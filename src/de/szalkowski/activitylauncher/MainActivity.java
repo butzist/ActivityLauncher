@@ -33,6 +33,7 @@ public class MainActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		/*
 		PackageManager pm = this.getPackageManager();
 		List<PackageInfo> packages = pm.getInstalledPackages(PackageManager.GET_ACTIVITIES);
 		for(PackageInfo pack : packages) {
@@ -53,6 +54,7 @@ public class MainActivity extends FragmentActivity implements
 				Log.e(LOG, "package without app");
 			}
 		}
+		*/
 
 		// Set up the action bar to show a dropdown list.
 		final ActionBar actionBar = getActionBar();

@@ -3,31 +3,32 @@ package de.szalkowski.activitylauncher;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.thirdparty.LauncherIconCreator;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class RecentTaskListFragment extends ListFragment {
-	protected class MyActivityInfo {
-		public ComponentName componentName;
-		public Drawable image;
-		public String name;
-	}
-	
 	final private String LOG = "de.szalkowski.activitylauncher";
 	protected List<MyActivityInfo> activities;
 	
@@ -44,8 +45,10 @@ public class RecentTaskListFragment extends ListFragment {
 		setListAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, activity_names) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				
 				LayoutInflater inflater = (LayoutInflater)RecentTaskListFragment.this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View view = inflater.inflate(R.layout.activity_list_item, parent, false);
+				view = inflater.inflate(R.layout.activity_list_item, parent, false);
 				
 				TextView text = (TextView)view.findViewById(android.R.id.text1);
 				ImageView image = (ImageView)view.findViewById(android.R.id.icon);
@@ -55,17 +58,35 @@ public class RecentTaskListFragment extends ListFragment {
 				
 				return view;
 			}
-			
-			@Override
-			public View getDropDownView(int position, View convertView,
-					ViewGroup parent) {
-				// TODO Auto-generated method stub
-				return super.getDropDownView(position, convertView, parent);
-			}
+
 		});
 	}
-
 	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		this.registerForContextMenu(getListView());
+		super.onActivityCreated(savedInstanceState);
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		ComponentName activity = RecentTaskListFragment.this.activities.get(position).componentName;
+		Intent intent = LauncherIconCreator.getActivityIntent(activity);
+		RecentTaskListFragment.this.getActivity().startActivity(intent);						
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		Log.d(LOG,"TEST");
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+		MyActivityInfo activity = RecentTaskListFragment.this.activities.get(info.position);
+		MenuItem item1 = menu.add("Create shortcut");
+		MenuItem item2 = menu.add("Launch");
+		item2.setIntent(LauncherIconCreator.getActivityIntent(activity.componentName));
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+
 	protected List<MyActivityInfo> getRunningActivities(Context context) {
 		PackageManager pm = this.getActivity().getPackageManager();
 		ArrayList<MyActivityInfo> activities = new ArrayList<MyActivityInfo>();
@@ -90,10 +111,8 @@ public class RecentTaskListFragment extends ListFragment {
 	protected String getActivityName(ComponentName activity, PackageManager pm) {
 		String canonicalName =  activity.toShortString();
 		PackageInfo pack;
-		//ApplicationInfo app;
 		
 		try {
-			//app = pm.getApplicationInfo(activity.getPackageName(), 0);
 			pack = pm.getPackageInfo(activity.getPackageName(), PackageManager.GET_ACTIVITIES);
 		} catch (NameNotFoundException e) {
 			return canonicalName;
@@ -104,13 +123,6 @@ public class RecentTaskListFragment extends ListFragment {
 		for(ActivityInfo act : pack.activities) {
 			if(act.name.equals(activity.getClassName())) {
 				return act.loadLabel(pm).toString();
-				
-				//CharSequence label = pm.getText(pack.packageName, act.labelRes, app);
-				//if(label!=null) {
-				//	return label.toString();
-				//} else {
-				//	return canonicalName;
-				//}
 			}
 		}
 		
