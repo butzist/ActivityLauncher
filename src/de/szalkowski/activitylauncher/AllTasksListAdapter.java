@@ -8,20 +8,17 @@ import java.util.Map;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AllTasksListAdapter extends BaseExpandableListAdapter {
-	final static private String LOG = "de.szalkowski.activitylauncher.alltaskslistadapter";
 	protected List<MyPackageInfo> packages = null;
 	protected List<MyActivityInfo> activities = null;
 	protected Map<Pair<Integer,Integer>,Integer> index = null;
@@ -41,14 +38,15 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 			int pack_pos = this.packages.size();
 			
 			for(ActivityInfo activity : pack.activities) {
-				if(activity.isEnabled()) {
+				if(activity.isEnabled() && activity.exported) {
 					ComponentName acomp = new ComponentName(activity.packageName, activity.name);
 					MyActivityInfo myactivity = new MyActivityInfo(acomp, pm);
 					myactivity.package_id = pack_pos;
 					int act_pos = this.activities.size();
 					
 					this.activities.add(myactivity);
-					this.index.put(new Pair<Integer, Integer>(pack_pos, n_activities), act_pos);					
+					this.index.put(new Pair<Integer, Integer>(pack_pos, n_activities), act_pos);
+					n_activities++;
 				}
 			}
 			if(n_activities > 0) {
@@ -73,12 +71,13 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 	public View getChildView (int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		MyActivityInfo activity = activities.get(index.get(new Pair<Integer,Integer>(groupPosition,childPosition)));
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(android.R.layout.simple_expandable_list_item_2, null);
+		View view = inflater.inflate(R.layout.all_activities_child_item, null);
 		
 		TextView text = (TextView) view.findViewById(android.R.id.text1);
-		text.setText(activity.name);
-		
-		Log.d(LOG, "createChild " + activity.name);
+		text.setText(activity.name + " (" + activity.component_name.getClassName() + ")");
+	
+		ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
+		icon.setImageDrawable(activity.icon);
 
 		return view;
 	}
@@ -107,11 +106,13 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 		MyPackageInfo pack = this.packages.get(groupPosition);
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(android.R.layout.simple_expandable_list_item_1, null);
+		View view = inflater.inflate(R.layout.all_activities_group_item, null);
 		
 		TextView text = (TextView) view.findViewById(android.R.id.text1);
 		text.setText(pack.name);
-		Log.d(LOG, "createGroup " + pack.name);
+		
+		ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
+		icon.setImageDrawable(pack.icon);
 		
 		return view;
 	}

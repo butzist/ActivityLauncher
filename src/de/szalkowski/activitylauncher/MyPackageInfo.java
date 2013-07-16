@@ -25,9 +25,11 @@ public class MyPackageInfo {
 			this.icon_resource = 0;
 		}
 	
-		try {
-			this.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(this.icon_resource);
-		} catch (Exception e) {}
+		if(this.icon_resource != 0) {
+			try {
+				this.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(this.icon_resource);
+			} catch (Exception e) {}
+		}
 	}
 	
 	public String package_name;

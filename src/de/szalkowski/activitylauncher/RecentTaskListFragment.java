@@ -8,7 +8,6 @@ import org.thirdparty.LauncherIconCreator;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -26,7 +25,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class RecentTaskListFragment extends ListFragment {
-	final private String LOG = "de.szalkowski.activitylauncher";
 	protected List<MyActivityInfo> activities;
 	
 	@Override
@@ -66,9 +64,8 @@ public class RecentTaskListFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		ComponentName activity = RecentTaskListFragment.this.activities.get(position).componentName;
-		Intent intent = LauncherIconCreator.getActivityIntent(activity);
-		RecentTaskListFragment.this.getActivity().startActivity(intent);						
+		ComponentName activity = RecentTaskListFragment.this.activities.get(position).component_name;
+		LauncherIconCreator.launchActivity(getActivity(), activity);
 	}
 
 	@Override
@@ -89,8 +86,7 @@ public class RecentTaskListFragment extends ListFragment {
 			LauncherIconCreator.createLauncherIcon(getActivity(), activity);
 			break;
 		case 1:
-			Intent intent = LauncherIconCreator.getActivityIntent(activity.componentName);
-			getActivity().startActivity(intent);
+			LauncherIconCreator.launchActivity(getActivity(), activity.component_name);
 			break;
 		}
 		return super.onContextItemSelected(item);

@@ -12,16 +12,16 @@
 package org.thirdparty;
 
 import de.szalkowski.activitylauncher.MyActivityInfo;
+import de.szalkowski.activitylauncher.MyPackageInfo;
+import de.szalkowski.activitylauncher.R;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
+import android.widget.Toast;
 
 public class LauncherIconCreator {
-	final static private String LOG = "de.szalkowski.thirdparty.launchericoncreator";
-
 	public static Intent getActivityIntent(ComponentName activity) {
 		Intent intent = new Intent();
 		intent.setComponent(activity);
@@ -32,10 +32,17 @@ public class LauncherIconCreator {
 	}
 
 	public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-		createLauncherIcon(context, activity.componentName, activity.name, activity.icon_resource_name);	
+		createLauncherIcon(context, activity.component_name, activity.name, activity.icon_resource_name);	
+	}
+
+	public static void createLauncherIcon(Context context, MyPackageInfo pack) {
+		Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.package_name);
+		createLauncherIcon(context, intent, pack.name, pack.icon_resource_name);	
 	}
 
 	public static void createLauncherIcon(Context context, ComponentName activity, String name, BitmapDrawable icon) {
+		Toast.makeText(context, String.format(context.getText(R.string.creating_activity_shortcut).toString(), activity.flattenToShortString()), Toast.LENGTH_LONG).show();
+
 	    Intent shortcutIntent = new Intent();
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, getActivityIntent(activity));
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
@@ -45,7 +52,10 @@ public class LauncherIconCreator {
 	    context.sendBroadcast(shortcutIntent);
 	    //finish();
 	}
+	
 	public static void createLauncherIcon(Context context, ComponentName activity, String name, String icon_resource_name) {
+		Toast.makeText(context, String.format(context.getText(R.string.creating_activity_shortcut).toString(), activity.flattenToShortString()), Toast.LENGTH_LONG).show();
+
 	    Intent shortcutIntent = new Intent();
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, getActivityIntent(activity));
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
@@ -56,5 +66,32 @@ public class LauncherIconCreator {
 	    shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 	    context.sendBroadcast(shortcutIntent);
 	    //finish();
+	}
+	
+	public static void createLauncherIcon(Context context, Intent intent, String name, String icon_resource_name) {
+		Toast.makeText(context, String.format(context.getText(R.string.creating_application_shortcut).toString(), name), Toast.LENGTH_LONG).show();
+
+	    Intent shortcutIntent = new Intent();
+	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
+	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
+	    Intent.ShortcutIconResource ir = new Intent.ShortcutIconResource();
+	    ir.packageName = intent.getPackage();
+	    ir.resourceName = icon_resource_name;
+	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir);
+	    shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+	    context.sendBroadcast(shortcutIntent);
+	    //finish();
+	}
+	
+	public static void launchActivity(Context context, ComponentName activity) {
+		Intent intent = LauncherIconCreator.getActivityIntent(activity);
+		Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()), Toast.LENGTH_LONG).show();
+		try {
+			context.startActivity(intent);
+		}
+		catch(Exception e) {
+			Toast.makeText(context, context.getText(R.string.error).toString() + ": " + e.toString(), Toast.LENGTH_LONG).show();
+		}
+
 	}
 }

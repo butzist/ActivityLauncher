@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 public class MyActivityInfo {
 	public MyActivityInfo(ComponentName activity, PackageManager pm) {
-		this.componentName = activity;
+		this.component_name = activity;
 		
 		ActivityInfo act;
 		try {
@@ -27,12 +27,14 @@ public class MyActivityInfo {
 			this.icon_resource = 0;
 		}
 		
-		try {
-			this.icon_resource_name = pm.getResourcesForActivity(activity).getResourceName(this.icon_resource);
-		} catch (Exception e) {}
+		if(this.icon_resource != 0) {
+			try {
+				this.icon_resource_name = pm.getResourcesForActivity(activity).getResourceName(this.icon_resource);
+			} catch (Exception e) {}
+		}
 	}
 	
-	public ComponentName componentName;
+	public ComponentName component_name;
 	public BitmapDrawable icon;
 	public int icon_resource;
 	public String icon_resource_name;
