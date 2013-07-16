@@ -14,7 +14,12 @@ public class MyActivityInfo {
 		try {
 			act = pm.getActivityInfo(activity, 0);
 			this.name = act.loadLabel(pm).toString();
-			this.icon = (BitmapDrawable)act.loadIcon(pm);
+			try {
+				this.icon = (BitmapDrawable)act.loadIcon(pm);
+			}
+			catch(ClassCastException e) {
+				this.icon = (BitmapDrawable)pm.getDefaultActivityIcon();
+			}
 			this.icon_resource = act.getIconResource();
 		} catch (NameNotFoundException e) {
 			this.name = activity.getShortClassName();
@@ -32,4 +37,5 @@ public class MyActivityInfo {
 	public int icon_resource;
 	public String icon_resource_name;
 	public String name;
+	public int package_id;
 };
