@@ -9,15 +9,12 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,11 +51,10 @@ public class RecentTaskListFragment extends ListFragment {
 				ImageView image = (ImageView)view.findViewById(android.R.id.icon);
 				
 				text.setText(RecentTaskListFragment.this.activities.get(position).name);
-				image.setImageDrawable(RecentTaskListFragment.this.activities.get(position).image);
+				image.setImageDrawable(RecentTaskListFragment.this.activities.get(position).icon);
 				
 				return view;
 			}
-
 		});
 	}
 	
@@ -78,13 +74,26 @@ public class RecentTaskListFragment extends ListFragment {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		Log.d(LOG,"TEST");
-		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-		MyActivityInfo activity = RecentTaskListFragment.this.activities.get(info.position);
-		MenuItem item1 = menu.add("Create shortcut");
-		MenuItem item2 = menu.add("Launch");
-		item2.setIntent(LauncherIconCreator.getActivityIntent(activity.componentName));
+		menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
+		menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_launch);
 		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+		MyActivityInfo activity = RecentTaskListFragment.this.activities.get(info.position);
+
+		switch(item.getItemId()) {
+		case 0:
+			LauncherIconCreator.createLauncherIcon(getActivity(), activity);
+			break;
+		case 1:
+			Intent intent = LauncherIconCreator.getActivityIntent(activity.componentName);
+			getActivity().startActivity(intent);
+			break;
+		}
+		return super.onContextItemSelected(item);
 	}
 
 	protected List<MyActivityInfo> getRunningActivities(Context context) {
@@ -93,39 +102,11 @@ public class RecentTaskListFragment extends ListFragment {
 		ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
 		List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(100);
 		for (ActivityManager.RunningTaskInfo task : tasks) {
-			MyActivityInfo info = new MyActivityInfo();
-			info.componentName = task.topActivity;
-			info.name = getActivityName(task.topActivity,pm);
-			try {
-				info.image = pm.getActivityIcon(task.topActivity);
-			} catch (NameNotFoundException e) {
-				info.image = pm.getDefaultActivityIcon();
-			}
-			
+			MyActivityInfo info = new MyActivityInfo(task.topActivity, pm);			
 			activities.add(info);
 		}
 		
 		return activities;
 	}
-	
-	protected String getActivityName(ComponentName activity, PackageManager pm) {
-		String canonicalName =  activity.toShortString();
-		PackageInfo pack;
-		
-		try {
-			pack = pm.getPackageInfo(activity.getPackageName(), PackageManager.GET_ACTIVITIES);
-		} catch (NameNotFoundException e) {
-			return canonicalName;
-		}
 
-		if(pack.activities == null) return canonicalName;
-		
-		for(ActivityInfo act : pack.activities) {
-			if(act.name.equals(activity.getClassName())) {
-				return act.loadLabel(pm).toString();
-			}
-		}
-		
-		return canonicalName;
-	}
 }

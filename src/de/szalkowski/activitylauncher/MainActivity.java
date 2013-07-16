@@ -1,16 +1,9 @@
 package de.szalkowski.activitylauncher;
 
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -32,29 +25,6 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		/*
-		PackageManager pm = this.getPackageManager();
-		List<PackageInfo> packages = pm.getInstalledPackages(PackageManager.GET_ACTIVITIES);
-		for(PackageInfo pack : packages) {
-			Log.v(LOG,"package: " + pack.packageName);
-			
-			try {
-				ApplicationInfo app = pm.getApplicationInfo(pack.packageName, 0);
-				if(pack.activities == null) continue;
-				
-				for(ActivityInfo activity : pack.activities) {
-					CharSequence label = pm.getText(pack.packageName, activity.labelRes, app);
-					if(label==null) {
-						label = "(no label)";
-					}
-					Log.v(LOG,"   activity: " + activity.name + " (" + label + ") " + (activity.isEnabled() && activity.exported ? "":"(disabled)"));
-				}
-			} catch (NameNotFoundException e) {
-				Log.e(LOG, "package without app");
-			}
-		}
-		*/
 
 		// Set up the action bar to show a dropdown list.
 		final ActionBar actionBar = getActionBar();
@@ -116,9 +86,6 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		}		
 		
-		//Bundle args = new Bundle();
-		//args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-		//fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 		return true;
