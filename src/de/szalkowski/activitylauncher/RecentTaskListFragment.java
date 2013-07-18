@@ -71,8 +71,14 @@ public class RecentTaskListFragment extends ListFragment {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+		MyActivityInfo activity = RecentTaskListFragment.this.activities.get(info.position);
+		menu.setHeaderIcon(activity.icon);
+		menu.setHeaderTitle(activity.name);
+
 		menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
 		menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_launch);
+
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 	

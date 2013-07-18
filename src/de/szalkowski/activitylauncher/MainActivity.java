@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ArrayAdapter;
@@ -38,6 +40,11 @@ public class MainActivity extends FragmentActivity implements
 						android.R.id.text1, new String[] {
 								getString(R.string.title_section_recent),
 								getString(R.string.title_section_all), }), this);
+		
+		if(!getPreferences(Context.MODE_PRIVATE).getBoolean("disclaimer_accepted", false)) {
+			DialogFragment dialog = new DisclaimerDialogFragment();
+			dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
+		}
 	}
 
 	/**
@@ -62,7 +69,7 @@ public class MainActivity extends FragmentActivity implements
 					savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
 		}
 	}
-
+	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// Serialize the current dropdown position.

@@ -54,6 +54,23 @@ public class AllTasksListFragment extends Fragment {
 			ContextMenuInfo menuInfo) {
 		menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
 		menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_launch);
+		
+		ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo)menuInfo;
+		ExpandableListView list = (ExpandableListView) getView().findViewById(R.id.expandableListView1);
+		
+		switch(ExpandableListView.getPackedPositionType(info.packedPosition)) {
+		case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
+			MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
+			menu.setHeaderIcon(activity.icon);
+			menu.setHeaderTitle(activity.name);
+			break;
+		case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
+			MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
+			menu.setHeaderIcon(pack.icon);
+			menu.setHeaderTitle(pack.name);
+			break;
+		}
+
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 	

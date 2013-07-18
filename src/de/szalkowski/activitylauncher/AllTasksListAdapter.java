@@ -36,7 +36,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 			if(pack.activities == null) continue;
 			int n_activities = 0;
 			int pack_pos = this.packages.size();
-			
+
 			for(ActivityInfo activity : pack.activities) {
 				if(activity.isEnabled() && activity.exported) {
 					ComponentName acomp = new ComponentName(activity.packageName, activity.name);
@@ -73,8 +73,11 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.all_activities_child_item, null);
 		
-		TextView text = (TextView) view.findViewById(android.R.id.text1);
-		text.setText(activity.name + " (" + activity.component_name.getClassName() + ")");
+		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+		text1.setText(activity.name);
+	
+		TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+		text2.setText(activity.component_name.getClassName());
 	
 		ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
 		icon.setImageDrawable(activity.icon);

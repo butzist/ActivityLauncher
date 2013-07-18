@@ -11,18 +11,35 @@
         android:layout_width="92dp"
         android:layout_height="32dp"
         android:layout_gravity="center_vertical"
-        android:duplicateParentState="true"
         android:src="@drawable/ic_launcher"
         android:paddingLeft="60dp"/>
 
-    <TextView
-        android:id="@android:id/text1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
-        android:duplicateParentState="true"
-        android:paddingLeft="10dp"
-        android:text="Some activity"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_gravity="left|center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@android:id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:text="activity name"
+            android:textIsSelectable="false"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@android:id/text2"
+            android:textColor="@android:color/darker_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="component name"
+            android:layout_gravity="left|center_vertical"
+            android:textIsSelectable="false"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
 
 </LinearLayout>

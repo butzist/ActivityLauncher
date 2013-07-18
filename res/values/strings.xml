@@ -3,6 +3,8 @@
     <string name="app_name">Activity Launcher</string>
     <string name="title_section_recent">Recent activities</string>
     <string name="title_section_all">All activities</string>
+    <string name="title_dialog_disclaimer">Disclaimer</string>
+    <string name="dialog_disclaimer">Use this software at your own risk. Some apps might not behave as expected when their activities are launched in the wrong context leading to data loss or even worse. You have been warned. Do you understand this and still want to use this software?</string>
     <string name="context_action_launch">Launch activity</string>
     <string name="context_action_shortcut">Create shortcut</string>
     <string name="starting_activity">Starting activity: %s</string>
