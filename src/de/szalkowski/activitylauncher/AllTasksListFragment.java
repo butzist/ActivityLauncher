@@ -5,6 +5,7 @@ import org.thirdparty.LauncherIconCreator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -63,6 +64,7 @@ public class AllTasksListFragment extends Fragment {
 			MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
 			menu.setHeaderIcon(activity.icon);
 			menu.setHeaderTitle(activity.name);
+			menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_edit);
 			break;
 		case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
 			MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
@@ -88,6 +90,13 @@ public class AllTasksListFragment extends Fragment {
 				break;
 			case 1:
 				LauncherIconCreator.launchActivity(getActivity(), activity.component_name);
+				break;
+			case 2:
+				DialogFragment dialog = new ShortcutEditDialogFragment();
+				Bundle args = new Bundle();
+				args.putParcelable("activity", activity.component_name);
+				dialog.setArguments(args);
+				dialog.show(this.getFragmentManager(), "ShortcutEditor");
 				break;
 			}
 			break;
