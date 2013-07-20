@@ -19,4 +19,7 @@
     <string name="error">Error</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
+    <string name="action_view_source">View Sourcecode</string>
+    <string name="action_view_translation">Help Translating!</string>
+    <string name="action_view_bugs">Report A Problem</string>
 </resources>

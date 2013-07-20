@@ -2,12 +2,16 @@ package de.szalkowski.activitylauncher;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.net.Uri;
 import android.os.Bundle;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 public class MainActivity extends FragmentActivity implements
@@ -69,6 +73,40 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_view_source:
+			Intent i2 = new Intent(Intent.ACTION_VIEW);
+			i2.setData(Uri.parse(this.getString(R.string.url_source)));
+			this.startActivity(i2);
+			return true;
+
+		case R.id.action_view_translation:
+			Intent i3 = new Intent(Intent.ACTION_VIEW);
+			i3.setData(Uri.parse(this.getString(R.string.url_translation)));
+			this.startActivity(i3);
+			return true;
+			
+		case R.id.action_view_bugs:
+			Intent i4 = new Intent(Intent.ACTION_VIEW);
+			i4.setData(Uri.parse(this.getString(R.string.url_bugs)));
+			this.startActivity(i4);
+			return true;
+			
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// Serialize the current dropdown position.

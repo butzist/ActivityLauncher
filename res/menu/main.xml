@@ -1,0 +1,5 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/action_view_source" android:title="@string/action_view_source" android:showAsAction="never"></item>
+    <item android:id="@+id/action_view_translation" android:title="@string/action_view_translation" android:showAsAction="never"></item>
+    <item android:id="@+id/action_view_bugs" android:title="@string/action_view_bugs" android:showAsAction="never"></item>
+</menu>

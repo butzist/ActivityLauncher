@@ -1,0 +1,5 @@
+<resources>
+    <string name="url_source">http://sourceforge.net/projects/activitylauncher/</string>
+    <string name="url_translation">http://crowdin.net/project/activitylauncher/invite</string>
+    <string name="url_bugs">https://sourceforge.net/p/activitylauncher/tickets/</string>
+</resources>
