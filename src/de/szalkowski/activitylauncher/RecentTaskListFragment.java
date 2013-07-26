@@ -40,10 +40,8 @@ public class RecentTaskListFragment extends ListFragment {
 		setListAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, activity_names) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				View view = super.getView(position, convertView, parent);
-				
 				LayoutInflater inflater = (LayoutInflater)RecentTaskListFragment.this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = inflater.inflate(R.layout.activity_list_item, parent, false);
+				View view = inflater.inflate(R.layout.activity_list_item, parent, false);
 				
 				TextView text = (TextView)view.findViewById(android.R.id.text1);
 				ImageView image = (ImageView)view.findViewById(android.R.id.icon);
