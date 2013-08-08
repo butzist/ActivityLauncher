@@ -4,6 +4,7 @@
   <string name="app_name">Activity Launcher</string>
   <string name="title_section_recent">Atividades recentes</string>
   <string name="title_section_all">Todas as atividades</string>
+  <string name="title_dialog_disclaimer">Aviso</string>
   <string name="dialog_disclaimer">Use este software em seu próprio risco. Alguns aplicativos podem não se comportar conforme o esperado quando suas atividades são iniciadas no contexto errado, levando à perda de dados ou até mesmo pior. Você foi avisado. Você entende isto e ainda quer usar este software?</string>
   <string name="context_action_launch">Atividade de lançamento</string>
   <string name="context_action_shortcut">Criar atalho</string>
@@ -19,4 +20,7 @@
   <string name="error">Erro</string>
   <string name="error_invalid_icon_resource">Erro: recurso de ícone inválido</string>
   <string name="error_invalid_icon_format">Erro: formato de ícone inválido</string>
+  <string name="action_view_source">Exibir código fonte</string>
+  <string name="action_view_translation">Ajude a traduzir!</string>
+  <string name="action_view_bugs">Relatar um problema</string>
 </resources>

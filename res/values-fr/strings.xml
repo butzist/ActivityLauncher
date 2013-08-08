@@ -5,6 +5,7 @@
   <string name="title_section_recent">Processus récents</string>
   <string name="title_section_all">Tous les processus</string>
   <string name="title_dialog_disclaimer">Clause de non-responsabilité</string>
+  <string name="dialog_disclaimer">Utilisez ce logiciel à vos propres risques. Certaines applications ne pourraient pas se comporter comme prévu lorsque leurs activités sont lancées dans le contexte incorrect menant à une perte de données ou même pire. Vous aurez été prévenu. Vous comprenez cela et voulez continuer à utiliser ce logiciel ?</string>
   <string name="context_action_launch">Lancer un processus</string>
   <string name="context_action_shortcut">Créer un raccourci</string>
   <string name="context_action_edit">Modifier le raccourci</string>
