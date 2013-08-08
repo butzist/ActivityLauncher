@@ -1,5 +1,0 @@
-Cette application Android lance les activités cachées et crée des raccourcis de l'écran d'accueil pour les applications installées.
-
-Ce projet manque encore quelques fonctionnalités et traduction. Vous êtes invités à contribuer !
-
-Traductions sont hébergées sous http://crowdin.net/project/activitylauncher/invite
