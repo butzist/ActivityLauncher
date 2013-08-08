@@ -20,4 +20,7 @@
   <string name="error">خطأ</string>
   <string name="error_invalid_icon_resource">خطأ: مورد رمز غير صالح</string>
   <string name="error_invalid_icon_format">الخطأ: تنسيق رمز غير صالح</string>
+  <string name="action_view_source">Sourcecode رأي</string>
+  <string name="action_view_translation">المساعدة في ترجمة!</string>
+  <string name="action_view_bugs">الإبلاغ عن مشكلة</string>
 </resources>
