@@ -1,0 +1,5 @@
+Ten program startuje ukryte działalności i tworzy skróty na ekranie głównym dla zainstalowanych aplikacji.
+
+Temu projektowi wciąż brakuje kilku funkcji i tłumaczenia. Serdecznie zapraszamy do brania udziału!
+
+Tłumaczenia są hostowane na http://crowdin.net/project/activitylauncher/invite

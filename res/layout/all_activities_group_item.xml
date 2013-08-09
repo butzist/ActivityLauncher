@@ -13,6 +13,7 @@
         android:layout_gravity="center_vertical"
         android:duplicateParentState="true"
         android:src="@drawable/ic_launcher"
+        android:contentDescription="@string/label_icon"
         android:paddingLeft="30dp" />
 
     <TextView
@@ -22,7 +23,6 @@
         android:layout_gravity="center_vertical|left"
         android:duplicateParentState="true"
         android:paddingLeft="10dp"
-        android:text="Some package"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>
