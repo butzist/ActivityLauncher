@@ -22,11 +22,11 @@
 
         <EditText
             android:id="@+id/editText_name"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
-            android:inputType="text"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="text" />
 
     </TableRow>
 
@@ -45,11 +45,11 @@
 
         <EditText
             android:id="@+id/editText_package"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
-            android:inputType="text"
-            android:ems="10" >
+            android:ems="10"
+            android:inputType="text" >
 
             <requestFocus />
         </EditText>
@@ -63,7 +63,7 @@
 
         <TextView
             android:id="@+id/textView_class"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:text="@string/label_class"
@@ -71,11 +71,11 @@
 
         <EditText
             android:id="@+id/editText_class"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
-            android:inputType="text"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="text" />
 
     </TableRow>
 
@@ -92,13 +92,30 @@
             android:text="@string/label_icon"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <EditText
-            android:id="@+id/editText_icon"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:inputType="text"
-            android:ems="10" />
+            android:layout_gravity="left|center_vertical" >
+
+            <EditText
+                android:id="@+id/editText_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="text" />
+
+            <ImageButton
+                android:id="@+id/iconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/title_dialog_icon_picker"
+                android:src="@drawable/ic_launcher" />
+
+        </LinearLayout>
 
     </TableRow>
 

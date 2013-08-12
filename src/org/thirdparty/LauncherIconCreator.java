@@ -32,7 +32,14 @@ public class LauncherIconCreator {
 	}
 
 	public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-		createLauncherIcon(context, activity.component_name, activity.name, activity.icon_resource_name);	
+		final String pack = activity.icon_resource_name.substring(0, activity.icon_resource_name.indexOf(':'));
+		
+		// Use bitmap version if icon from different package is used
+		if(!pack.equals(activity.component_name.getPackageName())) {
+			createLauncherIcon(context, activity.component_name, activity.name, activity.icon);
+		} else {
+			createLauncherIcon(context, activity.component_name, activity.name, activity.icon_resource_name);
+		}
 	}
 
 	public static void createLauncherIcon(Context context, MyPackageInfo pack) {

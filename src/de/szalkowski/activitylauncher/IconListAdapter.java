@@ -1,7 +1,7 @@
 package de.szalkowski.activitylauncher;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
@@ -21,8 +22,8 @@ public class IconListAdapter extends BaseAdapter {
 	private PackageManager pm;
 
 	public IconListAdapter(Context context) {
-		HashSet<String> icons = new HashSet<String>();
-
+		TreeSet<String> icons = new TreeSet<String>();
+		
 		this.context = context;
 		this.pm = context.getPackageManager();
 		List<PackageInfo> all_packages = this.pm.getInstalledPackages(PackageManager.GET_ACTIVITIES);
@@ -61,19 +62,27 @@ public class IconListAdapter extends BaseAdapter {
 		return 0;
 	}
 
+	static public Drawable getIcon(String icon_resource_string, PackageManager pm) {
+		try {
+			String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
+			String type = icon_resource_string.substring(icon_resource_string.indexOf(':') + 1, icon_resource_string.indexOf('/'));
+			String name = icon_resource_string.substring(icon_resource_string.indexOf('/') + 1, icon_resource_string.length());
+			Resources res = pm.getResourcesForApplication(pack);
+			Drawable icon = res.getDrawable(res.getIdentifier(name, type, pack));
+			return icon;
+		} catch(Exception e) {
+			return pm.getDefaultActivityIcon();
+		}
+		
+	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView view = new ImageView(this.context);
+		AbsListView.LayoutParams layout = new AbsListView.LayoutParams(50, 50);
+		view.setLayoutParams(layout);
 		String icon_resource_string = this.icons[position]; 
-		String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':') + 1);
-		try {
-			Resources res = this.pm.getResourcesForApplication(pack); 
-			Drawable icon = res.getDrawable(res.getIdentifier(null, null, icon_resource_string));
-			view.setImageDrawable(icon);
-		} catch(Exception e) {
-			view.setImageDrawable(this.pm.getDefaultActivityIcon());
-		}
+		view.setImageDrawable(IconListAdapter.getIcon(icon_resource_string, this.pm));
 		return view;
 	}
-
 }
