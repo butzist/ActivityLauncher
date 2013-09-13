@@ -1,57 +1,28 @@
 package de.szalkowski.activitylauncher;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.thirdparty.LauncherIconCreator;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-public class RecentTaskListFragment extends ListFragment {
-	protected List<MyActivityInfo> activities;
+public class RecentTaskListFragment extends ListFragment implements RecentTaskListAsyncProvider.Listener<MyActivityInfo[]> {
+	protected MyActivityInfo[] activities;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		this.activities = getRunningActivities(this.getActivity());
-		String[] activity_names = new String[this.activities.size()];
-		for(int i=0; i<this.activities.size(); ++i) {
-			activity_names[i] = this.activities.get(i).name;
-		}
 
-		setListAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, activity_names) {
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				LayoutInflater inflater = (LayoutInflater)RecentTaskListFragment.this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View view = inflater.inflate(R.layout.activity_list_item, parent, false);
-				
-				TextView text = (TextView)view.findViewById(android.R.id.text1);
-				ImageView image = (ImageView)view.findViewById(android.R.id.icon);
-				
-				text.setText(RecentTaskListFragment.this.activities.get(position).name);
-				image.setImageDrawable(RecentTaskListFragment.this.activities.get(position).icon);
-				
-				return view;
-			}
-		});
+		RecentTaskListAsyncProvider taskProvider = new RecentTaskListAsyncProvider(this.getActivity(), this);
+		taskProvider.execute();
 	}
 	
 	@Override
@@ -62,7 +33,7 @@ public class RecentTaskListFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		ComponentName activity = RecentTaskListFragment.this.activities.get(position).component_name;
+		ComponentName activity = RecentTaskListFragment.this.activities[position].component_name;
 		LauncherIconCreator.launchActivity(getActivity(), activity);
 	}
 
@@ -70,7 +41,7 @@ public class RecentTaskListFragment extends ListFragment {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-		MyActivityInfo activity = RecentTaskListFragment.this.activities.get(info.position);
+		MyActivityInfo activity = RecentTaskListFragment.this.activities[info.position];
 		menu.setHeaderIcon(activity.icon);
 		menu.setHeaderTitle(activity.name);
 
@@ -83,7 +54,7 @@ public class RecentTaskListFragment extends ListFragment {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-		MyActivityInfo activity = RecentTaskListFragment.this.activities.get(info.position);
+		MyActivityInfo activity = RecentTaskListFragment.this.activities[info.position];
 
 		switch(item.getItemId()) {
 		case 0:
@@ -96,17 +67,13 @@ public class RecentTaskListFragment extends ListFragment {
 		return super.onContextItemSelected(item);
 	}
 
-	protected List<MyActivityInfo> getRunningActivities(Context context) {
-		PackageManager pm = this.getActivity().getPackageManager();
-		ArrayList<MyActivityInfo> activities = new ArrayList<MyActivityInfo>();
-		ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-		List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(100);
-		for (ActivityManager.RunningTaskInfo task : tasks) {
-			MyActivityInfo info = new MyActivityInfo(task.topActivity, pm);			
-			activities.add(info);
-		}
-		
-		return activities;
+	@Override
+	public void onProviderFininshed(AsyncProvider<MyActivityInfo[]> task, MyActivityInfo[] value) {
+		try {
+			this.activities = value;
+			setListAdapter(new RecentTaskListAdapter(this.getActivity(), android.R.layout.simple_list_item_1, this.activities));
+		} catch (Exception e) {
+			Toast.makeText(this.getActivity(), R.string.error_tasks, Toast.LENGTH_SHORT).show();		
+		}		
 	}
-
 }

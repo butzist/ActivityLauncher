@@ -32,19 +32,19 @@ public class LauncherIconCreator {
 	}
 
 	public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-		final String pack = activity.icon_resource_name.substring(0, activity.icon_resource_name.indexOf(':'));
+		final String pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
 		
 		// Use bitmap version if icon from different package is used
-		if(!pack.equals(activity.component_name.getPackageName())) {
-			createLauncherIcon(context, activity.component_name, activity.name, activity.icon);
+		if(!pack.equals(activity.getComponentName().getPackageName())) {
+			createLauncherIcon(context, activity.getComponentName(), activity.getName(), activity.getIcon());
 		} else {
-			createLauncherIcon(context, activity.component_name, activity.name, activity.icon_resource_name);
+			createLauncherIcon(context, activity.getComponentName(), activity.getName(), activity.getIconResouceName());
 		}
 	}
 
 	public static void createLauncherIcon(Context context, MyPackageInfo pack) {
-		Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.package_name);
-		createLauncherIcon(context, intent, pack.name, pack.icon_resource_name);	
+		Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.getPackageName());
+		createLauncherIcon(context, intent, pack.getName(), pack.getIconResourceName());	
 	}
 
 	public static void createLauncherIcon(Context context, ComponentName activity, String name, BitmapDrawable icon) {

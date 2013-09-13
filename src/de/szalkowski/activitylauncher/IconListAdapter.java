@@ -3,11 +3,10 @@ package de.szalkowski.activitylauncher;
 import java.util.List;
 import java.util.TreeSet;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -21,26 +20,32 @@ public class IconListAdapter extends BaseAdapter {
 	private Context context;
 	private PackageManager pm;
 
-	public IconListAdapter(Context context) {
+	public IconListAdapter(Context context, IconListAsyncProvider.Updater updater) {
 		TreeSet<String> icons = new TreeSet<String>();
 		
 		this.context = context;
 		this.pm = context.getPackageManager();
-		List<PackageInfo> all_packages = this.pm.getInstalledPackages(PackageManager.GET_ACTIVITIES);
+		List<PackageInfo> all_packages = this.pm.getInstalledPackages(0);
+		updater.updateMax(all_packages.size());
+		updater.update(0);
 		
-		for(PackageInfo pack : all_packages) {
-			if(pack.activities == null) continue;
+		PackageManagerCache cache = PackageManagerCache.getPackageManagerCache(this.pm);
 
-			for(ActivityInfo activity : pack.activities) {
-				try	{
-					ComponentName acomp = new ComponentName(activity.packageName, activity.name);
-					int icon_resource = activity.getIconResource();
-					if(icon_resource != 0) {
-						String icon_resource_name = this.pm.getResourcesForActivity(acomp).getResourceName(icon_resource);
+		for(int i=0; i < all_packages.size(); ++i) {
+			updater.update(i+1);
+			
+			PackageInfo pack = all_packages.get(i);			
+			try {
+				MyPackageInfo mypack = cache.getPackageInfo(pack.packageName);
+
+				for(int j=0; j < mypack.getActivitiesCount(); ++j) {
+					String icon_resource_name = mypack.getActivity(j).getIconResouceName();
+					if(icon_resource_name != null) {
 						icons.add(icon_resource_name);
 					}
-				} catch(Exception e) {}
-			}
+				}
+			} catch (NameNotFoundException e) {	}
+
 		}
 		
 		this.icons = new String[icons.size()];

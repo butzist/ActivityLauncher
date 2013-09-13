@@ -5,6 +5,7 @@
     <string name="title_section_all">All activities</string>
     <string name="title_dialog_disclaimer">Disclaimer</string>
     <string name="title_dialog_icon_picker">Pick an icon</string>
+    <string name="dialog_progress_loading">Loading…</string>
     <string name="dialog_disclaimer">Use this software at your own risk. Some apps might not behave as expected when their activities are launched in the wrong context leading to data loss or even worse. You have been warned. Do you understand this and still want to use this software?</string>
     <string name="context_action_launch">Launch activity</string>
     <string name="context_action_shortcut">Create shortcut</string>
@@ -18,6 +19,8 @@
     <string name="creating_activity_shortcut">Creating activity shortcut for %s</string>
     <string name="creating_application_shortcut">Creating application shortcut for %s</string>
     <string name="error">Error</string>
+    <string name="error_tasks">Error loading task list</string>
+    <string name="error_icons">Error loading icons</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
     <string name="action_view_source">View Sourcecode</string>

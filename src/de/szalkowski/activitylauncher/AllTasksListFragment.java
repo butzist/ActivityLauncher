@@ -20,16 +20,17 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 
-public class AllTasksListFragment extends Fragment {
+public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter> {
+	protected ExpandableListView list;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frament_all_list, null);
 		
-		ExpandableListView list = (ExpandableListView) view.findViewById(R.id.expandableListView1);
-		list.setAdapter(new AllTasksListAdapter(this.getActivity()));
+		this.list = (ExpandableListView) view.findViewById(R.id.expandableListView1);
 		
-		list.setOnChildClickListener(new OnChildClickListener() {
+		this.list.setOnChildClickListener(new OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 				ExpandableListAdapter adapter = parent.getExpandableListAdapter();
@@ -39,6 +40,9 @@ public class AllTasksListFragment extends Fragment {
 			}
 		});
 		
+		AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(this.getActivity(), this);
+		provider.execute();
+		
 		return view;
 	}
 	
@@ -46,8 +50,8 @@ public class AllTasksListFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		ExpandableListView list = (ExpandableListView) getView().findViewById(R.id.expandableListView1);
-		this.registerForContextMenu(list);
+		//ExpandableListView list = (ExpandableListView) getView().findViewById(R.id.expandableListView1);
+		this.registerForContextMenu(this.list);
 	}
 	
 	@Override
@@ -116,5 +120,14 @@ public class AllTasksListFragment extends Fragment {
 			}
 		}
 		return super.onContextItemSelected(item);
+	}
+
+	@Override
+	public void onProviderFininshed(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
+		try {
+			this.list.setAdapter(value);
+		} catch (Exception e) {
+			Toast.makeText(this.getActivity(), R.string.error_tasks, Toast.LENGTH_SHORT).show();
+		}		
 	}
 }

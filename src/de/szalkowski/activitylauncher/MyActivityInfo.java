@@ -27,6 +27,7 @@ public class MyActivityInfo {
 			this.icon_resource = 0;
 		}
 		
+		this.icon_resource_name = null;
 		if(this.icon_resource != 0) {
 			try {
 				this.icon_resource_name = pm.getResourcesForActivity(activity).getResourceName(this.icon_resource);
@@ -34,10 +35,25 @@ public class MyActivityInfo {
 		}
 	}
 	
-	public ComponentName component_name;
-	public BitmapDrawable icon;
-	public int icon_resource;
-	public String icon_resource_name;
-	public String name;
-	public int package_id;
+	public ComponentName getComponentName() {
+		return component_name;
+	}
+	
+	public BitmapDrawable getIcon() {
+		return icon;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getIconResouceName() {
+		return icon_resource_name;
+	}
+	
+	protected ComponentName component_name;
+	protected BitmapDrawable icon;
+	protected int icon_resource;
+	protected String icon_resource_name;
+	protected String name;
 };
