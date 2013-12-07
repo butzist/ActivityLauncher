@@ -1,0 +1,5 @@
+Táto Android aplikácia spúšťa skryté aktivity a vytvára skratky na domovskú obrazovku pre nainštalované aplikácie.
+
+Tento projekt stále neobsahuje niektoré funkcie a preklady. Ste vítaní na prispievanie!
+
+Preklady sú umiestnené pod http://crowdin.net/project/activitylauncher/invite
