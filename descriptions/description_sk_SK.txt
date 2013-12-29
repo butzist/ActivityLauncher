@@ -1,4 +1,4 @@
-Táto Android aplikácia spúšťa skryté aktivity a vytvára skratky na domovskú obrazovku pre nainštalované aplikácie.
+Táto Android aplikácia spúšťa skryté aktivity a vytvára odkazy na domovskú obrazovku pre nainštalované aplikácie.
 
 Tento projekt stále neobsahuje niektoré funkcie a preklady. Ste vítaní na prispievanie!
 
