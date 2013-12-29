@@ -5,6 +5,8 @@
   <string name="title_section_recent">Ostatnie działalności</string>
   <string name="title_section_all">Wszystkie działalnośći</string>
   <string name="title_dialog_disclaimer">Uwaga</string>
+  <string name="title_dialog_icon_picker">Wybierz ikonę</string>
+  <string name="dialog_progress_loading">Ładowanie...</string>
   <string name="dialog_disclaimer">Korzystać z tego programu na własne ryzyko. Niektóre aplikacje mogą nie działać zgodnie z oczekiwaniami podczas ich działalności są uruchamiane w złym kontekście, co może prowadzić do utraty danych lub nawet gorzej. Zostałeś ostrzeżony. Czy rozumiesz to i pomimo tego chcesz używać ten program?</string>
   <string name="context_action_launch">Rozpocznij działalność</string>
   <string name="context_action_shortcut">Utwórz skrót</string>
@@ -18,6 +20,8 @@
   <string name="creating_activity_shortcut">Tworzenie skrótu działalności dla %s</string>
   <string name="creating_application_shortcut">Tworzenie skrótu aplikacji dla %s</string>
   <string name="error">Błąd</string>
+  <string name="error_tasks">Błąd podczas ładowania listy zadań</string>
+  <string name="error_icons">Błąd podczas ładowania ikon</string>
   <string name="error_invalid_icon_resource">Błąd: nieprawidłowy zasób ikony</string>
   <string name="error_invalid_icon_format">Błąd: nieprawidłowy format ikony</string>
   <string name="action_view_source">Widok kodu źródłowego</string>
