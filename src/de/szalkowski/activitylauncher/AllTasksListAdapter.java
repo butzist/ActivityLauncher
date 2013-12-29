@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -38,6 +39,8 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 				}
 			} catch (NameNotFoundException e) {}
 		}
+		
+		Collections.sort(this.packages);
 	}
 
 	@Override

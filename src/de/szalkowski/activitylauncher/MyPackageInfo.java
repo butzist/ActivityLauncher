@@ -1,5 +1,7 @@
 package de.szalkowski.activitylauncher;
 
+import java.util.Arrays;
+
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -7,7 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 
-public class MyPackageInfo {
+public class MyPackageInfo implements Comparable<MyPackageInfo> {
 	public MyPackageInfo(PackageInfo info, PackageManager pm, PackageManagerCache cache) {
 		this.package_name = info.packageName;
 		ApplicationInfo app = info.applicationInfo;
@@ -49,6 +51,8 @@ public class MyPackageInfo {
 					this.activities[i++] = cache.getActivityInfo(acomp);
 				}
 			}
+			
+			Arrays.sort(this.activities);
 		}
 	}
 	
@@ -93,4 +97,23 @@ public class MyPackageInfo {
 	protected String icon_resource_name;
 	protected String name;
 	protected MyActivityInfo[] activities;
+	
+	@Override
+	public int compareTo(MyPackageInfo another) {
+		int cmp_name = this.name.compareTo(another.name);
+		if (cmp_name != 0) return cmp_name;
+		
+		int cmp_package = this.package_name.compareTo(another.package_name);
+		return cmp_package;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(!other.getClass().equals(MyPackageInfo.class)) {
+			return false;
+		}
+		
+		MyPackageInfo other_info = (MyPackageInfo)other;		
+		return this.package_name.equals(other_info.package_name);
+	}
 }
