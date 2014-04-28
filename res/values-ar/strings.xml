@@ -5,6 +5,8 @@
   <string name="title_section_recent">الأنشطة الأخيرة</string>
   <string name="title_section_all">جميع الأنشطة</string>
   <string name="title_dialog_disclaimer">إخلاء مسؤولية</string>
+  <string name="title_dialog_icon_picker">اختر رمز</string>
+  <string name="dialog_progress_loading">تحميل&#8230;</string>
   <string name="dialog_disclaimer">استخدام هذا البرنامج على مسؤوليتك الخاصة. بعض التطبيقات قد لا تتصرف كما هو متوقع عند إطلاق أنشطتها في سياق خاطئ يؤدي إلى فقدان البيانات أو حتى أسوأ من ذلك. وقد تم تحذيرك. هل نفهم هذا ولا تزال ترغب في استخدام هذا البرنامج؟</string>
   <string name="context_action_launch">إطلاق النشاط</string>
   <string name="context_action_shortcut">إنشاء اختصار</string>
@@ -18,6 +20,8 @@
   <string name="creating_activity_shortcut">إنشاء اختصار النشاط ل %s</string>
   <string name="creating_application_shortcut">إنشاء اختصار للتطبيق ل %s</string>
   <string name="error">خطأ</string>
+  <string name="error_tasks">حدث خطأ أثناء تحميل قائمة المهام</string>
+  <string name="error_icons">خطأ في تحميل الرموز</string>
   <string name="error_invalid_icon_resource">خطأ: مورد رمز غير صالح</string>
   <string name="error_invalid_icon_format">الخطأ: تنسيق رمز غير صالح</string>
   <string name="action_view_source">Sourcecode رأي</string>

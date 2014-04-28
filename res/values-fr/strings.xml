@@ -5,6 +5,8 @@
   <string name="title_section_recent">Processus récents</string>
   <string name="title_section_all">Tous les processus</string>
   <string name="title_dialog_disclaimer">Clause de non-responsabilité</string>
+  <string name="title_dialog_icon_picker">Choisissez une icône</string>
+  <string name="dialog_progress_loading">Chargement&#8230;</string>
   <string name="dialog_disclaimer">Utilisez ce logiciel à vos propres risques. Certaines applications ne pourraient pas se comporter comme prévu lorsque leurs activités sont lancées dans le contexte incorrect menant à une perte de données ou même pire. Vous aurez été prévenu. Vous comprenez cela et voulez continuer à utiliser ce logiciel ?</string>
   <string name="context_action_launch">Lancer un processus</string>
   <string name="context_action_shortcut">Créer un raccourci</string>
@@ -18,6 +20,8 @@
   <string name="creating_activity_shortcut">Création du raccourci du processus %s</string>
   <string name="creating_application_shortcut">Création du raccourci de l\'application %s</string>
   <string name="error">Erreur</string>
+  <string name="error_tasks">Erreur lors du chargement de liste des tâches</string>
+  <string name="error_icons">Erreur lors du chargement des icônes</string>
   <string name="error_invalid_icon_resource">Erreur : ressource d\'icône invalide</string>
   <string name="error_invalid_icon_format">Erreur : format d\'icône invalide</string>
   <string name="action_view_source">Affichage code source</string>

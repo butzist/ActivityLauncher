@@ -5,6 +5,8 @@
   <string name="title_section_recent">최근 액티비티</string>
   <string name="title_section_all">모든 액티비티</string>
   <string name="title_dialog_disclaimer">경고</string>
+  <string name="title_dialog_icon_picker">아이콘 선택</string>
+  <string name="dialog_progress_loading">짐싣기&#8230;</string>
   <string name="dialog_disclaimer">자신의 위험을 감수하고 이 소프트웨어를 사용하십시오. 일부 애플리케이션은 액티비티 데이터가 손실되거나 심지어는 악화로 이어질 잘못된 컨텍스트에서 실행하는 경우 예상대로 작동하지 않을 수 있습니다. 당신은 경고받았습니다. 당신은 이걸 이해했고 여전히 이 소프트웨어를 사용 하시겠습니까?</string>
   <string name="context_action_launch">액티비티 시작</string>
   <string name="context_action_shortcut">바로가기 생성</string>
@@ -18,6 +20,8 @@
   <string name="creating_activity_shortcut">액티비티 바로가기 생성 %s</string>
   <string name="creating_application_shortcut">애플리케이션 바로가기 생성 %s</string>
   <string name="error">오류</string>
+  <string name="error_tasks">오류 로드 하는 작업 목록</string>
+  <string name="error_icons">오류 로딩 아이콘</string>
   <string name="error_invalid_icon_resource">오류: 잘못된 아이콘 리소스</string>
   <string name="error_invalid_icon_format">오류: 잘못된 아이콘 형식</string>
   <string name="action_view_source">소스 코드 보기</string>

@@ -5,6 +5,8 @@
   <string name="title_section_recent">Activities recientes</string>
   <string name="title_section_all">Todas las activities</string>
   <string name="title_dialog_disclaimer">Descargo de responsabilidad</string>
+  <string name="title_dialog_icon_picker">Elige un icono</string>
+  <string name="dialog_progress_loading">Cargando&#8230;</string>
   <string name="dialog_disclaimer">Usa este software bajo tu responsabilidad. Algunas aplicaciones pueden comportarse de forma inesperada cuando sus activities se ejecutan en el contexto equivocado, causando pérdidas de datos o incluso algo peor. Te hemos avisado. ¿Entiendes esto y aun así quieres usar este software?</string>
   <string name="context_action_launch">Ejecutar activity</string>
   <string name="context_action_shortcut">Crear acceso directo</string>
@@ -18,6 +20,8 @@
   <string name="creating_activity_shortcut">Creando un acceso directo para la activity %s</string>
   <string name="creating_application_shortcut">Creando un acceso directo para la aplicaión %s</string>
   <string name="error">Error</string>
+  <string name="error_tasks">Error al cargar la lista de tareas</string>
+  <string name="error_icons">Error al cargar iconos</string>
   <string name="error_invalid_icon_resource">Error: recurso de icono inválido</string>
   <string name="error_invalid_icon_format">Error: formato de icono inválido</string>
   <string name="action_view_source">Ver código fuente</string>
