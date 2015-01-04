@@ -1,0 +1,5 @@
+Această aplicație lansează activităti ascunse și creează scurtături pe ecranul principal pentru acestea.
+
+Acest proiect e deocamdata lipsit de unele facilităti si unele traduceri. Ești bine venit să contribui!
+
+Traducerile sunt hostate pe: crowdin.net/project/activitylauncher/invite

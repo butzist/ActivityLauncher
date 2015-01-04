@@ -1,0 +1,6 @@
+Bu uygulama gizlenmiş etkinliklere girmenizi ve yüklenmiş uygulamaların etkinlikleri için ana ekranda kısayol oluşturur.
+
+Bu projede hala birkaç özellik ve çeviri eksikliği var. Sizinde bir katkınız bulunsun!
+
+Çeviriler bu link altında toplanıyor
+http://crowdin.net/project/activitylauncher/invite

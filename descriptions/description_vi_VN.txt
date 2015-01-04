@@ -1,0 +1,5 @@
+Ứng dụng Android này ra mắt ẩn hoạt động và tạo ra màn hình phím tắt cho ứng dụng đã cài đặt.
+
+Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để contibute!
+
+Bản dịch được lưu trữ theo http://crowdin.net/project/activitylauncher/invite

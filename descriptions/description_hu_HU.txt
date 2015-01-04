@@ -1,0 +1,5 @@
+Ez az Android App rejtett tevékenységek indít, és telepített alkalmazások főképernyő parancsikonokat hoz létre.
+
+Ebből a projektből még mindig hiányzik néhány funkció és némi fordítás. Köszönjük a hozzájárulásokat!
+
+Fordítók: http://crowdin.net/project/activitylauncher/invite
