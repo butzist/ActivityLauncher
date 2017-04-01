@@ -10,99 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="088aaa99-97b6-4ba6-9911-d2c4927ac4f2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ActivityLauncherApp.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/buildConfig/androidTest/debug/de/szalkowski/activitylauncher/test/BuildConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/buildConfig/debug/de/szalkowski/activitylauncher/BuildConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/android/support/compat/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/android/support/coreui/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/android/support/coreutils/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/android/support/fragment/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/android/support/mediacompat/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/android/support/v4/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/generated/source/r/debug/de/szalkowski/activitylauncher/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rename-dirs.sh" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/ActivityLauncherApp.iml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/ActivityLauncherApp/build.gradle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/lint.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/lint.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/AndroidManifest.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/AllTasksListAdapter.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/AllTasksListAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/AllTasksListAsyncProvider.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/AllTasksListAsyncProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/AllTasksListFragment.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/AllTasksListFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/AsyncProvider.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/AsyncProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/DisclaimerDialogFragment.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/DisclaimerDialogFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/IconListAdapter.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/IconListAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/IconListAsyncProvider.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/IconListAsyncProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/IconPickerDialogFragment.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/IconPickerDialogFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/IconPickerFragment.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/IconPickerFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/MainActivity.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/MainActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/MyActivityInfo.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/MyActivityInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/MyPackageInfo.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/MyPackageInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/PackageManagerCache.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/PackageManagerCache.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/RecentTaskListAdapter.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/RecentTaskListAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/RecentTaskListAsyncProvider.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/RecentTaskListAsyncProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/RecentTaskListFragment.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/RecentTaskListFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/de/szalkowski/activitylauncher/ShortcutEditDialogFragment.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/de/szalkowski/activitylauncher/ShortcutEditDialogFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/org/thirdparty/LauncherIconCreator.java" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/java/org/thirdparty/LauncherIconCreator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/drawable-hdpi/ic_launcher.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/drawable-mdpi/ic_launcher.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/drawable-xhdpi/ic_launcher.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/drawable-xxhdpi/ic_launcher.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_list_item.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/activity_list_item.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/activity_main.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/all_activities_child_item.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/all_activities_child_item.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/all_activities_group_item.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/all_activities_group_item.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_edit_activity.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/dialog_edit_activity.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/frament_all_list.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/frament_all_list.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/icon_picker.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/layout/icon_picker.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/menu/main.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-af/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-zh-rCN/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-ar/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-ar/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-ca/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-vi/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-cs/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-zh/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-da/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-sv/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-de-rCH/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-de/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-de/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-de-rCH/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-el/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-el/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-en-rGB/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-en/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-en/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-en-rGB/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-es/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-es/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-fi/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-sr/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-fr/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-he/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-pt/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-hu/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-hu/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-it/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-it/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-ja/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-no/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-ko/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-ko/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-nl/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-nl/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-no/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-ja/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-pl/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-pl/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-pt-rBR/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-pt-rBR/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-pt/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-he/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-ro/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-ro/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-ru/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-si-rLK/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-si-rLK/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-sk/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-sk/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-sr/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-fi/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-sv/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-da/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-sw600dp/dimens.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-sw600dp/dimens.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-sw720dp-land/dimens.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-sw720dp-land/dimens.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-tr/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-tr/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-uk/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-uk/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-v11/styles.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-v11/styles.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-v14/styles.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-ca/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-zh-rCN/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-af/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values-zh/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values-cs/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values/defaults.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values/defaults.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values/dimens.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ActivityLauncherApp/ActivityLauncherApp.iml" afterPath="$PROJECT_DIR$/ActivityLauncherApp/ActivityLauncherApp.iml" />
     </list>
     <ignored path="ActivityLauncher.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1534,7 +1443,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4473096576194" />
+        <entry key="$PROJECT_DIR$" value="4473109004069" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1943,8 +1852,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1956,6 +1863,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane" />
     </panes>
   </component>
@@ -2258,12 +2167,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="7" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990867" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18684356" sideWeight="0.26451612" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18684356" sideWeight="0.27403846" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -2274,7 +2183,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18684356" sideWeight="0.7354839" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18684356" sideWeight="0.72596157" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2314,19 +2223,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle" />
     <entry file="file://$PROJECT_DIR$/ActivityLauncherApp/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2334,17 +2235,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties" />
     <entry file="file://$PROJECT_DIR$/ActivityLauncherApp/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
         <state />
@@ -2370,13 +2264,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
   </component>
 </project>
