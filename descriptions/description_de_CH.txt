@@ -2,4 +2,4 @@ Diese Android App startet versteckte Aktivitäten und erstellt Verknüpfungen f�
 
 Diesem Projekt fehlen noch immer ein paar Features und Übersetzungen. Sie sind willkommen sich zu beteiligen!
 
-Übersetzungen sind unter http://crowdin.net/project/activitylauncher/invite gehostet.
+Übersetzungen sind unter http://crowdin.net/project/activitylauncher/invite gehostet

@@ -1,0 +1,6 @@
+Deze Android App start verborgen activiteiten en maakt snelkoppelingen op het startscherm voor geïnstalleerde apps.
+
+Dit project mist nog enkele functies en vertalingen. Uw bijdrage is welkom!
+
+Vertalingen zijn gehost op
+http://crowdin.net/project/activitylauncher/invite

@@ -1,5 +1,5 @@
-Este App Android inicia atividades ocultas e cria atalhos da tela inicial para apps instalados.
+Este Aplicativo Android inicia atividades ocultas e cria atalhos na tela inicial para aplicativos instalados.
 
-Este projeto ainda carece de alguns recursos e tradução. Você é bem-vindo ao contibute!
+Este projeto ainda carece de alguns recursos e traduções. Você é bem-vindo a contribuir!
 
 As traduções são hospedadas sob http://crowdin.net/project/activitylauncher/invite

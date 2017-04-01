@@ -1,0 +1,5 @@
+Aplikasi Android ini meluncurkan aktivitas tersembunyi dan membuat pintasan ke layar utama seperti aplikasi terinstall.
+
+Proyek ini masih tidak memiliki beberapa fitur dan terjemahan. Anda dipersilakan untuk berkontribusi!
+
+Ikut terjemahan apl ini di http://crowdin.net/project/activitylauncher/invite

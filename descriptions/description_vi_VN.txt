@@ -1,5 +1,5 @@
-Ứng dụng Android này ra mắt ẩn hoạt động và tạo ra màn hình phím tắt cho ứng dụng đã cài đặt.
+Ứng dụng Android này chạy các hoạt động ẩn và tạo lối tắt màn hình chính cho các ứng dụng được cài đặt.
 
-Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để contibute!
+Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để đóng góp!
 
-Bản dịch được lưu trữ theo http://crowdin.net/project/activitylauncher/invite
+Bản dịch được lưu trữ tại http://crowdin.net/project/activitylauncher/invite

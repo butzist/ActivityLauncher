@@ -7,7 +7,7 @@
   <string name="title_dialog_disclaimer">Haftungsausschluss</string>
   <string name="title_dialog_icon_picker">Icon auswählen</string>
   <string name="dialog_progress_loading">Lade...</string>
-  <string name="dialog_disclaimer">Verwenden Sie diese Software auf Ihr eigenes Risiko. Einige Anwendungen verhalten sich möglicherweise nicht wie erwartet, wenn ihre Aktivitäten im falschen Kontext gestartet werden.  Dies kann zu Datenverlust führen oder sogar noch schlimmer. Sie wurden gewarnt. Verstehen sie diese Warnung und möchten diese Software trotzdem verwenden?</string>
+  <string name="dialog_disclaimer">Verwenden Sie diese Software auf Ihr eigenes Risiko. Einige Anwendungen verhalten sich möglicherweise nicht wie erwartet, wenn ihre Aktivitäten im falschen Kontext gestartet werden. Dies kann zu Datenverlust führen oder schlimmer. Sie wurden gewarnt. Verstehen sie diese Warnung und möchten diese Software trotzdem verwenden?</string>
   <string name="context_action_launch">Starte Aktivität</string>
   <string name="context_action_shortcut">Verknüpfung erstellen</string>
   <string name="context_action_edit">Verknüpfung bearbeiten</string>

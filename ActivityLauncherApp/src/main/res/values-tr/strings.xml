@@ -26,5 +26,5 @@
   <string name="error_invalid_icon_format">Hata: geçersiz simge formatı</string>
   <string name="action_view_source">Kaynak Kodunu Göster</string>
   <string name="action_view_translation">Çeviriye Yardım Et!</string>
-  <string name="action_view_bugs">Sorun Bildir</string>
+  <string name="action_view_bugs">Sorun bildir</string>
 </resources>

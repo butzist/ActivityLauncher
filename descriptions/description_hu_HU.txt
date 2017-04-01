@@ -1,5 +1,5 @@
-Ez az Android App rejtett tevékenységek indít, és telepített alkalmazások főképernyő parancsikonokat hoz létre.
+This Android App launches hidden activities and creates home screen shortcuts for installed apps.
 
-Ebből a projektből még mindig hiányzik néhány funkció és némi fordítás. Köszönjük a hozzájárulásokat!
+Ez a projekt nélkülöz még néhány funkciót és fordítást. Szeretettel várjuk hozzájárulásod!
 
-Fordítók: http://crowdin.net/project/activitylauncher/invite
+A fordítások itt találhatóak: http://crowdin.net/project/activitylauncher/invite

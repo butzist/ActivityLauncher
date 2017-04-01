@@ -1,0 +1,5 @@
+这个 Android 应用程序可以启动应用程序隐藏的活动并能在主屏幕创建应用或者活动快捷方式。
+
+本项目仍然缺少一些功能及翻译支持。 我们很期待您的支持和贡献！
+
+您可以下网址中为您喜爱的语言贡献自己的翻译：http://crowdin.net/project/activitylauncher/invite

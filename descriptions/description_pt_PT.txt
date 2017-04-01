@@ -1,0 +1,5 @@
+Esta aplicação abre atividades ocultas e cria atalhos no ecrã inicial para as aplicações instaladas.
+
+Este projeto ainda carece de recursos e precisa de traduções. Está convidado a contribuir!
+
+As traduções estão hospedadas em http://crowdin.net/project/activitylauncher/invite

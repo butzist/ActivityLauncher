@@ -1,5 +1,5 @@
 Это Android приложение запускает скрытые действия для установленных приложений и создает ярлыки для них на домашнем экране .
 
-Этому проекту все еще не хватает нескольких функций и перевода. Ждем от вас дополнений!
+This project still lacks a few features and translation. Ждем от вас дополнений!
 
-Переводы размещены на http://crowdin.net/project/activitylauncher/invite
+Translations are hosted under http://crowdin.net/project/activitylauncher/invite
