@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 android {
+    signingConfigs {
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
     defaultConfig {
         applicationId "de.szalkowski.activitylauncher"
         minSdkVersion 14
         targetSdkVersion 25
     }
-
     buildTypes {
         release {
             minifyEnabled false
