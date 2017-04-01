@@ -1,3 +1,4 @@
-/gen
-/bin
-/libs
+/build
+local.properties
+/.gradle
+/app/build
