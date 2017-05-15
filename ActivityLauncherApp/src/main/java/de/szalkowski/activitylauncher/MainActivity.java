@@ -34,6 +34,8 @@ public class MainActivity extends FragmentActivity implements
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setIcon(R.drawable.ic_launcher);
 
 		// Set up the dropdown list navigation in the action bar.
 		actionBar.setListNavigationCallbacks(
