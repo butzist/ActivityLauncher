@@ -8,12 +8,13 @@
 
     <ImageView
         android:id="@android:id/icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:duplicateParentState="true"
         android:contentDescription="@string/label_icon"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher" 
+        android:paddingLeft="10dp" />
 
     <TextView
         android:id="@android:id/text1"

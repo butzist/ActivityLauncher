@@ -1,0 +1,11 @@
+<resources>
+
+    <!--
+        Base application theme for API 21+. This theme completely replaces
+        AppBaseTheme from everywhere else on API 21+ devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.DeviceDefault.Light.DarkActionBar">
+        <!-- API 21 theme customizations can go here. -->
+    </style>
+
+</resources>
