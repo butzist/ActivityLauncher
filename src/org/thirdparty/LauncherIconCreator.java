@@ -11,15 +11,17 @@
 
 package org.thirdparty;
 
-import de.szalkowski.activitylauncher.MyActivityInfo;
-import de.szalkowski.activitylauncher.MyPackageInfo;
-import de.szalkowski.activitylauncher.R;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.Toast;
+import de.szalkowski.activitylauncher.MyActivityInfo;
+import de.szalkowski.activitylauncher.MyPackageInfo;
+import de.szalkowski.activitylauncher.R;
 
 public class LauncherIconCreator {
 	public static Intent getActivityIntent(ComponentName activity) {
@@ -47,17 +49,36 @@ public class LauncherIconCreator {
 		createLauncherIcon(context, intent, pack.getName(), pack.getIconResourceName());	
 	}
 
-	public static void createLauncherIcon(Context context, ComponentName activity, String name, BitmapDrawable icon) {
+	public static void createLauncherIcon(Context context, ComponentName activity, String name, Drawable icon) {
 		Toast.makeText(context, String.format(context.getText(R.string.creating_activity_shortcut).toString(), activity.flattenToShortString()), Toast.LENGTH_LONG).show();
 
 	    Intent shortcutIntent = new Intent();
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, getActivityIntent(activity));
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
-	    Bitmap bm = icon.getBitmap();
+	    Bitmap bm = getBitmapFromDrawable(icon);
 	    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, bm);
 	    shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 	    context.sendBroadcast(shortcutIntent);
 	    //finish();
+	}
+	
+	/**
+	 * Got reference from stackoverflow.com 
+	 * Url: https://stackoverflow.com/questions/44447056/convert-adaptiveicondrawable-to-bitmap-in-android-o-preview?utm_medium=organic&utm_source=
+	 * google_rich_qa&utm_campaign=google_rich_qa
+	 * 
+	 * @param drawable
+	 * @return
+	 */
+	private static Bitmap getBitmapFromDrawable(Drawable drawable) {
+		if (drawable instanceof BitmapDrawable) {
+			return ((BitmapDrawable) drawable).getBitmap();
+		}
+		final Bitmap bmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		final Canvas canvas = new Canvas(bmp);
+		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		drawable.draw(canvas);
+		return bmp;
 	}
 	
 	public static void createLauncherIcon(Context context, ComponentName activity, String name, String icon_resource_name) {

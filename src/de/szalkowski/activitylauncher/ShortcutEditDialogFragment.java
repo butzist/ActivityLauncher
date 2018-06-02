@@ -2,7 +2,6 @@ package de.szalkowski.activitylauncher;
 
 import org.thirdparty.LauncherIconCreator;
 
-import de.szalkowski.activitylauncher.IconPickerDialogFragment.IconPickerListener;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -11,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -22,6 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import de.szalkowski.activitylauncher.IconPickerDialogFragment.IconPickerListener;
 
 public class ShortcutEditDialogFragment extends DialogFragment {
 	protected MyActivityInfo activity;
@@ -106,16 +105,16 @@ public class ShortcutEditDialogFragment extends DialogFragment {
 							Resources resources = pm.getResourcesForApplication(pack);
 							ShortcutEditDialogFragment.this.activity.icon_resource = resources.getIdentifier(name, type, pack);
 							if(ShortcutEditDialogFragment.this.activity.icon_resource != 0) {
-								ShortcutEditDialogFragment.this.activity.icon = (BitmapDrawable)resources.getDrawable(ShortcutEditDialogFragment.this.activity.icon_resource);
+								ShortcutEditDialogFragment.this.activity.icon = resources.getDrawable(ShortcutEditDialogFragment.this.activity.icon_resource);
 							} else {
-								ShortcutEditDialogFragment.this.activity.icon = (BitmapDrawable)pm.getDefaultActivityIcon();
+								ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
 								Toast.makeText(getActivity(), R.string.error_invalid_icon_resource, Toast.LENGTH_LONG).show();
 							}
 						} catch (NameNotFoundException e) {
-							ShortcutEditDialogFragment.this.activity.icon = (BitmapDrawable)pm.getDefaultActivityIcon();
+							ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
 							Toast.makeText(getActivity(), R.string.error_invalid_icon_resource, Toast.LENGTH_LONG).show();
 						} catch (Exception e) {
-							ShortcutEditDialogFragment.this.activity.icon = (BitmapDrawable)pm.getDefaultActivityIcon();
+							ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
 							Toast.makeText(getActivity(), R.string.error_invalid_icon_format, Toast.LENGTH_LONG).show();
 						}
 						
