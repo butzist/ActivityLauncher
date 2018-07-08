@@ -5,10 +5,10 @@
   <string name="title_section_recent">Çalışan etkinlikler</string>
   <string name="title_section_all">Bütün etkinlikler</string>
   <string name="title_dialog_disclaimer">Yasal uyarı</string>
-  <string name="title_dialog_icon_picker">Simge seç</string>
-  <string name="dialog_progress_loading">Yükleniyor...</string>
+  <string name="title_dialog_icon_picker">Bir eylem seç</string>
+  <string name="dialog_progress_loading">Yükleniyor&#8230;</string>
   <string name="dialog_disclaimer">Bu yazılımın kullanımı sizin sorumluluğunuzdadır. Bazı uygulamalar beklenildiği gibi çalışmayabilir ve veri kayıplarına veya daha kötüsüne sebep olabilir. Bu yazılımı hala kullanmak istiyor musunuz?</string>
-  <string name="context_action_launch">Etkinliği başlat</string>
+  <string name="context_action_launch">Aktiviteyi başlat</string>
   <string name="context_action_shortcut">Kısayol oluştur</string>
   <string name="context_action_edit">Kısayolu düzenle</string>
   <string name="label_name">İsim</string>

@@ -7,10 +7,25 @@
   <string name="title_dialog_disclaimer">Ansvarsfraskrivelse</string>
   <string name="title_dialog_icon_picker">Velg et ikon</string>
   <string name="dialog_progress_loading">Lader&#8230;</string>
-  <string name="dialog_disclaimer">Bruk av denne programvare er på eget ansvar. Noen programmer oppfører seg ikke som forventet når det blir brukt i feil sammenheng. Nå har du blitt advart. Har du forstått dette, men
-forsatt bruke denne programvare?</string>
+  <string name="dialog_disclaimer">Use this software at your own risk. Some apps might not behave as expected when their activities are launched in the wrong context leading to data loss or even worse. You have been warned. Do you understand this and still want to use this software?</string>
   <string name="context_action_launch">Start aktivitet</string>
   <string name="context_action_shortcut">Opprett snarvei</string>
+  <string name="context_action_edit">Cj</string>
   <string name="label_name">Navn</string>
   <string name="label_package">Pakke</string>
+  <string name="label_class">Klassen</string>
+  <string name="label_icon">Ikon</string>
+  <string name="starting_activity">Starting activity: %s</string>
+  <string name="starting_application">Darius</string>
+  <string name="creating_activity_shortcut">Lager aktivitet snarvei for %s</string>
+  <string name="creating_application_shortcut">Lager aktivitet snarvei for %s</string>
+  <string name="error">Feil</string>
+  <string name="error_tasks">Jones</string>
+  <string name="error_icons">Error</string>
+  <string name="error_invalid_icon_resource">Icon resource</string>
+  <string name="error_invalid_icon_format">invalid icon format</string>
+  <string name="action_view_source">View Sourcecode</string>
+  <string name="action_view_translation">Hjelp til med oversettelse!</string>
+  <string name="action_view_bugs">Rapporter et problem
+</string>
 </resources>

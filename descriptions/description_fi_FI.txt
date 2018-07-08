@@ -1,5 +1,5 @@
-This Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Tämä Android sovellus käynnistää piilotetut toiminnot ja luo aloitusnäyttöön pikakuvakkeen asennetuista sovelluksista.
 
-This project still lacks a few features and translation. You are welcome to contibute!
+Tästä projektista puuttuu vielä joitain ominaisuuksia ja käänöksiä. Olet tervettullut olemaan osallisena!
 
-Translations are hosted under http://crowdin.net/project/activitylauncher/invite
+Käänöksiä voi tehdä osoitteessa: http://crowdin.net/project/activitylauncher/invite

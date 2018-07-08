@@ -1,5 +1,5 @@
-This Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Ovaj Android App pokreće skrivene aktivnosti i stvara početni ekran prečice za instaliranje aplikacije.
 
-This project still lacks a few features and translation. You are welcome to contibute!
+Ovaj projekat je još uvek nedostupan jer neke funkcije i prevodi fale. Nema na čemu!
 
-Translations are hosted under http://crowdin.net/project/activitylauncher/invite
+Prevodi se nalaze pod: http://crowdin.net/project/activitylauncher/invite

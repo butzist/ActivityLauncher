@@ -1,5 +1,5 @@
 Hierdie Android App Laai versteekte aktiwiteite en skep tuisskerm kortpaaie vir geïnstalleerde toepassings.
 
-Hierdie projek ontbreek steeds 'n paar kenmerke en vertaling. Jy is welkom om contibute!
+Hierdie projek ontbreek steeds 'n paar kenmerke en vertaling. Jeste stvarno, živa istina. Jy is welkom om contibute!
 
 Vertalings is aangebied onder http://crowdin.net/project/activitylauncher/invite
