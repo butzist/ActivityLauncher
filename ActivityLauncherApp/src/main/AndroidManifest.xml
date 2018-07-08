@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.szalkowski.activitylauncher"
-    android:versionCode="10"
-    android:versionName="1.6.2" >
+    android:versionCode="11"
+    android:versionName="1.7.0" >
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="25" />
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
     
@@ -25,5 +22,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
