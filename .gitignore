@@ -1,4 +1,5 @@
 /build
 local.properties
+/.idea
 /.gradle
 /ActivityLauncherApp/build
