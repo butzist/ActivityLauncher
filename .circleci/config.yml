@@ -11,8 +11,11 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "ActivityLauncherApp/build.gradle" }}
       - run:
-         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this. 
-         command: sudo chmod +x ./gradlew
+         name: Prepare Android keystore
+         command: echo $ENCODED_KEYSTORE | base64 --decode >> ~/code/keystore.jks
+      - run:
+         name: Setup Android keystore
+         command: echo 'export KEYSTORE=${HOME}/code/keystore.jks' >> $BASH_ENV
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
@@ -23,10 +26,23 @@ jobs:
       #- run:
       #    name: Run Tests
       #    command: ./gradlew lint test
-      - store_artifacts:
-          path: ActivityLauncherApp/build/reports
-          destination: reports
+      #- store_artifacts:
+      #    path: ActivityLauncherApp/build/reports
+      #    destination: reports
       #- store_test_results:
       #    path: ActivityLauncherApp/build/test-results
+      - run:
+          name: Build debug
+          command: ./gradlew assembleDebug
+      - store_artifacts:
+          path: ActivityLauncherApp/build/outputs/apk/debug
+          destination: debugApk
+      - run:
+          name: Build release
+          command: ./gradlew assembleRelease
+      - store_artifacts:
+          path: ActivityLauncherApp/build/outputs/apk/release
+          destination: releaseApk
+
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 

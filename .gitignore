@@ -3,3 +3,4 @@ local.properties
 /.idea
 /.gradle
 /ActivityLauncherApp/build
+/ActivityLauncherApp/keystore.jks
