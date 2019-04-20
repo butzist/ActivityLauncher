@@ -1,4 +1,4 @@
-/**
+/*
  * Based on code from Stackoverflow.com under CC BY-SA 3.0
  * Url: http://stackoverflow.com/questions/6493518/create-a-shortcut-for-any-app-on-desktop
  * By:  http://stackoverflow.com/users/815400/xuso

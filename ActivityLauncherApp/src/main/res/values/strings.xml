@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Activity Launcher</string>
-    <string name="title_section_recent">Recent activities</string>
     <string name="title_section_all">All activities</string>
     <string name="title_dialog_disclaimer">Disclaimer</string>
     <string name="title_dialog_icon_picker">Pick an icon</string>
