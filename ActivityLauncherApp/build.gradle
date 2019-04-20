@@ -9,7 +9,6 @@ android {
         }
     }
     compileSdkVersion 28
-    buildToolsVersion "28.0.1"
     defaultConfig {
         applicationId "de.szalkowski.activitylauncher"
         minSdkVersion 14
