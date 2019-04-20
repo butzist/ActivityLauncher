@@ -1,5 +1,5 @@
 Esta aplicación Android lanza actividades ocultas y crea accesos directos en la pantalla de inicio para aplicaciones instalados.
 
-Este proyecto todavía carece de algunas características y traducción. ¡Esperamos tus contribuciones!
+Este proyecto todavía carece de algunas características y traducción. You are welcome to contibute!
 
 Las traducciones están alojadas en http://crowdin.net/project/activitylauncher/invite

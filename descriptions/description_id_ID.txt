@@ -1,5 +1,5 @@
-This Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Aplikasi Android ini meluncurkan aktivitas tersembunyi dan membuat pintasan layar utama untuk aplikasi yang terpasang.
 
-Proyek ini masih mempunyai kekurangan dalam beberapa fitur dan terjemahan. You are welcome to contibute!
+Proyek ini masih mempunyai beberapa fitur yang belum diterjemahkan. Anda dipersilakan untuk ikut berkontribusi!
 
-Translations are hosted under http://crowdin.net/project/activitylauncher/invite
+Ikut terjemahan apl ini di http://crowdin.net/project/activitylauncher/invite

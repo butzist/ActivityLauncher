@@ -1,5 +1,5 @@
-This Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Denne Android App lanserer skjulte aktiviteter og oppretter startsiden snarveier for installerte programmer.
 
-Dette prosjektet mangler fortsatt mange funksjoner og oversettelse. You are welcome to contibute!
+Dette prosjektet mangler fortsatt mange funksjoner og oversettelse. Du er velkommen til å delta!
 
-Oversettelser ligger under http://crowdin.net/project/activitylauncher/invite
+Translations are hosted under http://crowdin.net/project/activitylauncher/invite

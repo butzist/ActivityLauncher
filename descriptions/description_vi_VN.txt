@@ -1,4 +1,4 @@
-Ứng dụng Android này chạy các hoạt động ẩn và tạo lối tắt màn hình chính cho các ứng dụng được cài đặt.
+This Android App launches hidden activities and creates home screen shortcuts for installed apps.
 
 Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để đóng góp!
 

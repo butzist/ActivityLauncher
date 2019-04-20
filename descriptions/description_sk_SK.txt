@@ -2,4 +2,4 @@ Táto Android aplikácia spúšťa skryté aktivity a vytvára odkazy na domovsk
 
 Tento projekt stále neobsahuje niektoré funkcie a preklady. Ste vítaní na prispievanie!
 
-Preklady sú umiestnené pod http://crowdin.net/project/activitylauncher/invite
+Translations are hosted under http://crowdin.net/project/activitylauncher/invite

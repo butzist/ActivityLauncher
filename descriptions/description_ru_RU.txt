@@ -2,4 +2,4 @@
 
 Этому проекту все еще не хватает нескольких функций и перевода. Ждем от вас дополнений!
 
-Переводы проводятся в соответствии с http://crowdin.net/project/activitylauncher/invite
+Переводы размещены на http://crowdin.net/project/activitylauncher/invite
