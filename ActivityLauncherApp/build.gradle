@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 android {
     signingConfigs {
         release {
@@ -8,23 +9,39 @@ android {
             keyPassword System.getenv("KEY_PASSWORD")
         }
     }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "de.szalkowski.activitylauncher"
         minSdkVersion 14
         targetSdkVersion 28
+        versionCode 12
+        versionName "1.8.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+
+    compileOptions {
+        encoding = 'UTF-8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*'
     }
 }
 
 dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
 }
-
