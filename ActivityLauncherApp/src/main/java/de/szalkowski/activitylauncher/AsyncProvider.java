@@ -5,26 +5,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {
-    public interface Listener<ReturnType> {
-        void onProviderFininshed(AsyncProvider<ReturnType> task, ReturnType value);
-    }
-
-    class Updater {
-        private AsyncProvider<ReturnType> provider;
-
-        Updater(AsyncProvider<ReturnType> provider) {
-            this.provider = provider;
-        }
-
-        void update(int value) {
-            this.provider.publishProgress(value);
-        }
-
-        void updateMax(int value) {
-            this.provider.max = value;
-        }
-    }
-
     private CharSequence message;
     private Listener<ReturnType> listener;
     private int max;
@@ -85,5 +65,25 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
     @Override
     protected ReturnType doInBackground(Void... params) {
         return run(new Updater(this));
+    }
+
+    public interface Listener<ReturnType> {
+        void onProviderFininshed(AsyncProvider<ReturnType> task, ReturnType value);
+    }
+
+    class Updater {
+        private AsyncProvider<ReturnType> provider;
+
+        Updater(AsyncProvider<ReturnType> provider) {
+            this.provider = provider;
+        }
+
+        void update(int value) {
+            this.provider.publishProgress(value);
+        }
+
+        void updateMax(int value) {
+            this.provider.max = value;
+        }
     }
 }

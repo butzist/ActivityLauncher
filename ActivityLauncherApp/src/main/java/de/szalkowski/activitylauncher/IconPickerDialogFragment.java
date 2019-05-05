@@ -16,10 +16,6 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 public class IconPickerDialogFragment extends DialogFragment implements IconListAsyncProvider.Listener<IconListAdapter> {
-    public interface IconPickerListener {
-        public void iconPicked(String icon);
-    }
-
     private GridView grid;
     private IconPickerListener listener = null;
 
@@ -74,5 +70,9 @@ public class IconPickerDialogFragment extends DialogFragment implements IconList
         } catch (Exception e) {
             Toast.makeText(this.getActivity(), R.string.error_icons, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public interface IconPickerListener {
+        public void iconPicked(String icon);
     }
 }

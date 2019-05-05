@@ -14,17 +14,17 @@ class PackageManagerCache {
     private final Map<ComponentName, MyActivityInfo> activityInfos;
     private PackageManager pm;
 
+    private PackageManagerCache(PackageManager pm) {
+        this.pm = pm;
+        this.packageInfos = new HashMap<>();
+        this.activityInfos = new HashMap<>();
+    }
+
     static PackageManagerCache getPackageManagerCache(PackageManager pm) {
         if (instance == null) {
             instance = new PackageManagerCache(pm);
         }
         return instance;
-    }
-
-    private PackageManagerCache(PackageManager pm) {
-        this.pm = pm;
-        this.packageInfos = new HashMap<>();
-        this.activityInfos = new HashMap<>();
     }
 
     MyPackageInfo getPackageInfo(String packageName) throws NameNotFoundException {

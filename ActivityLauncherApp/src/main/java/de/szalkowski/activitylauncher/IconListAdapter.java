@@ -25,6 +25,19 @@ public class IconListAdapter extends BaseAdapter {
         this.pm = context.getPackageManager();
     }
 
+    static Drawable getIcon(String icon_resource_string, PackageManager pm) {
+        try {
+            String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
+            String type = icon_resource_string.substring(icon_resource_string.indexOf(':') + 1, icon_resource_string.indexOf('/'));
+            String name = icon_resource_string.substring(icon_resource_string.indexOf('/') + 1);
+            Resources res = pm.getResourcesForApplication(pack);
+            return res.getDrawable(res.getIdentifier(name, type, pack));
+        } catch (Exception e) {
+            return pm.getDefaultActivityIcon();
+        }
+
+    }
+
     void resolve(IconListAsyncProvider.Updater updater) {
         TreeSet<String> icons = new TreeSet<>();
         List<PackageInfo> all_packages = this.pm.getInstalledPackages(0);
@@ -67,19 +80,6 @@ public class IconListAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return 0;
-    }
-
-    static Drawable getIcon(String icon_resource_string, PackageManager pm) {
-        try {
-            String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
-            String type = icon_resource_string.substring(icon_resource_string.indexOf(':') + 1, icon_resource_string.indexOf('/'));
-            String name = icon_resource_string.substring(icon_resource_string.indexOf('/') + 1);
-            Resources res = pm.getResourcesForApplication(pack);
-            return res.getDrawable(res.getIdentifier(name, type, pack));
-        } catch (Exception e) {
-            return pm.getDefaultActivityIcon();
-        }
-
     }
 
     @Override
