@@ -16,7 +16,7 @@
             android:id="@+id/textView_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:text="@string/label_name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -24,7 +24,7 @@
             android:id="@+id/editText_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:ems="10"
             android:inputType="text" />
 
@@ -39,7 +39,7 @@
             android:id="@+id/textView_package"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:text="@string/label_package"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -47,7 +47,7 @@
             android:id="@+id/editText_package"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:ems="10"
             android:inputType="text">
 
@@ -65,7 +65,7 @@
             android:id="@+id/textView_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:text="@string/label_class"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -73,7 +73,7 @@
             android:id="@+id/editText_class"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:ems="10"
             android:inputType="text" />
 
@@ -88,20 +88,20 @@
             android:id="@+id/textView_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:text="@string/label_icon"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical">
+            android:layout_gravity="start|center_vertical">
 
             <EditText
                 android:id="@+id/editText_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
+                android:layout_gravity="start|center_vertical"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="text" />

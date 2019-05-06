@@ -13,6 +13,7 @@
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/label_icon"
         android:duplicateParentState="true"
+        android:paddingStart="30dp"
         android:paddingLeft="30dp"
         android:src="@drawable/ic_launcher" />
 
@@ -20,8 +21,9 @@
         android:id="@android:id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
+        android:layout_gravity="center_vertical|start"
         android:duplicateParentState="true"
+        android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

@@ -52,7 +52,7 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
     protected void onPostExecute(ReturnType result) {
         super.onPostExecute(result);
         if (this.listener != null) {
-            this.listener.onProviderFininshed(this, result);
+            this.listener.onProviderFinished(this, result);
         }
 
         if (this.progress != null) {
@@ -68,7 +68,7 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
     }
 
     public interface Listener<ReturnType> {
-        void onProviderFininshed(AsyncProvider<ReturnType> task, ReturnType value);
+        void onProviderFinished(AsyncProvider<ReturnType> task, ReturnType value);
     }
 
     class Updater {

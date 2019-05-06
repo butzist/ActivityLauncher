@@ -2,6 +2,7 @@ package de.szalkowski.activitylauncher;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -34,8 +35,8 @@ public class MainActivity extends FragmentActivity {
 
     /**
      * Backward-compatible version of {@link ActionBar#getThemedContext()} that
-     * simply returns the {@link android.app.Activity} if
-     * <code>getThemedContext</code> is unavailable.
+     * simply returns the {@link Activity} if
+     * {@code getThemedContext} is unavailable.
      */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private Context getActionBarThemedContextCompat() {

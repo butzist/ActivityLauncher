@@ -2,13 +2,13 @@
     <item
         android:id="@+id/action_view_source"
         android:showAsAction="never"
-        android:title="@string/action_view_source"></item>
+        android:title="@string/action_view_source" />
     <item
         android:id="@+id/action_view_translation"
         android:showAsAction="never"
-        android:title="@string/action_view_translation"></item>
+        android:title="@string/action_view_translation" />
     <item
         android:id="@+id/action_view_bugs"
         android:showAsAction="never"
-        android:title="@string/action_view_bugs"></item>
+        android:title="@string/action_view_bugs" />
 </menu>

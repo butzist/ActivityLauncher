@@ -15,7 +15,6 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
@@ -45,14 +44,14 @@ public class LauncherIconCreator {
     }
 
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-        final String pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
+        final String pack = activity.getIconResourceName().substring(0, activity.getIconResourceName().indexOf(':'));
 
         // Use bitmap version if icon from different package is used
         if (!pack.equals(activity.getComponentName().getPackageName())) {
             createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()), null);
         } else {
             createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()),
-                    activity.getIconResouceName());
+                    activity.getIconResourceName());
         }
     }
 
@@ -141,13 +140,9 @@ public class LauncherIconCreator {
             new AlertDialog.Builder(context)
                     .setTitle(context.getText(R.string.error_creating_shortcut))
                     .setMessage(context.getText(R.string.error_verbose_pin_shortcut))
-                    .setPositiveButton(context.getText(android.R.string.ok), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Just close dialog don't do anything
-                            dialog.cancel();
-                        }
+                    .setPositiveButton(context.getText(android.R.string.ok), (dialog, which) -> {
+                        // Just close dialog don't do anything
+                        dialog.cancel();
                     })
                     .show();
         }

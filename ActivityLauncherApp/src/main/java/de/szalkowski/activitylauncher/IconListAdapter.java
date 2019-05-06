@@ -54,7 +54,7 @@ public class IconListAdapter extends BaseAdapter {
                 MyPackageInfo mypack = cache.getPackageInfo(pack.packageName);
 
                 for (int j = 0; j < mypack.getActivitiesCount(); ++j) {
-                    String icon_resource_name = mypack.getActivity(j).getIconResouceName();
+                    String icon_resource_name = mypack.getActivity(j).getIconResourceName();
                     if (icon_resource_name != null) {
                         icons.add(icon_resource_name);
                     }

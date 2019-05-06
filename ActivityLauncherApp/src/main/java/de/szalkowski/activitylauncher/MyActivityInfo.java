@@ -53,7 +53,7 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
         return name;
     }
 
-    public String getIconResouceName() {
+    public String getIconResourceName() {
         return icon_resource_name;
     }
 

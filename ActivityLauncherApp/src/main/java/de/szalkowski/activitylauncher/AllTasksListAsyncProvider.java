@@ -7,7 +7,7 @@ public class AllTasksListAsyncProvider extends AsyncProvider<AllTasksListAdapter
 
     AllTasksListAsyncProvider(
             Context context,
-            de.szalkowski.activitylauncher.AsyncProvider.Listener<AllTasksListAdapter> listener) {
+            AsyncProvider.Listener<AllTasksListAdapter> listener) {
         super(context, listener, true);
         this.adapter = new AllTasksListAdapter(context);
     }

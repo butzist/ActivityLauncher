@@ -3,15 +3,11 @@ package de.szalkowski.activitylauncher;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -39,32 +35,24 @@ public class IconPickerDialogFragment extends DialogFragment implements IconList
         View view = inflater.inflate(R.layout.icon_picker, null);
 
         this.grid = (GridView) view;
-        this.grid.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> view, View item, int index,
-                                    long id) {
-                if (IconPickerDialogFragment.this.listener != null) {
-                    IconPickerDialogFragment.this.listener.iconPicked(view.getAdapter().getItem(index).toString());
-                    IconPickerDialogFragment.this.getDialog().dismiss();
-                }
+        this.grid.setOnItemClickListener((view1, item, index, id) -> {
+            if (IconPickerDialogFragment.this.listener != null) {
+                IconPickerDialogFragment.this.listener.iconPicked(view1.getAdapter().getItem(index).toString());
+                IconPickerDialogFragment.this.getDialog().dismiss();
             }
         });
 
         builder.setTitle(R.string.title_dialog_icon_picker)
                 .setView(view)
-                .setNegativeButton(android.R.string.cancel, new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        IconPickerDialogFragment.this.getDialog().cancel();
-                    }
-                });
+                .setNegativeButton(android.R.string.cancel, (dialog, which) ->
+                        IconPickerDialogFragment.this.getDialog().cancel());
 
         return builder.create();
     }
 
     @Override
-    public void onProviderFininshed(AsyncProvider<IconListAdapter> task,
-                                    IconListAdapter value) {
+    public void onProviderFinished(AsyncProvider<IconListAdapter> task,
+                                   IconListAdapter value) {
         try {
             this.grid.setAdapter(value);
         } catch (Exception e) {
@@ -73,6 +61,6 @@ public class IconPickerDialogFragment extends DialogFragment implements IconList
     }
 
     public interface IconPickerListener {
-        public void iconPicked(String icon);
+        void iconPicked(String icon);
     }
 }

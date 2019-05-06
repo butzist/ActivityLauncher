@@ -10,17 +10,17 @@ import android.graphics.drawable.Drawable;
 import java.util.Arrays;
 
 public class MyPackageInfo implements Comparable<MyPackageInfo> {
-    protected String package_name;
     protected Drawable icon;
-    protected int icon_resource;
-    protected String icon_resource_name;
     protected String name;
-    protected MyActivityInfo[] activities;
+    String package_name;
+    private String icon_resource_name;
+    private MyActivityInfo[] activities;
 
     MyPackageInfo(PackageInfo info, PackageManager pm, PackageManagerCache cache) {
         this.package_name = info.packageName;
         ApplicationInfo app = info.applicationInfo;
 
+        int icon_resource;
         if (app != null) {
             this.name = pm.getApplicationLabel(app).toString();
             try {
@@ -28,18 +28,18 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
             } catch (ClassCastException e) {
                 this.icon = pm.getDefaultActivityIcon();
             }
-            this.icon_resource = app.icon;
+            icon_resource = app.icon;
         } else {
             this.name = info.packageName;
             this.icon = pm.getDefaultActivityIcon();
-            this.icon_resource = 0;
+            icon_resource = 0;
         }
 
         this.icon_resource_name = null;
-        if (this.icon_resource != 0) {
+        if (icon_resource != 0) {
             try {
-                this.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(this.icon_resource);
-            } catch (Exception e) {
+                this.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(icon_resource);
+            } catch (Exception ignored) {
             }
         }
 
@@ -73,11 +73,11 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         return n_activities;
     }
 
-    public int getActivitiesCount() {
+    int getActivitiesCount() {
         return activities.length;
     }
 
-    public MyActivityInfo getActivity(int i) {
+    MyActivityInfo getActivity(int i) {
         return activities[i];
     }
 
@@ -102,8 +102,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         int cmp_name = this.name.compareTo(another.name);
         if (cmp_name != 0) return cmp_name;
 
-        int cmp_package = this.package_name.compareTo(another.package_name);
-        return cmp_package;
+        return this.package_name.compareTo(another.package_name);
     }
 
     @Override

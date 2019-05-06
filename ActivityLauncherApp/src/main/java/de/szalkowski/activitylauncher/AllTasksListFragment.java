@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 
 import org.thirdparty.LauncherIconCreator;
@@ -27,18 +26,15 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frament_all_list, null);
+        View view = inflater.inflate(R.layout.fragment_all_list, null);
 
         this.list = view.findViewById(R.id.expandableListView1);
 
-        this.list.setOnChildClickListener(new OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                ExpandableListAdapter adapter = parent.getExpandableListAdapter();
-                MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
-                LauncherIconCreator.launchActivity(getActivity(), info.component_name);
-                return false;
-            }
+        this.list.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+            ExpandableListAdapter adapter = parent.getExpandableListAdapter();
+            MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
+            LauncherIconCreator.launchActivity(getActivity(), info.component_name);
+            return false;
         });
 
         AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(this.getActivity(), this);
@@ -65,13 +61,16 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
 
         switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
             case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
-                MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
+                MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(
+                        ExpandableListView.getPackedPositionGroup(info.packedPosition),
+                        ExpandableListView.getPackedPositionChild(info.packedPosition));
                 menu.setHeaderIcon(activity.icon);
                 menu.setHeaderTitle(activity.name);
                 menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_edit);
                 break;
             case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
-                MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
+                MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(
+                        ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 menu.setHeaderIcon(pack.icon);
                 menu.setHeaderTitle(pack.name);
                 break;
@@ -87,7 +86,9 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
 
         switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
             case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
-                MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
+                MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(
+                        ExpandableListView.getPackedPositionGroup(info.packedPosition),
+                        ExpandableListView.getPackedPositionChild(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
                         LauncherIconCreator.createLauncherIcon(getActivity(), activity);
@@ -106,7 +107,8 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 break;
 
             case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
-                MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
+                MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(
+                        ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
                         LauncherIconCreator.createLauncherIcon(getActivity(), pack);
@@ -114,7 +116,9 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                     case 1:
                         PackageManager pm = getActivity().getPackageManager();
                         Intent intent = pm.getLaunchIntentForPackage(pack.package_name);
-                        Toast.makeText(getActivity(), String.format(getText(R.string.starting_application).toString(), pack.name), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),
+                                String.format(getText(R.string.starting_application).toString(), pack.name),
+                                Toast.LENGTH_LONG).show();
                         getActivity().startActivity(intent);
                         break;
                 }
@@ -123,7 +127,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     }
 
     @Override
-    public void onProviderFininshed(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
+    public void onProviderFinished(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
         try {
             this.list.setAdapter(value);
         } catch (Exception e) {
