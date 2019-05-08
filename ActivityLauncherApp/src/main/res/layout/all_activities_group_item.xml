@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="?android:attr/activatedBackgroundIndicator"
-    android:minHeight="?android:attr/listPreferredItemHeight" >
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@android:id/icon"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
-        android:duplicateParentState="true"
-        android:src="@drawable/ic_launcher"
         android:contentDescription="@string/label_icon"
-        android:paddingLeft="30dp" />
+        android:duplicateParentState="true"
+        android:paddingLeft="30dp"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@android:id/text1"

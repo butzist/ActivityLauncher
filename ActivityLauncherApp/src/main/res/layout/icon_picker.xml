@@ -7,6 +7,6 @@
     android:horizontalSpacing="4dp"
     android:numColumns="auto_fit"
     android:stretchMode="spacingWidthUniform"
-    android:verticalSpacing="4dp" >
+    android:verticalSpacing="4dp">
 
 </GridView>

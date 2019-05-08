@@ -10,6 +10,13 @@ import android.graphics.drawable.Drawable;
 import java.util.Arrays;
 
 public class MyPackageInfo implements Comparable<MyPackageInfo> {
+    protected String package_name;
+    protected Drawable icon;
+    protected int icon_resource;
+    protected String icon_resource_name;
+    protected String name;
+    protected MyActivityInfo[] activities;
+
     MyPackageInfo(PackageInfo info, PackageManager pm, PackageManagerCache cache) {
         this.package_name = info.packageName;
         ApplicationInfo app = info.applicationInfo;
@@ -74,7 +81,6 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         return activities[i];
     }
 
-
     public String getPackageName() {
         return package_name;
     }
@@ -90,13 +96,6 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
     public String getIconResourceName() {
         return icon_resource_name;
     }
-
-    protected String package_name;
-    protected Drawable icon;
-    protected int icon_resource;
-    protected String icon_resource_name;
-    protected String name;
-    protected MyActivityInfo[] activities;
 
     @Override
     public int compareTo(MyPackageInfo another) {

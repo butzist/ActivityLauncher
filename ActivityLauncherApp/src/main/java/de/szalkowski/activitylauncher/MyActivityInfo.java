@@ -7,6 +7,12 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 
 public class MyActivityInfo implements Comparable<MyActivityInfo> {
+    protected Drawable icon;
+    protected String name;
+    ComponentName component_name;
+    int icon_resource;
+    String icon_resource_name;
+
     MyActivityInfo(ComponentName activity, PackageManager pm) {
         this.component_name = activity;
 
@@ -50,13 +56,6 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
     public String getIconResouceName() {
         return icon_resource_name;
     }
-
-    ComponentName component_name;
-    protected Drawable icon;
-    int icon_resource;
-    String icon_resource_name;
-    protected String name;
-
 
     @Override
     public int compareTo(MyActivityInfo another) {
