@@ -52,7 +52,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
             this.activities = new MyActivityInfo[n_activities];
 
             for (ActivityInfo activity : info.activities) {
-                if (activity.isEnabled() && activity.exported) {
+                if (isValid(activity)) {
                     assert (activity.packageName.equals(info.packageName));
                     ComponentName acomp = new ComponentName(activity.packageName, activity.name);
                     this.activities[i++] = cache.getActivityInfo(acomp);
@@ -66,11 +66,17 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
     private static int countActivitiesFromInfo(PackageInfo info) {
         int n_activities = 0;
         for (ActivityInfo activity : info.activities) {
-            if (activity.isEnabled() && activity.exported) {
+            if (isValid(activity)) {
                 n_activities++;
             }
         }
         return n_activities;
+    }
+
+    private static boolean isValid(ActivityInfo activity) {
+        // e.g. DevelopmentSettings (com.android.settings.Settings$DevelopmentSettingsDashboardActivity) seem to be disabled, BUT launching it does work
+        // => I assume, it's disabled in manifest by default and is enabled programatically if user clicks version number x times
+        return /*activity.isEnabled() &&*/ activity.exported;
     }
 
     public int getActivitiesCount() {
