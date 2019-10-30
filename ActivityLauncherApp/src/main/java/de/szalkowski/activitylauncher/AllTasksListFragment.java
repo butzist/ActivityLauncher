@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import org.thirdparty.IconCreatorException;
 import org.thirdparty.LauncherIconCreator;
 
 public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter> {
@@ -111,18 +110,18 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
-                        try {
-                            LauncherIconCreator.createLauncherIcon(getActivity(), pack);
-                        }
-                        catch (IconCreatorException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
-                        }
+                        boolean success = LauncherIconCreator.createLauncherIcon(getActivity(), pack);
+                        Toast.makeText(getActivity(), getString(R.string.error_no_default_activity), Toast.LENGTH_LONG).show();
                         break;
                     case 1:
                         PackageManager pm = getActivity().getPackageManager();
                         Intent intent = pm.getLaunchIntentForPackage(pack.package_name);
-                        Toast.makeText(getActivity(), String.format(getText(R.string.starting_application).toString(), pack.name), Toast.LENGTH_LONG).show();
-                        getActivity().startActivity(intent);
+                        if (intent != null) {
+                            Toast.makeText(getActivity(), String.format(getText(R.string.starting_application).toString(), pack.name), Toast.LENGTH_LONG).show();
+                            getActivity().startActivity(intent);
+                        } else {
+                            Toast.makeText(getActivity(), getString(R.string.error_no_default_activity), Toast.LENGTH_LONG).show();
+                        }
                         break;
                 }
         }

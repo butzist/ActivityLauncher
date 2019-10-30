@@ -44,7 +44,7 @@ public class LauncherIconCreator {
         return intent;
     }
 
-    public static void createLauncherIcon(Context context, MyActivityInfo activity) {
+    public static boolean createLauncherIcon(Context context, MyActivityInfo activity) {
         final String pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
 
         // Use bitmap version if icon from different package is used
@@ -54,14 +54,16 @@ public class LauncherIconCreator {
             createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()),
                     activity.getIconResouceName());
         }
+        return true;
     }
 
-    public static void createLauncherIcon(Context context, MyPackageInfo pack) throws IconCreatorException {
+    public static boolean createLauncherIcon(Context context, MyPackageInfo pack) {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.getPackageName());
         if (intent == null) {
-            throw new IconCreatorException(context.getString(R.string.error_no_default_activity));
+            return false;
         }
         createShortcut(context, pack.getName(), pack.getIcon(), intent, pack.getIconResourceName());
+        return true;
     }
 
     /**
