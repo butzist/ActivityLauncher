@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -19,7 +20,10 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 
+import org.thirdparty.IconCreatorException;
 import org.thirdparty.LauncherIconCreator;
+
+import java.util.Objects;
 
 public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter> {
     protected ExpandableListView list;
@@ -61,7 +65,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
         menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_launch);
 
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) menuInfo;
-        ExpandableListView list = getView().findViewById(R.id.expandableListView1);
+        ExpandableListView list = Objects.requireNonNull(getView()).findViewById(R.id.expandableListView1);
 
         switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
             case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
@@ -83,7 +87,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
-        ExpandableListView list = getView().findViewById(R.id.expandableListView1);
+        ExpandableListView list = Objects.requireNonNull(getView()).findViewById(R.id.expandableListView1);
 
         switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
             case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
@@ -100,7 +104,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                         Bundle args = new Bundle();
                         args.putParcelable("activity", activity.component_name);
                         dialog.setArguments(args);
-                        dialog.show(this.getFragmentManager(), "ShortcutEditor");
+                        dialog.show(Objects.requireNonNull(this.getFragmentManager()), "ShortcutEditor");
                         break;
                 }
                 break;
@@ -109,10 +113,16 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
-                        LauncherIconCreator.createLauncherIcon(getActivity(), pack);
+                        FragmentActivity fragment_activity = Objects.requireNonNull(getActivity());
+                        try {
+                            LauncherIconCreator.createLauncherIcon(fragment_activity, pack);
+                        }
+                        catch (IconCreatorException e) {
+                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                        }
                         break;
                     case 1:
-                        PackageManager pm = getActivity().getPackageManager();
+                        PackageManager pm = Objects.requireNonNull(getActivity()).getPackageManager();
                         Intent intent = pm.getLaunchIntentForPackage(pack.package_name);
                         Toast.makeText(getActivity(), String.format(getText(R.string.starting_application).toString(), pack.name), Toast.LENGTH_LONG).show();
                         getActivity().startActivity(intent);

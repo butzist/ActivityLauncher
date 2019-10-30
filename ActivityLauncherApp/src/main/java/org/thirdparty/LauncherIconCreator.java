@@ -56,8 +56,11 @@ public class LauncherIconCreator {
         }
     }
 
-    public static void createLauncherIcon(Context context, MyPackageInfo pack) {
+    public static void createLauncherIcon(Context context, MyPackageInfo pack) throws IconCreatorException {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.getPackageName());
+        if (intent == null) {
+            throw new IconCreatorException(context.getString(R.string.error_no_default_activity));
+        }
         createShortcut(context, pack.getName(), pack.getIcon(), intent, pack.getIconResourceName());
     }
 
