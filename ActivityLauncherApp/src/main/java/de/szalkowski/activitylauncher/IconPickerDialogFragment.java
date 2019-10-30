@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,11 +13,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class IconPickerDialogFragment extends DialogFragment implements IconListAsyncProvider.Listener<IconListAdapter> {
-    public interface IconPickerListener {
-        public void iconPicked(String icon);
-    }
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
+public class IconPickerDialogFragment extends DialogFragment implements IconListAsyncProvider.Listener<IconListAdapter> {
     private GridView grid;
     private IconPickerListener listener = null;
 
@@ -74,5 +71,9 @@ public class IconPickerDialogFragment extends DialogFragment implements IconList
         } catch (Exception e) {
             Toast.makeText(this.getActivity(), R.string.error_icons, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public interface IconPickerListener {
+        public void iconPicked(String icon);
     }
 }

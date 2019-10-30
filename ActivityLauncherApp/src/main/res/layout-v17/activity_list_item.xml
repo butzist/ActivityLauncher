@@ -8,21 +8,21 @@
 
     <ImageView
         android:id="@android:id/icon"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/label_icon"
         android:duplicateParentState="true"
-        android:paddingLeft="30dp"
+        android:paddingStart="10dp"
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@android:id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
+        android:layout_gravity="center_vertical|start"
         android:duplicateParentState="true"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

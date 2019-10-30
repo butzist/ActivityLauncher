@@ -6,9 +6,8 @@
 
     <ExpandableListView
         android:id="@+id/expandableListView1"
-        android:fastScrollEnabled="true"
-        android:fastScrollAlwaysVisible="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ExpandableListView>
+        android:layout_height="match_parent"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true"></ExpandableListView>
 </LinearLayout>
