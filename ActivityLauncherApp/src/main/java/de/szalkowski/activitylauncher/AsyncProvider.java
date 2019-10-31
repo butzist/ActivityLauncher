@@ -55,7 +55,10 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
         }
 
         if (this.progress != null) {
-            this.progress.dismiss();
+            try {
+                this.progress.dismiss();
+            }
+            catch (IllegalArgumentException e) { /* ignore */ }
         }
     }
 
