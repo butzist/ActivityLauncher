@@ -1,0 +1,33 @@
+name: Release Build
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Prepare Android keystore
+      run: echo ${{ secrects.encodedKeystore }} | base64 --decode >> ${HOME}/keystore.jks
+    - name: Download dependencies
+      run: ./gradlew androidDependencies
+    - name: Build release
+      run: ./gradlew assembleRelease
+      env:
+        KEYSTORE: ${{ HOME }}/keystore.jks
+        KEYSTORE_PASSWORD: ${{ secrets.keystorePassword }}
+        KEY_ALIAS: ${{ secrets.keyAlias }}
+        KEY_PASSWORD: ${{ secrets.keyPassword }}
+    - name: Upload release apk
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: Release
+        path: ActivityLauncherApp/build/outputs/apk/release
