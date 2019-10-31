@@ -42,8 +42,8 @@ public class IconPickerFragment extends Fragment implements IconListAsyncProvide
     }
 
     @Override
-    public void onProviderFininshed(AsyncProvider<IconListAdapter> task,
-                                    IconListAdapter value) {
+    public void onProviderFinished(AsyncProvider<IconListAdapter> task,
+                                   IconListAdapter value) {
         try {
             this.grid.setAdapter(value);
         } catch (Exception e) {

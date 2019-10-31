@@ -14,6 +14,8 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,8 +24,12 @@ import androidx.fragment.app.Fragment;
 
 import org.thirdparty.LauncherIconCreator;
 
-public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter> {
-    protected ExpandableListView list;
+public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter>, Filterable {
+    private ExpandableListView list;
+
+    AllTasksListFragment() {
+        super();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -41,6 +47,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 return false;
             }
         });
+        this.list.setTextFilterEnabled(true);
 
         AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(getActivity(), this);
         provider.execute();
@@ -129,11 +136,21 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     }
 
     @Override
-    public void onProviderFininshed(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
+    public void onProviderFinished(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
         try {
             this.list.setAdapter(value);
         } catch (Exception e) {
             Toast.makeText(getActivity(), R.string.error_tasks, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public Filter getFilter() {
+        AllTasksListAdapter adapter = (AllTasksListAdapter) this.list.getExpandableListAdapter();
+        if (adapter != null) {
+            return adapter.getFilter();
+        } else {
+            return null;
         }
     }
 }

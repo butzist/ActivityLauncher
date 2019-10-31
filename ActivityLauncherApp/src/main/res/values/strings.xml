@@ -28,4 +28,6 @@
     <string name="action_view_translation">Help Translating!</string>
     <string name="action_view_bugs">Report A Problem</string>
     <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
+    <string name="action_filter">Filter...</string>
+    <string name="filter_hint">package/action</string>
 </resources>

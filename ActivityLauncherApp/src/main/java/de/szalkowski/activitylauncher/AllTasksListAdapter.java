@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +17,34 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AllTasksListAdapter extends BaseExpandableListAdapter {
+public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
     private PackageManager pm;
     private List<MyPackageInfo> packages;
     private LayoutInflater inflater;
+    private List<MyPackageView> filtered;
+
+    private class MyPackageView {
+        private class Child {
+            MyActivityInfo child;
+            long id;
+        }
+        MyPackageInfo parent;
+        List<Child> children;
+        long id;
+
+        MyPackageView(MyPackageInfo parent, long id) {
+            this.parent = parent;
+            this.id = id;
+            this.children = new ArrayList<>();
+        }
+
+        void add(MyActivityInfo activity, long id) {
+            Child child = new Child();
+            child.child = activity;
+            child.id = id;
+            this.children.add(child);
+        }
+    }
 
     AllTasksListAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,16 +72,46 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
         }
 
         Collections.sort(this.packages);
+        this.filtered = createFilterView("");
+
+    }
+
+    private List<MyPackageView> createFilterView(String query) {
+        String q = query.toLowerCase();
+        List<MyPackageView> result = new ArrayList<>();
+        for (int j = 0; j < this.packages.size(); ++j) {
+            MyPackageInfo parent = this.packages.get(j);
+            MyPackageView entry = new MyPackageView(parent, j);
+
+            for (int i = 0; i < parent.getActivitiesCount(); ++i) {
+                MyActivityInfo child = parent.getActivity(i);
+                if (child.name.toLowerCase().contains(q) ||
+                        child.component_name.flattenToString().toLowerCase().contains(q) ||
+                        child.icon_resource_name != null && child.icon_resource_name.toLowerCase().contains(q)) {
+                    entry.add(child, i);
+                }
+            }
+
+            if (!entry.children.isEmpty() ||
+                    parent.name.toLowerCase().contains(q) ||
+                    parent.package_name.toLowerCase().contains(q) ||
+                    parent.icon_resource_name != null && parent.icon_resource_name.contains(q)
+            ) {
+                result.add(entry);
+            }
+        }
+
+        return result;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.packages.get(groupPosition).getActivity(childPosition);
+        return this.filtered.get(groupPosition).children.get(childPosition).child;
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return this.filtered.get(groupPosition).children.get(childPosition).id;
     }
 
     @Override
@@ -77,22 +133,22 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.packages.get(groupPosition).getActivitiesCount();
+        return this.filtered.get(groupPosition).children.size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this.packages.get(groupPosition);
+        return this.filtered.get(groupPosition).parent;
     }
 
     @Override
     public int getGroupCount() {
-        return this.packages.size();
+        return this.filtered.size();
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        return groupPosition;
+        return this.filtered.get(groupPosition).id;
     }
 
     @Override
@@ -119,4 +175,25 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<MyPackageView> result = createFilterView(constraint.toString());
+                FilterResults wrapped = new FilterResults();
+                wrapped.values = result;
+                wrapped.count = result.size();
+                return wrapped;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                if (results != null) {
+                    filtered = (List<MyPackageView>) results.values;
+                    notifyDataSetChanged();
+                }
+            }
+        };
+    }
 }

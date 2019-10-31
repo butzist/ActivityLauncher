@@ -9,14 +9,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.SearchView;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 public class MainActivity extends FragmentActivity {
 
-    protected final String LOG = "de.szalkowski.activitylauncher.MainActivity";
+    private final String LOG = "de.szalkowski.activitylauncher.MainActivity";
+    private Filterable filterTarget = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,10 @@ public class MainActivity extends FragmentActivity {
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
         }
 
-        Fragment fragment = new AllTasksListFragment();
+        AllTasksListFragment fragment = new AllTasksListFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
+        filterTarget = fragment;
     }
 
     /**
@@ -57,7 +61,31 @@ public class MainActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setQueryHint(this.getText(R.string.filter_hint));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                onFilter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                onFilter(newText);
+                return true;
+            }
+        });
+
         return true;
+    }
+
+    private void onFilter(String query) {
+        Filter filter = filterTarget.getFilter();
+        if (filter != null) {
+            filter.filter(query);
+        }
     }
 
     @Override

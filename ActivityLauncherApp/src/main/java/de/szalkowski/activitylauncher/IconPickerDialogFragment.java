@@ -64,8 +64,8 @@ public class IconPickerDialogFragment extends DialogFragment implements IconList
     }
 
     @Override
-    public void onProviderFininshed(AsyncProvider<IconListAdapter> task,
-                                    IconListAdapter value) {
+    public void onProviderFinished(AsyncProvider<IconListAdapter> task,
+                                   IconListAdapter value) {
         try {
             this.grid.setAdapter(value);
         } catch (Exception e) {
