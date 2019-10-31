@@ -1,3 +1,5 @@
+![](https://github.com/butzist/ActivityLauncher/workflows/Debug%20Build/badge.svg?branch=master)
+
 Activity Launcher
 =================
 
