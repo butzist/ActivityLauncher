@@ -113,7 +113,7 @@
                 android:layout_weight="0"
                 android:adjustViewBounds="false"
                 android:contentDescription="@string/title_dialog_icon_picker"
-                android:src="@drawable/ic_launcher" />
+                android:src="@mipmap/ic_launcher" />
 
         </LinearLayout>
 
