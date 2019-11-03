@@ -68,6 +68,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
                     this.packages.add(mypack);
                 }
             } catch (NameNotFoundException ignored) {
+            } catch (RuntimeException ignored) {
             }
         }
 

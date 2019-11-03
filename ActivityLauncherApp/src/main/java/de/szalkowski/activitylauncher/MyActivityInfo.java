@@ -26,6 +26,8 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
                 this.icon = pm.getDefaultActivityIcon();
             } catch (IllegalArgumentException e) {
                 this.icon = pm.getDefaultActivityIcon();
+            } catch (OutOfMemoryError e) {
+                this.icon = pm.getDefaultActivityIcon();
             }
             this.icon_resource = act.getIconResource();
         } catch (NameNotFoundException e) {

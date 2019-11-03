@@ -60,6 +60,7 @@ public class IconListAdapter extends BaseAdapter {
                     }
                 }
             } catch (NameNotFoundException ignored) {
+            } catch (RuntimeException ignored) {
             }
         }
 
