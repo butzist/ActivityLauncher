@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -162,6 +163,12 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
         ImageView icon = view.findViewById(android.R.id.icon);
         icon.setImageDrawable(pack.getIcon());
+
+        // expand if filtered list is short enough
+        if (filtered.size() < 10) {
+            ExpandableListView expandableListView = (ExpandableListView) parent;
+            expandableListView.expandGroup(groupPosition);
+        }
 
         return view;
     }
