@@ -13,18 +13,23 @@ android {
         applicationId "de.szalkowski.activitylauncher"
         minSdkVersion 14
         targetSdkVersion 28
+        versionCode 17
+        versionName "1.9.2"
     }
     buildTypes {
         release {
             minifyEnabled true
-            zipAlignEnabled true
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment:1.1.0'
 }
