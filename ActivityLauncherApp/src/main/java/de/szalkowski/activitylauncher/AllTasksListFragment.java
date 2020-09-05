@@ -108,7 +108,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                         Bundle args = new Bundle();
                         args.putParcelable("activity", activity.component_name);
                         dialog.setArguments(args);
-                        dialog.show(getFragmentManager(), "ShortcutEditor");
+                        dialog.show(getChildFragmentManager(), "ShortcutEditor");
                         break;
                 }
                 break;

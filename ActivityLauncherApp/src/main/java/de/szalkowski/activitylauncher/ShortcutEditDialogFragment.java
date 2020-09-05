@@ -85,7 +85,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                         ShortcutEditDialogFragment.this.image_icon.setImageDrawable(draw_icon);
                     }
                 });
-                dialog.show(getFragmentManager(), "icon picker");
+                dialog.show(getChildFragmentManager(), "icon picker");
             }
         });
 
