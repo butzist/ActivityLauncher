@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
@@ -34,18 +33,15 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frament_all_list, null);
+        View view = inflater.inflate(R.layout.fragment_all_list, null);
 
         this.list = view.findViewById(R.id.expandableListView1);
 
-        this.list.setOnChildClickListener(new OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                ExpandableListAdapter adapter = parent.getExpandableListAdapter();
-                MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
-                LauncherIconCreator.launchActivity(getActivity(), info.component_name);
-                return false;
-            }
+        this.list.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+            ExpandableListAdapter adapter = parent.getExpandableListAdapter();
+            MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
+            LauncherIconCreator.launchActivity(getActivity(), info.component_name);
+            return false;
         });
         this.list.setTextFilterEnabled(true);
 

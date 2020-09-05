@@ -24,8 +24,8 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     private LayoutInflater inflater;
     private List<MyPackageView> filtered;
 
-    private class MyPackageView {
-        private class Child {
+    private static class MyPackageView {
+        private static class Child {
             MyActivityInfo child;
             long id;
         }

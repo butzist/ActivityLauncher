@@ -39,7 +39,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         if (this.icon_resource != 0) {
             try {
                 this.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(this.icon_resource);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 
@@ -108,8 +108,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         int cmp_name = this.name.compareTo(another.name);
         if (cmp_name != 0) return cmp_name;
 
-        int cmp_package = this.package_name.compareTo(another.package_name);
-        return cmp_package;
+        return this.package_name.compareTo(another.package_name);
     }
 
     @Override
