@@ -22,15 +22,11 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
             this.name = act.loadLabel(pm).toString();
             try {
                 this.icon = act.loadIcon(pm);
-            } catch (ClassCastException e) {
-                this.icon = pm.getDefaultActivityIcon();
-            } catch (IllegalArgumentException e) {
-                this.icon = pm.getDefaultActivityIcon();
-            } catch (OutOfMemoryError e) {
+            } catch (Exception e) {
                 this.icon = pm.getDefaultActivityIcon();
             }
             this.icon_resource = act.getIconResource();
-        } catch (NameNotFoundException e) {
+        } catch (Exception e) {
             this.name = activity.getShortClassName();
             this.icon = pm.getDefaultActivityIcon();
             this.icon_resource = 0;
@@ -71,7 +67,7 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
 
     @Override
     public boolean equals(Object other) {
-        if (!other.getClass().equals(MyPackageInfo.class)) {
+        if (!other.getClass().equals(MyActivityInfo.class)) {
             return false;
         }
 

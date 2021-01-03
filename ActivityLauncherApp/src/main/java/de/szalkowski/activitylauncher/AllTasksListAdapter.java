@@ -19,33 +19,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
-    private PackageManager pm;
+    private final PackageManager pm;
+    private final LayoutInflater inflater;
     private List<MyPackageInfo> packages;
-    private LayoutInflater inflater;
     private List<MyPackageView> filtered;
-
-    private class MyPackageView {
-        private class Child {
-            MyActivityInfo child;
-            long id;
-        }
-        MyPackageInfo parent;
-        List<Child> children;
-        long id;
-
-        MyPackageView(MyPackageInfo parent, long id) {
-            this.parent = parent;
-            this.id = id;
-            this.children = new ArrayList<>();
-        }
-
-        void add(MyActivityInfo activity, long id) {
-            Child child = new Child();
-            child.child = activity;
-            child.id = id;
-            this.children.add(child);
-        }
-    }
 
     AllTasksListAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -68,8 +45,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
                 if (mypack.getActivitiesCount() > 0) {
                     this.packages.add(mypack);
                 }
-            } catch (NameNotFoundException ignored) {
-            } catch (RuntimeException ignored) {
+            } catch (NameNotFoundException | RuntimeException ignored) {
             }
         }
 
@@ -119,7 +95,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         MyActivityInfo activity = (MyActivityInfo) getChild(groupPosition, childPosition);
-        View view = this.inflater.inflate(R.layout.all_activities_child_item, null);
+        View view = this.inflater.inflate(R.layout.all_activities_child_item, parent, false);
 
         TextView text1 = view.findViewById(android.R.id.text1);
         text1.setText(activity.getName());
@@ -156,7 +132,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         MyPackageInfo pack = (MyPackageInfo) getGroup(groupPosition);
-        View view = this.inflater.inflate(R.layout.all_activities_group_item, null);
+        View view = this.inflater.inflate(R.layout.all_activities_group_item, parent, false);
 
         TextView text = view.findViewById(android.R.id.text1);
         text.setText(pack.getName());
@@ -196,6 +172,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             }
 
             @Override
+            @SuppressWarnings("unchecked")
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results != null) {
                     filtered = (List<MyPackageView>) results.values;
@@ -203,5 +180,29 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
                 }
             }
         };
+    }
+
+    private static class MyPackageView {
+        MyPackageInfo parent;
+        List<Child> children;
+        long id;
+
+        MyPackageView(MyPackageInfo parent, long id) {
+            this.parent = parent;
+            this.id = id;
+            this.children = new ArrayList<>();
+        }
+
+        void add(MyActivityInfo activity, long id) {
+            Child child = new Child();
+            child.child = activity;
+            child.id = id;
+            this.children.add(child);
+        }
+
+        private static class Child {
+            MyActivityInfo child;
+            long id;
+        }
     }
 }

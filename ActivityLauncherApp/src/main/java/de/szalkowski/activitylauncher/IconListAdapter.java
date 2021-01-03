@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,26 +15,15 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class IconListAdapter extends BaseAdapter {
+    private final PackageManager pm;
+    private final Context context;
+    private final IconLoader loader;
     private String[] icons;
-    private PackageManager pm;
-    private Context context;
 
     IconListAdapter(Context context) {
         this.context = context;
         this.pm = context.getPackageManager();
-    }
-
-    static Drawable getIcon(String icon_resource_string, PackageManager pm) {
-        try {
-            String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
-            String type = icon_resource_string.substring(icon_resource_string.indexOf(':') + 1, icon_resource_string.indexOf('/'));
-            String name = icon_resource_string.substring(icon_resource_string.indexOf('/') + 1);
-            Resources res = pm.getResourcesForApplication(pack);
-            return res.getDrawable(res.getIdentifier(name, type, pack));
-        } catch (Exception e) {
-            return pm.getDefaultActivityIcon();
-        }
-
+        this.loader = new IconLoader(context);
     }
 
     void resolve(IconListAsyncProvider.Updater updater) {
@@ -51,16 +39,15 @@ public class IconListAdapter extends BaseAdapter {
 
             PackageInfo pack = all_packages.get(i);
             try {
-                MyPackageInfo mypack = cache.getPackageInfo(pack.packageName);
+                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName);
 
-                for (int j = 0; j < mypack.getActivitiesCount(); ++j) {
-                    String icon_resource_name = mypack.getActivity(j).getIconResouceName();
+                for (int j = 0; j < myPack.getActivitiesCount(); ++j) {
+                    String icon_resource_name = myPack.getActivity(j).getIconResouceName();
                     if (icon_resource_name != null) {
                         icons.add(icon_resource_name);
                     }
                 }
-            } catch (NameNotFoundException ignored) {
-            } catch (RuntimeException ignored) {
+            } catch (NameNotFoundException | RuntimeException ignored) {
             }
         }
 
@@ -89,7 +76,8 @@ public class IconListAdapter extends BaseAdapter {
         AbsListView.LayoutParams layout = new AbsListView.LayoutParams(50, 50);
         view.setLayoutParams(layout);
         String icon_resource_string = this.icons[position];
-        view.setImageDrawable(IconListAdapter.getIcon(icon_resource_string, this.pm));
+        Drawable icon = loader.getIcon(icon_resource_string);
+        view.setImageDrawable(icon);
         return view;
     }
 }

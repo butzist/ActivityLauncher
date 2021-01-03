@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher;
 import android.content.Context;
 
 public class AllTasksListAsyncProvider extends AsyncProvider<AllTasksListAdapter> {
-    private AllTasksListAdapter adapter;
+    private final AllTasksListAdapter adapter;
 
     AllTasksListAsyncProvider(
             Context context,

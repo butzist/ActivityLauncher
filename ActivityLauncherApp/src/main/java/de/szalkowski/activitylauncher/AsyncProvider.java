@@ -5,10 +5,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {
-    private CharSequence message;
-    private Listener<ReturnType> listener;
+    private final CharSequence message;
+    private final Listener<ReturnType> listener;
     private int max;
-    private ProgressDialog progress;
+    private final ProgressDialog progress;
+
     AsyncProvider(Context context, Listener<ReturnType> listener, boolean showProgressDialog) {
         this.message = context.getText(R.string.dialog_progress_loading);
         this.listener = listener;
@@ -57,8 +58,7 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
         if (this.progress != null) {
             try {
                 this.progress.dismiss();
-            }
-            catch (IllegalArgumentException e) { /* ignore */ }
+            } catch (IllegalArgumentException e) { /* ignore */ }
         }
     }
 
@@ -74,7 +74,7 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
     }
 
     class Updater {
-        private AsyncProvider<ReturnType> provider;
+        private final AsyncProvider<ReturnType> provider;
 
         Updater(AsyncProvider<ReturnType> provider) {
             this.provider = provider;
