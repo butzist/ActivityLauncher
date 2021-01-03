@@ -10,6 +10,11 @@ Create shortcuts for any installed app and even hidden activities to launch them
 <a href="https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
 
+Contributing
+------------
+
+**The project is looking for co-maintainers!** See [here](https://github.com/butzist/ActivityLauncher/issues/51)
+
 Translations
 ------------
 
