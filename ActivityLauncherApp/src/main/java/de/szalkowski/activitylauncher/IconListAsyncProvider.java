@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher;
 import android.content.Context;
 
 class IconListAsyncProvider extends AsyncProvider<IconListAdapter> {
-    private IconListAdapter adapter;
+    private final IconListAdapter adapter;
 
     IconListAsyncProvider(Context context, Listener<IconListAdapter> listener) {
         super(context, listener, false);

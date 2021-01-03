@@ -15,7 +15,6 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
@@ -44,7 +43,7 @@ public class LauncherIconCreator {
         return intent;
     }
 
-    public static boolean createLauncherIcon(Context context, MyActivityInfo activity) {
+    public static void createLauncherIcon(Context context, MyActivityInfo activity) {
         final String pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
 
         // Use bitmap version if icon from different package is used
@@ -54,16 +53,14 @@ public class LauncherIconCreator {
             createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()),
                     activity.getIconResouceName());
         }
-        return true;
     }
 
-    public static boolean createLauncherIcon(Context context, MyPackageInfo pack) {
+    public static void createLauncherIcon(Context context, MyPackageInfo pack) {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.getPackageName());
         if (intent == null) {
-            return false;
+            return;
         }
         createShortcut(context, pack.getName(), pack.getIcon(), intent, pack.getIconResourceName());
-        return true;
     }
 
     /**
@@ -106,7 +103,7 @@ public class LauncherIconCreator {
         }
     }
 
-    @TargetApi(14)
+    @TargetApi(19)
     private static void doCreateShortcut(Context context, String appName, Intent intent, String iconResourceName) {
         Intent shortcutIntent = new Intent();
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
@@ -146,13 +143,9 @@ public class LauncherIconCreator {
             new AlertDialog.Builder(context)
                     .setTitle(context.getText(R.string.error_creating_shortcut))
                     .setMessage(context.getText(R.string.error_verbose_pin_shortcut))
-                    .setPositiveButton(context.getText(android.R.string.ok), new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Just close dialog don't do anything
-                            dialog.cancel();
-                        }
+                    .setPositiveButton(context.getText(android.R.string.ok), (dialog, which) -> {
+                        // Just close dialog don't do anything
+                        dialog.cancel();
                     })
                     .show();
         }

@@ -12,7 +12,7 @@ class PackageManagerCache {
     private static PackageManagerCache instance = null;
     private final Map<String, MyPackageInfo> packageInfos;
     private final Map<ComponentName, MyActivityInfo> activityInfos;
-    private PackageManager pm;
+    private final PackageManager pm;
 
     private PackageManagerCache(PackageManager pm) {
         this.pm = pm;
@@ -43,10 +43,6 @@ class PackageManagerCache {
         }
 
         return myInfo;
-    }
-
-    MyPackageInfo[] getAllPackageInfo() {
-        return null;
     }
 
     MyActivityInfo getActivityInfo(ComponentName activityName) {
