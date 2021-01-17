@@ -118,7 +118,7 @@
                 android:id="@+id/iconButton"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:scaleType="centerInside
+                android:scaleType="centerInside"
                 android:layout_weight="0"
                 android:adjustViewBounds="false"
                 android:contentDescription="@string/title_dialog_icon_picker"
