@@ -30,4 +30,10 @@
     <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
+    <color name="mainbg">#3e4149</color>
+    <color name="childbg">#3e4149</color>
+    <color name="childerbg">#181842</color>
+    <color name="childtext">#fbd14b</color>
+    <color name="childertext">#2EC4B6</color>
+    <color name="bugger">#FF5370</color>
 </resources>
