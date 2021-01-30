@@ -1,4 +1,5 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools">
     <item android:id="@+id/search"
         android:title="@string/action_filter"
         android:icon="@android:drawable/ic_menu_search"
