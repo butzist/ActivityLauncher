@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppBaseTheme" parent="android:Theme.DeviceDefault.DayNight">
+        <!-- or use this 
+            <style name="AppBaseTheme" parent="MaterialComponents.Theme.DayNight">
+            it is more realiable to use material theme 
+        -->
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
