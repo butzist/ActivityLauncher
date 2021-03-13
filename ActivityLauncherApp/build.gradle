@@ -11,7 +11,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "de.szalkowski.activitylauncher"
-        minSdkVersion 16
+        minSdkVersion 19
         //noinspection OldTargetApi
         targetSdkVersion 29
     }
