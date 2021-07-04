@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.szalkowski.activitylauncher"
-    android:versionCode="18"
-    android:versionName="1.10.0" >
-    
+    android:versionCode="19"
+    android:versionName="1.11.0" >
+
     <!-- for android 11 package visibility -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
