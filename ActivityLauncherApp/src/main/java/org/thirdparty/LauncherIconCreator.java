@@ -44,10 +44,13 @@ public class LauncherIconCreator {
     }
 
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-        final String pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
+        String pack = null;
 
+        if(activity.getIconResouceName() != null) {
+            pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
+        }
         // Use bitmap version if icon from different package is used
-        if (!pack.equals(activity.getComponentName().getPackageName())) {
+        if (pack != null && !pack.equals(activity.getComponentName().getPackageName())) {
             createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()), null);
         } else {
             createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()),
