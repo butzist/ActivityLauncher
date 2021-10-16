@@ -22,7 +22,6 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//temporary disabled landscape orientation due to crash issue
 
         if (!getPreferences(Context.MODE_PRIVATE).getBoolean("disclaimer_accepted", false)) {
             DialogFragment dialog = new DisclaimerDialogFragment();
