@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.SearchView;
-
+import android.content.pm.ActivityInfo;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
