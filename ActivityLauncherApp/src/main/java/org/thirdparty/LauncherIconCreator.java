@@ -20,9 +20,11 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.widget.Toast;
 
@@ -68,19 +70,42 @@ public class LauncherIconCreator {
 
     /**
      * Got reference from stackoverflow.com Url:
-     * https://stackoverflow.com/questions/44447056/convert-adaptiveicondrawable-to-bitmap-in-android-o-preview?utm_medium=organic&utm_source=
-     * google_rich_qa&utm_campaign=google_rich_qa
+     * https://stackoverflow.com/questions/44447056/convert-adaptiveicondrawable-to-bitmap-in-android-o-preview
+     * https://stackoverflow.com/questions/46130594/android-get-apps-adaptive-icons-from-package-manager
      */
-    private static Bitmap getBitmapFromDrawable(Drawable drawable) {
+    @TargetApi(26)
+    private static Icon getIconFromDrawable(Drawable drawable) {
+        if (drawable instanceof AdaptiveIconDrawable) {
+            Drawable backgroundDr = ((AdaptiveIconDrawable) drawable).getBackground();
+            Drawable foregroundDr = ((AdaptiveIconDrawable) drawable).getForeground();
+
+            Drawable[] drr = new Drawable[2];
+            drr[0] = backgroundDr;
+            drr[1] = foregroundDr;
+
+            LayerDrawable layerDrawable = new LayerDrawable(drr);
+
+            int width = layerDrawable.getIntrinsicWidth();
+            int height = layerDrawable.getIntrinsicHeight();
+
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+
+            layerDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            layerDrawable.draw(canvas);
+
+            return Icon.createWithAdaptiveBitmap(bitmap);
+        }
         if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
+            return Icon.createWithBitmap(((BitmapDrawable) drawable).getBitmap());
         }
 
         Bitmap bmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmp);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return bmp;
+        return Icon.createWithBitmap(bmp);
     }
 
     public static void launchActivity(Context context, ComponentName activity) {
@@ -130,14 +155,14 @@ public class LauncherIconCreator {
         ShortcutManager shortcutManager = Objects.requireNonNull(context.getSystemService(ShortcutManager.class));
 
         if (shortcutManager.isRequestPinShortcutSupported()) {
-            Bitmap bitmap = getBitmapFromDrawable(draw);
+            Icon icon = getIconFromDrawable(draw);
             intent.setAction(Intent.ACTION_CREATE_SHORTCUT);
 
 
             ShortcutInfo shortcutInfo = new ShortcutInfo.Builder(context, appName)
                     .setShortLabel(appName)
                     .setLongLabel(appName)
-                    .setIcon(Icon.createWithBitmap(bitmap))
+                    .setIcon(icon)
                     .setIntent(intent)
                     .build();
 
