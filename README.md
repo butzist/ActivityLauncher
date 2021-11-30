@@ -1,4 +1,4 @@
-![](https://github.com/butzist/ActivityLauncher/workflows/Debug%20Build/badge.svg?branch=master)
+[![Debug Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android.yml)
 
 Activity Launcher
 =================
