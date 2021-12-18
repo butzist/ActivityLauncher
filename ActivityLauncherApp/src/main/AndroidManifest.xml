@@ -17,6 +17,7 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
+        android:hasFragileUserData="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
