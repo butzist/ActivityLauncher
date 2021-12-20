@@ -3,5 +3,6 @@ local.properties
 /.idea
 /.gradle
 /ActivityLauncherApp/build
+/ActivityLauncherApp/release
 /ActivityLauncherApp/keystore.jks
 *.iml
