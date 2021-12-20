@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/gc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/activatedBackgroundIndicator"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal">
 
@@ -25,7 +25,6 @@
         android:paddingEnd="0dp">
 
         <TextView
-            style="@style/innerText1"
             android:id="@android:id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +33,7 @@
             android:textIsSelectable="false" />
 
         <TextView
-            style="@style/innerText2"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:id="@android:id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
