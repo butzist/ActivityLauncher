@@ -1,5 +1,9 @@
-Aplikasi Android ini meluncurkan aktivitas tersembunyi dan membuat pintasan layar utama untuk aplikasi yang terpasang.
+Aplikasi sumber-terbuka Android ini dapat meluncurkan aktivitas yang tersembunyi dan mencipta pintasan layar utama untuk aplikasi terpasang
 
-Proyek ini masih mempunyai beberapa fitur yang belum diterjemahkan. Anda dipersilakan untuk ikut berkontribusi!
 
-Ikut terjemahan apl ini di http://crowdin.net/project/activitylauncher/invite
+Projek ini masih kekurangan beberapa fitur dan terjemahan Anda dipersilakan untuk berkontribusi!
+
+Kode sumber:
+https://github.com/butzist/ActivityLauncher
+Terjemahan: http://crowdin.net/project/activitylauncher/invite
+Ikut serta dalam percobaan rilis beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

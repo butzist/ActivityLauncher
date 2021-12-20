@@ -1,5 +1,7 @@
-Tämä Android sovellus käynnistää piilotetut toiminnot ja luo aloitusnäyttöön pikakuvakkeen asennetuista sovelluksista.
+Tämä Avoimen lähdekoodin Android sovellus käynnistää piilotetut toiminnot ja luo aloitusnäyttöön pikakuvakkeen asennetuista sovelluksista.
 
-Tästä projektista puuttuu vielä joitain ominaisuuksia ja käänöksiä. Olet tervettullut olemaan osallisena!
+Tästä projektista puuttuu vielä joitain ominaisuuksia ja käänöksiä. Olet tervetullut osallistumaan!
 
-Käänöksiä voi tehdä osoitteessa: http://crowdin.net/project/activitylauncher/invite
+Lähdekoodi: https://github.com/butzist/ActivityLauncher
+Käännökset: http://crowdin.net/project/activitylauncher/invite
+Osallistu Betaan: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

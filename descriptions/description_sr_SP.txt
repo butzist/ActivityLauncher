@@ -1,5 +1,11 @@
-Ovaj Android App pokreće skrivene aktivnosti i stvara početni ekran prečice za instaliranje aplikacije.
+Ova Android aplikacija otvorenog koda pokreće skrivene aktivnosti i stvara prečice na početnom ekranu za instalirane aplikacije.
 
-Ovaj projekat je još uvek nedostupan jer neke funkcije i prevodi fale. Nema na čemu!
+Ovom projektu i dalje nedostaju neke funkcije i prevodi. Dobrodošli ste da doprinesete!
 
-Prevodi se nalaze pod: http://crowdin.net/project/activitylauncher/invite
+Otvoreni kod:
+https://github.com/butzist/ActivityLauncher
+Prevodi:
+http://crowdin.net/project/activitylauncher/invite
+Prijavite se za Beta izdanje:
+https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+

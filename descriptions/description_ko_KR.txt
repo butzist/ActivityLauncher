@@ -2,5 +2,6 @@
 
 이 앱의 일부 기능에 대한 현지어 번역이 현재 진행 중에 있습니다. 참여해 주신다면 감사하겠습니다!
 
-다음 사이트에서 번역에 참여하실 수 있습니다:
-http://crowdin.net/project/activitylauncher/invite
+Source code: https://github.com/butzist/ActivityLauncher
+Translations: http://crowdin.net/project/activitylauncher/invite
+Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

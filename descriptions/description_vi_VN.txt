@@ -1,5 +1,7 @@
-This Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Ứng dụng mã nguồn mở Android này khởi chạy các hoạt động ẩn và tạo lối tắt ra màn hình chính cho các ứng dụng đã được cài đặt.
 
-Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để đóng góp!
+Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để được đóng góp!
 
-Bản dịch được lưu trữ tại http://crowdin.net/project/activitylauncher/invite
+Mã nguồn: https://github.com/butzist/ActivityLauncher
+Bản dịch: http://crowdin.net/project/activitylauncher/invite
+Tham gia vào các bản phát hành thử nghiệm: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

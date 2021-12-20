@@ -1,5 +1,7 @@
-Diese Android App startet versteckte Aktivitäten und erstellt Verknüpfungen für installierte Anwendungen auf dem Startbildschirm.
+Diese Open-Source Android App startet versteckte Aktivitäten und erstellt Startbildschirm-Verknüpfungen für installierte Apps.
 
-Diesem Projekt fehlen noch immer ein paar Features und Übersetzungen. Sie sind willkommen sich zu beteiligen!
+Diesem Projekt fehlen noch immer ein paar Features und Übersetzungen. Sie sind herzlich eingeladen, sich zu beteiligen!
 
-Übersetzungen sind unter http://crowdin.net/project/activitylauncher/invite gehostet
+Quellcode: https://github.com/butzist/ActivityLauncher
+Übersetzungen: http://crowdin.net/project/activitylauncher/invite
+Opt-in für Beta-Release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

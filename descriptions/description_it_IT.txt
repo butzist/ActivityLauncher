@@ -1,5 +1,7 @@
-Questa App Android avvia le attività nascoste e crea collegamenti nella schermata home per le app installate.
+Quest'app open-source avvia le attività nascoste e crea collegamenti nella schermata home per le app installate.
 
-A questo progetto mancano ancora alcune funzionalità e la traduzione. Sei il benvenuto se vuoi contribuire!
+A questo progetto mancano ancora alcune funzioni e traduzioni. Siete invitati a contribuire!
 
-Le traduzioni le puoi trovare all'indirizzo: http://crowdin.net/project/activitylauncher/invite
+Codice sorgente: https://github.com/butzist/ActivityLauncher
+Traduzioni: http://crowdin.net/project/activitylauncher/invite
+Opt-in per la versione Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

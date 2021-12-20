@@ -1,6 +1,10 @@
-此 Android 应用程序能启动应用程序隐藏的活动，并能在启动器之上创建应用或者活动快捷方式。
+这个开源的安卓应用能够启动隐藏的活动，以及为您已安装的应用增加桌面快捷方式。
 
-本项目仍然缺少一些功能及翻译支持。 欢迎您自由贡献！
+本项目仍然缺少一些功能及翻译支持。 欢迎您来贡献！
 
-翻译在
- http://crowdin.net/project/activitylauncher/invite 映像
+源代码：
+https://github.com/butzist/ActivityLauncher
+翻译：
+http://crowdin.net/project/activitylauncher/invite
+想参与“测试中”版本：
+https://play.google.com/apps/testing/de.szalkowski.activitylauncher

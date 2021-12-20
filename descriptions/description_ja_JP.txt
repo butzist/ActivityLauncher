@@ -1,5 +1,7 @@
-この Android アプリランチャーは、非表示のアクティビティを起動したり、インストールされているアプリのショートカットをホーム画面に作成します。
+このオープンソースの Android アプリは、普通非表示になっているアクティビティを起動したり、ホーム画面にインストールされているアプリのショートカットを作成します。
 
-このプロジェクトは、まだいくつかの機能や翻訳が欠けています。 あなたの貢献を歓迎します!
+このプロジェクトは、まだいくつかの機能や翻訳ができていません。 あなたの貢献をお待ちしています!
 
-翻訳は http://crowdin.net/project/activitylauncher/invite で行なえます。
+ソースコード: https://github.com/butzist/ActivityLauncher
+翻訳: http://crowdin.net/project/activitylauncher/invite
+ベータ版のオプトイン: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

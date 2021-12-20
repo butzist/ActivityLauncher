@@ -1,5 +1,7 @@
-This Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Aquesta font-oberta Android App llançador amaga activitats i crea dreceras a la pantalla d'inici de las Apps instalades
 
-This project still lacks a few features and translation. You are welcome to contibute!
+This project still lacks a few features and translation. Vosté es benvingut per contribuïr
 
-Translations are hosted under http://crowdin.net/project/activitylauncher/invite
+Source code: https://github.com/butzist/ActivityLauncher
+Translations: http://crowdin.net/project/activitylauncher/invite
+Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

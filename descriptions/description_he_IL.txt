@@ -1,6 +1,8 @@
-זו אפליקציה הפותחת פעולות נסתרות ויוצרת קיצורים שלהם בדף הבית עבור יישומים מותקנים.
+זוהי אפליקציית קוד פתוח עבור אנדרואיד, שנותנת גישה להגדרות נסתרות, ויוצרת קיצורי דרך במסך הבית לאפליקציות מותקנות
 
 לפרוייקט זה עדיין חסרות כמה תכונות ותרגומים. אתם מוזמנים לתרום!
 
+קוד מקור: https://github.com/butzist/ActivityLauncher
 תרגומים נמצאים ב:
 http://crowdin.net/project/activitylauncher/invite
+Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
