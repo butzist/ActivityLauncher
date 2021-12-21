@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Aktivitets opner</string>
+    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="title_section_all">Alle aktiviteter</string>
+    <string name="title_dialog_disclaimer">Ansvarsfraskrivelse</string>
+    <string name="title_dialog_icon_picker">Velg et ikon</string>
+    <string name="dialog_progress_loading">Laster&#8230;</string>
+    <string name="dialog_disclaimer">Bruk denne programvare på eget ansvar. Noen programmer kan ikke fungere som forventet når deres aktiviteter er lansert i feil sammenheng fører til tap av data eller enda verre. Du har blitt advart. Du forstår dette og fortsatt ønsker å bruke denne programvaren?</string>
+    <string name="context_action_launch">Start aktivitet</string>
+    <string name="context_action_shortcut">Opprett snarvei</string>
+    <string name="context_action_edit">Sette snarveien</string>
+    <string name="label_name">Navn</string>
+    <string name="label_package">Pakke</string>
+    <string name="label_class" comment="label_class (Java class name)">Klasse</string>
+    <string name="label_icon">Ikon</string>
+    <string name="starting_activity">Starter aktivitet: %s</string>
+    <string name="starting_application">Starter programmet: %s</string>
+    <string name="creating_activity_shortcut">Lager aktivitet snarvei for %s</string>
+    <string name="creating_application_shortcut">Opprette programsnarvei for %s</string>
+    <string name="error">Feil</string>
+    <string name="error_tasks">Feil under lasting av oppgaveliste</string>
+    <string name="error_creating_shortcut">Feil, lage snarvei</string>
+    <string name="error_icons">Feil ved lasting av ikon</string>
+    <string name="error_invalid_icon_resource">Feil: Ugyldig ikon format</string>
+    <string name="error_invalid_icon_format">Feil: Ugyldig ikon format</string>
+    <string name="error_verbose_pin_shortcut">Gjeldende bærerakett støtter ikke \"PinShortcut\". Kan ikke opprette snarvei.</string>
+    <string name="action_view_source">Vis kildekode</string>
+    <string name="action_view_translation">Hjelp til med oversettelse!</string>
+    <string name="action_view_bugs">Rapporter et problem</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
+    <string name="action_filter">Filter...</string>
+    <string name="filter_hint">package/action</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Εκκινητής Δραστηριοτήτων</string>
+    <string name="short_description" maxLength="80">Εκκινεί κρυφές δραστηριότητες και δημιουργεί συντομεύσεις εφαρμογών</string>
+    <string name="title_section_all">Όλες οι δραστηριότητες</string>
+    <string name="title_dialog_disclaimer">Αποποίηση ευθυνών</string>
+    <string name="title_dialog_icon_picker">Επιλέξετε ένα εικονίδιο</string>
+    <string name="dialog_progress_loading">Φόρτωση&#8230;</string>
+    <string name="dialog_disclaimer">Χρησιμοποιήστε αυτό το λογισμικό με δική σας ευθύνη. Κάποιες εφαρμογές ίσως να μην συμπεριφερθούν όπως αναμένεται όταν οι δραστηριότητές τους εκκινούνται με λάθος τρόπο που οδηγεί σε απώλεια δεδομένων ή ακόμη χειρότερα. Έχετε προειδοποιηθεί. Το κατανοείτε αυτό και θέλετε ακόμη να χρησιμοποιήσετε αυτό το λογισμικό;</string>
+    <string name="context_action_launch">Εκκίνηση δραστηριότητας</string>
+    <string name="context_action_shortcut">Δημιουργία συντόμευσης</string>
+    <string name="context_action_edit">Επεξεργασία συντόμευσης</string>
+    <string name="label_name">Όνομα</string>
+    <string name="label_package">Πακέτο</string>
+    <string name="label_class" comment="label_class (Java class name)">Κατηγορία</string>
+    <string name="label_icon">Εικονίδιο</string>
+    <string name="starting_activity">Έναρξη δραστηριότητας: %s</string>
+    <string name="starting_application">Έναρξη εφαρμογής: %s</string>
+    <string name="creating_activity_shortcut">Δημιουργία συντόμευσης δραστηριότητας για %s</string>
+    <string name="creating_application_shortcut">Δημιουργία συντόμευσης εφαρμογής για %s</string>
+    <string name="error">Σφάλμα</string>
+    <string name="error_tasks">Σφάλμα κατά τη φόρτωση της λίστας εργασιών</string>
+    <string name="error_creating_shortcut">Σφάλμα κατά τη δημιουργία συντόμευσης</string>
+    <string name="error_icons">Σφάλμα κατά τη φόρτωση των εικονιδίων</string>
+    <string name="error_invalid_icon_resource">Σφάλμα: μη έγκυρος πόρος εικονιδίων</string>
+    <string name="error_invalid_icon_format">Σφάλμα: μη έγκυρη μορφή εικονιδίων</string>
+    <string name="error_verbose_pin_shortcut">Ο τρέχων εκκινητής δεν υποστηρίζει το \"PinShortcut\". Δεν είναι δυνατή η δημιουργία συντόμευσης.</string>
+    <string name="action_view_source">Προβολή πηγαίου κώδικα</string>
+    <string name="action_view_translation">Βοηθήστε στη μετάφραση!</string>
+    <string name="action_view_bugs">Αναφορά προβλήματος</string>
+    <string name="error_no_default_activity">Το πακέτο δεν έχει προεπιλεγμένη δραστηριότητα - προσπαθήστε να επιλέξετε μία ρητά</string>
+    <string name="action_filter">Φίλτρο...</string>
+    <string name="filter_hint">πακέτο/δράση</string>
+</resources>

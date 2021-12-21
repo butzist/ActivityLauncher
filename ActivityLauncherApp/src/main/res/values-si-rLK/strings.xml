@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ක්‍රියාකාරකම් දියත්කරණය</string>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">ක්‍රියාකාරකම් දියත්කරණය</string>
+    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">සියලුම ක්‍රියාකාරකම්</string>
     <string name="title_dialog_disclaimer">වියාචනය</string>
     <string name="title_dialog_icon_picker">අයිකනයක් අරගන්න</string>
@@ -11,7 +12,7 @@
     <string name="context_action_edit">කෙටිමඟ සංස්කරණය කරන්න</string>
     <string name="label_name">නම</string>
     <string name="label_package">පැකේජය</string>
-    <string name="label_class">පන්තිය</string>
+    <string name="label_class" comment="label_class (Java class name)">පන්තිය</string>
     <string name="label_icon">අයිකනය</string>
     <string name="starting_activity">Starting activity: %s</string>
     <string name="starting_application">යෙදුම ආරම්භ වෙමින්: %s</string>
@@ -27,4 +28,7 @@
     <string name="action_view_source">මූලාශ්‍රකේතය නරඹන්න</string>
     <string name="action_view_translation">පරිවර්තනයෙන් සහාය වන්න!</string>
     <string name="action_view_bugs">ගැටළුවක් වාර්තා කරන්න</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
+    <string name="action_filter">Filter...</string>
+    <string name="filter_hint">package/action</string>
 </resources>

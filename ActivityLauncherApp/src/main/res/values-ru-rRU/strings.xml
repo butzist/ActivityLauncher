@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Запуск Activity</string>
+    <string name="short_description" maxLength="80">Запускает скрытые действия и создает ярлыки для установленных приложений</string>
+    <string name="title_section_all">Все действия</string>
+    <string name="title_dialog_disclaimer">Отказ от ответственности</string>
+    <string name="title_dialog_icon_picker">Выберите иконку</string>
+    <string name="dialog_progress_loading">Загрузка&#8230;</string>
+    <string name="dialog_disclaimer">Используете это программное обеспечение на свой страх и риск. Некоторые приложения могут не работать так, как ожидалось, когда их деятельность запускаются в неверном контексте приводит к потере данных или даже хуже. Вы были предупреждены. Вы понимаете это и все еще хотите использовать это программное обеспечение?</string>
+    <string name="context_action_launch">Запуск действия</string>
+    <string name="context_action_shortcut">Создать ярлык</string>
+    <string name="context_action_edit">Изменить ярлык</string>
+    <string name="label_name">Имя</string>
+    <string name="label_package">Пакет</string>
+    <string name="label_class" comment="label_class (Java class name)">Класс</string>
+    <string name="label_icon">Иконка</string>
+    <string name="starting_activity">Запуск действия: %s</string>
+    <string name="starting_application">Запуск приложения: %s</string>
+    <string name="creating_activity_shortcut">Создание ярлыка действия для %s</string>
+    <string name="creating_application_shortcut">Создание ярлыка приложения для %s</string>
+    <string name="error">Ошибка</string>
+    <string name="error_tasks">Ошибка загрузки списка задач</string>
+    <string name="error_creating_shortcut">Ошибка создания ярлыка</string>
+    <string name="error_icons">Ошибка загрузки иконок</string>
+    <string name="error_invalid_icon_resource">Ошибка: Недопустимый ресурс иконки</string>
+    <string name="error_invalid_icon_format">Ошибка: Недопустимый формат иконки</string>
+    <string name="error_verbose_pin_shortcut">Нынешний лаунчер не поддерживает \"PinShortcut\". Невозможно создать ярлык.</string>
+    <string name="action_view_source">Просмотреть исходный код</string>
+    <string name="action_view_translation">Помогите с переводом!</string>
+    <string name="action_view_bugs">Сообщить о проблеме</string>
+    <string name="error_no_default_activity">У пакета нет действия по умолчанию, установите его самостоятельно</string>
+    <string name="action_filter">Фильтр...</string>
+    <string name="filter_hint">пакет/действие</string>
+</resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Activity Launcher</string>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
+    <string name="short_description" maxLength="80">Inicia atividades ocultas e cria atalhos para apps instalados</string>
     <string name="title_section_all">Todas as atividades</string>
     <string name="title_dialog_disclaimer">Aviso</string>
     <string name="title_dialog_icon_picker">Escolha um ícone</string>
@@ -11,7 +12,7 @@
     <string name="context_action_edit">Editar atalho</string>
     <string name="label_name">Nome:</string>
     <string name="label_package">Pacote:</string>
-    <string name="label_class">Classe:</string>
+    <string name="label_class" comment="label_class (Java class name)">Classe:</string>
     <string name="label_icon">Ícone:</string>
     <string name="starting_activity">Iniciando atividade: \"%s\"</string>
     <string name="starting_application">Iniciando aplicação: \"%s\"</string>
@@ -27,4 +28,7 @@
     <string name="action_view_source">Exibir código fonte</string>
     <string name="action_view_translation">Ajude a traduzir!</string>
     <string name="action_view_bugs">Relatar um problema</string>
+    <string name="error_no_default_activity">O pacote não tem uma atividade padrão - tente selecionar um explicitamente</string>
+    <string name="action_filter">Filtrar...</string>
+    <string name="filter_hint">pacote/ação</string>
 </resources>

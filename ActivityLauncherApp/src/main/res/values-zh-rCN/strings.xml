@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">活动启动器</string>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">活动启动器</string>
+    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">所有活动</string>
     <string name="title_dialog_disclaimer">免责声明</string>
     <string name="title_dialog_icon_picker">选取图标</string>
@@ -12,7 +13,7 @@
     <string name="context_action_edit">编辑快捷方式</string>
     <string name="label_name">名称</string>
     <string name="label_package">安装包</string>
-    <string name="label_class">类</string>
+    <string name="label_class" comment="label_class (Java class name)">类</string>
     <string name="label_icon">图标</string>
     <string name="starting_activity">启动活动:%s</string>
     <string name="starting_application">启动应用：%s</string>
@@ -28,4 +29,7 @@
     <string name="action_view_source">查看源代码</string>
     <string name="action_view_translation">帮助我们翻译</string>
     <string name="action_view_bugs">报告问题</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
+    <string name="action_filter">Filter...</string>
+    <string name="filter_hint">package/action</string>
 </resources>

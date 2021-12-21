@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
+    <string name="short_description" maxLength="80">Spouští skryté aktivity a\u00a0vytváří zástupce pro nainstalované aplikace</string>
+    <string name="title_section_all">Všechny aktivity</string>
+    <string name="title_dialog_disclaimer">Odmítnutí odpovědnosti</string>
+    <string name="title_dialog_icon_picker">Vyberte ikonu</string>
+    <string name="dialog_progress_loading">Načítaní&#8230;</string>
+    <string name="dialog_disclaimer">Tento software používáte na vlastní riziko. Některé aplikace se nemusí chovat podle očekávání, když jsou jejich aktivity spuštěny ve špatném kontextu, což může vést ke ztrátě dat nebo k\u00a0něčemu ještě horšímu. Byli jste varováni. Rozumíte výše uvedenému a\u00a0přesto tento software chcete používat?</string>
+    <string name="context_action_launch">Spustit aktivitu</string>
+    <string name="context_action_shortcut">Vytvořit zástupce</string>
+    <string name="context_action_edit">Upravit zástupce</string>
+    <string name="label_name">Název</string>
+    <string name="label_package">Balíček</string>
+    <string name="label_class" comment="label_class (Java class name)">Třída</string>
+    <string name="label_icon">Ikona</string>
+    <string name="starting_activity">Spouštění aktivity: %s</string>
+    <string name="starting_application">Spouštění aplikace: %s</string>
+    <string name="creating_activity_shortcut">Vytváření zástupce aktivity pro %s</string>
+    <string name="creating_application_shortcut">Vytváření zástupce aplikace pro %s</string>
+    <string name="error">Chyba</string>
+    <string name="error_tasks">Chyba při načítání seznamu úloh</string>
+    <string name="error_creating_shortcut">Chyba při vytváření zástupce</string>
+    <string name="error_icons">Chyba při načítání ikon</string>
+    <string name="error_invalid_icon_resource">Chyba: neplatný zdroj ikony</string>
+    <string name="error_invalid_icon_format">Chyba: neplatný formát ikony</string>
+    <string name="error_verbose_pin_shortcut">Aktuální spouštěč nepodporuje „PinShortcut“ (Připnutí zástupce). Nelze vytvořit zástupce.</string>
+    <string name="action_view_source">Zobrazit zdrojový kód</string>
+    <string name="action_view_translation">Pomozte s\u00a0překladem!</string>
+    <string name="action_view_bugs">Nahlásit problém</string>
+    <string name="error_no_default_activity">Balíček nemá výchozí aktivitu. Zkuste jednu vybrat explicitně</string>
+    <string name="action_filter">Filtrovat…</string>
+    <string name="filter_hint">balíček/akce</string>
+</resources>

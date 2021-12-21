@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
+    <string name="short_description" maxLength="80">Ejecuta activities ocultas y crea accesos directos en la pantalla de inicio</string>
+    <string name="title_section_all">Todas las actividades</string>
+    <string name="title_dialog_disclaimer">Términos de Uso</string>
+    <string name="title_dialog_icon_picker">Elige un icono</string>
+    <string name="dialog_progress_loading">Cargando&#8230;</string>
+    <string name="dialog_disclaimer">Usa este software bajo tu propio riesgo. Algunas aplicaciones pueden comportarse de forma rara cuando sus actividades se ejecutan en el contexto equivocado, causando pérdidas de datos o incluso algo aún peor. Quedas avisado de ello. ¿Lo entiendes y aun así quieres usar este software?</string>
+    <string name="context_action_launch">Ejecutar actividad</string>
+    <string name="context_action_shortcut">Crear acceso directo</string>
+    <string name="context_action_edit">Editar acceso directo</string>
+    <string name="label_name">Nombre</string>
+    <string name="label_package">Paquete</string>
+    <string name="label_class" comment="label_class (Java class name)">Clase</string>
+    <string name="label_icon">Icono</string>
+    <string name="starting_activity">Iniciando actividad: %s</string>
+    <string name="starting_application">Iniciando aplicación: %s</string>
+    <string name="creating_activity_shortcut">Creando un acceso directo para la actividad %s</string>
+    <string name="creating_application_shortcut">Creando un acceso directo para la aplicaión %s</string>
+    <string name="error">Error</string>
+    <string name="error_tasks">Error al cargar la lista de tareas</string>
+    <string name="error_creating_shortcut">Acceso directo crear error</string>
+    <string name="error_icons">Error al cargar iconos</string>
+    <string name="error_invalid_icon_resource">Error: recurso de icono inválido</string>
+    <string name="error_invalid_icon_format">Error: formato de icono inválido</string>
+    <string name="error_verbose_pin_shortcut">El lanzador actual no soporta \"PinShortcut\". No se puede crear el acceso directo.  </string>
+    <string name="action_view_source">Ver código fuente</string>
+    <string name="action_view_translation">¡Ayuda a traducir!</string>
+    <string name="action_view_bugs">Informa de un problema</string>
+    <string name="error_no_default_activity">El paquete no tiene una actividad predeterminada - intente seleccionar una explícitamente</string>
+    <string name="action_filter">Filtrar...</string>
+    <string name="filter_hint">paquete/acción</string>
+</resources>

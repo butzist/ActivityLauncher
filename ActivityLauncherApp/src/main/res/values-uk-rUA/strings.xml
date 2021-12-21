@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Лаунчер діяльності</string>
+    <string name="short_description" maxLength="80">Запускає приховані дії та створює ярлики для встановлених програм</string>
+    <string name="title_section_all">Усі діяльності</string>
+    <string name="title_dialog_disclaimer">Відмова від відповідальності</string>
+    <string name="title_dialog_icon_picker">Обрати іконку</string>
+    <string name="dialog_progress_loading">Завантаження...</string>
+    <string name="dialog_disclaimer">Використовувйте це програмне забезпечення на свій страх і ризик. Деякі програми можуть вести себе не так, як очікувалося, коли їх діяльність запускаються в неправильному контексті, що веде до втрати даних або навіть гірше. Ви були попереджені. Ви це розуміїте і хочете використовувати це програмне забезпечення?</string>
+    <string name="context_action_launch">Запуск діяльності</string>
+    <string name="context_action_shortcut">Створити ярлик</string>
+    <string name="context_action_edit">Редагувати ярлик</string>
+    <string name="label_name">Ім’я</string>
+    <string name="label_package">Пакет</string>
+    <string name="label_class" comment="label_class (Java class name)">Клас</string>
+    <string name="label_icon">Іконка</string>
+    <string name="starting_activity">Запуск діяльності: %s</string>
+    <string name="starting_application">Запуск програми: %s</string>
+    <string name="creating_activity_shortcut">Створення ярлика дії для %s</string>
+    <string name="creating_application_shortcut">Створення ярлика додатку для %s</string>
+    <string name="error">Помилка</string>
+    <string name="error_tasks">Помилка завантаження списку завдань</string>
+    <string name="error_creating_shortcut">Помилка створення ярлика</string>
+    <string name="error_icons">Помилка завантаження іконок</string>
+    <string name="error_invalid_icon_resource">Помилка: неприпустима іконка</string>
+    <string name="error_invalid_icon_format">Помилка: неприпустимий формат іконки</string>
+    <string name="error_verbose_pin_shortcut">Поточний лаунчер не підтримує \"PinShortcut\". Неможливо створити ярлик.</string>
+    <string name="action_view_source">Перегляд вихідного коду</string>
+    <string name="action_view_translation">Допоможіть перекласти!</string>
+    <string name="action_view_bugs">Повідомити про проблему</string>
+    <string name="error_no_default_activity">Пакет не має дії за замовчуванням, спробуйте вибрати її власноруч</string>
+    <string name="action_filter">Фільтр...</string>
+    <string name="filter_hint">пакет/дія</string>
+</resources>

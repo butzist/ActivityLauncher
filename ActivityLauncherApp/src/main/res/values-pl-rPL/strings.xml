@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Uruchamiacz aktywności</string>
+    <string name="short_description" maxLength="80">Startuje ukryte działalności i tworzy skróty na ekranie głównym</string>
+    <string name="title_section_all">Wszystkie aktywności</string>
+    <string name="title_dialog_disclaimer">Uwaga</string>
+    <string name="title_dialog_icon_picker">Wybierz ikonę</string>
+    <string name="dialog_progress_loading">Wczytywanie &#8230;</string>
+    <string name="dialog_disclaimer">Korzystasz z tego programu na własne ryzyko. Niektóre aplikacje mogą nie działać zgodnie z oczekiwaniami, jeśli będą uruchamiane w złym kontekście. Może to prowadzić do utraty danych lub nawet gorzej. Zostałeś ostrzeżony. Czy rozumiesz to i mimo wszystko chcesz używać tego programu?</string>
+    <string name="context_action_launch">Rozpocznij aktywność</string>
+    <string name="context_action_shortcut">Utwórz skrót</string>
+    <string name="context_action_edit">Edytuj skrót</string>
+    <string name="label_name">Nazwa</string>
+    <string name="label_package">Pakiet</string>
+    <string name="label_class" comment="label_class (Java class name)">Klasa</string>
+    <string name="label_icon">Ikona</string>
+    <string name="starting_activity">Rozpoczynanie aktywności: %s</string>
+    <string name="starting_application">Uruchamianie aplikacji: %s</string>
+    <string name="creating_activity_shortcut">Tworzenie skrótu aktywności dla %s</string>
+    <string name="creating_application_shortcut">Tworzenie skrótu aplikacji dla %s</string>
+    <string name="error">Błąd</string>
+    <string name="error_tasks">Błąd podczas ładowania listy zadań</string>
+    <string name="error_creating_shortcut">Błąd w tworzeniu skrótu</string>
+    <string name="error_icons">Błąd podczas ładowania ikon</string>
+    <string name="error_invalid_icon_resource">Błąd: nieprawidłowy zasób ikony</string>
+    <string name="error_invalid_icon_format">Błąd: nieprawidłowy format ikony</string>
+    <string name="error_verbose_pin_shortcut">Obecny launcher nie wspiera \"PinShortcut\". Nie można utworzyć skrótu.</string>
+    <string name="action_view_source">Pokaż kod źródłowy</string>
+    <string name="action_view_translation">Pomóż w tłumaczeniu!</string>
+    <string name="action_view_bugs">Zgłoś problem</string>
+    <string name="error_no_default_activity">Pakiet nie ma domyślnej aktywności - spróbuj wybrać jednoznacznie</string>
+    <string name="action_filter">Filtr...</string>
+    <string name="filter_hint">pakiet/akcja</string>
+</resources>
