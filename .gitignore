@@ -1,6 +1,8 @@
 /build
 local.properties
 /.idea
+/.vscode
+/.venv
 /.gradle
 /ActivityLauncherApp/build
 /ActivityLauncherApp/release
