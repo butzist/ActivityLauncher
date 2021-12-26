@@ -5,14 +5,14 @@ on:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: 
 
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo pip3 install google-api-python-client oauth2client
-      - name: Update listing
+        run: 
+      - name: haha
         run: python3 update-listing.py
         env:
-          SERVICEACCOUNT: ${{ secrets.SERVICEACCOUNT }}
-          SERVICEACCOUNT_EMAIL: ${{ secrets.SERVICEACCOUNT_EMAIL }}
+          SERVICEACCOUNT: ${{ sERVICEACCOUNT }}
+          SERVICEACCOUNT_EMAIL: ${{.SOUNT_EMAIL }}
