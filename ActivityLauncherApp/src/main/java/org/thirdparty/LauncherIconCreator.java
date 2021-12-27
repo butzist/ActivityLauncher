@@ -48,7 +48,7 @@ public class LauncherIconCreator {
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {
         String pack = null;
 
-        if(activity.getIconResouceName() != null) {
+        if(activity.getIconResouceName() != null && activity.getIconResouceName().indexOf(':') >= 0) {
             pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
         }
         // Use bitmap version if icon from different package is used
