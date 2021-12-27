@@ -28,10 +28,18 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import de.szalkowski.activitylauncher.MyActivityInfo;
 import de.szalkowski.activitylauncher.MyPackageInfo;
@@ -133,15 +141,36 @@ public class LauncherIconCreator {
         }
     }
 
-    private static void startRootActivity(Context context, ComponentName activity) throws IOException, InterruptedException {
+    private static void startRootActivity(Context context, ComponentName activity) throws IOException, InterruptedException, IllegalArgumentException {
         var component = activity.flattenToShortString();
         boolean isValid = validateComponentName(component);
         if (!isValid) {
-            Toast.makeText(context, String.format(context.getString(R.string.error_invalid_component_name), component), Toast.LENGTH_LONG).show();
-            return;
+            throw new IllegalArgumentException(String.format(context.getString(R.string.exception_invalid_component_name), component));
         }
         Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", "am start -a android.intent.action.MAIN -n " + component});
-        process.waitFor();
+        String output = getProcessOutput(process);
+
+        var exitValue = process.waitFor();
+        if (exitValue > 0) {
+            throw new RuntimeException(String.format(context.getString(R.string.exception_command_error), exitValue, output));
+        }
+    }
+
+    /**
+     * Got reference from stackoverflow.com URL:
+     * https://stackoverflow.com/questions/309424/how-do-i-read-convert-an-inputstream-into-a-string-in-java
+     */
+    @NonNull
+    private static String getProcessOutput(Process process) throws IOException {
+        var stream = process.getErrorStream();
+        int bufferSize = 1024;
+        char[] buffer = new char[bufferSize];
+        StringBuilder out = new StringBuilder();
+        Reader in = new InputStreamReader(stream, StandardCharsets.UTF_8);
+        for (int numRead; (numRead = in.read(buffer, 0, buffer.length)) > 0; ) {
+            out.append(buffer, 0, numRead);
+        }
+        return out.toString();
     }
 
     /**
