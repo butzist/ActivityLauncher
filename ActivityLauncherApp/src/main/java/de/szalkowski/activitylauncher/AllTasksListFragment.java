@@ -45,18 +45,12 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 }
         );
         this.list.setTextFilterEnabled(true);
+        registerForContextMenu(this.list);
 
         AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(getActivity(), this);
         provider.execute();
 
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        registerForContextMenu(this.list);
     }
 
     @Override
