@@ -11,6 +11,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -106,6 +107,9 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         ImageView icon = view.findViewById(android.R.id.icon);
         icon.setImageDrawable(activity.getIcon());
 
+        ImageButton button = view.findViewById(android.R.id.button1);
+        button.setOnClickListener(view1 -> view.performLongClick());
+
         return view;
     }
 
@@ -139,6 +143,9 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
         ImageView icon = view.findViewById(android.R.id.icon);
         icon.setImageDrawable(pack.getIcon());
+
+        ImageButton button = view.findViewById(android.R.id.button1);
+        button.setOnClickListener(view1 -> view.performLongClick());
 
         // expand if filtered list is short enough
         if (filtered.size() < 10) {

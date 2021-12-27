@@ -40,11 +40,12 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 (parent, v, groupPosition, childPosition, id) -> {
                     ExpandableListAdapter adapter = parent.getExpandableListAdapter();
                     MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
-                    LauncherIconCreator.launchActivity(getActivity(), info.component_name);
+                    LauncherIconCreator.launchActivity(getActivity(), info.component_name, false);
                     return false;
                 }
         );
         this.list.setTextFilterEnabled(true);
+        registerForContextMenu(this.list);
 
         AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(getActivity(), this);
         provider.execute();
@@ -53,17 +54,11 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        registerForContextMenu(this.list);
-    }
-
-    @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
                                     ContextMenuInfo menuInfo) {
         menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
         menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_launch);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_launch_as_root);
 
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) menuInfo;
         ExpandableListView list = requireView().findViewById(R.id.expandableListView1);
@@ -73,7 +68,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
                 menu.setHeaderIcon(activity.icon);
                 menu.setHeaderTitle(activity.name);
-                menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_edit);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_edit);
                 break;
             case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
                 MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
@@ -98,9 +93,12 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                         LauncherIconCreator.createLauncherIcon(getActivity(), activity);
                         break;
                     case 1:
-                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name);
+                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, false);
                         break;
                     case 2:
+                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, true);
+                        break;
+                    case 3:
                         DialogFragment dialog = new ShortcutEditDialogFragment();
                         Bundle args = new Bundle();
                         args.putParcelable("activity", activity.component_name);
