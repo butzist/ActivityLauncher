@@ -28,7 +28,10 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.szalkowski.activitylauncher.MyActivityInfo;
 import de.szalkowski.activitylauncher.MyPackageInfo;
@@ -69,7 +72,7 @@ public class LauncherIconCreator {
     }
 
     /**
-     * Got reference from stackoverflow.com Url:
+     * Got reference from stackoverflow.com URL:
      * https://stackoverflow.com/questions/44447056/convert-adaptiveicondrawable-to-bitmap-in-android-o-preview
      * https://stackoverflow.com/questions/46130594/android-get-apps-adaptive-icons-from-package-manager
      */
@@ -108,17 +111,50 @@ public class LauncherIconCreator {
         return Icon.createWithBitmap(bmp);
     }
 
-    public static void launchActivity(Context context, ComponentName activity) {
+    /**
+     * Got reference from stackoverflow.com URL
+     * https://stackoverflow.com/questions/9194725/run-android-program-as-root
+     * https://stackoverflow.com/questions/12343227/escaping-bash-function-arguments-for-use-by-su-c
+     */
+    public static void launchActivity(Context context, ComponentName activity, boolean asRoot) {
         Intent intent = LauncherIconCreator.getActivityIntent(activity);
         Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()),
                 Toast.LENGTH_LONG).show();
+
         try {
-            context.startActivity(intent);
+            if (!asRoot) {
+                context.startActivity(intent);
+            } else {
+                startRootActivity(context, activity);
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             Toast.makeText(context, context.getText(R.string.error).toString() + ": " + e.toString(), Toast.LENGTH_LONG).show();
         }
-
     }
+
+    private static void startRootActivity(Context context, ComponentName activity) throws IOException, InterruptedException {
+        var component = activity.flattenToShortString();
+        boolean isValid = validateComponentName(component);
+        if (!isValid) {
+            Toast.makeText(context, String.format(context.getString(R.string.error_invalid_component_name), component), Toast.LENGTH_LONG).show();
+            return;
+        }
+        Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", "am start -a android.intent.action.MAIN -n " + component});
+        process.waitFor();
+    }
+
+    /**
+     * In order to be on the safe side, validate component name before merging it into a root shell command
+     * @param component component name
+     * @return true, if valid
+     */
+    private static boolean validateComponentName(String component) {
+        Pattern p = Pattern.compile("^[./a-zA-Z0-9]+$");
+        Matcher m = p.matcher(component);
+        return m.matches();
+    }
+
 
     private static void createShortcut(Context context, String appName, Drawable draw, Intent intent, String iconResourceName) {
         Toast.makeText(context, String.format(context.getText(R.string.creating_application_shortcut).toString(), appName),

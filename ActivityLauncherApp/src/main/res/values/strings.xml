@@ -24,6 +24,7 @@
     <string name="error_icons">Error loading icons</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
+    <string name="error_invalid_component_name">Error: invalid or potentially harmful component name: %s</string>
     <string name="error_verbose_pin_shortcut">Current launcher does not support "PinShortcut". Unable to create shortcut.</string>
     <string name="action_view_source">View source code</string>
     <string name="action_view_translation">Help translate!</string>
@@ -31,4 +32,5 @@
     <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
 </resources>
