@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="short_description" maxLength="80">Startar dolda aktiviteter och skapar genvägar för installerade appar</string>
     <string name="title_section_all">Alla aktiviteter</string>
     <string name="title_dialog_disclaimer">Varning</string>
     <string name="title_dialog_icon_picker">Välj en ikon</string>
@@ -28,7 +28,7 @@
     <string name="action_view_source">Visa källkod</string>
     <string name="action_view_translation">Hjälp till att översätta!</string>
     <string name="action_view_bugs">Rapportera ett problem</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
+    <string name="error_no_default_activity">Paketet har ingen standardaktivitet</string>
     <string name="action_filter">Filter...</string>
-    <string name="filter_hint">package/action</string>
+    <string name="filter_hint">paket/åtgärd</string>
 </resources>
