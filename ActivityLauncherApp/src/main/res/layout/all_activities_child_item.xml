@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="?android:attr/activatedBackgroundIndicator"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
         android:id="@android:id/icon"
@@ -17,16 +18,19 @@
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|center_vertical"
+        android:layout_weight="1"
+        android:layout_gravity="start|center_vertical|fill_horizontal"
         android:orientation="vertical"
         android:paddingStart="10dp"
-        android:paddingEnd="0dp">
+        android:paddingEnd="10dp"
+        android:descendantFocusability="blocksDescendants">
 
         <TextView
             android:id="@android:id/text1"
-            android:layout_width="wrap_content"
+            android:text="Activity Title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -35,12 +39,25 @@
         <TextView
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:id="@android:id/text2"
-            android:layout_width="wrap_content"
+            android:text="package.name/.ActivityClass"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textIsSelectable="false" />
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@android:id/button1"
+        android:layout_width="42dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/label_menu"
+        android:paddingVertical="0dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="10dp"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        style="?android:attr/borderlessButtonStyle" />
 
 </LinearLayout>

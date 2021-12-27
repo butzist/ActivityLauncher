@@ -1,7 +1,2 @@
 * Updated translations (if you find errors in the translation, you can update/vote for the correct translation on Crowdin. Link is provided in the app.)
-* Use native system theme
-* Allow uninstall without losing userdata (#96)
-* Use Adaptive Icons for shortcuts (#93)
-* Fix crash when icon name is missing (#84)
-* Updated permission for Android 11 (#71)
-* Dark mode (#58)
+* Allow starting activities as root
