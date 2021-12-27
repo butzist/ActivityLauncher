@@ -1,4 +1,6 @@
-[![Debug Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android.yml)
+[![Debug Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android-debug.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android-debug.yml)
+[![Release Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android-release.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android-release.yml)
+[![Crowdin](https://badges.crowdin.net/activitylauncher/localized.svg)](https://crowdin.com/project/activitylauncher)
 
 Activity Launcher
 =================
