@@ -1,7 +1,6 @@
 name: Release Build
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - '*'
@@ -25,18 +24,25 @@ jobs:
       run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > ActivityLauncherApp/keystore.jks
     - name: Download dependencies
       run: ./gradlew androidDependencies
-    - name: Build release
+    - name: Build release AAB
       run: ./gradlew bundleRelease
       env:
         KEYSTORE: keystore.jks
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
         KEY_ALIAS: ${{ secrets.KEYALIAS }}
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
-    - name: Upload release apk
+    - name: Build release APK
+      run: ./gradlew assembleRelease
+      env:
+        KEYSTORE: keystore.jks
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEYALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
+    - name: Upload release APK
       uses: actions/upload-artifact@v2
       with:
-        name: Release
-        path: ActivityLauncherApp/build/outputs/bundle/release/
+        name: release
+        path: ActivityLauncherApp/build/outputs/apk/release/
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
