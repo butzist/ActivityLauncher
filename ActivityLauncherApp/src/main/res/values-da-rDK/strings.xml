@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Åbner skjulte aktiviteter og opretter genveje til installerede apps</string>
+    <string name="app_name">Activity Launcher</string>
+    <string name="short_description">Åbner skjulte aktiviteter og opretter genveje til installerede apps</string>
     <string name="title_section_all">Alle aktiviteter</string>
     <string name="title_dialog_disclaimer">Ansvarsfraskrivelse</string>
     <string name="title_dialog_icon_picker">Vælg et ikon</string>
     <string name="dialog_progress_loading">Indlæser&#8230;</string>
     <string name="dialog_disclaimer">Denne software benyttes på eget ansvar. Visse apps kan opføre sig uhensigtsmæssigt, når deres aktiviteter startes i en ukorrekt kontekst, hvilket kan betyde tab af data eller værre. Du er hermed advaret. Vil du fortsat benytte denne software?</string>
     <string name="context_action_launch">Start aktivitet</string>
+    <string name="context_action_launch_as_root">Start aktivitet som root</string>
     <string name="context_action_shortcut">Opret genvej</string>
     <string name="context_action_edit">Redigér genvej</string>
     <string name="label_name">Navn</string>
     <string name="label_package">Pakke</string>
-    <string name="label_class" comment="label_class (Java class name)">Klasse</string>
+    <string name="label_class">Klasse</string>
     <string name="label_icon">Ikon</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Starter aktivitet: %s</string>
     <string name="starting_application">Start applikation: %s</string>
     <string name="creating_activity_shortcut">Opretter aktivitetsgenvej til %s</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Fejl ved indlæsning af ikoner</string>
     <string name="error_invalid_icon_resource">Fejl: Ugyldig ikonressource</string>
     <string name="error_invalid_icon_format">Fejl: Ugyldigt ikonformat</string>
+    <string name="error_no_default_activity">Pakken har ikke en standardaktivitet - vælg én bestemt</string>
     <string name="error_verbose_pin_shortcut">Aktuel launcher understøtter ikke \"FastgørGenvej\". Kan ikke oprette genvej.</string>
+    <string name="exception_invalid_component_name">Ugyldigt eller potentielt skadeligt komponentnavn: %s</string>
+    <string name="exception_command_error">Kommando returnerede fejlkode: %d, output: %s</string>
     <string name="action_view_source">Vis kildekode</string>
     <string name="action_view_translation">Hjælp med oversættelse!</string>
     <string name="action_view_bugs">Rapportér et problem</string>
-    <string name="error_no_default_activity">Pakken har ikke en standardaktivitet - vælg én bestemt</string>
     <string name="action_filter">Filtrér...</string>
     <string name="filter_hint">pakke/handling</string>
 </resources>

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Pokretač Aktivnosti</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Pokretač Aktivnosti</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">Sve aktivnosti</string>
     <string name="title_dialog_disclaimer">Odricanje odgovornosti</string>
     <string name="title_dialog_icon_picker">Izaberi ikonicu</string>
     <string name="dialog_progress_loading">Učitavanje&#8230;</string>
     <string name="dialog_disclaimer">Koristite ovaj softver na vlastitu odgovornost. Neke aplikacije ne može da se ponašaju kao što je očekivano kada njihove aktivnosti su pokrenuta u kontekst nije u redu, što je dovelo do gubitka podataka ili čak i gore. Bio si upozoren. Ako ovo razumete želite koristiti ovaj softver?</string>
     <string name="context_action_launch">Pokreni ovu aktivnost</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Kreiraj/napravi prečicu</string>
     <string name="context_action_edit">Uredi prečicu</string>
     <string name="label_name">Ime</string>
     <string name="label_package">Paket</string>
-    <string name="label_class" comment="label_class (Java class name)">Klasa</string>
+    <string name="label_class">Klasa</string>
     <string name="label_icon">Ikonica</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Pokretanje Aktivnosti: %s</string>
     <string name="starting_application">Pokretanje Aplikacije: %s</string>
     <string name="creating_activity_shortcut">Kreiranje prečice aktivnosti za %s</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Грешка при учитавању ikonice</string>
     <string name="error_invalid_icon_resource">Greška: Pogrešna ikonica</string>
     <string name="error_invalid_icon_format">Greška: pogrešna ikonica</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Trenutni pokretač ne podržava \"PinShortcut\". Nemoguće kreirati prečicu.</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">Prikaz Sourcecode</string>
     <string name="action_view_translation">Pomozute tako što će te prevoditi!</string>
     <string name="action_view_bugs">Prijavite problem</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

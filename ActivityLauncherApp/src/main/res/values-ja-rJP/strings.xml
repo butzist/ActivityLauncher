@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Activity Launcher</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">すべてのアクティビティ</string>
     <string name="title_dialog_disclaimer">免責事項</string>
     <string name="title_dialog_icon_picker">アイコンを選ぶ</string>
     <string name="dialog_progress_loading">読み込み中&#8230;</string>
     <string name="dialog_disclaimer">あなたの自己責任でこのソフトウェアを使用してください。 アプリによっては、アクティビティが間違ったコンテキストで起動されたときに期待どおりに動作しない場合があり、データが失われたり悪影響を受ける可能性があります。 これは警告です。これを理解した上で、このソフトウェアを使用しますか？</string>
     <string name="context_action_launch">アクティビティを起動</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">ショートカットを作成</string>
     <string name="context_action_edit">ショートカットを編集</string>
     <string name="label_name">名前</string>
     <string name="label_package">パッケージ</string>
-    <string name="label_class" comment="label_class (Java class name)">クラス</string>
+    <string name="label_class">クラス</string>
     <string name="label_icon">アイコン</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">アクティビティの開始: %s</string>
     <string name="starting_application">アプリケーションの起動: %s</string>
     <string name="creating_activity_shortcut">%s のアクティビティのショートカットを作成しています</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">アイコンの読み込みエラー</string>
     <string name="error_invalid_icon_resource">エラー: 無効なアイコン リソース</string>
     <string name="error_invalid_icon_format">エラー: 無効なアイコン形式</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">現在のランチャーは \"PinShortcut\" をサポートしていません。ショートカットを作成できません。</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">ソースコードを表示</string>
     <string name="action_view_translation">翻訳を手伝ってください!</string>
     <string name="action_view_bugs">問題を報告</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

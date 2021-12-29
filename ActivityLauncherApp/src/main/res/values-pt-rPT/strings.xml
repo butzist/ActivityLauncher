@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Activity Launcher</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">Todas as atividades</string>
     <string name="title_dialog_disclaimer">Aviso</string>
     <string name="title_dialog_icon_picker">Escolha um ícone</string>
@@ -9,12 +9,14 @@
     <string name="dialog_disclaimer">Utilize este software por sua conta e risco.
 Algumas aplicações podem comportar-se de forma inesperada quando as suas atividades são lançadas em contexto diferente do esperado podendo levar à perda de dados ou pior. Pretende aceitar e continuar?</string>
     <string name="context_action_launch">Lançar atividade</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Criar atalho</string>
     <string name="context_action_edit">Editar atalho</string>
     <string name="label_name">Nome</string>
     <string name="label_package">Pacote</string>
-    <string name="label_class" comment="label_class (Java class name)">Identificador</string>
+    <string name="label_class">Identificador</string>
     <string name="label_icon">Ícone</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">A iniciar a atividade: %s</string>
     <string name="starting_application">A iniciar a aplicação: %s</string>
     <string name="creating_activity_shortcut">A criar atalho para a atividade %s</string>
@@ -25,11 +27,13 @@ Algumas aplicações podem comportar-se de forma inesperada quando as suas ativi
     <string name="error_icons">Erro ao carregar os ícones</string>
     <string name="error_invalid_icon_resource">Erro: recurso de ícone inválido</string>
     <string name="error_invalid_icon_format">Erro: Formato de ícones inválido</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">O launcher atual não suporta \"PinShortcut\". Não é possível criar atalhos.</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">Ver código-fonte</string>
     <string name="action_view_translation">Ajude a traduzir!</string>
     <string name="action_view_bugs">Reportar problemas</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

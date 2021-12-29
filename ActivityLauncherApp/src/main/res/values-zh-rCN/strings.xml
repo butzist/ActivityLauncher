@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">活动启动器</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">活动启动器</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">所有活动</string>
     <string name="title_dialog_disclaimer">免责声明</string>
     <string name="title_dialog_icon_picker">选取图标</string>
@@ -9,12 +9,14 @@
     <string name="dialog_disclaimer">警示：
 使用本软件表示您将独自承担软件使用过程中可能出现的风险，这些风险包括但不限于：一些应用活动在不正确的配置下启动时可能会产生意料之外的错误，这可能会导致应用数据丢失或者更严重的问题。您确认知晓这些可能产生的风险并仍然打算使用该软件吗？</string>
     <string name="context_action_launch">启动活动</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">创建快捷方式</string>
     <string name="context_action_edit">编辑快捷方式</string>
     <string name="label_name">名称</string>
     <string name="label_package">安装包</string>
-    <string name="label_class" comment="label_class (Java class name)">类</string>
+    <string name="label_class">类</string>
     <string name="label_icon">图标</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">启动活动:%s</string>
     <string name="starting_application">启动应用：%s</string>
     <string name="creating_activity_shortcut">正在为 %s 创建活动快捷方式</string>
@@ -25,11 +27,13 @@
     <string name="error_icons">加载图标时出错</string>
     <string name="error_invalid_icon_resource">错误: 无效的图标资源</string>
     <string name="error_invalid_icon_format">错误: 无效的图标格式</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">当前启动器尚不支持 “PinShortcut”。无法创建快捷方式。</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">查看源代码</string>
     <string name="action_view_translation">帮助我们翻译</string>
     <string name="action_view_bugs">报告问题</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

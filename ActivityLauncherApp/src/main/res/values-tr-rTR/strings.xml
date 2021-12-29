@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Activity Launcher</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">Tüm aktiviteler</string>
     <string name="title_dialog_disclaimer">Yasal uyarı</string>
     <string name="title_dialog_icon_picker">Bir simge seçin</string>
     <string name="dialog_progress_loading">Yükleniyor&#8230;</string>
     <string name="dialog_disclaimer">Bu yazılımın kullanımı sizin sorumluluğunuzdadır. Bazı uygulamalar beklenildiği gibi çalışmayabilir ve veri kayıplarına veya daha kötüsüne sebep olabilir. Bu yazılımı hala kullanmak istiyor musunuz?</string>
     <string name="context_action_launch">Aktiviteyi başlat</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Kısayol oluştur</string>
     <string name="context_action_edit">Kısayolu düzenle</string>
     <string name="label_name">İsim</string>
     <string name="label_package">Paket</string>
-    <string name="label_class" comment="label_class (Java class name)">Sınıf</string>
+    <string name="label_class">Sınıf</string>
     <string name="label_icon">Simge</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">%s etkinliği başlatılıyor</string>
     <string name="starting_application">%s uygulaması başlatılıyor</string>
     <string name="creating_activity_shortcut">%s için etkinlik kısayolu oluşturuluyor</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Simgeleri yüklemede hata</string>
     <string name="error_invalid_icon_resource">Hata: geçersiz simge kaynağı</string>
     <string name="error_invalid_icon_format">Hata: geçersiz simge formatı</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Geçerli başlatıcısı \"PinShortcut\" özelliğini desteklemiyor. Kısayol oluşturulamıyor.</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">Kaynak Kodunu Göster</string>
     <string name="action_view_translation">Çeviriye Yardım Et!</string>
     <string name="action_view_bugs">Bir Sorun Bildirin</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

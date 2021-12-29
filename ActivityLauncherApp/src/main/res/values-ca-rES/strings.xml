@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Activity Launcher</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">Totes les activitats</string>
     <string name="title_dialog_disclaimer">Disclaimer</string>
     <string name="title_dialog_icon_picker">Pick an icon</string>
     <string name="dialog_progress_loading">Loading&#8230;</string>
     <string name="dialog_disclaimer">Use this software at your own risk. Some apps might not behave as expected when their activities are launched in the wrong context leading to data loss or even worse. You have been warned. Do you understand this and still want to use this software?</string>
     <string name="context_action_launch">Launch activity</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Crear una drecera</string>
     <string name="context_action_edit">Afegeix una drecera</string>
     <string name="label_name">Nom</string>
     <string name="label_package">Paquet</string>
-    <string name="label_class" comment="label_class (Java class name)">Classe</string>
+    <string name="label_class">Classe</string>
     <string name="label_icon">Icona:</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Starting activity: %s</string>
     <string name="starting_application">Starting application: %s</string>
     <string name="creating_activity_shortcut">Creating application shortcut for %s</string>
@@ -24,12 +26,14 @@
     <string name="error_icons">Error loading icons</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">El Launcher actual no pot soportar \"PinDrecera\".
 Incapaç de crear la drecera</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">View Sourcecode</string>
     <string name="action_view_translation">Ajuda\'ns a traduir!</string>
     <string name="action_view_bugs">Comunicar un problema</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

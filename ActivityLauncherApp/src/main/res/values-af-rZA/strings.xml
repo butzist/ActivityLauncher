@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Aktiwiteit Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Aktiwiteit Launcher</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">Alle aktiwiteite</string>
     <string name="title_dialog_disclaimer">Vrywaring</string>
     <string name="title_dialog_icon_picker">Kies \'n ikoon</string>
     <string name="dialog_progress_loading">Laai tans&#8230;</string>
     <string name="dialog_disclaimer">Gebruik hierdie sagteware op jou eie risiko. Sommige toepassings kan nie optree soos verwag wanneer hulle aktiwiteite is geloods in die verkeerde konteks wat lei tot verlies van data of selfs erger. Jy het gewaarsku. Doen jy dit verstaan en steeds wil hierdie sagteware gebruik?</string>
     <string name="context_action_launch">Laai aktiwiteit</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Skep kortpad</string>
     <string name="context_action_edit">Redigeer kortpad</string>
     <string name="label_name">Naam</string>
     <string name="label_package">Pakket</string>
-    <string name="label_class" comment="label_class (Java class name)">Klas</string>
+    <string name="label_class">Klas</string>
     <string name="label_icon">Ikoon</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Begin aktiwiteit: %s</string>
     <string name="starting_application">Begin toediening: %s</string>
     <string name="creating_activity_shortcut">Skep aktiwiteit kortpad vir %s</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Fout laai ikone</string>
     <string name="error_invalid_icon_resource">Fout: ongeldige ikoon hulpbron</string>
     <string name="error_invalid_icon_format">Fout: ongeldige ikoon formaat</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Current launcher does not support \"PinShortcut\". Unable to create shortcut.</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">Bekyk Sourcecode</string>
     <string name="action_view_translation">Help vertaling!</string>
     <string name="action_view_bugs">Rapporteer \'n probleem</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

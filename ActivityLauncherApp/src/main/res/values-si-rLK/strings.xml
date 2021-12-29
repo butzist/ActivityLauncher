@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">ක්‍රියාකාරකම් දියත්කරණය</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">ක්‍රියාකාරකම් දියත්කරණය</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">සියලුම ක්‍රියාකාරකම්</string>
     <string name="title_dialog_disclaimer">වියාචනය</string>
     <string name="title_dialog_icon_picker">අයිකනයක් අරගන්න</string>
     <string name="dialog_progress_loading">පැටවෙමින්&#8230;</string>
     <string name="dialog_disclaimer">Use this software at your own risk. Some apps might not behave as expected when their activities are launched in the wrong context leading to data loss or even worse. You have been warned. Do you understand this and still want to use this software?</string>
     <string name="context_action_launch">ක්‍රියාකාරකම දියත් කරන්න</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">කෙටිමඟ තනන්න</string>
     <string name="context_action_edit">කෙටිමඟ සංස්කරණය කරන්න</string>
     <string name="label_name">නම</string>
     <string name="label_package">පැකේජය</string>
-    <string name="label_class" comment="label_class (Java class name)">පන්තිය</string>
+    <string name="label_class">පන්තිය</string>
     <string name="label_icon">අයිකනය</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Starting activity: %s</string>
     <string name="starting_application">යෙදුම ආරම්භ වෙමින්: %s</string>
     <string name="creating_activity_shortcut">Creating activity shortcut for %s</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Error loading icons</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Current launcher does not support \"PinShortcut\". Unable to create shortcut.</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">මූලාශ්‍රකේතය නරඹන්න</string>
     <string name="action_view_translation">පරිවර්තනයෙන් සහාය වන්න!</string>
     <string name="action_view_bugs">ගැටළුවක් වාර්තා කරන්න</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

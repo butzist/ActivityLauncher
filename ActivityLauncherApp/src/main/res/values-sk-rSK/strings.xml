@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Activity Launcher</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Activity Launcher</string>
+    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_section_all">Všetky aktivity</string>
     <string name="title_dialog_disclaimer">Upozornenie</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
     <string name="dialog_progress_loading">Načítavanie&#8230;</string>
     <string name="dialog_disclaimer">Tento softvér používate na vlastné riziko. Niektoré aplikácie sa nemusia správať tak, ako očakávate, keď ich aktivity sú spúšťané so zlým obsahom, ktorý môže spôsobiť stratu údajov alebo ešte niečo horšie. Boli ste varovaní. Pochopili ste všetkému v tejto správe a stále chcete používať tento softvér?</string>
     <string name="context_action_launch">Spustiť aktivitu</string>
+    <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Vytvoriť skratku</string>
     <string name="context_action_edit">Upraviť skratku</string>
     <string name="label_name">Názov</string>
     <string name="label_package">Balíček</string>
-    <string name="label_class" comment="label_class (Java class name)">Trieda</string>
+    <string name="label_class">Trieda</string>
     <string name="label_icon">Ikona</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Spúšťanie aktivity: %s</string>
     <string name="starting_application">Spúšťanie aplikácie: %s</string>
     <string name="creating_activity_shortcut">Vytváranie odkazu aktivity pre %s</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Chyba pri načítavaní ikony</string>
     <string name="error_invalid_icon_resource">Chyba: neplatný zdroj ikony</string>
     <string name="error_invalid_icon_format">Chyba: neplatný formát ikony</string>
+    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Aktuálny spúšťač nepodporuje funkciu „PinShortcut“. Skratku nie je možné vytvoriť.</string>
+    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
     <string name="action_view_source">Zobraziť zdrojový kód</string>
     <string name="action_view_translation">Pomôcť s prekladaním!</string>
     <string name="action_view_bugs">Nahlásiť problém</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="action_filter">Filter...</string>
     <string name="filter_hint">package/action</string>
 </resources>

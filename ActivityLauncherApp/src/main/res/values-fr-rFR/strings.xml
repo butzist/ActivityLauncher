@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" comment="Name of the application as shown on the start screen" maxLength="30">Lanceur d\'activités</string>
-    <string name="short_description" maxLength="80">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Lanceur d\'activités</string>
+    <string name="short_description">Lance des activités cachées et crée des raccourcis pour les applications</string>
     <string name="title_section_all">Toutes les activités</string>
     <string name="title_dialog_disclaimer">Clause de non-responsabilité</string>
     <string name="title_dialog_icon_picker">Choisissez une icône</string>
     <string name="dialog_progress_loading">Chargement&#8230;</string>
     <string name="dialog_disclaimer">Utilisez ce logiciel à vos propres risques. Certaines applications ne pourraient pas se comporter comme prévu lorsque leurs activités sont lancées dans le contexte incorrect menant à une perte de données ou même pire. Vous aurez été prévenu. Vous comprenez cela et voulez continuer à utiliser ce logiciel ?</string>
     <string name="context_action_launch">Lancer l\'activité</string>
+    <string name="context_action_launch_as_root">Lancer l\'activité (root)</string>
     <string name="context_action_shortcut">Créer un raccourci</string>
     <string name="context_action_edit">Modifier le raccourci</string>
     <string name="label_name">Nom</string>
     <string name="label_package">Paquet</string>
-    <string name="label_class" comment="label_class (Java class name)">Classe</string>
+    <string name="label_class">Classe</string>
     <string name="label_icon">Icône</string>
+    <string name="label_menu">Menu</string>
     <string name="starting_activity">Lancement de l\'activité : %s</string>
     <string name="starting_application">Lancement de l\'application: %s</string>
     <string name="creating_activity_shortcut">Création du raccourci pour %s</string>
@@ -24,11 +26,13 @@
     <string name="error_icons">Erreur lors du chargement des icônes</string>
     <string name="error_invalid_icon_resource">Erreur : ressource d\'icône non valide</string>
     <string name="error_invalid_icon_format">Erreur : format d\'icône non valide</string>
+    <string name="error_no_default_activity">Le paquet n\'a pas d\'activité par défaut - essayez d\'en sélectionner un explicitement</string>
     <string name="error_verbose_pin_shortcut">Le launcher actuel ne supporte pas \"PinShortcut\". Impossible de créer un raccourci.</string>
+    <string name="exception_invalid_component_name">Nom de composant non valide ou potentiellement dangereux : %s</string>
+    <string name="exception_command_error">La commande a retourné le code d\'erreur: %d, sortie: %s</string>
     <string name="action_view_source">Afficher le code source</string>
     <string name="action_view_translation">Aidez-nous à traduire!</string>
     <string name="action_view_bugs">Signaler un problème</string>
-    <string name="error_no_default_activity">Le paquet n\'a pas d\'activité par défaut - essayez d\'en sélectionner un explicitement</string>
     <string name="action_filter">Masquer...</string>
     <string name="filter_hint">paquet/action</string>
 </resources>
