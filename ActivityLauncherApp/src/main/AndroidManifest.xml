@@ -25,7 +25,8 @@
         <activity
             android:name="de.szalkowski.activitylauncher.MainActivity"
             android:label="@string/app_name"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="locked" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
