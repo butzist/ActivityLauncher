@@ -3,7 +3,6 @@ package de.szalkowski.activitylauncher;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 
 public class MyActivityInfo implements Comparable<MyActivityInfo> {
@@ -12,33 +11,37 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
     ComponentName component_name;
     int icon_resource;
     String icon_resource_name;
+    boolean is_private;
 
-    MyActivityInfo(ComponentName activity, PackageManager pm) {
-        this.component_name = activity;
+    public static MyActivityInfo fromComponentName(PackageManager pm, ComponentName activity)  {
+        var info = new MyActivityInfo();
+        info.component_name = activity;
 
         ActivityInfo act;
         try {
             act = pm.getActivityInfo(activity, 0);
-            this.name = act.loadLabel(pm).toString();
+            info.name = act.loadLabel(pm).toString();
             try {
-                this.icon = act.loadIcon(pm);
+                info.icon = act.loadIcon(pm);
             } catch (Exception e) {
-                this.icon = pm.getDefaultActivityIcon();
+                info.icon = pm.getDefaultActivityIcon();
             }
-            this.icon_resource = act.getIconResource();
+            info.icon_resource = act.getIconResource();
         } catch (Exception e) {
-            this.name = activity.getShortClassName();
-            this.icon = pm.getDefaultActivityIcon();
-            this.icon_resource = 0;
+            info.name = activity.getShortClassName();
+            info.icon = pm.getDefaultActivityIcon();
+            info.icon_resource = 0;
         }
 
-        this.icon_resource_name = null;
-        if (this.icon_resource != 0) {
+        info.icon_resource_name = null;
+        if (info.icon_resource != 0) {
             try {
-                this.icon_resource_name = pm.getResourcesForActivity(activity).getResourceName(this.icon_resource);
+                info.icon_resource_name = pm.getResourcesForActivity(activity).getResourceName(info.icon_resource);
             } catch (Exception ignored) {
             }
         }
+
+        return info;
     }
 
     public ComponentName getComponentName() {
@@ -73,5 +76,9 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
 
         MyActivityInfo other_info = (MyActivityInfo) other;
         return this.component_name.equals(other_info.component_name);
+    }
+
+    public void setPrivate(boolean isPrivate) {
+        this.is_private = isPrivate;
     }
 }

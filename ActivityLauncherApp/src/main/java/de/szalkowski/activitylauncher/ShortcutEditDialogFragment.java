@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 
 import org.thirdparty.LauncherIconCreator;
@@ -38,7 +39,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ComponentName activity = requireArguments().getParcelable("activity");
         final PackageManager pm = requireActivity().getPackageManager();
-        this.activity = new MyActivityInfo(activity, pm);
+        this.activity = MyActivityInfo.fromComponentName(pm, activity);
         this.loader = new IconLoader(requireContext());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
@@ -101,7 +102,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                         Resources resources = pm.getResourcesForApplication(pack);
                         ShortcutEditDialogFragment.this.activity.icon_resource = resources.getIdentifier(name, type, pack);
                         if (ShortcutEditDialogFragment.this.activity.icon_resource != 0) {
-                            ShortcutEditDialogFragment.this.activity.icon = resources.getDrawable(ShortcutEditDialogFragment.this.activity.icon_resource);
+                            ShortcutEditDialogFragment.this.activity.icon = ResourcesCompat.getDrawable(resources, ShortcutEditDialogFragment.this.activity.icon_resource, null);
                         } else {
                             ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
                             Toast.makeText(getActivity(), R.string.error_invalid_icon_resource, Toast.LENGTH_LONG).show();

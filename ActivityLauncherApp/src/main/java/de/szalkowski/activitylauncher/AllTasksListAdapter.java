@@ -104,6 +104,14 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         TextView text2 = view.findViewById(android.R.id.text2);
         text2.setText(activity.getComponentName().getClassName());
 
+        if (activity.is_private) {
+            text1.setEnabled(false);
+            text2.setEnabled(false);
+
+            ImageView icon1 = view.findViewById(android.R.id.icon1);
+            icon1.setVisibility(View.VISIBLE);
+        }
+
         ImageView icon = view.findViewById(android.R.id.icon);
         icon.setImageDrawable(activity.getIcon());
 

@@ -16,6 +16,7 @@
     <string name="label_class">Class</string>
     <string name="label_icon">Icon</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
     <string name="starting_activity">Starting activity: %s</string>
     <string name="starting_application">Starting application: %s</string>
     <string name="creating_activity_shortcut">Creating activity shortcut for %s</string>

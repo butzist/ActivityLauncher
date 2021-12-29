@@ -27,14 +27,34 @@
         android:paddingEnd="10dp"
         android:descendantFocusability="blocksDescendants">
 
-        <TextView
-            android:id="@android:id/text1"
-            android:text="Activity Title"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textIsSelectable="false" />
+            android:layout_gravity="start|center_vertical|fill_horizontal"
+            android:orientation="horizontal"
+            android:padding="0dp"
+            android:descendantFocusability="blocksDescendants">
+
+            <ImageView
+                android:id="@android:id/icon1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:contentDescription="@string/label_private"
+                android:padding="0dp"
+                android:src="@android:drawable/ic_lock_lock"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@android:id/text1"
+                android:text="Activity Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textIsSelectable="false" />
+
+        </LinearLayout>
 
         <TextView
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
@@ -55,8 +75,8 @@
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/label_menu"
         android:paddingVertical="0dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="10dp"
+        android:padding="0dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/ic_baseline_more_vert_24"
         style="?android:attr/borderlessButtonStyle" />
 

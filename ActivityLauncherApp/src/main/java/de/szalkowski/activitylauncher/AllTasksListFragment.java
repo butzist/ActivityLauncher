@@ -40,7 +40,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 (parent, v, groupPosition, childPosition, id) -> {
                     ExpandableListAdapter adapter = parent.getExpandableListAdapter();
                     MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
-                    LauncherIconCreator.launchActivity(getActivity(), info.component_name, false);
+                    LauncherIconCreator.launchActivity(getActivity(), info.component_name, info.is_private);
                     return false;
                 }
         );

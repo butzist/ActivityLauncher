@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
 import java.util.Arrays;
@@ -17,68 +16,65 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
     protected String name;
     protected MyActivityInfo[] activities;
 
-    MyPackageInfo(PackageInfo info, PackageManager pm, PackageManagerCache cache) {
-        this.package_name = info.packageName;
+    public static MyPackageInfo fromPackageInfo(PackageManagerCache cache, PackageInfo info) {
+        var pm = cache.getPackageManager();
+
+        var myInfo = new MyPackageInfo();
+        myInfo.package_name = info.packageName;
         ApplicationInfo app = info.applicationInfo;
 
         if (app != null) {
-            this.name = pm.getApplicationLabel(app).toString();
+            myInfo.name = pm.getApplicationLabel(app).toString();
             try {
-                this.icon = pm.getApplicationIcon(app);
+                myInfo.icon = pm.getApplicationIcon(app);
             } catch (Exception e) {
-                this.icon = pm.getDefaultActivityIcon();
+                myInfo.icon = pm.getDefaultActivityIcon();
             }
-            this.icon_resource = app.icon;
+            myInfo.icon_resource = app.icon;
         } else {
-            this.name = info.packageName;
-            this.icon = pm.getDefaultActivityIcon();
-            this.icon_resource = 0;
+            myInfo.name = info.packageName;
+            myInfo.icon = pm.getDefaultActivityIcon();
+            myInfo.icon_resource = 0;
         }
 
-        this.icon_resource_name = null;
-        if (this.icon_resource != 0) {
+        myInfo.icon_resource_name = null;
+        if (myInfo.icon_resource != 0) {
             try {
-                this.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(this.icon_resource);
+                myInfo.icon_resource_name = pm.getResourcesForApplication(app).getResourceName(myInfo.icon_resource);
             } catch (Exception ignored) {
             }
         }
 
         if (info.activities == null) {
-            this.activities = new MyActivityInfo[0];
+            myInfo.activities = new MyActivityInfo[0];
         } else {
             int n_activities = countActivitiesFromInfo(info);
             int i = 0;
 
-            this.activities = new MyActivityInfo[n_activities];
+            myInfo.activities = new MyActivityInfo[n_activities];
 
             for (ActivityInfo activity : info.activities) {
-                if (isValid(activity)) {
-                    if (BuildConfig.DEBUG && !(activity.packageName.equals(info.packageName))) {
-                        throw new AssertionError("Assertion failed");
-                    }
-                    ComponentName acomp = new ComponentName(activity.packageName, activity.name);
-                    this.activities[i++] = cache.getActivityInfo(acomp);
+                if (BuildConfig.DEBUG && !(activity.packageName.equals(info.packageName))) {
+                    throw new AssertionError("Assertion failed");
                 }
+                ComponentName acomp = new ComponentName(activity.packageName, activity.name);
+                MyActivityInfo myActivityInfo = cache.getActivityInfo(acomp);
+                myActivityInfo.setPrivate(isPrivate(activity));
+                myInfo.activities[i++] = myActivityInfo;
             }
 
-            Arrays.sort(this.activities);
+            Arrays.sort(myInfo.activities);
         }
+
+        return myInfo;
     }
 
     private static int countActivitiesFromInfo(PackageInfo info) {
-        int n_activities = 0;
-        for (ActivityInfo activity : info.activities) {
-            if (isValid(activity)) {
-                n_activities++;
-            }
-        }
-        return n_activities;
+        return info.activities.length;
     }
 
-    private static boolean isValid(ActivityInfo activity) {
-        // e.g. DevelopmentSettings (com.android.settings.Settings$DevelopmentSettingsDashboardActivity) seem to be disabled, BUT launching it does work
-        // => I assume, it's disabled in manifest by default and is enabled programatically if user clicks version number x times
-        return /*activity.isEnabled() &&*/ activity.exported;
+    private static boolean isPrivate(ActivityInfo activity) {
+        return !activity.isEnabled() || !activity.exported;
     }
 
     public int getActivitiesCount() {

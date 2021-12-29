@@ -38,7 +38,7 @@ class PackageManagerCache {
             PackageInfo info;
             info = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
 
-            myInfo = new MyPackageInfo(info, pm, this);
+            myInfo =  MyPackageInfo.fromPackageInfo(this, info);
             packageInfos.put(packageName, myInfo);
         }
 
@@ -53,10 +53,14 @@ class PackageManagerCache {
                 return activityInfos.get(activityName);
             }
 
-            myInfo = new MyActivityInfo(activityName, pm);
+            myInfo = MyActivityInfo.fromComponentName(pm, activityName);
             activityInfos.put(activityName, myInfo);
         }
 
         return myInfo;
+    }
+
+    PackageManager getPackageManager() {
+        return this.pm;
     }
 }
