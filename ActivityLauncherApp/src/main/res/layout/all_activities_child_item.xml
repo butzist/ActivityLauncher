@@ -57,7 +57,6 @@
         </LinearLayout>
 
         <TextView
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:id="@android:id/text2"
             android:text="package.name/.ActivityClass"
             android:layout_width="match_parent"

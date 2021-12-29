@@ -32,5 +32,4 @@ android {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
 }
