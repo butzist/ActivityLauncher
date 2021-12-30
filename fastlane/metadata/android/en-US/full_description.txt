@@ -1,0 +1,5 @@
+<i>Activity Launcher</i> lets you create shortcuts for any installed app and even hidden activities to launch them with ease. This is as easy as 1-2-3:
+
+* use the integrated browser to look for existing apps and their activities
+* give it a description and optionally pick an icon
+* push the button and enjoy!
