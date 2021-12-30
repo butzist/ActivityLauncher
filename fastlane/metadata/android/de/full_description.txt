@@ -1,0 +1,5 @@
+<i>Activity Launcher</i> startet versteckte Aktivitäten und erstellt Startbildschirm-Verknüpfungen für installierte Apps. Die Nutzung ist dabei denkbar einfach:
+
+* mittels des integrierten Browsers die gewünschte App bzw. Activität auswählen
+* eine Beschreibung hinzufügen und, optional, ein Icon auswählen
+* Den Knopf drücken und genießen :)
