@@ -57,8 +57,9 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
                                     ContextMenuInfo menuInfo) {
         menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
-        menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_launch);
-        menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_launch_as_root);
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_shortcut_as_root);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_launch);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_launch_as_root);
 
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) menuInfo;
         ExpandableListView list = requireView().findViewById(R.id.expandableListView1);
@@ -68,7 +69,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
                 menu.setHeaderIcon(activity.icon);
                 menu.setHeaderTitle(activity.name);
-                menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_edit);
+                menu.add(Menu.NONE, 4, Menu.NONE, R.string.context_action_edit);
                 break;
             case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
                 MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
@@ -93,15 +94,19 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                         LauncherIconCreator.createLauncherIcon(getActivity(), activity);
                         break;
                     case 1:
-                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, false);
+                        RootLauncherIconCreator.createLauncherIcon(getActivity(), activity);
                         break;
                     case 2:
-                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, true);
+                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, false);
                         break;
                     case 3:
+                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, true);
+                        break;
+                    case 4:
                         DialogFragment dialog = new ShortcutEditDialogFragment();
                         Bundle args = new Bundle();
                         args.putParcelable("activity", activity.component_name);
+                        args.putBoolean("as_root", activity.is_private);
                         dialog.setArguments(args);
                         dialog.show(getChildFragmentManager(), "ShortcutEditor");
                         break;

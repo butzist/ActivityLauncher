@@ -26,12 +26,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -39,7 +38,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import de.szalkowski.activitylauncher.MyActivityInfo;
 import de.szalkowski.activitylauncher.MyPackageInfo;
@@ -47,28 +45,41 @@ import de.szalkowski.activitylauncher.R;
 
 public class LauncherIconCreator {
 
-    private static Intent getActivityIntent(ComponentName activity) {
+    private static Intent getActivityIntent(ComponentName activity, Bundle extras) {
         Intent intent = new Intent();
         intent.setComponent(activity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+
         return intent;
     }
 
-    public static void createLauncherIcon(Context context, MyActivityInfo activity) {
+    public static void createLauncherIcon(Context context, MyActivityInfo activity, Bundle extras) {
         String pack = null;
 
-        if(activity.getIconResouceName() != null && activity.getIconResouceName().indexOf(':') >= 0) {
+        if (activity.getIconResouceName() != null && activity.getIconResouceName().indexOf(':') >= 0) {
             pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
         }
+
+        String name = activity.getName();
+        Intent intent = getActivityIntent(activity.getComponentName(), extras);
+        Drawable icon = activity.getIcon();
+
+
         // Use bitmap version if icon from different package is used
         if (pack != null && !pack.equals(activity.getComponentName().getPackageName())) {
-            createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()), null);
+            createShortcut(context, name, icon, intent, null);
         } else {
-            createShortcut(context, activity.getName(), activity.getIcon(), getActivityIntent(activity.getComponentName()),
-                    activity.getIconResouceName());
+            createShortcut(context, name, icon, intent, activity.getIconResouceName());
         }
+    }
+
+    public static void createLauncherIcon(Context context, MyActivityInfo activity) {
+        createLauncherIcon(context, activity, null);
     }
 
     public static void createLauncherIcon(Context context, MyPackageInfo pack) {
@@ -125,7 +136,7 @@ public class LauncherIconCreator {
      * https://stackoverflow.com/questions/12343227/escaping-bash-function-arguments-for-use-by-su-c
      */
     public static void launchActivity(Context context, ComponentName activity, boolean asRoot) {
-        Intent intent = LauncherIconCreator.getActivityIntent(activity);
+        Intent intent = LauncherIconCreator.getActivityIntent(activity, null);
         Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()),
                 Toast.LENGTH_LONG).show();
 
@@ -175,6 +186,7 @@ public class LauncherIconCreator {
 
     /**
      * In order to be on the safe side, validate component name before merging it into a root shell command
+     *
      * @param component component name
      * @return true, if valid
      */

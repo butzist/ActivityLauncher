@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     private EditText text_class;
     private EditText text_icon;
     private ImageButton image_icon;
+    private CheckBox check_as_root;
     private IconLoader loader;
 
     @NonNull
@@ -54,6 +56,8 @@ public class ShortcutEditDialogFragment extends DialogFragment {
         this.text_class.setText(this.activity.component_name.getClassName());
         this.text_icon = view.findViewById(R.id.editText_icon);
         this.text_icon.setText(this.activity.icon_resource_name);
+        this.check_as_root = view.findViewById(R.id.checkBox_as_root);
+        this.check_as_root.setChecked(requireArguments().getBoolean("as_root", false));
 
         this.text_icon.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,6 +95,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                     ShortcutEditDialogFragment.this.activity.name = ShortcutEditDialogFragment.this.text_name.getText().toString();
                     String component_package = ShortcutEditDialogFragment.this.text_package.getText().toString();
                     String component_class = ShortcutEditDialogFragment.this.text_class.getText().toString();
+                    boolean as_root = ShortcutEditDialogFragment.this.check_as_root.isChecked();
                     ShortcutEditDialogFragment.this.activity.component_name = new ComponentName(component_package, component_class);
                     ShortcutEditDialogFragment.this.activity.icon_resource_name = ShortcutEditDialogFragment.this.text_icon.getText().toString();
                     try {
@@ -115,7 +120,11 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                         Toast.makeText(getActivity(), R.string.error_invalid_icon_format, Toast.LENGTH_LONG).show();
                     }
 
-                    LauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                    if (as_root) {
+                        RootLauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                    } else {
+                        LauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                    }
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> Objects.requireNonNull(ShortcutEditDialogFragment.this.getDialog()).cancel());
 

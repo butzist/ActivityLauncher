@@ -34,5 +34,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="de.szalkowski.activitylauncher.RootLauncherActivity"
+            android:label="@string/context_action_launch_as_root"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
