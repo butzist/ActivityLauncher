@@ -147,7 +147,7 @@ public class LauncherIconCreator {
         if (!isValid) {
             throw new IllegalArgumentException(String.format(context.getString(R.string.exception_invalid_component_name), component));
         }
-        Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", "am start -a android.intent.action.MAIN -n " + component});
+        Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", "am start -n " + component});
         String output = getProcessOutput(process);
 
         var exitValue = process.waitFor();
