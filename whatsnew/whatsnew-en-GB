@@ -1,3 +1,6 @@
+The project is looking for a co-maintainer and someone, who can improve the UI/UX of the app. Check the issues section on the GitHub page if you are interested in contributing to this open-source project.
+
 * Updated translations (if you find errors in the translation, you can update/vote for the correct translation on Crowdin. Link is provided in the app.)
-* Allow starting activities as root
-* List unexported/disabled activities
+* List private (unexported/disabled) activities
+* Allow starting private activities as root
+* Allow creating shortcuts to private activities
