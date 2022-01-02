@@ -1,5 +1,6 @@
 package de.szalkowski.activitylauncher;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,13 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Filterable filterTarget = null;
 

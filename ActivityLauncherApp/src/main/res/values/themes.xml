@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <item name="primaryColor">@color/primaryColor</item>
+        <item name="primaryLightColor">@color/primaryLightColor</item>
+        <item name="primaryDarkColor">@color/primaryDarkColor</item>
+        <item name="primaryTextColor">@color/primaryTextColor</item>
+    </style>
+</resources>
