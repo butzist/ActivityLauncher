@@ -48,6 +48,9 @@ public class ShortcutEditDialogFragment extends DialogFragment {
         LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_edit_activity, null);
 
+        boolean rooted = this.isRootAllowed();
+        boolean asRoot = rooted && requireArguments().getBoolean("as_root", false);
+
         this.text_name = view.findViewById(R.id.editText_name);
         this.text_name.setText(this.activity.name);
         this.text_package = view.findViewById(R.id.editText_package);
@@ -57,7 +60,10 @@ public class ShortcutEditDialogFragment extends DialogFragment {
         this.text_icon = view.findViewById(R.id.editText_icon);
         this.text_icon.setText(this.activity.icon_resource_name);
         this.check_as_root = view.findViewById(R.id.checkBox_as_root);
-        this.check_as_root.setChecked(requireArguments().getBoolean("as_root", false));
+        this.check_as_root.setChecked(asRoot);
+        this.check_as_root.setEnabled(rooted);
+        var label_as_root = view.findViewById(R.id.textView_as_root);
+        label_as_root.setEnabled(rooted);
 
         this.text_icon.addTextChangedListener(new TextWatcher() {
             @Override
@@ -131,4 +137,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    private boolean isRootAllowed() {
+        return ((MainActivity) Objects.requireNonNull(getActivity())).isRootAllowed();
+    }
 }

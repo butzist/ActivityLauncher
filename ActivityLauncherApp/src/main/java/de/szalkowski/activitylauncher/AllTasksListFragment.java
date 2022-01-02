@@ -23,12 +23,10 @@ import androidx.fragment.app.Fragment;
 
 import org.thirdparty.LauncherIconCreator;
 
+import java.util.Objects;
+
 public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter>, Filterable {
     private ExpandableListView list;
-
-    AllTasksListFragment() {
-        super();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -56,11 +54,16 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
                                     ContextMenuInfo menuInfo) {
-        menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
-        menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_shortcut_as_root);
-        menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_launch);
-        menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_launch_as_root);
+        var rooted = isRootAllowed();
 
+        menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
+        if (rooted) {
+            menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_shortcut_as_root);
+        }
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_launch);
+        if (rooted) {
+            menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_launch_as_root);
+        }
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) menuInfo;
         ExpandableListView list = requireView().findViewById(R.id.expandableListView1);
 
@@ -152,5 +155,9 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
         } else {
             return null;
         }
+    }
+
+    private boolean isRootAllowed() {
+        return ((MainActivity) Objects.requireNonNull(getActivity())).isRootAllowed();
     }
 }

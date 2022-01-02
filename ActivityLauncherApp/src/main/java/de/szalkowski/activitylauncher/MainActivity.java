@@ -23,9 +23,15 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!getPreferences(Context.MODE_PRIVATE).getBoolean("disclaimer_accepted", false)) {
+        var prefs = getPreferences(Context.MODE_PRIVATE);
+        if (!prefs.getBoolean("disclaimer_accepted", false)) {
             DialogFragment dialog = new DisclaimerDialogFragment();
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
+        }
+
+        if (!prefs.contains("allow_root")) {
+            var hasSU = RootDetection.detectSU();
+            prefs.edit().putBoolean("allow_root", hasSU).apply();
         }
 
         AllTasksListFragment fragment = new AllTasksListFragment();
@@ -99,10 +105,13 @@ public class MainActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         // Serialize the current dropdown position.
         super.onSaveInstanceState(outState);
+    }
+
+    public boolean isRootAllowed() {
+        return getPreferences(MODE_PRIVATE).getBoolean("allow_root", false);
     }
 }
