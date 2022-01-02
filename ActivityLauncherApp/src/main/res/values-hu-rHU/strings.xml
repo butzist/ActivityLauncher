@@ -10,12 +10,15 @@
     <string name="context_action_launch">Tevékenység indítása</string>
     <string name="context_action_launch_as_root">Indítsa el a tevékenységet rootként</string>
     <string name="context_action_shortcut">Parancsikon létrehozása</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Parancsikon szerkesztése</string>
     <string name="label_name">Név</string>
     <string name="label_package">Csomag</string>
     <string name="label_class">Osztály</string>
     <string name="label_icon">Ikon</string>
     <string name="label_menu">Menü</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">%s tevékenység indítása</string>
     <string name="starting_application">%s alkalmazás indítása</string>
     <string name="creating_activity_shortcut">%s tevékenység parancsikonjának létrehozása</string>

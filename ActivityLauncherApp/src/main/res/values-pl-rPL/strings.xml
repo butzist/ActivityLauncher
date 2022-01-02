@@ -10,12 +10,15 @@
     <string name="context_action_launch">Rozpocznij aktywność</string>
     <string name="context_action_launch_as_root">Uruchom aktywność jako root</string>
     <string name="context_action_shortcut">Utwórz skrót</string>
+    <string name="context_action_shortcut_as_root">Utwórz skrót jako root</string>
     <string name="context_action_edit">Edytuj skrót</string>
     <string name="label_name">Nazwa</string>
     <string name="label_package">Pakiet</string>
     <string name="label_class">Klasa</string>
     <string name="label_icon">Ikona</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">prywatne</string>
+    <string name="label_as_root">Jako root</string>
     <string name="starting_activity">Rozpoczynanie aktywności: %s</string>
     <string name="starting_application">Uruchamianie aplikacji: %s</string>
     <string name="creating_activity_shortcut">Tworzenie skrótu aktywności dla %s</string>

@@ -10,12 +10,15 @@
     <string name="context_action_launch">Launch activity</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Crear una drecera</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Afegeix una drecera</string>
     <string name="label_name">Nom</string>
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icona:</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Starting activity: %s</string>
     <string name="starting_application">Starting application: %s</string>
     <string name="creating_activity_shortcut">Creating application shortcut for %s</string>

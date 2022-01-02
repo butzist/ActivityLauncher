@@ -10,12 +10,15 @@
     <string name="context_action_launch">Start aktivitet</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Opprett snarvei</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Sette snarveien</string>
     <string name="label_name">Navn</string>
     <string name="label_package">Pakke</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Ikon</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Starter aktivitet: %s</string>
     <string name="starting_application">Starter programmet: %s</string>
     <string name="creating_activity_shortcut">Lager aktivitet snarvei for %s</string>

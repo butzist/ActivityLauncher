@@ -10,12 +10,15 @@
     <string name="context_action_launch">शुरू करें</string>
     <string name="context_action_launch_as_root">रूट(Root) रूप में शुरू करें</string>
     <string name="context_action_shortcut">शॉर्टकट</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">शॉर्टकट एडिट करें</string>
     <string name="label_name">नाम</string>
     <string name="label_package">पैकेज</string>
     <string name="label_class">वर्ग(class)</string>
     <string name="label_icon">आइकॉन</string>
     <string name="label_menu">मेन्यू</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">%s गतिविधि शुरू हो रही है </string>
     <string name="starting_application">%s एप्लीकेशन शुरू हो रही है</string>
     <string name="creating_activity_shortcut">%s के लिए एक्टिविटी शॉर्टकट शुरू हो रहा</string>

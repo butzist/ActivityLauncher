@@ -10,12 +10,15 @@
     <string name="context_action_launch">Khởi chạy hoạt động</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Tạo lối tắt</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Chỉnh sửa lối tắt</string>
     <string name="label_name">Tên</string>
     <string name="label_package">Gói</string>
     <string name="label_class">Cấp</string>
     <string name="label_icon">Biểu tượng</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Đang bắt đầu hoạt động: %s</string>
     <string name="starting_application">Đang bắt đầu ứng dụng: %s</string>
     <string name="creating_activity_shortcut">Đang tạo lối tắt hoạt động cho %s</string>

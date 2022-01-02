@@ -10,12 +10,15 @@
     <string name="context_action_launch">Pokreni ovu aktivnost</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Kreiraj/napravi prečicu</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Uredi prečicu</string>
     <string name="label_name">Ime</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Klasa</string>
     <string name="label_icon">Ikonica</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Pokretanje Aktivnosti: %s</string>
     <string name="starting_application">Pokretanje Aplikacije: %s</string>
     <string name="creating_activity_shortcut">Kreiranje prečice aktivnosti za %s</string>

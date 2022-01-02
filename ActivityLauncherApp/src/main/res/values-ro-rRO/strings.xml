@@ -10,12 +10,15 @@
     <string name="context_action_launch">Lansează activitatea</string>
     <string name="context_action_launch_as_root">Lansează activitatea ca root</string>
     <string name="context_action_shortcut">Crează o scurtătura pe ecranul principal</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Editează Scurtătura</string>
     <string name="label_name">Nume</string>
     <string name="label_package">Numele Pachetului</string>
     <string name="label_class">Clasă</string>
     <string name="label_icon">Pitogramă</string>
     <string name="label_menu">Meniu</string>
+    <string name="label_private">personal</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Se lansează activitatea %s</string>
     <string name="starting_application">Se lansează aplicația %s</string>
     <string name="creating_activity_shortcut">Se crează scurtătură la activitate pentru %s</string>

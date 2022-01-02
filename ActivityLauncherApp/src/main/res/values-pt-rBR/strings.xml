@@ -10,12 +10,15 @@
     <string name="context_action_launch">Iniciar atividade</string>
     <string name="context_action_launch_as_root">Iniciar atividade com root</string>
     <string name="context_action_shortcut">Criar atalho</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Editar atalho</string>
     <string name="label_name">Nome:</string>
     <string name="label_package">Pacote:</string>
     <string name="label_class">Classe:</string>
     <string name="label_icon">Ícone:</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">privado</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Iniciando atividade: \"%s\"</string>
     <string name="starting_application">Iniciando aplicação: \"%s\"</string>
     <string name="creating_activity_shortcut">Criando atalho de atividade para %s</string>

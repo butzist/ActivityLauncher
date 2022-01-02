@@ -10,12 +10,15 @@
     <string name="context_action_launch">Starte Aktivität</string>
     <string name="context_action_launch_as_root">Starte Aktivität (root User)</string>
     <string name="context_action_shortcut">Verknüpfung erstellen</string>
+    <string name="context_action_shortcut_as_root">Verknüpfung erstellen (root User)</string>
     <string name="context_action_edit">Verknüpfung bearbeiten</string>
     <string name="label_name">Name</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Icon</string>
     <string name="label_menu">Menü</string>
+    <string name="label_private">privat</string>
+    <string name="label_as_root">Root User</string>
     <string name="starting_activity">Starte Aktivität: %s</string>
     <string name="starting_application">Starte Anwendung: %s</string>
     <string name="creating_activity_shortcut">Erstelle Verknüpfung zu Aktivität %s</string>

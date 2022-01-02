@@ -10,12 +10,15 @@
     <string name="context_action_launch">Laai aktiwiteit</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Skep kortpad</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Redigeer kortpad</string>
     <string name="label_name">Naam</string>
     <string name="label_package">Pakket</string>
     <string name="label_class">Klas</string>
     <string name="label_icon">Ikoon</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Begin aktiwiteit: %s</string>
     <string name="starting_application">Begin toediening: %s</string>
     <string name="creating_activity_shortcut">Skep aktiwiteit kortpad vir %s</string>

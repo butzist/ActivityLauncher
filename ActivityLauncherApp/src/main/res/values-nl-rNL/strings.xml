@@ -10,12 +10,15 @@
     <string name="context_action_launch">Start activiteit</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Maak snelkoppeling</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Bewerk snelkoppeling</string>
     <string name="label_name">Naam</string>
     <string name="label_package">Pakket</string>
     <string name="label_class">Class</string>
     <string name="label_icon">Icoon</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Activiteit beginnen: %s</string>
     <string name="starting_application">Starten applicatie: %s</string>
     <string name="creating_activity_shortcut">Activiteiten snelkoppeling maken voor %s</string>

@@ -10,12 +10,15 @@
     <string name="context_action_launch">Spustiť aktivitu</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Vytvoriť skratku</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Upraviť skratku</string>
     <string name="label_name">Názov</string>
     <string name="label_package">Balíček</string>
     <string name="label_class">Trieda</string>
     <string name="label_icon">Ikona</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Spúšťanie aktivity: %s</string>
     <string name="starting_application">Spúšťanie aplikácie: %s</string>
     <string name="creating_activity_shortcut">Vytváranie odkazu aktivity pre %s</string>

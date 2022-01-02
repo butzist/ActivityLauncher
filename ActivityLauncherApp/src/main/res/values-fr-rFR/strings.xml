@@ -10,12 +10,15 @@
     <string name="context_action_launch">Lancer l\'activité</string>
     <string name="context_action_launch_as_root">Lancer l\'activité (root)</string>
     <string name="context_action_shortcut">Créer un raccourci</string>
+    <string name="context_action_shortcut_as_root">Créer un raccourci (root)</string>
     <string name="context_action_edit">Modifier le raccourci</string>
     <string name="label_name">Nom</string>
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icône</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">privé</string>
+    <string name="label_as_root">Root</string>
     <string name="starting_activity">Lancement de l\'activité : %s</string>
     <string name="starting_application">Lancement de l\'application: %s</string>
     <string name="creating_activity_shortcut">Création du raccourci pour %s</string>

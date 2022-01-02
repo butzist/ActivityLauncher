@@ -10,12 +10,15 @@
     <string name="context_action_launch">Aktiviteyi başlat</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">Kısayol oluştur</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Kısayolu düzenle</string>
     <string name="label_name">İsim</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Sınıf</string>
     <string name="label_icon">Simge</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">%s etkinliği başlatılıyor</string>
     <string name="starting_application">%s uygulaması başlatılıyor</string>
     <string name="creating_activity_shortcut">%s için etkinlik kısayolu oluşturuluyor</string>

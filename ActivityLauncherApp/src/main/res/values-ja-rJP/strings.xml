@@ -10,12 +10,15 @@
     <string name="context_action_launch">アクティビティを起動</string>
     <string name="context_action_launch_as_root">Launch activity as root</string>
     <string name="context_action_shortcut">ショートカットを作成</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">ショートカットを編集</string>
     <string name="label_name">名前</string>
     <string name="label_package">パッケージ</string>
     <string name="label_class">クラス</string>
     <string name="label_icon">アイコン</string>
     <string name="label_menu">Menu</string>
+    <string name="label_private">private</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">アクティビティの開始: %s</string>
     <string name="starting_application">アプリケーションの起動: %s</string>
     <string name="creating_activity_shortcut">%s のアクティビティのショートカットを作成しています</string>

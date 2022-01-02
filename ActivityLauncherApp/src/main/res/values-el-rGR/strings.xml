@@ -10,12 +10,15 @@
     <string name="context_action_launch">Εκκίνηση δραστηριότητας</string>
     <string name="context_action_launch_as_root">Εκκίνηση δραστηριότητας ως root</string>
     <string name="context_action_shortcut">Δημιουργία συντόμευσης</string>
+    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Επεξεργασία συντόμευσης</string>
     <string name="label_name">Όνομα</string>
     <string name="label_package">Πακέτο</string>
     <string name="label_class">Κατηγορία</string>
     <string name="label_icon">Εικονίδιο</string>
     <string name="label_menu">Μενού</string>
+    <string name="label_private">Ιδιωτικό</string>
+    <string name="label_as_root">As root</string>
     <string name="starting_activity">Έναρξη δραστηριότητας: %s</string>
     <string name="starting_application">Έναρξη εφαρμογής: %s</string>
     <string name="creating_activity_shortcut">Δημιουργία συντόμευσης δραστηριότητας για %s</string>
