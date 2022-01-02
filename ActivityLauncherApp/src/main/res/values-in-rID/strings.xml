@@ -10,7 +10,7 @@
     <string name="context_action_launch">Luncurkan aktivitas</string>
     <string name="context_action_launch_as_root">Luncurkan aktivitas sebagai root</string>
     <string name="context_action_shortcut">Buat pintasan</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Membuat Pintasan Sebagai Akar</string>
     <string name="context_action_edit">Edit pintasan</string>
     <string name="label_name">Nama</string>
     <string name="label_package">Paket</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Ikon</string>
     <string name="label_menu">Menu</string>
     <string name="label_private">Privasi</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Sebagai Akar</string>
     <string name="starting_activity">Memulai aktivitas: %s.</string>
     <string name="starting_application">Memulai aplikasi: %s</string>
     <string name="creating_activity_shortcut">Membuat pintasan aktivitas untuk %s.</string>

@@ -10,7 +10,7 @@
     <string name="context_action_launch">Start aktivitet</string>
     <string name="context_action_launch_as_root">Start aktivitet som root</string>
     <string name="context_action_shortcut">Opret genvej</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Opret genvej som root</string>
     <string name="context_action_edit">Redigér genvej</string>
     <string name="label_name">Navn</string>
     <string name="label_package">Pakke</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Ikon</string>
     <string name="label_menu">Menu</string>
     <string name="label_private">privat</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Som root</string>
     <string name="starting_activity">Starter aktivitet: %s</string>
     <string name="starting_application">Start applikation: %s</string>
     <string name="creating_activity_shortcut">Opretter aktivitetsgenvej til %s</string>

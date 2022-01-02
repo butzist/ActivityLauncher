@@ -9,9 +9,9 @@
     <string name="dialog_disclaimer">警示：
 使用本软件表示您将独自承担软件使用过程中可能出现的风险，这些风险包括但不限于：一些应用活动在不正确的配置下启动时可能会产生意料之外的错误，这可能会导致应用数据丢失或者更严重的问题。您确认知晓这些可能产生的风险并仍然打算使用该软件吗？</string>
     <string name="context_action_launch">启动活动</string>
-    <string name="context_action_launch_as_root">以 root 身份启动活动</string>
+    <string name="context_action_launch_as_root">使用ROOT启动活动</string>
     <string name="context_action_shortcut">创建快捷方式</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">使用ROOT创建快捷方式</string>
     <string name="context_action_edit">编辑快捷方式</string>
     <string name="label_name">名称</string>
     <string name="label_package">安装包</string>
@@ -19,7 +19,7 @@
     <string name="label_icon">图标</string>
     <string name="label_menu">菜单</string>
     <string name="label_private">私人的</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">使用ROOT</string>
     <string name="starting_activity">启动活动:%s</string>
     <string name="starting_application">启动应用：%s</string>
     <string name="creating_activity_shortcut">正在为 %s 创建活动快捷方式</string>
