@@ -21,3 +21,4 @@ Translations
 ------------
 
 The [Crowdin project](https://crowdin.com/project/ActivityLauncher) contains detailed credits for the translations and allows anyone to contribute by translating the app.
+[fixed system webview not showing] (https://m.youtube.com/watch?v=7UCTtSk2ChI)
