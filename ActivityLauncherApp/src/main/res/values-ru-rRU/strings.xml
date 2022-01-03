@@ -10,7 +10,7 @@
     <string name="context_action_launch">Запуск действия</string>
     <string name="context_action_launch_as_root">Запустить активность от имени root</string>
     <string name="context_action_shortcut">Создать ярлык</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Создать ярлык (root)</string>
     <string name="context_action_edit">Изменить ярлык</string>
     <string name="label_name">Имя</string>
     <string name="label_package">Пакет</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Иконка</string>
     <string name="label_menu">Меню</string>
     <string name="label_private">приватный</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Root</string>
     <string name="starting_activity">Запуск действия: %s</string>
     <string name="starting_application">Запуск приложения: %s</string>
     <string name="creating_activity_shortcut">Создание ярлыка действия для %s</string>

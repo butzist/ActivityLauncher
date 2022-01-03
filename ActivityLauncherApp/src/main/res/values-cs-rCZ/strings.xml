@@ -10,7 +10,7 @@
     <string name="context_action_launch">Spustit aktivitu</string>
     <string name="context_action_launch_as_root">Spustit aktivitu s\u00a0právy root</string>
     <string name="context_action_shortcut">Vytvořit zástupce</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Vytvořit zástupce jako root</string>
     <string name="context_action_edit">Upravit zástupce</string>
     <string name="label_name">Název</string>
     <string name="label_package">Balíček</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Ikona</string>
     <string name="label_menu">Menu</string>
     <string name="label_private">soukromé</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Jako root</string>
     <string name="starting_activity">Spouštění aktivity: %s</string>
     <string name="starting_application">Spouštění aplikace: %s</string>
     <string name="creating_activity_shortcut">Vytváření zástupce aktivity pro %s</string>

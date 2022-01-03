@@ -1,7 +1,7 @@
-يطلق تطبيق Android المفتوح المصدر هذا الأنشطة المخفية وينشئ اختصارات الشاشة الرئيسية للتطبيقات المثبتة.
+يشغل تطبيق Android المفتوح المصدر هذا الأنشطة المخفية وينشئ اختصارات الشاشة الرئيسية للتطبيقات المثبتة.
 
-هذا المشروع لايزال يفتقر بعض الميزات والتراجم. مرحبا بك في المساهمة!
+هذا المشروع لايزال يفتقر بعض الميزات والترجمات. مرحبا بك في المساهمة!
 
 الكود المصدر: https://github.com/butzist/ActivityLauncher
 يتم استضافة الترجمات على http://crowdin.net/project/activitylauncher/invite
-الاشتراك في إصدار بيتا: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+الاشتراك في الاصدار التجريبي (بيتا): https://play.google.com/apps/testing/de.szalkowski.activitylauncher

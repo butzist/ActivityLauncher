@@ -10,7 +10,7 @@
     <string name="context_action_launch">Starta aktivitet</string>
     <string name="context_action_launch_as_root">Starta aktivitet som root</string>
     <string name="context_action_shortcut">Skapa genväg</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Skapa genväg som root</string>
     <string name="context_action_edit">Redigera genväg</string>
     <string name="label_name">Namn</string>
     <string name="label_package">Paket</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Ikon</string>
     <string name="label_menu">Meny</string>
     <string name="label_private">privat</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Som root</string>
     <string name="starting_activity">Startar aktivitet: %s</string>
     <string name="starting_application">Startar applikation: %s</string>
     <string name="creating_activity_shortcut">Skapar aktivitesgenväg för %s</string>

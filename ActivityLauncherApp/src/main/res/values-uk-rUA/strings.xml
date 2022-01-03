@@ -10,7 +10,7 @@
     <string name="context_action_launch">Запуск дії</string>
     <string name="context_action_launch_as_root">Запуск дії (root)</string>
     <string name="context_action_shortcut">Створити ярлик</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Створити ярлик (root)</string>
     <string name="context_action_edit">Редагувати ярлик</string>
     <string name="label_name">Ім’я</string>
     <string name="label_package">Пакет</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Іконка</string>
     <string name="label_menu">Меню</string>
     <string name="label_private">приватний</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Root</string>
     <string name="starting_activity">Запуск діяльності: %s</string>
     <string name="starting_application">Запуск програми: %s</string>
     <string name="creating_activity_shortcut">Створення ярлика дії для %s</string>

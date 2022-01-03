@@ -8,9 +8,9 @@
     <string name="dialog_progress_loading">جار التحميل&#8230;</string>
     <string name="dialog_disclaimer">استخدام هذا البرنامج على مسؤوليتك الخاصة. بعض التطبيقات قد لا تتصرف كما هو متوقع عند إطلاق أنشطتها في سياق خاطئ يؤدي إلى فقدان البيانات أو حتى أسوأ من ذلك. وقد تم تحذيرك. هل نفهم هذا ولا تزال ترغب في استخدام هذا البرنامج؟</string>
     <string name="context_action_launch">إطلاق النشاط</string>
-    <string name="context_action_launch_as_root">تشغيل النشاط كجذر</string>
+    <string name="context_action_launch_as_root">تشغيل النشاط بصلاحيات الروت</string>
     <string name="context_action_shortcut">إنشاء اختصار</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">إنشاء اختصار عبر صلاحيات الروت</string>
     <string name="context_action_edit">تحرير الاختصار</string>
     <string name="label_name">الاسم</string>
     <string name="label_package">حزمة</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">رمز</string>
     <string name="label_menu">القائمة</string>
     <string name="label_private">خاص</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">بصلاحيات الروت</string>
     <string name="starting_activity">بدء النشاط: %s</string>
     <string name="starting_application">بدء تشغيل تطبيق: %s</string>
     <string name="creating_activity_shortcut">إنشاء اختصار النشاط ل %s</string>
