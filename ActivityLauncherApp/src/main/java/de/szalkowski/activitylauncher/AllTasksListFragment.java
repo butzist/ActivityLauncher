@@ -124,7 +124,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                         LauncherIconCreator.createLauncherIcon(requireActivity(), pack);
                         Toast.makeText(getActivity(), getString(R.string.error_no_default_activity), Toast.LENGTH_LONG).show();
                         break;
-                    case 1:
+                    case 2:
                         PackageManager pm = requireActivity().getPackageManager();
                         Intent intent = pm.getLaunchIntentForPackage(pack.package_name);
                         if (intent != null) {
