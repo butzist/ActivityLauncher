@@ -22,3 +22,5 @@ Translations
 ------------
 
 The [Crowdin project](https://crowdin.com/project/ActivityLauncher) contains detailed credits for the translations and allows anyone to contribute by translating the app.
+
+Test Workflow
