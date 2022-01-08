@@ -32,5 +32,5 @@ jobs:
     - name: Upload release APK
       uses: actions/upload-artifact@v2
       with:
-        name: release
-        path: ActivityLauncherApp/build/outputs/apk/release/
+        name: release.apk
+        path: ActivityLauncherApp/build/outputs/apk/release/ActivityLauncherApp-release.apk
