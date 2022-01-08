@@ -1,6 +1,7 @@
 [![Debug Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android-master.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android-master.yml)
 [![Release Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android-release.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android-release.yml)
 [![Crowdin](https://badges.crowdin.net/activitylauncher/localized.svg)](https://crowdin.com/project/activitylauncher)
+[![Gitter Chat](https://badges.gitter.im/ActivityLauncher/community.svg)](https://gitter.im/ActivityLauncher/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Activity Launcher
 =================
