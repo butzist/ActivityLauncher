@@ -18,4 +18,9 @@ jobs:
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build debug
-      run: ./gradlew bundleDebug
+      run: ./gradlew assembleDebug
+    - name: Upload debug APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: debug.apk
+        path: ActivityLauncherApp/build/outputs/apk/debug/ActivityLauncherApp-debug.apk
