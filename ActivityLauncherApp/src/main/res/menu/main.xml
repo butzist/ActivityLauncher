@@ -6,15 +6,7 @@
         app:showAsAction="collapseActionView|always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
     <item
-        android:id="@+id/action_view_source"
+        android:id="@+id/action_settings"
         app:showAsAction="never"
-        android:title="@string/action_view_source" />
-    <item
-        android:id="@+id/action_view_translation"
-        app:showAsAction="never"
-        android:title="@string/action_view_translation" />
-    <item
-        android:id="@+id/action_view_bugs"
-        app:showAsAction="never"
-        android:title="@string/action_view_bugs" />
+        android:title="@string/settings" />
 </menu>

@@ -38,4 +38,8 @@
     <string name="action_view_bugs">Relatar um problema</string>
     <string name="action_filter">Filtrar...</string>
     <string name="filter_hint">pacote/ação</string>
+    <string name="summary_action_view_bugs">If you have any suggestion or issue please, create an issue in our Github repo</string>
+    <string name="summary_action_view_translation">If you are enjoyingActivity launcher, please, consider translating the App to your language</string>
+    <string name="summary_action_view_source">Github repo with the source code of Activity Launcher</string>
+    <string name="settings">Settings</string>
 </resources>

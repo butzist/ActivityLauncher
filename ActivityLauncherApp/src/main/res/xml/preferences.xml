@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="Settings">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="private_activities"
+            android:title="Enable private activities" />
+
+        <ListPreference
+            android:key="theme"
+            android:title="Theme"
+            android:entries="@array/theme_settings"
+            android:defaultValue="0"
+            android:entryValues="@array/theme_settings_values"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="About">
+        <Preference
+            android:key="action_view_source"
+            android:title="@string/action_view_source"
+            android:summary="@string/summary_action_view_source"
+            app:singleLineTitle="true">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/url_source" />
+        </Preference>
+
+        <Preference
+            android:key="action_view_translation"
+            android:title="@string/action_view_translation"
+            android:summary="@string/summary_action_view_translation"
+            app:singleLineTitle="true">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/url_translation" />
+        </Preference>
+        <Preference
+            android:key="action_view_bugs"
+            android:title="@string/action_view_bugs"
+            android:summary="@string/summary_action_view_bugs"
+            app:singleLineTitle="true">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/url_bugs" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

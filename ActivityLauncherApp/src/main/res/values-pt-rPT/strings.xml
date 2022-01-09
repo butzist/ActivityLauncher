@@ -39,4 +39,8 @@ Algumas aplicações podem comportar-se de forma inesperada quando as suas ativi
     <string name="action_view_bugs">Reportar problemas</string>
     <string name="action_filter">Filtro</string>
     <string name="filter_hint">Pacote/acção</string>
+    <string name="summary_action_view_bugs">If you have any suggestion or issue please, create an issue in our Github repo</string>
+    <string name="summary_action_view_translation">If you are enjoyingActivity launcher, please, consider translating the App to your language</string>
+    <string name="summary_action_view_source">Github repo with the source code of Activity Launcher</string>
+    <string name="settings">Settings</string>
 </resources>

@@ -83,27 +83,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_view_source) {
-            Intent i2 = new Intent(Intent.ACTION_VIEW);
-            i2.setData(Uri.parse(this.getString(R.string.url_source)));
-            this.startActivity(i2);
-            return true;
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
-
-        if (id == R.id.action_view_translation) {
-            Intent i3 = new Intent(Intent.ACTION_VIEW);
-            i3.setData(Uri.parse(this.getString(R.string.url_translation)));
-            this.startActivity(i3);
-            return true;
-        }
-
-        if (id == R.id.action_view_bugs) {
-            Intent i4 = new Intent(Intent.ACTION_VIEW);
-            i4.setData(Uri.parse(this.getString(R.string.url_bugs)));
-            this.startActivity(i4);
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
