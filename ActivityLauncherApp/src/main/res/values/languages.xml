@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item>"af_ZA"</item>
+        <item>"ar_SA"</item>
+        <item>"bg_BG"</item>
+        <item>"ca_ES"</item>
+        <item>"cs_CZ"</item>
+        <item>"da_DK"</item>
+        <item>"de_DE"</item>
+        <item>"el_GR"</item>
+        <item>"en_GB"</item>
+        <item>"en_US"</item>
+        <item>"es_ES"</item>
+        <item>"fa_IR"</item>
+        <item>"fi_FI"</item>
+        <item>"fr_FR"</item>
+        <item>"hi_IN"</item>
+        <item>"hu_HU"</item>
+        <item>"in_ID"</item>
+        <item>"it_IT"</item>
+        <item>"iw_IL"</item>
+        <item>"ja_JP"</item>
+        <item>"tr_TR"</item>
+        <item>"ko_KR"</item>
+        <item>"nl_NL"</item>
+        <item>"nb_NO"</item>
+        <item>"pl_PL"</item>
+        <item>"pt_BR"</item>
+        <item>"pt_PT"</item>
+        <item>"ro_RO"</item>
+        <item>"ru_RU"</item>
+        <item>"si_LK"</item>
+        <item>"sk_SK"</item>
+        <item>"sl_SI"</item>
+        <item>"sr_"</item>
+        <item>"sv_SE"</item>
+        <item>"th_TH"</item>
+        <item>"tr_TR"</item>
+        <item>"uk_UA"</item>
+        <item>"vi_VN"</item>
+        <item>"zh_CN"</item>
+    </string-array>
+</resources>
