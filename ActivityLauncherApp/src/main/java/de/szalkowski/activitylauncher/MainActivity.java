@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
             var hasSU = RootDetection.detectSU();
             prefs.edit().putBoolean("allow_root", hasSU).apply();
         }
-
+        if (!prefs.contains("theme")) {
+            //SettingsActivity.setTheme(prefs.getString("theme","0"));
+        }
         AllTasksListFragment fragment = new AllTasksListFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();

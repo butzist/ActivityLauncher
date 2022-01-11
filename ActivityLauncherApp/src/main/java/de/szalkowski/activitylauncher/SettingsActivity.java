@@ -1,8 +1,6 @@
 package de.szalkowski.activitylauncher;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActionBar;
 import android.os.Bundle;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -18,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(R.id.settings_container, new SettingsFragment())
                 .commit();
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();

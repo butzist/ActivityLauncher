@@ -4,8 +4,9 @@
     android:versionCode="29"
     android:versionName="1.13.5">
 
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> <!-- query intent for all packages according to documentation -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <queries android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <queries>
         <intent>
             <action android:name="*" />
@@ -21,9 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SettingsActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
@@ -35,6 +33,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:exported="true" />
+        <activity
             android:name=".RootLauncherActivity"
             android:exported="true"
             android:label="@string/context_action_launch_as_root">
@@ -43,5 +45,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
