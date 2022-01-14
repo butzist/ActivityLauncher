@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="languages">
+        <item>"System Default"</item>
         <item>"af_ZA"</item>
         <item>"ar_SA"</item>
         <item>"bg_BG"</item>

@@ -38,8 +38,12 @@
     <string name="action_view_bugs">Rapportér et problem</string>
     <string name="action_filter">Filtrér...</string>
     <string name="filter_hint">pakke/handling</string>
-    <string name="summary_action_view_bugs">If you have any suggestion or issue please, create an issue in our Github repo</string>
-    <string name="summary_action_view_translation">If you are enjoyingActivity launcher, please, consider translating the App to your language</string>
-    <string name="summary_action_view_source">Github repo with the source code of Activity Launcher</string>
+    <string name="summary_action_view_bugs">If you have any suggestion or issue, please submit an issue in our project on GitHub.</string>
+    <string name="summary_action_view_translation">If you are enjoying Activity Launcher, please consider translating the App into your language.</string>
+    <string name="summary_action_view_source">The source code of this App is available for reading and modifying on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
     <string name="settings">Settings</string>
+    <string name="theme_default">System Default</string>
+    <string name="theme_light">Light Theme</string>
+    <string name="theme_dark">Dark Theme</string>
+    <string name="root_check">Root check failed!</string>
 </resources>

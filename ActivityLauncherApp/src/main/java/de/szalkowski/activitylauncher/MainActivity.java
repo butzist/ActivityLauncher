@@ -1,20 +1,18 @@
 package de.szalkowski.activitylauncher;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Filter;
 import android.widget.Filterable;
-import androidx.appcompat.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,19 +23,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        var prefs = getPreferences(Context.MODE_PRIVATE);
+        var prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
         if (!prefs.getBoolean("disclaimer_accepted", false)) {
             DialogFragment dialog = new DisclaimerDialogFragment();
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
         }
+        Configuration config = Utils.createLocaleConfiguration(prefs.getString("locale","en_US"));
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
 
-        if (!prefs.contains("allow_root")) {
-            var hasSU = RootDetection.detectSU();
-            prefs.edit().putBoolean("allow_root", hasSU).apply();
-        }
-        if (!prefs.contains("theme")) {
-            //SettingsActivity.setTheme(prefs.getString("theme","0"));
-        }
         AllTasksListFragment fragment = new AllTasksListFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
@@ -99,6 +94,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean isRootAllowed() {
-        return getPreferences(MODE_PRIVATE).getBoolean("allow_root", false);
+        return PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean("allow_root", false);
     }
 }

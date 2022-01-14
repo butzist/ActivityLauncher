@@ -18,7 +18,6 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
 
     public static MyPackageInfo fromPackageInfo(PackageManagerCache cache, PackageInfo info) {
         var pm = cache.getPackageManager();
-
         var myInfo = new MyPackageInfo();
         myInfo.package_name = info.packageName;
         ApplicationInfo app = info.applicationInfo;
