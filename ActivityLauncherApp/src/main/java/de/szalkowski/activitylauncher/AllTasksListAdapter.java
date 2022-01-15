@@ -21,16 +21,19 @@ import androidx.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
     private final PackageManager pm;
     private final LayoutInflater inflater;
     private List<MyPackageInfo> packages;
     private List<MyPackageView> filtered;
+    SharedPreferences prefs;
 
     AllTasksListAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.pm = context.getPackageManager();
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
     }
 
     void resolve(AllTasksListAsyncProvider.Updater updater) {
@@ -54,7 +57,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         }
 
         Collections.sort(this.packages);
-        this.filtered = createFilterView("");
+        this.filtered = createFilterActivity(prefs.getBoolean("hide_private_activity", true));
 
     }
 
@@ -79,6 +82,26 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
                     parent.package_name.toLowerCase().contains(q) ||
                     parent.icon_resource_name != null && parent.icon_resource_name.contains(q)
             ) {
+                result.add(entry);
+            }
+        }
+
+        return result;
+    }
+
+    private List<MyPackageView> createFilterActivity(boolean hideActivities) {
+        List<MyPackageView> result = new ArrayList<>();
+        for (int j = 0; j < this.packages.size(); ++j) {
+            MyPackageInfo parent = this.packages.get(j);
+            MyPackageView entry = new MyPackageView(parent, j);
+
+            for (int i = 0; i < parent.getActivitiesCount(); ++i) {
+                MyActivityInfo child = parent.getActivity(i);
+                if (!hideActivities || hideActivities != child.is_private) {
+                    entry.add(child, i);
+                }
+            }
+            if (!entry.children.isEmpty()) {
                 result.add(entry);
             }
         }
