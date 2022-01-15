@@ -61,7 +61,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
     }
 
-    private List<MyPackageView> createFilterView(String query) {
+    private List<MyPackageView> createFilterView(String query, boolean hideActivities) {
         String q = query.toLowerCase();
         List<MyPackageView> result = new ArrayList<>();
         for (int j = 0; j < this.packages.size(); ++j) {
@@ -70,9 +70,9 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
             for (int i = 0; i < parent.getActivitiesCount(); ++i) {
                 MyActivityInfo child = parent.getActivity(i);
-                if (child.name.toLowerCase().contains(q) ||
+                if ((child.name.toLowerCase().contains(q) ||
                         child.component_name.flattenToString().toLowerCase().contains(q) ||
-                        child.icon_resource_name != null && child.icon_resource_name.toLowerCase().contains(q)) {
+                        child.icon_resource_name != null && child.icon_resource_name.toLowerCase().contains(q)) && (!hideActivities || hideActivities != child.is_private)) {
                     entry.add(child, i);
                 }
             }
@@ -202,7 +202,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<MyPackageView> result = createFilterView(constraint.toString());
+                List<MyPackageView> result = createFilterView(constraint.toString() ,prefs.getBoolean("hide_private_activity", true));
                 FilterResults wrapped = new FilterResults();
                 wrapped.values = result;
                 wrapped.count = result.size();
