@@ -57,7 +57,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         }
 
         Collections.sort(this.packages);
-        this.filtered = createFilterActivity(prefs.getBoolean("hide_private_activity", true));
+        this.filtered = createFilterView("", prefs.getBoolean("hide_private_activity", true));
 
     }
 
@@ -89,25 +89,6 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         return result;
     }
 
-    private List<MyPackageView> createFilterActivity(boolean hideActivities) {
-        List<MyPackageView> result = new ArrayList<>();
-        for (int j = 0; j < this.packages.size(); ++j) {
-            MyPackageInfo parent = this.packages.get(j);
-            MyPackageView entry = new MyPackageView(parent, j);
-
-            for (int i = 0; i < parent.getActivitiesCount(); ++i) {
-                MyActivityInfo child = parent.getActivity(i);
-                if (!hideActivities || hideActivities != child.is_private) {
-                    entry.add(child, i);
-                }
-            }
-            if (!entry.children.isEmpty()) {
-                result.add(entry);
-            }
-        }
-
-        return result;
-    }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
