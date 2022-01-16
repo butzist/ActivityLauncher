@@ -19,8 +19,9 @@ public class ActivityLauncherApp extends Application {
         }
 
         if (!prefs.contains("hide_private_activities")) {
-            prefs.edit().putBoolean("hide_private_activities", true).apply();
+            prefs.edit().putBoolean("hide_private_activities", false).apply();
         }
+
         if (!prefs.contains("locale")) {
             prefs.edit().putString("locale", "System Default").apply();
         }

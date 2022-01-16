@@ -47,9 +47,10 @@
     <string name="settings_allow_root">Allow root</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_language">Language</string>
+    <string name="settings_summary_private_activities">Hide private (unexported and disabled) activites, that cannot be started without root access</string>
+    <string name="settings_summary_root_mode">Allow launching private activities by using root privileges</string>
     <string name="theme_default">System Default</string>
     <string name="theme_light">Light Theme</string>
     <string name="theme_dark">Dark Theme</string>
-    <string name="private_activities_summary">Hide private (unexported and disabled) activites, that cannot be started without root access</string>
-    <string name="root_mode_summary">Allow launching private activities by using root privileges</string>
+
 </resources>
