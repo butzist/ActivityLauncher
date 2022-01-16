@@ -5,13 +5,7 @@
     android:versionName="1.13.5">
 
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <queries android:name="android.permission.QUERY_ALL_PACKAGES" />
-
-    <queries>
-        <intent>
-            <action android:name="*" />
-        </intent>
-    </queries>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
