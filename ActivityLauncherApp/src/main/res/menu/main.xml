@@ -9,5 +9,5 @@
         android:id="@+id/action_settings"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_settings"
-        android:title="@string/settings_activity" />
+        android:title="@string/activity_settings" />
 </menu>
