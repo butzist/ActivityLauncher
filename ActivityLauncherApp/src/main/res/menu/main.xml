@@ -2,19 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/search"
         android:title="@string/action_filter"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search"
         app:showAsAction="collapseActionView|always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
     <item
-        android:id="@+id/action_view_source"
-        app:showAsAction="never"
-        android:title="@string/action_view_source" />
-    <item
-        android:id="@+id/action_view_translation"
-        app:showAsAction="never"
-        android:title="@string/action_view_translation" />
-    <item
-        android:id="@+id/action_view_bugs"
-        app:showAsAction="never"
-        android:title="@string/action_view_bugs" />
+        android:id="@+id/action_settings"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 </menu>

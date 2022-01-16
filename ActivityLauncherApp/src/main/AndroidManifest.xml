@@ -2,12 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.szalkowski.activitylauncher"
     android:versionCode="29"
-    android:versionName="1.13.5" >
+    android:versionName="1.13.5">
 
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <queries android:name="android.permission.QUERY_ALL_PACKAGES" />
 
-    <!-- query intent for all packages according to documentation -->
-    <queries android:name="android.permission.QUERY_ALL_PACKAGES"/>
     <queries>
         <intent>
             <action android:name="*" />
@@ -20,22 +19,28 @@
         android:hasFragileUserData="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:name=".ActivityLauncherBase"
+        android:theme="@style/AppTheme">
         <activity
-            android:name="de.szalkowski.activitylauncher.MainActivity"
-            android:label="@string/app_name"
+            android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="locked" >
+            android:label="@string/app_name"
+            android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="de.szalkowski.activitylauncher.RootLauncherActivity"
-            android:label="@string/context_action_launch_as_root"
-            android:exported="true" >
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:exported="true" />
+        <activity
+            android:name=".RootLauncherActivity"
+            android:exported="true"
+            android:label="@string/context_action_launch_as_root">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
