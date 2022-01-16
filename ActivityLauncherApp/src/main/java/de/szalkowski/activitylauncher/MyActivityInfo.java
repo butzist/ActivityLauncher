@@ -13,7 +13,7 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
     String icon_resource_name;
     boolean is_private;
 
-    public static MyActivityInfo fromComponentName(PackageManager pm, ComponentName activity)  {
+    public static MyActivityInfo fromComponentName(PackageManager pm, ComponentName activity) {
         var info = new MyActivityInfo();
         info.component_name = activity;
 

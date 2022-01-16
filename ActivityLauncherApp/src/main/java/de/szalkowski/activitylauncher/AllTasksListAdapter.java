@@ -26,9 +26,9 @@ import java.util.Objects;
 public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
     private final PackageManager pm;
     private final LayoutInflater inflater;
+    SharedPreferences prefs;
     private List<MyPackageInfo> packages;
     private List<MyPackageView> filtered;
-    SharedPreferences prefs;
 
     AllTasksListAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -57,11 +57,10 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         }
 
         Collections.sort(this.packages);
-        this.filtered = createFilterView("", prefs.getBoolean("hide_private_activity", true));
-
+        this.filtered = createFilterView("", this.prefs.getBoolean("hide_private_activities", true));
     }
 
-    private List<MyPackageView> createFilterView(String query, boolean hideActivities) {
+    private List<MyPackageView> createFilterView(String query, boolean hidePrivate) {
         String q = query.toLowerCase();
         List<MyPackageView> result = new ArrayList<>();
         for (int j = 0; j < this.packages.size(); ++j) {
@@ -70,17 +69,20 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
             for (int i = 0; i < parent.getActivitiesCount(); ++i) {
                 MyActivityInfo child = parent.getActivity(i);
-                if ((child.name.toLowerCase().contains(q) ||
-                        child.component_name.flattenToString().toLowerCase().contains(q) ||
-                        child.icon_resource_name != null && child.icon_resource_name.toLowerCase().contains(q)) && (!hideActivities || hideActivities != child.is_private)) {
+                if (
+                        (child.name.toLowerCase().contains(q) ||
+                                child.component_name.flattenToString().toLowerCase().contains(q) ||
+                                child.icon_resource_name != null && child.icon_resource_name.toLowerCase().contains(q)
+                        ) && (!hidePrivate || !child.is_private)
+                ) {
                     entry.add(child, i);
                 }
             }
 
-            if (!entry.children.isEmpty() ||
+            if (!entry.children.isEmpty() && (
                     parent.name.toLowerCase().contains(q) ||
                     parent.package_name.toLowerCase().contains(q) ||
-                    parent.icon_resource_name != null && parent.icon_resource_name.contains(q)
+                    parent.icon_resource_name != null && parent.icon_resource_name.contains(q))
             ) {
                 result.add(entry);
             }
@@ -160,7 +162,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         button.setOnClickListener(view1 -> view.performLongClick());
 
         // expand if filtered list is short enough
-        if (filtered.size() < 10) {
+        if (this.filtered.size() < 10) {
             ExpandableListView expandableListView = (ExpandableListView) parent;
             expandableListView.expandGroup(groupPosition);
         }
@@ -183,7 +185,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<MyPackageView> result = createFilterView(constraint.toString() ,prefs.getBoolean("hide_private_activity", true));
+                List<MyPackageView> result = createFilterView(constraint.toString(), prefs.getBoolean("hide_private_activities", true));
                 FilterResults wrapped = new FilterResults();
                 wrapped.values = result;
                 wrapped.count = result.size();
@@ -194,7 +196,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             @SuppressWarnings("unchecked")
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results != null) {
-                    filtered = (List<MyPackageView>) results.values;
+                    AllTasksListAdapter.this.filtered = (List<MyPackageView>) results.values;
                     notifyDataSetChanged();
                 }
             }

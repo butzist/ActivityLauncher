@@ -138,6 +138,6 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     }
 
     private boolean isRootAllowed() {
-        return ((MainActivity) Objects.requireNonNull(getActivity())).isRootAllowed();
+        return ((MainActivity) requireActivity()).isRootAllowed();
     }
 }

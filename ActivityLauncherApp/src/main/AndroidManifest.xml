@@ -14,7 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".ActivityLauncherBase"
+        android:name=".ActivityLauncherApp"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -30,11 +30,11 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".RootLauncherActivity"
-            android:exported="true"
-            android:label="@string/context_action_launch_as_root">
+            android:label="@string/context_action_launch_as_root"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>

@@ -19,11 +19,11 @@ public class DisclaimerDialogFragment extends DialogFragment {
         builder.setTitle(R.string.title_dialog_disclaimer)
                 .setMessage(R.string.dialog_disclaimer)
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getBaseContext());
+                    SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
                     editor.edit().putBoolean("disclaimer_accepted", true).apply();
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                    SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getBaseContext());
+                    SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
                     editor.edit().putBoolean("disclaimer_accepted", false).apply();
                     requireActivity().finish();
                 });

@@ -38,7 +38,7 @@ class PackageManagerCache {
             PackageInfo info;
             info = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
 
-            myInfo =  MyPackageInfo.fromPackageInfo(this, info);
+            myInfo = MyPackageInfo.fromPackageInfo(this, info);
             packageInfos.put(packageName, myInfo);
         }
 

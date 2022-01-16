@@ -159,6 +159,6 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     }
 
     private boolean isRootAllowed() {
-        return ((MainActivity) Objects.requireNonNull(getActivity())).isRootAllowed();
+        return ((MainActivity) requireActivity()).isRootAllowed();
     }
 }

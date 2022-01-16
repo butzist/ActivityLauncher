@@ -7,16 +7,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Locale;
 
-public class Utils extends AppCompatActivity {
+public class SettingsUtils extends AppCompatActivity {
     public final static String THEME_DEFAULT = "0";
     public final static String THEME_LIGHT = "1";
     public final static String THEME_DARK = "2";
 
     public static Configuration createLocaleConfiguration(String language) {
         Configuration config = new Configuration();
-        if(language.contains("_")){
+        if (language.contains("_")) {
             String[] parts = language.split("_");
-            Locale locale = new Locale(parts[0],parts[1]);
+            Locale locale = new Locale(parts[0], parts[1]);
             Locale.setDefault(locale);
             config.locale = locale;
         }
@@ -25,7 +25,7 @@ public class Utils extends AppCompatActivity {
 
     public static String getCountryName(String name) {
         for (Locale locale : Locale.getAvailableLocales()) {
-            if (name.equals(locale.getLanguage() + '_' + locale.getCountry())){
+            if (name.equals(locale.getLanguage() + '_' + locale.getCountry())) {
                 return locale.getDisplayName();
             }
         }

@@ -17,6 +17,7 @@ import androidx.preference.PreferenceManager;
 public class MainActivity extends AppCompatActivity {
 
     private Filterable filterTarget = null;
+    private String filter = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             DialogFragment dialog = new DisclaimerDialogFragment();
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
         }
-        Configuration config = Utils.createLocaleConfiguration(prefs.getString("locale","en_US"));
+        Configuration config = SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "en_US"));
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
 
@@ -55,13 +56,15 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                onFilter(query);
+                MainActivity.this.filter = query;
+                MainActivity.this.updateFilter(query);
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                onFilter(newText);
+            public boolean onQueryTextChange(String query) {
+                MainActivity.this.filter = query;
+                MainActivity.this.updateFilter(query);
                 return true;
             }
         });
@@ -69,8 +72,14 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void onFilter(String query) {
-        Filter filter = filterTarget.getFilter();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateFilter(this.filter);
+    }
+
+    private void updateFilter(String query) {
+        Filter filter = this.filterTarget.getFilter();
         if (filter != null) {
             filter.filter(query);
         }

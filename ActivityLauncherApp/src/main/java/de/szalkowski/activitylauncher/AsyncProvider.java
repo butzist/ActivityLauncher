@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {
     private final CharSequence message;
     private final Listener<ReturnType> listener;
-    private int max;
     private final ProgressDialog progress;
+    private int max;
 
     AsyncProvider(Context context, Listener<ReturnType> listener, boolean showProgressDialog) {
         this.message = context.getText(R.string.dialog_progress_loading);
