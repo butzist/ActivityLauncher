@@ -23,7 +23,7 @@
         <ListPreference
             android:key="language"
             android:title="Language"
-            android:entries="@array/locales"
+            android:entryValues="@array/locales"
             android:defaultValue="0" />
     </PreferenceCategory>
 
