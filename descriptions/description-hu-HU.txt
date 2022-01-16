@@ -2,6 +2,8 @@ Ez az Android alkalmazás képes elindítani a rejtett alkalmazástevékenysége
 
 Ez a projekt nélkülöz még néhány funkciót és fordítást. Elfogadunk minden segítséget!
 
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+Forráskód:
+https://github.com/butzist/ActivityLauncher
+Fordítás:
+http://crowdin.net/project/activitylauncher/invite
+Jelentkezés a bétaverzióra: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
