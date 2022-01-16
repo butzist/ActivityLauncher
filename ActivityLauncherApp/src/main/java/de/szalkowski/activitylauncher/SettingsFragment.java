@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher;
 
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -33,10 +34,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         for (String locale : locales) {
             language.add(SettingsUtils.getCountryName(locale));
         }
-
         String[] languageValue = language.toArray(new String[0]);
         languages.setEntries(languageValue);
-        languages.setEntryValues(locales);
 
         privateActivities.setOnPreferenceChangeListener((preference, newValue) -> {
             prefs.edit().putBoolean("hide_private_activities", (Boolean) newValue).apply();
@@ -63,7 +62,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         languages.setOnPreferenceChangeListener((preference, newValue) -> {
             prefs.edit().putString("locale", (String) newValue).apply();
-            Configuration config = SettingsUtils.createLocaleConfiguration(newValue.toString());
+            Configuration config;
+            if (newValue.toString().equals("System Default")){
+                config = SettingsUtils.createLocaleConfiguration(Resources.getSystem().getConfiguration().locale.toString());
+            } else {
+                config = SettingsUtils.createLocaleConfiguration(newValue.toString());
+            }
             var resources = requireActivity().getBaseContext().getResources();
             resources.updateConfiguration(config, resources.getDisplayMetrics());
             requireActivity().recreate();
