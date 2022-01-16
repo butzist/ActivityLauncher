@@ -46,8 +46,4 @@
     <string name="theme_light">Light Theme</string>
     <string name="theme_dark">Dark Theme</string>
     <string name="root_check">Root check failed!</string>
-    <string name="private_activities">Hide private activities</string>
-    <string name="allow_root">Allow root</string>
-    <string name="theme">Theme</string>
-    <string name="language">Language</string>
 </resources>

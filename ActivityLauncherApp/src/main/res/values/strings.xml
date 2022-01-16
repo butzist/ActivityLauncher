@@ -42,12 +42,12 @@
     <string name="summary_action_view_bugs">If you have any suggestions or issues, please report them in our project on GitHub.</string>
     <string name="action_filter">Filter&#8230;</string>
     <string name="filter_hint">package/action</string>
-    <string name="settings">Settings</string>
+    <string name="settings_activity">Settings</string>
+    <string name="settings_private">Hide private activitie</string>
+    <string name="settings_allow_root">Allow root</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_language">Language</string>
     <string name="theme_default">System Default</string>
     <string name="theme_light">Light Theme</string>
     <string name="theme_dark">Dark Theme</string>
-    <string name="private_activities">Hide private activities</string>
-    <string name="allow_root">Allow root</string>
-    <string name="theme">Theme</string>
-    <string name="language">Language</string>
 </resources>
