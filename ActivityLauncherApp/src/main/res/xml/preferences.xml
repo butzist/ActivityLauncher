@@ -8,12 +8,12 @@
             android:defaultValue="true"
             android:key="private_activities"
             android:title="@string/settings_hide_private"
-            android:summary="Hide private (unexported and disabled) activites, that cannot be started without root access"/>
+            android:summary="@string/private_activities_summary"/>
         <SwitchPreference
             android:defaultValue="false"
             android:key="root_mode"
             android:title="@string/settings_allow_root"
-            android:summary="Allow launching private activities by using root privileges"/>
+            android:summary="@string/root_mode_summary"/>
         <ListPreference
             android:key="theme"
             android:title="@string/settings_theme"
