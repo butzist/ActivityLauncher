@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ class PackageManagerCache {
         return instance;
     }
 
-    MyPackageInfo getPackageInfo(String packageName) throws NameNotFoundException {
+    MyPackageInfo getPackageInfo(String packageName, Configuration config) throws NameNotFoundException {
         MyPackageInfo myInfo;
 
         synchronized (packageInfos) {
@@ -38,7 +39,7 @@ class PackageManagerCache {
             PackageInfo info;
             info = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
 
-            myInfo = MyPackageInfo.fromPackageInfo(this, info);
+            myInfo = MyPackageInfo.fromPackageInfo(this, info, config);
             packageInfos.put(packageName, myInfo);
         }
 

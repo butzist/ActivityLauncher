@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -11,19 +12,24 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import androidx.preference.PreferenceManager;
+
 import java.util.List;
+import java.util.Objects;
 import java.util.TreeSet;
 
 public class IconListAdapter extends BaseAdapter {
     private final PackageManager pm;
     private final Context context;
     private final IconLoader loader;
+    private SharedPreferences prefs;
     private String[] icons;
 
     IconListAdapter(Context context) {
         this.context = context;
         this.pm = context.getPackageManager();
         this.loader = new IconLoader(context);
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
     }
 
     void resolve(IconListAsyncProvider.Updater updater) {
@@ -39,7 +45,7 @@ public class IconListAdapter extends BaseAdapter {
 
             PackageInfo pack = all_packages.get(i);
             try {
-                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName);
+                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName, SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "System Default")));
 
                 for (int j = 0; j < myPack.getActivitiesCount(); ++j) {
                     String icon_resource_name = myPack.getActivity(j).getIconResouceName();

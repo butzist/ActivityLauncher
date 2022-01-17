@@ -48,7 +48,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             PackageInfo pack = all_packages.get(i);
             MyPackageInfo mypack;
             try {
-                mypack = cache.getPackageInfo(pack.packageName);
+                mypack = cache.getPackageInfo(pack.packageName, SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "System Default")));
                 if (mypack.getActivitiesCount() > 0) {
                     this.packages.add(mypack);
                 }

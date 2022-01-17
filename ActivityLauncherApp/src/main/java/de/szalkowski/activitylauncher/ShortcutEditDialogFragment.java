@@ -35,6 +35,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     private ImageButton image_icon;
     private CheckBox check_as_root;
     private IconLoader loader;
+    private AlertDialog dialog;
 
     @NonNull
     @Override
@@ -79,6 +80,20 @@ public class ShortcutEditDialogFragment extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 Drawable draw_icon = ShortcutEditDialogFragment.this.loader.getIcon(s.toString());
                 ShortcutEditDialogFragment.this.image_icon.setImageDrawable(draw_icon);
+            }
+        });
+        this.text_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(editable.length() >= 1);
             }
         });
 
@@ -134,7 +149,14 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> Objects.requireNonNull(ShortcutEditDialogFragment.this.getDialog()).cancel());
 
-        return builder.create();
+        dialog = builder.create();
+        return dialog;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
     private boolean isRootAllowed() {
