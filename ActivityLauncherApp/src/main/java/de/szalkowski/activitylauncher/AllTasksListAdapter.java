@@ -34,6 +34,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.pm = context.getPackageManager();
         this.prefs = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        PackageManagerCache.clearPackageManager();
     }
 
     void resolve(AllTasksListAsyncProvider.Updater updater) {

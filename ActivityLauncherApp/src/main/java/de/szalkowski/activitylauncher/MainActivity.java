@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
@@ -83,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(!this.localeString.equals(prefs.getString("locale", "System Default"))){
             recreate();
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            }
         }
         updateFilter(this.filter);
     }

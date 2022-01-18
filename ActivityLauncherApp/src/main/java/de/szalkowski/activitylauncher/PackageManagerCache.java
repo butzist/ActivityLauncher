@@ -64,4 +64,7 @@ class PackageManagerCache {
     PackageManager getPackageManager() {
         return this.pm;
     }
+    static void clearPackageManager() {
+        instance = null;
+    }
 }
