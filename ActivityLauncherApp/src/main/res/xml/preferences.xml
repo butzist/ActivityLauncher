@@ -5,7 +5,7 @@
     <PreferenceCategory
         android:title="Settings">
         <SwitchPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="private_activities"
             android:title="@string/settings_hide_private"
             android:summary="@string/settings_summary_private_activities"/>
