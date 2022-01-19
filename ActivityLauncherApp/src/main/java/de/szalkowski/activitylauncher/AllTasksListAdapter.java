@@ -80,11 +80,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
                 }
             }
 
-            if (!entry.children.isEmpty() && (
-                    parent.name.toLowerCase().contains(q) ||
-                    parent.package_name.toLowerCase().contains(q) ||
-                    parent.icon_resource_name != null && parent.icon_resource_name.contains(q))
-            ) {
+            if (!entry.children.isEmpty()) {
                 result.add(entry);
             }
         }
