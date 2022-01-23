@@ -45,9 +45,11 @@ Algumas aplicações podem comportar-se de forma inesperada quando as suas ativi
     <string name="filter_hint">Pacote/acção</string>
     <string name="activity_settings">Definições</string>
     <string name="settings_hide_private">Hide private activities</string>
-    <string name="settings_allow_root">Allow root</string>
-    <string name="settings_theme">Theme</string>
+    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_allow_root">Enable privileged mode</string>
+    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
     <string name="settings_language">Language</string>
+    <string name="settings_theme">Theme</string>
     <string name="theme_default">Predefinição do Sistema</string>
     <string name="theme_light">Tema Claro</string>
     <string name="theme_dark">Tema Escuro</string>

@@ -43,10 +43,12 @@
     <string name="action_filter">Фильтр...</string>
     <string name="filter_hint">пакет/действие</string>
     <string name="activity_settings">Установки</string>
-    <string name="settings_hide_private">Hide private activities</string>
-    <string name="settings_allow_root">Allow root</string>
-    <string name="settings_theme">Theme</string>
-    <string name="settings_language">Language</string>
+    <string name="settings_hide_private">Скрыть приватные действия</string>
+    <string name="settings_summary_hide_private">Скрыть приватные и отключеные действия, которые невозможно запустить без root-доступа</string>
+    <string name="settings_allow_root">Enable privileged mode</string>
+    <string name="settings_summary_allow_root">Разрешить запуск приватных действий с использованием root-прав</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_theme">Тема</string>
     <string name="theme_default">Системные настройки</string>
     <string name="theme_light">Светлая тема</string>
     <string name="theme_dark">Тёмная тема</string>

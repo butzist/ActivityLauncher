@@ -44,9 +44,11 @@
     <string name="filter_hint">Paket/Aktion</string>
     <string name="activity_settings">Einstellungen</string>
     <string name="settings_hide_private">Private Aktivitäten ausblenden</string>
+    <string name="settings_summary_hide_private">Verstecke private (nicht exportierte und deaktivierte) Aktivitäten, die ohne Root-Zugriff nicht gestartet werden können</string>
     <string name="settings_allow_root">Root-Rechte zulassen</string>
-    <string name="settings_theme">Farbschema</string>
+    <string name="settings_summary_allow_root">Erlaube das Starten von privaten Aktivitäten mit Root-Rechten</string>
     <string name="settings_language">Sprache</string>
+    <string name="settings_theme">Farbschema</string>
     <string name="theme_default">Standard</string>
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>

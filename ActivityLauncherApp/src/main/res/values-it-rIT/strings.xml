@@ -10,7 +10,7 @@
     <string name="context_action_launch">Avvia attività</string>
     <string name="context_action_launch_as_root">Avvia attività come root</string>
     <string name="context_action_shortcut">Crea scorciatoia</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
+    <string name="context_action_shortcut_as_root">Crea scorciatoia come root</string>
     <string name="context_action_edit">Modifica scorciatoia</string>
     <string name="label_name">Nome</string>
     <string name="label_package">Pacchetto</string>
@@ -18,7 +18,7 @@
     <string name="label_icon">Icona</string>
     <string name="label_menu">Menu</string>
     <string name="label_private">privato</string>
-    <string name="label_as_root">As root</string>
+    <string name="label_as_root">Come root</string>
     <string name="starting_activity">Avvio attività: %s</string>
     <string name="starting_application">Avvio applicazione: %s</string>
     <string name="creating_activity_shortcut">Creazione collegamento attività per %s</string>
@@ -43,10 +43,12 @@
     <string name="action_filter">Filtro...</string>
     <string name="filter_hint">package/azione</string>
     <string name="activity_settings">Impostazioni</string>
-    <string name="settings_hide_private">Hide private activities</string>
-    <string name="settings_allow_root">Allow root</string>
-    <string name="settings_theme">Theme</string>
-    <string name="settings_language">Language</string>
+    <string name="settings_hide_private">Nascondi attività private</string>
+    <string name="settings_summary_hide_private">Nascondi le attività private (non esportate e disabilitate), che non possono essere avviate senza accesso root</string>
+    <string name="settings_allow_root">Abilita modalità privilegiata</string>
+    <string name="settings_summary_allow_root">Consenti l\'avvio di attività private utilizzando i privilegi di root</string>
+    <string name="settings_language">Lingua</string>
+    <string name="settings_theme">Tema</string>
     <string name="theme_default">Default di Sistema</string>
     <string name="theme_light">Tema Chiaro</string>
     <string name="theme_dark">Tema Scuro</string>

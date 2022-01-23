@@ -44,9 +44,11 @@
     <string name="filter_hint">pakiet/akcja</string>
     <string name="activity_settings">Ustawienia</string>
     <string name="settings_hide_private">Ukryj aktywności prywatne</string>
+    <string name="settings_summary_hide_private">Ukryj aktywności prywatne (niespodziewane i wyłączone), których nie można uruchomić bez dostępu do roota</string>
     <string name="settings_allow_root">Zezwalaj na roota</string>
-    <string name="settings_theme">Motyw</string>
+    <string name="settings_summary_allow_root">Zezwalaj na uruchamianie prywatnych aktywności przez korzystanie z uprawnień roota</string>
     <string name="settings_language">Język</string>
+    <string name="settings_theme">Motyw</string>
     <string name="theme_default">Domyślne systemowe</string>
     <string name="theme_light">Jasny motyw</string>
     <string name="theme_dark">Ciemny motyw</string>

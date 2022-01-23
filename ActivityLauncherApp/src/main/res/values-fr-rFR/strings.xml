@@ -44,9 +44,11 @@
     <string name="filter_hint">paquet/action</string>
     <string name="activity_settings">Configuration</string>
     <string name="settings_hide_private">Masquer les activités privées</string>
-    <string name="settings_allow_root">Autoriser root</string>
-    <string name="settings_theme">Thème</string>
+    <string name="settings_summary_hide_private">Masquer les activités privées (non exportées et désactivées) qui ne peuvent pas être démarrées sans l\'accès root</string>
+    <string name="settings_allow_root">Activer le mode privilégié</string>
+    <string name="settings_summary_allow_root">Autoriser le lancement d\'activités privées en utilisant les privilèges root</string>
     <string name="settings_language">Langue</string>
+    <string name="settings_theme">Thème</string>
     <string name="theme_default">Défaut</string>
     <string name="theme_light">Thème clair</string>
     <string name="theme_dark">Thème Noir</string>
