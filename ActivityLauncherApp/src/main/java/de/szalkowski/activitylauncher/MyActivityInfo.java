@@ -68,6 +68,7 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
         appRes.updateConfiguration(config, new DisplayMetrics());
         return appRes.getString(activity.labelRes);
     }
+    
     @Override
     public int compareTo(MyActivityInfo another) {
         int cmp_name = this.name.compareTo(another.name);
