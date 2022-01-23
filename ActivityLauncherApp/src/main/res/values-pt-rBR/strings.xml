@@ -44,9 +44,9 @@
     <string name="filter_hint">pacote/ação</string>
     <string name="activity_settings">Configurações</string>
     <string name="settings_hide_private">Ocultar atividades privadas</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
-    <string name="settings_allow_root">Enable privileged mode</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
+    <string name="settings_summary_hide_private">Ocultar atividades privadas (não exportadas e desativadas), que não podem ser iniciadas sem acesso root</string>
+    <string name="settings_allow_root">Ativar modo privilegiado</string>
+    <string name="settings_summary_allow_root">Permitir a abertura de atividades privadas usando privilégios de root</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Padrão do sistema</string>

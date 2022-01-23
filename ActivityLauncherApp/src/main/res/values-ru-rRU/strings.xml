@@ -45,7 +45,7 @@
     <string name="activity_settings">Установки</string>
     <string name="settings_hide_private">Скрыть приватные действия</string>
     <string name="settings_summary_hide_private">Скрыть приватные и отключеные действия, которые невозможно запустить без root-доступа</string>
-    <string name="settings_allow_root">Enable privileged mode</string>
+    <string name="settings_allow_root">Включить привилегированный режим</string>
     <string name="settings_summary_allow_root">Разрешить запуск приватных действий с использованием root-прав</string>
     <string name="settings_language">Язык</string>
     <string name="settings_theme">Тема</string>

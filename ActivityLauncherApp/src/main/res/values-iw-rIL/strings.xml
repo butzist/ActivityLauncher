@@ -17,8 +17,8 @@
     <string name="label_package">חבילה</string>
     <string name="label_class">מחלקה</string>
     <string name="label_icon">סמל</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">private</string>
+    <string name="label_menu">תפריט</string>
+    <string name="label_private">פרטי </string>
     <string name="label_as_root">As root</string>
     <string name="starting_activity">מתחיל פעילות : %s</string>
     <string name="starting_application">מפעיל אפליקציה: %s</string>
