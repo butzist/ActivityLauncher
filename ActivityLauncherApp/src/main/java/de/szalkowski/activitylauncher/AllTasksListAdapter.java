@@ -34,6 +34,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.pm = context.getPackageManager();
         this.prefs = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        PackageManagerCache.clearPackageManager();
     }
 
     void resolve(AllTasksListAsyncProvider.Updater updater) {
@@ -48,7 +49,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             PackageInfo pack = all_packages.get(i);
             MyPackageInfo mypack;
             try {
-                mypack = cache.getPackageInfo(pack.packageName);
+                mypack = cache.getPackageInfo(pack.packageName, SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "System Default")));
                 if (mypack.getActivitiesCount() > 0) {
                     this.packages.add(mypack);
                 }
@@ -79,11 +80,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
                 }
             }
 
-            if (!entry.children.isEmpty() && (
-                    parent.name.toLowerCase().contains(q) ||
-                    parent.package_name.toLowerCase().contains(q) ||
-                    parent.icon_resource_name != null && parent.icon_resource_name.contains(q))
-            ) {
+            if (!entry.children.isEmpty()) {
                 result.add(entry);
             }
         }

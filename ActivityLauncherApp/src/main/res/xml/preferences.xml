@@ -5,15 +5,15 @@
     <PreferenceCategory
         android:title="Settings">
         <SwitchPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="private_activities"
             android:title="@string/settings_hide_private"
-            android:summary="Hide private (unexported and disabled) activites, that cannot be started without root access"/>
+            android:summary="@string/settings_summary_private_activities"/>
         <SwitchPreference
             android:defaultValue="false"
             android:key="root_mode"
             android:title="@string/settings_allow_root"
-            android:summary="Allow launching private activities by using root privileges"/>
+            android:summary="@string/settings_summary_root_mode"/>
         <ListPreference
             android:key="theme"
             android:title="@string/settings_theme"

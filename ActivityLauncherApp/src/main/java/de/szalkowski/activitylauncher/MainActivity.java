@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,25 +13,31 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private Filterable filterTarget = null;
     private String filter = "";
+    SharedPreferences prefs;
+    String localeString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        var prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        setTitle(R.string.app_name);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         if (!prefs.getBoolean("disclaimer_accepted", false)) {
             DialogFragment dialog = new DisclaimerDialogFragment();
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
         }
-        Configuration config = SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "en_US"));
+        localeString = prefs.getString("locale", "en_US");
+        Configuration config = SettingsUtils.createLocaleConfiguration(localeString);
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
 
@@ -75,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(!this.localeString.equals(prefs.getString("locale", "System Default"))){
+            recreate();
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            }
+        }
         updateFilter(this.filter);
     }
 

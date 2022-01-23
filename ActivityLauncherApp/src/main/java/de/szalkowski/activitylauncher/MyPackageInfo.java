@@ -4,9 +4,14 @@ import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class MyPackageInfo implements Comparable<MyPackageInfo> {
     protected String package_name;
@@ -16,14 +21,18 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
     protected String name;
     protected MyActivityInfo[] activities;
 
-    public static MyPackageInfo fromPackageInfo(PackageManagerCache cache, PackageInfo info) {
+    public static MyPackageInfo fromPackageInfo(PackageManagerCache cache, PackageInfo info, Configuration config) throws PackageManager.NameNotFoundException {
         var pm = cache.getPackageManager();
         var myInfo = new MyPackageInfo();
         myInfo.package_name = info.packageName;
         ApplicationInfo app = info.applicationInfo;
 
         if (app != null) {
-            myInfo.name = pm.getApplicationLabel(app).toString();
+            final Resources appRes = pm.getResourcesForApplication(myInfo.package_name);
+            appRes.updateConfiguration(config, new DisplayMetrics());
+            final String localizedLabel = appRes.getString(app.labelRes);
+
+            myInfo.name = localizedLabel;
             try {
                 myInfo.icon = pm.getApplicationIcon(app);
             } catch (Exception e) {
