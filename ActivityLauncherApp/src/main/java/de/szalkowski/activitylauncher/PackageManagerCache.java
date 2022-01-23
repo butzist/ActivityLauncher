@@ -50,7 +50,7 @@ class PackageManagerCache {
         return myInfo;
     }
 
-    MyActivityInfo getActivityInfo(ComponentName activityName) {
+    MyActivityInfo getActivityInfo(ComponentName activityName, Configuration config) {
         MyActivityInfo myInfo;
 
         synchronized (activityInfos) {
@@ -58,7 +58,7 @@ class PackageManagerCache {
                 return activityInfos.get(activityName);
             }
 
-            myInfo = MyActivityInfo.fromComponentName(pm, activityName);
+            myInfo = MyActivityInfo.fromComponentName(pm, activityName, config);
             activityInfos.put(activityName, myInfo);
         }
 
