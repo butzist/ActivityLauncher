@@ -2,7 +2,6 @@ package de.szalkowski.activitylauncher;
 
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -24,7 +23,7 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
         ActivityInfo act;
         try {
             act = pm.getActivityInfo(activity, 0);
-            info.name = getActivityName(config,pm,activity,act); //act.loadLabel(pm).toString();
+            info.name = getActivityName(config, pm, activity, act);
             try {
                 info.icon = act.loadIcon(pm);
             } catch (Exception e) {
