@@ -31,7 +31,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     private List<MyPackageInfo> packages;
     private List<MyPackageView> filtered;
 
-    AllTasksListAdapter(@NonNull  Context context) {
+    AllTasksListAdapter(@NonNull Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.pm = context.getPackageManager();
         this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
