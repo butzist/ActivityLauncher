@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -22,7 +21,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());;
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
 
         SwitchPreference hidePrivate = Objects.requireNonNull(findPreference("hide_private"));
         SwitchPreference allowRoot = Objects.requireNonNull(findPreference("allow_root"));
