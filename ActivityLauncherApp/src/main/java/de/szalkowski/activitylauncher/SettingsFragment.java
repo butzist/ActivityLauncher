@@ -1,10 +1,12 @@
 package de.szalkowski.activitylauncher;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -15,20 +17,30 @@ import java.util.Objects;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
+    private SharedPreferences prefs;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
-        var prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());;
 
-        SwitchPreference privateActivities = Objects.requireNonNull(findPreference("private_activities"));
-        SwitchPreference rootmode = Objects.requireNonNull(findPreference("root_mode"));
+        SwitchPreference hidePrivate = Objects.requireNonNull(findPreference("hide_private"));
+        SwitchPreference allowRoot = Objects.requireNonNull(findPreference("allow_root"));
         ListPreference theme = Objects.requireNonNull(findPreference("theme"));
         ListPreference languages = Objects.requireNonNull(findPreference("language"));
 
         theme.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
         languages.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
 
+        populateLanguages(languages);
+
+        hidePrivate.setOnPreferenceChangeListener((preference, newValue) -> onHidePrivateUpdated((Boolean) newValue));
+        allowRoot.setOnPreferenceChangeListener((preference, newValue) -> onAllowRootUpdated((Boolean) newValue));
+        theme.setOnPreferenceChangeListener((preference, newValue) -> onThemeUpdated((String) newValue));
+        languages.setOnPreferenceChangeListener((preference, newValue) -> onLanguageUpdated((String) newValue));
+    }
+
+    private void populateLanguages(ListPreference languages) {
         String[] locales = getResources().getStringArray(R.array.locales);
         ArrayList<String> language = new ArrayList<>();
         for (String locale : locales) {
@@ -36,44 +48,43 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
         String[] languageValue = language.toArray(new String[0]);
         languages.setEntries(languageValue);
-
-        privateActivities.setOnPreferenceChangeListener((preference, newValue) -> {
-            prefs.edit().putBoolean("hide_private_activities", (Boolean) newValue).apply();
-            return true;
-        });
-
-        rootmode.setOnPreferenceChangeListener((preference, newValue) -> {
-            var hasSU = RootDetection.detectSU();
-            boolean newValueBool = (Boolean) newValue;
-
-            if (newValueBool && !hasSU) {
-                Toast.makeText(getActivity(), getText(R.string.warning_root_check), Toast.LENGTH_LONG).show();
-            }
-
-            prefs.edit().putBoolean("allow_root", newValueBool).apply();
-            return true;
-        });
-
-        theme.setOnPreferenceChangeListener((preference, newValue) -> {
-            prefs.edit().putString("theme", newValue.toString()).apply();
-            SettingsUtils.setTheme(newValue.toString());
-            return true;
-        });
-
-        languages.setOnPreferenceChangeListener((preference, newValue) -> {
-            prefs.edit().putString("locale", (String) newValue).apply();
-            Configuration config;
-            if (newValue.toString().equals("System Default")){
-                config = SettingsUtils.createLocaleConfiguration(Resources.getSystem().getConfiguration().locale.toString());
-            } else {
-                config = SettingsUtils.createLocaleConfiguration(newValue.toString());
-            }
-            var resources = requireActivity().getBaseContext().getResources();
-            resources.updateConfiguration(config, resources.getDisplayMetrics());
-            requireActivity().recreate();
-            return true;
-        });
     }
 
+    private boolean onAllowRootUpdated(boolean newValue) {
+        var hasSU = RootDetection.detectSU();
 
+        if (newValue && !hasSU) {
+            Toast.makeText(getActivity(), getText(R.string.warning_root_check), Toast.LENGTH_LONG).show();
+        }
+
+        prefs.edit().putBoolean("allow_root", newValue).apply();
+        return true;
+    }
+
+    private boolean onThemeUpdated(String newValue) {
+        this.prefs.edit().putString("theme", newValue).apply();
+        SettingsUtils.setTheme(newValue);
+        return true;
+    }
+
+    private boolean onHidePrivateUpdated(boolean newValue) {
+        this.prefs.edit().putBoolean("hide_hide_private", newValue).apply();
+        return true;
+    }
+
+    private boolean onLanguageUpdated(String newValue) {
+        this.prefs.edit().putString("language", newValue).apply();
+        Configuration config;
+        if (newValue.equals("System Default")) {
+            config = SettingsUtils.createLocaleConfiguration(Resources.getSystem().getConfiguration().locale.toString());
+        } else {
+            config = SettingsUtils.createLocaleConfiguration(newValue);
+        }
+
+        var resources = requireActivity().getBaseContext().getResources();
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        PackageManagerCache.resetPackageManagerCache();
+        requireActivity().recreate();
+        return true;
+    }
 }

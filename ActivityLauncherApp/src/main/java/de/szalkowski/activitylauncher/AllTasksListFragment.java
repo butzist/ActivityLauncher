@@ -23,8 +23,6 @@ import androidx.fragment.app.Fragment;
 
 import org.thirdparty.LauncherIconCreator;
 
-import java.util.Objects;
-
 public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter>, Filterable {
     private ExpandableListView list;
 

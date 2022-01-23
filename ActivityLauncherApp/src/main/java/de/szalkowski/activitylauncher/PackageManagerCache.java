@@ -28,6 +28,10 @@ class PackageManagerCache {
         return instance;
     }
 
+    static void resetPackageManagerCache() {
+        instance = null;
+    }
+
     MyPackageInfo getPackageInfo(String packageName, Configuration config) throws NameNotFoundException {
         MyPackageInfo myInfo;
 
@@ -63,8 +67,5 @@ class PackageManagerCache {
 
     PackageManager getPackageManager() {
         return this.pm;
-    }
-    static void clearPackageManager() {
-        instance = null;
     }
 }

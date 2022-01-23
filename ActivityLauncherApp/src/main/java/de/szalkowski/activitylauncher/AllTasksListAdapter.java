@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
     private final PackageManager pm;
@@ -30,16 +31,16 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     private List<MyPackageInfo> packages;
     private List<MyPackageView> filtered;
 
-    AllTasksListAdapter(Context context) {
+    AllTasksListAdapter(@NonNull  Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.pm = context.getPackageManager();
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
-        PackageManagerCache.clearPackageManager();
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     void resolve(AllTasksListAsyncProvider.Updater updater) {
         PackageManagerCache cache = PackageManagerCache.getPackageManagerCache(this.pm);
         List<PackageInfo> all_packages = this.pm.getInstalledPackages(0);
+        Configuration locale = SettingsUtils.createLocaleConfiguration(prefs.getString("language", "System Default"));
         this.packages = new ArrayList<>(all_packages.size());
         updater.updateMax(all_packages.size());
         updater.update(0);
@@ -49,7 +50,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             PackageInfo pack = all_packages.get(i);
             MyPackageInfo mypack;
             try {
-                mypack = cache.getPackageInfo(pack.packageName, SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "System Default")));
+                mypack = cache.getPackageInfo(pack.packageName, locale);
                 if (mypack.getActivitiesCount() > 0) {
                     this.packages.add(mypack);
                 }
@@ -58,7 +59,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         }
 
         Collections.sort(this.packages);
-        this.filtered = createFilterView("", this.prefs.getBoolean("hide_private_activities", true));
+        this.filtered = createFilterView("", this.prefs.getBoolean("hide_hide_private", true));
     }
 
     private List<MyPackageView> createFilterView(String query, boolean hidePrivate) {
@@ -182,7 +183,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<MyPackageView> result = createFilterView(constraint.toString(), prefs.getBoolean("hide_private_activities", true));
+                List<MyPackageView> result = createFilterView(constraint.toString(), prefs.getBoolean("hide_hide_private", true));
                 FilterResults wrapped = new FilterResults();
                 wrapped.values = result;
                 wrapped.count = result.size();

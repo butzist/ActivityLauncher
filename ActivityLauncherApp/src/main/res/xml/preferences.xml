@@ -6,14 +6,14 @@
         android:title="Settings">
         <SwitchPreference
             android:defaultValue="false"
-            android:key="private_activities"
+            android:key="hide_private"
             android:title="@string/settings_hide_private"
-            android:summary="@string/settings_summary_private_activities"/>
+            android:summary="@string/settings_summary_hide_private"/>
         <SwitchPreference
             android:defaultValue="false"
-            android:key="root_mode"
+            android:key="allow_root"
             android:title="@string/settings_allow_root"
-            android:summary="@string/settings_summary_root_mode"/>
+            android:summary="@string/settings_summary_allow_root"/>
         <ListPreference
             android:key="theme"
             android:title="@string/settings_theme"

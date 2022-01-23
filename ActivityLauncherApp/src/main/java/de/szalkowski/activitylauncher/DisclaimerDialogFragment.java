@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
-import java.util.Objects;
-
 public class DisclaimerDialogFragment extends DialogFragment {
     @NonNull
     @Override

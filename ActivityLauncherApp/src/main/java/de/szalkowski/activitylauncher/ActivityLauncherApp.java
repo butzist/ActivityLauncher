@@ -18,12 +18,12 @@ public class ActivityLauncherApp extends Application {
             prefs.edit().putBoolean("allow_root", hasSU).apply();
         }
 
-        if (!prefs.contains("hide_private_activities")) {
-            prefs.edit().putBoolean("hide_private_activities", false).apply();
+        if (!prefs.contains("hide_hide_private")) {
+            prefs.edit().putBoolean("hide_hide_private", false).apply();
         }
 
-        if (!prefs.contains("locale")) {
-            prefs.edit().putString("locale", "System Default").apply();
+        if (!prefs.contains("language")) {
+            prefs.edit().putString("language", "System Default").apply();
         }
     }
 }

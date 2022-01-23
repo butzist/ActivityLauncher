@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
                 android:labelFor="@+id/editText_name"
                 android:text="@string/label_name"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:id="@+id/editText_name"
                 android:layout_width="match_parent"
@@ -44,6 +46,7 @@
                 android:labelFor="@+id/editText_package"
                 android:text="@string/label_package"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:id="@+id/editText_package"
                 android:layout_width="match_parent"
@@ -51,6 +54,7 @@
                 android:layout_weight="1"
                 android:importantForAutofill="no"
                 android:inputType="text">
+
                 <requestFocus />
             </EditText>
         </TableRow>
@@ -68,13 +72,14 @@
                 android:labelFor="@+id/editText_class"
                 android:text="@string/label_class"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:id="@+id/editText_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="text" />
         </TableRow>
 
         <TableRow
@@ -90,21 +95,23 @@
                 android:labelFor="@+id/editText_icon"
                 android:text="@string/label_icon"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:id="@+id/editText_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:inputType="text"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="text" />
+
             <ImageButton
                 android:id="@+id/iconButton"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:scaleType="centerInside"
                 android:adjustViewBounds="false"
                 android:contentDescription="@string/title_dialog_icon_picker"
+                android:scaleType="centerInside"
                 android:src="@mipmap/ic_launcher" />
 
         </TableRow>
@@ -122,6 +129,7 @@
                 android:labelFor="@+id/editText_name"
                 android:text="@string/label_as_root"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <CheckBox
                 android:id="@+id/checkBox_as_root"
                 android:layout_width="match_parent"

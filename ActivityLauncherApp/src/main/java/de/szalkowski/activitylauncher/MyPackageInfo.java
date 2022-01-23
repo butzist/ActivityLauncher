@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public class MyPackageInfo implements Comparable<MyPackageInfo> {
     protected String package_name;
@@ -28,11 +27,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         ApplicationInfo app = info.applicationInfo;
 
         if (app != null) {
-            final Resources appRes = pm.getResourcesForApplication(myInfo.package_name);
-            appRes.updateConfiguration(config, new DisplayMetrics());
-            final String localizedLabel = appRes.getString(app.labelRes);
-
-            myInfo.name = localizedLabel;
+            myInfo.name = getLocalizedName(config, pm, myInfo, app);
             try {
                 myInfo.icon = pm.getApplicationIcon(app);
             } catch (Exception e) {
@@ -75,6 +70,12 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         }
 
         return myInfo;
+    }
+
+    private static String getLocalizedName(Configuration config, PackageManager pm, MyPackageInfo myInfo, ApplicationInfo app) throws PackageManager.NameNotFoundException {
+        Resources appRes = pm.getResourcesForApplication(myInfo.package_name);
+        appRes.updateConfiguration(config, new DisplayMetrics());
+        return appRes.getString(app.labelRes);
     }
 
     private static int countActivitiesFromInfo(PackageInfo info) {

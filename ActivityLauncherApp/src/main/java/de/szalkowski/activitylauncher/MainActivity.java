@@ -16,35 +16,34 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity {
-
+    private SharedPreferences prefs;
+    private String localeString;
     private Filterable filterTarget = null;
     private String filter = "";
-    SharedPreferences prefs;
-    String localeString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        if (!prefs.getBoolean("disclaimer_accepted", false)) {
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        this.localeString = prefs.getString("language", "System Default");
+        Configuration config = SettingsUtils.createLocaleConfiguration(this.localeString);
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
+        if (!this.prefs.getBoolean("disclaimer_accepted", false)) {
             DialogFragment dialog = new DisclaimerDialogFragment();
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
         }
-        localeString = prefs.getString("locale", "en_US");
-        Configuration config = SettingsUtils.createLocaleConfiguration(localeString);
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
 
         AllTasksListFragment fragment = new AllTasksListFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
-        filterTarget = fragment;
+        this.filterTarget = fragment;
     }
 
     @Override
@@ -82,13 +81,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!this.localeString.equals(prefs.getString("locale", "System Default"))){
-            recreate();
-            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-            }
+        if (!this.localeString.equals(this.prefs.getString("language", "System Default"))) {
+            recreateFragments();
         }
         updateFilter(this.filter);
+    }
+
+    private void recreateFragments() {
+        recreate();
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
     }
 
     private void updateFilter(String query) {

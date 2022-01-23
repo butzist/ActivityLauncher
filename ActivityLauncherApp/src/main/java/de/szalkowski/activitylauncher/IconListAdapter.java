@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class IconListAdapter extends BaseAdapter {
     private final PackageManager pm;
     private final Context context;
     private final IconLoader loader;
-    private SharedPreferences prefs;
+    private final SharedPreferences prefs;
     private String[] icons;
 
     IconListAdapter(Context context) {
@@ -35,6 +36,7 @@ public class IconListAdapter extends BaseAdapter {
     void resolve(IconListAsyncProvider.Updater updater) {
         TreeSet<String> icons = new TreeSet<>();
         List<PackageInfo> all_packages = this.pm.getInstalledPackages(0);
+        Configuration locale = SettingsUtils.createLocaleConfiguration(prefs.getString("language", "System Default"));
         updater.updateMax(all_packages.size());
         updater.update(0);
 
@@ -45,7 +47,7 @@ public class IconListAdapter extends BaseAdapter {
 
             PackageInfo pack = all_packages.get(i);
             try {
-                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName, SettingsUtils.createLocaleConfiguration(prefs.getString("locale", "System Default")));
+                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName, locale);
 
                 for (int j = 0; j < myPack.getActivitiesCount(); ++j) {
                     String icon_resource_name = myPack.getActivity(j).getIconResouceName();

@@ -35,7 +35,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     private ImageButton image_icon;
     private CheckBox check_as_root;
     private IconLoader loader;
-    private AlertDialog dialog;
+    private AlertDialog alertDialog;
 
     @NonNull
     @Override
@@ -82,6 +82,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                 ShortcutEditDialogFragment.this.image_icon.setImageDrawable(draw_icon);
             }
         });
+
         this.text_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -93,7 +94,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(editable.length() >= 1);
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(editable.length() >= 1);
             }
         });
 
@@ -149,15 +150,15 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> Objects.requireNonNull(ShortcutEditDialogFragment.this.getDialog()).cancel());
 
-        dialog = builder.create();
-        return dialog;
+        alertDialog = builder.create();
+        return alertDialog;
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        if(ShortcutEditDialogFragment.this.text_name.getText().toString().isEmpty()){
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        if (ShortcutEditDialogFragment.this.text_name.getText().toString().isEmpty()) {
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
     }
 
