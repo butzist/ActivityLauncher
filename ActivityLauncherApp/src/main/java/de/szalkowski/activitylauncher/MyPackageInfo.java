@@ -61,7 +61,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
                     throw new AssertionError("Assertion failed");
                 }
                 ComponentName acomp = new ComponentName(activity.packageName, activity.name);
-                MyActivityInfo myActivityInfo = cache.getActivityInfo(acomp,config);
+                MyActivityInfo myActivityInfo = cache.getActivityInfo(acomp, config);
                 myActivityInfo.setPrivate(isPrivate(activity));
                 myInfo.activities[i++] = myActivityInfo;
             }
