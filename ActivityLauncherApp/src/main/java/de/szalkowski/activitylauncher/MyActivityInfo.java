@@ -24,8 +24,6 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
         ActivityInfo act;
         try {
             act = pm.getActivityInfo(activity, 0);
-
-
             info.name = getActivityName(config,pm,activity,act); //act.loadLabel(pm).toString();
             try {
                 info.icon = act.loadIcon(pm);
