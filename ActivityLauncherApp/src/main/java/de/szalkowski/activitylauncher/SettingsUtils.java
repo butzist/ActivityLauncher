@@ -26,7 +26,7 @@ public class SettingsUtils extends AppCompatActivity {
     public static String getCountryName(String name) {
         for (Locale locale : Locale.getAvailableLocales()) {
             if (name.equals(locale.getLanguage() + '_' + locale.getCountry())) {
-                return locale.getDisplayName();
+                return locale.getDisplayName(locale);
             }
         }
         return name;
