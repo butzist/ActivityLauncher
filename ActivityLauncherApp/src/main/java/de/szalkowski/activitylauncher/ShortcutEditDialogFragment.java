@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 
 import org.thirdparty.LauncherIconCreator;
 
@@ -42,7 +44,8 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ComponentName activity = requireArguments().getParcelable("activity");
         final PackageManager pm = requireActivity().getPackageManager();
-        this.activity = MyActivityInfo.fromComponentName(pm, activity);
+        Configuration locale = SettingsUtils.createLocaleConfiguration(PreferenceManager.getDefaultSharedPreferences(getContext()).getString("language", "System Default"));
+        this.activity = MyActivityInfo.fromComponentName(pm, activity, locale);
         this.loader = new IconLoader(requireContext());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
