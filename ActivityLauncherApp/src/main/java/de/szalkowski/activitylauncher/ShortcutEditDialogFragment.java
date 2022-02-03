@@ -14,9 +14,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,14 +25,11 @@ import org.thirdparty.LauncherIconCreator;
 
 import java.util.Objects;
 
+import de.szalkowski.activitylauncher.databinding.DialogEditActivityBinding;
+
 public class ShortcutEditDialogFragment extends DialogFragment {
+    private DialogEditActivityBinding binding;
     private MyActivityInfo activity;
-    private EditText text_name;
-    private EditText text_package;
-    private EditText text_class;
-    private EditText text_icon;
-    private ImageButton image_icon;
-    private CheckBox check_as_root;
     private IconLoader loader;
     private AlertDialog alertDialog;
 
@@ -50,26 +44,19 @@ public class ShortcutEditDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.dialog_edit_activity, null);
+        binding = DialogEditActivityBinding.inflate(inflater, null, false);
 
         boolean rooted = this.isRootAllowed();
         boolean asRoot = rooted && requireArguments().getBoolean("as_root", false);
+        binding.editTextName.setText(this.activity.name);
+        binding.editTextPackage.setText(this.activity.component_name.getPackageName());
+        binding.editTextClass.setText(this.activity.component_name.getClassName());
+        binding.editTextIcon.setText(this.activity.icon_resource_name);
+        binding.checkBoxAsRoot.setChecked(asRoot);
+        binding.checkBoxAsRoot.setEnabled(rooted);
+        binding.textViewAsRoot.setEnabled(rooted);
 
-        this.text_name = view.findViewById(R.id.editText_name);
-        this.text_name.setText(this.activity.name);
-        this.text_package = view.findViewById(R.id.editText_package);
-        this.text_package.setText(this.activity.component_name.getPackageName());
-        this.text_class = view.findViewById(R.id.editText_class);
-        this.text_class.setText(this.activity.component_name.getClassName());
-        this.text_icon = view.findViewById(R.id.editText_icon);
-        this.text_icon.setText(this.activity.icon_resource_name);
-        this.check_as_root = view.findViewById(R.id.checkBox_as_root);
-        this.check_as_root.setChecked(asRoot);
-        this.check_as_root.setEnabled(rooted);
-        var label_as_root = view.findViewById(R.id.textView_as_root);
-        label_as_root.setEnabled(rooted);
-
-        this.text_icon.addTextChangedListener(new TextWatcher() {
+        binding.editTextIcon.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
@@ -82,11 +69,11 @@ public class ShortcutEditDialogFragment extends DialogFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 Drawable draw_icon = ShortcutEditDialogFragment.this.loader.getIcon(s.toString());
-                ShortcutEditDialogFragment.this.image_icon.setImageDrawable(draw_icon);
+                binding.iconButton.setImageDrawable(draw_icon);
             }
         });
 
-        this.text_name.addTextChangedListener(new TextWatcher() {
+        binding.editTextName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -101,28 +88,27 @@ public class ShortcutEditDialogFragment extends DialogFragment {
             }
         });
 
-        this.image_icon = view.findViewById(R.id.iconButton);
-        this.image_icon.setImageDrawable(this.activity.icon);
-        this.image_icon.setOnClickListener(v -> {
+        binding.iconButton.setImageDrawable(this.activity.icon);
+        binding.iconButton.setOnClickListener(v -> {
             IconPickerDialogFragment dialog = new IconPickerDialogFragment();
             dialog.attachIconPickerListener(icon -> {
-                ShortcutEditDialogFragment.this.text_icon.setText(icon);
+                binding.editTextIcon.setText(icon);
                 Drawable draw_icon = this.loader.getIcon(icon);
-                ShortcutEditDialogFragment.this.image_icon.setImageDrawable(draw_icon);
+                binding.iconButton.setImageDrawable(draw_icon);
             });
             dialog.show(getChildFragmentManager(), "icon picker");
         });
 
         builder.setTitle(this.activity.name)
-                .setView(view)
+                .setView(binding.getRoot())
                 .setIcon(this.activity.icon)
                 .setPositiveButton(R.string.context_action_shortcut, (dialog, which) -> {
-                    ShortcutEditDialogFragment.this.activity.name = ShortcutEditDialogFragment.this.text_name.getText().toString();
-                    String component_package = ShortcutEditDialogFragment.this.text_package.getText().toString();
-                    String component_class = ShortcutEditDialogFragment.this.text_class.getText().toString();
-                    boolean as_root = ShortcutEditDialogFragment.this.check_as_root.isChecked();
+                    ShortcutEditDialogFragment.this.activity.name = binding.editTextName.getText().toString();
+                    String component_package = binding.editTextPackage.getText().toString();
+                    String component_class = binding.editTextClass.getText().toString();
+                    boolean as_root = binding.checkBoxAsRoot.isChecked();
                     ShortcutEditDialogFragment.this.activity.component_name = new ComponentName(component_package, component_class);
-                    ShortcutEditDialogFragment.this.activity.icon_resource_name = ShortcutEditDialogFragment.this.text_icon.getText().toString();
+                    ShortcutEditDialogFragment.this.activity.icon_resource_name = binding.editTextIcon.getText().toString();
                     try {
                         final String icon_resource_string = ShortcutEditDialogFragment.this.activity.icon_resource_name;
                         final String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
@@ -160,7 +146,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (ShortcutEditDialogFragment.this.text_name.getText().toString().isEmpty()) {
+        if (binding.editTextName.getText().toString().isEmpty()) {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
     }
