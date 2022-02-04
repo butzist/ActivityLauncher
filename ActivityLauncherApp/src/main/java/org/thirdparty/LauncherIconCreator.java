@@ -148,7 +148,7 @@ public class LauncherIconCreator {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, context.getText(R.string.error).toString() + ": " + e.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getText(R.string.error).toString() + ": " + e, Toast.LENGTH_LONG).show();
         }
     }
 

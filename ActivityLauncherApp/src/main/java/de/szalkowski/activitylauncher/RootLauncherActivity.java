@@ -32,7 +32,7 @@ public class RootLauncherActivity extends FragmentActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), getText(R.string.error).toString() + ": " + e.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getText(R.string.error).toString() + ": " + e, Toast.LENGTH_LONG).show();
         } finally {
             finish();
         }
