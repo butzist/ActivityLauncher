@@ -13,9 +13,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
@@ -23,6 +20,9 @@ import androidx.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import de.szalkowski.activitylauncher.databinding.AllActivitiesChildItemBinding;
+import de.szalkowski.activitylauncher.databinding.AllActivitiesGroupItemBinding;
 
 public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
     private final PackageManager pm;
@@ -103,26 +103,21 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         MyActivityInfo activity = (MyActivityInfo) getChild(groupPosition, childPosition);
-        View view = this.inflater.inflate(R.layout.all_activities_child_item, parent, false);
+        AllActivitiesChildItemBinding binding = AllActivitiesChildItemBinding.inflate(inflater, parent, false);
 
-        TextView text1 = view.findViewById(android.R.id.text1);
-        text1.setText(activity.getName());
+        binding.text1.setText(activity.getName());
 
-        TextView text2 = view.findViewById(android.R.id.text2);
-        text2.setText(activity.getComponentName().getClassName());
+        binding.text2.setText(activity.getComponentName().getClassName());
 
         if (activity.is_private) {
-            ImageView icon1 = view.findViewById(android.R.id.icon1);
-            icon1.setVisibility(View.VISIBLE);
+            binding.icon1.setVisibility(View.VISIBLE);
         }
 
-        ImageView icon = view.findViewById(android.R.id.icon);
-        icon.setImageDrawable(activity.getIcon());
+        binding.icon.setImageDrawable(activity.getIcon());
 
-        ImageButton button = view.findViewById(android.R.id.button1);
-        button.setOnClickListener(view1 -> view.performLongClick());
+        binding.button1.setOnClickListener(view1 -> binding.getRoot().performLongClick());
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -148,16 +143,13 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         MyPackageInfo pack = (MyPackageInfo) getGroup(groupPosition);
-        View view = this.inflater.inflate(R.layout.all_activities_group_item, parent, false);
+        AllActivitiesGroupItemBinding binding = AllActivitiesGroupItemBinding.inflate(inflater, parent, false);
 
-        TextView text = view.findViewById(android.R.id.text1);
-        text.setText(pack.getName());
+        binding.text1.setText(pack.getName());
 
-        ImageView icon = view.findViewById(android.R.id.icon);
-        icon.setImageDrawable(pack.getIcon());
+        binding.icon.setImageDrawable(pack.getIcon());
 
-        ImageButton button = view.findViewById(android.R.id.button1);
-        button.setOnClickListener(view1 -> view.performLongClick());
+        binding.button1.setOnClickListener(view1 -> binding.getRoot().performLongClick());
 
         // expand if filtered list is short enough
         if (this.filtered.size() < 10) {
@@ -165,7 +157,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             expandableListView.expandGroup(groupPosition);
         }
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override

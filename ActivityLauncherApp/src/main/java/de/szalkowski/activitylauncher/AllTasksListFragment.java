@@ -23,16 +23,17 @@ import androidx.fragment.app.Fragment;
 
 import org.thirdparty.LauncherIconCreator;
 
+import de.szalkowski.activitylauncher.databinding.FragmentAllListBinding;
+
 public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter>, Filterable {
-    private ExpandableListView list;
+    private FragmentAllListBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_list, container, false);
+        binding = FragmentAllListBinding.inflate(inflater, container, false);
 
-        this.list = view.findViewById(R.id.expandableListView1);
-        this.list.setOnChildClickListener(
+        binding.expandableListView1.setOnChildClickListener(
                 (parent, v, groupPosition, childPosition, id) -> {
                     ExpandableListAdapter adapter = parent.getExpandableListAdapter();
                     MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
@@ -41,13 +42,13 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                     return false;
                 }
         );
-        this.list.setTextFilterEnabled(true);
-        registerForContextMenu(this.list);
+        binding.expandableListView1.setTextFilterEnabled(true);
+        registerForContextMenu(binding.expandableListView1);
 
         AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(getActivity(), this);
         provider.execute();
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -64,17 +65,16 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
             menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_launch_as_root);
         }
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) menuInfo;
-        ExpandableListView list = requireView().findViewById(R.id.expandableListView1);
 
         switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
             case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
-                MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
+                MyActivityInfo activity = (MyActivityInfo) binding.expandableListView1.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
                 menu.setHeaderIcon(activity.icon);
                 menu.setHeaderTitle(activity.name);
                 menu.add(Menu.NONE, 4, Menu.NONE, R.string.context_action_edit);
                 break;
             case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
-                MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
+                MyPackageInfo pack = (MyPackageInfo) binding.expandableListView1.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 menu.setHeaderIcon(pack.icon);
                 menu.setHeaderTitle(pack.name);
                 break;
@@ -86,11 +86,10 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
-        ExpandableListView list = requireView().findViewById(R.id.expandableListView1);
 
         switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
             case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
-                MyActivityInfo activity = (MyActivityInfo) list.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
+                MyActivityInfo activity = (MyActivityInfo) binding.expandableListView1.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
                         LauncherIconCreator.createLauncherIcon(getActivity(), activity);
@@ -116,7 +115,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 break;
 
             case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
-                MyPackageInfo pack = (MyPackageInfo) list.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
+                MyPackageInfo pack = (MyPackageInfo) binding.expandableListView1.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
                         LauncherIconCreator.createLauncherIcon(requireActivity(), pack);
@@ -140,7 +139,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
     @Override
     public void onProviderFinished(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
         try {
-            this.list.setAdapter(value);
+            binding.expandableListView1.setAdapter(value);
         } catch (Exception e) {
             Toast.makeText(getActivity(), R.string.error_tasks, Toast.LENGTH_SHORT).show();
         }
@@ -148,7 +147,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
 
     @Override
     public Filter getFilter() {
-        AllTasksListAdapter adapter = (AllTasksListAdapter) this.list.getExpandableListAdapter();
+        AllTasksListAdapter adapter = (AllTasksListAdapter) binding.expandableListView1.getExpandableListAdapter();
         if (adapter != null) {
             return adapter.getFilter();
         } else {
