@@ -34,7 +34,7 @@
         android:id="@android:id/button1"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="52dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_gravity="start|center_vertical"
         android:contentDescription="@string/label_menu"
         android:paddingVertical="0dp"
