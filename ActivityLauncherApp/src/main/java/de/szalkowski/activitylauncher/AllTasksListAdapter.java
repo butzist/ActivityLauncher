@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,7 +116,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
         binding.icon.setImageDrawable(activity.getIcon());
 
-        binding.button1.setOnClickListener(view1 -> binding.getRoot().performLongClick());
+        binding.button1.setOnClickListener(this::bringContextMenu);
 
         return binding.getRoot();
     }
@@ -149,7 +150,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
         binding.icon.setImageDrawable(pack.getIcon());
 
-        binding.button1.setOnClickListener(view1 -> binding.getRoot().performLongClick());
+        binding.button1.setOnClickListener(this::bringContextMenu);
 
         // expand if filtered list is short enough
         if (this.filtered.size() < 10) {
@@ -158,6 +159,12 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         }
 
         return binding.getRoot();
+    }
+
+    private void bringContextMenu(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            view.getParent().showContextMenuForChild(view, 0, 0);
+        else view.performLongClick();
     }
 
     @Override
