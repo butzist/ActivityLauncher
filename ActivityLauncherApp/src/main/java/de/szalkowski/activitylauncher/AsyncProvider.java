@@ -1,13 +1,22 @@
 package de.szalkowski.activitylauncher;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
+
+import androidx.appcompat.app.AlertDialog;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
+import de.szalkowski.activitylauncher.databinding.ProgressDialogBinding;
 
 public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {
     private final CharSequence message;
     private final Listener<ReturnType> listener;
-    private final ProgressDialog progress;
+    private final AlertDialog dialog;
+    private final ProgressDialogBinding binding;
+    private final NumberFormat progressPercentFormat = NumberFormat.getPercentInstance();
     private int max;
 
     AsyncProvider(Context context, Listener<ReturnType> listener, boolean showProgressDialog) {
@@ -15,23 +24,31 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
         this.listener = listener;
 
         if (showProgressDialog) {
-            this.progress = new ProgressDialog(context);
+            this.binding = ProgressDialogBinding.inflate(LayoutInflater.from(context));
+            this.dialog = new AlertDialog.Builder(context).setView(binding.getRoot()).create();
+            this.progressPercentFormat.setMaximumFractionDigits(0);
         } else {
-            progress = null;
+            this.binding = null;
+            this.dialog = null;
         }
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-        if (this.progress != null && values.length > 0) {
+        if (this.binding != null && values.length > 0) {
             int value = values[0];
 
             if (value == 0) {
-                this.progress.setIndeterminate(false);
-                this.progress.setMax(this.max);
+                this.binding.progress.setIndeterminate(false);
+                this.binding.progress.setMax(this.max);
             }
 
-            this.progress.setProgress(value);
+            this.binding.progress.setProgress(value);
+            this.binding.progressNumber.setText(
+                    String.format(Locale.getDefault(), "%1d/%2d", value, this.max)
+            );
+            double percent = (double) value / (double) this.max;
+            this.binding.progressPercent.setText(this.progressPercentFormat.format(percent));
         }
     }
 
@@ -39,12 +56,11 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
     protected void onPreExecute() {
         super.onPreExecute();
 
-        if (this.progress != null) {
-            this.progress.setCancelable(false);
-            this.progress.setMessage(this.message);
-            this.progress.setIndeterminate(true);
-            this.progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            this.progress.show();
+        if (this.dialog != null && this.binding != null) {
+            this.dialog.setCancelable(false);
+            this.dialog.setTitle(this.message);
+            this.binding.progress.setIndeterminate(true);
+            this.dialog.show();
         }
     }
 
@@ -55,9 +71,9 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
             this.listener.onProviderFinished(this, result);
         }
 
-        if (this.progress != null) {
+        if (this.dialog != null) {
             try {
-                this.progress.dismiss();
+                this.dialog.dismiss();
             } catch (IllegalArgumentException e) { /* ignore */ }
         }
     }
