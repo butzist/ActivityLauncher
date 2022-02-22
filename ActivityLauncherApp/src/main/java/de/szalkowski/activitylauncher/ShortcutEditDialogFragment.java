@@ -21,6 +21,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import org.thirdparty.LauncherIconCreator;
 
 import java.util.Objects;
@@ -42,7 +44,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
         this.activity = MyActivityInfo.fromComponentName(pm, activity, locale);
         this.loader = new IconLoader(requireContext());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity());
         LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         binding = DialogEditActivityBinding.inflate(inflater, null, false);
 

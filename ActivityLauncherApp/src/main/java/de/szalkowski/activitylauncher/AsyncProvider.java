@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -25,7 +27,7 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
 
         if (showProgressDialog) {
             this.binding = ProgressDialogBinding.inflate(LayoutInflater.from(context));
-            this.dialog = new AlertDialog.Builder(context).setView(binding.getRoot()).create();
+            this.dialog = new MaterialAlertDialogBuilder(context).setView(binding.getRoot()).create();
             this.progressPercentFormat.setMaximumFractionDigits(0);
         } else {
             this.binding = null;

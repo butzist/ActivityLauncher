@@ -29,7 +29,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -244,7 +245,7 @@ public class LauncherIconCreator {
 
             shortcutManager.requestPinShortcut(shortcutInfo, null);
         } else {
-            new AlertDialog.Builder(context)
+            new MaterialAlertDialogBuilder(context)
                     .setTitle(context.getText(R.string.error_creating_shortcut))
                     .setMessage(context.getText(R.string.error_verbose_pin_shortcut))
                     .setPositiveButton(context.getText(android.R.string.ok), (dialog, which) -> {
