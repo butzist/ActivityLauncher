@@ -14,13 +14,13 @@
             android:key="allow_root"
             android:title="@string/settings_allow_root"
             android:summary="@string/settings_summary_allow_root"/>
-        <ListPreference
+        <de.szalkowski.activitylauncher.ListPreference
             android:key="theme"
             android:title="@string/settings_theme"
             android:entries="@array/theme_settings"
             android:defaultValue="0"
             android:entryValues="@array/theme_settings_values"/>
-        <ListPreference
+        <de.szalkowski.activitylauncher.ListPreference
             android:key="language"
             android:title="@string/settings_language"
             android:entryValues="@array/locales"

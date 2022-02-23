@@ -2,7 +2,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="android:statusBarColor" tools:targetApi="lollipop">#80404040</item>
-        <!-- This only is needed for androidx.preference initiated alert dialogs -->
-        <item name="dialogCornerRadius">24dp</item>
     </style>
 </resources>
