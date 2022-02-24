@@ -1,6 +1,8 @@
 The project is looking for a co-maintainer and someone, who can improve the UI/UX of the app. Check the issues section on the GitHub page if you are interested in contributing to this open-source project.
 
 * Updated translations (you can update/vote for the correct translation on Crowdin - link is provided in the app)
-* Allow launch and shortcuts of private activities
-* Settings screen (by @Ismael034)
-* Bug Fixes (by @Ismael034)
+* Remove Russian language support due to continuous unfriendly feedback
+* Bring context menu on three dots clicks (@ebraminio)
+* Replace the deprecated ProgressDialog with app custom one (@ebraminio)
+* Add launcher shortcut for Android TV (@Ismael034)
+* Add roundness to the dialogs (@Ismael034)
