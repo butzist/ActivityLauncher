@@ -1,0 +1,11 @@
+Это Android приложение, с открытым источником, даёт доступ к скрытым функц
+иям установленных приложений и создает ярлыки для них на домашнем экране .
+
+Этому проекту все еще не хватает нескольких функций и перевода. Ждем от вас дополнений!
+
+Исходный код: https://github.com/butzist/ActivityLauncher
+Переводы: http://crowdin.net/project/activitylauncher/invite
+Авторизация бета-версии: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+
+
+
