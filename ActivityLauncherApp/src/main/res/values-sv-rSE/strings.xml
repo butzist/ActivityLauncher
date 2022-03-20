@@ -44,9 +44,9 @@
     <string name="filter_hint">paket/åtgärd</string>
     <string name="activity_settings">Inställningar</string>
     <string name="settings_hide_private">Dölj privata aktiviteter</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_summary_hide_private">Dölj privata (oexporterade och inaktiverade) aktiviteter, som inte kan startas utan root-åtkomst</string>
     <string name="settings_allow_root">Tillåt rot</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
+    <string name="settings_summary_allow_root">Tillåt start av privata aktiviteter genom att använda root-rättigheter</string>
     <string name="settings_language">Språk</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Systemstandard</string>

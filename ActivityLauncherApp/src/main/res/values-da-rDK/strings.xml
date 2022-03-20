@@ -44,9 +44,9 @@
     <string name="filter_hint">pakke/handling</string>
     <string name="activity_settings">Indstillinger</string>
     <string name="settings_hide_private">Skjul private aktiviteter</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_summary_hide_private">Skjul private (ikke-eksporterede og deaktiverede) aktiviteter, som ikke kan startes uden root-adgang</string>
     <string name="settings_allow_root">Tillad root-adgang</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
+    <string name="settings_summary_allow_root">Tillad start af private aktiviteter vha. root-privilegier</string>
     <string name="settings_language">Sprog</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Systemstandard</string>

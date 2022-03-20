@@ -45,9 +45,9 @@
     <string name="filter_hint">软件包/操作</string>
     <string name="activity_settings">设置</string>
     <string name="settings_hide_private">隐藏不可用的活动</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_summary_hide_private">隐藏的活动（无接口或禁用）不能在没有Root权限下被打开。</string>
     <string name="settings_allow_root">允许Root</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
+    <string name="settings_summary_allow_root">允许通过使用 Root 权限启动隐藏活动</string>
     <string name="settings_language">语言</string>
     <string name="settings_theme">主题背景</string>
     <string name="theme_default">系统默认</string>

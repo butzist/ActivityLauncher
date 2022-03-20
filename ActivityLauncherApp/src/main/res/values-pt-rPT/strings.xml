@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Activity Launcher</string>
-    <string name="short_description">Lança atividades ocultas e cria atalhos para aplicações instaladas</string>
+    <string name="short_description">Inicia atividades ocultas e cria atalhos para as aplicações instaladas</string>
     <string name="title_section_all">Todas as atividades</string>
     <string name="title_dialog_disclaimer">Aviso</string>
     <string name="title_dialog_icon_picker">Escolha um ícone</string>
     <string name="dialog_progress_loading">A carregar&#8230;</string>
-    <string name="dialog_disclaimer">Utilize este software por sua conta e risco.
-Algumas aplicações podem comportar-se de forma inesperada quando as suas atividades são lançadas em contexto diferente do esperado podendo levar à perda de dados ou pior. Pretende aceitar e continuar?</string>
-    <string name="context_action_launch">Lançar atividade</string>
+    <string name="dialog_disclaimer">Utilize este software ao seu próprio risco.
+Algumas aplicações podem comportar-se de forma inesperada quando as suas atividades são iniciadas em contexto diferente do esperado podendo levar à perda de dados, instabilidade ou pior. Pretende continuar?</string>
+    <string name="context_action_launch">Iniciar atividade</string>
     <string name="context_action_launch_as_root">Iniciar atividade como root</string>
     <string name="context_action_shortcut">Criar atalho</string>
-    <string name="context_action_shortcut_as_root">Criar atalho como root</string>
+    <string name="context_action_shortcut_as_root">Criar atalho com o acesso ao Root</string>
     <string name="context_action_edit">Editar atalho</string>
     <string name="label_name">Nome</string>
     <string name="label_package">Pacote</string>
     <string name="label_class">Identificador</string>
     <string name="label_icon">Ícone</string>
-    <string name="label_menu">Menú</string>
+    <string name="label_menu">Menu</string>
     <string name="label_private">Privado</string>
     <string name="label_as_root">Como root</string>
     <string name="starting_activity">A iniciar a atividade: %s</string>
@@ -42,14 +42,14 @@ Algumas aplicações podem comportar-se de forma inesperada quando as suas ativi
     <string name="action_view_bugs">Reportar problemas</string>
     <string name="summary_action_view_bugs">Caso tenha sugestões ou problemas, por favor reporte-os no nosso projeto no GitHub.</string>
     <string name="action_filter">Filtro</string>
-    <string name="filter_hint">Pacote/acção</string>
+    <string name="filter_hint">Pacote/ação</string>
     <string name="activity_settings">Definições</string>
-    <string name="settings_hide_private">Hide private activities</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
-    <string name="settings_allow_root">Enable privileged mode</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
-    <string name="settings_language">Language</string>
-    <string name="settings_theme">Theme</string>
+    <string name="settings_hide_private">Esconder atividades privadas</string>
+    <string name="settings_summary_hide_private">Esconder atividades privadas (não exportadas e inativas) que não conseguem ser iniciadas sem acesso a Root</string>
+    <string name="settings_allow_root">Ativar modo privilegiado</string>
+    <string name="settings_summary_allow_root">Permitir o início de atividades privadas com o uso de privilégios ao Root</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_theme">Tema</string>
     <string name="theme_default">Predefinição do Sistema</string>
     <string name="theme_light">Tema Claro</string>
     <string name="theme_dark">Tema Escuro</string>

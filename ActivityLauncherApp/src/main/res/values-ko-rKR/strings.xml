@@ -44,9 +44,9 @@
     <string name="filter_hint">패키지/동작</string>
     <string name="activity_settings">설정</string>
     <string name="settings_hide_private">비활성 액티비티 숨김</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_summary_hide_private">루트 권한 없이는 실행할 수 없는, 비활성(출시되지 않은, 숨은) 액티비티를 숨김</string>
     <string name="settings_allow_root">루트 허용</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
+    <string name="settings_summary_allow_root">루트 권한을 이용하여 비활성 액티비티 실행 허용</string>
     <string name="settings_language">언어</string>
     <string name="settings_theme">테마</string>
     <string name="theme_default">시스템 기본값</string>

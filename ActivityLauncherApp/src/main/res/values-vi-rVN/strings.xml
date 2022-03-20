@@ -44,9 +44,9 @@
     <string name="filter_hint">gói/hành động</string>
     <string name="activity_settings">Cài đặt</string>
     <string name="settings_hide_private">Ẩn hoạt động private</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_summary_hide_private">Ẩn hoạt động (chưa export và tắt) ẩn danh không thể bắt đầu nếu không có quyền root</string>
     <string name="settings_allow_root">Cho phép root</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
+    <string name="settings_summary_allow_root">Cho phép bắt đầu hoạt động ẩn danh bằng quyền root</string>
     <string name="settings_language">Ngôn ngữ</string>
     <string name="settings_theme">Chủ đề</string>
     <string name="theme_default">Mặc định hệ thống</string>

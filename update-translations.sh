@@ -8,6 +8,7 @@ chmod 644 */*.*
 chmod 755 *
 rm -fr ../descriptions
 mv descriptions ..
-cp -r res/*  ../ActivityLauncherApp/src/main/res/
+cp -r res/* ../ActivityLauncherApp/src/main/res/
+cp -r res/values-en-rUS  ../ActivityLauncherApp/src/main/res/values-ru-rRU
 popd
 rm -fr _crowdin

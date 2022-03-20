@@ -44,9 +44,9 @@
     <string name="filter_hint">πακέτο/δράση</string>
     <string name="activity_settings">Ρυθμίσεις</string>
     <string name="settings_hide_private">Απόκρυψη ιδιωτικών δραστηριοτήτων</string>
-    <string name="settings_summary_hide_private">Απόκρυψη ιδιωτικών (μη εξαγόμενων και απενεργοποιημένων) ενεργειών, που δεν μπορούν να ξεκινήσουν χωρίς πρόσβαση root</string>
+    <string name="settings_summary_hide_private">Απόκρυψη ιδιωτικών (μη εξαγόμενων και απενεργοποιημένων) δραστηριοτήτων, που δεν μπορούν να ξεκινήσουν χωρίς πρόσβαση root</string>
     <string name="settings_allow_root">Να επιτρέπεται η λειτουργία root</string>
-    <string name="settings_summary_allow_root">Αποδοχή έναρξης ιδιωτικών ενεργειών με χρήση δικαιώματος root</string>
+    <string name="settings_summary_allow_root">Αποδοχή έναρξης ιδιωτικών δραστηριότητες με χρήση δικαιώματος root</string>
     <string name="settings_language">Γλώσσα</string>
     <string name="settings_theme">Θέμα</string>
     <string name="theme_default">Προεπιλογή Συστήματος</string>
