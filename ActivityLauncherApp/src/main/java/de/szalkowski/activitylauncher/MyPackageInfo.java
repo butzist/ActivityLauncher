@@ -62,7 +62,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
                 }
                 ComponentName acomp = new ComponentName(activity.packageName, activity.name);
                 MyActivityInfo myActivityInfo = cache.getActivityInfo(acomp, config);
-                myActivityInfo.setPrivate(isPrivate(activity));
+                myActivityInfo.setPrivate(isPrivate(activity, pm.getComponentEnabledSetting(acomp)));
                 myInfo.activities[i++] = myActivityInfo;
             }
 
@@ -83,8 +83,18 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         return info.activities.length;
     }
 
-    private static boolean isPrivate(ActivityInfo activity) {
-        return !activity.isEnabled() || !activity.exported;
+    private static boolean isPrivate(ActivityInfo activity, int enabledState) {
+        if(!activity.exported)
+            return true;
+
+        switch (enabledState) {
+            case PackageManager.COMPONENT_ENABLED_STATE_DISABLED:
+                return true;
+            case PackageManager.COMPONENT_ENABLED_STATE_ENABLED:
+                return false;
+            default:
+                return !activity.isEnabled();
+        }
     }
 
     public int getActivitiesCount() {
