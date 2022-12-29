@@ -43,9 +43,19 @@
         <activity
             android:name=".RootLauncherActivity"
             android:label="@string/context_action_launch_as_root"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/AppTheme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoDisplay">
+            <intent-filter>
+                <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>

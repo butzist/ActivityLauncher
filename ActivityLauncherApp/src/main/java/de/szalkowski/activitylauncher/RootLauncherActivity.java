@@ -4,11 +4,9 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.thirdparty.LauncherIconCreator;
-
-public class RootLauncherActivity extends FragmentActivity {
+public class RootLauncherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class RootLauncherActivity extends FragmentActivity {
 
             var signer = new Signer(getApplicationContext());
             if (signer.validateComponentNameSignature(componentName, signature)) {
-                LauncherIconCreator.launchActivity(getApplicationContext(), componentName, true);
+                LauncherActivity.launchActivity(getApplicationContext(), componentName, true);
             }
         } catch (Exception e) {
             e.printStackTrace();
