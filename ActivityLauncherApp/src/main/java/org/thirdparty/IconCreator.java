@@ -37,7 +37,9 @@ import de.szalkowski.activitylauncher.MyActivityInfo;
 import de.szalkowski.activitylauncher.MyPackageInfo;
 import de.szalkowski.activitylauncher.R;
 
-public class LauncherIconCreator {
+public class IconCreator {
+
+    private static String INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT";
 
     public static Intent getActivityIntent(ComponentName activity, Bundle extras) {
         Intent intent = new Intent();
@@ -160,7 +162,7 @@ public class LauncherIconCreator {
 
         if (shortcutManager.isRequestPinShortcutSupported()) {
             Icon icon = getIconFromDrawable(draw);
-            Intent intent = new Intent("activitylauncher.intent.action.LAUNCH_SHORTCUT");
+            Intent intent = new Intent(INTENT_LAUNCH_SHORTCUT);
             intent.putExtra("extra_intent", extraIntent.toUri(0));
 
             ShortcutInfo shortcutInfo = new ShortcutInfo.Builder(context, appName)

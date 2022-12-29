@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LauncherActivity"
+            android:name=".ShortcutActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoDisplay">
             <intent-filter>

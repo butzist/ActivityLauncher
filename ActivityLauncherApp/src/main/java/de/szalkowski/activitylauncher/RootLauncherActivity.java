@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.thirdparty.Launcher;
+
 public class RootLauncherActivity extends AppCompatActivity {
 
     @Override
@@ -26,7 +28,7 @@ public class RootLauncherActivity extends AppCompatActivity {
 
             var signer = new Signer(getApplicationContext());
             if (signer.validateComponentNameSignature(componentName, signature)) {
-                LauncherActivity.launchActivity(getApplicationContext(), componentName, true);
+                Launcher.launchActivity(getApplicationContext(), componentName, true);
             }
         } catch (Exception e) {
             e.printStackTrace();

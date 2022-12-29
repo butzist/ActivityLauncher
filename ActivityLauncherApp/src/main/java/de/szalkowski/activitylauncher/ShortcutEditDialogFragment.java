@@ -20,7 +20,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
-import org.thirdparty.LauncherIconCreator;
+import org.thirdparty.IconCreator;
 
 import java.util.Objects;
 
@@ -133,7 +133,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                     if (as_root) {
                         RootLauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
                     } else {
-                        LauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                        IconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> Objects.requireNonNull(ShortcutEditDialogFragment.this.getDialog()).cancel());

@@ -1,47 +1,29 @@
-package de.szalkowski.activitylauncher;
+package org.thirdparty;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import org.thirdparty.LauncherIconCreator;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LauncherActivity extends AppCompatActivity {
+import de.szalkowski.activitylauncher.R;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        try {
-            Intent launchIntent = Intent.parseUri(getIntent().getStringExtra("extra_intent"), 0);
-            launchActivity(this, launchIntent.getComponent(), false);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } finally {
-            finish();
-        }
-    }
-
+public class Launcher {
     /**
      * Got reference from stackoverflow.com URL
      * https://stackoverflow.com/questions/9194725/run-android-program-as-root
      * https://stackoverflow.com/questions/12343227/escaping-bash-function-arguments-for-use-by-su-c
      */
     public static void launchActivity(Context context, ComponentName activity, boolean asRoot) {
-        Intent intent = LauncherIconCreator.getActivityIntent(activity, null);
+        Intent intent = IconCreator.getActivityIntent(activity, null);
         Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()),
                 Toast.LENGTH_LONG).show();
         try {
