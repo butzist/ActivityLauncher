@@ -28,7 +28,7 @@ public class RootLauncherActivity extends AppCompatActivity {
 
             var signer = new Signer(getApplicationContext());
             if (signer.validateComponentNameSignature(componentName, signature)) {
-                Launcher.launchActivity(getApplicationContext(), componentName, true);
+                Launcher.launchActivity(getApplicationContext(), componentName, true, true);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,10 +22,12 @@ public class Launcher {
      * https://stackoverflow.com/questions/9194725/run-android-program-as-root
      * https://stackoverflow.com/questions/12343227/escaping-bash-function-arguments-for-use-by-su-c
      */
-    public static void launchActivity(Context context, ComponentName activity, boolean asRoot) {
+    public static void launchActivity(Context context, ComponentName activity, boolean asRoot, boolean showToast) {
         Intent intent = IconCreator.getActivityIntent(activity, null);
-        Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()),
-                Toast.LENGTH_LONG).show();
+
+        if (showToast)
+            Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()),
+                    Toast.LENGTH_LONG).show();
         try {
             if (!asRoot) {
                 context.startActivity(intent);

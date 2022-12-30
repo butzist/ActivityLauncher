@@ -39,7 +39,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                     ExpandableListAdapter adapter = parent.getExpandableListAdapter();
                     MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
                     var rooted = isRootAllowed();
-                    Launcher.launchActivity(getActivity(), info.component_name, rooted && info.is_private);
+                    Launcher.launchActivity(getActivity(), info.component_name, rooted && info.is_private, true);
                     return false;
                 }
         );
@@ -99,10 +99,10 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                         RootLauncherIconCreator.createLauncherIcon(getActivity(), activity);
                         break;
                     case 2:
-                        Launcher.launchActivity(getActivity(), activity.component_name, false);
+                        Launcher.launchActivity(getActivity(), activity.component_name, false, true);
                         break;
                     case 3:
-                        Launcher.launchActivity(getActivity(), activity.component_name, true);
+                        Launcher.launchActivity(getActivity(), activity.component_name, true, true);
                         break;
                     case 4:
                         DialogFragment dialog = new ShortcutEditDialogFragment();
