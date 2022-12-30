@@ -21,7 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import org.thirdparty.LauncherIconCreator;
+import org.thirdparty.IconCreator;
+import org.thirdparty.Launcher;
 
 import de.szalkowski.activitylauncher.databinding.FragmentAllListBinding;
 
@@ -38,7 +39,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                     ExpandableListAdapter adapter = parent.getExpandableListAdapter();
                     MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
                     var rooted = isRootAllowed();
-                    LauncherIconCreator.launchActivity(getActivity(), info.component_name, rooted && info.is_private);
+                    Launcher.launchActivity(getActivity(), info.component_name, rooted && info.is_private);
                     return false;
                 }
         );
@@ -92,16 +93,16 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 MyActivityInfo activity = (MyActivityInfo) binding.expandableListView1.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
-                        LauncherIconCreator.createLauncherIcon(getActivity(), activity);
+                        IconCreator.createLauncherIcon(getActivity(), activity);
                         break;
                     case 1:
                         RootLauncherIconCreator.createLauncherIcon(getActivity(), activity);
                         break;
                     case 2:
-                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, false);
+                        Launcher.launchActivity(getActivity(), activity.component_name, false);
                         break;
                     case 3:
-                        LauncherIconCreator.launchActivity(getActivity(), activity.component_name, true);
+                        Launcher.launchActivity(getActivity(), activity.component_name, true);
                         break;
                     case 4:
                         DialogFragment dialog = new ShortcutEditDialogFragment();
@@ -118,7 +119,7 @@ public class AllTasksListFragment extends Fragment implements AllTasksListAsyncP
                 MyPackageInfo pack = (MyPackageInfo) binding.expandableListView1.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
                 switch (item.getItemId()) {
                     case 0:
-                        LauncherIconCreator.createLauncherIcon(requireActivity(), pack);
+                        IconCreator.createLauncherIcon(requireActivity(), pack);
                         Toast.makeText(getActivity(), getString(R.string.error_no_default_activity), Toast.LENGTH_LONG).show();
                         break;
                     case 2:

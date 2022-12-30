@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import org.thirdparty.LauncherIconCreator;
+import org.thirdparty.IconCreator;
 
 public class RootLauncherIconCreator {
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {
@@ -29,6 +29,6 @@ public class RootLauncherIconCreator {
         activity.is_private = true;
         activity.component_name = new ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.RootLauncherActivity");
 
-        LauncherIconCreator.createLauncherIcon(context, activity, extras);
+        IconCreator.createLauncherIcon(context, activity, extras);
     }
 }
