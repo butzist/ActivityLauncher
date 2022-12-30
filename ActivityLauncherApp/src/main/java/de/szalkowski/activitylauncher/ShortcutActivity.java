@@ -17,8 +17,8 @@ public class ShortcutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try {
             Intent launchIntent = Intent.parseUri(getIntent().getStringExtra("extra_intent"), 0);
-            launchActivity(this, launchIntent.getComponent(), false);
-        } catch (URISyntaxException e) {
+            launchActivity(this, launchIntent.getComponent(), false, false);
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             finish();
