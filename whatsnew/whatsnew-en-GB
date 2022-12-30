@@ -1,6 +1,2 @@
 * Updated translations (you can update/vote for the correct translation on Crowdin - link is provided in the app)
-* Remove Russian language support due to continuous unfriendly feedback
-* Bring context menu on three dots clicks (@ebraminio)
-* Replace the deprecated ProgressDialog with app custom one (@ebraminio)
-* Add launcher shortcut for Android TV (@Ismael034)
-* Add roundness to the dialogs (@Ismael034)
+* Fix for issue #171 (Shortcuts not working propertly in Android 13) (@Ismael034)
