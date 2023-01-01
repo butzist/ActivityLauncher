@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.activity;
 
 import static org.thirdparty.Launcher.launchActivity;
 
@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.net.URISyntaxException;
 
 public class ShortcutActivity extends AppCompatActivity {
 

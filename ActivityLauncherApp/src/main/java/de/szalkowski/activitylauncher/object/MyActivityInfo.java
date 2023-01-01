@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.object;
 
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
@@ -55,18 +55,50 @@ public class MyActivityInfo implements Comparable<MyActivityInfo> {
         return icon;
     }
 
+    public int getIconResource() {
+        return icon_resource;
+    }
+
+    public String getIconResourceName() {
+        return icon_resource_name;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getIconResouceName() {
-        return icon_resource_name;
+    public Boolean isPrivate() {
+        return is_private;
     }
 
     private static String getActivityName(Configuration config, PackageManager pm, ComponentName activityComponent, ActivityInfo activity) throws PackageManager.NameNotFoundException {
         Resources appRes = pm.getResourcesForApplication(activityComponent.getPackageName());
         appRes.updateConfiguration(config, new DisplayMetrics());
         return appRes.getString(activity.labelRes);
+    }
+
+    public void setComponentName(ComponentName component_name) {
+        this.component_name = component_name;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+    }
+
+    public void setIconResource(int icon_resource) {
+        this.icon_resource = icon_resource;
+    }
+
+    public void setIconResourceName(String icon_resource_name) {
+        this.icon_resource_name = icon_resource_name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrivate(Boolean is_private) {
+        this.is_private = is_private;
     }
 
     @Override

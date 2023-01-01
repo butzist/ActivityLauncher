@@ -1,10 +1,10 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.util;
 
 import java.io.File;
 import java.util.Objects;
 import java.util.Vector;
 
-public class RootDetection {
+public class RootUtils {
     public static boolean detectSU() {
         var paths = new Vector<File>();
         var dirs = Objects.requireNonNull(System.getenv("PATH")).split(":");
@@ -17,9 +17,6 @@ public class RootDetection {
                 return true;
             }
         }
-
         return false;
     }
-
-
 }

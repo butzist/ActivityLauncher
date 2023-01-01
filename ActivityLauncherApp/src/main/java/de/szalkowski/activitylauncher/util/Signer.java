@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.util;
 
 import android.content.ComponentName;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.async;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import de.szalkowski.activitylauncher.R;
 import de.szalkowski.activitylauncher.databinding.ProgressDialogBinding;
 
 public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {
@@ -89,18 +90,18 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
         void onProviderFinished(AsyncProvider<ReturnType> task, ReturnType value);
     }
 
-    class Updater {
+    public class Updater {
         private final AsyncProvider<ReturnType> provider;
 
         Updater(AsyncProvider<ReturnType> provider) {
             this.provider = provider;
         }
 
-        void update(int value) {
+        public void update(int value) {
             this.provider.publishProgress(value);
         }
 
-        void updateMax(int value) {
+        public void updateMax(int value) {
             this.provider.max = value;
         }
     }

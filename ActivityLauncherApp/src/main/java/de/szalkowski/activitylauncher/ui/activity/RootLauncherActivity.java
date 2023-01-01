@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.activity;
 
 import android.content.ComponentName;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.thirdparty.Launcher;
+
+import de.szalkowski.activitylauncher.R;
+import de.szalkowski.activitylauncher.util.Signer;
 
 public class RootLauncherActivity extends AppCompatActivity {
 

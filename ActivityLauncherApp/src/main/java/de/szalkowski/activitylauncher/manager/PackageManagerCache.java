@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.manager;
 
 import android.content.ComponentName;
 import android.content.pm.PackageInfo;
@@ -9,7 +9,10 @@ import android.content.res.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
-class PackageManagerCache {
+import de.szalkowski.activitylauncher.object.MyActivityInfo;
+import de.szalkowski.activitylauncher.object.MyPackageInfo;
+
+public class PackageManagerCache {
     private static PackageManagerCache instance = null;
     private final Map<String, MyPackageInfo> packageInfos;
     private final Map<ComponentName, MyActivityInfo> activityInfos;
@@ -21,18 +24,18 @@ class PackageManagerCache {
         this.activityInfos = new HashMap<>();
     }
 
-    static PackageManagerCache getPackageManagerCache(PackageManager pm) {
+    public static PackageManagerCache getPackageManagerCache(PackageManager pm) {
         if (instance == null) {
             instance = new PackageManagerCache(pm);
         }
         return instance;
     }
 
-    static void resetPackageManagerCache() {
+    public static void resetPackageManagerCache() {
         instance = null;
     }
 
-    MyPackageInfo getPackageInfo(String packageName, Configuration config) throws NameNotFoundException {
+    public MyPackageInfo getPackageInfo(String packageName, Configuration config) throws NameNotFoundException {
         MyPackageInfo myInfo;
 
         synchronized (packageInfos) {
@@ -50,7 +53,7 @@ class PackageManagerCache {
         return myInfo;
     }
 
-    MyActivityInfo getActivityInfo(ComponentName activityName, Configuration config) {
+    public MyActivityInfo getActivityInfo(ComponentName activityName, Configuration config) {
         MyActivityInfo myInfo;
 
         synchronized (activityInfos) {
@@ -65,7 +68,7 @@ class PackageManagerCache {
         return myInfo;
     }
 
-    PackageManager getPackageManager() {
+    public PackageManager getPackageManager() {
         return this.pm;
     }
 }

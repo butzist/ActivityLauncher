@@ -1,13 +1,12 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.util;
 
 import android.content.res.Configuration;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Locale;
 
-public class SettingsUtils extends AppCompatActivity {
+public class SettingsUtils {
     public final static String THEME_DEFAULT = "0";
     public final static String THEME_LIGHT = "1";
     public final static String THEME_DARK = "2";
