@@ -82,6 +82,62 @@
                 android:inputType="text" />
         </TableRow>
 
+
+        <TableRow>
+            <TextView
+                android:id="@+id/textView_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:labelFor="@+id/editText_action"
+                android:text="@string/label_action"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editText_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:text="android.intent.action.VIEW" />
+
+            <CheckBox
+                android:id="@+id/checkBox_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:labelFor="@+id/editText_data"
+                android:text="@string/label_data"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editText_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+
+            <CheckBox
+                android:id="@+id/checkBox_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+        </TableRow>
+
         <TableRow
             android:id="@+id/tableRow_icon"
             android:layout_width="wrap_content"

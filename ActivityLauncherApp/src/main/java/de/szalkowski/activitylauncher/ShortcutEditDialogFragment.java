@@ -8,6 +8,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -51,6 +52,10 @@ public class ShortcutEditDialogFragment extends DialogFragment {
         binding.editTextName.setText(this.activity.name);
         binding.editTextPackage.setText(this.activity.component_name.getPackageName());
         binding.editTextClass.setText(this.activity.component_name.getClassName());
+        binding.checkBoxAction.setOnCheckedChangeListener((buttonView, isChecked) -> binding.editTextAction.setEnabled(isChecked));
+        binding.editTextAction.setEnabled(binding.checkBoxAction.isChecked());
+        binding.checkBoxData.setOnCheckedChangeListener((buttonView, isChecked) -> binding.editTextData.setEnabled(isChecked));
+        binding.editTextData.setEnabled(binding.checkBoxData.isChecked());
         binding.editTextIcon.setText(this.activity.icon_resource_name);
         binding.checkBoxAsRoot.setChecked(asRoot);
         binding.checkBoxAsRoot.setEnabled(rooted);
@@ -131,10 +136,24 @@ public class ShortcutEditDialogFragment extends DialogFragment {
                         Toast.makeText(getActivity(), R.string.error_invalid_icon_format, Toast.LENGTH_LONG).show();
                     }
 
-                    if (as_root) {
-                        RootLauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                    final String action;
+                    if (binding.checkBoxAction.isChecked()) {
+                        action = binding.editTextAction.getText().toString();
                     } else {
-                        LauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                        action = null;
+                    }
+
+                    final Uri data;
+                    if (binding.checkBoxData.isChecked()) {
+                        data = Uri.parse(binding.editTextData.getText().toString());
+                    } else {
+                        data = null;
+                    }
+
+                    if (as_root) {
+                        RootLauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity, action, data);
+                    } else {
+                        LauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity, action, data);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> Objects.requireNonNull(ShortcutEditDialogFragment.this.getDialog()).cancel());

@@ -52,4 +52,6 @@
     <string name="theme_default">System Default</string>
     <string name="theme_light">Light Theme</string>
     <string name="theme_dark">Dark Theme</string>
+    <string name="label_data">Data</string>
+    <string name="label_action">Action</string>
 </resources>

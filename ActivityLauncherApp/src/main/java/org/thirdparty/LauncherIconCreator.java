@@ -24,6 +24,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ import de.szalkowski.activitylauncher.R;
 
 public class LauncherIconCreator {
 
-    private static Intent getActivityIntent(ComponentName activity, Bundle extras) {
+    private static Intent getActivityIntent(ComponentName activity, Bundle extras, String action, Uri data) {
         Intent intent = new Intent();
         intent.setComponent(activity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -55,10 +56,20 @@ public class LauncherIconCreator {
             intent.putExtras(extras);
         }
 
+        if (action != null) {
+            intent.setAction(action);
+        } else {
+            intent.setAction(Intent.ACTION_CREATE_SHORTCUT);
+        }
+
+        if (data != null) {
+            intent.setData(data);
+        }
+
         return intent;
     }
 
-    public static void createLauncherIcon(Context context, MyActivityInfo activity, Bundle extras) {
+    public static void createLauncherIcon(Context context, MyActivityInfo activity, Bundle extras, String action, Uri data) {
         String pack = null;
 
         if (activity.getIconResouceName() != null && activity.getIconResouceName().indexOf(':') >= 0) {
@@ -66,7 +77,7 @@ public class LauncherIconCreator {
         }
 
         String name = activity.getName();
-        Intent intent = getActivityIntent(activity.getComponentName(), extras);
+        Intent intent = getActivityIntent(activity.getComponentName(), extras, action, data);
         Drawable icon = activity.getIcon();
 
 
@@ -79,7 +90,11 @@ public class LauncherIconCreator {
     }
 
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-        createLauncherIcon(context, activity, null);
+        createLauncherIcon(context, activity, null, null);
+    }
+
+    public static void createLauncherIcon(Context context, MyActivityInfo activity, String action, Uri data) {
+        createLauncherIcon(context, activity, null, action, data);
     }
 
     public static void createLauncherIcon(Context context, MyPackageInfo pack) {
@@ -136,7 +151,7 @@ public class LauncherIconCreator {
      * https://stackoverflow.com/questions/12343227/escaping-bash-function-arguments-for-use-by-su-c
      */
     public static void launchActivity(Context context, ComponentName activity, boolean asRoot) {
-        Intent intent = LauncherIconCreator.getActivityIntent(activity, null);
+        Intent intent = LauncherIconCreator.getActivityIntent(activity, null, null, null);
         Toast.makeText(context, String.format(context.getText(R.string.starting_activity).toString(), activity.flattenToShortString()),
                 Toast.LENGTH_LONG).show();
 
@@ -233,7 +248,6 @@ public class LauncherIconCreator {
 
         if (shortcutManager.isRequestPinShortcutSupported()) {
             Icon icon = getIconFromDrawable(draw);
-            intent.setAction(Intent.ACTION_CREATE_SHORTCUT);
 
             ShortcutInfo shortcutInfo = new ShortcutInfo.Builder(context, appName)
                     .setShortLabel(appName)
