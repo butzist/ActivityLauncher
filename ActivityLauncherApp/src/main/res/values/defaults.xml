@@ -1,5 +1,5 @@
 <resources>
-    <string name="url_source" translatable="false">https://github.com/butzist/ActivityLauncher</string>
+    <string name="url_source" translatable="false">https://github.com/Sash0k/ActivityLauncher/tree/rustore-fork</string>
     <string name="url_translation" translatable="false">https://crowdin.net/project/activitylauncher/invite</string>
     <string name="url_bugs" translatable="false">https://github.com/butzist/ActivityLauncher/issues</string>
 </resources>

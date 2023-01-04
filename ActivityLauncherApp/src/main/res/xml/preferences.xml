@@ -42,7 +42,8 @@
             android:key="action_view_translation"
             android:title="@string/action_view_translation"
             android:summary="@string/summary_action_view_translation"
-            app:singleLineTitle="true">
+            app:singleLineTitle="true"
+            app:isPreferenceVisible="false">
             <intent android:action="android.intent.action.VIEW"
                 android:data="@string/url_translation" />
         </Preference>
@@ -50,7 +51,8 @@
             android:key="action_view_bugs"
             android:title="@string/action_view_bugs"
             android:summary="@string/summary_action_view_bugs"
-            app:singleLineTitle="true">
+            app:singleLineTitle="true"
+            app:isPreferenceVisible="false">
             <intent android:action="android.intent.action.VIEW"
                 android:data="@string/url_bugs" />
         </Preference>
