@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -7,11 +7,13 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
-class IconLoader {
+import androidx.core.content.res.ResourcesCompat;
+
+public class IconLoader {
     private final PackageManager pm;
     private final Context context;
 
-    IconLoader(Context context) {
+    public IconLoader(Context context) {
         this.context = context;
         this.pm = context.getPackageManager();
     }
@@ -23,10 +25,10 @@ class IconLoader {
 
     @TargetApi(21)
     static Drawable getDrawable(Resources res, int id, Resources.Theme theme) {
-        return res.getDrawable(id, theme);
+        return ResourcesCompat.getDrawable(res,id, theme);
     }
 
-    Drawable getIcon(String icon_resource_string) {
+    public Drawable getIcon(String icon_resource_string) {
         try {
             String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
             String type = icon_resource_string.substring(icon_resource_string.indexOf(':') + 1, icon_resource_string.indexOf('/'));

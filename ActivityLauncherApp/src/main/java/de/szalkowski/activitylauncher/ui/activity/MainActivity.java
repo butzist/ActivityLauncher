@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +16,12 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
+import de.szalkowski.activitylauncher.constant.Constants;
+import de.szalkowski.activitylauncher.ui.fragment.AllTasksListFragment;
+import de.szalkowski.activitylauncher.ui.fragment.dialog.DisclaimerDialogFragment;
+import de.szalkowski.activitylauncher.R;
+import de.szalkowski.activitylauncher.util.SettingsUtils;
+
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private String localeString;
@@ -30,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         this.prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        this.localeString = prefs.getString("language", "System Default");
+        this.localeString = prefs.getString(Constants.PREF_LANGUAGE, "System Default");
         Configuration config = SettingsUtils.createLocaleConfiguration(this.localeString);
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
 
-        if (!this.prefs.getBoolean("disclaimer_accepted", false)) {
+        if (!this.prefs.getBoolean(Constants.PREF_DISCLAIMER, false)) {
             DialogFragment dialog = new DisclaimerDialogFragment();
             dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
         }
@@ -119,6 +125,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean isRootAllowed() {
-        return PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean("allow_root", false);
+        return PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean(Constants.PREF_ALLOW_ROOT, false);
     }
 }

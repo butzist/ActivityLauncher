@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.activity;
 
 import static org.thirdparty.Launcher.launchActivity;
 

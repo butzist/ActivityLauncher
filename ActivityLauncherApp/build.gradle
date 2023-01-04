@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "de.szalkowski.activitylauncher"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
     }
     buildTypes {
         release {
@@ -40,8 +40,8 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.fragment:fragment:1.5.2'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.fragment:fragment:1.5.5'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference:1.2.0'
 

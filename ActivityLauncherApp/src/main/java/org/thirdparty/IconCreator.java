@@ -33,13 +33,14 @@ import androidx.appcompat.app.AlertDialog;
 import java.util.Objects;
 
 
-import de.szalkowski.activitylauncher.MyActivityInfo;
-import de.szalkowski.activitylauncher.MyPackageInfo;
+import de.szalkowski.activitylauncher.object.MyActivityInfo;
+import de.szalkowski.activitylauncher.object.MyPackageInfo;
 import de.szalkowski.activitylauncher.R;
+import de.szalkowski.activitylauncher.util.Signer;
 
 public class IconCreator {
 
-    private static String INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT";
+    private static final String INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT";
 
     public static Intent getActivityIntent(ComponentName activity, Bundle extras) {
         Intent intent = new Intent();
@@ -57,8 +58,8 @@ public class IconCreator {
     public static void createLauncherIcon(Context context, MyActivityInfo activity, Bundle extras) {
         String pack = null;
 
-        if (activity.getIconResouceName() != null && activity.getIconResouceName().indexOf(':') >= 0) {
-            pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
+        if (activity.getIconResourceName() != null && activity.getIconResourceName().indexOf(':') >= 0) {
+            pack = activity.getIconResourceName().substring(0, activity.getIconResourceName().indexOf(':'));
         }
 
         String name = activity.getName();
@@ -70,8 +71,32 @@ public class IconCreator {
         if (pack != null && !pack.equals(activity.getComponentName().getPackageName())) {
             createShortcut(context, name, icon, intent, null);
         } else {
-            createShortcut(context, name, icon, intent, activity.getIconResouceName());
+            createShortcut(context, name, icon, intent, activity.getIconResourceName());
         }
+    }
+
+    public static void createRootLauncherIcon(Context context, MyActivityInfo activity) {
+        var signer = new Signer(context);
+        var extras = new Bundle();
+        var comp = activity.getComponentName();
+
+        String signature;
+        try {
+            signature = signer.signComponentName(comp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, context.getText(R.string.error).toString() + ": " + e, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        extras.putString("pkg", comp.getPackageName());
+        extras.putString("cls", comp.getClassName());
+        extras.putString("sign", signature);
+
+        activity.setPrivate(true);
+        activity.setComponentName(new ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.activities.RootLauncherActivity"));
+
+        IconCreator.createLauncherIcon(context, activity, extras);
     }
 
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {

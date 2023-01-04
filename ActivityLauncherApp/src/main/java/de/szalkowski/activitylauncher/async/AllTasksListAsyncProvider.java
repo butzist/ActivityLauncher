@@ -1,13 +1,15 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.async;
 
 import android.content.Context;
+
+import de.szalkowski.activitylauncher.ui.adapter.AllTasksListAdapter;
 
 public class AllTasksListAsyncProvider extends AsyncProvider<AllTasksListAdapter> {
     private final AllTasksListAdapter adapter;
 
-    AllTasksListAsyncProvider(
+    public AllTasksListAsyncProvider(
             Context context,
-            de.szalkowski.activitylauncher.AsyncProvider.Listener<AllTasksListAdapter> listener) {
+            AsyncProvider.Listener<AllTasksListAdapter> listener) {
         super(context, listener, true);
         this.adapter = new AllTasksListAdapter(context);
     }

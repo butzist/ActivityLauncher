@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.fragment.dialog;
 
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -24,7 +24,12 @@ import org.thirdparty.IconCreator;
 
 import java.util.Objects;
 
+import de.szalkowski.activitylauncher.util.IconLoader;
+import de.szalkowski.activitylauncher.R;
+import de.szalkowski.activitylauncher.util.SettingsUtils;
 import de.szalkowski.activitylauncher.databinding.DialogEditActivityBinding;
+import de.szalkowski.activitylauncher.object.MyActivityInfo;
+import de.szalkowski.activitylauncher.ui.activity.MainActivity;
 
 public class ShortcutEditDialogFragment extends DialogFragment {
     private DialogEditActivityBinding binding;
@@ -37,7 +42,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ComponentName activity = requireArguments().getParcelable("activity");
         final PackageManager pm = requireActivity().getPackageManager();
-        Configuration locale = SettingsUtils.createLocaleConfiguration(PreferenceManager.getDefaultSharedPreferences(getContext()).getString("language", "System Default"));
+        Configuration locale = SettingsUtils.createLocaleConfiguration(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("language", "System Default"));
         this.activity = MyActivityInfo.fromComponentName(pm, activity, locale);
         this.loader = new IconLoader(requireContext());
 
@@ -47,10 +52,10 @@ public class ShortcutEditDialogFragment extends DialogFragment {
 
         boolean rooted = this.isRootAllowed();
         boolean asRoot = rooted && requireArguments().getBoolean("as_root", false);
-        binding.editTextName.setText(this.activity.name);
-        binding.editTextPackage.setText(this.activity.component_name.getPackageName());
-        binding.editTextClass.setText(this.activity.component_name.getClassName());
-        binding.editTextIcon.setText(this.activity.icon_resource_name);
+        binding.editTextName.setText(this.activity.getName());
+        binding.editTextPackage.setText(this.activity.getComponentName().getPackageName());
+        binding.editTextClass.setText(this.activity.getComponentName().getClassName());
+        binding.editTextIcon.setText(this.activity.getIconResourceName());
         binding.checkBoxAsRoot.setChecked(asRoot);
         binding.checkBoxAsRoot.setEnabled(rooted);
         binding.textViewAsRoot.setEnabled(rooted);
@@ -87,7 +92,7 @@ public class ShortcutEditDialogFragment extends DialogFragment {
             }
         });
 
-        binding.iconButton.setImageDrawable(this.activity.icon);
+        binding.iconButton.setImageDrawable(this.activity.getIcon());
         binding.iconButton.setOnClickListener(v -> {
             IconPickerDialogFragment dialog = new IconPickerDialogFragment();
             dialog.attachIconPickerListener(icon -> {
@@ -98,40 +103,40 @@ public class ShortcutEditDialogFragment extends DialogFragment {
             dialog.show(getChildFragmentManager(), "icon picker");
         });
 
-        builder.setTitle(this.activity.name)
+        builder.setTitle(this.activity.getName())
                 .setView(binding.getRoot())
-                .setIcon(this.activity.icon)
+                .setIcon(this.activity.getIcon())
                 .setPositiveButton(R.string.context_action_shortcut, (dialog, which) -> {
-                    ShortcutEditDialogFragment.this.activity.name = binding.editTextName.getText().toString();
+                    ShortcutEditDialogFragment.this.activity.setName(binding.editTextName.getText().toString());
                     String component_package = binding.editTextPackage.getText().toString();
                     String component_class = binding.editTextClass.getText().toString();
                     boolean as_root = binding.checkBoxAsRoot.isChecked();
-                    ShortcutEditDialogFragment.this.activity.component_name = new ComponentName(component_package, component_class);
-                    ShortcutEditDialogFragment.this.activity.icon_resource_name = binding.editTextIcon.getText().toString();
+                    ShortcutEditDialogFragment.this.activity.setComponentName(new ComponentName(component_package, component_class));
+                    ShortcutEditDialogFragment.this.activity.setIconResourceName(binding.editTextIcon.getText().toString());
                     try {
-                        final String icon_resource_string = ShortcutEditDialogFragment.this.activity.icon_resource_name;
+                        final String icon_resource_string = ShortcutEditDialogFragment.this.activity.getIconResourceName();
                         final String pack = icon_resource_string.substring(0, icon_resource_string.indexOf(':'));
                         final String type = icon_resource_string.substring(icon_resource_string.indexOf(':') + 1, icon_resource_string.indexOf('/'));
                         final String name = icon_resource_string.substring(icon_resource_string.indexOf('/') + 1);
 
                         Resources resources = pm.getResourcesForApplication(pack);
-                        ShortcutEditDialogFragment.this.activity.icon_resource = resources.getIdentifier(name, type, pack);
-                        if (ShortcutEditDialogFragment.this.activity.icon_resource != 0) {
-                            ShortcutEditDialogFragment.this.activity.icon = ResourcesCompat.getDrawable(resources, ShortcutEditDialogFragment.this.activity.icon_resource, null);
+                        ShortcutEditDialogFragment.this.activity.setIconResource(resources.getIdentifier(name, type, pack));
+                        if (ShortcutEditDialogFragment.this.activity.getIconResource() != 0) {
+                            ShortcutEditDialogFragment.this.activity.setIcon(ResourcesCompat.getDrawable(resources, ShortcutEditDialogFragment.this.activity.getIconResource(), null));
                         } else {
-                            ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
+                            ShortcutEditDialogFragment.this.activity.setIcon(pm.getDefaultActivityIcon());
                             Toast.makeText(getActivity(), R.string.error_invalid_icon_resource, Toast.LENGTH_LONG).show();
                         }
                     } catch (NameNotFoundException e) {
-                        ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
+                        ShortcutEditDialogFragment.this.activity.setIcon(pm.getDefaultActivityIcon());
                         Toast.makeText(getActivity(), R.string.error_invalid_icon_resource, Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
-                        ShortcutEditDialogFragment.this.activity.icon = pm.getDefaultActivityIcon();
+                        ShortcutEditDialogFragment.this.activity.setIcon(pm.getDefaultActivityIcon());
                         Toast.makeText(getActivity(), R.string.error_invalid_icon_format, Toast.LENGTH_LONG).show();
                     }
 
                     if (as_root) {
-                        RootLauncherIconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
+                        IconCreator.createRootLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
                     } else {
                         IconCreator.createLauncherIcon(getActivity(), ShortcutEditDialogFragment.this.activity);
                     }

@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.util;
 
 import java.io.File;
 import java.util.Objects;

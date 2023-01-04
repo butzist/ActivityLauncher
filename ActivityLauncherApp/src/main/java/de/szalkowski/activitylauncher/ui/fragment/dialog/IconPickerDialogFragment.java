@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.fragment.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import de.szalkowski.activitylauncher.R;
+import de.szalkowski.activitylauncher.async.AsyncProvider;
+import de.szalkowski.activitylauncher.async.IconListAsyncProvider;
+import de.szalkowski.activitylauncher.ui.adapter.IconListAdapter;
 
 public class IconPickerDialogFragment extends DialogFragment implements IconListAsyncProvider.Listener<IconListAdapter> {
     private GridView grid;

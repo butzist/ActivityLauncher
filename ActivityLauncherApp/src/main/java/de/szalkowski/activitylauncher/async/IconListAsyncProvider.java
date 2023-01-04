@@ -1,11 +1,13 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.async;
 
 import android.content.Context;
 
-class IconListAsyncProvider extends AsyncProvider<IconListAdapter> {
+import de.szalkowski.activitylauncher.ui.adapter.IconListAdapter;
+
+public class IconListAsyncProvider extends AsyncProvider<IconListAdapter> {
     private final IconListAdapter adapter;
 
-    IconListAsyncProvider(Context context, Listener<IconListAdapter> listener) {
+    public IconListAsyncProvider(Context context, Listener<IconListAdapter> listener) {
         super(context, listener, false);
         this.adapter = new IconListAdapter(context);
     }

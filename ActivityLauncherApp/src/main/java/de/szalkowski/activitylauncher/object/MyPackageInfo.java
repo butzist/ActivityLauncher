@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.object;
 
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
@@ -11,6 +11,9 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
 import java.util.Arrays;
+
+import de.szalkowski.activitylauncher.BuildConfig;
+import de.szalkowski.activitylauncher.manager.PackageManagerCache;
 
 public class MyPackageInfo implements Comparable<MyPackageInfo> {
     protected String package_name;

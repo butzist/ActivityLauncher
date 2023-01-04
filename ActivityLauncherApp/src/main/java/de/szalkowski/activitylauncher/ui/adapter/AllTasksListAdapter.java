@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,8 +22,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.szalkowski.activitylauncher.constant.Constants;
+import de.szalkowski.activitylauncher.util.SettingsUtils;
+import de.szalkowski.activitylauncher.async.AllTasksListAsyncProvider;
 import de.szalkowski.activitylauncher.databinding.AllActivitiesChildItemBinding;
 import de.szalkowski.activitylauncher.databinding.AllActivitiesGroupItemBinding;
+import de.szalkowski.activitylauncher.manager.PackageManagerCache;
+import de.szalkowski.activitylauncher.object.MyActivityInfo;
+import de.szalkowski.activitylauncher.object.MyPackageInfo;
 
 public class AllTasksListAdapter extends BaseExpandableListAdapter implements Filterable {
     private final PackageManager pm;
@@ -32,13 +38,13 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
     private List<MyPackageInfo> packages;
     private List<MyPackageView> filtered;
 
-    AllTasksListAdapter(@NonNull Context context) {
+    public AllTasksListAdapter(@NonNull Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.pm = context.getPackageManager();
         this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    void resolve(AllTasksListAsyncProvider.Updater updater) {
+    public void resolve(AllTasksListAsyncProvider.Updater updater) {
         PackageManagerCache cache = PackageManagerCache.getPackageManagerCache(this.pm);
         List<PackageInfo> all_packages = this.pm.getInstalledPackages(0);
         Configuration locale = SettingsUtils.createLocaleConfiguration(prefs.getString("language", "System Default"));
@@ -73,10 +79,10 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
             for (int i = 0; i < parent.getActivitiesCount(); ++i) {
                 MyActivityInfo child = parent.getActivity(i);
                 if (
-                        (child.name.toLowerCase().contains(q) ||
-                                child.component_name.flattenToString().toLowerCase().contains(q) ||
-                                child.icon_resource_name != null && child.icon_resource_name.toLowerCase().contains(q)
-                        ) && (!hidePrivate || !child.is_private)
+                        (child.getName().toLowerCase().contains(q) ||
+                                child.getComponentName().flattenToString().toLowerCase().contains(q) ||
+                                child.getIconResourceName() != null && child.getIconResourceName().toLowerCase().contains(q)
+                        ) && (!hidePrivate || !child.isPrivate())
                 ) {
                     entry.add(child, i);
                 }
@@ -110,7 +116,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
 
         binding.text2.setText(activity.getComponentName().getClassName());
 
-        if (activity.is_private) {
+        if (activity.isPrivate()) {
             binding.icon1.setVisibility(View.VISIBLE);
         }
 
@@ -182,7 +188,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<MyPackageView> result = createFilterView(constraint.toString(), prefs.getBoolean("hide_hide_private", true));
+                List<MyPackageView> result = createFilterView(constraint.toString(), prefs.getBoolean(Constants.PREF_HIDE_HIDE_PRIVATE, true));
                 FilterResults wrapped = new FilterResults();
                 wrapped.values = result;
                 wrapped.count = result.size();
