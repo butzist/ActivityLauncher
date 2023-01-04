@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:title="Settings">
+        android:title="@string/activity_settings">
         <SwitchPreference
             android:defaultValue="false"
             android:key="hide_private"
@@ -28,7 +28,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="About">
+        android:title="@string/category_title_about">
         <Preference
             android:key="action_view_source"
             android:title="@string/action_view_source"
