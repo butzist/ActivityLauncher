@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="?android:attr/activatedBackgroundIndicator"
     android:descendantFocusability="blocksDescendants"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@android:id/icon"
-        android:layout_width="92dp"
+        android:id="@+id/imageView_activity_icon"
+        android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/label_icon"
-        android:paddingStart="60dp"
-        android:paddingEnd="0dp"
+        android:layout_marginStart="60dp"
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|center_vertical|fill_horizontal"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:descendantFocusability="blocksDescendants"
         android:orientation="vertical"
@@ -30,26 +29,22 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical|fill_horizontal"
             android:descendantFocusability="blocksDescendants"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@android:id/icon1"
+                android:id="@+id/imageView_lock"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:contentDescription="@string/label_private"
-                android:padding="0dp"
                 android:src="@android:drawable/ic_lock_lock"
                 android:visibility="gone" />
 
             <TextView
-                android:id="@android:id/text1"
+                android:id="@+id/textView_activity_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
                 android:text="Activity Title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textIsSelectable="false" />
@@ -57,10 +52,9 @@
         </LinearLayout>
 
         <TextView
-            android:id="@android:id/text2"
+            android:id="@+id/textView_activity_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical"
             android:text="package.name/.ActivityClass"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textIsSelectable="false" />
@@ -68,15 +62,13 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@android:id/button1"
+        android:id="@+id/imageButton_context_menu"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="52dp"
+        android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/label_menu"
-        android:padding="0dp"
-        android:paddingVertical="0dp"
         android:src="@drawable/ic_baseline_more_vert_24" />
 
 </LinearLayout>

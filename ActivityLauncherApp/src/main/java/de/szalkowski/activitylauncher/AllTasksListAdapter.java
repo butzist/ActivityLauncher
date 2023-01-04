@@ -106,17 +106,17 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         MyActivityInfo activity = (MyActivityInfo) getChild(groupPosition, childPosition);
         AllActivitiesChildItemBinding binding = AllActivitiesChildItemBinding.inflate(inflater, parent, false);
 
-        binding.text1.setText(activity.getName());
+        binding.textViewActivityTitle.setText(activity.getName());
 
-        binding.text2.setText(activity.getComponentName().getClassName());
+        binding.textViewActivityClass.setText(activity.getComponentName().getClassName());
 
         if (activity.is_private) {
-            binding.icon1.setVisibility(View.VISIBLE);
+            binding.imageViewLock.setVisibility(View.VISIBLE);
         }
 
-        binding.icon.setImageDrawable(activity.getIcon());
+        binding.imageViewActivityIcon.setImageDrawable(activity.getIcon());
 
-        binding.button1.setOnClickListener(this::bringContextMenu);
+        binding.imageButtonContextMenu.setOnClickListener(this::bringContextMenu);
 
         return binding.getRoot();
     }
@@ -146,11 +146,11 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         MyPackageInfo pack = (MyPackageInfo) getGroup(groupPosition);
         AllActivitiesGroupItemBinding binding = AllActivitiesGroupItemBinding.inflate(inflater, parent, false);
 
-        binding.text1.setText(pack.getName());
+        binding.textViewPackageName.setText(pack.getName());
 
-        binding.icon.setImageDrawable(pack.getIcon());
+        binding.imageViewPackageIcon.setImageDrawable(pack.getIcon());
 
-        binding.button1.setOnClickListener(this::bringContextMenu);
+        binding.imageButtonContextMenu.setOnClickListener(this::bringContextMenu);
 
         // expand if filtered list is short enough
         if (this.filtered.size() < 10) {
