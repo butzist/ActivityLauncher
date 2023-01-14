@@ -39,12 +39,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.fragment:fragment:1.5.2'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
-    implementation 'androidx.preference:preference:1.2.0'
-
-    // force newer version of dependency of dependency
-    def lifecycleVersion = '2.5.1'
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.preference:preference:1.1.1'
 }
