@@ -34,6 +34,7 @@
     <string name="warning_root_check">Предупреждение: Вероятно, на этом устройстве недоступны привилегии root.</string>
     <string name="exception_invalid_component_name">Недопустимое или потенциально опасное имя компонента: %s</string>
     <string name="exception_command_error">Команда вернула код ошибки: %d, результат: %s</string>
+    <string name="category_title_about">О приложении</string>
     <string name="action_view_source">Просмотреть исходный код</string>
     <string name="summary_action_view_source">Исходный код приложения доступен для чтения и изменения на GitHub.</string>
     <string name="action_view_translation">Помогите с переводом!</string>
@@ -42,7 +43,7 @@
     <string name="summary_action_view_bugs">Если у вас есть предложения или вопросы, сообщите о них в нашем проекте на GitHub.</string>
     <string name="action_filter">Фильтр…</string>
     <string name="filter_hint">пакет/действие</string>
-    <string name="activity_settings">Установки</string>
+    <string name="activity_settings">Настройки</string>
     <string name="settings_hide_private">Скрыть приватные действия</string>
     <string name="settings_summary_hide_private">Скрыть приватные и отключеные действия, которые невозможно запустить без root-доступа</string>
     <string name="settings_allow_root">Включить привилегированный режим</string>
