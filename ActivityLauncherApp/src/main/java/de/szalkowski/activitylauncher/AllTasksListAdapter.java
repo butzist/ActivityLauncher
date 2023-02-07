@@ -147,6 +147,7 @@ public class AllTasksListAdapter extends BaseExpandableListAdapter implements Fi
         AllActivitiesGroupItemBinding binding = AllActivitiesGroupItemBinding.inflate(inflater, parent, false);
 
         binding.textViewPackageName.setText(pack.getName());
+        binding.textViewPackageVersion.setText(pack.version);
 
         binding.imageViewPackageIcon.setImageDrawable(pack.getIcon());
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/activatedBackgroundIndicator"
@@ -8,13 +9,23 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/imageView_lock"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:contentDescription="@string/label_private"
+        android:layout_margin="8dp"
+        android:src="@android:drawable/ic_lock_lock"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
+
+    <ImageView
         android:id="@+id/imageView_activity_icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/label_icon"
-        android:layout_marginStart="60dp"
-        android:src="@mipmap/ic_launcher" />
+        tools:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -32,20 +43,11 @@
             android:descendantFocusability="blocksDescendants"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView_lock"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:contentDescription="@string/label_private"
-                android:src="@android:drawable/ic_lock_lock"
-                android:visibility="gone" />
-
             <TextView
                 android:id="@+id/textView_activity_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activity Title"
+                tools:text="Activity Title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textIsSelectable="false" />
 
@@ -55,7 +57,7 @@
             android:id="@+id/textView_activity_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="package.name/.ActivityClass"
+            tools:text="package.name/.ActivityClass"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textIsSelectable="false" />
 

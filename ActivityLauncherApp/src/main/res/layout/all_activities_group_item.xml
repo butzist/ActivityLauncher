@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/activatedBackgroundIndicator"
     android:descendantFocusability="blocksDescendants"
-    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:minHeight="?android:attr/listPreferredItemHeightLarge"
     android:orientation="horizontal">
 
     <ImageView
@@ -15,18 +16,37 @@
         android:contentDescription="@string/label_icon"
         android:duplicateParentState="true"
         android:layout_marginStart="30dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginEnd="10dp"
+        tools:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/textView_package_name"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:duplicateParentState="true"
-        android:paddingStart="10dp"
-        android:text="Package Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textView_package_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:duplicateParentState="true"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="Package Name" />
+
+        <TextView
+            android:id="@+id/textView_package_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="1.0.0" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/imageButton_context_menu"

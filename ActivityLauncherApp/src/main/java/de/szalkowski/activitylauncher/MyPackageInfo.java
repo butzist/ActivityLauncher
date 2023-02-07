@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 public class MyPackageInfo implements Comparable<MyPackageInfo> {
     protected String package_name;
+    protected String version;
     protected Drawable icon;
     protected int icon_resource;
     protected String icon_resource_name;
@@ -24,6 +25,7 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
         var pm = cache.getPackageManager();
         var myInfo = new MyPackageInfo();
         myInfo.package_name = info.packageName;
+        myInfo.version = info.versionName + " (" + info.versionCode + ")";
         ApplicationInfo app = info.applicationInfo;
 
         if (app != null) {
