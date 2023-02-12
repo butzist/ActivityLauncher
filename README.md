@@ -1,7 +1,6 @@
 Activity Launcher
 =================
-![](images/1.png)
-![](images/3.png)
+<img src="images/1.png" width="300"> <img src="images/3.png" width="300">
 
 Запуск и создание ярлыков для установленных приложений (в том числе для скрытых в системе).
 
