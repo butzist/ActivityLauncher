@@ -1,7 +1,0 @@
-このオープンソースの Android アプリは、普通非表示になっているアクティビティを起動したり、ホーム画面にインストールされているアプリのショートカットを作成します。
-
-このプロジェクトは、まだいくつかの機能や翻訳ができていません。 あなたの貢献をお待ちしています!
-
-ソースコード: https://github.com/butzist/ActivityLauncher
-翻訳: http://crowdin.net/project/activitylauncher/invite
-ベータ版のオプトイン: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

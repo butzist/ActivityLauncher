@@ -1,7 +1,0 @@
-Este Aplicativo Android inicia atividades ocultas e cria atalhos na tela inicial para aplicativos instalados.
-
-Este projeto ainda carece de alguns recursos e traduções. Você está convidado a contribuir!
-
-Código fonte: https://github.com/butzist/ActivityLauncher
-Traduções: http://crowdin.net/project/activitylauncher/invite
-Opt-in para versão Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

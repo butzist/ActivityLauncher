@@ -1,7 +1,0 @@
-Αυτή η εφαρμογή Android ανοιχτού κώδικα εκκινεί κρυφές δραστηριότητες και δημιουργεί συντομεύσεις εγκατεστημένων εφαρμογών στην αρχική οθόνη.
-
-Από αυτό το έργο λείπουν ακόμη μερικά χαρακτηριστικά και μεταφράσεις. Μπορείτε να συνεισφέρετε!
-
-Πηγαίος κώδικας: https://github.com/butzist/ActivityLauncher
-Μεταφράσεις: http://crowdin.net/project/activitylauncher/invite
-Προαιρετικά για έκδοση Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

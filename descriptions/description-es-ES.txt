@@ -1,7 +1,0 @@
-Esta aplicación de Android de código abierto lanza actividades ocultas y crea accesos directos en la pantalla de inicio para las aplicaciones instaladas.
-
-Este proyecto todavía carece de algunas características y traducción. ¡Te invitamos a contribuir!
-
-El código fuente es: https://github.com/butzist/ActivityLauncher
-Traducciones en: http://crowdin.net/project/activitylauncher/invite
-Opt-in para versión beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -1,7 +1,0 @@
-Deze Android App start verborgen activiteiten en maakt snelkoppelingen op het startscherm voor geïnstalleerde apps.
-
-Dit project mist nog enkele functies en vertalingen. Uw bijdrage is welkom!
-
-Broncode: https://github.com/butzist/ActivityLauncher
-Vertalingen: http://crowdin.net/project/activitylauncher/invite
-Opt-in voor Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

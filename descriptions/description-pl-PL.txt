@@ -1,7 +1,0 @@
-Ta aplikacja open-source na Androida uruchamia ukryte działania i tworzy skróty do ekranu głównego dla zainstalowanych aplikacji.
-
-W tym projekcie wciąż brakuje kilku funkcji i tłumaczeń. Serdecznie zapraszamy do brania udziału!
-
-Kod źródłowy: https://github.com/butzist/ActivityLauncher
-Tłumaczenia: http://crowdin.net/project/activitylauncher/invite
-Opt-in dla wersji Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -1,7 +1,0 @@
-Această aplicație Android open-source lansează activități ascunse și creează scurtături pe ecranul de pornire pentru aplicațiile instalate.
-
-Acest proiect încă nu are câteva caracteristici și traducere. Sunteți bineveniți să contribuiți!
-
-Cod sursă: https://github.com/butzist/ActivityLauncher
-Traduceri: http://crowdin.net/project/activitylauncher/invite
-Accesați versiunea Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

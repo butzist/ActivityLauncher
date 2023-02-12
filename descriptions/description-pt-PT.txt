@@ -1,7 +1,0 @@
-Este aplicativo de código aberto abre atividades ocultas e cria atalhos na tela inicial para apps instalados.
-
-Este projeto ainda carece de alguns recursos e traduções. Está convidado a contribuir!
-
-Source code: https://github.com/butzist/ActivityLauncher
-Traduções: http://crowdin.net/project/activitylauncher/invite
-Opt-in para versão Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

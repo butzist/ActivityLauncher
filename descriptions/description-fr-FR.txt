@@ -1,7 +1,0 @@
-Cette application Android open-source lance les activités cachées et crée des raccourcis de l'écran d'accueil pour les applications installées.
-
-Ce projet nécessite encore quelques fonctionnalités et traductions supplémentaires. Vous êtes invités à contribuer !
-
-Code source : https://github.com/butzist/ActivityLauncher
-Traductions : http://crowdin.net/project/activitylauncher/invite
-Opt-in pour la version bêta : https://play.google.com/apps/testing/de.szalkowski.activitylauncher

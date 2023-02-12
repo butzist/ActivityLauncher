@@ -1,7 +1,0 @@
-Denne open-source Android-app starter skjulte aktiviteter og opretter Startskærmsgenveje til installere apps.
-
-Dette projekt mangler stadig nogle få funktioner samt oversættelse. Du er velkommen til a bidrage!
-
-Kildekode: https://github.com/butzist/ActivityLauncher
-Oversættelser: http://crowdin.net/project/activitylauncher/invite
-Abonnér på Beta-versioner: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

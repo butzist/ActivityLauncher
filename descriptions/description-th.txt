@@ -1,7 +1,0 @@
-This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.
-
-This project still lacks a few features and translation. You are welcome to contribute!
-
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

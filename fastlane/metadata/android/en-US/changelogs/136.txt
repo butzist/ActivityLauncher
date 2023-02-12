@@ -1,0 +1,5 @@
+* fork feature: implemented search history
+* fork feature: show versions for apps in list, UI redesign
+* fork: size and internal dependencies optimized (about 30% smaller)
+* fork: translations improved
+* mainline: Fix for issue #171 (Shortcuts not working properly in Android 13) (@Ismael034)

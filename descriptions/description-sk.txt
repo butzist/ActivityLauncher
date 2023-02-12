@@ -1,7 +1,0 @@
-Táto open-source Android aplikácia spúšťa skryté aktivity a vytvára widgety pre nainštalované aplikácie.
-
-Tento projekt stále neobsahuje niektoré funkcie a preklady. Každý príspevok je vítaný.
-
-Zdrojový kód: https://github.com/butzist/ActivityLauncher
-Preklady: http://crowdin.net/project/activitylauncher/invite
-Beta vydanie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

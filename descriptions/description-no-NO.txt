@@ -1,7 +1,0 @@
-Denne åpen-kilden Android App lanserer skjulte aktiviteter og oppretter startsiden snarveier for installerte programmer.
-
-Dette prosjektet mangler fortsatt mange funksjoner og oversettelse. Du er velkommen til å delta!
-
-Kildekode: https://github.com/butzist/ActivityLauncher
-Oversettelser: http://crowdin.net/project/activitylauncher/invite
-Opt-in for betaversjon: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

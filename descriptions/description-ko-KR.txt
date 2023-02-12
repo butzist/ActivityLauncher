@@ -1,7 +1,0 @@
-이 오픈소스 안드로이드 앱은 설치된 앱의 숨겨진 액티비티의 바로가기를 홈 화면에 생성하여 바로 실행할 수 있습니다.
-
-이 앱의 일부 기능에 대한 현지어 번역이 현재 진행 중에 있습니다. 참여해 주신다면 감사하겠습니다!
-
-소스 코드: https://github.com/butzist/ActivityLauncher
-번역에 참여하기: http://crowdin.net/project/activitylauncher/invite
-베타 릴리스에 참여하기: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

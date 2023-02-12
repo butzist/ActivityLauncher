@@ -1,7 +1,0 @@
-Denna Android-app med öppen källkod startar dolda aktiviteter och skapar genvägar på hemskärmen för installerade appar.
-
-Det här projektet saknar fortfarande några funktioner och översättning. Du är välkommen att bidra!
-
-Källkod: https://github.com/butzist/ActivityLauncher
-Översättningar: http://crowdin.net/project/activitylauncher/invite
-Installera betaversion: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

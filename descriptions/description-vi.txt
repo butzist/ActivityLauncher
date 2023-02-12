@@ -1,7 +1,0 @@
-Ứng dụng mã nguồn mở Android này khởi chạy các hoạt động ẩn và tạo lối tắt ra màn hình chính cho các ứng dụng đã được cài đặt.
-
-Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để được đóng góp!
-
-Mã nguồn: https://github.com/butzist/ActivityLauncher
-Bản dịch: http://crowdin.net/project/activitylauncher/invite
-Tham gia vào các bản phát hành thử nghiệm: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

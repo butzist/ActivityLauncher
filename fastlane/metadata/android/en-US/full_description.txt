@@ -1,0 +1,1 @@
+This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.

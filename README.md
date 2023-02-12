@@ -1,10 +1,12 @@
 Activity Launcher
 =================
+![](images/1.png)
+![](images/3.png)
 
 Запуск и создание ярлыков для установленных приложений (в том числе для скрытых в системе).
 
 <a href="https://apps.rustore.ru/app/de.szalkowski.activitylauncher.rustore_fork" target="_blank">
-<img src="whatsnew/rustore.png" width="188" height="63" alt="Скачайте из RuStore"/></a>
+<img src="images/rustore.png" width="188" height="63" alt="Скачайте из RuStore"/></a>
 
 Fork features
 ------------

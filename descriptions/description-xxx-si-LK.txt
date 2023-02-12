@@ -1,7 +1,0 @@
-මෙම විවෘත මූලාශ්‍ර ඇන්ඩ්‍රොයිඩ් යෙදුම සැඟවුණු ක්‍රියාකාරකම් දියත් කරන අතර ස්ථාපිත යෙදුම් සඳහා මුල් තිර කෙටිමං නිර්මාණය කරයි.
-
-මෙම ව්‍යාපෘතියේ තවමත් විශේෂාංග කිහිපයක් සහ පරිවර්තනයක් නොමැත. දායක වීමට, ඔබ සාදරයෙන් පිළිගනිමු!
-
-මූලාශ්‍ර කේතය: https://github.com/butzist/ActivityLauncher
-පරිවර්තන: http://crowdin.net/project/activitylauncher/invite
-බීටා නිකුතුව සඳහා තෝරා ගැනීම: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

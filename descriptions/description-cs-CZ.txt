@@ -1,7 +1,0 @@
-Tato Android open‑source aplikace umožňuje spouštět skryté aktivity a\u00a0vytvářet zástupce na domovské obrazovce pro nainstalované aplikace.
-
-Tomuto projektu stále schází několik funkcí a\u00a0překlad. Pokud chcete, můžete směle přispět!
-
-Zdrojový kód: https://github.com/butzist/ActivityLauncher
-Překlady: http://crowdin.net/project/activitylauncher/invite
-Přihlášení do vydání betaverze: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

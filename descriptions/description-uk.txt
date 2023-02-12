@@ -1,8 +1,0 @@
-Цей Android додаток з відкритим вихідним кодом запускає приховані дії та створює ярлики на робочому столі для встановлених додатків.
-
-Цьому проекту все ще не вистачає деяких функцій і перекладів. Ви можете зробити свій внесок!
-
-Вихідний код: https://github.com/butzist/ActivityLauncher
-Переклади розміщені за шляхом : 
-http://crowdin.net/project/activitylauncher/invit
-Посилання на авторизацію до бета-релізу: https://play.google.com/apps/testing/de.szalkow.activitylauncher

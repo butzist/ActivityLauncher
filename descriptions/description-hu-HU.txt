@@ -1,9 +1,0 @@
-Ez az Android alkalmazás képes elindítani a rejtett alkalmazástevékenységeket, és létrehozza a telepített alkalmazások parancsikonjait a főképernyőn.
-
-Ez a projekt nélkülöz még néhány funkciót és fordítást. Elfogadunk minden segítséget!
-
-Forráskód:
-https://github.com/butzist/ActivityLauncher
-Fordítás:
-http://crowdin.net/project/activitylauncher/invite
-Jelentkezés a bétaverzióra: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
