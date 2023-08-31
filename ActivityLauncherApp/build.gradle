@@ -9,17 +9,15 @@ android {
         }
     }
     compileSdk 33
-    buildToolsVersion '33.0.0'
     defaultConfig {
         applicationId "de.szalkowski.activitylauncher"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
     }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
-            zipAlignEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
@@ -36,17 +34,17 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'de.szalkowski.activitylauncher'
 }
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.fragment:fragment:1.5.2'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.fragment:fragment:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.preference:preference:1.2.1'
+}
 
-    // force newer version of dependency of dependency
-    def lifecycleVersion = '2.5.1'
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+configurations.implementation {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
 }
