@@ -1,3 +1,1 @@
-Fix for issue #171 (Shortcuts not working properly in Android 13) (@Ismael034):
-
-This version contains a workaround for the "App isn't installed" error showing up when starting shortcuts on Android 13. The fix makes all shortcuts point to our own proxy activity - similar approach to our root launcher.
+Updated translations (Azerbaijani and Traditional Chinese added - check Crowdin for credits)
