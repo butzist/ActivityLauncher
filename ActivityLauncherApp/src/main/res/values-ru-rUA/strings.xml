@@ -18,7 +18,7 @@
     <string name="label_icon">Иконка</string>
     <string name="label_menu">Меню</string>
     <string name="label_private">приватный</string>
-    <string name="label_as_root">Root</string>
+    <string name="label_as_root">От имени Root</string>
     <string name="starting_activity">Запуск действия: %s</string>
     <string name="starting_application">Запуск приложения: %s</string>
     <string name="creating_activity_shortcut">Создание ярлыка действия для %s</string>

@@ -45,7 +45,7 @@
     <string name="activity_settings">Beállítások </string>
     <string name="settings_hide_private">Privát tevékenységek elrejtése</string>
     <string name="settings_summary_hide_private">Rejtse el a privát (nem exportált és letiltott) tevékenységeket, amiket nem lehet root engedélyek nélkül elindítani</string>
-    <string name="settings_allow_root">Enable privileged mode</string>
+    <string name="settings_allow_root">Engedélyezze a privilegizált módot</string>
     <string name="settings_summary_allow_root">Engedélyezi privát tevékenységek indítását root engedélyek használatával</string>
     <string name="settings_language">Nyelv</string>
     <string name="settings_theme">Téma</string>

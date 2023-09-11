@@ -1,0 +1,7 @@
+Bu açıq mənbəli Android tətbiqi, gizli fəaliyyətləri başladır və quraşdırılmış tətbiqlər əsas ekran qısayolları yaradır.
+
+Bu layihədə hələ də bir çox özəllik və tərcümə çatışmır. Töhfə verə bilərsiniz!
+
+Mənbə kodu: https://github.com/butzist/ActivityLauncher
+Tərcümələr: http://crowdin.net/project/activitylauncher/invite
+Beta buraxılışına yazılın: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

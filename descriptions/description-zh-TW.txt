@@ -1,0 +1,7 @@
+這個開放原始碼的 Android 應用程式可以啟動隱藏的活動，並為已安裝的應用程式建立主畫面捷徑。
+
+此專案仍缺少一些功能和翻譯。 我們歡迎您的參與！
+
+原始碼：https://github.com/butzist/ActivityLauncher
+翻譯：http://crowdin.net/project/activitylauncher/invite
+加入測試版：https://play.google.com/apps/testing/de.szalkowski.activitylauncher

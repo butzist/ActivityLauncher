@@ -17,7 +17,7 @@
     <string name="label_class">Classe</string>
     <string name="label_icon">Icona:</string>
     <string name="label_menu">Menu</string>
-    <string name="label_private">private</string>
+    <string name="label_private">Privat</string>
     <string name="label_as_root">As root</string>
     <string name="starting_activity">Starting activity: %s</string>
     <string name="starting_application">Starting application: %s</string>
@@ -38,19 +38,19 @@ Incapaç de crear la drecera</string>
     <string name="action_view_source">View Sourcecode</string>
     <string name="summary_action_view_source">The source code of this App is available for reading and modifying on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
     <string name="action_view_translation">Ajuda\'ns a traduir!</string>
-    <string name="summary_action_view_translation">If you are enjoying Activity Launcher, please consider translating the App into your language.</string>
+    <string name="summary_action_view_translation">Si estàs gaudint d\'Activity Launcher, considera traduir l\'aplicació a la teva llengua</string>
     <string name="action_view_bugs">Comunicar un problema</string>
-    <string name="summary_action_view_bugs">Please submit your suggestions or issues on our GitHub project page.</string>
-    <string name="action_filter">Filter&#8230;</string>
+    <string name="summary_action_view_bugs">Envieu els vostres suggeriments o problemes a la nostra pàgina del projecte GitHub.</string>
+    <string name="action_filter">Filtra</string>
     <string name="filter_hint">package/action</string>
-    <string name="activity_settings">Settings</string>
+    <string name="activity_settings">Configuració</string>
     <string name="settings_hide_private">Hide private activities</string>
     <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
     <string name="settings_allow_root">Enable privileged mode</string>
     <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
-    <string name="settings_language">Language</string>
-    <string name="settings_theme">Theme</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_theme">Tema</string>
     <string name="theme_default">System Default</string>
-    <string name="theme_light">Light Theme</string>
-    <string name="theme_dark">Dark Theme</string>
+    <string name="theme_light">Tema clar</string>
+    <string name="theme_dark">Tema fosc</string>
 </resources>

@@ -7,11 +7,11 @@
     <string name="title_dialog_icon_picker">Обрати іконку</string>
     <string name="dialog_progress_loading">Завантаження...</string>
     <string name="dialog_disclaimer">Використовувйте це програмне забезпечення на свій страх і ризик. Деякі програми можуть вести себе не так, як очікувалося, коли їх діяльність запускаються в неправильному контексті, що веде до втрати даних або навіть гірше. Ви були попереджені. Ви це розуміїте і хочете використовувати це програмне забезпечення?</string>
-    <string name="context_action_launch">Запуск дії</string>
+    <string name="context_action_launch">Запуск діяльності</string>
     <string name="context_action_launch_as_root">Запуск дії (root)</string>
     <string name="context_action_shortcut">Створити ярлик</string>
     <string name="context_action_shortcut_as_root">Створити ярлик (root)</string>
-    <string name="context_action_edit">Редагувати ярлик</string>
+    <string name="context_action_edit">Змінити ярлик</string>
     <string name="label_name">Ім’я</string>
     <string name="label_package">Пакет</string>
     <string name="label_class">Клас</string>
@@ -44,12 +44,12 @@
     <string name="filter_hint">пакет/дія</string>
     <string name="activity_settings">Налаштування</string>
     <string name="settings_hide_private">Приховати приватні дії</string>
-    <string name="settings_summary_hide_private">Приховати приватні та вимкнені дії, які не можуть бути запущені без root-доступу</string>
+    <string name="settings_summary_hide_private">Приховати приватні (неекспортовані і вимкнені) дії, що не можуть бути запущені без root-доступу</string>
     <string name="settings_allow_root">Включити привілейований режим</string>
     <string name="settings_summary_allow_root">Дозволити запуск приватних дій за допомогою root-прав</string>
     <string name="settings_language">Мова</string>
     <string name="settings_theme">Тема</string>
     <string name="theme_default">Системна (за замовчуванням)</string>
-    <string name="theme_light">Світла</string>
-    <string name="theme_dark">Темна</string>
+    <string name="theme_light">Світла тема</string>
+    <string name="theme_dark">Темна тема</string>
 </resources>

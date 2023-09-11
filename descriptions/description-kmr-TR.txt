@@ -1,0 +1,7 @@
+ئەم ئەپەی ئەندرۆید سەرچاوە کراوە چالاکییە شاراوەکان دەستپێدەکات و کورتکراوەی شاشەی سەرەکی بۆ ئەپەکانی دامەزراو دروست دەکات.
+
+ئەم پڕۆژەیە هێشتا چەند تایبەتمەندی و وەرگێڕانی تێدا نییە. بەخێرهاتنتان دەکەین بۆ بەشداریکردن!
+
+کۆدی سەرچاوە: https://github.com/butzist/ActivityLauncher
+وەرگێڕان: http://crowdin.net/project/activitylauncher/invite
+هەڵبژاردن بۆ بڵاوکردنەوەی بێتا: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

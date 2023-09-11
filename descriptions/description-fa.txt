@@ -1,7 +1,7 @@
-This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.
+این برنامه اندروید منبع باز فعالیت‌های پنهان را راه‌اندازی می کند و میان‌برهای صفحه اصلی را برای برنامه‌های نصب شده ایجاد می کند.
 
-This project still lacks a few features and translation. You are welcome to contribute!
+This project still lacks a few features and translation. مقدم شما را برای مشارکت گرامی می‌داریم!
 
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+کد منبع: https://github.com/butzist/ActivityLauncher
+ترجمه‌ها: http://crowdin.net/project/activitylauncher/invite
+شرکت در نسخۀ بتا: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
