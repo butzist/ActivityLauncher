@@ -42,7 +42,7 @@
     <string name="summary_action_view_bugs">Zəhmət olmasa təklif və ya problemləri GitHub layihə səhifəmizə göndərin.</string>
     <string name="action_filter">Filtr&#8230;</string>
     <string name="filter_hint">paket/əməliyyat</string>
-    <string name="activity_settings">Tənzimləmələr</string>
+    <string name="activity_settings">Ayarlar</string>
     <string name="settings_hide_private">Şəxsi fəaliyyətləri gizlət</string>
     <string name="settings_summary_hide_private">Root müraciəti olmadan başladıla bilməyən şəxsi (xaricə köçürülməmiş və ya sıradan çıxarılmış) fəaliyyətləri gizlət</string>
     <string name="settings_allow_root">İmtiyazlı rejimi fəallaşdır</string>
@@ -50,6 +50,6 @@
     <string name="settings_language">Dil</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">İlkin sistem</string>
-    <string name="theme_light">Light Theme</string>
-    <string name="theme_dark">Dark Theme</string>
+    <string name="theme_light">İşıqlı tema</string>
+    <string name="theme_dark">Qaranlıq tema</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Activity Launcher</string>
-    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="app_name">Aktivit desbekirin</string>
+    <string name="short_description">Çalakiyên veşartî dide destpêkirin û ji bo sepanên sazkirî kurtebiran diafirîne</string>
     <string name="title_section_all">هەموو چالاکیەکان</string>
     <string name="title_dialog_disclaimer">بەرپرسیاریەتی</string>
     <string name="title_dialog_icon_picker">ئایکۆن هەڵبژێرە</string>

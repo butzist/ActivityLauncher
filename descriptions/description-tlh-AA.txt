@@ -1,7 +1,7 @@
-This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.
+tlhab ‹Android› nIqHomvam mung De'. Qu' So'lu'bogh taghmoH nIqHom 'ej latlh nIqHomvaD juH HaSta qIgh chenmoH.
 
-This project still lacks a few features and translation. You are welcome to contribute!
+'op DI'on, ghItlh mughlu'ta'bogh je HutlhtaH jInmolvam. Daghaq net rIt!
 
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+mung De': https://github.com/butzist/ActivityLauncher
+mughtaHghach: http://crowdin.net/project/activitylauncher/invite
+waHmeH SarvaD jeS 'e' SapmeH: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

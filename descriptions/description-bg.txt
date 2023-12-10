@@ -1,7 +1,10 @@
-This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Приложение за Android с отворен код, кето стартира скрити активности и създава преки пътища на началния екран за инсталирани приложения.
 
-This project still lacks a few features and translation. You are welcome to contribute!
+Този проект все още има липса на някои функции и преводи. Добре дошли сте да допринесете!
 
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+Програмен код:
+https://github.com/butzist/ActivityLauncher
+Преводи:
+http://crowdin.net/project/activitylauncher/invite
+Запишете се за Бета версия:
+https://play.google.com/apps/testing/de.szalkowski.activitylauncher
