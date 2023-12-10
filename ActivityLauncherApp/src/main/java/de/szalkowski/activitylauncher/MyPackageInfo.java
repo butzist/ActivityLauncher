@@ -73,11 +73,14 @@ public class MyPackageInfo implements Comparable<MyPackageInfo> {
     }
 
     private static String getLocalizedName(Configuration config, PackageManager pm, MyPackageInfo myInfo, ApplicationInfo app) throws PackageManager.NameNotFoundException {
-        Resources appRes = pm.getResourcesForApplication(myInfo.package_name);
-        appRes.updateConfiguration(config, new DisplayMetrics());
-        return appRes.getString(app.labelRes);
+        try {
+            Resources appRes = pm.getResourcesForApplication(myInfo.package_name);
+            appRes.updateConfiguration(config, new DisplayMetrics());
+            return appRes.getString(app.labelRes);
+        } catch (PackageManager.NameNotFoundException | RuntimeException ignored) {
+            return app.loadLabel(pm).toString();
+        }
     }
-
 
     private static int countActivitiesFromInfo(PackageInfo info) {
         return info.activities.length;
