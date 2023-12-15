@@ -4,6 +4,7 @@
         <item>System Default</item>
         <item>af_ZA</item>
         <item>ar_SA</item>
+        <item>az_AZ</item>
         <item>bg_BG</item>
         <item>ca_ES</item>
         <item>cs_CZ</item>
@@ -18,12 +19,14 @@
         <item>fr_FR</item>
         <item>hi_IN</item>
         <item>hu_HU</item>
+        <item>hy_AM</item>
         <item>in_ID</item>
         <item>it_IT</item>
         <item>iw_IL</item>
         <item>ja_JP</item>
-        <item>tr_TR</item>
+        <item>kmr_TR</item>
         <item>ko_KR</item>
+        <item>lv_LV</item>
         <item>nl_NL</item>
         <item>nb_NO</item>
         <item>pl_PL</item>
@@ -35,10 +38,13 @@
         <item>sl_SI</item>
         <item>sr_RS</item>
         <item>sv_SE</item>
+        <item>ta_IN</item>
         <item>th_TH</item>
+        <item>tlh_AA</item>
         <item>tr_TR</item>
         <item>uk_UA</item>
         <item>vi_VN</item>
         <item>zh_CN</item>
+        <item>zh_TW</item>
     </string-array>
 </resources>
