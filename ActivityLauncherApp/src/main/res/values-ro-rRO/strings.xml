@@ -34,6 +34,7 @@
     <string name="warning_root_check">Atenție: Privilegiile Root probabil nu sunt disponibile pe acest dispozitiv.</string>
     <string name="exception_invalid_component_name">Componentă potențial dăunătoare sau nume greșit: %s</string>
     <string name="exception_command_error">Comanda a returnat codul de eroare: %d, rezultat: %s</string>
+    <string name="category_title_about">Despre</string>
     <string name="action_view_source">Vezi codul sursă</string>
     <string name="summary_action_view_source">Codul sursă al acestei aplicații este disponibil pentru citire și modificare pe GitHub. Puteți să ne trimiteți cereri pull cu îmbunătățiri și erori.</string>
     <string name="action_view_translation">Ajută la traducere!</string>

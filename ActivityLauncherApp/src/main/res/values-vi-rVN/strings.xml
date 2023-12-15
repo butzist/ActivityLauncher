@@ -34,6 +34,7 @@
     <string name="warning_root_check">Cảnh báo: Quyền root có thể không có sẵn trên thiết bị này.</string>
     <string name="exception_invalid_component_name">Tên thành phần không hợp lệ hoặc có thể gây hại: %s</string>
     <string name="exception_command_error">Câu lệnh trả về mã lỗi: %d, nội dung: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">Xem mã nguồn</string>
     <string name="summary_action_view_source">Mã nguồn của ứng dụng này có sẵn để đọc và thay đổi trên GitHub. Bạn có thể thoải mái gửi chúng tôi yêu cầu pull với những cải tiến và sửa lỗi của bạn.</string>
     <string name="action_view_translation">Giúp chúng tôi dịch!</string>

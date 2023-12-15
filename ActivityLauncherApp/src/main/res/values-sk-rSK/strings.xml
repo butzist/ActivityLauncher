@@ -34,6 +34,7 @@
     <string name="warning_root_check">Upozornenie: Oprávnenia root pravdepodobne nie sú na tomto zariadení dostupné.</string>
     <string name="exception_invalid_component_name">Neplatný alebo potenciálne škodlivý názov komponentu: %s</string>
     <string name="exception_command_error">Príkaz vrátil kód chyby: %d, výstup: %s</string>
+    <string name="category_title_about">O aplikácii</string>
     <string name="action_view_source">Zobraziť zdrojový kód</string>
     <string name="summary_action_view_source">Zdrojový kód tejto aplikácie je k dispozícii na čítanie a úpravu na GitHube. Neváhajte a pošlite nám požiadavky na stiahnutie s vylepšeniami a opravami chýb.</string>
     <string name="action_view_translation">Pomôcť s prekladaním!</string>

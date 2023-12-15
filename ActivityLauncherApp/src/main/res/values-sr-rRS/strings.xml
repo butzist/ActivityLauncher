@@ -34,6 +34,7 @@
     <string name="warning_root_check">Упозорење: Root привилегије су вероватно недоступне на овом уређају.</string>
     <string name="exception_invalid_component_name">Неважеће или потенцијално штетно име компоненте: </string>
     <string name="exception_command_error">Команда је дала код грешке: %d, излаз: %s</string>
+    <string name="category_title_about">Информације</string>
     <string name="action_view_source">Prikaz Sourcecode</string>
     <string name="summary_action_view_source">Изворни код ове апликације је доступан за читање и измену на GitHub-у. Слободно нам шаљите pull захтеве са побољшањима и исправкама грешака. </string>
     <string name="action_view_translation">Pomozute tako što će te prevoditi!</string>

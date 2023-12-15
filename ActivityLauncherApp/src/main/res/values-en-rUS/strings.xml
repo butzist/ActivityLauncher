@@ -34,6 +34,7 @@
     <string name="warning_root_check">Warning: Root privileges are probably not available on this device.</string>
     <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
     <string name="exception_command_error">Command returned error code: %d, output: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">View source code</string>
     <string name="summary_action_view_source">The source code of this App is available for reading and modifying on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
     <string name="action_view_translation">Help translate!</string>

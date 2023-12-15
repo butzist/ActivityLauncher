@@ -34,6 +34,7 @@
     <string name="warning_root_check">Uyarı: Kök ayrıcalıkları muhtemelen bu cihazda mevcut değildir.</string>
     <string name="exception_invalid_component_name">Geçersiz veya potansiyel olarak zararlı bileşen adı: %s</string>
     <string name="exception_command_error">Komut, hata kodunu döndürdü: %d, çıktı: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">Kaynak Kodunu Göster</string>
     <string name="summary_action_view_source">Bu uygulamanın kaynak kodu GitHub\'da mevcuttur.
 Okunabilir veya düzenlenebilir. İyileştirmeler ve hata düzeltmeleri için yardım etmekten çekinmeyin.</string>

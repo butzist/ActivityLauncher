@@ -34,6 +34,7 @@
     <string name="warning_root_check">ghuH: ghaytan loHwI\' DIb lo\'laHbe\' janvam.</string>
     <string name="exception_invalid_component_name">waSbogh qoj jochbogh \'ay\' pong: %s</string>
     <string name="exception_command_error">«Qagh mI\' %d» ja\' ra\'wI\', %s lIng</string>
+    <string name="category_title_about">De\' ghItlh</string>
     <string name="action_view_source">mung De\' legh</string>
     <string name="summary_action_view_source">‹GitHub›Daq nIqHomvam mung De\' laDlaH vay\' \'ej choHlaH vay\'. tI\'meH \'ej DubmeH choHmey DaghItlhchugh, ghongeH.</string>
     <string name="action_view_translation">mughmeH yIboQ</string>

@@ -35,6 +35,7 @@
     <string name="warning_root_check">אזהרה: הרשאות שורש כנראה אינן זמינות במכשיר זה.</string>
     <string name="exception_invalid_component_name">שם רכיב לא חוקי או שעלול להזיק: %s</string>
     <string name="exception_command_error">הפקודה החזירה קוד שגיאה: %d, פלט: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">צפה בקוד המקור</string>
     <string name="summary_action_view_source">קוד המקור של אפליקציה זו זמין לקריאה ושינוי ב-GitHub.  אל תהסס לשלוח לנו בקשות משיכה עם שיפורים ותיקוני באגים.</string>
     <string name="action_view_translation">תעזור בתרגום האפליקציה!</string>

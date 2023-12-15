@@ -34,6 +34,7 @@
     <string name="warning_root_check">Peringatan: Hak akses root mungkin tidak tersedia di perangkat ini.</string>
     <string name="exception_invalid_component_name">Nama komponen tidak valid atau berpotensi berbahaya: %s</string>
     <string name="exception_command_error">Perintah mengembalikan kode kesalahan: %d, keluaran: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">Lihat kode sumber</string>
     <string name="summary_action_view_source">Kode sumber Aplikasi ini tersedia untuk dibaca dan dimodifikasi di GitHub. Jangan ragu untuk mengirimi kami permintaan tarik dengan peningkatan dan perbaikan bug.</string>
     <string name="action_view_translation">Bantu Terjemahkan!</string>

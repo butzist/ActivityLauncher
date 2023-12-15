@@ -34,6 +34,7 @@
     <string name="warning_root_check">警告：Root 權限可能無在此裝置上使用。</string>
     <string name="exception_invalid_component_name">無效的或潛在的有害元件名稱：%s</string>
     <string name="exception_command_error">命令返回錯誤代碼：%d，輸出：%s</string>
+    <string name="category_title_about">關於</string>
     <string name="action_view_source">檢視原始碼</string>
     <string name="summary_action_view_source">這個應用程式的原始碼可在 GitHub 上閱讀並修改，請隨時向我們傳送有關功能改善和錯誤修正的提取要求。</string>
     <string name="action_view_translation">協助翻譯</string>

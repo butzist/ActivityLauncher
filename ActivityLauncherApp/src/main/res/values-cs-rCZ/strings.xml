@@ -34,6 +34,7 @@
     <string name="warning_root_check">Varování: Oprávnění root pravděpodobně nejsou na tomto zařízení k\u00a0dispozici.</string>
     <string name="exception_invalid_component_name">Neplatný nebo potenciálně škodlivý název komponentu: %s</string>
     <string name="exception_command_error">Příkaz vrátil chybový kód: %d, výstup: %s</string>
+    <string name="category_title_about">O aplikaci</string>
     <string name="action_view_source">Zobrazit zdrojový kód</string>
     <string name="summary_action_view_source">Zdrojový kód této aplikace je k\u00a0dispozici pro čtení a\u00a0úpravy na GitHubu. Neváhejte nám posílat pull requests s\u00a0vylepšeními a\u00a0opravami chyb.</string>
     <string name="action_view_translation">Pomozte s\u00a0překladem!</string>

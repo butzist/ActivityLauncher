@@ -34,6 +34,7 @@
     <string name="warning_root_check">Advarsel: Rodrettigheder er sandsynligvis utilgængelige på denne enhed.</string>
     <string name="exception_invalid_component_name">Ugyldigt eller potentielt skadeligt komponentnavn: %s</string>
     <string name="exception_command_error">Kommando returnerede fejlkode: %d, output: %s</string>
+    <string name="category_title_about">Om</string>
     <string name="action_view_source">Vis kildekode</string>
     <string name="summary_action_view_source">Denne Apps kildekoden kan læses og ændres på GitHub. Send os gerne pull requests med forbedringer og fejlrettelser.</string>
     <string name="action_view_translation">Hjælp med oversættelse!</string>

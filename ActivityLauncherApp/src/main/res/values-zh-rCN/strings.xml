@@ -35,6 +35,7 @@
     <string name="warning_root_check">警告：Root权限可能在此设备上不可用。</string>
     <string name="exception_invalid_component_name">无效或有害的名称%s</string>
     <string name="exception_command_error">命令返回错误代码： %d, 输出: %s</string>
+    <string name="category_title_about">關於</string>
     <string name="action_view_source">查看源代码</string>
     <string name="summary_action_view_source">此应用的源代码可在 GitHub 上读取和修改。请随时向我们发送含有改进和缺陷修复的请求。</string>
     <string name="action_view_translation">帮助我们翻译</string>

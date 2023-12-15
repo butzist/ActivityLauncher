@@ -34,6 +34,7 @@
     <string name="warning_root_check">警告: このデバイスではルート権限が使用できない可能性があります。</string>
     <string name="exception_invalid_component_name">無効または有害なコンポーネント名の可能性: %s</string>
     <string name="exception_command_error">コマンドがエラーコードを返しました: %d, 出力: %s</string>
+    <string name="category_title_about">について</string>
     <string name="action_view_source">ソースコードを表示</string>
     <string name="summary_action_view_source">このアプリのソースコードはGitHub上で見たり変更したりすることができます。改善点やバグ修正があれば、プルリクエストをお気軽に送信してください。</string>
     <string name="action_view_translation">翻訳を手伝ってください!</string>

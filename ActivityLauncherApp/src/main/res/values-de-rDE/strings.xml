@@ -34,6 +34,7 @@
     <string name="warning_root_check">Warnung: Root-Rechte sind auf diesem Gerät wahrscheinlich nicht verfügbar.</string>
     <string name="exception_invalid_component_name">Ungültiger oder potenziell schädlicher Komponentenname: %s</string>
     <string name="exception_command_error">Befehl hat Fehlercode %d zurückgegeben. Ausgabe: %s</string>
+    <string name="category_title_about">Info</string>
     <string name="action_view_source">Quellcode anzeigen</string>
     <string name="summary_action_view_source">Der Quellcode dieser App kann auf GitHub eingesehen und modifiziert werden. Du kannst uns auch Pull-Requests mit Verbesserungen und Bugfixes schicken.</string>
     <string name="action_view_translation">Helfen Sie beim Übersetzen!</string>

@@ -34,6 +34,7 @@
     <string name="warning_root_check">Attenzione: i privilegi di root probabilmente non sono disponibili su questo dispositivo.</string>
     <string name="exception_invalid_component_name">Nome componente non valido o potenzialmente dannoso: %s</string>
     <string name="exception_command_error">Il comando ha restituito il codice di errore: %d, output: %s</string>
+    <string name="category_title_about">Informazioni</string>
     <string name="action_view_source">Visualizza il codice sorgente</string>
     <string name="summary_action_view_source">Il codice sorgente di questa app è disponibile per la lettura e la modifica su GitHub. Sentiti libero di inviarci richieste di pull con miglioramenti e correzioni di bug.</string>
     <string name="action_view_translation">Aiutaci a tradurre!</string>

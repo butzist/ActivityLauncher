@@ -34,6 +34,7 @@
     <string name="warning_root_check">चेतावनी: रूट (root) विशेषाधिकार शायद इस डिवाइस पर उपलब्ध नहीं हैं।</string>
     <string name="exception_invalid_component_name">अमान्य या संभावित रूप से हानिकारक अंश नाम: %s</string>
     <string name="exception_command_error">कमांड ने त्रुटि कोड(error code) लौटाया: %d, आउटपुट: %s</string>
+    <string name="category_title_about">विषय में</string>
     <string name="action_view_source">सोर्स कोड देखें</string>
     <string name="summary_action_view_source">इस ऐप का सोर्स कोड GitHub पर पढ़ने और संशोधित करने के लिए उपलब्ध है। बेझिझक हमें सुधार और बग फिक्स के साथ पुल अनुरोध (pull requests) भेजें।</string>
     <string name="action_view_translation">अनुवाद करने में हमारी मदद करें।</string>

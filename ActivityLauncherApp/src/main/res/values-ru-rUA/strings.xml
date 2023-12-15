@@ -34,6 +34,7 @@
     <string name="warning_root_check">Предупреждение: Вероятно, на этом устройстве недоступны привилегии root.</string>
     <string name="exception_invalid_component_name">Недопустимое или потенциально опасное имя компонента: %s</string>
     <string name="exception_command_error">Команда вернула код ошибки: %d, результат: %s</string>
+    <string name="category_title_about">О программе</string>
     <string name="action_view_source">Просмотреть исходный код</string>
     <string name="summary_action_view_source">Исходный код приложения доступен для чтения и изменения на GitHub. Отправляйте нам запросы на включение изменений с улучшениями и исправлениями.</string>
     <string name="action_view_translation">Помогите с переводом!</string>

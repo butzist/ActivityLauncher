@@ -34,6 +34,7 @@
     <string name="warning_root_check">Попередження: Ймовірно, на цьому пристрої відсутні root-права.</string>
     <string name="exception_invalid_component_name">Недопустима або потенційно небезпечна назва компоненту: %s</string>
     <string name="exception_command_error">Команда повернула код помилки: %d, результат: %s</string>
+    <string name="category_title_about">Про програму</string>
     <string name="action_view_source">Перегляд вихідного коду</string>
     <string name="summary_action_view_source">Код цього додатку доступний для читання та зміни на GitHub. Не вагайтесь відправляти нам запити на внесення змін з покращеннями та виправленням помилок.</string>
     <string name="action_view_translation">Допоможіть перекласти!</string>

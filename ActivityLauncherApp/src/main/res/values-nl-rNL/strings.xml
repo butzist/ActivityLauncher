@@ -34,6 +34,7 @@
     <string name="warning_root_check">Waarschuwing: Root rechten zijn waarschijnlijk niet beschikbaar op dit apparaat.</string>
     <string name="exception_invalid_component_name">Ongeldige of mogelijk schadelijke onderdeel naam: %s</string>
     <string name="exception_command_error">Opdracht retourneerde foutcode: %d, uitvoer: %s</string>
+    <string name="category_title_about">Over</string>
     <string name="action_view_source">Bekijk broncode</string>
     <string name="summary_action_view_source">De broncode van deze app is beschikbaar voor het lezen en wijzigen op GitHub. Stuur ons gerust pull requests met verbeteringen en bugfixes.</string>
     <string name="action_view_translation">Help met vertalen!</string>

@@ -34,6 +34,7 @@
     <string name="warning_root_check">Varning: Roträttigheter är förmodligen inte tillgängliga på den här enheten.</string>
     <string name="exception_invalid_component_name">Ogiltigt eller potentiellt skadligt komponentnamn: %s</string>
     <string name="exception_command_error">Kommandot returnerade felkod: %d, utdata: %s</string>
+    <string name="category_title_about">Om</string>
     <string name="action_view_source">Visa källkod</string>
     <string name="summary_action_view_source">Källkoden för denna app är tillgänglig för att läsa och ändra på GitHub. Känn dig fri att skicka oss pull-förfrågningar med förbättringar och buggfixar.</string>
     <string name="action_view_translation">Hjälp till att översätta!</string>

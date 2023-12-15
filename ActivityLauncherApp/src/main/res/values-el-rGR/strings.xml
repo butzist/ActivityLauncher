@@ -34,6 +34,7 @@
     <string name="warning_root_check">Προειδοποίηση: Τα δικαιώματα root πιθανόν να μην είναι διαθέσιμα σε αυτήν τη συσκευή.</string>
     <string name="exception_invalid_component_name">Μη έγκυρο ή δυνητικά επιβλαβές όνομα στοιχείου: %s</string>
     <string name="exception_command_error">Η εντολή επέστρεψε κωδικό σφάλματος: %d, έξοδος: %s</string>
+    <string name="category_title_about">Σχετικά</string>
     <string name="action_view_source">Προβολή πηγαίου κώδικα</string>
     <string name="summary_action_view_source">Ο πηγαίος κώδικας αυτής της εφαρμογής είναι διαθέσιμος για ανάγνωση και τροποποίηση στο GitHub. Μη διστάσετε να μας στείλετε αιτήματα με βελτιώσεις και διορθώσεις σφαλμάτων.</string>
     <string name="action_view_translation">Βοηθήστε στη μετάφραση!</string>

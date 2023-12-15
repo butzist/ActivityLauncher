@@ -34,6 +34,7 @@
     <string name="warning_root_check">تحذير: ربما لا تتوفر امتيازات الجذر على هذا الجهاز.</string>
     <string name="exception_invalid_component_name">اسم المكون غير صالح أو يحتمل أن يكون ضارًا: %s</string>
     <string name="exception_command_error">رمز الخطأ في إرجاع الأمر: %d، الناتج: %s</string>
+    <string name="category_title_about">حول التطبيق</string>
     <string name="action_view_source">عرض الرمز البرمجي الأساس</string>
     <string name="summary_action_view_source">رمز المصدر لهذا التطبيق متاح للقراءة والتعديل على GitHub. لا تتردد في إرسال طلبات السحب مع التحسينات و الأخطاء.</string>
     <string name="action_view_translation">ساعدني في الترجمة!</string>

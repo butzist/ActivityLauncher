@@ -34,6 +34,7 @@
     <string name="warning_root_check">Attention : les privilèges root ne sont probablement pas disponibles sur cet appareil.</string>
     <string name="exception_invalid_component_name">Nom de composant non valide ou potentiellement dangereux : %s</string>
     <string name="exception_command_error">La commande a retourné le code d\'erreur: %d, sortie: %s</string>
+    <string name="category_title_about">À propos</string>
     <string name="action_view_source">Afficher le code source</string>
     <string name="summary_action_view_source">Le code source de cette application est disponible pour la lecture et la modification sur GitHub. N\'hésitez pas à nous envoyer des demandes de fusion avec des améliorations et des corrections de bugs.</string>
     <string name="action_view_translation">Aidez-nous à traduire!</string>

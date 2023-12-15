@@ -34,6 +34,7 @@
     <string name="warning_root_check">Ostrzeżenie: Uprawnienia roota nie są dostępne na tym urządzeniu.</string>
     <string name="exception_invalid_component_name">Nieprawidłowa lub potencjalnie szkodliwa nazwa komponentu: %s</string>
     <string name="exception_command_error">Polecenie zwróciło kod błędu: %d, wyjście: %s</string>
+    <string name="category_title_about">O aplikacji</string>
     <string name="action_view_source">Pokaż kod źródłowy</string>
     <string name="summary_action_view_source">Kod źródłowy tej aplikacji jest dostępny do czytania i modyfikowania na GitHub. Możesz wysłać nam pull requesty z poprawkami i poprawkami błędów.</string>
     <string name="action_view_translation">Pomóż w tłumaczeniu!</string>

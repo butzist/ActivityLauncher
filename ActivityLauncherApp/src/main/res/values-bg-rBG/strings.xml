@@ -34,6 +34,7 @@
     <string name="warning_root_check">Внимание: Има вероятност на това устройство да не са налични Root привилегии.</string>
     <string name="exception_invalid_component_name">Невалидно или потенциално зловредно име на компонент: %s</string>
     <string name="exception_command_error">Командата завърши с код на грешка: %d, изход: %s</string>
+    <string name="category_title_about">Описание</string>
     <string name="action_view_source">Преглед на изходния код</string>
     <string name="summary_action_view_source">Изходният код на това приложение е достъпен за преглеждане и модифициране в GitHub. Чувствайте се свободни да ни изпращате заявки за изтегляне с подобрения и корекции на грешки.</string>
     <string name="action_view_translation">Помогнете ни с превода</string>

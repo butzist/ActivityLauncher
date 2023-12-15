@@ -34,6 +34,7 @@
     <string name="warning_root_check">คำเตือน: อุปกรณ์นี้อาจไม่มีสิทธิ์รูท</string>
     <string name="exception_invalid_component_name">ชื่อส่วนประกอบที่ไม่ถูกต้องหรืออาจเป็นอันตราย: %s</string>
     <string name="exception_command_error">คำสั่งถูกส่งคืน รหัสข้อผิดพลาด: %d, ข้อมูลผล: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">ดูซอร์สโค้ด</string>
     <string name="summary_action_view_source">ซอร์สโค้ดของแอพนี้มีให้อ่านและแก้ไขบน GitHub อย่าลังเลที่จะส่งคำขอถึงเรา เราพร้อมสำหรับการปรับปรุงด้วยการแก้ไขข้อบกพร่อง และแก้บัค</string>
     <string name="action_view_translation">ช่วยเราแปลภาษา</string>

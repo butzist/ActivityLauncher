@@ -34,6 +34,7 @@
     <string name="warning_root_check">Figyelem: Valószínűleg nincs rootolva a készülék </string>
     <string name="exception_invalid_component_name">Érvénytelen vagy potenciálisan káros összetevőnév: %s</string>
     <string name="exception_command_error">A parancs hibakódot adott vissza: %d, kimenet: %s</string>
+    <string name="category_title_about">About</string>
     <string name="action_view_source">Forráskód megtekintése</string>
     <string name="summary_action_view_source">Az alkalmazás forráskódja elérhető és módosítható a GitHubon. Küldj nekünk pull requesteket fejlesztésekkel és hibajavításokkal!</string>
     <string name="action_view_translation">Segíts a fordításban!</string>
