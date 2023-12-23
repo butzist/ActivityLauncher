@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
+
+import de.szalkowski.activitylauncher.R;
 
 public class DisclaimerDialogFragment extends DialogFragment {
     @NonNull

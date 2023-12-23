@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
-        <item name="dialogCornerRadius">24dp</item>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ActivityLauncher" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-    <style name="AppTheme.NoDisplay" parent="AppTheme">
+
+    <style name="Theme.ActivityLauncher" parent="Base.Theme.ActivityLauncher" />
+
+    <style name="Theme.NoDisplay" parent="Base.Theme.ActivityLauncher">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>

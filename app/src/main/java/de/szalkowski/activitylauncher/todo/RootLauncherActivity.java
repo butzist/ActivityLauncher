@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.content.ComponentName;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.thirdparty.Launcher;
+import de.szalkowski.activitylauncher.R;
 
 public class RootLauncherActivity extends AppCompatActivity {
 
@@ -24,11 +24,12 @@ public class RootLauncherActivity extends AppCompatActivity {
             String cls = bundle.getString("cls");
             String signature = bundle.getString("sign");
 
-            var componentName = new ComponentName(pkg, cls);
+            ComponentName componentName = new ComponentName(pkg, cls);
 
-            var signer = new Signer(getApplicationContext());
+            Signer signer = new Signer(getApplicationContext());
             if (signer.validateComponentNameSignature(componentName, signature)) {
-                Launcher.launchActivity(getApplicationContext(), componentName, true, true);
+                // FIXME
+                //Launcher.launchActivity(getApplicationContext(), componentName, true, true);
             }
         } catch (Exception e) {
             e.printStackTrace();

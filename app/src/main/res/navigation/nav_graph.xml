@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/PackageListFragment">
+
+    <fragment
+        android:id="@+id/PackageListFragment"
+        android:name="de.szalkowski.activitylauncher.ui.PackageListFragment"
+        android:label="@string/package_list_fragment_label"
+        tools:layout="@layout/fragment_package_list">
+
+        <action
+            android:id="@+id/actionSelectPackage"
+            app:destination="@id/ActivityListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/ActivityListFragment"
+        android:name="de.szalkowski.activitylauncher.ui.ActivityListFragment"
+        android:label="@string/activity_list_fragment_label"
+        tools:layout="@layout/fragment_activity_list">
+        <argument
+            android:name="packageName"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/actionSelectActivity"
+            app:destination="@id/ActivityDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/ActivityDetailsFragment"
+        android:name="de.szalkowski.activitylauncher.ui.ActivityDetailsFragment"
+        android:label="@string/context_action_edit"
+        tools:layout="@layout/fragment_activity_details">
+        <argument
+            android:name="activityComponentName"
+            app:argType="android.content.ComponentName"
+            app:nullable="false" />
+
+    </fragment>
+</navigation>

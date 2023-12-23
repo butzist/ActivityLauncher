@@ -1,93 +1,127 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.services
 
-import android.content.ComponentName;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
+import android.content.ComponentName
+import android.content.Context
+import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.graphics.drawable.Drawable
+import android.util.DisplayMetrics
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
 
-public class MyActivityInfo implements Comparable<MyActivityInfo> {
-    protected Drawable icon;
-    protected String name;
-    ComponentName component_name;
-    int icon_resource;
-    String icon_resource_name;
-    boolean is_private;
+interface ActivityListService {
+    fun getActivities(
+        packageName: String,
+    ): List<MyActivityInfo>
 
-    public static MyActivityInfo fromComponentName(PackageManager pm, ComponentName activity, Configuration config) {
-        var info = new MyActivityInfo();
-        info.component_name = activity;
+    fun getActivity(
+        componentName: ComponentName,
+    ): MyActivityInfo
+}
 
-        ActivityInfo act;
-        try {
-            act = pm.getActivityInfo(activity, 0);
-            info.name = getActivityName(config, pm, activity, act);
-            try {
-                info.icon = act.loadIcon(pm);
-            } catch (Exception e) {
-                info.icon = pm.getDefaultActivityIcon();
-            }
-            info.icon_resource = act.getIconResource();
-        } catch (Exception e) {
-            info.name = activity.getShortClassName();
-            info.icon = pm.getDefaultActivityIcon();
-            info.icon_resource = 0;
+class ActivityListServiceImpl @Inject constructor(@ActivityContext context: Context) :
+    ActivityListService {
+
+    private val packageManager = context.packageManager
+    private val config: Configuration = Configuration() // FIXME
+
+    override fun getActivities(packageName: String): List<MyActivityInfo> {
+        val info = try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+        } catch (e: Exception) {
+            return listOf()
         }
 
-        info.icon_resource_name = null;
-        if (info.icon_resource != 0) {
-            try {
-                info.icon_resource_name = pm.getResourcesForActivity(activity).getResourceName(info.icon_resource);
-            } catch (Exception ignored) {
-            }
+        return info.activities.orEmpty().map {
+            getActivityInfo(it)
+        }.sortedBy { it.name }
+    }
+
+    override fun getActivity(componentName: ComponentName): MyActivityInfo {
+        val activityInfo = try {
+            packageManager.getActivityInfo(componentName, 0)
+        } catch (e: Exception) {
+            return MyActivityInfo(
+                componentName,
+                componentName.shortClassName,
+                packageManager.defaultActivityIcon,
+                null,
+                false
+            )
         }
 
-        return info;
+        return getActivityInfo(activityInfo)
     }
 
-    public ComponentName getComponentName() {
-        return component_name;
+    private fun getActivityInfo(
+        activityInfo: ActivityInfo
+    ): MyActivityInfo {
+        val componentName = getComponentName(activityInfo)
+        val name = getLocalizedName(activityInfo)
+        val icon = getIcon(activityInfo)
+        val iconResourceName = getIconResourceName(activityInfo)
+        val isPrivate = isPrivate(activityInfo)
+
+        return MyActivityInfo(
+            componentName,
+            name,
+            icon,
+            iconResourceName,
+            isPrivate,
+        )
     }
 
-    public Drawable getIcon() {
-        return icon;
-    }
+    private fun getComponentName(activityInfo: ActivityInfo) =
+        ComponentName(activityInfo.packageName, activityInfo.name)
 
-    public String getName() {
-        return name;
-    }
-
-    public String getIconResouceName() {
-        return icon_resource_name;
-    }
-
-    private static String getActivityName(Configuration config, PackageManager pm, ComponentName activityComponent, ActivityInfo activity) throws PackageManager.NameNotFoundException {
-        Resources appRes = pm.getResourcesForApplication(activityComponent.getPackageName());
-        appRes.updateConfiguration(config, new DisplayMetrics());
-        return appRes.getString(activity.labelRes);
-    }
-
-    @Override
-    public int compareTo(MyActivityInfo another) {
-        int cmp_name = this.name.compareTo(another.name);
-        if (cmp_name != 0) return cmp_name;
-
-        return this.component_name.compareTo(another.component_name);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (!other.getClass().equals(MyActivityInfo.class)) {
-            return false;
+    private fun getIconResourceName(
+        activityInfo: ActivityInfo
+    ): String? {
+        if (activityInfo.iconResource == 0) {
+            return null
         }
 
-        MyActivityInfo other_info = (MyActivityInfo) other;
-        return this.component_name.equals(other_info.component_name);
+        return try {
+            packageManager.getResourcesForActivity(getComponentName(activityInfo))
+                .getResourceName(activityInfo.iconResource)
+        } catch (ignored: Exception) {
+            null
+        }
     }
 
-    public void setPrivate(boolean isPrivate) {
-        this.is_private = isPrivate;
+    private fun getIcon(activityInfo: ActivityInfo): Drawable = try {
+        activityInfo.loadIcon(packageManager)
+    } catch (e: Exception) {
+        packageManager.defaultActivityIcon
+    }
+
+    private fun getLocalizedName(
+        activityInfo: ActivityInfo
+    ): String = try {
+        val appRes = packageManager.getResourcesForApplication(activityInfo.packageName)
+        appRes.updateConfiguration(config, DisplayMetrics())
+        appRes.getString(activityInfo.labelRes)
+    } catch (e: Exception) {
+        getComponentName(activityInfo).shortClassName
+    }
+
+    private fun isPrivate(activityInfo: ActivityInfo): Boolean {
+        if (!activityInfo.exported) return true
+
+        val enabledState = packageManager.getComponentEnabledSetting(getComponentName(activityInfo))
+        return when (enabledState) {
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED -> true
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED -> false
+            else -> !activityInfo.isEnabled
+        }
     }
 }
+
+data class MyActivityInfo(
+    val componentName: ComponentName,
+    val name: String,
+    val icon: Drawable,
+    val iconResourceName: String?,
+    var isPrivate: Boolean,
+)

@@ -1,29 +1,33 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher
 
-import android.app.Application;
+import android.app.Application
+import androidx.preference.PreferenceManager
+import dagger.hilt.android.HiltAndroidApp
+import de.szalkowski.activitylauncher.todo.RootDetection
+import de.szalkowski.activitylauncher.todo.SettingsUtils
 
-import androidx.preference.PreferenceManager;
+@HiltAndroidApp
+class ActivityLauncherApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
 
-public class ActivityLauncherApp extends Application {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(
+            baseContext
+        )
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        var prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-        SettingsUtils.setTheme(prefs.getString("theme", "0"));
+        SettingsUtils.setTheme(prefs.getString("theme", "0"))
 
         if (!prefs.contains("allow_root")) {
-            var hasSU = RootDetection.detectSU();
-            prefs.edit().putBoolean("allow_root", hasSU).apply();
+            val hasSU = RootDetection.detectSU()
+            prefs.edit().putBoolean("allow_root", hasSU).apply()
         }
 
         if (!prefs.contains("hide_hide_private")) {
-            prefs.edit().putBoolean("hide_hide_private", false).apply();
+            prefs.edit().putBoolean("hide_hide_private", false).apply()
         }
 
         if (!prefs.contains("language")) {
-            prefs.edit().putString("language", "System Default").apply();
+            prefs.edit().putString("language", "System Default").apply()
         }
     }
 }

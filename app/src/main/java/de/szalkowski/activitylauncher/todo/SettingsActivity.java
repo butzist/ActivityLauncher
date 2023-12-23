@@ -1,10 +1,12 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
+
+import de.szalkowski.activitylauncher.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

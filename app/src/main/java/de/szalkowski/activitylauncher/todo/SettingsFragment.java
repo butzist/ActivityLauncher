@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -13,6 +13,8 @@ import androidx.preference.SwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import de.szalkowski.activitylauncher.R;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -50,7 +52,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private boolean onAllowRootUpdated(boolean newValue) {
-        var hasSU = RootDetection.detectSU();
+        boolean hasSU = RootDetection.detectSU();
 
         if (newValue && !hasSU) {
             Toast.makeText(getActivity(), getText(R.string.warning_root_check), Toast.LENGTH_LONG).show();
@@ -80,9 +82,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             config = SettingsUtils.createLocaleConfiguration(newValue);
         }
 
-        var resources = requireActivity().getBaseContext().getResources();
+        Resources resources = requireActivity().getBaseContext().getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
-        PackageManagerCache.resetPackageManagerCache();
+        // FIXME
+        //PackageManagerCache.resetPackageManagerCache();
         requireActivity().recreate();
         return true;
     }

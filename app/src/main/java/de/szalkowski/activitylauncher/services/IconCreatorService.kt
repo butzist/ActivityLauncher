@@ -1,89 +1,73 @@
-/*
- * Based on code from Stackoverflow.com under CC BY-SA 3.0
- * Url: http://stackoverflow.com/questions/6493518/create-a-shortcut-for-any-app-on-desktop
- * By:  http://stackoverflow.com/users/815400/xuso
- * <p>
- * and
- * <p>
- * Url: http://stackoverflow.com/questions/3298908/creating-a-shortcut-how-can-i-work-with-a-drawable-as-icon
- * By:  http://stackoverflow.com/users/327402/waza-be
- */
+package de.szalkowski.activitylauncher.services
 
-package org.thirdparty;
+import android.annotation.TargetApi
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.Intent.ShortcutIconResource
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.AdaptiveIconDrawable
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.Icon
+import android.graphics.drawable.LayerDrawable
+import android.os.Build
+import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import dagger.hilt.android.qualifiers.ActivityContext
+import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.services.internal.getActivityIntent
+import java.util.Objects
+import javax.inject.Inject
 
-import android.annotation.TargetApi;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.AdaptiveIconDrawable;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.widget.Toast;
+private const val INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT"
 
-import androidx.appcompat.app.AlertDialog;
+interface IconCreatorService {
+    fun createLauncherIcon(activity: MyActivityInfo, extras: Bundle?)
+    fun createLauncherIcon(activity: MyActivityInfo)
+    fun createLauncherIcon(pack: MyPackageInfo)
+}
 
-import java.util.Objects;
+class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val context: Context) :
+    IconCreatorService {
+    override fun createLauncherIcon(activity: MyActivityInfo, extras: Bundle?) {
+        val pack = extractIconPackageName(activity)
+        val name: String = activity.name
+        val intent = getActivityIntent(activity.componentName, extras)
+        val icon: Drawable = activity.icon
 
-
-import de.szalkowski.activitylauncher.MyActivityInfo;
-import de.szalkowski.activitylauncher.MyPackageInfo;
-import de.szalkowski.activitylauncher.R;
-
-public class IconCreator {
-
-    private static String INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT";
-
-    public static Intent getActivityIntent(ComponentName activity, Bundle extras) {
-        Intent intent = new Intent();
-        intent.setComponent(activity);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        if (extras != null) {
-            intent.putExtras(extras);
-        }
-
-        return intent;
-    }
-
-    public static void createLauncherIcon(Context context, MyActivityInfo activity, Bundle extras) {
-        String pack = null;
-
-        if (activity.getIconResouceName() != null && activity.getIconResouceName().indexOf(':') >= 0) {
-            pack = activity.getIconResouceName().substring(0, activity.getIconResouceName().indexOf(':'));
-        }
-
-        String name = activity.getName();
-        Intent intent = getActivityIntent(activity.getComponentName(), extras);
-        Drawable icon = activity.getIcon();
-
-
-        // Use bitmap version if icon from different package is used
-        if (pack != null && !pack.equals(activity.getComponentName().getPackageName())) {
-            createShortcut(context, name, icon, intent, null);
+        // Use bitmap version, if icon from different package is used
+        if (pack != null && pack != activity.componentName.packageName) {
+            createShortcut(name, icon, intent, null)
         } else {
-            createShortcut(context, name, icon, intent, activity.getIconResouceName());
+            createShortcut(name, icon, intent, activity.iconResourceName)
         }
     }
 
-    public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-        createLauncherIcon(context, activity, null);
+    override fun createLauncherIcon(activity: MyActivityInfo) {
+        createLauncherIcon(activity, null)
     }
 
-    public static void createLauncherIcon(Context context, MyPackageInfo pack) {
-        Intent intent = context.getPackageManager().getLaunchIntentForPackage(pack.getPackageName());
-        if (intent == null) {
-            return;
+    override fun createLauncherIcon(pack: MyPackageInfo) {
+        val intent = context.packageManager.getLaunchIntentForPackage(pack.packageName) ?: return
+        createShortcut(pack.name, pack.icon, intent, pack.iconResourceName)
+    }
+
+    private fun extractIconPackageName(
+        activity: MyActivityInfo,
+    ): String? {
+        if (activity.iconResourceName == null) return null
+
+        val indexOfSeparator = activity.iconResourceName.indexOf(':')
+        if (indexOfSeparator < 0) {
+            return null
         }
-        createShortcut(context, pack.getName(), pack.getIcon(), intent, pack.getIconResourceName());
+
+        return activity.iconResourceName.substring(0, indexOfSeparator)
     }
 
     /**
@@ -92,96 +76,95 @@ public class IconCreator {
      * https://stackoverflow.com/questions/46130594/android-get-apps-adaptive-icons-from-package-manager
      */
     @TargetApi(26)
-    private static Icon getIconFromDrawable(Drawable drawable) {
-        if (drawable instanceof AdaptiveIconDrawable) {
-            Drawable backgroundDr = ((AdaptiveIconDrawable) drawable).getBackground();
-            Drawable foregroundDr = ((AdaptiveIconDrawable) drawable).getForeground();
-
-            Drawable[] drr = new Drawable[2];
-            drr[0] = backgroundDr;
-            drr[1] = foregroundDr;
-
-            LayerDrawable layerDrawable = new LayerDrawable(drr);
-
-            int width = layerDrawable.getIntrinsicWidth();
-            int height = layerDrawable.getIntrinsicHeight();
-
-            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-            Canvas canvas = new Canvas(bitmap);
-
-            layerDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            layerDrawable.draw(canvas);
-
-            return Icon.createWithAdaptiveBitmap(bitmap);
+    private fun getIconFromDrawable(drawable: Drawable): Icon {
+        if (drawable is AdaptiveIconDrawable) {
+            val backgroundDr = drawable.background
+            val foregroundDr = drawable.foreground
+            val drr = arrayOfNulls<Drawable>(2)
+            drr[0] = backgroundDr
+            drr[1] = foregroundDr
+            val layerDrawable = LayerDrawable(drr)
+            val width = layerDrawable.intrinsicWidth
+            val height = layerDrawable.intrinsicHeight
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            layerDrawable.setBounds(0, 0, canvas.width, canvas.height)
+            layerDrawable.draw(canvas)
+            return Icon.createWithAdaptiveBitmap(bitmap)
         }
-        if (drawable instanceof BitmapDrawable) {
-            return Icon.createWithBitmap(((BitmapDrawable) drawable).getBitmap());
+        if (drawable is BitmapDrawable) {
+            return Icon.createWithBitmap(drawable.bitmap)
         }
-
-        Bitmap bmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bmp);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return Icon.createWithBitmap(bmp);
+        val bmp = Bitmap.createBitmap(
+            drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bmp)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return Icon.createWithBitmap(bmp)
     }
 
-
-    private static void createShortcut(Context context, String appName, Drawable draw, Intent intent, String iconResourceName) {
-        Toast.makeText(context, String.format(context.getText(R.string.creating_application_shortcut).toString(), appName),
-                Toast.LENGTH_LONG).show();
-
+    private fun createShortcut(
+        appName: String, draw: Drawable, intent: Intent, iconResourceName: String?
+    ) {
+        Toast.makeText(
+            context, String.format(
+                context.getText(R.string.creating_application_shortcut).toString(), appName
+            ), Toast.LENGTH_LONG
+        ).show()
         if (Build.VERSION.SDK_INT >= 26) {
-            doCreateShortcut(context, appName, draw, intent);
+            doCreateShortcut(appName, draw, intent)
         } else {
-            doCreateShortcut(context, appName, intent, iconResourceName);
+            doCreateShortcut(appName, intent, iconResourceName)
         }
     }
 
-    private static void doCreateShortcut(Context context, String appName, Intent intent, String iconResourceName) {
-        Intent shortcutIntent = new Intent();
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName);
+    private fun doCreateShortcut(
+        appName: String, intent: Intent, iconResourceName: String?
+    ) {
+        val shortcutIntent = Intent()
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName)
         if (iconResourceName != null) {
-            Intent.ShortcutIconResource ir = new Intent.ShortcutIconResource();
-            if (intent.getComponent() == null) {
-                ir.packageName = intent.getPackage();
+            val ir = ShortcutIconResource()
+            if (intent.component == null) {
+                ir.packageName = intent.getPackage()
             } else {
-                ir.packageName = intent.getComponent().getPackageName();
+                ir.packageName = intent.component!!.packageName
             }
-            ir.resourceName = iconResourceName;
-            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir);
+            ir.resourceName = iconResourceName
+            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir)
         }
-        shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        context.sendBroadcast(shortcutIntent);
+        shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT")
+        context.sendBroadcast(shortcutIntent)
     }
 
     @TargetApi(26)
-    private static void doCreateShortcut(Context context, String appName, Drawable draw, Intent extraIntent) {
-        ShortcutManager shortcutManager = Objects.requireNonNull(context.getSystemService(ShortcutManager.class));
-
-        if (shortcutManager.isRequestPinShortcutSupported()) {
-            Icon icon = getIconFromDrawable(draw);
-            Intent intent = new Intent(INTENT_LAUNCH_SHORTCUT);
-            intent.putExtra("extra_intent", extraIntent.toUri(0));
-
-            ShortcutInfo shortcutInfo = new ShortcutInfo.Builder(context, appName)
-                    .setShortLabel(appName)
-                    .setLongLabel(appName)
-                    .setIcon(icon)
-                    .setIntent(intent)
-                    .build();
-            shortcutManager.requestPinShortcut(shortcutInfo, null);
-
+    private fun doCreateShortcut(
+        appName: String, draw: Drawable, extraIntent: Intent
+    ) {
+        val shortcutManager = Objects.requireNonNull(
+            context.getSystemService(
+                ShortcutManager::class.java
+            )
+        )
+        if (shortcutManager.isRequestPinShortcutSupported) {
+            val icon = getIconFromDrawable(draw)
+            val intent = Intent(INTENT_LAUNCH_SHORTCUT)
+            intent.putExtra("extra_intent", extraIntent.toUri(0))
+            val shortcutInfo =
+                ShortcutInfo.Builder(context, appName).setShortLabel(appName).setLongLabel(appName)
+                    .setIcon(icon).setIntent(intent).build()
+            shortcutManager.requestPinShortcut(shortcutInfo, null)
         } else {
-            new AlertDialog.Builder(context)
-                    .setTitle(context.getText(R.string.error_creating_shortcut))
-                    .setMessage(context.getText(R.string.error_verbose_pin_shortcut))
-                    .setPositiveButton(context.getText(android.R.string.ok), (dialog, which) -> {
-                        // Just close dialog don't do anything
-                        dialog.cancel();
-                    })
-                    .show();
+            AlertDialog.Builder(context).setTitle(context.getText(R.string.error_creating_shortcut))
+                .setMessage(context.getText(R.string.error_verbose_pin_shortcut)).setPositiveButton(
+                    context.getText(android.R.string.ok)
+                ) { dialog: DialogInterface, _: Int ->
+                    // Just close dialog don't do anything
+                    dialog.cancel()
+                }.show()
         }
     }
 }
+
