@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp">
+        android:layout_height="wrap_content">
 
         <TableRow
-            android:id="@+id/tableRow_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:labelFor="@+id/editText_name"
+                android:labelFor="@+id/etName"
                 android:text="@string/label_name"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText_name"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -34,21 +33,19 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow_package"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView_package"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:labelFor="@+id/editText_package"
+                android:labelFor="@+id/etPackage"
                 android:text="@string/label_package"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText_package"
+                android:id="@+id/etPackage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -60,21 +57,19 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:labelFor="@+id/editText_class"
+                android:labelFor="@+id/etClass"
                 android:text="@string/label_class"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText_class"
+                android:id="@+id/etClass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -83,21 +78,19 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:labelFor="@+id/editText_icon"
+                android:labelFor="@+id/etIcon"
                 android:text="@string/label_icon"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/editText_icon"
+                android:id="@+id/etIcon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -106,7 +99,7 @@
                 android:inputType="text" />
 
             <ImageButton
-                android:id="@+id/iconButton"
+                android:id="@+id/ibIconPicker"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:adjustViewBounds="false"
@@ -119,23 +112,30 @@
         <TableRow
             android:id="@+id/tableRow_as_root"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView_as_root"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:labelFor="@+id/editText_name"
-                android:text="@string/label_as_root"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <CheckBox
-                android:id="@+id/checkBox_as_root"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical" />
-
-        </TableRow>
+            android:layout_height="wrap_content" />
     </TableLayout>
+
+    <Button
+        android:id="@+id/btLaunch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/context_action_launch" />
+
+    <Button
+        android:id="@+id/btLaunchAsRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/context_action_launch_as_root" />
+
+    <Button
+        android:id="@+id/btCreateShortcut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/context_action_shortcut" />
+
+    <Button
+        android:id="@+id/btCreateShortcutAsRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/context_action_shortcut_as_root" />
 </LinearLayout>

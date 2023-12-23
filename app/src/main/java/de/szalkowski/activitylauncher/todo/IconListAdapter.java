@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +18,8 @@ import androidx.preference.PreferenceManager;
 import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
+
+import de.szalkowski.activitylauncher.services.MyPackageInfo;
 
 public class IconListAdapter extends BaseAdapter {
     private final PackageManager pm;
@@ -40,24 +42,25 @@ public class IconListAdapter extends BaseAdapter {
         updater.updateMax(all_packages.size());
         updater.update(0);
 
-        PackageManagerCache cache = PackageManagerCache.getPackageManagerCache(this.pm);
-
-        for (int i = 0; i < all_packages.size(); ++i) {
-            updater.update(i + 1);
-
-            PackageInfo pack = all_packages.get(i);
-            try {
-                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName, locale);
-
-                for (int j = 0; j < myPack.getActivitiesCount(); ++j) {
-                    String icon_resource_name = myPack.getActivity(j).getIconResouceName();
-                    if (icon_resource_name != null) {
-                        icons.add(icon_resource_name);
-                    }
-                }
-            } catch (NameNotFoundException | RuntimeException ignored) {
-            }
-        }
+        // FIXME
+//        PackageManagerCache cache = PackageManagerCache.getPackageManagerCache(this.pm);
+//
+//        for (int i = 0; i < all_packages.size(); ++i) {
+//            updater.update(i + 1);
+//
+//            PackageInfo pack = all_packages.get(i);
+//            try {
+//                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName, locale);
+//
+//                for (int j = 0; j < myPack.getActivitiesCount(); ++j) {
+//                    String icon_resource_name = myPack.getActivity(j).getIconResouceName();
+//                    if (icon_resource_name != null) {
+//                        icons.add(icon_resource_name);
+//                    }
+//                }
+//            } catch (NameNotFoundException | RuntimeException ignored) {
+//            }
+//        }
 
         this.icons = new String[icons.size()];
         this.icons = icons.toArray(this.icons);

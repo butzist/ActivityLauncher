@@ -1,7 +1,8 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Base64;
 
 import java.security.InvalidKeyException;
@@ -15,7 +16,7 @@ public class Signer {
     private final String key;
 
     public Signer(Context context) {
-        var preferences = context.getSharedPreferences("signer", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("signer", Context.MODE_PRIVATE);
         if (!preferences.contains("key")) {
             SecureRandom random = new SecureRandom();
             byte[] bytes = new byte[256];
@@ -40,12 +41,12 @@ public class Signer {
     }
 
     public String signComponentName(ComponentName comp) throws InvalidKeyException, NoSuchAlgorithmException {
-        var name = comp.flattenToShortString();
+        String name = comp.flattenToShortString();
         return hmac256(this.key, name);
     }
 
     public boolean validateComponentNameSignature(ComponentName comp, String signature) throws InvalidKeyException, NoSuchAlgorithmException {
-        var compSignature = this.signComponentName(comp);
+        String compSignature = this.signComponentName(comp);
         return signature.equals(compSignature);
     }
 }

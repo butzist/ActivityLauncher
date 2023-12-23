@@ -1,124 +1,55 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Filter;
-import android.widget.Filterable;
+import android.os.Bundle
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import android.view.Menu
+import android.view.MenuItem
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
-public class MainActivity extends AppCompatActivity {
-    private SharedPreferences prefs;
-    private String localeString;
-    private Filterable filterTarget = null;
-    private String filter = "";
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setTitle(R.string.app_name);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        this.localeString = prefs.getString("language", "System Default");
-        Configuration config = SettingsUtils.createLocaleConfiguration(this.localeString);
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
+        setSupportActionBar(binding.toolbar)
 
-        if (!this.prefs.getBoolean("disclaimer_accepted", false)) {
-            DialogFragment dialog = new DisclaimerDialogFragment();
-            dialog.show(getSupportFragmentManager(), "DisclaimerDialogFragment");
-        }
-
-        AllTasksListFragment fragment = new AllTasksListFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fragment).commit();
-        this.filterTarget = fragment;
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    @Override
-    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        // Restore the previously serialized current dropdown position.
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setQueryHint(this.getText(R.string.filter_hint));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                MainActivity.this.filter = query;
-                MainActivity.this.updateFilter(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                MainActivity.this.filter = query;
-                MainActivity.this.updateFilter(query);
-                return true;
-            }
-        });
-
-        return true;
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!this.localeString.equals(this.prefs.getString("language", "System Default"))) {
-            recreateFragments();
-        }
-        updateFilter(this.filter);
-    }
-
-    private void recreateFragments() {
-        recreate();
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private void updateFilter(String query) {
-        Filter filter = this.filterTarget.getFilter();
-        if (filter != null) {
-            filter.filter(query);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        // Serialize the current dropdown position.
-        super.onSaveInstanceState(outState);
-    }
-
-    public boolean isRootAllowed() {
-        return PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean("allow_root", false);
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
     }
 }

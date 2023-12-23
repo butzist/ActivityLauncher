@@ -1,27 +1,30 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher
 
-import static org.thirdparty.Launcher.launchActivity;
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.services.ActivityLauncherService
+import javax.inject.Inject
 
-import android.content.Intent;
-import android.os.Bundle;
+@AndroidEntryPoint
+class ShortcutActivity : AppCompatActivity() {
+    @Inject
+    internal lateinit var activityLauncherService: ActivityLauncherService
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.net.URISyntaxException;
-
-public class ShortcutActivity extends AppCompatActivity {
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         try {
-            Intent launchIntent = Intent.parseUri(getIntent().getStringExtra("extra_intent"), 0);
-            launchActivity(this, launchIntent.getComponent(), false, false);
-        } catch (Exception e) {
-            e.printStackTrace();
+            val launchIntent = Intent.parseUri(intent.getStringExtra("extra_intent"), 0)
+            activityLauncherService.launchActivity(launchIntent.component!!,
+                asRoot = false,
+                showToast = false
+            );
+        } catch (e: Exception) {
+            e.printStackTrace()
         } finally {
-            finish();
+            finish()
         }
     }
 }
+

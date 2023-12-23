@@ -1,17 +1,18 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import org.thirdparty.IconCreator;
+import de.szalkowski.activitylauncher.R;
+import de.szalkowski.activitylauncher.services.MyActivityInfo;
 
 public class RootLauncherIconCreator {
     public static void createLauncherIcon(Context context, MyActivityInfo activity) {
-        var signer = new Signer(context);
-        var extras = new Bundle();
-        var comp = activity.getComponentName();
+        Signer signer = new Signer(context);
+        Bundle extras = new Bundle();
+        ComponentName comp = activity.getComponentName();
 
         String signature;
         try {
@@ -26,9 +27,10 @@ public class RootLauncherIconCreator {
         extras.putString("cls", comp.getClassName());
         extras.putString("sign", signature);
 
-        activity.is_private = true;
-        activity.component_name = new ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.RootLauncherActivity");
-
-        IconCreator.createLauncherIcon(context, activity, extras);
+        // FIXME
+//        activity.is_private = true;
+//        activity.component_name = new ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.RootLauncherActivity");
+//
+//        IconCreator.createLauncherIcon(context, activity, extras);
     }
 }

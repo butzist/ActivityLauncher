@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.todo;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import de.szalkowski.activitylauncher.R;
 import de.szalkowski.activitylauncher.databinding.ProgressDialogBinding;
 
 public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {

@@ -1,162 +1,47 @@
-package de.szalkowski.activitylauncher;
+package de.szalkowski.activitylauncher.ui
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.databinding.FragmentPackageListBinding
+import javax.inject.Inject
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+@AndroidEntryPoint
+class PackageListFragment : Fragment() {
+    @Inject
+    internal lateinit var packageListAdapter: PackageListAdapter
 
-import org.thirdparty.IconCreator;
-import org.thirdparty.Launcher;
+    private var _binding: FragmentPackageListBinding? = null
 
-import de.szalkowski.activitylauncher.databinding.FragmentAllListBinding;
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-public class AllTasksListFragment extends Fragment implements AllTasksListAsyncProvider.Listener<AllTasksListAdapter>, Filterable {
-    private FragmentAllListBinding binding;
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentAllListBinding.inflate(inflater, container, false);
-
-        binding.expandableListView1.setOnChildClickListener(
-                (parent, v, groupPosition, childPosition, id) -> {
-                    ExpandableListAdapter adapter = parent.getExpandableListAdapter();
-                    MyActivityInfo info = (MyActivityInfo) adapter.getChild(groupPosition, childPosition);
-                    var rooted = isRootAllowed();
-                    Launcher.launchActivity(getActivity(), info.component_name, rooted && info.is_private, true);
-                    return false;
-                }
-        );
-        binding.expandableListView1.setTextFilterEnabled(true);
-        registerForContextMenu(binding.expandableListView1);
-
-        AllTasksListAsyncProvider provider = new AllTasksListAsyncProvider(getActivity(), this);
-        provider.execute();
-
-        return binding.getRoot();
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPackageListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
-                                    ContextMenuInfo menuInfo) {
-        var rooted = isRootAllowed();
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        menu.add(Menu.NONE, 0, Menu.NONE, R.string.context_action_shortcut);
-        if (rooted) {
-            menu.add(Menu.NONE, 1, Menu.NONE, R.string.context_action_shortcut_as_root);
+        packageListAdapter.onItemClick = {
+            val action = PackageListFragmentDirections.actionSelectPackage(it.packageName)
+            findNavController().navigate(action)
         }
-        menu.add(Menu.NONE, 2, Menu.NONE, R.string.context_action_launch);
-        if (rooted) {
-            menu.add(Menu.NONE, 3, Menu.NONE, R.string.context_action_launch_as_root);
-        }
-        ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) menuInfo;
-
-        switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
-            case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
-                MyActivityInfo activity = (MyActivityInfo) binding.expandableListView1.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
-                menu.setHeaderIcon(activity.icon);
-                menu.setHeaderTitle(activity.name);
-                menu.add(Menu.NONE, 4, Menu.NONE, R.string.context_action_edit);
-                break;
-            case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
-                MyPackageInfo pack = (MyPackageInfo) binding.expandableListView1.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
-                menu.setHeaderIcon(pack.icon);
-                menu.setHeaderTitle(pack.name);
-                break;
-        }
-
-        super.onCreateContextMenu(menu, v, menuInfo);
+        binding.rvPackages.adapter = packageListAdapter
+        binding.rvPackages.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
-
-        switch (ExpandableListView.getPackedPositionType(info.packedPosition)) {
-            case ExpandableListView.PACKED_POSITION_TYPE_CHILD:
-                MyActivityInfo activity = (MyActivityInfo) binding.expandableListView1.getExpandableListAdapter().getChild(ExpandableListView.getPackedPositionGroup(info.packedPosition), ExpandableListView.getPackedPositionChild(info.packedPosition));
-                switch (item.getItemId()) {
-                    case 0:
-                        IconCreator.createLauncherIcon(getActivity(), activity);
-                        break;
-                    case 1:
-                        RootLauncherIconCreator.createLauncherIcon(getActivity(), activity);
-                        break;
-                    case 2:
-                        Launcher.launchActivity(getActivity(), activity.component_name, false, true);
-                        break;
-                    case 3:
-                        Launcher.launchActivity(getActivity(), activity.component_name, true, true);
-                        break;
-                    case 4:
-                        DialogFragment dialog = new ShortcutEditDialogFragment();
-                        Bundle args = new Bundle();
-                        args.putParcelable("activity", activity.component_name);
-                        args.putBoolean("as_root", activity.is_private);
-                        dialog.setArguments(args);
-                        dialog.show(getChildFragmentManager(), "ShortcutEditor");
-                        break;
-                }
-                break;
-
-            case ExpandableListView.PACKED_POSITION_TYPE_GROUP:
-                MyPackageInfo pack = (MyPackageInfo) binding.expandableListView1.getExpandableListAdapter().getGroup(ExpandableListView.getPackedPositionGroup(info.packedPosition));
-                switch (item.getItemId()) {
-                    case 0:
-                        IconCreator.createLauncherIcon(requireActivity(), pack);
-                        Toast.makeText(getActivity(), getString(R.string.error_no_default_activity), Toast.LENGTH_LONG).show();
-                        break;
-                    case 2:
-                        PackageManager pm = requireActivity().getPackageManager();
-                        Intent intent = pm.getLaunchIntentForPackage(pack.package_name);
-                        if (intent != null) {
-                            Toast.makeText(getActivity(), String.format(getText(R.string.starting_application).toString(), pack.name), Toast.LENGTH_LONG).show();
-                            requireActivity().startActivity(intent);
-                        } else {
-                            Toast.makeText(getActivity(), getString(R.string.error_no_default_activity), Toast.LENGTH_LONG).show();
-                        }
-                        break;
-                }
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    @Override
-    public void onProviderFinished(AsyncProvider<AllTasksListAdapter> task, AllTasksListAdapter value) {
-        try {
-            binding.expandableListView1.setAdapter(value);
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), R.string.error_tasks, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public Filter getFilter() {
-        AllTasksListAdapter adapter = (AllTasksListAdapter) binding.expandableListView1.getExpandableListAdapter();
-        if (adapter != null) {
-            return adapter.getFilter();
-        } else {
-            return null;
-        }
-    }
-
-    private boolean isRootAllowed() {
-        return ((MainActivity) requireActivity()).isRootAllowed();
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

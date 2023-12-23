@@ -1,49 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:versionCode="41"
-    android:versionName="1.15.2">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
-    <uses-feature
-        android:name="android.software.leanback"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
-
     <application
+        android:name=".ActivityLauncherApp"
         android:allowBackup="true"
-        android:fullBackupContent="true"
-        android:hasFragileUserData="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".ActivityLauncherApp"
-        android:theme="@style/AppTheme"
-        android:banner="@string/app_name" tools:targetApi="q">
+        android:theme="@style/Theme.ActivityLauncher"
+        tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="locked">
+            android:theme="@style/Theme.ActivityLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".todo.SettingsActivity"
             android:label="@string/activity_settings"
             android:exported="false" />
         <activity
-            android:name=".RootLauncherActivity"
+            android:name=".todo.RootLauncherActivity"
             android:label="@string/context_action_launch_as_root"
             android:exported="true"
-            android:theme="@style/AppTheme.NoDisplay">
+            android:theme="@style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -51,11 +43,12 @@
         <activity
             android:name=".ShortcutActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoDisplay">
+            android:theme="@style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
