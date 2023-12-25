@@ -45,16 +45,13 @@ public class IconPickerDialogFragment extends DialogFragment implements IconList
             }
         });
 
-        builder.setTitle(R.string.title_dialog_icon_picker)
-                .setView(view)
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> IconPickerDialogFragment.this.requireDialog().cancel());
+        builder.setTitle(R.string.title_dialog_icon_picker).setView(view).setNegativeButton(android.R.string.cancel, (dialog, which) -> IconPickerDialogFragment.this.requireDialog().cancel());
 
         return builder.create();
     }
 
     @Override
-    public void onProviderFinished(AsyncProvider<IconListAdapter> task,
-                                   IconListAdapter value) {
+    public void onProviderFinished(AsyncProvider<IconListAdapter> task, IconListAdapter value) {
         try {
             this.grid.setAdapter(value);
         } catch (Exception e) {

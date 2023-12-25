@@ -1,25 +1,17 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.services
 
-import java.io.File;
-import java.util.Objects;
-import java.util.Vector;
+import java.io.File
+import javax.inject.Inject
 
-public class RootDetection {
-    public static boolean detectSU() {
-        Vector<File> paths = new Vector<>();
-        String[] dirs = Objects.requireNonNull(System.getenv("PATH")).split(":");
-        for (String dir : dirs) {
-            paths.add(new File(dir, "su"));
-        }
 
-        for (File path : paths) {
-            if (path.exists() && path.canExecute() && path.isFile()) {
-                return true;
-            }
-        }
+interface RootDetectionService {
+    fun detectSU(): Boolean
+}
 
-        return false;
+class RootDetectionServiceImpl @Inject constructor() : RootDetectionService {
+    override fun detectSU(): Boolean {
+        val dirs = System.getenv("PATH").orEmpty().split(":").map { dir -> File(dir, "su") }
+
+        return dirs.any { path -> path.exists() && path.canExecute() && path.isFile }
     }
-
-
 }

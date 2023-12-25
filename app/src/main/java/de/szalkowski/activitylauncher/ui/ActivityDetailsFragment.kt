@@ -13,7 +13,6 @@ import de.szalkowski.activitylauncher.services.ActivityLauncherService
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.IconCreatorService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
-import de.szalkowski.activitylauncher.services.MyPackageInfo
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,6 +40,7 @@ class ActivityDetailsFragment : Fragment() {
 
         activityInfo = activityListService.getActivity(args.activityComponentName)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -64,9 +64,8 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btLaunch.setOnClickListener {
-            activityLauncherService.launchActivity(editedActivityInfo.componentName,
-                asRoot = false,
-                showToast = true
+            activityLauncherService.launchActivity(
+                editedActivityInfo.componentName, asRoot = false, showToast = true
             )
         }
     }
@@ -78,7 +77,8 @@ class ActivityDetailsFragment : Fragment() {
 
     private val editedActivityInfo: MyActivityInfo
         get() {
-            val componentName = ComponentName(binding.etPackage.text.toString(), binding.etClass.text.toString())
+            val componentName =
+                ComponentName(binding.etPackage.text.toString(), binding.etClass.text.toString())
             val iconResourceName = binding.etIcon.text.toString()
 
             return MyActivityInfo(

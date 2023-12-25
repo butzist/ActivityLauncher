@@ -19,7 +19,7 @@ public class RootLauncherIconCreator {
             signature = signer.signComponentName(comp);
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, context.getText(R.string.error).toString() + ": " + e, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getText(R.string.error) + ": " + e, Toast.LENGTH_LONG).show();
             return;
         }
 

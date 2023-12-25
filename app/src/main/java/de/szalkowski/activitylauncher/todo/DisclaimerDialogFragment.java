@@ -16,17 +16,14 @@ public class DisclaimerDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.title_dialog_disclaimer)
-                .setMessage(R.string.dialog_disclaimer)
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
-                    editor.edit().putBoolean("disclaimer_accepted", true).apply();
-                })
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                    SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
-                    editor.edit().putBoolean("disclaimer_accepted", false).apply();
-                    requireActivity().finish();
-                });
+        builder.setTitle(R.string.title_dialog_disclaimer).setMessage(R.string.dialog_disclaimer).setPositiveButton(android.R.string.yes, (dialog, which) -> {
+            SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
+            editor.edit().putBoolean("disclaimer_accepted", true).apply();
+        }).setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+            SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
+            editor.edit().putBoolean("disclaimer_accepted", false).apply();
+            requireActivity().finish();
+        });
 
         return builder.create();
     }

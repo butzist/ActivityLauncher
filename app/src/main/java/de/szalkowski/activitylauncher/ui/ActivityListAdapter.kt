@@ -12,12 +12,11 @@ import dagger.assisted.AssistedInject
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
-import de.szalkowski.activitylauncher.services.MyPackageInfo
-import de.szalkowski.activitylauncher.services.PackageListService
-import javax.inject.Inject
 
-class ActivityListAdapter @AssistedInject constructor(activityListService: ActivityListService, @Assisted private val packageName: String) :
-    RecyclerView.Adapter<ActivityListAdapter.ViewHolder>() {
+class ActivityListAdapter @AssistedInject constructor(
+    activityListService: ActivityListService,
+    @Assisted private val packageName: String
+) : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>() {
     @AssistedFactory
     interface ActivityListAdapterFactory {
         fun create(packageName: String): ActivityListAdapter
@@ -54,7 +53,11 @@ class ActivityListAdapter @AssistedInject constructor(activityListService: Activ
 
         val item = activities[position]
         holder.item = item
-        tvName.text = if (item.isPrivate) { "(${item.name})" } else { item.name}
+        tvName.text = if (item.isPrivate) {
+            "(${item.name})"
+        } else {
+            item.name
+        }
         tvPackage.text = item.componentName.shortClassName
         ivIcon.setImageDrawable(item.icon)
     }

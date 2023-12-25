@@ -1,31 +1,22 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher
 
-import android.os.Bundle;
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.services.SettingsService
+import de.szalkowski.activitylauncher.ui.SettingsFragment
+import javax.inject.Inject
 
-import androidx.appcompat.app.AppCompatActivity;
+@AndroidEntryPoint
+class SettingsActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-import java.util.Objects;
+        setContentView(R.layout.activity_settings)
+        this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setTitle(R.string.activity_settings)
 
-import de.szalkowski.activitylauncher.R;
-
-public class SettingsActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        Objects.requireNonNull(this.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        setTitle(R.string.activity_settings);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings_container, new SettingsFragment())
-                .commit();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.settings_container, SettingsFragment()).commit()
     }
 }

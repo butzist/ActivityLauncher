@@ -13,9 +13,10 @@ interface PackageListService {
     val packages: List<MyPackageInfo>
 }
 
-class PackageListServiceImpl @Inject constructor(@ApplicationContext context: Context) :
+class PackageListServiceImpl @Inject constructor(@ApplicationContext context: Context, settingsService: SettingsService) :
     PackageListService {
-    private val config: Configuration = Configuration() // FIXME
+
+    private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager: PackageManager = context.packageManager
 
     override val packages: List<MyPackageInfo>
