@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".todo.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/activity_settings"
             android:exported="false" />
         <activity

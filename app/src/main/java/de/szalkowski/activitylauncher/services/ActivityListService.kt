@@ -20,11 +20,11 @@ interface ActivityListService {
     ): MyActivityInfo
 }
 
-class ActivityListServiceImpl @Inject constructor(@ActivityContext context: Context) :
+class ActivityListServiceImpl @Inject constructor(@ActivityContext context: Context, settingsService: SettingsService) :
     ActivityListService {
 
+    private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager = context.packageManager
-    private val config: Configuration = Configuration() // FIXME
 
     override fun getActivities(packageName: String): List<MyActivityInfo> {
         val info = try {

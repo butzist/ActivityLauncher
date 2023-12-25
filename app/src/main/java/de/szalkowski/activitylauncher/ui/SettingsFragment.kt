@@ -1,92 +1,96 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.ui
 
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.widget.Toast;
+import android.content.SharedPreferences
+import android.content.res.Resources
+import android.os.Bundle
+import android.widget.Toast
+import androidx.preference.ListPreference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
+import androidx.preference.SwitchPreference
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.services.RootDetectionService
+import de.szalkowski.activitylauncher.services.SettingsService
+import java.util.Objects
+import javax.inject.Inject
 
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
 
-import java.util.ArrayList;
-import java.util.Objects;
+@AndroidEntryPoint
+class SettingsFragment : PreferenceFragmentCompat() {
+    private lateinit var prefs: SharedPreferences
 
-import de.szalkowski.activitylauncher.R;
+    @Inject
+    internal lateinit var rootDetectionService: RootDetectionService
 
+    @Inject
+    internal lateinit var settingsService: SettingsService
 
-public class SettingsFragment extends PreferenceFragmentCompat {
-    private SharedPreferences prefs;
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.preferences, rootKey)
+        prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().baseContext)
 
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.preferences, rootKey);
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
+        val hidePrivate: SwitchPreference = Objects.requireNonNull(findPreference("hide_private"))
+        val allowRoot: SwitchPreference = Objects.requireNonNull(findPreference("allow_root"))
+        val theme: ListPreference = Objects.requireNonNull(findPreference("theme"))
+        val languages: ListPreference = Objects.requireNonNull(findPreference("language"))
 
-        SwitchPreference hidePrivate = Objects.requireNonNull(findPreference("hide_private"));
-        SwitchPreference allowRoot = Objects.requireNonNull(findPreference("allow_root"));
-        ListPreference theme = Objects.requireNonNull(findPreference("theme"));
-        ListPreference languages = Objects.requireNonNull(findPreference("language"));
-
-        theme.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
-        languages.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
-
-        populateLanguages(languages);
-
-        hidePrivate.setOnPreferenceChangeListener((preference, newValue) -> onHidePrivateUpdated((Boolean) newValue));
-        allowRoot.setOnPreferenceChangeListener((preference, newValue) -> onAllowRootUpdated((Boolean) newValue));
-        theme.setOnPreferenceChangeListener((preference, newValue) -> onThemeUpdated((String) newValue));
-        languages.setOnPreferenceChangeListener((preference, newValue) -> onLanguageUpdated((String) newValue));
-    }
-
-    private void populateLanguages(ListPreference languages) {
-        String[] locales = getResources().getStringArray(R.array.locales);
-        ArrayList<String> language = new ArrayList<>();
-        for (String locale : locales) {
-            language.add(SettingsUtils.getCountryName(locale));
+        languages.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance())
+        populateLanguages(languages)
+        languages.setOnPreferenceChangeListener { _, newValue ->
+            onLanguageUpdated(
+                newValue as String
+            )
         }
-        String[] languageValue = language.toArray(new String[0]);
-        languages.setEntries(languageValue);
+
+        hidePrivate.setOnPreferenceChangeListener { _, newValue ->
+            onHidePrivateUpdated(
+                newValue as Boolean
+            )
+        }
+
+        allowRoot.setOnPreferenceChangeListener { _, newValue ->
+            onAllowRootUpdated(
+                newValue as Boolean
+            )
+        }
+
+        theme.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance())
+        theme.setOnPreferenceChangeListener { _, newValue -> onThemeUpdated(newValue as String) }
     }
 
-    private boolean onAllowRootUpdated(boolean newValue) {
-        boolean hasSU = RootDetection.detectSU();
+    private fun populateLanguages(languages: ListPreference) {
+        val languageValues = resources.getStringArray(R.array.locales)
+            .map { locale -> settingsService.getCountryName(locale) }
+        languages.entries = languageValues.toTypedArray()
+    }
 
+    private fun onAllowRootUpdated(newValue: Boolean): Boolean {
+        val hasSU = rootDetectionService.detectSU()
         if (newValue && !hasSU) {
-            Toast.makeText(getActivity(), getText(R.string.warning_root_check), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, getText(R.string.warning_root_check), Toast.LENGTH_LONG).show()
         }
-
-        prefs.edit().putBoolean("allow_root", newValue).apply();
-        return true;
+        prefs.edit().putBoolean("allow_root", newValue).apply()
+        return true
     }
 
-    private boolean onThemeUpdated(String newValue) {
-        this.prefs.edit().putString("theme", newValue).apply();
-        SettingsUtils.setTheme(newValue);
-        return true;
+    private fun onThemeUpdated(newValue: String): Boolean {
+        prefs.edit().putString("theme", newValue).apply()
+        settingsService.setTheme(newValue)
+        return true
     }
 
-    private boolean onHidePrivateUpdated(boolean newValue) {
-        this.prefs.edit().putBoolean("hide_hide_private", newValue).apply();
-        return true;
+    private fun onHidePrivateUpdated(newValue: Boolean): Boolean {
+        prefs.edit().putBoolean("hide_hide_private", newValue).apply()
+        return true
     }
 
-    private boolean onLanguageUpdated(String newValue) {
-        this.prefs.edit().putString("language", newValue).apply();
-        Configuration config;
-        if (newValue.equals("System Default")) {
-            config = SettingsUtils.createLocaleConfiguration(Resources.getSystem().getConfiguration().locale.toString());
-        } else {
-            config = SettingsUtils.createLocaleConfiguration(newValue);
-        }
+    private fun onLanguageUpdated(newValue: String): Boolean {
+        prefs.edit().putString("language", newValue).apply()
 
-        Resources resources = requireActivity().getBaseContext().getResources();
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-        // FIXME
-        //PackageManagerCache.resetPackageManagerCache();
-        requireActivity().recreate();
-        return true;
+        settingsService.applyLocaleConfiguration(requireActivity().baseContext)
+        requireActivity().recreate()
+        return true
     }
 }
+

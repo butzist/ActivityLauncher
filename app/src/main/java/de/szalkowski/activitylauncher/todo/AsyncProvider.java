@@ -45,9 +45,7 @@ public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer,
             }
 
             this.binding.progress.setProgress(value);
-            this.binding.progressNumber.setText(
-                    String.format(Locale.getDefault(), "%1d/%2d", value, this.max)
-            );
+            this.binding.progressNumber.setText(String.format(Locale.getDefault(), "%1d/%2d", value, this.max));
             double percent = (double) value / (double) this.max;
             this.binding.progressPercent.setText(this.progressPercentFormat.format(percent));
         }

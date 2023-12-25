@@ -4,7 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -28,4 +29,20 @@ abstract class ServicesModule {
     abstract fun bindIconCreatorService(
         iconCreatorServiceImpl: IconCreatorServiceImpl
     ): IconCreatorService
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class ApplicationServicesModule {
+    @Singleton
+    @Binds
+    abstract fun bindRootDetectionService(
+        rootDetectionServiceImpl: RootDetectionServiceImpl
+    ): RootDetectionService
+
+    @Singleton
+    @Binds
+    abstract fun bindSettingsService(
+        settingsServiceImpl: SettingsServiceImpl
+    ): SettingsService
 }
