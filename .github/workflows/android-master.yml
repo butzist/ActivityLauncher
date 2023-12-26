@@ -19,7 +19,7 @@ jobs:
         java-version: 17
         cache: 'gradle'
     - name: Prepare Android keystore
-      run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > ActivityLauncherApp/keystore.jks
+      run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release APK
@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: release.apk
-        path: ActivityLauncherApp/build/outputs/apk/release/ActivityLauncherApp-release.apk
+        path: app/build/outputs/apk/release/app-release.apk

@@ -21,7 +21,7 @@ jobs:
         java-version: 17
         cache: 'gradle'
     - name: Prepare Android keystore
-      run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > ActivityLauncherApp/keystore.jks
+      run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release AAB
@@ -42,16 +42,16 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: release.apk
-        path: ActivityLauncherApp/build/outputs/apk/release/ActivityLauncherApp-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
         serviceAccountJsonPlainText: ${{ secrets.SERVICEACCOUNT }}
         packageName: de.szalkowski.activitylauncher
-        releaseFiles: ActivityLauncherApp/build/outputs/bundle/release/*.aab
+        releaseFiles: app/build/outputs/bundle/release/*.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: beta
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew
-        mappingFile: ActivityLauncherApp/build/outputs/mapping/release/mapping.txt
+        mappingFile: app/build/outputs/mapping/release/mapping.txt
