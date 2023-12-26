@@ -12,11 +12,12 @@ android {
 
     defaultConfig {
         applicationId = "de.szalkowski.activitylauncher"
-        minSdk = 19
+        minSdk = 16
         targetSdk = 34
         versionCode = 50
         versionName = "2.0.0"
 
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,6 +65,7 @@ kapt {
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.multidex:multidex:2.0.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")

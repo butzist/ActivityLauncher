@@ -1,12 +1,12 @@
 package de.szalkowski.activitylauncher
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
 import de.szalkowski.activitylauncher.services.SettingsService
 import javax.inject.Inject
 
 @HiltAndroidApp
-class ActivityLauncherApp : Application() {
+class ActivityLauncherApp : MultiDexApplication() {
     @Inject
     internal lateinit var settingsService: SettingsService
 
