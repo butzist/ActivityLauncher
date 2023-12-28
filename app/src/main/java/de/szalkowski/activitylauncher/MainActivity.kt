@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.services.SettingsService
+import de.szalkowski.activitylauncher.ui.DisclaimerDialogFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         settingsService.applyLocaleConfiguration(baseContext)
+        if (!settingsService.disclaimerAccepted) {
+            DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
+        }
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 return true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
