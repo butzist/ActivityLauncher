@@ -1,30 +1,28 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.ui
 
-import android.app.Dialog;
-import android.content.SharedPreferences;
-import android.os.Bundle;
+import android.app.Dialog
+import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.services.SettingsService
+import javax.inject.Inject
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
-import androidx.preference.PreferenceManager;
+@AndroidEntryPoint
+class DisclaimerDialogFragment : DialogFragment() {
+    @Inject
+    internal lateinit var settingsService: SettingsService
 
-import de.szalkowski.activitylauncher.R;
-
-public class DisclaimerDialogFragment extends DialogFragment {
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.title_dialog_disclaimer).setMessage(R.string.dialog_disclaimer).setPositiveButton(android.R.string.yes, (dialog, which) -> {
-            SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
-            editor.edit().putBoolean("disclaimer_accepted", true).apply();
-        }).setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-            SharedPreferences editor = PreferenceManager.getDefaultSharedPreferences(requireActivity().getBaseContext());
-            editor.edit().putBoolean("disclaimer_accepted", false).apply();
-            requireActivity().finish();
-        });
-
-        return builder.create();
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(R.string.title_dialog_disclaimer).setMessage(R.string.dialog_disclaimer)
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                settingsService.disclaimerAccepted = true
+            }.setNegativeButton(android.R.string.cancel) { _, _ ->
+                settingsService.disclaimerAccepted = false
+                requireActivity().finish()
+            }
+        return builder.create()
     }
 }

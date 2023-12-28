@@ -9,57 +9,87 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Locale
 import javax.inject.Inject
 
-const val THEME_DEFAULT = "0"
-const val THEME_LIGHT = "1"
-const val THEME_DARK = "2"
-
 interface SettingsService {
+    fun init()
     fun getLocaleConfiguration(): Configuration
+    fun applyLocaleConfiguration(context: Context)
     fun getCountryName(name: String): String
     fun setTheme(theme: String?)
 
-    fun init()
-
-    fun applyLocaleConfiguration(context: Context)
+    var disclaimerAccepted: Boolean
+    val hideHidePrivate: Boolean
+    val language: String
+    val allowRoot: Boolean
+    val theme: String
 }
 
-class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: Context) : SettingsService {
-    private val prefs = PreferenceManager.getDefaultSharedPreferences(context);
+class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: Context) :
+    SettingsService {
+    companion object {
+        const val THEME_DEFAULT = "0"
+        const val THEME_LIGHT = "1"
+        const val THEME_DARK = "2"
+
+        const val LANGUAGE_DEFAULT = "System Default"
+
+        const val PREF_ALLOW_ROOT = "allow_root"
+        const val PREF_THEME = "theme"
+        const val PREF_HIDE_HIDE_PRIVATE = "hide_hide_private"
+        const val PREF_LANGUAGE = "language"
+        const val PREF_DISCLAIMER_ACCEPTED = "disclaimer_accepted"
+    }
+
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
     @Inject
     internal lateinit var rootDetectionService: RootDetectionService
 
     override fun init() {
-        setTheme(prefs.getString("theme", "0"))
+        setTheme(theme)
 
-        if (!prefs.contains("allow_root")) {
+        if (!prefs.contains(PREF_ALLOW_ROOT)) {
             val hasSU = rootDetectionService.detectSU()
-            prefs.edit().putBoolean("allow_root", hasSU).apply()
+            prefs.edit().putBoolean(PREF_ALLOW_ROOT, hasSU).apply()
         }
 
-        if (!prefs.contains("hide_hide_private")) {
-            prefs.edit().putBoolean("hide_hide_private", false).apply()
+        if (!prefs.contains(PREF_HIDE_HIDE_PRIVATE)) {
+            prefs.edit().putBoolean(PREF_HIDE_HIDE_PRIVATE, false).apply()
         }
 
-        if (!prefs.contains("language")) {
-            prefs.edit().putString("language", "System Default").apply()
+        if (!prefs.contains(PREF_LANGUAGE)) {
+            prefs.edit().putString(PREF_LANGUAGE, LANGUAGE_DEFAULT).apply()
         }
     }
+
+    override var disclaimerAccepted: Boolean
+        get() = prefs.getBoolean(PREF_DISCLAIMER_ACCEPTED, false)
+        set(value) = prefs.edit().putBoolean(PREF_DISCLAIMER_ACCEPTED, value).apply()
+
+    override val theme: String
+        get() = prefs.getString(PREF_THEME, THEME_DEFAULT)!!
+
+    override val allowRoot: Boolean
+        get() = prefs.getBoolean(PREF_ALLOW_ROOT, false)
+
+    override val language: String
+        get() = prefs.getString(PREF_LANGUAGE, LANGUAGE_DEFAULT)!!
+
+    override val hideHidePrivate: Boolean
+        get() = prefs.getBoolean(PREF_HIDE_HIDE_PRIVATE, false)
 
     override fun applyLocaleConfiguration(context: Context) {
         val config = getLocaleConfiguration()
         Locale.setDefault(config.locale)
-        context.resources.updateConfiguration(config,
-            context.resources.displayMetrics);
+        context.resources.updateConfiguration(
+            config, context.resources.displayMetrics
+        )
     }
 
     override fun getLocaleConfiguration(): Configuration {
-        val settingsLanguage = prefs.getString("language", "System Default")!!
-
-        val language = if (settingsLanguage == "System Default") {
+        val language = if (language == LANGUAGE_DEFAULT) {
             Resources.getSystem().configuration.locale.toString()
         } else {
-            settingsLanguage
+            language
         }
 
         val config = Configuration()
