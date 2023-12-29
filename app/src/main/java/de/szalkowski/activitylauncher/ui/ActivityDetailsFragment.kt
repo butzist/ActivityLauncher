@@ -63,9 +63,19 @@ class ActivityDetailsFragment : Fragment() {
             iconCreatorService.createLauncherIcon(editedActivityInfo)
         }
 
+        binding.btCreateShortcutAsRoot.setOnClickListener {
+            iconCreatorService.createRootLauncherIcon(editedActivityInfo)
+        }
+
         binding.btLaunch.setOnClickListener {
             activityLauncherService.launchActivity(
                 editedActivityInfo.componentName, asRoot = false, showToast = true
+            )
+        }
+
+        binding.btLaunchAsRoot.setOnClickListener {
+            activityLauncherService.launchActivity(
+                editedActivityInfo.componentName, asRoot = true, showToast = true
             )
         }
     }

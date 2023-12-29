@@ -36,6 +36,12 @@ abstract class ServicesModule {
 abstract class ApplicationServicesModule {
     @Singleton
     @Binds
+    abstract fun bindIntentSigningService(
+        intentSigningServiceImpl: IntentSigningServiceImpl
+    ): IntentSigningService
+
+    @Singleton
+    @Binds
     abstract fun bindRootDetectionService(
         rootDetectionServiceImpl: RootDetectionServiceImpl
     ): RootDetectionService

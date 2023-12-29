@@ -34,7 +34,7 @@ class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private v
         asRoot: Boolean,
         showToast: Boolean
     ) {
-        val intent: Intent = getActivityIntent(activity, null)
+        val intent = getActivityIntent(activity, null)
         if (showToast) Toast.makeText(
             context,
             String.format(
@@ -69,6 +69,7 @@ class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private v
                 component
             )
         }
+
         val process = Runtime.getRuntime().exec(
             arrayOf(
                 "su", "-c",

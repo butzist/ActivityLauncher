@@ -21,40 +21,43 @@ import androidx.appcompat.app.AlertDialog
 import dagger.hilt.android.qualifiers.ActivityContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.internal.getActivityIntent
-import java.util.Objects
 import javax.inject.Inject
 
-private const val INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT"
-
 interface IconCreatorService {
-    fun createLauncherIcon(activity: MyActivityInfo, extras: Bundle?)
-    fun createLauncherIcon(activity: MyActivityInfo)
-    fun createLauncherIcon(pack: MyPackageInfo)
+    fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle? = null)
+    fun createRootLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle? = null)
+
+    companion object {
+        const val INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT"
+        const val INTENT_LAUNCH_ROOT_SHORTCUT = "activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT"
+
+        const val INTENT_EXTRA_INTENT = "extra_intent"
+        const val INTENT_EXTRA_SIGNATURE = "sign"
+    }
 }
 
-class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val context: Context) :
-    IconCreatorService {
-    override fun createLauncherIcon(activity: MyActivityInfo, extras: Bundle?) {
+class IconCreatorServiceImpl @Inject constructor(
+    @ActivityContext private val context: Context,
+    private val signingService: IntentSigningService
+) : IconCreatorService {
+    override fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
+        createLauncherIcon(activity, optionalExtras, false)
+    }
+
+    override fun createRootLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
+        createLauncherIcon(activity, optionalExtras, true)
+    }
+
+    private fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?, asRoot: Boolean) {
         val pack = extractIconPackageName(activity)
-        val name: String = activity.name
-        val intent = getActivityIntent(activity.componentName, extras)
-        val icon: Drawable = activity.icon
+        val intent = getActivityIntent(activity.componentName, optionalExtras)
 
         // Use bitmap version, if icon from different package is used
         if (pack != null && pack != activity.componentName.packageName) {
-            createShortcut(name, icon, intent, null)
+            createShortcut(activity.name, intent, activity.icon, asRoot, null)
         } else {
-            createShortcut(name, icon, intent, activity.iconResourceName)
+            createShortcut(activity.name, intent, activity.icon, asRoot, activity.iconResourceName)
         }
-    }
-
-    override fun createLauncherIcon(activity: MyActivityInfo) {
-        createLauncherIcon(activity, null)
-    }
-
-    override fun createLauncherIcon(pack: MyPackageInfo) {
-        val intent = context.packageManager.getLaunchIntentForPackage(pack.packageName) ?: return
-        createShortcut(pack.name, pack.icon, intent, pack.iconResourceName)
     }
 
     private fun extractIconPackageName(
@@ -105,7 +108,7 @@ class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val co
     }
 
     private fun createShortcut(
-        appName: String, draw: Drawable, intent: Intent, iconResourceName: String?
+        appName: String, intent: Intent, draw: Drawable, asRoot: Boolean, iconResourceName: String?
     ) {
         Toast.makeText(
             context, String.format(
@@ -113,17 +116,22 @@ class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val co
             ), Toast.LENGTH_LONG
         ).show()
         if (Build.VERSION.SDK_INT >= 26) {
-            doCreateShortcut(appName, draw, intent)
+            doCreateShortcut(appName, intent, asRoot, draw)
         } else {
-            doCreateShortcut(appName, intent, iconResourceName)
+            doCreateShortcut(appName, intent, asRoot, iconResourceName)
         }
     }
 
     private fun doCreateShortcut(
-        appName: String, intent: Intent, iconResourceName: String?
+        appName: String, intent: Intent, asRoot: Boolean, iconResourceName: String?
     ) {
         val shortcutIntent = Intent()
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
+        if (asRoot) {
+            // wrap only if root access needed
+            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, createShortcutIntent(intent, true))
+        } else {
+            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
+        }
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName)
         if (iconResourceName != null) {
             val ir = ShortcutIconResource()
@@ -134,6 +142,7 @@ class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val co
             }
             ir.resourceName = iconResourceName
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir)
+
         }
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT")
         context.sendBroadcast(shortcutIntent)
@@ -141,20 +150,15 @@ class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val co
 
     @TargetApi(26)
     private fun doCreateShortcut(
-        appName: String, draw: Drawable, extraIntent: Intent
+        appName: String, intent: Intent, asRoot: Boolean, draw: Drawable
     ) {
-        val shortcutManager = Objects.requireNonNull(
-            context.getSystemService(
-                ShortcutManager::class.java
-            )
-        )
+        val shortcutManager = context.getSystemService(ShortcutManager::class.java)!!
         if (shortcutManager.isRequestPinShortcutSupported) {
             val icon = getIconFromDrawable(draw)
-            val intent = Intent(INTENT_LAUNCH_SHORTCUT)
-            intent.putExtra("extra_intent", extraIntent.toUri(0))
+            val shortcutIntent = createShortcutIntent(intent, asRoot)
             val shortcutInfo =
                 ShortcutInfo.Builder(context, appName).setShortLabel(appName).setLongLabel(appName)
-                    .setIcon(icon).setIntent(intent).build()
+                    .setIcon(icon).setIntent(shortcutIntent).build()
             shortcutManager.requestPinShortcut(shortcutInfo, null)
         } else {
             AlertDialog.Builder(context).setTitle(context.getText(R.string.error_creating_shortcut))
@@ -165,6 +169,26 @@ class IconCreatorServiceImpl @Inject constructor(@ActivityContext private val co
                     dialog.cancel()
                 }.show()
         }
+    }
+
+    private fun createShortcutIntent(intent: Intent, asRoot: Boolean): Intent {
+        val action = if(asRoot) {
+            IconCreatorService.INTENT_LAUNCH_ROOT_SHORTCUT} else {IconCreatorService.INTENT_LAUNCH_SHORTCUT}
+        val shortcutIntent = Intent(action)
+        shortcutIntent.putExtra(IconCreatorService.INTENT_EXTRA_INTENT, intent.toUri(0))
+
+        val signature: String
+        try {
+            signature = signingService.signIntent(intent)
+            shortcutIntent.putExtra(IconCreatorService.INTENT_EXTRA_SIGNATURE, signature)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                context, context.getText(R.string.error).toString() + ": " + e, Toast.LENGTH_LONG
+            ).show()
+        }
+
+        return shortcutIntent
     }
 }
 

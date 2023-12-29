@@ -38,6 +38,7 @@ class PackageListFragment : Fragment() {
         }
         binding.rvPackages.adapter = packageListAdapter
         binding.rvPackages.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPackages.isNestedScrollingEnabled = false
     }
 
     override fun onDestroyView() {
