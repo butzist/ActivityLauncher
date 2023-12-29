@@ -23,7 +23,6 @@
             android:theme="@style/Theme.ActivityLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,20 +31,13 @@
             android:label="@string/activity_settings"
             android:exported="false" />
         <activity
-            android:name=".todo.RootLauncherActivity"
-            android:label="@string/context_action_launch_as_root"
-            android:exported="true"
-            android:theme="@style/Theme.NoDisplay">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ShortcutActivity"
             android:exported="true"
+            android:noHistory="true"
             android:theme="@style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT"/>
+                <action android:name="activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

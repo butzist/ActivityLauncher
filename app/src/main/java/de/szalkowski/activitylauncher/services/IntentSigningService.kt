@@ -1,52 +1,59 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.services;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Base64;
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.util.Base64
+import dagger.hilt.android.qualifiers.ApplicationContext
+import java.security.SecureRandom
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
+import javax.inject.Inject
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
+interface IntentSigningService {
+    fun signIntent(intent: Intent): String
+    fun validateIntentSignature(intent: Intent, signature: String): Boolean
+}
 
-public class Signer {
-    private final String key;
+class IntentSigningServiceImpl @Inject constructor(@ApplicationContext context: Context) :
+    IntentSigningService {
+    private val key: String
 
-    public Signer(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("signer", Context.MODE_PRIVATE);
+    init {
+        val preferences = context.getSharedPreferences("signer", Context.MODE_PRIVATE)
         if (!preferences.contains("key")) {
-            SecureRandom random = new SecureRandom();
-            byte[] bytes = new byte[256];
-            random.nextBytes(bytes);
-
-            this.key = Base64.encodeToString(bytes, Base64.NO_WRAP);
-            preferences.edit().putString("key", this.key).apply();
+            val random = SecureRandom()
+            val bytes = ByteArray(256)
+            random.nextBytes(bytes)
+            key = Base64.encodeToString(bytes, Base64.NO_WRAP)
+            preferences.edit().putString("key", key).apply()
         } else {
-            this.key = preferences.getString("key", "");
+            key = preferences.getString("key", "")!!
         }
     }
 
-    /**
-     * Adapted from StackOverflow:
-     * https://stackoverflow.com/questions/36004761/is-there-any-function-for-creating-hmac256-string-in-android
-     */
-    private static String hmac256(String key, String message) throws NoSuchAlgorithmException, InvalidKeyException {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(new SecretKeySpec(key.getBytes(), "HmacSHA256"));
-        byte[] result = mac.doFinal(message.getBytes());
-        return Base64.encodeToString(result, Base64.NO_WRAP);
+    override fun signIntent(intent: Intent): String {
+        val uri = intent.toUri(0)
+        return hmac256(key, uri)
     }
 
-    public String signComponentName(ComponentName comp) throws InvalidKeyException, NoSuchAlgorithmException {
-        String name = comp.flattenToShortString();
-        return hmac256(this.key, name);
+    override fun validateIntentSignature(intent: Intent, signature: String): Boolean {
+        val compSignature = signIntent(intent)
+        return signature == compSignature
     }
 
-    public boolean validateComponentNameSignature(ComponentName comp, String signature) throws InvalidKeyException, NoSuchAlgorithmException {
-        String compSignature = this.signComponentName(comp);
-        return signature.equals(compSignature);
+    companion object {
+        /**
+         * Adapted from StackOverflow:
+         * https://stackoverflow.com/questions/36004761/is-there-any-function-for-creating-hmac256-string-in-android
+         */
+        private fun hmac256(key: String?, message: String): String {
+            val mac = Mac.getInstance("HmacSHA256")
+            mac.init(SecretKeySpec(key!!.toByteArray(), "HmacSHA256"))
+            val result = mac.doFinal(message.toByteArray())
+            return Base64.encodeToString(result, Base64.NO_WRAP)
+        }
     }
 }
+
