@@ -1,141 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="15dp"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TableLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/label_name"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:labelFor="@+id/etName"
-                android:text="@string/label_name"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPackage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/label_package"
+        app:layout_constraintTop_toBottomOf="@+id/tilName">
 
-            <EditText
-                android:id="@+id/etName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-        </TableRow>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiPackage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/label_class"
+        app:layout_constraintTop_toBottomOf="@+id/tilPackage">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:labelFor="@+id/etPackage"
-                android:text="@string/label_package"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiClass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/etPackage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:importantForAutofill="no"
-                android:inputType="text">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilIcon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/label_icon"
+        app:layout_constraintEnd_toStartOf="@+id/ibIconPicker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilClass">
 
-                <requestFocus />
-            </EditText>
-        </TableRow>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:labelFor="@+id/etClass"
-                android:text="@string/label_class"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/etClass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:labelFor="@+id/etIcon"
-                android:text="@string/label_icon"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/etIcon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-
-            <ImageButton
-                android:id="@+id/ibIconPicker"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:adjustViewBounds="false"
-                android:contentDescription="@string/title_dialog_icon_picker"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_launcher" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow_as_root"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </TableLayout>
+    <ImageButton
+        android:id="@+id/ibIconPicker"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_margin="8dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/title_dialog_icon_picker"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="@+id/tilIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tilIcon" />
 
     <Button
         android:id="@+id/btLaunch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/context_action_launch" />
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/context_action_launch"
+        app:layout_constraintTop_toBottomOf="@+id/tilIcon" />
 
     <Button
         android:id="@+id/btLaunchAsRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/context_action_launch_as_root" />
+        android:layout_margin="8dp"
+        android:text="@string/context_action_launch_as_root"
+        app:layout_constraintTop_toBottomOf="@+id/btLaunch" />
 
     <Button
         android:id="@+id/btCreateShortcut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/context_action_shortcut" />
+        android:layout_margin="8dp"
+        android:text="@string/context_action_shortcut"
+        app:layout_constraintTop_toBottomOf="@+id/btLaunchAsRoot" />
 
     <Button
         android:id="@+id/btCreateShortcutAsRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/context_action_shortcut_as_root" />
-</LinearLayout>
+        android:layout_margin="8dp"
+        android:text="@string/context_action_shortcut_as_root"
+        app:layout_constraintTop_toBottomOf="@+id/btCreateShortcut"
+        tools:layout_editor_absoluteY="20dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
