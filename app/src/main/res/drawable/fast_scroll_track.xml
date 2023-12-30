@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CC BY-SA 4.0 https://stackoverflow.com/a/46026362 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/shape_track"/>
+
+    <item
+        android:drawable="@drawable/shape_track"/>
+</selector>

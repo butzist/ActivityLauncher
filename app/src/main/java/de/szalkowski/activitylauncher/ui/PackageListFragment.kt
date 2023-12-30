@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.FragmentPackageListBinding
 import javax.inject.Inject
@@ -37,7 +36,6 @@ class PackageListFragment : Fragment() {
             findNavController().navigate(action)
         }
         binding.rvPackages.adapter = packageListAdapter
-        binding.rvPackages.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPackages.isNestedScrollingEnabled = false
     }
 
