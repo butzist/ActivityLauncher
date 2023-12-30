@@ -51,6 +51,10 @@ class ActivityDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val actionBar = activity as? ActionBarSearch
+        // FIXME just hide the search menu item, instead
+       actionBar?.actionBarSearchText = ""
+
         binding.tiName.setText(activityInfo.name)
         binding.tiPackage.setText(activityInfo.componentName.packageName)
         binding.tiClass.setText(activityInfo.componentName.shortClassName)
