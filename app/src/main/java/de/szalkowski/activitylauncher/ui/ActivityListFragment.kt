@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
 import javax.inject.Inject
@@ -48,7 +47,7 @@ class ActivityListFragment : Fragment() {
         }
 
         binding.rvActivities.adapter = activityListAdapter
-        binding.rvActivities.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvActivities.isNestedScrollingEnabled = false
     }
 
     override fun onDestroyView() {
