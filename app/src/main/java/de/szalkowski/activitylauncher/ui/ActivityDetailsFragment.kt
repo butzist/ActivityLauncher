@@ -51,10 +51,10 @@ class ActivityDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.etName.setText(activityInfo.name)
-        binding.etPackage.setText(activityInfo.componentName.packageName)
-        binding.etClass.setText(activityInfo.componentName.className)
-        binding.etIcon.setText(activityInfo.iconResourceName ?: "")
+        binding.tiName.setText(activityInfo.name)
+        binding.tiPackage.setText(activityInfo.componentName.packageName)
+        binding.tiClass.setText(activityInfo.componentName.shortClassName)
+        binding.tiIcon.setText(activityInfo.iconResourceName ?: "")
         binding.ibIconPicker.setImageDrawable(activityInfo.icon)
 
         // TODO binding.ibIconPicker
@@ -88,12 +88,12 @@ class ActivityDetailsFragment : Fragment() {
     private val editedActivityInfo: MyActivityInfo
         get() {
             val componentName =
-                ComponentName(binding.etPackage.text.toString(), binding.etClass.text.toString())
-            val iconResourceName = binding.etIcon.text.toString()
+                ComponentName(binding.tiPackage.text.toString(), binding.tiClass.text.toString())
+            val iconResourceName = binding.tiIcon.text.toString()
 
             return MyActivityInfo(
                 componentName,
-                binding.etName.text.toString(),
+                binding.tiName.text.toString(),
                 binding.ibIconPicker.drawable,
                 iconResourceName.ifBlank { null },
                 false,
