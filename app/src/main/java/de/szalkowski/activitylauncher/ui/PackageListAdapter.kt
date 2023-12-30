@@ -14,7 +14,9 @@ import javax.inject.Inject
 class PackageListAdapter @Inject constructor(packageListService: PackageListService) :
     RecyclerView.Adapter<PackageListAdapter.ViewHolder>() {
 
-    private val packages = packageListService.packages
+    private val allPackages = packageListService.packages
+    private var filteredPackages = allPackages
+
     var onItemClick: ((MyPackageInfo) -> Unit)? = null
 
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
@@ -27,6 +29,19 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
         }
     }
 
+    var filter: String = ""
+        set(value) {
+            field = value
+            filteredPackages = allPackages.filter { p ->
+                listOf(p.name, p.packageName).any {
+                    it.contains(
+                        field, ignoreCase = true
+                    )
+                }
+            }
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.list_item_package_list, parent, false)
@@ -34,7 +49,7 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
     }
 
     override fun getItemCount(): Int {
-        return packages.size
+        return filteredPackages.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -43,7 +58,7 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
         val tvPackage = view.findViewById<TextView>(R.id.tvPackage)
         val ivIcon = view.findViewById<ImageView>(R.id.ivIcon)
 
-        val item = packages[position]
+        val item = filteredPackages[position]
         holder.item = item
         tvName.text = item.name
         tvPackage.text = item.packageName

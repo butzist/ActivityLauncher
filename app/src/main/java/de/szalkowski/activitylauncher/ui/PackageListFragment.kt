@@ -31,6 +31,12 @@ class PackageListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val actionBar = activity as? ActionBarSearch
+        packageListAdapter.filter = actionBar?.actionBarSearchText.orEmpty()
+        actionBar?.onActionBarSearchListener = { search ->
+            packageListAdapter.filter = search
+        }
+
         packageListAdapter.onItemClick = {
             val action = PackageListFragmentDirections.actionSelectPackage(it.packageName)
             findNavController().navigate(action)

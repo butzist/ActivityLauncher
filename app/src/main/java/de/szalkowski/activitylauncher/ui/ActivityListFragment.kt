@@ -41,6 +41,12 @@ class ActivityListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val actionBar = activity as? ActionBarSearch
+        activityListAdapter.filter = actionBar?.actionBarSearchText.orEmpty()
+        actionBar?.onActionBarSearchListener = { search ->
+            activityListAdapter.filter = search
+        }
+
         activityListAdapter.onItemClick = {
             val action = ActivityListFragmentDirections.actionSelectActivity(it.componentName)
             findNavController().navigate(action)

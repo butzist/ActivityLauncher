@@ -22,7 +22,8 @@ class ActivityListAdapter @AssistedInject constructor(
         fun create(packageName: String): ActivityListAdapter
     }
 
-    private val activities = activityListService.getActivities(packageName)
+    private val allActivities = activityListService.getActivities(packageName)
+    private var filteredActivities = allActivities
     var onItemClick: ((MyActivityInfo) -> Unit)? = null
 
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
@@ -35,6 +36,19 @@ class ActivityListAdapter @AssistedInject constructor(
         }
     }
 
+    var filter: String = ""
+        set(value) {
+            field = value
+            filteredActivities = allActivities.filter { a ->
+                listOf(a.name, a.componentName.className).any {
+                    it.contains(
+                        field, ignoreCase = true
+                    )
+                }
+            }
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.list_item_package_list, parent, false)
@@ -42,7 +56,7 @@ class ActivityListAdapter @AssistedInject constructor(
     }
 
     override fun getItemCount(): Int {
-        return activities.size
+        return filteredActivities.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -51,7 +65,7 @@ class ActivityListAdapter @AssistedInject constructor(
         val tvPackage = view.findViewById<TextView>(R.id.tvPackage)
         val ivIcon = view.findViewById<ImageView>(R.id.ivIcon)
 
-        val item = activities[position]
+        val item = filteredActivities[position]
         holder.item = item
         tvName.text = if (item.isPrivate) {
             "(${item.name})"
