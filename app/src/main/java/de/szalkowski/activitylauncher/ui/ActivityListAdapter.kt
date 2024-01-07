@@ -14,8 +14,7 @@ import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 
 class ActivityListAdapter @AssistedInject constructor(
-    activityListService: ActivityListService,
-    @Assisted private val packageName: String
+    activityListService: ActivityListService, @Assisted private val packageName: String
 ) : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>() {
     @AssistedFactory
     interface ActivityListAdapterFactory {
@@ -23,7 +22,7 @@ class ActivityListAdapter @AssistedInject constructor(
     }
 
     private val allActivities = activityListService.getActivities(packageName)
-    private var filteredActivities = allActivities
+    private var filteredActivities = listOf<MyActivityInfo>()
     var onItemClick: ((MyActivityInfo) -> Unit)? = null
 
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
@@ -39,19 +38,34 @@ class ActivityListAdapter @AssistedInject constructor(
     var filter: String = ""
         set(value) {
             field = value
-            filteredActivities = allActivities.filter { a ->
-                listOf(a.name, a.componentName.className).any {
+            filteredActivities = listOfNotNull(allActivities.defaultActivity?.takeIf { a ->
+                listOf(
+                    allActivities.packageName, allActivities.name, a.name, a.componentName.className
+                ).any {
+                    it.contains(
+                        field, ignoreCase = true
+                    )
+                }
+            }) + allActivities.activities.filter { a ->
+                listOf(
+                    a.name, a.componentName.shortClassName
+                ).any {
                     it.contains(
                         field, ignoreCase = true
                     )
                 }
             }
+
             notifyDataSetChanged()
         }
 
+    init {
+        filter = ""
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.list_item_package_list, parent, false)
+        val view = inflater.inflate(R.layout.list_item_activity_list, parent, false)
         return ViewHolder(view)
     }
 
@@ -62,7 +76,7 @@ class ActivityListAdapter @AssistedInject constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
         val tvName = view.findViewById<TextView>(R.id.tvName)
-        val tvPackage = view.findViewById<TextView>(R.id.tvPackage)
+        val tvPackage = view.findViewById<TextView>(R.id.tvClass)
         val ivIcon = view.findViewById<ImageView>(R.id.ivIcon)
 
         val item = filteredActivities[position]

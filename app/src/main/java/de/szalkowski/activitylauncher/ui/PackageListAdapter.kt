@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.services.ActivityName
 import de.szalkowski.activitylauncher.services.MyPackageInfo
 import de.szalkowski.activitylauncher.services.PackageListService
 import javax.inject.Inject
@@ -32,13 +33,14 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
     var filter: String = ""
         set(value) {
             field = value
-            filteredPackages = allPackages.filter { p ->
-                listOf(p.name, p.packageName).any {
-                    it.contains(
-                        field, ignoreCase = true
-                    )
-                }
+            filteredPackages = allPackages.map { p ->
+                p.copy(activityNames = p.activityNames.filter { it.matches(field) }, defaultActivityName = p.defaultActivityName?.takeIf { a ->
+                    a.matches(field) || p.matches(field)
+                })
+            }.filter { p ->
+                p.activityNames.isNotEmpty() || p.defaultActivityName != null
             }
+
             notifyDataSetChanged()
         }
 
@@ -55,15 +57,34 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
         val tvName = view.findViewById<TextView>(R.id.tvName)
-        val tvPackage = view.findViewById<TextView>(R.id.tvPackage)
+        val tvPackage = view.findViewById<TextView>(R.id.tvClass)
+        val tvVersion = view.findViewById<TextView>(R.id.tvVersion)
+        val tvActivities = view.findViewById<TextView>(R.id.tvActivities)
         val ivIcon = view.findViewById<ImageView>(R.id.ivIcon)
 
         val item = filteredPackages[position]
+        val activityCount = item.activityNames.size + (item.defaultActivityName?.let { 1 } ?: 0)
         holder.item = item
         tvName.text = item.name
+        tvVersion.text = item.version
         tvPackage.text = item.packageName
+        tvActivities.text = "(${activityCount})"
+
         ivIcon.setImageDrawable(item.icon)
     }
 }
 
 
+private fun ActivityName.matches(s: String): Boolean  =
+    listOf(this.name, this.shortCls).any {
+        it.contains(
+            s, ignoreCase = true
+        )
+    }
+
+private fun MyPackageInfo.matches(s: String): Boolean  =
+    listOf(this.name, this.packageName).any {
+        it.contains(
+            s, ignoreCase = true
+        )
+    }
