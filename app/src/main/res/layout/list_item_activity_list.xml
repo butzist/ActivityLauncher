@@ -16,29 +16,17 @@
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:scrollHorizontally="true"
-        android:text="application name"
+        android:text="activity name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/space"
-        app:layout_constraintEnd_toStartOf="@+id/tvActivities"
         app:layout_constraintStart_toEndOf="@+id/ivIcon" />
-
-    <TextView
-        android:id="@+id/tvActivities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:maxLines="1"
-        android:text="(N)"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="@+id/tvName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvName" />
 
     <Space
         android:id="@+id/space"
@@ -50,31 +38,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvVersion"
-        android:layout_width="0dp"
+        android:id="@+id/tvClass"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:scrollHorizontally="true"
-        android:text="version"
+        android:text="class name"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivIcon"
         app:layout_constraintTop_toBottomOf="@+id/space" />
-
-    <TextView
-        android:id="@+id/tvClass"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:scrollHorizontally="true"
-        android:text="package name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivIcon"
-        app:layout_constraintTop_toBottomOf="@+id/tvVersion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
