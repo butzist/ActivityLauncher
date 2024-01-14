@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +13,7 @@ import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
 import de.szalkowski.activitylauncher.services.ActivityLauncherService
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.IconCreatorService
+import de.szalkowski.activitylauncher.services.IconLoaderService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 import javax.inject.Inject
 
@@ -28,6 +30,9 @@ class ActivityDetailsFragment : Fragment() {
 
     @Inject
     internal lateinit var iconCreatorService: IconCreatorService
+
+    @Inject
+    internal lateinit var iconLoaderService: IconLoaderService
 
     private var _binding: FragmentActivityDetailsBinding? = null
 
@@ -53,7 +58,7 @@ class ActivityDetailsFragment : Fragment() {
 
         val actionBar = activity as? ActionBarSearch
         // FIXME just hide the search menu item, instead
-       actionBar?.actionBarSearchText = ""
+        actionBar?.actionBarSearchText = ""
 
         binding.tiName.setText(activityInfo.name)
         binding.tiPackage.setText(activityInfo.componentName.packageName)
@@ -61,7 +66,19 @@ class ActivityDetailsFragment : Fragment() {
         binding.tiIcon.setText(activityInfo.iconResourceName ?: "")
         binding.ibIconPicker.setImageDrawable(activityInfo.icon)
 
-        // TODO binding.ibIconPicker
+        binding.ibIconPicker.setOnClickListener {
+            val dialog = IconPickerDialogFragment()
+            dialog.attachIconPickerListener { icon ->
+                binding.tiIcon.setText(icon)
+            }
+            dialog.show(childFragmentManager, "icon picker")
+        }
+
+        binding.tiIcon.doAfterTextChanged { text ->
+            val icon = text.toString()
+            val drawable = iconLoaderService.getIcon(icon)
+            binding.ibIconPicker.setImageDrawable(drawable)
+        }
 
         binding.btCreateShortcut.setOnClickListener {
             iconCreatorService.createLauncherIcon(editedActivityInfo)

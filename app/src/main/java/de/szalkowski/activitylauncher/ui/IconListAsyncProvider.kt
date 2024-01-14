@@ -1,18 +1,24 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.ui
 
-import android.content.Context;
+import android.content.Context
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ActivityContext
 
-class IconListAsyncProvider extends AsyncProvider<IconListAdapter> {
-    private final IconListAdapter adapter;
 
-    IconListAsyncProvider(Context context, Listener<IconListAdapter> listener) {
-        super(context, listener, false);
-        this.adapter = new IconListAdapter(context);
+class IconListAsyncProvider @AssistedInject constructor(
+    @ActivityContext context: Context,
+    private val adapter: IconListAdapter,
+    @Assisted listener: Listener<IconListAdapter>?
+) : AsyncProvider<IconListAdapter>(context, listener, false) {
+    @AssistedFactory
+    interface IconListAsyncProviderFactory {
+        fun create(listener: Listener<IconListAdapter>?): IconListAsyncProvider
     }
 
-    @Override
-    protected IconListAdapter run(Updater updater) {
-        adapter.resolve(updater);
-        return this.adapter;
+    override fun run(updater: Updater?): IconListAdapter {
+        adapter.resolve(updater)
+        return this.adapter
     }
 }

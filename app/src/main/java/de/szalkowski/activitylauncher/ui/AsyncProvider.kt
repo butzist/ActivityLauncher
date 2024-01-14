@@ -1,106 +1,87 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.ui
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.view.LayoutInflater;
+import android.content.Context
+import android.os.AsyncTask
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
+import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.databinding.ProgressDialogBinding
+import java.text.NumberFormat
+import java.util.Locale
 
-import androidx.appcompat.app.AlertDialog;
+abstract class AsyncProvider<ReturnType> internal constructor(
+    context: Context, private val listener: Listener<ReturnType>?, showProgressDialog: Boolean
+) : AsyncTask<Void?, Int?, ReturnType>() {
+    private val message = context.getText(R.string.dialog_progress_loading)
+    private var dialog: AlertDialog? = null
+    private var binding: ProgressDialogBinding? = null
+    private val progressPercentFormat: NumberFormat = NumberFormat.getPercentInstance()
+    private var max = 0
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
-import de.szalkowski.activitylauncher.R;
-import de.szalkowski.activitylauncher.databinding.ProgressDialogBinding;
-
-public abstract class AsyncProvider<ReturnType> extends AsyncTask<Void, Integer, ReturnType> {
-    private final CharSequence message;
-    private final Listener<ReturnType> listener;
-    private final AlertDialog dialog;
-    private final ProgressDialogBinding binding;
-    private final NumberFormat progressPercentFormat = NumberFormat.getPercentInstance();
-    private int max;
-
-    AsyncProvider(Context context, Listener<ReturnType> listener, boolean showProgressDialog) {
-        this.message = context.getText(R.string.dialog_progress_loading);
-        this.listener = listener;
-
+    init {
         if (showProgressDialog) {
-            this.binding = ProgressDialogBinding.inflate(LayoutInflater.from(context));
-            this.dialog = new AlertDialog.Builder(context).setView(binding.getRoot()).create();
-            this.progressPercentFormat.setMaximumFractionDigits(0);
+            this.binding = ProgressDialogBinding.inflate(LayoutInflater.from(context))
+            this.dialog = AlertDialog.Builder(context).setView(binding!!.getRoot()).create()
+            progressPercentFormat.maximumFractionDigits = 0
         } else {
-            this.binding = null;
-            this.dialog = null;
+            this.binding = null
+            this.dialog = null
         }
     }
 
-    @Override
-    protected void onProgressUpdate(Integer... values) {
-        if (this.binding != null && values.length > 0) {
-            int value = values[0];
+    protected fun onProgressUpdate(vararg values: Int) {
+        if (values.isNotEmpty()) {
+            val value = values[0]
 
             if (value == 0) {
-                this.binding.progress.setIndeterminate(false);
-                this.binding.progress.setMax(this.max);
+                binding?.progress?.isIndeterminate = false
+                binding?.progress?.max = this.max
             }
 
-            this.binding.progress.setProgress(value);
-            this.binding.progressNumber.setText(String.format(Locale.getDefault(), "%1d/%2d", value, this.max));
-            double percent = (double) value / (double) this.max;
-            this.binding.progressPercent.setText(this.progressPercentFormat.format(percent));
+            binding?.progress?.progress = value
+            binding?.progressNumber?.text = String.format(
+                Locale.getDefault(), "%1d/%2d", value, this.max
+            )
+            val percent = value.toDouble() / max.toDouble()
+            binding?.progressPercent?.text = progressPercentFormat.format(percent)
         }
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+    override fun onPreExecute() {
+        super.onPreExecute()
 
-        if (this.dialog != null && this.binding != null) {
-            this.dialog.setCancelable(false);
-            this.dialog.setTitle(this.message);
-            this.binding.progress.setIndeterminate(true);
-            this.dialog.show();
+        dialog?.setCancelable(false)
+        dialog?.setTitle(this.message)
+        binding?.progress?.isIndeterminate = true
+        dialog?.show()
+    }
+
+    override fun onPostExecute(result: ReturnType) {
+        super.onPostExecute(result)
+        listener?.onProviderFinished(this, result)
+
+        runCatching {
+            dialog?.dismiss()
         }
     }
 
-    @Override
-    protected void onPostExecute(ReturnType result) {
-        super.onPostExecute(result);
-        if (this.listener != null) {
-            this.listener.onProviderFinished(this, result);
-        }
+    protected abstract fun run(updater: Updater?): ReturnType
 
-        if (this.dialog != null) {
-            try {
-                this.dialog.dismiss();
-            } catch (IllegalArgumentException e) { /* ignore */ }
-        }
+    override fun doInBackground(vararg params: Void?): ReturnType {
+        return run(Updater(this))
     }
 
-    abstract protected ReturnType run(Updater updater);
-
-    @Override
-    protected ReturnType doInBackground(Void... params) {
-        return run(new Updater(this));
+    interface Listener<ReturnType> {
+        fun onProviderFinished(task: AsyncProvider<ReturnType>?, value: ReturnType)
     }
 
-    public interface Listener<ReturnType> {
-        void onProviderFinished(AsyncProvider<ReturnType> task, ReturnType value);
-    }
-
-    class Updater {
-        private final AsyncProvider<ReturnType> provider;
-
-        Updater(AsyncProvider<ReturnType> provider) {
-            this.provider = provider;
+    inner class Updater(private val provider: AsyncProvider<ReturnType>) {
+        fun update(value: Int) {
+            provider.publishProgress(value)
         }
 
-        void update(int value) {
-            this.provider.publishProgress(value);
-        }
-
-        void updateMax(int value) {
-            this.provider.max = value;
+        fun updateMax(value: Int) {
+            provider.max = value
         }
     }
 }

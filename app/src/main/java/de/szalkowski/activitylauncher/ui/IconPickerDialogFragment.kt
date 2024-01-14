@@ -1,65 +1,72 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.ui
 
-import android.app.Dialog;
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.GridView;
-import android.widget.Toast;
+import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
+import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.GridView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.services.IconLoaderService
+import javax.inject.Inject
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
+@AndroidEntryPoint
+class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconListAdapter> {
+    private lateinit var grid: GridView
+    private var listener: IconPickerListener? = null
 
-import de.szalkowski.activitylauncher.R;
+    @Inject
+    internal lateinit var iconListAsyncProviderFactory: IconListAsyncProvider.IconListAsyncProviderFactory
 
-public class IconPickerDialogFragment extends DialogFragment implements IconListAsyncProvider.Listener<IconListAdapter> {
-    private GridView grid;
-    private IconPickerListener listener = null;
+    override fun onAttach(activity: Context) {
+        super.onAttach(activity)
 
-    @Override
-    public void onAttach(@NonNull Context activity) {
-        super.onAttach(activity);
-
-        IconListAsyncProvider provider = new IconListAsyncProvider(this.getActivity(), this);
-        provider.execute();
+        val provider = iconListAsyncProviderFactory.create(this)
+        provider.execute()
     }
 
-    public void attachIconPickerListener(IconPickerListener listener) {
-        this.listener = listener;
+    fun attachIconPickerListener(listener: IconPickerListener) {
+        this.listener = listener
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-        LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.icon_picker, null);
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val builder = AlertDialog.Builder(requireActivity())
+        val view = layoutInflater.inflate(R.layout.icon_picker, null)
 
-        this.grid = (GridView) view;
-        this.grid.setOnItemClickListener((view1, item, index, id) -> {
-            if (IconPickerDialogFragment.this.listener != null) {
-                IconPickerDialogFragment.this.listener.iconPicked(view1.getAdapter().getItem(index).toString());
-                IconPickerDialogFragment.this.requireDialog().dismiss();
+        this.grid = view as GridView
+        grid.onItemClickListener =
+            OnItemClickListener { adapterView: AdapterView<*>, _: View?, index: Int, _: Long ->
+                listener?.iconPicked(
+                    // FIXME ugly and unsafe
+                    (adapterView.adapter.getItem(index) as IconLoaderService.IconInfo).iconResourceName
+                )
+                requireDialog().dismiss()
             }
-        });
 
-        builder.setTitle(R.string.title_dialog_icon_picker).setView(view).setNegativeButton(android.R.string.cancel, (dialog, which) -> IconPickerDialogFragment.this.requireDialog().cancel());
+        builder.setTitle(R.string.title_dialog_icon_picker).setView(view).setNegativeButton(
+            android.R.string.cancel
+        ) { dialog: DialogInterface?, _: Int ->
+            dialog?.cancel()
+        }
 
-        return builder.create();
+        return builder.create()
     }
 
-    @Override
-    public void onProviderFinished(AsyncProvider<IconListAdapter> task, IconListAdapter value) {
+    override fun onProviderFinished(task: AsyncProvider<IconListAdapter>?, value: IconListAdapter) {
         try {
-            this.grid.setAdapter(value);
-        } catch (Exception e) {
-            Toast.makeText(this.getActivity(), R.string.error_icons, Toast.LENGTH_SHORT).show();
+            grid.adapter = value
+        } catch (ignored: Exception) {
+            Toast.makeText(this.activity, R.string.error_icons, Toast.LENGTH_SHORT).show()
         }
     }
 
-    public interface IconPickerListener {
-        void iconPicked(String icon);
+    fun interface IconPickerListener {
+        fun iconPicked(icon: String)
     }
 }

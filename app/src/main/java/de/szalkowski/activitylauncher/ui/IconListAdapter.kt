@@ -1,97 +1,39 @@
-package de.szalkowski.activitylauncher.todo;
+package de.szalkowski.activitylauncher.ui
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AbsListView
+import android.widget.BaseAdapter
+import android.widget.ImageView
+import de.szalkowski.activitylauncher.services.IconLoaderService
+import javax.inject.Inject
 
-import androidx.preference.PreferenceManager;
+class IconListAdapter @Inject constructor(private val iconLoaderService: IconLoaderService) :
+    BaseAdapter() {
+    private lateinit var icons: List<IconLoaderService.IconInfo>
 
-import java.util.List;
-import java.util.Objects;
-import java.util.TreeSet;
-
-import de.szalkowski.activitylauncher.services.MyPackageInfo;
-
-public class IconListAdapter extends BaseAdapter {
-    private final PackageManager pm;
-    private final Context context;
-    private final IconLoader loader;
-    private final SharedPreferences prefs;
-    private String[] icons;
-
-    IconListAdapter(Context context) {
-        this.context = context;
-        this.pm = context.getPackageManager();
-        this.loader = new IconLoader(context);
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+    fun resolve(updater: AsyncProvider<IconListAdapter>.Updater?) {
+        this.icons = iconLoaderService.loadIcons(updater)
     }
 
-    void resolve(IconListAsyncProvider.Updater updater) {
-        TreeSet<String> icons = new TreeSet<>();
-        List<PackageInfo> all_packages = this.pm.getInstalledPackages(0);
-
-        //Configuration locale = SettingsUtils.createLocaleConfiguration(prefs.getString("language", "System Default"));
-        Configuration locale = new Configuration(); // FIXME
-
-        updater.updateMax(all_packages.size());
-        updater.update(0);
-
-        // FIXME
-//        PackageManagerCache cache = PackageManagerCache.getPackageManagerCache(this.pm);
-//
-//        for (int i = 0; i < all_packages.size(); ++i) {
-//            updater.update(i + 1);
-//
-//            PackageInfo pack = all_packages.get(i);
-//            try {
-//                MyPackageInfo myPack = cache.getPackageInfo(pack.packageName, locale);
-//
-//                for (int j = 0; j < myPack.getActivitiesCount(); ++j) {
-//                    String icon_resource_name = myPack.getActivity(j).getIconResouceName();
-//                    if (icon_resource_name != null) {
-//                        icons.add(icon_resource_name);
-//                    }
-//                }
-//            } catch (NameNotFoundException | RuntimeException ignored) {
-//            }
-//        }
-
-        this.icons = new String[icons.size()];
-        this.icons = icons.toArray(this.icons);
+    override fun getCount(): Int {
+        return icons.size
     }
 
-    @Override
-    public int getCount() {
-        return icons.length;
+    override fun getItem(position: Int): Any {
+        return icons[position]
     }
 
-    @Override
-    public Object getItem(int position) {
-        return icons[position];
+    override fun getItemId(position: Int): Long {
+        return 0
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView view = new ImageView(this.context);
-        AbsListView.LayoutParams layout = new AbsListView.LayoutParams(50, 50);
-        view.setLayoutParams(layout);
-        String icon_resource_string = this.icons[position];
-        Drawable icon = loader.getIcon(icon_resource_string);
-        view.setImageDrawable(icon);
-        return view;
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view = ImageView(parent.context)
+        val layout = AbsListView.LayoutParams(50, 50)
+        view.layoutParams = layout
+        val icon = icons[position]
+        view.setImageDrawable(icon.icon)
+        return view
     }
 }
