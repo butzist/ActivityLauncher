@@ -5,13 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.ActivityListFragment">
+    tools:context=".ui.PackageListFragment">
 
     <!-- CC BY-SA 4.0 https://stackoverflow.com/a/46026362 -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvActivities"
+        android:id="@+id/rvPackages"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:fastScrollEnabled="true"
+        app:fastScrollHorizontalThumbDrawable="@drawable/fast_scroll_thumb"
+        app:fastScrollHorizontalTrackDrawable="@drawable/fast_scroll_track"
+        app:fastScrollVerticalThumbDrawable="@drawable/fast_scroll_thumb"
+        app:fastScrollVerticalTrackDrawable="@drawable/fast_scroll_track"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
