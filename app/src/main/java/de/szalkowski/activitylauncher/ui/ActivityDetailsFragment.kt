@@ -62,7 +62,7 @@ class ActivityDetailsFragment : Fragment() {
 
         binding.tiName.setText(activityInfo.name)
         binding.tiPackage.setText(activityInfo.componentName.packageName)
-        binding.tiClass.setText(activityInfo.componentName.shortClassName)
+        binding.tiClass.setText(activityInfo.componentName.className)
         binding.tiIcon.setText(activityInfo.iconResourceName ?: "")
         binding.ibIconPicker.setImageDrawable(activityInfo.icon)
 
