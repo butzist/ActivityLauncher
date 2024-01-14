@@ -34,6 +34,12 @@ abstract class ServicesModule {
     abstract fun bindIconCreatorService(
         iconCreatorServiceImpl: IconCreatorServiceImpl
     ): IconCreatorService
+
+    @ActivityScoped
+    @Binds
+    abstract fun bindIconLoaderService(
+        iconLoaderServiceImpl: IconLoaderServiceImpl
+    ): IconLoaderService
 }
 
 @Module
