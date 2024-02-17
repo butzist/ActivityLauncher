@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import dagger.hilt.android.qualifiers.ActivityContext
+import de.szalkowski.activitylauncher.services.internal.componentName
+import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
 
 interface ActivityListService {
@@ -72,11 +74,11 @@ class ActivityListServiceImpl @Inject constructor(
         activityInfo: ActivityInfo,
         nameInfo: ActivityName,
     ): MyActivityInfo {
-        val componentName = getComponentName(activityInfo)
+        val componentName = activityInfo.componentName
         val name = nameInfo.name
         val icon = getIcon(activityInfo)
         val iconResourceName = getIconResourceName(activityInfo)
-        val isPrivate = isPrivate(activityInfo)
+        val isPrivate = activityInfo.isPrivate(packageManager)
 
         return MyActivityInfo(
             componentName,
@@ -87,8 +89,7 @@ class ActivityListServiceImpl @Inject constructor(
         )
     }
 
-    private fun getComponentName(activityInfo: ActivityInfo) =
-        ComponentName(activityInfo.packageName, activityInfo.name)
+
 
     private fun getIconResourceName(
         activityInfo: ActivityInfo
@@ -98,7 +99,7 @@ class ActivityListServiceImpl @Inject constructor(
         }
 
         return try {
-            packageManager.getResourcesForActivity(getComponentName(activityInfo))
+            packageManager.getResourcesForActivity(activityInfo.componentName)
                 .getResourceName(activityInfo.iconResource)
         } catch (ignored: Exception) {
             null
@@ -109,17 +110,6 @@ class ActivityListServiceImpl @Inject constructor(
         activityInfo.loadIcon(packageManager)
     } catch (e: Exception) {
         packageManager.defaultActivityIcon
-    }
-
-    private fun isPrivate(activityInfo: ActivityInfo): Boolean {
-        if (!activityInfo.exported) return true
-
-        val enabledState = packageManager.getComponentEnabledSetting(getComponentName(activityInfo))
-        return when (enabledState) {
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED -> true
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED -> false
-            else -> !activityInfo.isEnabled
-        }
     }
 
     private fun createNameFromClass(cls: String): String {

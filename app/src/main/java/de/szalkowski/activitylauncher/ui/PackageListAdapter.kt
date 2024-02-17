@@ -1,5 +1,6 @@
 package de.szalkowski.activitylauncher.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,7 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
         return filteredPackages.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
         val tvName = view.findViewById<TextView>(R.id.tvName)

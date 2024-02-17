@@ -15,6 +15,7 @@ import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.IconCreatorService
 import de.szalkowski.activitylauncher.services.IconLoaderService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
+import de.szalkowski.activitylauncher.services.SettingsService
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,6 +34,9 @@ class ActivityDetailsFragment : Fragment() {
 
     @Inject
     internal lateinit var iconLoaderService: IconLoaderService
+
+    @Inject
+    internal lateinit var settingsService: SettingsService
 
     private var _binding: FragmentActivityDetailsBinding? = null
 
@@ -98,6 +102,14 @@ class ActivityDetailsFragment : Fragment() {
             activityLauncherService.launchActivity(
                 editedActivityInfo.componentName, asRoot = true, showToast = true
             )
+        }
+
+        if (!settingsService.allowRoot) {
+            binding.btCreateShortcutAsRoot.visibility = View.GONE
+            binding.btLaunchAsRoot.visibility = View.GONE
+        } else {
+            binding.btCreateShortcutAsRoot.visibility = View.VISIBLE
+            binding.btLaunchAsRoot.visibility = View.VISIBLE
         }
     }
 
