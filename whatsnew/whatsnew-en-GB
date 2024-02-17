@@ -1,2 +1,9 @@
-* Fixed listing of apps without localized translation
-* Updated translations (Klingon and Bulgarian added - check Crowdin for credits and QA)
+Early access of ActivityLauncher v2
+
+* Translated to Kotlin
+* Faster startup time
+* New UX and Material 3
+* Support for API versions 16 to 34
+
+Discussion is open on GitHub
+https://github.com/butzist/ActivityLauncher/discussions/234
