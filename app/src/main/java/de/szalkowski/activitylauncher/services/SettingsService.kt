@@ -17,7 +17,7 @@ interface SettingsService {
     fun setTheme(theme: String?)
 
     var disclaimerAccepted: Boolean
-    val hideHidePrivate: Boolean
+    val hidePrivate: Boolean
     val language: String
     val allowRoot: Boolean
     val theme: String
@@ -74,7 +74,7 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
     override val language: String
         get() = prefs.getString(PREF_LANGUAGE, LANGUAGE_DEFAULT)!!
 
-    override val hideHidePrivate: Boolean
+    override val hidePrivate: Boolean
         get() = prefs.getBoolean(PREF_HIDE_HIDE_PRIVATE, false)
 
     override fun applyLocaleConfiguration(context: Context) {

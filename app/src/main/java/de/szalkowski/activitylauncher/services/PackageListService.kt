@@ -10,6 +10,7 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
 
 interface PackageListService {
@@ -17,7 +18,7 @@ interface PackageListService {
 }
 
 class PackageListServiceImpl @Inject constructor(
-    @ApplicationContext context: Context, settingsService: SettingsService
+    @ApplicationContext context: Context, val settingsService: SettingsService
 ) : PackageListService {
 
     private val config: Configuration = settingsService.getLocaleConfiguration()
@@ -43,7 +44,9 @@ class PackageListServiceImpl @Inject constructor(
         val icon = getIcon(app)
         val iconResourceName = getIconResourceName(app, appRes)
         val defaultActivityName = getDefaultActivityName(packageName, appRes)
-        val activities = info.activities.orEmpty().map { getActivityName(it, appRes) }
+        val activities = info.activities.orEmpty()
+            .filter{ !settingsService.hidePrivate || !it.isPrivate(packageManager) }
+            .map { getActivityName(it, appRes) }
             .filter { it != defaultActivityName }
 
         return MyPackageInfo(
