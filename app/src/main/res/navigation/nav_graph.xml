@@ -3,8 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/PackageListFragment">
+    app:startDestination="@id/LoadingFragment">
 
+    <fragment
+        android:id="@+id/LoadingFragment"
+        android:name="de.szalkowski.activitylauncher.ui.LoadingFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_loading">
+
+        <action
+            android:id="@+id/actionLoadingFinished"
+            app:destination="@id/PackageListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/LoadingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/PackageListFragment"
         android:name="de.szalkowski.activitylauncher.ui.PackageListFragment"
@@ -17,8 +33,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ActivityListFragment"
@@ -36,8 +51,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ActivityDetailsFragment"

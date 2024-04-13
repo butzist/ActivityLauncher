@@ -18,7 +18,7 @@ import de.szalkowski.activitylauncher.ui.DisclaimerDialogFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity() : AppCompatActivity(), ActionBarSearch {
+class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -43,12 +43,13 @@ class MainActivity() : AppCompatActivity(), ActionBarSearch {
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-
     override var onActionBarSearchListener: ((String) -> Unit)? = null
     private var actionBarSearchView: SearchView? = null
     override var actionBarSearchText: String
         get() = actionBarSearchView?.query?.toString().orEmpty()
-        set(value) { actionBarSearchView?.setQuery(value, false) }
+        set(value) {
+            actionBarSearchView?.setQuery(value, false)
+        }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
