@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Gizli fəaliyyətli başladır və quraşdırılmış tətbiqlər üçün qısayollar yaradır</string>
-    <string name="title_section_all">Bütün fəaliyyətlər</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Məsuliyyətdən imtina</string>
     <string name="title_dialog_icon_picker">Bir nişan seçin</string>
     <string name="dialog_progress_loading">Yüklənir&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">%s üçün fəaliyyət qısayolu yaradılır</string>
     <string name="creating_application_shortcut">%s üçün tətbiq qısayolu yaradılır</string>
     <string name="error">Xəta</string>
-    <string name="error_tasks">Tapşırıq siyahısını yükləmə xətası</string>
     <string name="error_creating_shortcut">Qısayol yaratma xətası</string>
     <string name="error_icons">Nişanları yükləmə xətası</string>
     <string name="error_invalid_icon_resource">Xəta: yararsız nişan resursu</string>

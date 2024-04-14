@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">啟動隱藏的活動並為已安裝的應用程式建立捷徑</string>
-    <string name="title_section_all">所有活動</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">免責聲明</string>
     <string name="title_dialog_icon_picker">選擇圖示</string>
     <string name="dialog_progress_loading">正在載入&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">正在為 %s 建立活動捷徑</string>
     <string name="creating_application_shortcut">正在為 %s 建立應用程式捷徑</string>
     <string name="error">錯誤</string>
-    <string name="error_tasks">無法載入工作清單</string>
     <string name="error_creating_shortcut">無法建立捷徑</string>
     <string name="error_icons">無法載入圖示</string>
     <string name="error_invalid_icon_resource">錯誤：無效的圖示資源</string>

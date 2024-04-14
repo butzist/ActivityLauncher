@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activiteit Launcher</string>
     <string name="short_description">Start verborgen activiteiten en creëert snelkoppelingen voor geïnstalleerde apps</string>
-    <string name="title_section_all">Alle activiteiten</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Disclaimer</string>
     <string name="title_dialog_icon_picker">Kies een icoon</string>
     <string name="dialog_progress_loading">Laden&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Activiteiten snelkoppeling maken voor %s</string>
     <string name="creating_application_shortcut">Applicatie snelkoppeling maken voor %s</string>
     <string name="error">Fout</string>
-    <string name="error_tasks">Fout bij laden takenlijst</string>
     <string name="error_creating_shortcut">Snelkoppeling maken fout</string>
     <string name="error_icons">Fout bij het laden van de iconen</string>
     <string name="error_invalid_icon_resource">Fout: ongeldige icoon bron</string>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">非表示のアクティビティを起動し、インストールされたアプリのショートカットを作成します</string>
-    <string name="title_section_all">すべてのアクティビティ</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">免責事項</string>
     <string name="title_dialog_icon_picker">アイコンを選ぶ</string>
     <string name="dialog_progress_loading">読み込み中&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">%s のアクティビティのショートカットを作成しています</string>
     <string name="creating_application_shortcut">%s のアプリケーションのショートカットを作成しています</string>
     <string name="error">エラー</string>
-    <string name="error_tasks">タスクリストの読み込みエラー</string>
     <string name="error_creating_shortcut">ショートカットの作成エラー</string>
     <string name="error_icons">アイコンの読み込みエラー</string>
     <string name="error_invalid_icon_resource">エラー: 無効なアイコン リソース</string>

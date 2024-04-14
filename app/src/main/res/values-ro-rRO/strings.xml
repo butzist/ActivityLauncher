@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Lansator Activități</string>
     <string name="short_description">Lansează activități ascunse și creează comenzi rapide pentru aplic. ascunse</string>
-    <string name="title_section_all">Toate Activitățile</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Clauza Exonerare</string>
     <string name="title_dialog_icon_picker">Alege o iconița</string>
     <string name="dialog_progress_loading">Se încarcă...</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Se crează scurtătură la activitate pentru %s</string>
     <string name="creating_application_shortcut">Se crează scurtătură la aplicație pentru %s</string>
     <string name="error">Eroare</string>
-    <string name="error_tasks">Eroâre la încărcarea listei cu activități</string>
     <string name="error_creating_shortcut">Eroare Creare comandă rapidă</string>
     <string name="error_icons">Eroare la încărcarea pitogramelor</string>
     <string name="error_invalid_icon_resource">Eroare: resursa pitogramei este invalidă</string>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Запуск Activity</string>
     <string name="short_description">Запускает скрытые действия и создает ярлыки для установленных приложений</string>
-    <string name="title_section_all">Все действия</string>
+    <string name="title_fragment_package_list">Установленные пакеты</string>
+    <string name="title_fragment_activity_list">Действия</string>
     <string name="title_dialog_disclaimer">Отказ от ответственности</string>
     <string name="title_dialog_icon_picker">Выберите иконку</string>
     <string name="dialog_progress_loading">Загрузка&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Создание ярлыка действия для %s</string>
     <string name="creating_application_shortcut">Создание ярлыка приложения для %s</string>
     <string name="error">Ошибка</string>
-    <string name="error_tasks">Ошибка загрузки списка задач</string>
     <string name="error_creating_shortcut">Ошибка создания ярлыка</string>
     <string name="error_icons">Ошибка загрузки иконок</string>
     <string name="error_invalid_icon_resource">Ошибка: Недопустимый ресурс иконки</string>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Startar dolda aktiviteter och skapar genvägar för installerade appar</string>
-    <string name="title_section_all">Alla aktiviteter</string>
+    <string name="title_fragment_package_list">Installerade paket</string>
+    <string name="title_fragment_activity_list">Aktiviteter</string>
     <string name="title_dialog_disclaimer">Varning</string>
     <string name="title_dialog_icon_picker">Välj en ikon</string>
     <string name="dialog_progress_loading">Laddar&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Skapar aktivitesgenväg för %s</string>
     <string name="creating_application_shortcut">Skapar applikationsgenväg för %s</string>
     <string name="error">Fel</string>
-    <string name="error_tasks">Ett fel uppstod när aktivitetslistan skulle laddas</string>
     <string name="error_creating_shortcut">Ett fel uppstod när genvägen skulle skapas</string>
     <string name="error_icons">Ett fel uppstod när ikonerna skulle laddas</string>
     <string name="error_invalid_icon_resource">Fel: ogiltig ikonresurs</string>

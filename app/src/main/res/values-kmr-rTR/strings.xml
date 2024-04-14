@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Aktivit desbekirin</string>
     <string name="short_description">Çalakiyên veşartî dide destpêkirin û ji bo sepanên sazkirî kurtebiran diafirîne</string>
-    <string name="title_section_all">هەموو چالاکیەکان</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">بەرپرسیاریەتی</string>
     <string name="title_dialog_icon_picker">ئایکۆن هەڵبژێرە</string>
     <string name="dialog_progress_loading">چاوەڕێکە...</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">دروستکردنی کورتە ڕێگای چالاکیی بۆ %s</string>
     <string name="creating_application_shortcut">دروستکردنی کورتە ڕێگای بەرنامە بۆ %s</string>
     <string name="error">هەڵە</string>
-    <string name="error_tasks">هەڵە لە بارکردنی لیستی ئەرکەکان</string>
     <string name="error_creating_shortcut">هەڵە لە دروستکردنی شۆرتکات</string>
     <string name="error_icons">هەڵە لە بارکردنی ئایکۆنەکاندا</string>
     <string name="error_invalid_icon_resource">هەڵە: سەرچاوەی ئایکۆنێکی نادروست</string>

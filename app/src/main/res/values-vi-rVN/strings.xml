@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Khởi chạy hoạt động ẩn và tạo lối tắt cho ứng dụng được cài đặt</string>
-    <string name="title_section_all">Tất cả các ứng dụng</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Miễn trừ trách nhiệm</string>
     <string name="title_dialog_icon_picker">Chọn biểu tượng</string>
     <string name="dialog_progress_loading">Đang tải dữ liệu&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Đang tạo lối tắt hoạt động cho %s</string>
     <string name="creating_application_shortcut">Đang tạo lối tắt ứng dụng cho %s</string>
     <string name="error">Lỗi</string>
-    <string name="error_tasks">Lỗi khi tải danh sách tác vụ</string>
     <string name="error_creating_shortcut">Error creating shortcut</string>
     <string name="error_icons">Lỗi khi tải biểu tượng</string>
     <string name="error_invalid_icon_resource">Lỗi: không hợp lệ biểu tượng tài nguyên</string>

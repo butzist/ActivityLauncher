@@ -1,7 +1,7 @@
-Aquesta font-oberta Android App llançador amaga activitats i crea dreceras a la pantalla d'inici de las Apps instalades
+Aquesta aplicació d'Android de codi obert llança activitats ocultes i crea dreceres de la pantalla d'inici per a les aplicacions instal·lades.
 
-This project still lacks a few features and translation. Vosté es benvingut per contribuïr
+Aquest projecte encara no té algunes funcions i traduccions. Esteu convidats a contribuir!
 
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+Codi font: https://github.com/butzist/ActivityLauncher
+Traduccions: http://crowdin.net/project/activitylauncher/invite
+Activa la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Ejecuta activities ocultas y crea accesos directos en la pantalla de inicio</string>
-    <string name="title_section_all">Todas las actividades</string>
+    <string name="title_fragment_package_list">Paquetes instalado</string>
+    <string name="title_fragment_activity_list">Actividades</string>
     <string name="title_dialog_disclaimer">Términos de Uso</string>
     <string name="title_dialog_icon_picker">Elige un icono</string>
     <string name="dialog_progress_loading">Cargando&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Creando un acceso directo para la actividad %s</string>
     <string name="creating_application_shortcut">Creando un acceso directo para la aplicaión %s</string>
     <string name="error">Error</string>
-    <string name="error_tasks">Error al cargar la lista de tareas</string>
     <string name="error_creating_shortcut">Acceso directo crear error</string>
     <string name="error_icons">Error al cargar iconos</string>
     <string name="error_invalid_icon_resource">Error: recurso de icono inválido</string>

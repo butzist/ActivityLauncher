@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Uruchamiacz aktywności</string>
     <string name="short_description">Startuje ukryte działalności i tworzy skróty na ekranie głównym</string>
-    <string name="title_section_all">Wszystkie aktywności</string>
+    <string name="title_fragment_package_list">Zainstalowane pakiety</string>
+    <string name="title_fragment_activity_list">Aktywności</string>
     <string name="title_dialog_disclaimer">Uwaga</string>
     <string name="title_dialog_icon_picker">Wybierz ikonę</string>
     <string name="dialog_progress_loading">Wczytywanie &#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Tworzenie skrótu aktywności dla %s</string>
     <string name="creating_application_shortcut">Tworzenie skrótu aplikacji dla %s</string>
     <string name="error">Błąd</string>
-    <string name="error_tasks">Błąd podczas ładowania listy zadań</string>
     <string name="error_creating_shortcut">Błąd w tworzeniu skrótu</string>
     <string name="error_icons">Błąd podczas ładowania ikon</string>
     <string name="error_invalid_icon_resource">Błąd: nieprawidłowy zasób ikony</string>

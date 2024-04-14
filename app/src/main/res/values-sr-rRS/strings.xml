@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Pokretač Aktivnosti</string>
     <string name="short_description">Покреће скривене активности и прави пречице за инсталиране апликације. </string>
-    <string name="title_section_all">Sve aktivnosti</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Odricanje odgovornosti</string>
     <string name="title_dialog_icon_picker">Izaberi ikonicu</string>
     <string name="dialog_progress_loading">Učitavanje&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Kreiranje prečice aktivnosti za %s</string>
     <string name="creating_application_shortcut">Kreiranje prečice aplikacije za %s</string>
     <string name="error">Greška</string>
-    <string name="error_tasks">Greška pri učitavanju liste</string>
     <string name="error_creating_shortcut">Error creating shortcut</string>
     <string name="error_icons">Грешка при учитавању ikonice</string>
     <string name="error_invalid_icon_resource">Greška: Pogrešna ikonica</string>

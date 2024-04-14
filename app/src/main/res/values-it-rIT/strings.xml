@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Avvia le attività nascoste e crea collegamenti nella schermata home</string>
-    <string name="title_section_all">Tutte le Attività</string>
+    <string name="title_fragment_package_list">Pacchetti installati</string>
+    <string name="title_fragment_activity_list">Attività</string>
     <string name="title_dialog_disclaimer">Dichiarazione di non responsabilità</string>
     <string name="title_dialog_icon_picker">Scegli un\'icona</string>
     <string name="dialog_progress_loading">Caricamento&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Creazione collegamento attività per %s</string>
     <string name="creating_application_shortcut">Creazione collegamento applicazione per %s</string>
     <string name="error">Errore</string>
-    <string name="error_tasks">Errore nel caricamento dell\'elenco delle attività</string>
     <string name="error_creating_shortcut">Errore nella creazione della scorciatoia</string>
     <string name="error_icons">Errore caricamento icone</string>
     <string name="error_invalid_icon_resource">Errore: risorsa icona non valido</string>

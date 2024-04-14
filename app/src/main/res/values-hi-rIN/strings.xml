@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">एक्टिविटी लॉन्चर</string>
     <string name="short_description">छुपे हुए फीचर्स को चालू करें तथा ऐप्स के लिए शॉर्टकट्स बनाएं</string>
-    <string name="title_section_all">सभी गतिविधियां</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">स्वीकरण व अस्वीकरण</string>
     <string name="title_dialog_icon_picker">आइकॉन चयन</string>
     <string name="dialog_progress_loading">लोडिंग&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">%s के लिए एक्टिविटी शॉर्टकट शुरू हो रहा</string>
     <string name="creating_application_shortcut">%s एप्लिकेशन के लिए शॉर्टकट बनाया जा रहा है</string>
     <string name="error">असफल(Error)</string>
-    <string name="error_tasks">कार्य सूची लोड करने में असफल(error)</string>
     <string name="error_creating_shortcut">शॉर्टकट सृजन असफल</string>
     <string name="error_icons">आइकॉन लोड करने में असफल</string>
     <string name="error_invalid_icon_resource">Error: अमान्य/अवैध आइकन संसाधन(resource)</string>

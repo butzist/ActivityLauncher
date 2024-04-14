@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Εκκινητής Δραστηριοτήτων</string>
     <string name="short_description">Εκκινεί κρυφές δραστηριότητες και δημιουργεί συντομεύσεις εφαρμογών</string>
-    <string name="title_section_all">Όλες οι δραστηριότητες</string>
+    <string name="title_fragment_package_list">Εγκατεστημένα πακέτα</string>
+    <string name="title_fragment_activity_list">Δραστηριότητες</string>
     <string name="title_dialog_disclaimer">Αποποίηση ευθυνών</string>
     <string name="title_dialog_icon_picker">Επιλέξετε ένα εικονίδιο</string>
     <string name="dialog_progress_loading">Φόρτωση&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Δημιουργία συντόμευσης δραστηριότητας για %s</string>
     <string name="creating_application_shortcut">Δημιουργία συντόμευσης εφαρμογής για %s</string>
     <string name="error">Σφάλμα</string>
-    <string name="error_tasks">Σφάλμα κατά τη φόρτωση της λίστας εργασιών</string>
     <string name="error_creating_shortcut">Σφάλμα κατά τη δημιουργία συντόμευσης</string>
     <string name="error_icons">Σφάλμα κατά τη φόρτωση των εικονιδίων</string>
     <string name="error_invalid_icon_resource">Σφάλμα: μη έγκυρος πόρος εικονιδίων</string>

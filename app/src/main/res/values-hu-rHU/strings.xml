@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Tevékenység Launcher</string>
     <string name="short_description">Elindítja a rejtett tevékenységeket és parancsikonokat készít az alkalmazásokhoz</string>
-    <string name="title_section_all">Minden tevékenység</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Felelősséget kizáró nyilatkozat</string>
     <string name="title_dialog_icon_picker">Válasszon egy ikont a</string>
     <string name="dialog_progress_loading">Betöltés...</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">%s tevékenység parancsikonjának létrehozása</string>
     <string name="creating_application_shortcut">%s alkalmazás parancsikonjának létrehozása</string>
     <string name="error">Hiba</string>
-    <string name="error_tasks">Hiba a feladatlista betöltése közben</string>
     <string name="error_creating_shortcut">Hiba a parancsikon létrehozásakor</string>
     <string name="error_icons">Hiba az ikonok betöltése közben</string>
     <string name="error_invalid_icon_resource">Hiba: érvénytelen ikonforrás</string>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Startet versteckte Aktivitäten und erstellt Verknüpfungen für installierte Apps</string>
-    <string name="title_section_all">Alle Aktivitäten</string>
+    <string name="title_fragment_package_list">Installierte Pakete</string>
+    <string name="title_fragment_activity_list">Aktivitäten</string>
     <string name="title_dialog_disclaimer">Haftungsausschluss</string>
     <string name="title_dialog_icon_picker">Icon auswählen</string>
     <string name="dialog_progress_loading">Lade...</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Erstelle Verknüpfung zu Aktivität %s</string>
     <string name="creating_application_shortcut">Erstelle Verknüpfung zu Applikation %s</string>
     <string name="error">Fehler</string>
-    <string name="error_tasks">Fehler beim Laden der Taskliste</string>
     <string name="error_creating_shortcut">Fehler beim Erstellen der Verknüpfung</string>
     <string name="error_icons">Fehler beim Laden der Icons</string>
     <string name="error_invalid_icon_resource">Fehler: Ungültige Symbolressource</string>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Zaganjalnik Aktivnosti</string>
     <string name="short_description">Zažene skrite dejavnosti in ustvari bližnjice do nameščenih aplikacij</string>
-    <string name="title_section_all">Vse dejavnosti</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Zavrnitev odgovornosti</string>
     <string name="title_dialog_icon_picker">Izberite ikono</string>
     <string name="dialog_progress_loading">Nalaganje&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Ustvarjanje bližnjice dejavnosti za %s</string>
     <string name="creating_application_shortcut">Ustvarjanje bližnjice do aplikacije za %s</string>
     <string name="error">Napaka</string>
-    <string name="error_tasks">Napaka pri nalaganju seznama opravil</string>
     <string name="error_creating_shortcut">Napaka pri ustvarjanju bližnjice</string>
     <string name="error_icons">Error loading icons</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>

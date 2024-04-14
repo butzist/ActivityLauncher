@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/PackageListFragment"
         android:name="de.szalkowski.activitylauncher.ui.PackageListFragment"
-        android:label="@string/package_list_fragment_label"
+        android:label="@string/title_fragment_package_list"
         tools:layout="@layout/fragment_package_list">
 
         <action
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/ActivityListFragment"
         android:name="de.szalkowski.activitylauncher.ui.ActivityListFragment"
-        android:label="@string/activity_list_fragment_label"
+        android:label="@string/title_fragment_activity_list"
         tools:layout="@layout/fragment_activity_list">
         <argument
             android:name="packageName"

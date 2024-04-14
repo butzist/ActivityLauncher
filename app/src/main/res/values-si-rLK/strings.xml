@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">ක්‍රියාකාරකම් දියත්කරණය</string>
     <string name="short_description">සැඟවුණු ක්‍රියාකාරකම් දියත් කරන අතර ස්ථාපිත යෙදුම් සඳහා කෙටිමං නිර්මාණය කරයි</string>
-    <string name="title_section_all">සියලුම ක්‍රියාකාරකම්</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">අවවාදයයි</string>
     <string name="title_dialog_icon_picker">අයිකනයක් අරගන්න</string>
     <string name="dialog_progress_loading">පූරණය වෙමින්...</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">සඳහා ක්‍රියාකාරකම් කෙටිමඟ නිර්මාණය කිරීම %s</string>
     <string name="creating_application_shortcut">Creating application shortcut for %s</string>
     <string name="error">දෝෂයකි</string>
-    <string name="error_tasks">කාර්ය ලැයිස්තුව පූරණය වීමේ දෝෂයකි</string>
     <string name="error_creating_shortcut">කෙටි මග සෑදීමේ දෝෂයකි</string>
     <string name="error_icons">අයිකන පූරණය කිරීමේ දෝෂයකි</string>
     <string name="error_invalid_icon_resource">දෝෂය: අයිකන සම්පත් සමඟ නොගැළපෙයි</string>

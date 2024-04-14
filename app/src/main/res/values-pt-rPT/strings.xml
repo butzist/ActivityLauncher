@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Inicia atividades ocultas e cria atalhos para as aplicações instaladas</string>
-    <string name="title_section_all">Todas as atividades</string>
+    <string name="title_fragment_package_list">Pacotes instalados</string>
+    <string name="title_fragment_activity_list">Atividades</string>
     <string name="title_dialog_disclaimer">Aviso</string>
     <string name="title_dialog_icon_picker">Escolha um ícone</string>
     <string name="dialog_progress_loading">A carregar&#8230;</string>
@@ -25,7 +26,6 @@ Algumas aplicações podem comportar-se de forma inesperada quando as suas ativi
     <string name="creating_activity_shortcut">A criar atalho para a atividade %s</string>
     <string name="creating_application_shortcut">A criar atalho para a aplicação %s</string>
     <string name="error">Erro</string>
-    <string name="error_tasks">Erro ao carregar a lista de tarefas</string>
     <string name="error_creating_shortcut">Erro ao criar atalho</string>
     <string name="error_icons">Erro ao carregar os ícones</string>
     <string name="error_invalid_icon_resource">Erro: recurso de ícone inválido</string>

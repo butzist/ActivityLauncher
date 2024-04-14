@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Spouští skryté aktivity a\u00a0vytváří zástupce pro nainstalované aplikace</string>
-    <string name="title_section_all">Všechny aktivity</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Odmítnutí odpovědnosti</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
     <string name="dialog_progress_loading">Načítaní&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Vytváření zástupce aktivity pro %s</string>
     <string name="creating_application_shortcut">Vytváření zástupce aplikace pro %s</string>
     <string name="error">Chyba</string>
-    <string name="error_tasks">Chyba při načítání seznamu úloh</string>
     <string name="error_creating_shortcut">Chyba při vytváření zástupce</string>
     <string name="error_icons">Chyba při načítání ikon</string>
     <string name="error_invalid_icon_resource">Chyba: neplatný zdroj ikony</string>

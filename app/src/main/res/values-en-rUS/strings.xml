@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
-    <string name="title_section_all">All activities</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Disclaimer</string>
     <string name="title_dialog_icon_picker">Pick an icon</string>
     <string name="dialog_progress_loading">Loading&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Creating activity shortcut for %s</string>
     <string name="creating_application_shortcut">Creating application shortcut for %s</string>
     <string name="error">Error</string>
-    <string name="error_tasks">Error loading task list</string>
     <string name="error_creating_shortcut">Error creating shortcut</string>
     <string name="error_icons">Error loading icons</string>
     <string name="error_invalid_icon_resource">Error: invalid icon resource</string>

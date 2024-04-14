@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Aktivitets opner</string>
     <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
-    <string name="title_section_all">Alle aktiviteter</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">Ansvarsfraskrivelse</string>
     <string name="title_dialog_icon_picker">Velg et ikon</string>
     <string name="dialog_progress_loading">Laster&#8230;</string>
@@ -24,7 +25,6 @@
     <string name="creating_activity_shortcut">Lager aktivitet snarvei for %s</string>
     <string name="creating_application_shortcut">Opprette programsnarvei for %s</string>
     <string name="error">Feil</string>
-    <string name="error_tasks">Feil under lasting av oppgaveliste</string>
     <string name="error_creating_shortcut">Feil, lage snarvei</string>
     <string name="error_icons">Feil ved lasting av ikon</string>
     <string name="error_invalid_icon_resource">Feil: Ugyldig ikon format</string>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">משגר פעילויות</string>
     <string name="short_description">פתיחת פעילויות מוסתרות ויצירת קיצורי דרך ליישומים מותקנים</string>
-    <string name="title_section_all">כל הפעילויות</string>
+    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">כתב ויתור</string>
     <string name="title_dialog_icon_picker">בחר סמל</string>
     <string name="dialog_progress_loading">טוען...</string>
@@ -25,7 +26,6 @@
     <string name="creating_activity_shortcut">יוצר קיצור לאפליקציה %s</string>
     <string name="creating_application_shortcut">יוצר קיצור לאפליקציה %s</string>
     <string name="error">שגיאה</string>
-    <string name="error_tasks">שגיאה בעת טעינת רשימת משימות</string>
     <string name="error_creating_shortcut">שגיאה ביצירת קיצור דרך</string>
     <string name="error_icons">שגיאה בטעינת סמלים</string>
     <string name="error_invalid_icon_resource">שגיאה: סמל לא חוקי</string>
@@ -38,8 +38,8 @@
     <string name="category_title_about">About</string>
     <string name="action_view_source">צפה בקוד המקור</string>
     <string name="summary_action_view_source">קוד המקור של אפליקציה זו זמין לקריאה ושינוי ב-GitHub.  אל תהסס לשלוח לנו בקשות משיכה עם שיפורים ותיקוני באגים.</string>
-    <string name="action_view_translation">תעזור בתרגום האפליקציה!</string>
-    <string name="summary_action_view_translation">אם נהנתה ממשגר הפעילויות, אנא שקול לעזור לתרגם את האפליקציה לשפה שלך.</string>
+    <string name="action_view_translation">עיזרו בתרגום האפליקציה!</string>
+    <string name="summary_action_view_translation">אם נהנתם ממשגר הפעילויות, אנא שיקלו לעזור לתרגם את האפליקציה לשפתכם.</string>
     <string name="action_view_bugs">דווח על בעיה</string>
     <string name="summary_action_view_bugs">אנא שלח את ההצעות או הבעיות שלך בדף פרויקט GitHub שלנו.</string>
     <string name="action_filter">סנן</string>
