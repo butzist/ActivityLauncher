@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.PackageListService
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.concurrent.thread
@@ -29,9 +32,11 @@ class LoadingFragment : Fragment() {
             // preload package list
             packageListService.get()
 
-            context.runOnUiThread {
-                val action = LoadingFragmentDirections.actionLoadingFinished()
-                findNavController().navigate(action)
+            lifecycleScope.launch {
+                lifecycle.withResumed {
+                    val action = LoadingFragmentDirections.actionLoadingFinished()
+                    findNavController().navigate(action)
+                }
             }
         }
 

@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace = "de.szalkowski.activitylauncher"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.szalkowski.activitylauncher"
         minSdk = 16
-        targetSdk = 34
-        versionCode = 52
-        versionName = "2.0.2"
+        targetSdk = 36
+        versionCode = 53
+        versionName = "2.0.3"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
