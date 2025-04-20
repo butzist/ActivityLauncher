@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Ejecuta activities ocultas y crea accesos directos en la pantalla de inicio</string>
-    <string name="title_fragment_package_list">Paquetes instalado</string>
+    <string name="title_fragment_package_list">Paquetes instalados</string>
     <string name="title_fragment_activity_list">Actividades</string>
     <string name="title_dialog_disclaimer">Términos de Uso</string>
     <string name="title_dialog_icon_picker">Elige un icono</string>

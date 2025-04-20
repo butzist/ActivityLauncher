@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">액티비티 런처</string>
     <string name="short_description">숨겨진 액티비티를 시작하고 설치된 앱에 대한 바로 가기를 만듭니다.</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">설치한 패키지</string>
+    <string name="title_fragment_activity_list">액티비티</string>
     <string name="title_dialog_disclaimer">경고</string>
     <string name="title_dialog_icon_picker">아이콘 선택</string>
     <string name="dialog_progress_loading">불러오는 중...</string>

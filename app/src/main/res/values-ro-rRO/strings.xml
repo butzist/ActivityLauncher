@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Lansator Activități</string>
     <string name="short_description">Lansează activități ascunse și creează comenzi rapide pentru aplic. ascunse</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">Pachete instalate</string>
+    <string name="title_fragment_activity_list">Activități</string>
     <string name="title_dialog_disclaimer">Clauza Exonerare</string>
     <string name="title_dialog_icon_picker">Alege o iconița</string>
     <string name="dialog_progress_loading">Se încarcă...</string>

@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">مشغل النشاط</string>
     <string name="short_description">يطلق الأنشطة المخفية وينشئ اختصارات للتطبيقات المثبتة</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">الحزم المثبتة</string>
+    <string name="title_fragment_activity_list">الأنشطة</string>
     <string name="title_dialog_disclaimer">إخلاء مسؤولية</string>
     <string name="title_dialog_icon_picker">اختر رمزا</string>
     <string name="dialog_progress_loading">جار التحميل&#8230;</string>

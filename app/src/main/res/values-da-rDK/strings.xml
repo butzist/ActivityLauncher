@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Åbner skjulte aktiviteter og opretter genveje til installerede apps</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">Installerede pakker</string>
+    <string name="title_fragment_activity_list">Aktiviteter</string>
     <string name="title_dialog_disclaimer">Ansvarsfraskrivelse</string>
     <string name="title_dialog_icon_picker">Vælg et ikon</string>
     <string name="dialog_progress_loading">Indlæser&#8230;</string>

@@ -2,15 +2,15 @@
 <resources>
     <string name="app_name">活动启动器</string>
     <string name="short_description">启动隐藏活动并为已安装的应用创建快捷方式</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">已安装的软件包</string>
+    <string name="title_fragment_activity_list">活动</string>
     <string name="title_dialog_disclaimer">免责声明</string>
     <string name="title_dialog_icon_picker">选取图标</string>
     <string name="dialog_progress_loading">载入中...</string>
     <string name="dialog_disclaimer">警示：
 使用本软件表示您将独自承担软件使用过程中可能出现的风险，这些风险包括但不限于：一些应用活动在不正确的配置下启动时可能会产生意料之外的错误，这可能会导致应用数据丢失或者更严重的问题。您确认知晓这些可能产生的风险并仍然打算使用该软件吗？</string>
     <string name="context_action_launch">启动活动</string>
-    <string name="context_action_launch_as_root">使用ROOT启动活动</string>
+    <string name="context_action_launch_as_root">使用ROOT权限启动活动</string>
     <string name="context_action_shortcut">创建快捷方式</string>
     <string name="context_action_shortcut_as_root">使用ROOT创建快捷方式</string>
     <string name="context_action_edit">编辑快捷方式</string>

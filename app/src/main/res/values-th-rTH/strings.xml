@@ -3,7 +3,7 @@
     <string name="app_name">ตัวเรียกใช้งาน Activity</string>
     <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
     <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_activity_list">activities ทั้งหมด</string>
     <string name="title_dialog_disclaimer">ข้อจำกัดความรับผิดชอบ</string>
     <string name="title_dialog_icon_picker">เลือกไอคอน</string>
     <string name="dialog_progress_loading">กำลังโหลด...</string>

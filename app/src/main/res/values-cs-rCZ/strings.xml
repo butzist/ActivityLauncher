@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">Spouští skryté aktivity a\u00a0vytváří zástupce pro nainstalované aplikace</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">Instalované balíčky</string>
+    <string name="title_fragment_activity_list">Aktivity</string>
     <string name="title_dialog_disclaimer">Odmítnutí odpovědnosti</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
     <string name="dialog_progress_loading">Načítaní&#8230;</string>

@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">啟動隱藏的活動並為已安裝的應用程式建立捷徑</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">已安裝的套件</string>
+    <string name="title_fragment_activity_list">活動</string>
     <string name="title_dialog_disclaimer">免責聲明</string>
     <string name="title_dialog_icon_picker">選擇圖示</string>
     <string name="dialog_progress_loading">正在載入&#8230;</string>

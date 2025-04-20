@@ -21,15 +21,15 @@
     <string name="label_private">privado</string>
     <string name="label_as_root">Como root</string>
     <string name="starting_activity">Iniciando atividade: \"%s\"</string>
-    <string name="starting_application">Iniciando aplicação: \"%s\"</string>
-    <string name="creating_activity_shortcut">Criando atalho de atividade para %s</string>
+    <string name="starting_application">Iniciando app: \"%s\"</string>
+    <string name="creating_activity_shortcut">Criando o atalho do aplicativo para %s</string>
     <string name="creating_application_shortcut">Criando atalho para \"%s\"</string>
     <string name="error">Erro</string>
     <string name="error_creating_shortcut">Erro ao criar atalho</string>
     <string name="error_icons">Erro ao carregar ícones</string>
     <string name="error_invalid_icon_resource">Erro: recurso de ícone inválido</string>
     <string name="error_invalid_icon_format">Erro: formato de ícone inválido</string>
-    <string name="error_no_default_activity">O pacote não tem uma atividade padrão - tente selecionar um explicitamente</string>
+    <string name="error_no_default_activity">O pacote não tem uma atividade padrão - tente selecionar uma manualmente</string>
     <string name="error_verbose_pin_shortcut">O launcher atual não suporta \"PinShortcut\". Não foi possível criar atalho.</string>
     <string name="warning_root_check">Aviso: Os privilégios de Root provavelmente não estão disponíveis neste dispositivo.</string>
     <string name="exception_invalid_component_name">Nome de componente inválido ou potencialmente prejudicial: %s</string>
@@ -46,7 +46,7 @@
     <string name="activity_settings">Configurações</string>
     <string name="settings_hide_private">Ocultar atividades privadas</string>
     <string name="settings_summary_hide_private">Ocultar atividades privadas (não exportadas e desativadas), que não podem ser iniciadas sem acesso root</string>
-    <string name="settings_allow_root">Ativar modo privilegiado</string>
+    <string name="settings_allow_root">Ativar modo root</string>
     <string name="settings_summary_allow_root">Permitir a abertura de atividades privadas usando privilégios de root</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_theme">Tema</string>

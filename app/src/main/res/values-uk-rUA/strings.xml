@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Лаунчер Активіті</string>
     <string name="short_description">Запускає приховані активіті та створює ярлики для встановлених додатків</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">Встановлені пакети</string>
+    <string name="title_fragment_activity_list">Активіті</string>
     <string name="title_dialog_disclaimer">Відмова від відповідальності</string>
     <string name="title_dialog_icon_picker">Обрати іконку</string>
     <string name="dialog_progress_loading">Завантаження...</string>
