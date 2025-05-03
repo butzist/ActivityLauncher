@@ -29,7 +29,8 @@ interface IconCreatorService {
 
     companion object {
         const val INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT"
-        const val INTENT_LAUNCH_ROOT_SHORTCUT = "activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT"
+        const val INTENT_LAUNCH_ROOT_SHORTCUT =
+            "activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT"
 
         const val INTENT_EXTRA_INTENT = "extra_intent"
         const val INTENT_EXTRA_SIGNATURE = "sign"
@@ -48,15 +49,32 @@ class IconCreatorServiceImpl @Inject constructor(
         createLauncherIcon(activity, optionalExtras, true)
     }
 
-    private fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?, asRoot: Boolean) {
-        val pack = extractIconPackageName(activity)
-        val intent = getActivityIntent(activity.componentName, optionalExtras)
+    private fun createLauncherIcon(
+        activity: MyActivityInfo,
+        optionalExtras: Bundle?,
+        asRoot: Boolean
+    ) {
+        try {
+            val pack = extractIconPackageName(activity)
+            val intent = getActivityIntent(activity.componentName, optionalExtras)
 
-        // Use bitmap version, if icon from different package is used
-        if (pack != null && pack != activity.componentName.packageName) {
-            createShortcut(activity.name, intent, activity.icon, asRoot, null)
-        } else {
-            createShortcut(activity.name, intent, activity.icon, asRoot, activity.iconResourceName)
+            // Use bitmap version, if icon from different package is used
+            if (pack != null && pack != activity.componentName.packageName) {
+                createShortcut(activity.name, intent, activity.icon, asRoot, null)
+            } else {
+                createShortcut(
+                    activity.name,
+                    intent,
+                    activity.icon,
+                    asRoot,
+                    activity.iconResourceName
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                context, context.getText(R.string.error_creating_shortcut).toString() + ": " + e, Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -128,12 +146,15 @@ class IconCreatorServiceImpl @Inject constructor(
         val shortcutIntent = Intent()
         if (asRoot) {
             // wrap only if root access needed
-            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, createShortcutIntent(intent, true))
+            shortcutIntent.putExtra(
+                Intent.EXTRA_SHORTCUT_INTENT,
+                createShortcutIntent(intent, true)
+            )
         } else {
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
         }
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName)
-        if (iconResourceName != null) {
+        if (!iconResourceName.isNullOrEmpty()) {
             val ir = ShortcutIconResource()
             if (intent.component == null) {
                 ir.packageName = intent.getPackage()
@@ -172,21 +193,17 @@ class IconCreatorServiceImpl @Inject constructor(
     }
 
     private fun createShortcutIntent(intent: Intent, asRoot: Boolean): Intent {
-        val action = if(asRoot) {
-            IconCreatorService.INTENT_LAUNCH_ROOT_SHORTCUT} else {IconCreatorService.INTENT_LAUNCH_SHORTCUT}
+        val action = if (asRoot) {
+            IconCreatorService.INTENT_LAUNCH_ROOT_SHORTCUT
+        } else {
+            IconCreatorService.INTENT_LAUNCH_SHORTCUT
+        }
         val shortcutIntent = Intent(action)
         shortcutIntent.putExtra(IconCreatorService.INTENT_EXTRA_INTENT, intent.toUri(0))
 
-        val signature: String
-        try {
-            signature = signingService.signIntent(intent)
-            shortcutIntent.putExtra(IconCreatorService.INTENT_EXTRA_SIGNATURE, signature)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(
-                context, context.getText(R.string.error).toString() + ": " + e, Toast.LENGTH_LONG
-            ).show()
-        }
+        val signature = signingService.signIntent(intent)
+        shortcutIntent.putExtra(IconCreatorService.INTENT_EXTRA_SIGNATURE, signature)
+
 
         return shortcutIntent
     }
