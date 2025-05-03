@@ -25,20 +25,6 @@ class PackageListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // disable back button
-        val appBarConfiguration = AppBarConfiguration.Builder(
-                R.id.PackageListFragment
-            ).build()
-        setupActionBarWithNavController(
-            this.requireActivity() as AppCompatActivity,
-            findNavController(),
-            appBarConfiguration
-        )
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {

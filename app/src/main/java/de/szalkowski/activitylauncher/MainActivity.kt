@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -38,8 +39,12 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
         }
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // define top level destinations (no back button)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.LoadingFragment, R.id.PackageListFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
