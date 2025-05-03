@@ -12,10 +12,11 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.PackageListService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Provider
-import kotlin.concurrent.thread
 
 @AndroidEntryPoint
 class LoadingFragment : Fragment() {
@@ -26,19 +27,19 @@ class LoadingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val context = this.requireActivity()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                // preload package list
+                packageListService.get()
+            }
 
-        thread {
-            // preload package list
-            packageListService.get()
-
-            lifecycleScope.launch {
-                lifecycle.withResumed {
-                    val action = LoadingFragmentDirections.actionLoadingFinished()
-                    findNavController().navigate(action)
-                }
+            withResumed {
+                // navigate to next screen
+                val action = LoadingFragmentDirections.actionLoadingFinished()
+                findNavController().navigate(action)
             }
         }
+
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_loading, container, false)
