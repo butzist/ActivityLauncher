@@ -24,19 +24,20 @@ class PackageListServiceImpl @Inject constructor(
     private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager: PackageManager = context.packageManager
     private val installedPackages: List<MyPackageInfo> =
-        packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES).map {
+        packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES).mapNotNull {
             getPackageInfo(it)
         }.sortedBy { it.name.lowercase() }
 
     override val packages: List<MyPackageInfo>
         get() = installedPackages
 
-    private fun getPackageInfo(info: PackageInfo): MyPackageInfo {
-        val packageName = info.packageName
-        val app = info.applicationInfo ?: return MyPackageInfo(
-            packageName, packageName, "", null, listOf(), packageManager.defaultActivityIcon, null
-        )
+    private fun getPackageInfo(info: PackageInfo): MyPackageInfo? {
+        val packageName = info.packageName as String? // do not trust Android implementations
+        if (packageName.isNullOrEmpty()) {
+            return null
+        }
 
+        val app = info.applicationInfo ?: return null
         val appRes = getLocalizedResources(packageName)
 
         val name = getName(app, appRes)
@@ -45,7 +46,7 @@ class PackageListServiceImpl @Inject constructor(
         val iconResourceName = getIconResourceName(app, appRes)
         val defaultActivityName = getDefaultActivityName(packageName, appRes)
         val activities = info.activities.orEmpty()
-            .filter{ !settingsService.hidePrivate || !it.isPrivate(packageManager) }
+            .filter { !settingsService.hidePrivate || !it.isPrivate(packageManager) }
             .map { getActivityName(it, appRes) }
             .filter { it != defaultActivityName }
 
@@ -55,12 +56,20 @@ class PackageListServiceImpl @Inject constructor(
     }
 
     private fun getDefaultActivityName(
-        packageName: String, appRes: Resources
+        packageName: String, appRes: Resources?
     ): ActivityName? {
-        val defaultIntent = packageManager.getLaunchIntentForPackage(packageName)
-        val activityInfo = defaultIntent?.resolveActivityInfo(packageManager, 0) ?: return null
-        val defaultActivityName = getActivityName(activityInfo, appRes)
-        return defaultActivityName
+        if (appRes != null) {
+            try {
+                val defaultIntent = packageManager.getLaunchIntentForPackage(packageName)
+                val activityInfo =
+                    defaultIntent?.resolveActivityInfo(packageManager, 0) ?: return null
+                val defaultActivityName = getActivityName(activityInfo, appRes)
+                return defaultActivityName
+            } catch (ignored: Exception) {
+            }
+        }
+
+        return null
     }
 
     private fun getIcon(app: ApplicationInfo): Drawable {
@@ -105,6 +114,7 @@ class PackageListServiceImpl @Inject constructor(
 
     private fun getActivityName(activity: ActivityInfo, appRes: Resources?): ActivityName {
         var name = createNameFromClass(activity.name)
+
         if (appRes != null) {
             try {
                 name = appRes.getString(activity.labelRes)
@@ -116,10 +126,14 @@ class PackageListServiceImpl @Inject constructor(
         return ActivityName(name, cls, activity.name)
     }
 
-    private fun getLocalizedResources(packageName: String): Resources {
-        val appRes = packageManager.getResourcesForApplication(packageName)
-        appRes.updateConfiguration(config, DisplayMetrics())
-        return appRes
+    private fun getLocalizedResources(packageName: String): Resources? {
+        try {
+            val appRes = packageManager.getResourcesForApplication(packageName)
+            appRes.updateConfiguration(config, DisplayMetrics())
+            return appRes
+        } catch (ignored: Exception) {
+            return null
+        }
     }
 
     private fun createNameFromClass(cls: String): String {
