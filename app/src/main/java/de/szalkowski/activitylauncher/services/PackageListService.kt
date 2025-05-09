@@ -58,24 +58,24 @@ class PackageListServiceImpl @Inject constructor(
     private fun getDefaultActivityName(
         packageName: String, appRes: Resources?
     ): ActivityName? {
-        if (appRes != null) {
-            try {
-                val defaultIntent = packageManager.getLaunchIntentForPackage(packageName)
-                val activityInfo =
-                    defaultIntent?.resolveActivityInfo(packageManager, 0) ?: return null
-                val defaultActivityName = getActivityName(activityInfo, appRes)
-                return defaultActivityName
-            } catch (ignored: Exception) {
-            }
+        if (appRes == null) {
+            return null;
         }
 
-        return null
+        return runCatching {
+            val defaultIntent = packageManager.getLaunchIntentForPackage(packageName)
+            val activityInfo =
+                defaultIntent?.resolveActivityInfo(packageManager, 0) ?: return null
+            val defaultActivityName = getActivityName(activityInfo, appRes)
+            return defaultActivityName
+        }.getOrNull()
+
     }
 
     private fun getIcon(app: ApplicationInfo): Drawable {
-        return try {
+        return runCatching {
             packageManager.getApplicationIcon(app)
-        } catch (ignored: Exception) {
+        }.getOrElse {
             packageManager.defaultActivityIcon
         }
     }
@@ -85,14 +85,13 @@ class PackageListServiceImpl @Inject constructor(
     ): String? {
         val iconResource = app.icon
 
-        if (iconResource != 0 && appRes != null) {
-            try {
-                return appRes.getResourceName(iconResource)
-            } catch (ignored: Exception) {
-            }
+        if (iconResource == 0 || appRes == null) {
+            return null
         }
 
-        return null
+        return runCatching {
+            appRes.getResourceName(iconResource)
+        }.getOrNull()
     }
 
 
@@ -102,23 +101,21 @@ class PackageListServiceImpl @Inject constructor(
             name = createNameFromClass(name)
         }
 
-        if (appRes != null) {
-            try {
-                name = appRes.getString(app.labelRes)
-            } catch (ignored: Exception) {
-            }
+        if (appRes == null) {
+            return name
         }
 
-        return name
+        return runCatching {
+            appRes.getString(app.labelRes)
+        }.getOrElse { name }
     }
 
     private fun getActivityName(activity: ActivityInfo, appRes: Resources?): ActivityName {
         var name = createNameFromClass(activity.name)
 
         if (appRes != null) {
-            try {
+            runCatching {
                 name = appRes.getString(activity.labelRes)
-            } catch (ignored: Exception) {
             }
         }
 
@@ -127,13 +124,11 @@ class PackageListServiceImpl @Inject constructor(
     }
 
     private fun getLocalizedResources(packageName: String): Resources? {
-        try {
+        return runCatching {
             val appRes = packageManager.getResourcesForApplication(packageName)
             appRes.updateConfiguration(config, DisplayMetrics())
-            return appRes
-        } catch (ignored: Exception) {
-            return null
-        }
+            appRes
+        }.getOrNull()
     }
 
     private fun createNameFromClass(cls: String): String {

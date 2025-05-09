@@ -41,7 +41,8 @@ class ActivityListServiceImpl @Inject constructor(
             infos[name.fullCls]?.let { info -> getActivityInfo(info, name) }
         }
 
-        return PackageActivities(pack.packageName,
+        return PackageActivities(
+            pack.packageName,
             pack.name,
             defaultActivity,
             pack.activityNames.associateWith { n -> infos[n.fullCls] }
@@ -90,7 +91,6 @@ class ActivityListServiceImpl @Inject constructor(
     }
 
 
-
     private fun getIconResourceName(
         activityInfo: ActivityInfo
     ): String? {
@@ -98,17 +98,15 @@ class ActivityListServiceImpl @Inject constructor(
             return null
         }
 
-        return try {
+        return runCatching {
             packageManager.getResourcesForActivity(activityInfo.componentName)
                 .getResourceName(activityInfo.iconResource)
-        } catch (ignored: Exception) {
-            null
-        }
+        }.getOrNull()
     }
 
-    private fun getIcon(activityInfo: ActivityInfo): Drawable = try {
+    private fun getIcon(activityInfo: ActivityInfo): Drawable = runCatching {
         activityInfo.loadIcon(packageManager)
-    } catch (e: Exception) {
+    }.getOrElse {
         packageManager.defaultActivityIcon
     }
 
