@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,8 +43,11 @@ class PackageListFragment : Fragment() {
         }
 
         packageListAdapter.onItemClick = {
-            val action = PackageListFragmentDirections.actionSelectPackage(it.packageName)
-            findNavController().navigate(action)
+            runCatching {
+                val action = PackageListFragmentDirections.actionSelectPackage(it.packageName)
+                findNavController().navigate(action)
+            }.onFailure { Log.e("Navigation", "Error while navigating from PackageListFragment") }
+
         }
         binding.rvPackages.adapter = packageListAdapter
         binding.rvPackages.isNestedScrollingEnabled = false
