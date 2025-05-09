@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,8 +49,10 @@ class ActivityListFragment : Fragment() {
         }
 
         activityListAdapter.onItemClick = {
-            val action = ActivityListFragmentDirections.actionSelectActivity(it.componentName)
-            findNavController().navigate(action)
+            runCatching {
+                val action = ActivityListFragmentDirections.actionSelectActivity(it.componentName)
+                findNavController().navigate(action)
+            }.onFailure { Log.e("Navigation", "Error while navigating from PackageListFragment") }
         }
 
         binding.rvActivities.adapter = activityListAdapter
