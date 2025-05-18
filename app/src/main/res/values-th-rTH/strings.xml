@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ตัวเรียกใช้งาน Activity</string>
-    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
-    <string name="title_fragment_package_list">Installed packages</string>
+    <string name="short_description">เปิดกิจกรรมที่ซ่อนอยู่และสร้างทางลัดสำหรับแอปที่ติดตั้ง</string>
+    <string name="title_fragment_package_list">แอปที่ติดตั้งแล้ว</string>
     <string name="title_fragment_activity_list">activities ทั้งหมด</string>
     <string name="title_dialog_disclaimer">ข้อจำกัดความรับผิดชอบ</string>
     <string name="title_dialog_icon_picker">เลือกไอคอน</string>
     <string name="dialog_progress_loading">กำลังโหลด...</string>
-    <string name="dialog_disclaimer">การใช้ซอฟต์แวร์นี้ต้องยอมรับความเสี่ยงเอง  แอพบางตัวอาจไม่ทำงานตามที่คาดไว้ เมื่อเปิด activities ในบริบทที่ไม่ถูกต้อง อาจนำไปสู่การสูญเสียข้อมูลหรือแย่ลงไปอีก  คุณได้รับการเตือนแล้ว  คุณเข้าใจสิ่งนี้และยังต้องการใช้ซอฟต์แวร์นี้หรือไม่?</string>
+    <string name="dialog_disclaimer">แอปนี้ให้การเข้าถึงฟีเจอร์ที่โดยปกติจะมองไม่เห็นสำหรับผู้ใช้ บางตัวเลือกอาจทำงานไม่ตรงตามที่คาดหวังหรืออาจไม่ปลอดภัยในการใช้งาน คุณเข้าใจและยังต้องการดำเนินการต่อหรือไม่?</string>
     <string name="context_action_launch">เข้า activity</string>
     <string name="context_action_launch_as_root">เข้าactivity โดยสิทธิ์รูท</string>
     <string name="context_action_shortcut">สร้างทางลัด</string>

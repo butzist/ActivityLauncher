@@ -7,8 +7,7 @@
     <string name="title_dialog_disclaimer">Aviso</string>
     <string name="title_dialog_icon_picker">Escolha um ícone</string>
     <string name="dialog_progress_loading">A carregar&#8230;</string>
-    <string name="dialog_disclaimer">Utilize este software ao seu próprio risco.
-Algumas aplicações podem comportar-se de forma inesperada quando as suas atividades são iniciadas em contexto diferente do esperado podendo levar à perda de dados, instabilidade ou pior. Pretende continuar?</string>
+    <string name="dialog_disclaimer">Este app dá acesso a recursos que não são normalmente visíveis para os usuários. Algumas opções podem não funcionar como esperado ou podem não ser seguras para uso. Você entende e ainda quer continuar?</string>
     <string name="context_action_launch">Iniciar atividade</string>
     <string name="context_action_launch_as_root">Iniciar atividade como root</string>
     <string name="context_action_shortcut">Criar atalho</string>

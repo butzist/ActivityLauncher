@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">إخلاء مسؤولية</string>
     <string name="title_dialog_icon_picker">اختر رمزا</string>
     <string name="dialog_progress_loading">جار التحميل&#8230;</string>
-    <string name="dialog_disclaimer">استخدام هذا البرنامج على مسؤوليتك الخاصة. بعض التطبيقات قد لا تتصرف كما هو متوقع عند إطلاق أنشطتها في سياق خاطئ يؤدي إلى فقدان البيانات أو حتى أسوأ من ذلك. وقد تم تحذيرك. هل نفهم هذا ولا تزال ترغب في استخدام هذا البرنامج؟</string>
+    <string name="dialog_disclaimer">يتيح هذا التطبيق الوصول إلى الميزات غير المرئية عادة للمستخدمين. قد لا تعمل بعض الخيارات كما هو متوقع أو قد لا تكون آمنة للاستخدام. هل تفهم ولا تزال تريد المتابعة؟</string>
     <string name="context_action_launch">إطلاق النشاط</string>
     <string name="context_action_launch_as_root">تشغيل النشاط بصلاحيات الروت</string>
     <string name="context_action_shortcut">إنشاء اختصار</string>

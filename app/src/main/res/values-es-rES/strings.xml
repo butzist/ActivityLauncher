@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Términos de Uso</string>
     <string name="title_dialog_icon_picker">Elige un icono</string>
     <string name="dialog_progress_loading">Cargando&#8230;</string>
-    <string name="dialog_disclaimer">Usa este software bajo tu propio riesgo. Algunas aplicaciones pueden comportarse de forma rara cuando sus actividades se ejecutan en el contexto equivocado, causando pérdidas de datos o incluso algo aún peor. Quedas avisado de ello. ¿Lo entiendes y aun así quieres usar este software?</string>
+    <string name="dialog_disclaimer">Esta aplicación da acceso a funciones normalmente no visibles para los usuarios. Algunas opciones pueden no funcionar como se esperaba o no ser seguras de usar. ¿Entiende y quieres continuar?</string>
     <string name="context_action_launch">Ejecutar actividad</string>
     <string name="context_action_launch_as_root">Ejecutar activity como root</string>
     <string name="context_action_shortcut">Crear acceso directo</string>

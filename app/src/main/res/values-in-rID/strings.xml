@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Sanggahan</string>
     <string name="title_dialog_icon_picker">Pilih ikon</string>
     <string name="dialog_progress_loading">Memuat&#8230;</string>
-    <string name="dialog_disclaimer">Gunakan perangkat lunak ini dengan risiko anda sendiri. Beberapa aplikasi mungkin tidak berperilaku seperti yang diharapkan ketika kegiatan mereka diluncurkan dalam konteks yang salah yang menyebabkan hilangnya data atau bahkan lebih buruk. Anda telah diperingatkan. Apakah Anda memahami ini dan masih ingin menggunakan perangkat lunak ini?</string>
+    <string name="dialog_disclaimer">Aplikasi ini memberikan akses ke fitur yang biasanya tidak terlihat oleh pengguna. Beberapa opsi mungkin tidak berfungsi seperti yang diharapkan atau mungkin tidak aman untuk digunakan. Apakah Anda mengerti dan tetap ingin melanjutkan?</string>
     <string name="context_action_launch">Luncurkan aktivitas</string>
     <string name="context_action_launch_as_root">Luncurkan aktivitas sebagai root</string>
     <string name="context_action_shortcut">Buat pintasan</string>

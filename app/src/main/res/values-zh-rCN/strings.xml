@@ -7,8 +7,7 @@
     <string name="title_dialog_disclaimer">免责声明</string>
     <string name="title_dialog_icon_picker">选取图标</string>
     <string name="dialog_progress_loading">载入中...</string>
-    <string name="dialog_disclaimer">警示：
-使用本软件表示您将独自承担软件使用过程中可能出现的风险，这些风险包括但不限于：一些应用活动在不正确的配置下启动时可能会产生意料之外的错误，这可能会导致应用数据丢失或者更严重的问题。您确认知晓这些可能产生的风险并仍然打算使用该软件吗？</string>
+    <string name="dialog_disclaimer">此应用给予用户通常不可见的功能访问权限。 某些选项可能无法正常使用，或者可能无法安全使用。您是否理解并且仍然想要继续？</string>
     <string name="context_action_launch">启动活动</string>
     <string name="context_action_launch_as_root">使用ROOT权限启动活动</string>
     <string name="context_action_shortcut">创建快捷方式</string>

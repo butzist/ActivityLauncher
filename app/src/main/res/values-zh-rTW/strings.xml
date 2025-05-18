@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">免責聲明</string>
     <string name="title_dialog_icon_picker">選擇圖示</string>
     <string name="dialog_progress_loading">正在載入&#8230;</string>
-    <string name="dialog_disclaimer">使用此軟體需要您自行承擔風險。部分應用程式的某些活動在錯誤的內容中啟動時，它們可能不會以預期的方式運作，從而導致資料遺失或更為嚴重的錯誤。我們已在此警告，您確定您瞭解這一點並仍要繼續使用此軟體嗎？</string>
+    <string name="dialog_disclaimer">這個應用程式提供使用者平常無法看到的功能。某些選項可能無法如預期運作，或可能存在安全風險。您是否了解並仍然希望繼續？</string>
     <string name="context_action_launch">啟動活動</string>
     <string name="context_action_launch_as_root">啟動活動 (Root)</string>
     <string name="context_action_shortcut">建立捷徑</string>
