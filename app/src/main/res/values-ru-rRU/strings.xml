@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Отказ от ответственности</string>
     <string name="title_dialog_icon_picker">Выберите иконку</string>
     <string name="dialog_progress_loading">Загрузка&#8230;</string>
-    <string name="dialog_disclaimer">Используете это программное обеспечение на свой страх и риск. Некоторые приложения могут не работать так, как ожидалось, когда их деятельность запускаются в неверном контексте приводит к потере данных или даже хуже. Вы были предупреждены. Вы понимаете это и все еще хотите использовать это программное обеспечение?</string>
+    <string name="dialog_disclaimer">Это приложение дает доступ к функциям, которые обычно не видны пользователям. Некоторые опции могут работать не так, как ожидалось или могут быть небезопасными для использования. Вы понимаете и все еще хотите продолжить?</string>
     <string name="context_action_launch">Запуск действия</string>
     <string name="context_action_launch_as_root">Запустить активность от имени root</string>
     <string name="context_action_shortcut">Создать ярлык</string>

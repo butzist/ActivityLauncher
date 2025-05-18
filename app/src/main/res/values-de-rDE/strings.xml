@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Haftungsausschluss</string>
     <string name="title_dialog_icon_picker">Icon auswählen</string>
     <string name="dialog_progress_loading">Lade...</string>
-    <string name="dialog_disclaimer">Verwenden Sie diese Software auf Ihr eigenes Risiko. Einige Anwendungen verhalten sich möglicherweise nicht wie erwartet, wenn ihre Aktivitäten im falschen Kontext gestartet werden.  Dies kann zu Datenverlust führen oder sogar noch schlimmer. Sie wurden gewarnt. Verstehen sie diese Warnung und möchten diese Software trotzdem verwenden?</string>
+    <string name="dialog_disclaimer">Diese App gibt Zugriff auf Funktionen, die normalerweise nicht für Benutzer sichtbar sind. Einige Optionen funktionieren möglicherweise nicht wie erwartet oder sind nicht sicher. Haben Sie verstanden und möchten trotzdem fortfahren?</string>
     <string name="context_action_launch">Starte Aktivität</string>
     <string name="context_action_launch_as_root">Starte Aktivität (root User)</string>
     <string name="context_action_shortcut">Verknüpfung erstellen</string>

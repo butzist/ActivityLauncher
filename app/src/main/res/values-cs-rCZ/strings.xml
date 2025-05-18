@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Odmítnutí odpovědnosti</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
     <string name="dialog_progress_loading">Načítaní&#8230;</string>
-    <string name="dialog_disclaimer">Tento software používáte na vlastní riziko. Některé aplikace se nemusí chovat podle očekávání, když jsou jejich aktivity spuštěny ve špatném kontextu, což může vést ke ztrátě dat nebo k\u00a0něčemu ještě horšímu. Byli jste varováni. Rozumíte výše uvedenému a\u00a0přesto tento software chcete používat?</string>
+    <string name="dialog_disclaimer">Tato aplikace umožňuje přístup k funkcím, které běžně nejsou uživatelům k dispozici. Některé možnosti nemusí fungovat podle očekávání, nebo nemusí být bezpečné je používat. Rozumíte tomuto upozornění a přesto chcete pokračovat?</string>
     <string name="context_action_launch">Spustit aktivitu</string>
     <string name="context_action_launch_as_root">Spustit aktivitu s\u00a0právy root</string>
     <string name="context_action_shortcut">Vytvořit zástupce</string>

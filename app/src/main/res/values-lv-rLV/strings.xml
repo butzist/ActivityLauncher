@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Atruna</string>
     <string name="title_dialog_icon_picker">Atlasiet ikonu</string>
     <string name="dialog_progress_loading">Notiek ielāde&#8230;</string>
-    <string name="dialog_disclaimer">Izmantojiet šo lietotni uz savu atbildību. Dažas lietotnes var nedarboties, kā paredzēts, ja to darbības tiek palaistas nepareizā kontekstā, izraisot datu zudumu vai vēl ļaunāk. Jūs esat brīdināts. Es saprotu un joprojām vēlos izmantot šo lietotni?</string>
+    <string name="dialog_disclaimer">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
     <string name="context_action_launch">Izpildīt darbību</string>
     <string name="context_action_launch_as_root">Izpildīt darbību ar root tiesībām</string>
     <string name="context_action_shortcut">Izveidot saīsni</string>
@@ -27,7 +27,7 @@
     <string name="error">Kļūda</string>
     <string name="error_creating_shortcut">Veidojot saīsni, radās kļūda</string>
     <string name="error_icons">Ielādējot ikonas, radās kļūda</string>
-    <string name="error_invalid_icon_resource">Kļūda: nederīgs ikonu resurss</string>
+    <string name="error_invalid_icon_resource">Kļūda: nederīgs ikonas resurss</string>
     <string name="error_invalid_icon_format">Kļūda: nederīgs ikonas formāts</string>
     <string name="error_no_default_activity">Pakotnei nav noklusējuma darbības - mēģiniet to atlasīt tieši</string>
     <string name="error_verbose_pin_shortcut">Pašreizējais palaidējs neatbalsta \"PinShortcut\". Nevar izveidot saīsni.</string>
@@ -45,7 +45,7 @@
     <string name="filter_hint">lietotne/darbība</string>
     <string name="activity_settings">Iestatījumi</string>
     <string name="settings_hide_private">Slēpt privātās darbības</string>
-    <string name="settings_summary_hide_private">Slēpt privātās (neeksportētās un atspējotās) darbības, kuras nevar palaist bez root piekļuves tiesībām</string>
+    <string name="settings_summary_hide_private">Slēpt privātās (neizgūtās un atspējotās) darbības, kuras nevar palaist bez root piekļuves tiesībām</string>
     <string name="settings_allow_root">Iespējot priviliģēto režīmu</string>
     <string name="settings_summary_allow_root">Atļaut izpildīt privātas darbības, izmantojot root tiesības</string>
     <string name="settings_language">Valoda</string>

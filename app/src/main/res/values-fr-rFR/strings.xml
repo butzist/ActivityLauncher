@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Clause de non-responsabilité</string>
     <string name="title_dialog_icon_picker">Choisissez une icône</string>
     <string name="dialog_progress_loading">Chargement&#8230;</string>
-    <string name="dialog_disclaimer">Utilisez ce logiciel à vos propres risques. Certaines applications ne pourraient pas se comporter comme prévu lorsque leurs activités sont lancées dans le contexte incorrect menant à une perte de données ou même pire. Vous aurez été prévenu. Vous comprenez cela et voulez continuer à utiliser ce logiciel ?</string>
+    <string name="dialog_disclaimer">Cette application donne accès à des fonctionnalités normalement invisibles pour les utilisateurs. Certaines options peuvent ne pas fonctionner comme prévu ou peuvent ne pas être sûres à utiliser. Voulez-vous continuer ?</string>
     <string name="context_action_launch">Lancer l\'activité</string>
     <string name="context_action_launch_as_root">Lancer l\'activité (root)</string>
     <string name="context_action_shortcut">Créer un raccourci</string>

@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">स्वीकरण व अस्वीकरण</string>
     <string name="title_dialog_icon_picker">आइकॉन चयन</string>
     <string name="dialog_progress_loading">लोडिंग&#8230;</string>
-    <string name="dialog_disclaimer">इस सॉफ़्टवेयर का उपयोग अपने जोखिम पर करें।  हो सकता है कि कुछ ऐप उम्मीद के मुताबिक व्यवहार न करें, जब उनकी गतिविधियों को लॉन्च किया जाता है, जिससे डेटा हानि या इससे भी बदतर हो जाती है।  आपको चेतावनी दी गई है।  क्या आप इसे समझते हैं और अभी भी इस सॉफ़्टवेयर का उपयोग करना चाहते हैं?</string>
+    <string name="dialog_disclaimer">यह ऐप उन फीचर्स तक पहुँच प्रदान करता है जो सामान्यतः उपयोगकर्ताओं को दिखाई नहीं देते। कुछ विकल्प उम्मीद के अनुसार काम नहीं कर सकते हैं या उपयोग के लिए सुरक्षित नहीं हो सकते हैं। क्या आप समझते हैं और फिर भी आगे बढ़ना चाहते हैं?</string>
     <string name="context_action_launch">गतिविधि शुरू करे</string>
     <string name="context_action_launch_as_root">रूट(Root) रूप में शुरू करें</string>
     <string name="context_action_shortcut">शॉर्टकट बनाएं</string>

@@ -2,13 +2,12 @@
 <resources>
     <string name="app_name">משגר פעילויות</string>
     <string name="short_description">פתיחת פעילויות מוסתרות ויצירת קיצורי דרך ליישומים מותקנים</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">חבילות מותקנות</string>
+    <string name="title_fragment_activity_list">פעילויות</string>
     <string name="title_dialog_disclaimer">כתב ויתור</string>
     <string name="title_dialog_icon_picker">בחר סמל</string>
     <string name="dialog_progress_loading">טוען...</string>
-    <string name="dialog_disclaimer">השתמש בתוכנה זו באחריותך בלבד. אפליקציות מסוימות עלולות לא לפעול כצפוי, ואף עלול להוביל לאובדן נתונים.
-האם אתה מבין ועדיין רוצה להשתמש בתוכנה זו?</string>
+    <string name="dialog_disclaimer">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
     <string name="context_action_launch">בחר פעילות</string>
     <string name="context_action_launch_as_root">הפעל פעילות עם הרשאות רוט</string>
     <string name="context_action_shortcut">צור קיצור דרך</string>
@@ -35,7 +34,7 @@
     <string name="warning_root_check">אזהרה: הרשאות שורש כנראה אינן זמינות במכשיר זה.</string>
     <string name="exception_invalid_component_name">שם רכיב לא חוקי או שעלול להזיק: %s</string>
     <string name="exception_command_error">הפקודה החזירה קוד שגיאה: %d, פלט: %s</string>
-    <string name="category_title_about">About</string>
+    <string name="category_title_about">אודות</string>
     <string name="action_view_source">צפה בקוד המקור</string>
     <string name="summary_action_view_source">קוד המקור של אפליקציה זו זמין לקריאה ושינוי ב-GitHub.  אל תהסס לשלוח לנו בקשות משיכה עם שיפורים ותיקוני באגים.</string>
     <string name="action_view_translation">עיזרו בתרגום האפליקציה!</string>

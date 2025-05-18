@@ -7,7 +7,7 @@
     <string name="title_dialog_disclaimer">Uwaga</string>
     <string name="title_dialog_icon_picker">Wybierz ikonę</string>
     <string name="dialog_progress_loading">Wczytywanie &#8230;</string>
-    <string name="dialog_disclaimer">Korzystasz z tego programu na własne ryzyko. Niektóre aplikacje mogą nie działać zgodnie z oczekiwaniami, jeśli będą uruchamiane w złym kontekście. Może to prowadzić do utraty danych lub nawet gorzej. Zostałeś ostrzeżony. Czy rozumiesz to i mimo wszystko chcesz używać tego programu?</string>
+    <string name="dialog_disclaimer">Ta aplikacja daje dostęp do funkcji, które nie są zwykle widoczne dla użytkowników. Niektóre opcje mogą nie działać zgodnie z oczekiwaniami lub mogą nie być bezpieczne. Czy rozumiesz i nadal chcesz kontynuować?</string>
     <string name="context_action_launch">Rozpocznij aktywność</string>
     <string name="context_action_launch_as_root">Uruchom aktywność jako root</string>
     <string name="context_action_shortcut">Utwórz skrót</string>
