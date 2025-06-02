@@ -5,20 +5,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentPackageListBinding
+import de.szalkowski.activitylauncher.services.ViewIntentParserService
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PackageListFragment : Fragment() {
     @Inject
     internal lateinit var packageListAdapter: PackageListAdapter
+
+    @Inject
+    internal lateinit var viewIntentParserService: ViewIntentParserService
 
     private var _binding: FragmentPackageListBinding? = null
 
@@ -51,6 +53,17 @@ class PackageListFragment : Fragment() {
         }
         binding.rvPackages.adapter = packageListAdapter
         binding.rvPackages.isNestedScrollingEnabled = false
+
+        runCatching {
+            val intent = activity?.intent ?: return
+            val packageName = viewIntentParserService.packageFromIntent(intent) ?: return
+            val action = PackageListFragmentDirections.actionSelectPackage(packageName)
+            findNavController().navigate(action)
+        }.onFailure {
+            Toast.makeText(requireContext(), getString(R.string.error_invalid_activity_link), Toast.LENGTH_LONG)
+                .show()
+        }
+
     }
 
     override fun onDestroyView() {
