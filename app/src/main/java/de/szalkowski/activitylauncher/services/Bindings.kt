@@ -40,6 +40,12 @@ abstract class ServicesModule {
     abstract fun bindIconLoaderService(
         iconLoaderServiceImpl: IconLoaderServiceImpl
     ): IconLoaderService
+
+    @ActivityScoped
+    @Binds
+    abstract fun bindShareActivityService(
+        shareActivityServiceImpl: ShareActivityServiceImpl
+    ): ShareActivityService
 }
 
 @Module
@@ -50,6 +56,12 @@ abstract class ApplicationServicesModule {
     abstract fun bindIntentSigningService(
         intentSigningServiceImpl: IntentSigningServiceImpl
     ): IntentSigningService
+
+    @Singleton
+    @Binds
+    abstract fun bindViewIntentParserService(
+        viewIntentParserServiceImpl: ViewIntentParserServiceImpl
+    ): ViewIntentParserService
 
     @Singleton
     @Binds
