@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Skep kortpad</string>
     <string name="context_action_shortcut_as_root">Skep kortpad as oorsprong </string>
     <string name="context_action_edit">Redigeer kortpad</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Naam</string>
     <string name="label_package">Pakket</string>
     <string name="label_class">Klas</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Fout: ongeldige ikoon formaat</string>
     <string name="error_no_default_activity">Die pakket beskik nie oor n aktiwiteit as norm nie - oefen keuse eksplisiet uit </string>
     <string name="error_verbose_pin_shortcut">Current launcher does not support \"PinShortcut\". Unable to create shortcut.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Waarskuwing: Toestemming tot oorsprong is moontlik onbeskikbaar oo hierdie gestel </string>
     <string name="exception_invalid_component_name">Ongeldig of moontlik skadelike komponent naam: %s</string>
     <string name="exception_command_error">Bevel kom terug met n kode fout %d, uitset: %s</string>

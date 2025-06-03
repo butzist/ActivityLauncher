@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Criar atalho</string>
     <string name="context_action_shortcut_as_root">Criar atalho com o acesso ao Root</string>
     <string name="context_action_edit">Editar atalho</string>
+    <string name="context_action_share_shortcut">Compartilhar atalho</string>
     <string name="label_name">Nome</string>
     <string name="label_package">Pacote</string>
     <string name="label_class">Identificador</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Erro: Formato de ícones inválido</string>
     <string name="error_no_default_activity">O pacote não tem uma atividade predefinida - tente selecionar uma explicitamente</string>
     <string name="error_verbose_pin_shortcut">O launcher atual não suporta \"PinShortcut\". Não é possível criar atalhos.</string>
+    <string name="error_invalid_activity_link">Link de atividade inválido fornecido</string>
     <string name="warning_root_check">Aviso: Provavelmente os privilégios de Root não estão disponíveis neste dispositivo.</string>
     <string name="exception_invalid_component_name">Componente de nome invalido ou potencialmente nocivo: %s</string>
     <string name="exception_command_error">Código de erro retornado: %d, saída: %s</string>

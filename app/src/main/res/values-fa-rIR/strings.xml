@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">ایجاد میانبر</string>
     <string name="context_action_shortcut_as_root">ایجاد میان‌بر به عنوان روت</string>
     <string name="context_action_edit">ویرایش میان‌بر</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">نام</string>
     <string name="label_package">بسته</string>
     <string name="label_class">کلاس</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">خطا: قالب آیکون نامعتبر</string>
     <string name="error_no_default_activity">بسته اکتیویتی پیش‌فرض ندارد - سعی کنید یک اکتیویتی مشخص را انتخاب کنید</string>
     <string name="error_verbose_pin_shortcut">لانچر فعلی «سنجاق کردن میان‌بر» را پشتیبانی نمی‌کند. ناتوان در ایجاد میان‌بر.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">هشدار: احتمالا امتیازات روت در این دستگاه موجود نیست.</string>
     <string name="exception_invalid_component_name">نام مؤلفه نامعتبر یا بالقوه مضر: %s</string>
     <string name="exception_command_error">فرمان کد خطای %d را برگرداند، خروجی %s</string>

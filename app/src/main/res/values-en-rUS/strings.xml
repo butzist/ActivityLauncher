@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Create shortcut</string>
     <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Edit shortcut</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Name</string>
     <string name="label_package">Package</string>
     <string name="label_class">Class</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
     <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Current launcher does not support \"PinShortcut\". Unable to create shortcut.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Warning: Root privileges are probably not available on this device.</string>
     <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
     <string name="exception_command_error">Command returned error code: %d, output: %s</string>

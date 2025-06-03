@@ -7,12 +7,13 @@
     <string name="title_dialog_disclaimer">Varning</string>
     <string name="title_dialog_icon_picker">Välj en ikon</string>
     <string name="dialog_progress_loading">Laddar&#8230;</string>
-    <string name="dialog_disclaimer">Använd denna programvara på egen risk. Vissa appar kanske inte beter sig som förväntat när deras aktiviteter startas i fel sammanhang vilket leder till dataförlust eller ännu värre. Du har blivit varnad. Förstår du detta och vill fortfarande använda denna programvara?</string>
+    <string name="dialog_disclaimer">Appen ger åtkomst till funktioner som normalt inte är synliga för användare. Vissa alternativ kanske inte fungerar som förväntat eller kanske inte är säkra att använda. Förstår du detta och vill ändå fortsätta?</string>
     <string name="context_action_launch">Starta aktivitet</string>
     <string name="context_action_launch_as_root">Starta aktivitet som root</string>
     <string name="context_action_shortcut">Skapa genväg</string>
     <string name="context_action_shortcut_as_root">Skapa genväg som root</string>
     <string name="context_action_edit">Redigera genväg</string>
+    <string name="context_action_share_shortcut">Dela genväg</string>
     <string name="label_name">Namn</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Klass</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Fel: ogiltigt ikonformat</string>
     <string name="error_no_default_activity">Paketet har ingen standardaktivitet</string>
     <string name="error_verbose_pin_shortcut">Nuvarande launcher stöder inte \"PinGencut\". Det går inte att skapa en genväg.</string>
+    <string name="error_invalid_activity_link">Ogiltig aktivitetslänk angiven</string>
     <string name="warning_root_check">Varning: Roträttigheter är förmodligen inte tillgängliga på den här enheten.</string>
     <string name="exception_invalid_component_name">Ogiltigt eller potentiellt skadligt komponentnamn: %s</string>
     <string name="exception_command_error">Kommandot returnerade felkod: %d, utdata: %s</string>

@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Vytvořit zástupce</string>
     <string name="context_action_shortcut_as_root">Vytvořit zástupce jako root</string>
     <string name="context_action_edit">Upravit zástupce</string>
+    <string name="context_action_share_shortcut">Sdílet zástupce</string>
     <string name="label_name">Název</string>
     <string name="label_package">Balíček</string>
     <string name="label_class">Třída</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Chyba: neplatný formát ikony</string>
     <string name="error_no_default_activity">Balíček nemá výchozí aktivitu. Zkuste jednu vybrat explicitně</string>
     <string name="error_verbose_pin_shortcut">Aktuální spouštěč nepodporuje „PinShortcut“ (Připnutí zástupce). Nelze vytvořit zástupce.</string>
+    <string name="error_invalid_activity_link">Byl poskytnut neplatný odkaz na aktivitu</string>
     <string name="warning_root_check">Varování: Oprávnění root pravděpodobně nejsou na tomto zařízení k\u00a0dispozici.</string>
     <string name="exception_invalid_component_name">Neplatný nebo potenciálně škodlivý název komponentu: %s</string>
     <string name="exception_command_error">Příkaz vrátil chybový kód: %d, výstup: %s</string>

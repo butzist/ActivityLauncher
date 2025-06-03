@@ -7,12 +7,13 @@
     <string name="title_dialog_disclaimer">Clauza Exonerare</string>
     <string name="title_dialog_icon_picker">Alege o iconița</string>
     <string name="dialog_progress_loading">Se încarcă...</string>
-    <string name="dialog_disclaimer">Utilizati această aplicatie cu propriul risc. Unele aplicații pot sa se comporte greșit când activitățile lor sunt lansate intr-un context greșit iar acest lucru poate duce la pierderea datelor sau ceva mai rău.Ai fost atenționat! Înțelegi asta si inca doresti sa folosesti acest soft?</string>
+    <string name="dialog_disclaimer">Această aplicație oferă acces la funcții care nu sunt vizibile în mod normal utilizatorilor. Este posibil ca unele opțiuni să nu funcționeze conform așteptărilor sau să nu fie sigure pentru utilizare. Înțelegi și totuși dorești să continui?</string>
     <string name="context_action_launch">Lansează activitatea</string>
     <string name="context_action_launch_as_root">Lansează activitatea ca root</string>
     <string name="context_action_shortcut">Crează o scurtătura pe ecranul principal</string>
     <string name="context_action_shortcut_as_root">Creează scurtătură ca root</string>
     <string name="context_action_edit">Editează Scurtătura</string>
+    <string name="context_action_share_shortcut">Distribuie scurtătura</string>
     <string name="label_name">Nume</string>
     <string name="label_package">Numele Pachetului</string>
     <string name="label_class">Clasă</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Eroare: formatul pitogramei este invalid</string>
     <string name="error_no_default_activity">Pachetul nu are o activitate implicită - încercați să selectați una în mod explicit</string>
     <string name="error_verbose_pin_shortcut">Actualul lansator nu acceptă \"PinShortcut\". Imposibil de creat scurtătura.</string>
+    <string name="error_invalid_activity_link">Link-ul de activitate furnizat este greșit</string>
     <string name="warning_root_check">Atenție: Privilegiile Root probabil nu sunt disponibile pe acest dispozitiv.</string>
     <string name="exception_invalid_component_name">Componentă potențial dăunătoare sau nume greșit: %s</string>
     <string name="exception_command_error">Comanda a returnat codul de eroare: %d, rezultat: %s</string>

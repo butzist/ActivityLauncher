@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">කෙටිමඟ තනන්න</string>
     <string name="context_action_shortcut_as_root">මූල ලෙස කෙටිමං සාදන්න</string>
     <string name="context_action_edit">කෙටිමඟ සංස්කරණය කරන්න</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">නම</string>
     <string name="label_package">පැකේජය</string>
     <string name="label_class">පන්තිය</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Error: invalid icon format</string>
     <string name="error_no_default_activity">පැකේජයේ පෙරනිමි ක්‍රියාකාරකමක් නොමැත - එකක් පැහැදිලිව තෝරා ගැනීමට උත්සාහ කරන්න</string>
     <string name="error_verbose_pin_shortcut">වත්මන් දියත් කිරීම \"PinShortcut\" (කෙටිමඟ Pin කරන්න) හා සහය නොදක්වයි. කෙටිමඟ නිර්මාණය කළ නොහැක.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">අවවාදයයි: බොහෝ විට මෙම උපාංගයේ මූල වරප්‍රසාද ලබා ගත නොහැක.</string>
     <string name="exception_invalid_component_name">වලංගු නොවන හෝ හානිකර විය හැකි සංරචක නාමය: %s</string>
     <string name="exception_command_error">විධානය දෝෂ කේතය ලබා දුන්නේය: %d, ප්‍රතිදානය: %s</string>

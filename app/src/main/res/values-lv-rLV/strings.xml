@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Izveidot saīsni</string>
     <string name="context_action_shortcut_as_root">Izveidot saīsni ar root tiesībām</string>
     <string name="context_action_edit">Rediģēt saīsni</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Nosaukums</string>
     <string name="label_package">Lietotne</string>
     <string name="label_class">Klase</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Kļūda: nederīgs ikonas formāts</string>
     <string name="error_no_default_activity">Pakotnei nav noklusējuma darbības - mēģiniet to atlasīt tieši</string>
     <string name="error_verbose_pin_shortcut">Pašreizējais palaidējs neatbalsta \"PinShortcut\". Nevar izveidot saīsni.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Brīdinājums: iespējams root piekļuves tiesības nav pieejamas šajā ierīcē.</string>
     <string name="exception_invalid_component_name">Nederīgs vai potenciāli bīstams komponenta nosaukums: %s</string>
     <string name="exception_command_error">Komanda atgrieza kļūdas kodu: %d, izvade: %s</string>
