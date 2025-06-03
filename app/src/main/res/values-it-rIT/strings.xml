@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Crea scorciatoia</string>
     <string name="context_action_shortcut_as_root">Crea scorciatoia come root</string>
     <string name="context_action_edit">Modifica scorciatoia</string>
+    <string name="context_action_share_shortcut">Condividi collegamento</string>
     <string name="label_name">Nome</string>
     <string name="label_package">Pacchetto</string>
     <string name="label_class">Classe</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Errore: formato icona non valido</string>
     <string name="error_no_default_activity">Il package non ha una attività di default - prova a selezionarne una esplicitamente</string>
     <string name="error_verbose_pin_shortcut">Il launcher attuale non supporta \"PinShortcut\". Impossibile creare scorciatoia.</string>
+    <string name="error_invalid_activity_link">Link attività fornito non valido</string>
     <string name="warning_root_check">Attenzione: i privilegi di root probabilmente non sono disponibili su questo dispositivo.</string>
     <string name="exception_invalid_component_name">Nome componente non valido o potenzialmente dannoso: %s</string>
     <string name="exception_command_error">Il comando ha restituito il codice di errore: %d, output: %s</string>

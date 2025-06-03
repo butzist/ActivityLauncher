@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Verknüpfung erstellen</string>
     <string name="context_action_shortcut_as_root">Verknüpfung erstellen (root User)</string>
     <string name="context_action_edit">Verknüpfung bearbeiten</string>
+    <string name="context_action_share_shortcut">Verknüpfung teilen</string>
     <string name="label_name">Name</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Klasse</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Fehler: Ungültiges Iconformat</string>
     <string name="error_no_default_activity">Paket hat keine Standard-Aktivität - versuche eine explizit auszuwählen</string>
     <string name="error_verbose_pin_shortcut">Der aktuelle Launcher unterstützt nicht das \"PinShortcuts\" Feature. Verknüpfung wurde nicht erstellt.</string>
+    <string name="error_invalid_activity_link">Ungültiger Aktivitätslink geöffnet</string>
     <string name="warning_root_check">Warnung: Root-Rechte sind auf diesem Gerät wahrscheinlich nicht verfügbar.</string>
     <string name="exception_invalid_component_name">Ungültiger oder potenziell schädlicher Komponentenname: %s</string>
     <string name="exception_command_error">Befehl hat Fehlercode %d zurückgegeben. Ausgabe: %s</string>

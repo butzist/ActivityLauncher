@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Opprett snarvei</string>
     <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Sette snarveien</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Navn</string>
     <string name="label_package">Pakke</string>
     <string name="label_class">Klasse</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Feil: Ugyldig ikon format</string>
     <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
     <string name="error_verbose_pin_shortcut">Gjeldende bærerakett støtter ikke \"PinShortcut\". Kan ikke opprette snarvei.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Warning: Root privileges are probably not available on this device.</string>
     <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
     <string name="exception_command_error">Command returned error code: %d, output: %s</string>

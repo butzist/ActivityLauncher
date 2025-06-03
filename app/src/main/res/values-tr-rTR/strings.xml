@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Kısayol oluştur</string>
     <string name="context_action_shortcut_as_root">Yönetici olarak kısayol oluştur</string>
     <string name="context_action_edit">Kısayolu düzenle</string>
+    <string name="context_action_share_shortcut">Kısayolu paylaş</string>
     <string name="label_name">İsim</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Sınıf</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Hata: geçersiz simge formatı</string>
     <string name="error_no_default_activity">Paketin varsayılan bir etkinliği yok - bir ayrıntı eklemeyi deneyin</string>
     <string name="error_verbose_pin_shortcut">Geçerli başlatıcısı \"PinShortcut\" özelliğini desteklemiyor. Kısayol oluşturulamıyor.</string>
+    <string name="error_invalid_activity_link">Geçersiz etkinlik bağlantısı sağlandı</string>
     <string name="warning_root_check">Uyarı: Kök ayrıcalıkları muhtemelen bu cihazda mevcut değildir.</string>
     <string name="exception_invalid_component_name">Geçersiz veya potansiyel olarak zararlı bileşen adı: %s</string>
     <string name="exception_command_error">Komut, hata kodunu döndürdü: %d, çıktı: %s</string>

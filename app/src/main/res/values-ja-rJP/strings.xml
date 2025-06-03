@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">ショートカットを作成</string>
     <string name="context_action_shortcut_as_root">root としてショートカットを作成</string>
     <string name="context_action_edit">ショートカットを編集</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">名前</string>
     <string name="label_package">パッケージ</string>
     <string name="label_class">クラス</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">エラー: 無効なアイコン形式</string>
     <string name="error_no_default_activity">パッケージにデフォルトのアクティビティがありません。明示的に選択してください</string>
     <string name="error_verbose_pin_shortcut">現在のランチャーは \"PinShortcut\" をサポートしていません。ショートカットを作成できません。</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">警告: このデバイスではルート権限が使用できない可能性があります。</string>
     <string name="exception_invalid_component_name">無効または有害なコンポーネント名の可能性: %s</string>
     <string name="exception_command_error">コマンドがエラーコードを返しました: %d, 出力: %s</string>

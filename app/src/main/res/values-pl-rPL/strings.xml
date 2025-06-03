@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Utwórz skrót</string>
     <string name="context_action_shortcut_as_root">Utwórz skrót jako root</string>
     <string name="context_action_edit">Edytuj skrót</string>
+    <string name="context_action_share_shortcut">Udostępnij skrót</string>
     <string name="label_name">Nazwa</string>
     <string name="label_package">Pakiet</string>
     <string name="label_class">Klasa</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Błąd: nieprawidłowy format ikony</string>
     <string name="error_no_default_activity">Pakiet nie ma domyślnej aktywności - spróbuj wybrać jednoznacznie</string>
     <string name="error_verbose_pin_shortcut">Obecny launcher nie wspiera \"PinShortcut\". Nie można utworzyć skrótu.</string>
+    <string name="error_invalid_activity_link">Podano nieprawidłowy link do aktywności</string>
     <string name="warning_root_check">Ostrzeżenie: Uprawnienia roota nie są dostępne na tym urządzeniu.</string>
     <string name="exception_invalid_component_name">Nieprawidłowa lub potencjalnie szkodliwa nazwa komponentu: %s</string>
     <string name="exception_command_error">Polecenie zwróciło kod błędu: %d, wyjście: %s</string>

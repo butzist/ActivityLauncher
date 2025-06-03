@@ -7,12 +7,13 @@
     <string name="title_dialog_disclaimer">Αποποίηση ευθυνών</string>
     <string name="title_dialog_icon_picker">Επιλέξετε ένα εικονίδιο</string>
     <string name="dialog_progress_loading">Φόρτωση&#8230;</string>
-    <string name="dialog_disclaimer">Χρησιμοποιήστε αυτό το λογισμικό με δική σας ευθύνη. Κάποιες εφαρμογές ίσως να μην συμπεριφερθούν όπως αναμένεται όταν οι δραστηριότητές τους εκκινούνται με λάθος τρόπο που οδηγεί σε απώλεια δεδομένων ή ακόμη χειρότερα. Έχετε προειδοποιηθεί. Το κατανοείτε αυτό και θέλετε ακόμη να χρησιμοποιήσετε αυτό το λογισμικό;</string>
+    <string name="dialog_disclaimer">Αυτή η εφαρμογή παρέχει πρόσβαση σε χαρακτηριστικά που δεν είναι κανονικά ορατά στους χρήστες. Ορισμένες επιλογές μπορεί να μη λειτουργούν όπως αναμένεται ή μπορεί να μην είναι ασφαλές να τα χρησιμοποιήσετε. Κατανοείτε και θέλετε να προχωρήσετε;</string>
     <string name="context_action_launch">Εκκίνηση δραστηριότητας</string>
     <string name="context_action_launch_as_root">Εκκίνηση δραστηριότητας ως root</string>
     <string name="context_action_shortcut">Δημιουργία συντόμευσης</string>
     <string name="context_action_shortcut_as_root">Δημιουργία συντόμευσης ως root</string>
     <string name="context_action_edit">Επεξεργασία συντόμευσης</string>
+    <string name="context_action_share_shortcut">Κοινή χρήση συντόμευσης</string>
     <string name="label_name">Όνομα</string>
     <string name="label_package">Πακέτο</string>
     <string name="label_class">Κατηγορία</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Σφάλμα: μη έγκυρη μορφή εικονιδίων</string>
     <string name="error_no_default_activity">Το πακέτο δεν έχει προεπιλεγμένη δραστηριότητα - προσπαθήστε να επιλέξετε μία ρητά</string>
     <string name="error_verbose_pin_shortcut">Ο τρέχων εκκινητής δεν υποστηρίζει το \"PinShortcut\". Δεν είναι δυνατή η δημιουργία συντόμευσης.</string>
+    <string name="error_invalid_activity_link">Δόθηκε μη έγκυρος σύνδεσμος δραστηριότητας</string>
     <string name="warning_root_check">Προειδοποίηση: Τα δικαιώματα root πιθανόν να μην είναι διαθέσιμα σε αυτήν τη συσκευή.</string>
     <string name="exception_invalid_component_name">Μη έγκυρο ή δυνητικά επιβλαβές όνομα στοιχείου: %s</string>
     <string name="exception_command_error">Η εντολή επέστρεψε κωδικό σφάλματος: %d, έξοδος: %s</string>

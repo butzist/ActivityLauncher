@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Tạo lối tắt</string>
     <string name="context_action_shortcut_as_root">Tạo lối tắt như là root</string>
     <string name="context_action_edit">Chỉnh sửa lối tắt</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Tên</string>
     <string name="label_package">Gói</string>
     <string name="label_class">Cấp</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Lỗi: định dạng biểu tượng không hợp lệ</string>
     <string name="error_no_default_activity">Gói không có hoạt động mặc định - hãy thử chọn rõ một hoạt động</string>
     <string name="error_verbose_pin_shortcut">Current launcher does not support \"PinShortcut\". Unable to create shortcut.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Cảnh báo: Quyền root có thể không có sẵn trên thiết bị này.</string>
     <string name="exception_invalid_component_name">Tên thành phần không hợp lệ hoặc có thể gây hại: %s</string>
     <string name="exception_command_error">Câu lệnh trả về mã lỗi: %d, nội dung: %s</string>

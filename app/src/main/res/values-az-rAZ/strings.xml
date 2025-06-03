@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Qısayol yarat</string>
     <string name="context_action_shortcut_as_root">Qısayol yarat (root)</string>
     <string name="context_action_edit">Qısayola düzəliş et</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Ad</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Sinif</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Xəta: yararsız nişan formatı</string>
     <string name="error_no_default_activity">Paketin ilkin bir fəaliyyəti yoxdur - açıq şəkildə birini seçməyi sınayın</string>
     <string name="error_verbose_pin_shortcut">Hazırkı başladıcı \"PinShortcut\"u dəstəkləmir. Qısayol yaradıla bilmir.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Xəbərdarlıq: Root imtiyazları yəqin ki, bu cihazda mövcud deyil.</string>
     <string name="exception_invalid_component_name">Yararsız və ya potensial olaraq zərərli komponent adı: %s</string>
     <string name="exception_command_error">Əmr, xəta kodunu qaytardı: %d, çıxış: %s</string>

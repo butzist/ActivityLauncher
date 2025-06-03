@@ -13,6 +13,7 @@
     <string name="context_action_shortcut">Crea una drecera</string>
     <string name="context_action_shortcut_as_root">Crea una drecera com a root</string>
     <string name="context_action_edit">Edita la drecera</string>
+    <string name="context_action_share_shortcut">Share shortcut</string>
     <string name="label_name">Nom</string>
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
@@ -31,6 +32,7 @@
     <string name="error_invalid_icon_format">Error: el format d\'icona no és vàlid</string>
     <string name="error_no_default_activity">El paquet no té una activitat predeterminada: proveu de seleccionar-ne una de manera explícita</string>
     <string name="error_verbose_pin_shortcut">El llançador actual no és compatible amb el \"PinShortcut\". No s\'ha pogut crear la drecera.</string>
+    <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">Advertència: els privilegis de root probablement no estiguin disponibles en aquest dispositiu.</string>
     <string name="exception_invalid_component_name">Nom de component no vàlid o potencialment nociu: %s</string>
     <string name="exception_command_error">L\'ordre ha retornat el codi d\'error: %d, sortida: %s</string>
