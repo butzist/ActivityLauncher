@@ -11,11 +11,11 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "de.szalkowski.activitylauncher"
-        minSdk = 16
+        applicationId = System.getenv("APPID") ?: "de.szalkowski.activitylauncher"
+        minSdk = 23
         targetSdk = 36
-        versionCode = 57
-        versionName = "2.0.7"
+        versionCode = 60
+        versionName = "2.1.0"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
