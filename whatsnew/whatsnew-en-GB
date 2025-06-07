@@ -1,9 +1,11 @@
-Early access of ActivityLauncher v2
+# Changelog
 
-* Translated to Kotlin
-* Faster startup time
-* New UX and Material 3
-* Support for API versions 16 to 34
+## Features
 
-Discussion is open on GitHub
-https://github.com/butzist/ActivityLauncher/discussions/234
+- Sharing of shortcuts via URL
+
+## Other improvements/changes
+
+- Package renamed to de.szalkowski.activitylauncher.oss to prevent unwanted
+  updates from Google Play
+- Publishing of APK in GitHub release

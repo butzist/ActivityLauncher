@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - '*'
+
 jobs:
   build:
 
@@ -27,9 +28,10 @@ jobs:
     - name: Build release AAB
       run: ./gradlew bundleRelease
       env:
+        APPID: de.szalkowski.activitylauncher.pro
         KEYSTORE: keystore.jks
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
-        KEY_ALIAS: ${{ secrets.KEYALIAS }}
+        KEY_ALIAS: de.szalkowski.activitylauncher.pro
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
     - name: Build release APK
       run: ./gradlew assembleRelease
