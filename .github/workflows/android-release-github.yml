@@ -1,9 +1,9 @@
-name: Build APK
+name: Release on GitHub
 
 on:
   push:
-    branches:
-      - 'master'
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -30,8 +30,23 @@ jobs:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
         KEY_ALIAS: de.szalkowski.activitylauncher.oss
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
-    - name: Upload Release APK
-      uses: actions/upload-artifact@v4
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
       with:
-        name: release.apk
-        path: app/build/outputs/apk/release/app-release.apk
+        draft: false
+        prerelease: false
+        release_name: ${{ github.ref }}
+        tag_name: ${{ github.ref }}
+        body_path: whatsnew/whatsnew-en-GB
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: Upload Release APK
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: app/build/outputs/apk/release/app-release.apk
+        asset_name: ActivityLauncher-${{ github.ref }}.apk
+        asset_content_type: application/vnd.android.package-archive
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
