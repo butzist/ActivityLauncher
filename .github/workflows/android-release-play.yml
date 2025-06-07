@@ -33,23 +33,11 @@ jobs:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
         KEY_ALIAS: de.szalkowski.activitylauncher.pro
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
-    - name: Build release APK
-      run: ./gradlew assembleRelease
-      env:
-        KEYSTORE: keystore.jks
-        KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
-        KEY_ALIAS: ${{ secrets.KEYALIAS }}
-        KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
-    - name: Upload release APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: release.apk
-        path: app/build/outputs/apk/release/app-release.apk
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
         serviceAccountJsonPlainText: ${{ secrets.SERVICEACCOUNT }}
-        packageName: de.szalkowski.activitylauncher
+        packageName: de.szalkowski.activitylauncher.pro
         releaseFiles: app/build/outputs/bundle/release/*.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: beta
