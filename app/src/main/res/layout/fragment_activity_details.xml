@@ -94,7 +94,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/context_action_launch"
             android:drawableLeft="@drawable/ic_rocket_launch"
-            android:drawableTint="@color/white"
+            android:drawableTint="?attr/colorOnPrimary"
             app:layout_constraintTop_toBottomOf="@+id/tilIcon" />
 
         <Button
@@ -114,7 +114,7 @@
             android:layout_margin="8dp"
             android:text="@string/context_action_shortcut"
             android:drawableLeft="@drawable/ic_add_home_work"
-            android:drawableTint="@color/white"
+            android:drawableTint="?attr/colorOnPrimary"
             app:layout_constraintTop_toBottomOf="@+id/btLaunchAsRoot" />
 
         <Button
@@ -134,7 +134,7 @@
             android:layout_margin="8dp"
             android:text="@string/context_action_share_shortcut"
             android:drawableLeft="@drawable/ic_share"
-            android:drawableTint="@color/white"
+            android:drawableTint="?attr/colorOnPrimary"
             app:layout_constraintTop_toBottomOf="@+id/btCreateShortcutAsRoot"
             tools:layout_editor_absoluteY="20dp" />
 
