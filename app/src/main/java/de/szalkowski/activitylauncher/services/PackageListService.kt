@@ -24,7 +24,12 @@ class PackageListServiceImpl @Inject constructor(
     private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager: PackageManager = context.packageManager
     private val installedPackages: List<MyPackageInfo> =
-        packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES).mapNotNull {
+        packageManager.getInstalledPackages(
+            PackageManager.GET_ACTIVITIES
+                    or PackageManager.MATCH_ALL
+                    or PackageManager.MATCH_DISABLED_COMPONENTS
+                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+        ).mapNotNull {
             getPackageInfo(it)
         }.sortedBy { it.name.lowercase() }
 
