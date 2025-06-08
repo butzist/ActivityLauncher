@@ -73,7 +73,9 @@ class IconCreatorServiceImpl @Inject constructor(
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(
-                context, context.getText(R.string.error_creating_shortcut).toString() + ": " + e, Toast.LENGTH_LONG
+                context,
+                context.getText(R.string.error_creating_shortcut).toString() + ": " + e,
+                Toast.LENGTH_LONG
             ).show()
         }
     }

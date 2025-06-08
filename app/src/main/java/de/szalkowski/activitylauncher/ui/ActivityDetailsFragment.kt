@@ -1,8 +1,6 @@
 package de.szalkowski.activitylauncher.ui
 
 import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +8,12 @@ import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import dagger.Binds
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.ActivityScoped
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
 import de.szalkowski.activitylauncher.services.ActivityLauncherService
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.IconCreatorService
 import de.szalkowski.activitylauncher.services.IconLoaderService
-import de.szalkowski.activitylauncher.services.IconLoaderServiceImpl
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 import de.szalkowski.activitylauncher.services.SettingsService
 import de.szalkowski.activitylauncher.services.ShareActivityService

@@ -2,7 +2,6 @@ package de.szalkowski.activitylauncher.services
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.widget.Toast
 import dagger.hilt.android.qualifiers.ActivityContext
 import de.szalkowski.activitylauncher.R
@@ -23,7 +22,8 @@ interface ActivityLauncherService {
     )
 }
 
-class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private val context: Context) : ActivityLauncherService {
+class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private val context: Context) :
+    ActivityLauncherService {
     /**
      * Got reference from stackoverflow.com URL
      * https://stackoverflow.com/questions/9194725/run-android-program-as-root

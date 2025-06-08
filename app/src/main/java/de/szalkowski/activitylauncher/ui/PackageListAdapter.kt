@@ -35,9 +35,11 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
         set(value) {
             field = value
             filteredPackages = allPackages.map { p ->
-                p.copy(activityNames = p.activityNames.filter { it.matches(field) }, defaultActivityName = p.defaultActivityName?.takeIf { a ->
-                    a.matches(field) || p.matches(field)
-                })
+                p.copy(
+                    activityNames = p.activityNames.filter { it.matches(field) },
+                    defaultActivityName = p.defaultActivityName?.takeIf { a ->
+                        a.matches(field) || p.matches(field)
+                    })
             }.filter { p ->
                 p.activityNames.isNotEmpty() || p.defaultActivityName != null
             }
@@ -77,14 +79,14 @@ class PackageListAdapter @Inject constructor(packageListService: PackageListServ
 }
 
 
-private fun ActivityName.matches(s: String): Boolean  =
+private fun ActivityName.matches(s: String): Boolean =
     listOf(this.name, this.shortCls).any {
         it.contains(
             s, ignoreCase = true
         )
     }
 
-private fun MyPackageInfo.matches(s: String): Boolean  =
+private fun MyPackageInfo.matches(s: String): Boolean =
     listOf(this.name, this.packageName).any {
         it.contains(
             s, ignoreCase = true

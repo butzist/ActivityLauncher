@@ -59,7 +59,7 @@ class PackageListServiceImpl @Inject constructor(
         packageName: String, appRes: Resources?
     ): ActivityName? {
         if (appRes == null) {
-            return null;
+            return null
         }
 
         return runCatching {
