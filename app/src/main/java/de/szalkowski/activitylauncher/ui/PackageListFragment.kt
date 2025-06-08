@@ -60,7 +60,11 @@ class PackageListFragment : Fragment() {
             val action = PackageListFragmentDirections.actionSelectPackage(packageName)
             findNavController().navigate(action)
         }.onFailure {
-            Toast.makeText(requireContext(), getString(R.string.error_invalid_activity_link), Toast.LENGTH_LONG)
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.error_invalid_activity_link),
+                Toast.LENGTH_LONG
+            )
                 .show()
         }
 

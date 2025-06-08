@@ -29,7 +29,8 @@ class ViewIntentParserServiceImpl @Inject constructor(
         return runCatching {
             val url = intent.dataString.orEmpty()
             val rawComponent = url.removePrefix("https://activitylauncher.net/activity/")
-            ComponentName.unflattenFromString(rawComponent) ?: throw Exception("Invalid component name")
+            ComponentName.unflattenFromString(rawComponent)
+                ?: throw Exception("Invalid component name")
         }.getOrNull()
     }
 }

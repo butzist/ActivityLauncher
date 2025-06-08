@@ -1,6 +1,5 @@
-package de.szalkowski.activitylauncher.services;
+package de.szalkowski.activitylauncher.services
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Base64

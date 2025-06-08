@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val navController = navHostFragment.navController
 
         // define top level destinations (no back button)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.LoadingFragment, R.id.PackageListFragment))
+        appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.LoadingFragment, R.id.PackageListFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 

@@ -22,22 +22,25 @@ class ShortcutActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
-            val launchIntent = Intent.parseUri(intent.getStringExtra(IconCreatorService.INTENT_EXTRA_INTENT), 0)
-            val signature = intent.getStringExtra(IconCreatorService.INTENT_EXTRA_SIGNATURE).orEmpty()
+            val launchIntent =
+                Intent.parseUri(intent.getStringExtra(IconCreatorService.INTENT_EXTRA_INTENT), 0)
+            val signature =
+                intent.getStringExtra(IconCreatorService.INTENT_EXTRA_SIGNATURE).orEmpty()
             val asRoot = intent.action == IconCreatorService.INTENT_LAUNCH_ROOT_SHORTCUT
 
             if (asRoot && !signingService.validateIntentSignature(launchIntent, signature)) {
                 return
             }
 
-            launcherService.launchActivity(launchIntent.component!!,
+            launcherService.launchActivity(
+                launchIntent.component!!,
                 asRoot,
                 showToast = false
             )
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
-            ActivityCompat.finishAffinity(this);
+            ActivityCompat.finishAffinity(this)
         }
     }
 }
