@@ -74,4 +74,10 @@ abstract class ApplicationServicesModule {
     abstract fun bindSettingsService(
         settingsServiceImpl: SettingsServiceImpl
     ): SettingsService
+
+    @Singleton
+    @Binds
+    abstract fun bindInAppReviewService(
+        inAppReviewServiceImpl: InAppReviewServiceImpl
+    ): InAppReviewService
 }
