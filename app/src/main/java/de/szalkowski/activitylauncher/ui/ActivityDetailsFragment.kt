@@ -14,6 +14,7 @@ import de.szalkowski.activitylauncher.services.ActivityLauncherService
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.IconCreatorService
 import de.szalkowski.activitylauncher.services.IconLoaderService
+import de.szalkowski.activitylauncher.services.InAppReviewService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 import de.szalkowski.activitylauncher.services.SettingsService
 import de.szalkowski.activitylauncher.services.ShareActivityService
@@ -38,6 +39,9 @@ class ActivityDetailsFragment : Fragment() {
 
     @Inject
     internal lateinit var iconLoaderService: IconLoaderService
+
+    @Inject
+    internal lateinit var inAppReviewService: InAppReviewService
 
     @Inject
     internal lateinit var settingsService: SettingsService
@@ -119,6 +123,8 @@ class ActivityDetailsFragment : Fragment() {
             binding.btCreateShortcutAsRoot.visibility = View.VISIBLE
             binding.btLaunchAsRoot.visibility = View.VISIBLE
         }
+
+        activity?.let { inAppReviewService.showInAppReview(it) }
     }
 
     override fun onDestroyView() {
