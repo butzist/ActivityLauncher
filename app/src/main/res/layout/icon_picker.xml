@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_vertical|center_horizontal"
-    android:columnWidth="50dp"
-    android:horizontalSpacing="4dp"
-    android:numColumns="auto_fit"
-    android:stretchMode="spacingWidthUniform"
-    android:verticalSpacing="4dp"></GridView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="?attr/dialogPreferredPadding">
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:indeterminate="true" />
+
+    <GridView
+        android:id="@+id/gvIcons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:columnWidth="50dp"
+        android:horizontalSpacing="4dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="4dp"
+        android:visibility="gone" />
+</LinearLayout>
