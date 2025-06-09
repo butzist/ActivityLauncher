@@ -7,22 +7,26 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.databinding.IconPickerBinding
 import de.szalkowski.activitylauncher.services.IconLoaderService
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconListAdapter> {
-    private lateinit var grid: GridView
-    private var listener: IconPickerListener? = null
-
     @Inject
     internal lateinit var iconListAsyncProviderFactory: IconListAsyncProvider.IconListAsyncProviderFactory
+
+    private var listener: IconPickerListener? = null
+    private var _binding: IconPickerBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onAttach(activity: Context) {
         super.onAttach(activity)
@@ -37,10 +41,10 @@ class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconLi
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
-        val view = layoutInflater.inflate(R.layout.icon_picker, null)
+        _binding = IconPickerBinding.inflate(layoutInflater, null, false)
+        val view = _binding!!.root
 
-        this.grid = view as GridView
-        grid.onItemClickListener =
+        binding.gvIcons.onItemClickListener =
             OnItemClickListener { adapterView: AdapterView<*>, _: View?, index: Int, _: Long ->
                 listener?.iconPicked(
                     // FIXME ugly and unsafe
@@ -60,7 +64,9 @@ class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconLi
 
     override fun onProviderFinished(task: AsyncProvider<IconListAdapter>?, value: IconListAdapter) {
         try {
-            grid.adapter = value
+            binding.gvIcons.adapter = value
+            binding.progressCircular.visibility = View.GONE
+            binding.gvIcons.visibility = View.VISIBLE
         } catch (ignored: Exception) {
             Toast.makeText(this.activity, R.string.error_icons, Toast.LENGTH_SHORT).show()
         }
