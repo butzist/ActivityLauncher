@@ -26,7 +26,7 @@ jobs:
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release AAB
-      run: ./gradlew bundleRelease
+      run: ./gradlew bundlePlayStoreRelease
       env:
         APPID: de.szalkowski.activitylauncher.pro
         KEYSTORE: keystore.jks
@@ -38,10 +38,10 @@ jobs:
       with:
         serviceAccountJsonPlainText: ${{ secrets.SERVICEACCOUNT }}
         packageName: de.szalkowski.activitylauncher.pro
-        releaseFiles: app/build/outputs/bundle/release/*.aab
+        releaseFiles: app/build/outputs/bundle/playStore/release/*.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: beta
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew
-        mappingFile: app/build/outputs/mapping/release/mapping.txt
+        mappingFile: app/build/outputs/mapping/playStore/release/mapping.txt

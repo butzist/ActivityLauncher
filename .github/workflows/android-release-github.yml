@@ -23,7 +23,7 @@ jobs:
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release APK
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleOssRelease
       env:
         APPID: de.szalkowski.activitylauncher.oss
         KEYSTORE: keystore.jks
@@ -45,8 +45,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: app/build/outputs/apk/release/app-release.apk
-        asset_name: ActivityLauncher-${{ github.ref }}.apk
+        asset_path: app/build/outputs/apk/oss/release/app-oss-release.apk
+        asset_name: ActivityLauncher-${{ github.ref_name }}.apk
         asset_content_type: application/vnd.android.package-archive
       env:
         GITHUB_TOKEN: ${{ github.token }}
