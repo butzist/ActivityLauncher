@@ -12,13 +12,26 @@ android {
 
     defaultConfig {
         applicationId = System.getenv("APPID") ?: "de.szalkowski.activitylauncher"
-        minSdk = 23
+        minSdk = 16
         targetSdk = 36
         versionCode = 62
         versionName = "2.1.2"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("oss") {
+            // for direct distribution
+            dimension = "distribution"
+        }
+        create("playStore") {
+            // includes Google Play Store specific additions
+            dimension = "distribution"
+            minSdk = 23
+        }
     }
 
     signingConfigs {
@@ -73,7 +86,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("com.google.dagger:hilt-android:2.50")
-    implementation("com.google.android.play:review-ktx:2.0.2")
+    "playStoreImplementation"("com.google.android.play:review-ktx:2.0.2")
     kapt("com.google.dagger:hilt-compiler:2.50")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
