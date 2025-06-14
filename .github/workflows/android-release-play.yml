@@ -40,7 +40,7 @@ jobs:
         packageName: de.szalkowski.activitylauncher.pro
         releaseFiles: app/build/outputs/bundle/playStore/release/*.aab
         releaseName: ${{ steps.version.outputs.tag }}
-        track: beta
+        track: alpha
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew
