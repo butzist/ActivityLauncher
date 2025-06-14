@@ -92,9 +92,9 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/context_action_launch"
             android:drawableLeft="@drawable/ic_rocket_launch"
             android:drawableTint="?attr/colorOnPrimary"
+            android:text="@string/context_action_launch"
             app:layout_constraintTop_toBottomOf="@+id/tilIcon" />
 
         <Button
@@ -102,9 +102,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/context_action_launch_as_root"
             android:drawableLeft="@drawable/ic_rocket_launch"
             android:drawableTint="#ff4444"
+            android:text="@string/context_action_launch_as_root"
             app:layout_constraintTop_toBottomOf="@+id/btLaunch" />
 
         <Button
@@ -112,9 +112,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/context_action_shortcut"
             android:drawableLeft="@drawable/ic_add_home_work"
             android:drawableTint="?attr/colorOnPrimary"
+            android:text="@string/context_action_shortcut"
             app:layout_constraintTop_toBottomOf="@+id/btLaunchAsRoot" />
 
         <Button
@@ -122,9 +122,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/context_action_shortcut_as_root"
             android:drawableLeft="@drawable/ic_add_home_work"
             android:drawableTint="#ff4444"
+            android:text="@string/context_action_shortcut_as_root"
             app:layout_constraintTop_toBottomOf="@+id/btCreateShortcut" />
 
         <Button
@@ -132,9 +132,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/context_action_share_shortcut"
             android:drawableLeft="@drawable/ic_share"
             android:drawableTint="?attr/colorOnPrimary"
+            android:text="@string/context_action_share_shortcut"
             app:layout_constraintTop_toBottomOf="@+id/btCreateShortcutAsRoot"
             tools:layout_editor_absoluteY="20dp" />
 

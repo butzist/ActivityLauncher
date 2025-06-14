@@ -1,13 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/search"
-        android:title="@string/action_filter"
+    <item
+        android:id="@+id/search"
         android:icon="@drawable/ic_search"
-        app:showAsAction="collapseActionView|always"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        android:title="@string/action_filter"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|always" />
     <item
         android:id="@+id/action_settings"
-        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_settings"
-        android:title="@string/activity_settings" />
+        android:title="@string/activity_settings"
+        app:showAsAction="ifRoom" />
 </menu>
