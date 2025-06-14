@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Δραστηριότητες</string>
     <string name="title_dialog_disclaimer">Αποποίηση ευθυνών</string>
     <string name="title_dialog_icon_picker">Επιλέξετε ένα εικονίδιο</string>
-    <string name="dialog_progress_loading">Φόρτωση&#8230;</string>
+    <string name="dialog_progress_loading">Φόρτωση…</string>
     <string name="dialog_disclaimer">Αυτή η εφαρμογή παρέχει πρόσβαση σε χαρακτηριστικά που δεν είναι κανονικά ορατά στους χρήστες. Ορισμένες επιλογές μπορεί να μη λειτουργούν όπως αναμένεται ή μπορεί να μην είναι ασφαλές να τα χρησιμοποιήσετε. Κατανοείτε και θέλετε να προχωρήσετε;</string>
     <string name="context_action_launch">Εκκίνηση δραστηριότητας</string>
     <string name="context_action_launch_as_root">Εκκίνηση δραστηριότητας ως root</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Πακέτο</string>
     <string name="label_class">Κατηγορία</string>
     <string name="label_icon">Εικονίδιο</string>
-    <string name="label_menu">Μενού</string>
     <string name="label_private">Ιδιωτικό</string>
-    <string name="label_as_root">Ως root</string>
     <string name="starting_activity">Έναρξη δραστηριότητας: %s</string>
     <string name="starting_application">Έναρξη εφαρμογής: %s</string>
     <string name="creating_activity_shortcut">Δημιουργία συντόμευσης δραστηριότητας για %s</string>

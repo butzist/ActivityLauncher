@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">活動</string>
     <string name="title_dialog_disclaimer">免責聲明</string>
     <string name="title_dialog_icon_picker">選擇圖示</string>
-    <string name="dialog_progress_loading">正在載入&#8230;</string>
+    <string name="dialog_progress_loading">正在載入…</string>
     <string name="dialog_disclaimer">這個應用程式提供使用者平常無法看到的功能。某些選項可能無法如預期運作，或可能存在安全風險。您是否了解並仍然希望繼續？</string>
     <string name="context_action_launch">啟動活動</string>
     <string name="context_action_launch_as_root">啟動活動 (Root)</string>
@@ -18,9 +18,7 @@
     <string name="label_package">套件</string>
     <string name="label_class">類別</string>
     <string name="label_icon">圖示</string>
-    <string name="label_menu">選單</string>
     <string name="label_private">私人</string>
-    <string name="label_as_root">以 Root</string>
     <string name="starting_activity">正在啟動活動：%s</string>
     <string name="starting_application">正在啟動應用程式：%s</string>
     <string name="creating_activity_shortcut">正在為 %s 建立活動捷徑</string>
@@ -43,7 +41,7 @@
     <string name="summary_action_view_translation">如果您喜歡 Activity Launcher，請考慮將這個應用程式翻譯為您的語言。</string>
     <string name="action_view_bugs">回報問題</string>
     <string name="summary_action_view_bugs">請在我們的 GitHub 專案頁面提交您的建議或問題。</string>
-    <string name="action_filter">篩選&#8230;</string>
+    <string name="action_filter">篩選…</string>
     <string name="filter_hint">套件/動作</string>
     <string name="activity_settings">設定</string>
     <string name="settings_hide_private">隱藏私人活動</string>

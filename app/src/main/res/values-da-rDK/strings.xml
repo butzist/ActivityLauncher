@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Aktiviteter</string>
     <string name="title_dialog_disclaimer">Ansvarsfraskrivelse</string>
     <string name="title_dialog_icon_picker">Vælg et ikon</string>
-    <string name="dialog_progress_loading">Indlæser&#8230;</string>
+    <string name="dialog_progress_loading">Indlæser…</string>
     <string name="dialog_disclaimer">Denne app giver adgang til funktioner, som normalt ikke er synlige for brugerne. Nogle muligheder fungerer måske ikke som forventet eller er måske ikke sikre at bruge. Forstår man dette og ønsker stadig at fortsætte?</string>
     <string name="context_action_launch">Start aktivitet</string>
     <string name="context_action_launch_as_root">Start aktivitet som root</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Pakke</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Ikon</string>
-    <string name="label_menu">Menu</string>
     <string name="label_private">privat</string>
-    <string name="label_as_root">Som root</string>
     <string name="starting_activity">Starter aktivitet: %s</string>
     <string name="starting_application">Start applikation: %s</string>
     <string name="creating_activity_shortcut">Opretter aktivitetsgenvej til %s</string>

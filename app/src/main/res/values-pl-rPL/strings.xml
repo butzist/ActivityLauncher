@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Aktywności</string>
     <string name="title_dialog_disclaimer">Uwaga</string>
     <string name="title_dialog_icon_picker">Wybierz ikonę</string>
-    <string name="dialog_progress_loading">Wczytywanie &#8230;</string>
+    <string name="dialog_progress_loading">Wczytywanie …</string>
     <string name="dialog_disclaimer">Ta aplikacja daje dostęp do funkcji, które nie są zwykle widoczne dla użytkowników. Niektóre opcje mogą nie działać zgodnie z oczekiwaniami lub mogą nie być bezpieczne. Czy rozumiesz i nadal chcesz kontynuować?</string>
     <string name="context_action_launch">Rozpocznij aktywność</string>
     <string name="context_action_launch_as_root">Uruchom aktywność jako root</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Pakiet</string>
     <string name="label_class">Klasa</string>
     <string name="label_icon">Ikona</string>
-    <string name="label_menu">Menu</string>
     <string name="label_private">prywatne</string>
-    <string name="label_as_root">Jako root</string>
     <string name="starting_activity">Rozpoczynanie aktywności: %s</string>
     <string name="starting_application">Uruchamianie aplikacji: %s</string>
     <string name="creating_activity_shortcut">Tworzenie skrótu aktywności dla %s</string>

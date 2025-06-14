@@ -18,9 +18,7 @@
     <string name="label_package">แพ็คเกจ</string>
     <string name="label_class">ระดับ</string>
     <string name="label_icon">ไอคอน</string>
-    <string name="label_menu">เมนู</string>
     <string name="label_private">ส่วนตัว</string>
-    <string name="label_as_root">สิทธิ์รูท</string>
     <string name="starting_activity">กำลังเริ่มต้น activity: %s</string>
     <string name="starting_application">กำลังเริ่มต้น แอพพลิเคชั่น: %s</string>
     <string name="creating_activity_shortcut">กำลังสร้างทางลัด activity สำหรับ %s</string>
@@ -43,7 +41,7 @@
     <string name="summary_action_view_translation">หากคุณชอบตัวเรียกใช้งาน activity โปรดลองแปลแอพเป็นภาษาของคุณ</string>
     <string name="action_view_bugs">รายงานปัญหา</string>
     <string name="summary_action_view_bugs">กรุณาส่งข้อเสนอแนะหรือปัญหาของคุณในหน้าโครงการ GitHub ของเรา</string>
-    <string name="action_filter">ตัวกรอง&#8230;</string>
+    <string name="action_filter">ตัวกรอง…</string>
     <string name="filter_hint">แพ็คเกจ/การดำเนินการ</string>
     <string name="activity_settings">การตั้งค่า</string>
     <string name="settings_hide_private">ซ่อน activities ส่วนตัว</string>

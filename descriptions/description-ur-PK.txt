@@ -1,0 +1,7 @@
+یہ اوپن سورس اینڈرائیڈ ایپ چھپی ہوئی سرگرمیاں شروع کرتی ہے اور انسٹال شدہ ایپس کے لیے ہوم اسکرین شارٹ کٹس بناتی ہے۔.
+
+اس پروجیکٹ میں ابھی کچھ خصوصیات اور تراجم کی کمی ہے۔. اس پروجیکٹ میں ابھی کچھ خصوصیات اور تراجم کی کمی ہے۔!
+
+ذریعہ کوڈ: https://github.com/butzist/ActivityLauncher
+ترجمے: http://crowdin.net/project/activitylauncher/invite
+بیٹا ریلیز کے لیے شامل ہوں: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

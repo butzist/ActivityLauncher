@@ -18,9 +18,7 @@
     <string name="label_package">Пакет</string>
     <string name="label_class">Клас</string>
     <string name="label_icon">Іконка</string>
-    <string name="label_menu">Меню</string>
     <string name="label_private">приватний</string>
-    <string name="label_as_root">Root</string>
     <string name="starting_activity">Запуск активіті: %s</string>
     <string name="starting_application">Запуск додатку: %s</string>
     <string name="creating_activity_shortcut">Створення ярлика активіті для %s</string>

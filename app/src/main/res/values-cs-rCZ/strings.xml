@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Aktivity</string>
     <string name="title_dialog_disclaimer">Odmítnutí odpovědnosti</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
-    <string name="dialog_progress_loading">Načítaní&#8230;</string>
+    <string name="dialog_progress_loading">Načítaní…</string>
     <string name="dialog_disclaimer">Tato aplikace umožňuje přístup k funkcím, které běžně nejsou uživatelům k dispozici. Některé možnosti nemusí fungovat podle očekávání, nebo nemusí být bezpečné je používat. Rozumíte tomuto upozornění a přesto chcete pokračovat?</string>
     <string name="context_action_launch">Spustit aktivitu</string>
     <string name="context_action_launch_as_root">Spustit aktivitu s\u00a0právy root</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Balíček</string>
     <string name="label_class">Třída</string>
     <string name="label_icon">Ikona</string>
-    <string name="label_menu">Menu</string>
     <string name="label_private">soukromé</string>
-    <string name="label_as_root">Jako root</string>
     <string name="starting_activity">Spouštění aktivity: %s</string>
     <string name="starting_application">Spouštění aplikace: %s</string>
     <string name="creating_activity_shortcut">Vytváření zástupce aktivity pro %s</string>
@@ -43,7 +41,7 @@
     <string name="summary_action_view_translation">Pokud se vám Activity Launcher líbí, zvažte prosím překlad aplikace do vašeho jazyka.</string>
     <string name="action_view_bugs">Nahlásit problém</string>
     <string name="summary_action_view_bugs">Pokud máte jakékoliv návrhy nebo problémy, nahlaste je v\u00a0našem projektu na GitHubu.</string>
-    <string name="action_filter">Filtrovat&#8230;</string>
+    <string name="action_filter">Filtrovat…</string>
     <string name="filter_hint">balíček/akce</string>
     <string name="activity_settings">Nastavení</string>
     <string name="settings_hide_private">Skrýt soukromé aktivity</string>

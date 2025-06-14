@@ -1,0 +1,7 @@
+ਇਹ ਓਪਨ-ਸੋਰਸ ਐਂਡਰਾਇਡ ਐਪ ਲੁਕੀਆਂ ਹੋਈਆਂ ਗਤੀਵਿਧੀਆਂ ਨੂੰ ਲਾਂਚ ਕਰਦਾ ਹੈ ਅਤੇ ਸਥਾਪਤ ਐਪਾਂ ਲਈ ਹੋਮ ਸਕ੍ਰੀਨ ਸ਼ਾਰਟਕੱਟ ਬਣਾਉਂਦਾ ਹੈ।
+
+ਇਸ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਅਜੇ ਵੀ ਕੁਝ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦ ਦੀ ਘਾਟ ਹੈ। ਤੁਹਾਡਾ ਯੋਗਦਾਨ ਕਰਨ ਲਈ ਸੁਆਗਤ ਹੈ!
+
+ਸਰੋਤ ਕੋਡ: https://github.com/butzist/ActivityLauncher
+ਅਨੁਵਾਦ: http://crowdin.net/project/activitylauncher/invite
+ਬੀਟਾ ਰੀਲੀਜ਼ ਲਈ ਆਪਟ-ਇਨ ਕਰੋ: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

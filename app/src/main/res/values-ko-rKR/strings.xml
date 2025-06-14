@@ -13,14 +13,12 @@
     <string name="context_action_shortcut">바로가기 생성</string>
     <string name="context_action_shortcut_as_root">루트 권한으로 바로가기 생성</string>
     <string name="context_action_edit">바로가기 편집</string>
-    <string name="context_action_share_shortcut">Share shortcut</string>
+    <string name="context_action_share_shortcut">바로 가기 공유</string>
     <string name="label_name">이름</string>
     <string name="label_package">패키지</string>
     <string name="label_class">종류</string>
     <string name="label_icon">아이콘</string>
-    <string name="label_menu">메뉴</string>
     <string name="label_private">비활성</string>
-    <string name="label_as_root">루트 권한</string>
     <string name="starting_activity">액티비티를 시작하는 중: %s</string>
     <string name="starting_application">애플리케이션을 시작하는 중: %s</string>
     <string name="creating_activity_shortcut">액티비티 바로가기 생성 %s</string>
@@ -32,7 +30,7 @@
     <string name="error_invalid_icon_format">오류: 잘못된 아이콘 형식</string>
     <string name="error_no_default_activity">패키지에 기본 액티비티가 없습니다. 명시적으로 하나를 선택하십시오.</string>
     <string name="error_verbose_pin_shortcut">현재 런처가 \'PinShortcut\' 을 지원하지 않아 바로가기를 생성할 수 없습니다.</string>
-    <string name="error_invalid_activity_link">Invalid activity link provided</string>
+    <string name="error_invalid_activity_link">제공된 활동 링크가 유효하지 않습니다.</string>
     <string name="warning_root_check">주의: 이 기기에서는 루트 권한을 이용할 수 없는 것으로 보입니다.</string>
     <string name="exception_invalid_component_name">유효하지 않거나 잠재적으로 위험한 구성 요소 이름: %s</string>
     <string name="exception_command_error">명령어가 오류 코드를 반환함: %d, 출력: %s</string>

@@ -18,9 +18,7 @@
     <string name="label_package">Numele Pachetului</string>
     <string name="label_class">Clasă</string>
     <string name="label_icon">Pitogramă</string>
-    <string name="label_menu">Meniu</string>
     <string name="label_private">personal</string>
-    <string name="label_as_root">Ca root</string>
     <string name="starting_activity">Se lansează activitatea %s</string>
     <string name="starting_application">Se lansează aplicația %s</string>
     <string name="creating_activity_shortcut">Se crează scurtătură la activitate pentru %s</string>

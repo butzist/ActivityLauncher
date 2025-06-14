@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Действия</string>
     <string name="title_dialog_disclaimer">Отказ от ответственности</string>
     <string name="title_dialog_icon_picker">Выберите иконку</string>
-    <string name="dialog_progress_loading">Загрузка&#8230;</string>
+    <string name="dialog_progress_loading">Загрузка…</string>
     <string name="dialog_disclaimer">Это приложение предоставляет доступ к функциям, которые обычно не видны пользователям. Некоторые опции могут работать не так, как ожидалось, или могут быть небезопасными для использования. Вы понимаете и всё ещё хотите продолжить?</string>
     <string name="context_action_launch">Запуск действия</string>
     <string name="context_action_launch_as_root">Запустить активность от имени root</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Пакет</string>
     <string name="label_class">Класс</string>
     <string name="label_icon">Иконка</string>
-    <string name="label_menu">Меню</string>
     <string name="label_private">приватный</string>
-    <string name="label_as_root">От имени Root</string>
     <string name="starting_activity">Запуск действия: %s</string>
     <string name="starting_application">Запуск приложения: %s</string>
     <string name="creating_activity_shortcut">Создание ярлыка действия для %s</string>

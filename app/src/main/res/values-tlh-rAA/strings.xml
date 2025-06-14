@@ -6,8 +6,8 @@
     <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">chut ghuH</string>
     <string name="title_dialog_icon_picker">Degh yIwIv</string>
-    <string name="dialog_progress_loading">SImlI\'&#8230;</string>
     <string name="dialog_disclaimer">nIqHomvam Dalo\'taHvIS bISuD. chaq QapHa\' \'op nIqHommey, mItHa\'chugh Qu\'chaj taghmoHmeH ghu\'. De\' DaweSlaH \'ej DuH qaqHa\' lutu\'lu\'. DaghuHmoHlu\'pu\'. Dayaj\'a\'? nIqHom Dalo\' DaneHtaH\'a\'?</string>
+    <string name="dialog_progress_loading">SImlI\'…</string>
     <string name="context_action_launch">Qu\' taghmoH</string>
     <string name="context_action_launch_as_root">Qu\' taghmoH; loHwI\'</string>
     <string name="context_action_shortcut">qIgh chenmoH</string>
@@ -18,9 +18,7 @@
     <string name="label_package">vey</string>
     <string name="label_class">Segh</string>
     <string name="label_icon">Degh</string>
-    <string name="label_menu">HIDjolev</string>
     <string name="label_private">\'em</string>
-    <string name="label_as_root">loHwI\'</string>
     <string name="starting_activity">Qu\' taghmoHlI\': %s</string>
     <string name="starting_application">nIqHom taghmoHlI\': %s</string>
     <string name="creating_activity_shortcut">%svaD Qu\' qIgh chenmoHlI\'</string>
@@ -43,7 +41,7 @@
     <string name="summary_action_view_translation">Qu\' taghmoHwI\' DatIvtaHchugh, HollIjvaD nIqHomvam DamughlaH \'e\' yIqel.</string>
     <string name="action_view_bugs">ghunwI\'vaD Qagh SovmoH</string>
     <string name="summary_action_view_bugs">‹GitHub› jInmol DaqmajDaq QInHomlIj ghongeH.</string>
-    <string name="action_filter">QIb&#8230;</string>
+    <string name="action_filter">QIb…</string>
     <string name="filter_hint">vey/ghIgh</string>
     <string name="activity_settings">SeHlaw</string>
     <string name="settings_hide_private">\'em Qu\' So\'</string>

@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Faaliyetler</string>
     <string name="title_dialog_disclaimer">Yasal uyarı</string>
     <string name="title_dialog_icon_picker">Bir simge seçin</string>
-    <string name="dialog_progress_loading">Yükleniyor&#8230;</string>
+    <string name="dialog_progress_loading">Yükleniyor…</string>
     <string name="dialog_disclaimer">Bu uygulama, kullanıcılara genellikle görünmeyen özelliklere erişim sağlar. Bazı seçenekler beklendiği gibi çalışmayabilir veya kullanmak güvenli olmayabilir. Anladınız mı ve yine de devam etmek istiyor musunuz?</string>
     <string name="context_action_launch">Aktiviteyi başlat</string>
     <string name="context_action_launch_as_root">Etkinliği root yetkisiyle çalıştır</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Sınıf</string>
     <string name="label_icon">Simge</string>
-    <string name="label_menu">Menü</string>
     <string name="label_private">özel</string>
-    <string name="label_as_root">Yönetici olarak</string>
     <string name="starting_activity">%s etkinliği başlatılıyor</string>
     <string name="starting_application">%s uygulaması başlatılıyor</string>
     <string name="creating_activity_shortcut">%s için etkinlik kısayolu oluşturuluyor</string>

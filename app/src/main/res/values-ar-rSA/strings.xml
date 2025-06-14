@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">الأنشطة</string>
     <string name="title_dialog_disclaimer">إخلاء مسؤولية</string>
     <string name="title_dialog_icon_picker">اختر رمزا</string>
-    <string name="dialog_progress_loading">جار التحميل&#8230;</string>
+    <string name="dialog_progress_loading">جار التحميل…</string>
     <string name="dialog_disclaimer">يتيح هذا التطبيق الوصول إلى الميزات غير المرئية عادة للمستخدمين. قد لا تعمل بعض الخيارات كما هو متوقع أو قد لا تكون آمنة للاستخدام. هل تفهم ولا تزال تريد المتابعة؟</string>
     <string name="context_action_launch">إطلاق النشاط</string>
     <string name="context_action_launch_as_root">تشغيل النشاط بصلاحيات الروت</string>
@@ -18,9 +18,7 @@
     <string name="label_package">حزمة</string>
     <string name="label_class">فئة</string>
     <string name="label_icon">رمز</string>
-    <string name="label_menu">القائمة</string>
     <string name="label_private">خاص</string>
-    <string name="label_as_root">بصلاحيات الروت</string>
     <string name="starting_activity">بدء النشاط: %s</string>
     <string name="starting_application">بدء تشغيل تطبيق: %s</string>
     <string name="creating_activity_shortcut">إنشاء اختصار النشاط ل %s</string>

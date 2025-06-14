@@ -1,7 +1,7 @@
-This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.
+இந்த திறந்த மூல ஆண்ட்ராய்டு செயலி மறைக்கப்பட்ட செயல்பாடுகளைத் தொடங்கி, நிறுவப்பட்ட செயலிகளுக்கான முகப்புத் திரை குறுக்குவழிகளை உருவாக்குகிறது.
 
-This project still lacks a few features and translation. You are welcome to contribute!
+இந்த திட்டத்தில் இன்னும் சில அம்சங்கள் மற்றும் மொழிபெயர்ப்பு இல்லை. பங்களிக்க உங்களை வரவேற்கிறோம்!
 
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+மூலக் குறியீடு: https://github.com/butzist/ActivityLauncher
+மொழிபெயர்ப்புகள்: http://crowdin.net/project/activitylauncher/invite
+பீட்டா வெளியீட்டிற்கு விருப்பம்: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

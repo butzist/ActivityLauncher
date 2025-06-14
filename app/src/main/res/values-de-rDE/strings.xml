@@ -18,9 +18,7 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Icon</string>
-    <string name="label_menu">Menü</string>
     <string name="label_private">privat</string>
-    <string name="label_as_root">Root User</string>
     <string name="starting_activity">Starte Aktivität: %s</string>
     <string name="starting_application">Starte Anwendung: %s</string>
     <string name="creating_activity_shortcut">Erstelle Verknüpfung zu Aktivität %s</string>
@@ -43,7 +41,7 @@
     <string name="summary_action_view_translation">Wenn dir Activity Launcher gefällt, helfe uns die App in Deine Sprache zu übersetzen.</string>
     <string name="action_view_bugs">Ein Problem melden</string>
     <string name="summary_action_view_bugs">Anregungen oder Probleme kannst in unserem Projekt auf GitHub melden.</string>
-    <string name="action_filter">Filter...</string>
+    <string name="action_filter">סינון…</string>
     <string name="filter_hint">Paket/Aktion</string>
     <string name="activity_settings">Einstellungen</string>
     <string name="settings_hide_private">Private Aktivitäten ausblenden</string>

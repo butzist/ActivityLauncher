@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">Activités</string>
     <string name="title_dialog_disclaimer">Clause de non-responsabilité</string>
     <string name="title_dialog_icon_picker">Choisissez une icône</string>
-    <string name="dialog_progress_loading">Chargement&#8230;</string>
+    <string name="dialog_progress_loading">Chargement…</string>
     <string name="dialog_disclaimer">Cette application donne accès à des fonctionnalités normalement invisibles pour les utilisateurs. Certaines options peuvent ne pas fonctionner comme prévu ou peuvent ne pas être sûres à utiliser. Voulez-vous continuer ?</string>
     <string name="context_action_launch">Lancer l\'activité</string>
     <string name="context_action_launch_as_root">Lancer l\'activité (root)</string>
@@ -18,9 +18,7 @@
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icône</string>
-    <string name="label_menu">Menu</string>
     <string name="label_private">privé</string>
-    <string name="label_as_root">Root</string>
     <string name="starting_activity">Lancement de l\'activité : %s</string>
     <string name="starting_application">Lancement de l\'application: %s</string>
     <string name="creating_activity_shortcut">Création du raccourci pour %s</string>

@@ -6,7 +6,7 @@
     <string name="title_fragment_activity_list">गतिविधियाँ</string>
     <string name="title_dialog_disclaimer">स्वीकरण व अस्वीकरण</string>
     <string name="title_dialog_icon_picker">आइकॉन चयन</string>
-    <string name="dialog_progress_loading">लोडिंग&#8230;</string>
+    <string name="dialog_progress_loading">लोडिंग…</string>
     <string name="dialog_disclaimer">यह ऐप उन फीचर्स तक पहुँच प्रदान करता है जो सामान्यतः उपयोगकर्ताओं को दिखाई नहीं देते। कुछ विकल्प उम्मीद के अनुसार काम नहीं कर सकते हैं या उपयोग के लिए सुरक्षित नहीं हो सकते हैं। क्या आप समझते हैं और फिर भी आगे बढ़ना चाहते हैं?</string>
     <string name="context_action_launch">गतिविधि शुरू करे</string>
     <string name="context_action_launch_as_root">रूट(Root) रूप में शुरू करें</string>
@@ -18,9 +18,7 @@
     <string name="label_package">पैकेज</string>
     <string name="label_class">वर्ग(class)</string>
     <string name="label_icon">आइकॉन</string>
-    <string name="label_menu">मेन्यू</string>
     <string name="label_private">निजी</string>
-    <string name="label_as_root">रूट (root) के रूप में</string>
     <string name="starting_activity">%s गतिविधि शुरू हो रही है </string>
     <string name="starting_application">%s एप्लीकेशन शुरू हो रही है</string>
     <string name="creating_activity_shortcut">%s के लिए एक्टिविटी शॉर्टकट शुरू हो रहा</string>
