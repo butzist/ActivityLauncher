@@ -38,10 +38,10 @@ jobs:
       with:
         serviceAccountJsonPlainText: ${{ secrets.SERVICEACCOUNT }}
         packageName: de.szalkowski.activitylauncher.pro
-        releaseFiles: app/build/outputs/bundle/playStore/release/*.aab
+        releaseFiles: app/build/outputs/bundle/playStoreRelease/app-playStore-release.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: alpha
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew
-        mappingFile: app/build/outputs/mapping/playStore/release/mapping.txt
+        mappingFile: app/build/outputs/mapping/playStoreRelease/mapping.txt
