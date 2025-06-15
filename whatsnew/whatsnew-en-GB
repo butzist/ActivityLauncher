@@ -6,8 +6,12 @@
 - In-app reviews
 - Translation updates
 
+## Fixes
+
+- Missing selectable languages in settings
+
 ## Other improvements/changes
 
-- Package renamed to de.szalkowski.activitylauncher.oss to prevent unwanted
+- Package on GitHub renamed to de.szalkowski.activitylauncher.oss to prevent unwanted
   updates from Google Play
 - Publishing of APK in GitHub release
