@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.services.SettingsService
@@ -32,16 +34,26 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        //binding.slidingPaneLayout.lockMode = SlidingPaneLayout.LOCK_MODE_UNLOCKED
 
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
         }
 
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         val navController = navHostFragment.navController
+
+        actionBarSearchView = findViewById(R.id.tiSearch)
+        actionBarSearchView?.addTextChangedListener {
+            val query = it.toString()
+            onActionBarSearchListener?.invoke(query)
+        }
 
         // define top level destinations (no back button)
         appBarConfiguration =
@@ -50,31 +62,16 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     }
 
     override var onActionBarSearchListener: ((String) -> Unit)? = null
-    private var actionBarSearchView: SearchView? = null
+    private var actionBarSearchView: TextInputEditText? = null
     override var actionBarSearchText: String
-        get() = actionBarSearchView?.query?.toString().orEmpty()
+        get() = actionBarSearchView?.text.toString()
         set(value) {
-            actionBarSearchView?.setQuery(value, false)
+            actionBarSearchView?.setText(value)
         }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
-
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
-        actionBarSearchView = searchView
-        searchView.queryHint = getText(R.string.filter_hint)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                onActionBarSearchListener?.invoke(query.orEmpty())
-                return true
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                onActionBarSearchListener?.invoke(query.orEmpty())
-                return true
-            }
-        })
 
         return true
     }

@@ -1,7 +1,19 @@
-This open-source Android App launches hidden activities and creates home screen shortcuts for installed apps.
+Support the continued development of Activity Launcher by upgrading to Activity Launcher Pro—an ad-free, analytics-free tool that unlocks hidden app activities, lets you create custom shortcuts, and helps power future improvements.
 
-This project still lacks a few features and translations. You are welcome to contribute!
+Whether you're a power user, developer, or just curious, Activity Launcher Pro gives you deeper control and customization over your device.
 
+🔍 Key Features:
+- Launch hidden or internal activities within installed apps
+- Create shortcuts for quick access to specific features or screens
+- Clean and lightweight with a simple interface
+
+💡 About the Project:
+Activity Launcher Pro is an open-source project available at https://github.com/butzist/ActivityLauncher.
+
+🤝 Get Involved:
+This is a community-driven project – you're welcome to contribute code, translations, or ideas. Help us improve and grow!
+
+Website: https://activitylauncher.net
 Source code: https://github.com/butzist/ActivityLauncher
 Translations: http://crowdin.net/project/activitylauncher/invite
-Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

@@ -24,11 +24,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ActivityLauncher"
-        tools:targetApi="31">
+        tools:targetApi="36">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.ActivityLauncher">
+            android:theme="@style/Theme.ActivityLauncher.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,14 +42,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/activity_settings"
-            android:exported="false" />
-        <activity
             android:name=".ShortcutActivity"
             android:exported="true"
             android:noHistory="true"
-            android:theme="@style/Theme.NoDisplay">
+            android:theme="@style/Theme.ActivityLauncher.NoDisplay">
             <intent-filter>
                 <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT"/>
                 <action android:name="activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT"/>

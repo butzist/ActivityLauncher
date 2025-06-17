@@ -67,7 +67,6 @@ class PackageListFragment : Fragment() {
             )
                 .show()
         }
-
     }
 
     override fun onDestroyView() {
