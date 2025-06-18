@@ -10,6 +10,14 @@ Launches hidden activities and creates shortcuts for installed apps
 <a href="https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
 
+## Shortcuts not created
+
+In case the shortcuts are not created in your home screen, make sure Activity Launcher has the "Home screen shortcuts" permission.
+
+Click on Settings -> Apps -> Manage apps -> Activity Launcher -> Other permissions -> Home screen shortcuts.
+
+See [#267](https://github.com/butzist/ActivityLauncher/issues/267).
+
 ## Translations
 
 The [Crowdin project](https://crowdin.com/project/ActivityLauncher) contains
