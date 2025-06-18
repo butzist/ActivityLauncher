@@ -41,7 +41,7 @@
     <string name="action_view_translation">Help translate</string>
     <string name="summary_action_view_translation">If you are enjoying Activity Launcher, please consider translating the app into your language</string>
     <string name="action_view_bugs">Report a problem</string>
-    <string name="summary_action_view_bugs">Please submit your suggestions or issues on our GitHub repository.</string>
+    <string name="summary_action_view_bugs">Please submit your suggestions or issues on our GitHub repository</string>
     <string name="action_filter">Filter&#8230;</string>
     <string name="filter_hint">package/action</string>
     <string name="activity_settings">Settings</string>
