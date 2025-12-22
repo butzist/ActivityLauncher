@@ -12,19 +12,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.databinding.FragmentFavoritesBinding
+import de.szalkowski.activitylauncher.databinding.FragmentRecentsBinding
 import de.szalkowski.activitylauncher.services.ActivityListService
-import de.szalkowski.activitylauncher.services.FavoritesService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
+import de.szalkowski.activitylauncher.services.RecentActivitiesService
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesFragment : Fragment() {
-    private var _binding: FragmentFavoritesBinding? = null
+class RecentsFragment : Fragment() {
+    private var _binding: FragmentRecentsBinding? = null
     private val binding get() = _binding!!
 
     @Inject
-    internal lateinit var favoritesService: FavoritesService
+    internal lateinit var recentActivitiesService: RecentActivitiesService
 
     @Inject
     internal lateinit var activityListService: ActivityListService
@@ -32,8 +32,12 @@ class FavoritesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentRecentsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onResume() {
@@ -42,23 +46,24 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun updateList() {
-        val favoriteActivities = favoritesService.getFavorites()
-        val activityInfos = favoriteActivities.mapNotNull { componentName ->
+        val recentActivities = recentActivitiesService.getRecentActivities()
+        val activityInfos = recentActivities.mapNotNull { recent ->
             try {
-                activityListService.getActivity(componentName)
+                activityListService.getActivity(recent.componentName)
             } catch (e: Exception) {
+                // Activity might be uninstalled or not found
                 null
             }
         }
-
-        val adapter = FavoritesListAdapter(activityInfos)
+        
+        val adapter = RecentsListAdapter(activityInfos)
         adapter.onItemClick = { info ->
             runCatching {
-                val action = FavoritesFragmentDirections.actionSelectActivity(info.componentName)
+                val action = RecentsFragmentDirections.actionSelectActivity(info.componentName)
                 findNavController().navigate(action)
-            }.onFailure { Log.e("Navigation", "Error while navigating from FavoritesFragment") }
+            }.onFailure { Log.e("Navigation", "Error while navigating from RecentsFragment") }
         }
-        binding.rvFavorites.adapter = adapter
+        binding.rvRecents.adapter = adapter
     }
 
     override fun onDestroyView() {
@@ -66,8 +71,8 @@ class FavoritesFragment : Fragment() {
         _binding = null
     }
 
-    class FavoritesListAdapter(private val activities: List<MyActivityInfo>) :
-        RecyclerView.Adapter<FavoritesListAdapter.ViewHolder>() {
+    class RecentsListAdapter(private val activities: List<MyActivityInfo>) :
+        RecyclerView.Adapter<RecentsListAdapter.ViewHolder>() {
 
         var onItemClick: ((MyActivityInfo) -> Unit)? = null
 

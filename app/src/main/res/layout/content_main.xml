@@ -16,6 +16,7 @@
             app:layout_scrollFlags="scroll|enterAlways|snap" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSearch"
             style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -64,4 +64,30 @@
             app:argType="android.content.ComponentName"
             app:nullable="false" />
     </fragment>
+    <fragment
+        android:id="@+id/FavoritesFragment"
+        android:name="de.szalkowski.activitylauncher.ui.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/actionSelectActivity"
+            app:destination="@id/ActivityDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/RecentsFragment"
+        android:name="de.szalkowski.activitylauncher.ui.RecentsFragment"
+        android:label="Recents"
+        tools:layout="@layout/fragment_recents">
+        <action
+            android:id="@+id/actionSelectActivity"
+            app:destination="@id/ActivityDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>

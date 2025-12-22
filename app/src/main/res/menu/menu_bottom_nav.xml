@@ -3,14 +3,14 @@
     <item
         android:id="@+id/PackageListFragment"
         android:icon="@drawable/ic_search"
-        android:title="@string/title_fragment_package_list" />
+        android:title="All" />
     <item
         android:id="@+id/FavoritesFragment"
         android:icon="@drawable/ic_rocket_launch"
-        android:title="@string/app_name" />
+        android:title="Favorites" />
     <item
-        android:id="@+id/ActivityDetailsFragment"
+        android:id="@+id/RecentsFragment"
         android:icon="@drawable/ic_settings"
-        android:title="@string/activity_settings" />
+        android:title="Recents" />
 
 </menu>

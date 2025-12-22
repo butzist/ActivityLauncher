@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
@@ -38,8 +39,6 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        //binding.slidingPaneLayout.lockMode = SlidingPaneLayout.LOCK_MODE_UNLOCKED
-
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
@@ -55,7 +54,56 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             onActionBarSearchListener?.invoke(query)
         }
 
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        // Custom Navigation Logic
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.PackageListFragment -> {
+                    // Pop everything to go back to the base "All" tab
+                    if (navController.currentDestination?.id == R.id.FavoritesFragment ||
+                        navController.currentDestination?.id == R.id.RecentsFragment
+                    ) {
+                        navController.popBackStack()
+                    }
+                    true
+                }
+
+                R.id.FavoritesFragment -> {
+                    if (navController.currentDestination?.id == R.id.RecentsFragment) {
+                        navController.popBackStack() // Pop Recents to replace with Favorites
+                    }
+                    if (navController.currentDestination?.id != R.id.FavoritesFragment) {
+                        navController.navigate(R.id.FavoritesFragment)
+                    }
+                    true
+                }
+
+                R.id.RecentsFragment -> {
+                    if (navController.currentDestination?.id == R.id.FavoritesFragment) {
+                        navController.popBackStack() // Pop Favorites to replace with Recents
+                    }
+                    if (navController.currentDestination?.id != R.id.RecentsFragment) {
+                        navController.navigate(R.id.RecentsFragment)
+                    }
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        // Sync Bottom Navigation Selection with Back Button
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.FavoritesFragment -> bottomNav.menu.findItem(R.id.FavoritesFragment).isChecked = true
+                R.id.RecentsFragment -> bottomNav.menu.findItem(R.id.RecentsFragment).isChecked = true
+                else -> bottomNav.menu.findItem(R.id.PackageListFragment).isChecked = true
+            }
+        }
+
         // define top level destinations (no back button)
+        // Favorites and Recents are removed so they show the Back arrow
         appBarConfiguration =
             AppBarConfiguration(setOf(R.id.LoadingFragment, R.id.PackageListFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -70,16 +118,11 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
-
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
