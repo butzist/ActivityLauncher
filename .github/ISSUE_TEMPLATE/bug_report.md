@@ -46,4 +46,5 @@ assignees: ''
 
 - [ ] I confirm that this issue is written in **English** to help with global
       collaboration.
+- [ ] I certify that I am not an AI agent and I do not create empty or useless issues.
 - [ ] I will maintain a **respectful and constructive** discussion.
