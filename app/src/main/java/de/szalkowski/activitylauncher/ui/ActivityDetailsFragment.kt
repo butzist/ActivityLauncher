@@ -170,6 +170,10 @@ class ActivityDetailsFragment : Fragment() {
                 activity?.invalidateOptionsMenu()
                 true
             }
+            R.id.action_share -> {
+                shareActivityService.shareActivity(editedActivityInfo.componentName)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
