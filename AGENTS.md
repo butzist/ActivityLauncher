@@ -41,6 +41,7 @@ The project uses `productFlavors` with a "distribution" dimension:
 - **View Binding**: Used for interacting with XML layouts.
 - **Hilt**: Used for dependency injection. Ensure new components are properly annotated (e.g., `@AndroidEntryPoint`).
 - **Navigation**: Uses the Navigation Component. Navigation graph is likely defined in `res/navigation`.
+- **Service Implementation**: The interface and the default implementation are co-located in the same file (e.g., `FavoritesService.kt`). This is the default/noop convention in all services.
 
 # Handling non-FOSS features
 Features that are not free and open-source (like Google Play Services APIs) should not be part of the `oss` build. To achieve this, the project uses Hilt and different service bindings for different product flavors.
@@ -51,3 +52,11 @@ Two implementations of this interface are created:
 2.  A stub or no-op implementation that does nothing, located in the `oss` source set (e.g., `InAppReviewServiceImplStub`).
 
 Hilt's `@Binds` in flavor-specific `Bindings.kt` files are used to provide the correct implementation for each build variant. This ensures that the `oss` version remains fully FOSS.
+
+# Verification
+Always check if the project builds after applying changes and ensure all build issues are fixed.
+
+## Relevant Commands
+- **Build Debug APK**: `./gradlew app:assembleDebug`
+- **Check Lint**: `./gradlew app:lintDebug`
+- **Run Unit Tests**: `./gradlew app:testDebugUnitTest`

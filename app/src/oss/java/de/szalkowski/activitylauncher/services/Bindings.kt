@@ -80,4 +80,16 @@ abstract class ApplicationServicesModule {
     abstract fun bindInAppReviewService(
         inAppReviewServiceImpl: InAppReviewServiceImplStub
     ): InAppReviewService
+
+    @Singleton
+    @Binds
+    abstract fun bindFavoritesService(
+        favoritesServiceImpl: FavoritesServiceImpl
+    ): FavoritesService
+
+    @Singleton
+    @Binds
+    abstract fun bindRecentActivitiesService(
+        recentActivitiesServiceImpl: RecentActivitiesServiceImpl
+    ): RecentActivitiesService
 }
