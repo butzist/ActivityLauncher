@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
@@ -55,57 +56,18 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        // Custom Navigation Logic
-        bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.PackageListFragment -> {
-                    // Pop everything to go back to the base "All" tab
-                    if (navController.currentDestination?.id == R.id.FavoritesFragment ||
-                        navController.currentDestination?.id == R.id.RecentsFragment
-                    ) {
-                        navController.popBackStack()
-                    }
-                    true
-                }
-
-                R.id.FavoritesFragment -> {
-                    if (navController.currentDestination?.id == R.id.RecentsFragment) {
-                        navController.popBackStack() // Pop Recents to replace with Favorites
-                    }
-                    if (navController.currentDestination?.id != R.id.FavoritesFragment) {
-                        navController.navigate(R.id.FavoritesFragment)
-                    }
-                    true
-                }
-
-                R.id.RecentsFragment -> {
-                    if (navController.currentDestination?.id == R.id.FavoritesFragment) {
-                        navController.popBackStack() // Pop Favorites to replace with Recents
-                    }
-                    if (navController.currentDestination?.id != R.id.RecentsFragment) {
-                        navController.navigate(R.id.RecentsFragment)
-                    }
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        // Sync Bottom Navigation Selection with Back Button
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.FavoritesFragment -> bottomNav.menu.findItem(R.id.FavoritesFragment).isChecked = true
-                R.id.RecentsFragment -> bottomNav.menu.findItem(R.id.RecentsFragment).isChecked = true
-                else -> bottomNav.menu.findItem(R.id.PackageListFragment).isChecked = true
-            }
-        }
+        bottomNav.setupWithNavController(navController)
 
         // define top level destinations (no back button)
-        // Favorites and Recents are removed so they show the Back arrow
         appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.LoadingFragment, R.id.PackageListFragment))
+            AppBarConfiguration(
+                setOf(
+                    R.id.LoadingFragment,
+                    R.id.PackageListFragment,
+                    R.id.FavoritesFragment,
+                    R.id.RecentsFragment
+                )
+            )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
