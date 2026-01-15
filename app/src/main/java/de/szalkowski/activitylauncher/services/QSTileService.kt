@@ -17,18 +17,20 @@ class QSTileService : TileService() {
             QSTileNavHostActivity::class.java,
         ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        @Suppress("StartActivityAndCollapseDeprecated", "DEPRECATION")
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            return startActivityAndCollapse(intent)
-        }
+        unlockAndRun {
+            @Suppress("StartActivityAndCollapseDeprecated", "DEPRECATION")
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                return@unlockAndRun startActivityAndCollapse(intent)
+            }
 
-        return startActivityAndCollapse(
-            PendingIntent.getActivity(
-                this,
-                0,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE,
-            ),
-        )
+            return@unlockAndRun startActivityAndCollapse(
+                PendingIntent.getActivity(
+                    this,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE,
+                ),
+            )
+        }
     }
 }
