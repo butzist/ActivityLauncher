@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
 import de.szalkowski.activitylauncher.services.ViewIntentParserService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,6 +28,7 @@ class ActivityListFragment : Fragment() {
     @Inject
     internal lateinit var activityListAdapterFactory: ActivityListAdapter.ActivityListAdapterFactory
     private lateinit var activityListAdapter: ActivityListAdapter
+    private var filterJob: Job? = null
 
     @Inject
     internal lateinit var viewIntentParserService: ViewIntentParserService
@@ -49,9 +56,9 @@ class ActivityListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = activity as? ActionBarSearch
-        activityListAdapter.filter = actionBar?.actionBarSearchText.orEmpty()
+        updateFilter(actionBar?.actionBarSearchText.orEmpty(), false)
         actionBar?.onActionBarSearchListener = { search ->
-            activityListAdapter.filter = search
+            updateFilter(search, true)
         }
 
         activityListAdapter.onItemClick = {
@@ -62,7 +69,6 @@ class ActivityListFragment : Fragment() {
         }
 
         binding.rvActivities.adapter = activityListAdapter
-        binding.rvActivities.isNestedScrollingEnabled = false
 
         runCatching {
             val intent = activity?.intent ?: return
@@ -80,6 +86,22 @@ class ActivityListFragment : Fragment() {
                 Toast.LENGTH_LONG
             )
                 .show()
+        }
+    }
+
+    private fun updateFilter(query: String, debounce: Boolean) {
+        val actionBar = activity as? ActionBarSearch
+        filterJob?.cancel()
+        filterJob = lifecycleScope.launch {
+            if (debounce) {
+                delay(300)
+            }
+            actionBar?.isSearching = true
+            val filtered = withContext(Dispatchers.Default) {
+                activityListAdapter.performFilter(query)
+            }
+            activityListAdapter.submitList(filtered)
+            actionBar?.isSearching = false
         }
     }
 

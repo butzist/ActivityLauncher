@@ -12,11 +12,13 @@ import android.util.DisplayMetrics
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface PackageListService {
     val packages: List<MyPackageInfo>
 }
 
+@Singleton
 class PackageListServiceImpl @Inject constructor(
     @ApplicationContext context: Context, val settingsService: SettingsService
 ) : PackageListService {
@@ -29,14 +31,14 @@ class PackageListServiceImpl @Inject constructor(
                     or PackageManager.MATCH_ALL
                     or PackageManager.MATCH_DISABLED_COMPONENTS
                     or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-        ).mapNotNull {
-            getPackageInfo(it)
+        ).mapIndexedNotNull { index, p ->
+            getPackageInfo(p, index.toLong())
         }.sortedBy { it.name.lowercase() }
 
     override val packages: List<MyPackageInfo>
         get() = installedPackages
 
-    private fun getPackageInfo(info: PackageInfo): MyPackageInfo? {
+    private fun getPackageInfo(info: PackageInfo, id: Long): MyPackageInfo? {
         val packageName = info.packageName as String? // do not trust Android implementations
         if (packageName.isNullOrEmpty()) {
             return null
@@ -55,8 +57,7 @@ class PackageListServiceImpl @Inject constructor(
             .map { getActivityName(it, appRes) }
             .filter { it != defaultActivityName }
 
-        return MyPackageInfo(
-            packageName, name, version, defaultActivityName, activities, icon, iconResourceName
+        return MyPackageInfo(id, packageName, name, version, defaultActivityName, activities, icon, iconResourceName
         )
     }
 
@@ -143,6 +144,7 @@ class PackageListServiceImpl @Inject constructor(
 }
 
 data class MyPackageInfo(
+    val id: Long,
     val packageName: String,
     val name: String,
     val version: String,

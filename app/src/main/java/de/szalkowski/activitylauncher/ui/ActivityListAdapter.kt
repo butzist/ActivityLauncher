@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -12,20 +14,29 @@ import dagger.assisted.AssistedInject
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
+import kotlinx.coroutines.yield
+import javax.inject.Inject
 
 class ActivityListAdapter @AssistedInject constructor(
     activityListService: ActivityListService, @Assisted private val packageName: String
-) : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>() {
+) : ListAdapter<MyActivityInfo, ActivityListAdapter.ViewHolder>(ActivityDiffCallback) {
     @AssistedFactory
     interface ActivityListAdapterFactory {
         fun create(packageName: String): ActivityListAdapter
     }
 
     private val allActivities = activityListService.getActivities(packageName)
-    private var filteredActivities = listOf<MyActivityInfo>()
+    private val combinedActivities = listOfNotNull(allActivities.defaultActivity) + allActivities.activities
     var onItemClick: ((MyActivityInfo) -> Unit)? = null
 
+    init {
+        submitList(combinedActivities)
+    }
+
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
+        val tvName: TextView = viewItem.findViewById(R.id.tvName)
+        val tvPackage: TextView = viewItem.findViewById(R.id.tvClass)
+        val ivIcon: ImageView = viewItem.findViewById(R.id.ivIcon)
         lateinit var item: MyActivityInfo
 
         init {
@@ -35,32 +46,36 @@ class ActivityListAdapter @AssistedInject constructor(
         }
     }
 
-    var filter: String = ""
-        set(value) {
-            field = value
-            filteredActivities = listOfNotNull(allActivities.defaultActivity?.takeIf { a ->
-                listOf(
-                    allActivities.packageName, allActivities.name, a.name, a.componentName.className
-                ).any {
-                    it.contains(
-                        field, ignoreCase = true
-                    )
-                }
-            }) + allActivities.activities.filter { a ->
-                listOf(
-                    a.name, a.componentName.shortClassName
-                ).any {
-                    it.contains(
-                        field, ignoreCase = true
-                    )
-                }
-            }
+    suspend fun performFilter(query: String): List<MyActivityInfo> {
+        if (query.isEmpty()) return combinedActivities
 
-            notifyDataSetChanged()
+        val result = mutableListOf<MyActivityInfo>()
+        
+        // Check default activity with special rules (matches package/app name too)
+        allActivities.defaultActivity?.let { a ->
+            yield()
+            if (allActivities.packageName.contains(query, ignoreCase = true) ||
+                allActivities.name.contains(query, ignoreCase = true) ||
+                a.name.contains(query, ignoreCase = true) ||
+                a.componentName.className.contains(query, ignoreCase = true)
+            ) {
+                result.add(a)
+            }
         }
 
-    init {
-        filter = ""
+        // Check regular activities
+        for (a in allActivities.activities) {
+            yield()
+            if (a.name.contains(query, ignoreCase = true) ||
+                a.componentName.shortClassName.contains(query, ignoreCase = true)
+            ) {
+                if (result.indexOf(a) == -1) {
+                    result.add(a)
+                }
+            }
+        }
+        
+        return result
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -69,26 +84,23 @@ class ActivityListAdapter @AssistedInject constructor(
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return filteredActivities.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.item = item
+        holder.tvName.text = if (item.isPrivate) "(${item.name})" else item.name
+        holder.tvPackage.text = item.componentName.shortClassName
+        holder.ivIcon.setImageDrawable(item.icon)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val view = holder.itemView
-        val tvName = view.findViewById<TextView>(R.id.tvName)
-        val tvPackage = view.findViewById<TextView>(R.id.tvClass)
-        val ivIcon = view.findViewById<ImageView>(R.id.ivIcon)
-
-        val item = filteredActivities[position]
-        holder.item = item
-        tvName.text = if (item.isPrivate) {
-            "(${item.name})"
-        } else {
-            item.name
+    object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
+        override fun areItemsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+            return oldItem.componentName == newItem.componentName
         }
-        tvPackage.text = item.componentName.shortClassName
-        ivIcon.setImageDrawable(item.icon)
+
+        override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+            return oldItem.name == newItem.name &&
+                    oldItem.isPrivate == newItem.isPrivate &&
+                    oldItem.iconResourceName == newItem.iconResourceName
+        }
     }
 }
-
-

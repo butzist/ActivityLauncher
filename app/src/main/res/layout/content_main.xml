@@ -15,35 +15,51 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways|snap" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilSearch"
-            style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/filter_hint"
-            app:startIconDrawable="@drawable/ic_search"
-            app:startIconTint="?attr/colorOnSurfaceVariant"
-            app:boxBackgroundMode="filled"
-            app:boxBackgroundColor="?attr/colorSurfaceContainer"
-            app:boxStrokeColor="@android:color/transparent"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:boxCornerRadiusTopStart="24dp"
-            app:boxCornerRadiusTopEnd="24dp"
-            app:boxCornerRadiusBottomStart="24dp"
-            app:boxCornerRadiusBottomEnd="24dp"
-            app:layout_scrollFlags="scroll|enterAlways|snap" >
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiSearch"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSearch"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:imeOptions="actionSearch"
-                android:textColorHint="?attr/colorOnSurfaceVariant"
-                android:textColor="?attr/colorOnSurface" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_margin="8dp"
+                android:hint="@string/filter_hint"
+                app:startIconDrawable="@drawable/ic_search"
+                app:startIconTint="?attr/colorOnSurfaceVariant"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="?attr/colorSurfaceContainer"
+                app:boxStrokeColor="@android:color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxCornerRadiusTopStart="24dp"
+                app:boxCornerRadiusTopEnd="24dp"
+                app:boxCornerRadiusBottomStart="24dp"
+                app:boxCornerRadiusBottomEnd="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:textColor="?attr/colorOnSurface" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/pbSearch"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="24dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorSize="24dp"
+                app:trackThickness="2dp" />
+        </FrameLayout>
 
 
     </com.google.android.material.appbar.AppBarLayout>

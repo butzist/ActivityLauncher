@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.findNavController
@@ -14,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
@@ -55,6 +57,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             onActionBarSearchListener?.invoke(query)
         }
 
+        progressBar = findViewById(R.id.pbSearch)
+
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
 
@@ -73,10 +77,18 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     override var onActionBarSearchListener: ((String) -> Unit)? = null
     private var actionBarSearchView: TextInputEditText? = null
+    private var progressBar: CircularProgressIndicator? = null
+
     override var actionBarSearchText: String
         get() = actionBarSearchView?.text.toString()
         set(value) {
             actionBarSearchView?.setText(value)
+        }
+
+    override var isSearching: Boolean
+        get() = progressBar?.visibility == View.VISIBLE
+        set(value) {
+            progressBar?.visibility = if (value) View.VISIBLE else View.GONE
         }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
