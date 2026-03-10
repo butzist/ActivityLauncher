@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
@@ -80,9 +79,6 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Hide the search bar
-        activity?.findViewById<TextInputLayout>(R.id.tilSearch)?.visibility = View.GONE
 
         binding.tiName.setText(activityInfo.name)
         binding.tiPackage.setText(activityInfo.componentName.packageName)
@@ -180,8 +176,6 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Restore search bar visibility
-        activity?.findViewById<TextInputLayout>(R.id.tilSearch)?.visibility = View.VISIBLE
         _binding = null
     }
 

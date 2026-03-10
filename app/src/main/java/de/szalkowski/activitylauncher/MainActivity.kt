@@ -13,13 +13,17 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
+import de.szalkowski.activitylauncher.services.FavoritesService
+import de.szalkowski.activitylauncher.services.RecentActivitiesService
 import de.szalkowski.activitylauncher.services.SettingsService
+import de.szalkowski.activitylauncher.services.ViewIntentParserService
 import de.szalkowski.activitylauncher.ui.ActionBarSearch
 import de.szalkowski.activitylauncher.ui.DisclaimerDialogFragment
 import javax.inject.Inject
@@ -32,6 +36,15 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     @Inject
     internal lateinit var settingsService: SettingsService
+
+    @Inject
+    internal lateinit var favoritesService: FavoritesService
+
+    @Inject
+    internal lateinit var recentActivitiesService: RecentActivitiesService
+
+    @Inject
+    internal lateinit var viewIntentParserService: ViewIntentParserService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +86,50 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                 )
             )
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val searchContainer = findViewById<View>(R.id.searchContainer)
+        val appBarLayout = findViewById<AppBarLayout>(R.id.appBar)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // Bottom Navigation visibility
+            binding.bottomNavigation.visibility = View.VISIBLE
+
+            // AppBar and Search Bar visibility
+            val params = toolbar.layoutParams as AppBarLayout.LayoutParams
+            when (destination.id) {
+                R.id.LoadingFragment -> {
+                    appBarLayout.visibility = View.VISIBLE
+                    searchContainer?.visibility = View.GONE
+                }
+                R.id.ActivityDetailsFragment -> {
+                    appBarLayout.visibility = View.VISIBLE
+                    searchContainer?.visibility = View.GONE
+                    params.scrollFlags = 0 // Fixed toolbar for details
+                    toolbar.layoutParams = params
+                    appBarLayout.setExpanded(true, true)
+                }
+                else -> {
+                    appBarLayout.visibility = View.VISIBLE
+                    searchContainer?.visibility = View.VISIBLE
+                    params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                    toolbar.layoutParams = params
+                }
+            }
+        }
+
+        // Handle initial navigation if not already deep-linked
+        if (savedInstanceState == null) {
+            val intent = intent
+            if (intent != null && viewIntentParserService.packageFromIntent(intent) != null) {
+                // Keep default start destination (PackageListFragment) or let deep link handle it
+            } else if (favoritesService.getFavorites().isNotEmpty()) {
+                navController.navigate(R.id.FavoritesFragment)
+            } else if (recentActivitiesService.getRecentActivities().isNotEmpty()) {
+                navController.navigate(R.id.RecentsFragment)
+            }
+        }
     }
 
     override var onActionBarSearchListener: ((String) -> Unit)? = null
