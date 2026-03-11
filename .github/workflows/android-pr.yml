@@ -17,6 +17,8 @@ jobs:
         cache: 'gradle'
     - name: Download dependencies
       run: ./gradlew androidDependencies
+    - name: Check code formatting
+      run: ./gradlew spotlessCheck
     - name: Build debug
       run: ./gradlew assembleOssDebug
     - name: Upload debug APK

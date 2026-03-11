@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: spotless
+        name: Spotless code formatting
+        entry: ./gradlew spotlessApply --daemon
+        language: system
+        files: '\.(kt|kts|java|gradle|xml)$'
+        pass_filenames: false
+        always_run: true

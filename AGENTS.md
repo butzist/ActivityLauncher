@@ -60,3 +60,32 @@ Always check if the project builds after applying changes and ensure all build i
 - **Build Debug APK**: `./gradlew app:assembleDebug`
 - **Check Lint**: `./gradlew app:lintDebug`
 - **Run Unit Tests**: `./gradlew app:testDebugUnitTest`
+
+# Code Style and Formatting
+
+This project uses Spotless for automatic code formatting and style checking.
+
+## Code Style Commands
+
+- **Check code formatting**: `./gradlew spotlessCheck`
+- **Apply code formatting**: `./gradlew spotlessApply`
+- **Format Kotlin files**: `./gradlew spotlessApply`
+- **Check only Kotlin formatting**: `./gradlew app:spotlessKotlinCheck`
+
+## Automatic Formatting
+
+- **Development builds**: Code is automatically formatted during
+  `./gradlew build` or `./gradlew assembleDebug`
+- **Git pre-commit**: Code is automatically formatted before each commit
+- **CI/CD**: Pull requests are blocked if code formatting fails
+
+## IDE Integration (Android Studio)
+
+1. Install the "Spotless" plugin from JetBrains Marketplace
+2. Enable "Format on save" in Settings → Editor → Code Style
+3. Configure actions to run `spotlessApply` on save
+
+## Configuration Files
+
+- `app/build.gradle.kts`: Spotless configuration with ktlint rules
+- `.editorconfig`: Basic formatting rules for IDEs

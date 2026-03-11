@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.diffplug.spotless")
 }
 
 android {
@@ -49,7 +50,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -73,6 +74,45 @@ android {
 // Allow references to generated code
 kapt {
     correctErrorTypes = true
+}
+
+// Configure Spotless for code formatting
+spotless {
+    kotlin {
+        target("**/*.kt")
+        targetExclude("**/build/**/*.kt")
+        ktlint("1.2.1").editorConfigOverride(
+            mapOf(
+                "android" to "true",
+                "ktlint_standard_no-wildcard-imports" to "disabled",
+                "ktlint_standard_chain-rule-first" to "disabled",
+            ),
+        )
+    }
+
+    kotlinGradle {
+        target("**/*.kts")
+        targetExclude("**/build/**/*.kts")
+        ktlint("1.2.1")
+    }
+
+    format("xml") {
+        target("**/*.xml")
+        targetExclude("**/build/**/*.xml")
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+// Configure build-time formatting for development
+tasks.named("preBuild") {
+    // Auto-format on development builds, but check on CI
+    if (System.getenv("CI") == null) {
+        dependsOn("spotlessApply")
+    } else {
+        dependsOn("spotlessCheck")
+    }
 }
 
 dependencies {
