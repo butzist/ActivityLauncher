@@ -35,7 +35,7 @@ class ActivityListServiceImpl @Inject constructor(
             packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities
         }.getOrNull().orEmpty().associateBy { i -> i.name }
 
-        val pack = this.packageListService.packages.find { p -> p.packageName == packageName }
+        val pack = this.packageListService.getPackage(packageName)
             ?: return PackageActivities(packageName, packageName, null, listOf())
         val defaultActivity = pack.defaultActivityName?.let { name ->
             infos[name.fullCls]?.let { info -> getActivityInfo(info, name) }
@@ -51,8 +51,7 @@ class ActivityListServiceImpl @Inject constructor(
     }
 
     override fun getActivity(componentName: ComponentName): MyActivityInfo {
-        val pack =
-            this.packageListService.packages.find { p -> p.packageName == componentName.packageName }
+        val pack = this.packageListService.getPackage(componentName.packageName)
         val activityInfo = runCatching {
             packageManager.getActivityInfo(componentName, 0)
         }.getOrNull()

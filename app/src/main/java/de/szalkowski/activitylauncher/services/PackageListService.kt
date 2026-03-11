@@ -16,6 +16,7 @@ import javax.inject.Singleton
 
 interface PackageListService {
     val packages: List<MyPackageInfo>
+    fun getPackage(packageName: String): MyPackageInfo?
 }
 
 @Singleton
@@ -25,20 +26,43 @@ class PackageListServiceImpl @Inject constructor(
 
     private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager: PackageManager = context.packageManager
-    private val installedPackages: List<MyPackageInfo> =
-        packageManager.getInstalledPackages(
-            PackageManager.GET_ACTIVITIES
-                    or PackageManager.MATCH_ALL
-                    or PackageManager.MATCH_DISABLED_COMPONENTS
-                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-        ).mapIndexedNotNull { index, p ->
-            getPackageInfo(p, index.toLong())
-        }.sortedBy { it.name.lowercase() }
+    private val cache = mutableMapOf<String, MyPackageInfo>()
+    private var allLoaded = false
 
     override val packages: List<MyPackageInfo>
-        get() = installedPackages
+        get() {
+            if (!allLoaded) {
+                packageManager.getInstalledPackages(
+                    PackageManager.GET_ACTIVITIES
+                            or PackageManager.MATCH_ALL
+                            or PackageManager.MATCH_DISABLED_COMPONENTS
+                            or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                ).forEach { p ->
+                    getPackageInfo(p)?.let { cache[it.packageName] = it }
+                }
+                allLoaded = true
+            }
+            return cache.values.sortedBy { it.name.lowercase() }
+        }
 
-    private fun getPackageInfo(info: PackageInfo, id: Long): MyPackageInfo? {
+    override fun getPackage(packageName: String): MyPackageInfo? {
+        cache[packageName]?.let { return it }
+
+        return runCatching {
+            val info = packageManager.getPackageInfo(
+                packageName,
+                PackageManager.GET_ACTIVITIES
+                        or PackageManager.MATCH_ALL
+                        or PackageManager.MATCH_DISABLED_COMPONENTS
+                        or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+            )
+            getPackageInfo(info)
+        }.getOrNull()?.also {
+            cache[packageName] = it
+        }
+    }
+
+    private fun getPackageInfo(info: PackageInfo): MyPackageInfo? {
         val packageName = info.packageName as String? // do not trust Android implementations
         if (packageName.isNullOrEmpty()) {
             return null
@@ -57,7 +81,15 @@ class PackageListServiceImpl @Inject constructor(
             .map { getActivityName(it, appRes) }
             .filter { it != defaultActivityName }
 
-        return MyPackageInfo(id, packageName, name, version, defaultActivityName, activities, icon, iconResourceName
+        return MyPackageInfo(
+            packageName.hashCode().toLong(),
+            packageName,
+            name,
+            version,
+            defaultActivityName,
+            activities,
+            icon,
+            iconResourceName
         )
     }
 
