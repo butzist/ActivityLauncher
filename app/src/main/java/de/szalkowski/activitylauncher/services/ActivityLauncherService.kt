@@ -2,8 +2,9 @@ package de.szalkowski.activitylauncher.services
 
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.internal.getActivityIntent
 import java.io.IOException
@@ -22,7 +23,7 @@ interface ActivityLauncherService {
     )
 }
 
-class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private val context: Context) :
+class ActivityLauncherServiceImpl @Inject constructor(@ApplicationContext private val context: Context) :
     ActivityLauncherService {
     /**
      * Got reference from stackoverflow.com URL
@@ -35,6 +36,7 @@ class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private v
         showToast: Boolean
     ) {
         val intent = getActivityIntent(activity, null)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (showToast) Toast.makeText(
             context,
             String.format(
@@ -119,4 +121,3 @@ class ActivityLauncherServiceImpl @Inject constructor(@ActivityContext private v
         return m.matches()
     }
 }
-

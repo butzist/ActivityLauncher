@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentRecentsBinding
 import de.szalkowski.activitylauncher.services.ActivityLauncherService
-import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
-import de.szalkowski.activitylauncher.services.RecentActivitiesService
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,11 +28,7 @@ class RecentsFragment : Fragment() {
     private var _binding: FragmentRecentsBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    internal lateinit var recentActivitiesService: RecentActivitiesService
-
-    @Inject
-    internal lateinit var activityListService: ActivityListService
+    private val viewModel: RecentsViewModel by viewModels()
 
     @Inject
     internal lateinit var activityLauncherService: ActivityLauncherService
@@ -46,35 +45,7 @@ class RecentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.bindingAdapterPosition
-                val item = adapter.getItem(position)
-                recentActivitiesService.removeActivity(item.componentName)
-                adapter.removeItem(position)
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.rvRecents)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateList()
-    }
-
-    private fun updateList() {
-        val recentActivities = recentActivitiesService.getRecentActivities()
-        val activityInfos = recentActivities.mapNotNull { recent ->
-            try {
-                activityListService.getActivity(recent.componentName)
-            } catch (e: Exception) {
-                // Activity might be uninstalled or not found
-                null
-            }
-        }.toMutableList()
-        
-        adapter = RecentsListAdapter(activityInfos)
+        adapter = RecentsListAdapter()
         adapter.onItemClick = { info ->
             activityLauncherService.launchActivity(info.componentName, asRoot = false, showToast = true)
         }
@@ -85,6 +56,29 @@ class RecentsFragment : Fragment() {
             }.onFailure { Log.e("Navigation", "Error while navigating from RecentsFragment") }
         }
         binding.rvRecents.adapter = adapter
+
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val item = adapter.getItem(position)
+                viewModel.removeRecent(item.componentName)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvRecents)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.activities.collect { activities ->
+                    adapter.submitList(activities)
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadRecents()
     }
 
     override fun onDestroyView() {
@@ -92,17 +86,17 @@ class RecentsFragment : Fragment() {
         _binding = null
     }
 
-    class RecentsListAdapter(private val activities: MutableList<MyActivityInfo>) :
-        RecyclerView.Adapter<RecentsListAdapter.ViewHolder>() {
+    class RecentsListAdapter : RecyclerView.Adapter<RecentsListAdapter.ViewHolder>() {
 
+        private var activities: List<MyActivityInfo> = emptyList()
         var onItemClick: ((MyActivityInfo) -> Unit)? = null
         var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
 
         fun getItem(position: Int): MyActivityInfo = activities[position]
 
-        fun removeItem(position: Int) {
-            activities.removeAt(position)
-            notifyItemRemoved(position)
+        fun submitList(newActivities: List<MyActivityInfo>) {
+            activities = newActivities
+            notifyDataSetChanged() // For simplicity, using notifyDataSetChanged. Consider DiffUtil if performance is an issue.
         }
 
         inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {

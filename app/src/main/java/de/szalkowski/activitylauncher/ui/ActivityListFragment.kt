@@ -7,28 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
 import de.szalkowski.activitylauncher.services.ViewIntentParserService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ActivityListFragment : Fragment() {
     private val args: ActivityListFragmentArgs by navArgs()
-
+    
     @Inject
     internal lateinit var activityListAdapterFactory: ActivityListAdapter.ActivityListAdapterFactory
     private lateinit var activityListAdapter: ActivityListAdapter
-    private var filterJob: Job? = null
+
+    private val viewModel: ActivityListViewModel by viewModels()
 
     @Inject
     internal lateinit var viewIntentParserService: ViewIntentParserService
@@ -41,7 +41,7 @@ class ActivityListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        
         activityListAdapter = activityListAdapterFactory.create(args.packageName)
     }
 
@@ -56,9 +56,25 @@ class ActivityListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = activity as? ActionBarSearch
-        updateFilter(actionBar?.actionBarSearchText.orEmpty(), false)
+        
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.activities.collect { activities ->
+                        activityListAdapter.submitList(activities)
+                    }
+                }
+                launch {
+                    viewModel.isSearching.collect { isSearching ->
+                        actionBar?.isSearching = isSearching
+                    }
+                }
+            }
+        }
+
+        viewModel.filter(actionBar?.actionBarSearchText.orEmpty())
         actionBar?.onActionBarSearchListener = { search ->
-            updateFilter(search, true)
+            viewModel.filter(search)
         }
 
         activityListAdapter.onItemClick = {
@@ -86,22 +102,6 @@ class ActivityListFragment : Fragment() {
                 Toast.LENGTH_LONG
             )
                 .show()
-        }
-    }
-
-    private fun updateFilter(query: String, debounce: Boolean) {
-        val actionBar = activity as? ActionBarSearch
-        filterJob?.cancel()
-        filterJob = lifecycleScope.launch {
-            if (debounce) {
-                delay(300)
-            }
-            actionBar?.isSearching = true
-            val filtered = withContext(Dispatchers.Default) {
-                activityListAdapter.performFilter(query)
-            }
-            activityListAdapter.submitList(filtered)
-            actionBar?.isSearching = false
         }
     }
 

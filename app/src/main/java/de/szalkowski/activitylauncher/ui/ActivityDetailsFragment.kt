@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.ui
 
-import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -10,64 +9,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
-import de.szalkowski.activitylauncher.services.ActivityLauncherService
-import de.szalkowski.activitylauncher.services.ActivityListService
-import de.szalkowski.activitylauncher.services.FavoritesService
-import de.szalkowski.activitylauncher.services.IconCreatorService
-import de.szalkowski.activitylauncher.services.IconLoaderService
 import de.szalkowski.activitylauncher.services.InAppReviewService
-import de.szalkowski.activitylauncher.services.MyActivityInfo
-import de.szalkowski.activitylauncher.services.RecentActivitiesService
-import de.szalkowski.activitylauncher.services.SettingsService
-import de.szalkowski.activitylauncher.services.ShareActivityService
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ActivityDetailsFragment : Fragment() {
-    private val args: ActivityDetailsFragmentArgs by navArgs()
-
-    @Inject
-    internal lateinit var activityListService: ActivityListService
-    private lateinit var activityInfo: MyActivityInfo
-
-    @Inject
-    internal lateinit var activityLauncherService: ActivityLauncherService
-
-    @Inject
-    internal lateinit var iconCreatorService: IconCreatorService
-
-    @Inject
-    internal lateinit var shareActivityService: ShareActivityService
-
-    @Inject
-    internal lateinit var iconLoaderService: IconLoaderService
+    private val viewModel: ActivityDetailsViewModel by viewModels()
 
     @Inject
     internal lateinit var inAppReviewService: InAppReviewService
 
-    @Inject
-    internal lateinit var settingsService: SettingsService
-
-    @Inject
-    internal lateinit var recentActivitiesService: RecentActivitiesService
-
-    @Inject
-    internal lateinit var favoritesService: FavoritesService
-
     private var _binding: FragmentActivityDetailsBinding? = null
     private val binding get() = _binding!!
-
-    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        activityInfo = activityListService.getActivity(args.activityComponentName)
-        isFavorite = favoritesService.isFavorite(activityInfo.componentName)
     }
 
     override fun onCreateView(
@@ -80,17 +45,41 @@ class ActivityDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        updateFavoriteUI()
-
-        binding.btFavorite.setOnClickListener {
-            toggleFavorite()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isFavorite.collect { isFavorite ->
+                        updateFavoriteUI(isFavorite)
+                        activity?.invalidateOptionsMenu()
+                    }
+                }
+                launch {
+                    viewModel.activityInfo.collect { info ->
+                        if (info != null) {
+                            binding.tiName.setText(viewModel.editedName.value)
+                            binding.tiPackage.setText(viewModel.editedPackage.value)
+                            binding.tiClass.setText(viewModel.editedClass.value)
+                            binding.tiIcon.setText(viewModel.editedIconResourceName.value)
+                            binding.ibIconPicker.setImageDrawable(viewModel.editedIconDrawable.value)
+                        }
+                    }
+                }
+                launch {
+                    viewModel.editedIconDrawable.collect { drawable ->
+                        binding.ibIconPicker.setImageDrawable(drawable)
+                    }
+                }
+            }
         }
 
-        binding.tiName.setText(activityInfo.name)
-        binding.tiPackage.setText(activityInfo.componentName.packageName)
-        binding.tiClass.setText(activityInfo.componentName.className)
-        binding.tiIcon.setText(activityInfo.iconResourceName ?: "")
-        binding.ibIconPicker.setImageDrawable(activityInfo.icon)
+        binding.btFavorite.setOnClickListener {
+            viewModel.toggleFavorite()
+        }
+
+        binding.tiName.doAfterTextChanged { viewModel.updateName(it.toString()) }
+        binding.tiPackage.doAfterTextChanged { viewModel.updatePackage(it.toString()) }
+        binding.tiClass.doAfterTextChanged { viewModel.updateClass(it.toString()) }
+        binding.tiIcon.doAfterTextChanged { viewModel.updateIconResourceName(it.toString()) }
 
         binding.ibIconPicker.setOnClickListener {
             val dialog = IconPickerDialogFragment()
@@ -100,41 +89,27 @@ class ActivityDetailsFragment : Fragment() {
             dialog.show(childFragmentManager, "icon picker")
         }
 
-        binding.tiIcon.doAfterTextChanged { text ->
-            val icon = text.toString()
-            val drawable = iconLoaderService.getIcon(icon)
-            binding.ibIconPicker.setImageDrawable(drawable)
-        }
-
         binding.btCreateShortcut.setOnClickListener {
-            iconCreatorService.createLauncherIcon(editedActivityInfo)
-            recentActivitiesService.addActivity(editedActivityInfo.componentName, false)
+            viewModel.createShortcut(asRoot = false)
         }
 
         binding.btCreateShortcutAsRoot.setOnClickListener {
-            iconCreatorService.createRootLauncherIcon(editedActivityInfo)
-            recentActivitiesService.addActivity(editedActivityInfo.componentName, true)
+            viewModel.createShortcut(asRoot = true)
         }
 
         binding.btLaunch.setOnClickListener {
-            activityLauncherService.launchActivity(
-                editedActivityInfo.componentName, asRoot = false, showToast = true
-            )
-            recentActivitiesService.addActivity(editedActivityInfo.componentName, false)
+            viewModel.launchActivity(asRoot = false)
         }
 
         binding.btLaunchAsRoot.setOnClickListener {
-            activityLauncherService.launchActivity(
-                editedActivityInfo.componentName, asRoot = true, showToast = true
-            )
-            recentActivitiesService.addActivity(editedActivityInfo.componentName, true)
+            viewModel.launchActivity(asRoot = true)
         }
 
         binding.btShareShortcut.setOnClickListener {
-            shareActivityService.shareActivity(editedActivityInfo.componentName)
+            viewModel.shareActivity()
         }
 
-        if (!settingsService.allowRoot) {
+        if (!viewModel.settingsService.allowRoot) {
             binding.btCreateShortcutAsRoot.visibility = View.GONE
             binding.btLaunchAsRoot.visibility = View.GONE
         } else {
@@ -153,7 +128,7 @@ class ActivityDetailsFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val favoriteItem = menu.findItem(R.id.action_favorite)
-        if (isFavorite) {
+        if (viewModel.isFavorite.value) {
             favoriteItem.setIcon(R.drawable.ic_favorite)
         } else {
             favoriteItem.setIcon(R.drawable.ic_favorite_border)
@@ -163,11 +138,11 @@ class ActivityDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_favorite -> {
-                toggleFavorite()
+                viewModel.toggleFavorite()
                 true
             }
             R.id.action_share -> {
-                shareActivityService.shareActivity(editedActivityInfo.componentName)
+                viewModel.shareActivity()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -179,18 +154,7 @@ class ActivityDetailsFragment : Fragment() {
         _binding = null
     }
 
-    private fun toggleFavorite() {
-        isFavorite = !isFavorite
-        if (isFavorite) {
-            favoritesService.addFavorite(activityInfo.componentName)
-        } else {
-            favoritesService.removeFavorite(activityInfo.componentName)
-        }
-        updateFavoriteUI()
-        activity?.invalidateOptionsMenu()
-    }
-
-    private fun updateFavoriteUI() {
+    private fun updateFavoriteUI(isFavorite: Boolean) {
         if (isFavorite) {
             binding.btFavorite.setText(R.string.context_action_favorite_remove)
             binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite, 0, 0, 0)
@@ -199,19 +163,4 @@ class ActivityDetailsFragment : Fragment() {
             binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border, 0, 0, 0)
         }
     }
-
-    private val editedActivityInfo: MyActivityInfo
-        get() {
-            val componentName =
-                ComponentName(binding.tiPackage.text.toString(), binding.tiClass.text.toString())
-            val iconResourceName = binding.tiIcon.text.toString()
-
-            return MyActivityInfo(
-                componentName,
-                binding.tiName.text.toString(),
-                binding.ibIconPicker.drawable,
-                iconResourceName.ifBlank { null },
-                false,
-            )
-        }
 }

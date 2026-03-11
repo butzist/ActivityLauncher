@@ -3,54 +3,48 @@ package de.szalkowski.activitylauncher.services
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class ServicesModule {
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindActivityLauncherService(
         activityLauncherServiceImpl: ActivityLauncherServiceImpl
     ): ActivityLauncherService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindActivityListService(
         activityListServiceImpl: ActivityListServiceImpl
     ): ActivityListService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindPackageListService(
         packageListServiceImpl: PackageListServiceImpl
     ): PackageListService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindIconCreatorService(
         iconCreatorServiceImpl: IconCreatorServiceImpl
     ): IconCreatorService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindIconLoaderService(
         iconLoaderServiceImpl: IconLoaderServiceImpl
     ): IconLoaderService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindShareActivityService(
         shareActivityServiceImpl: ShareActivityServiceImpl
     ): ShareActivityService
-}
 
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class ApplicationServicesModule {
     @Singleton
     @Binds
     abstract fun bindIntentSigningService(

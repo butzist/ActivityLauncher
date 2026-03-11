@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentFavoritesBinding
 import de.szalkowski.activitylauncher.services.ActivityLauncherService
-import de.szalkowski.activitylauncher.services.ActivityListService
-import de.szalkowski.activitylauncher.services.FavoritesService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,11 +28,7 @@ class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    internal lateinit var favoritesService: FavoritesService
-
-    @Inject
-    internal lateinit var activityListService: ActivityListService
+    private val viewModel: FavoritesViewModel by viewModels()
 
     @Inject
     internal lateinit var activityLauncherService: ActivityLauncherService
@@ -46,34 +45,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.bindingAdapterPosition
-                val item = adapter.getItem(position)
-                favoritesService.removeFavorite(item.componentName)
-                adapter.removeItem(position)
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.rvFavorites)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateList()
-    }
-
-    private fun updateList() {
-        val favoriteActivities = favoritesService.getFavorites()
-        val activityInfos = favoriteActivities.mapNotNull { componentName ->
-            try {
-                activityListService.getActivity(componentName)
-            } catch (e: Exception) {
-                null
-            }
-        }.toMutableList()
-
-        adapter = FavoritesListAdapter(activityInfos)
+        adapter = FavoritesListAdapter()
         adapter.onItemClick = { info ->
             activityLauncherService.launchActivity(info.componentName, asRoot = false, showToast = true)
         }
@@ -84,6 +56,29 @@ class FavoritesFragment : Fragment() {
             }.onFailure { Log.e("Navigation", "Error while navigating from FavoritesFragment") }
         }
         binding.rvFavorites.adapter = adapter
+
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val item = adapter.getItem(position)
+                viewModel.removeFavorite(item.componentName)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvFavorites)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.activities.collect { activities ->
+                    adapter.submitList(activities)
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadFavorites()
     }
 
     override fun onDestroyView() {
@@ -91,17 +86,17 @@ class FavoritesFragment : Fragment() {
         _binding = null
     }
 
-    class FavoritesListAdapter(private val activities: MutableList<MyActivityInfo>) :
-        RecyclerView.Adapter<FavoritesListAdapter.ViewHolder>() {
+    class FavoritesListAdapter : RecyclerView.Adapter<FavoritesListAdapter.ViewHolder>() {
 
+        private var activities: List<MyActivityInfo> = emptyList()
         var onItemClick: ((MyActivityInfo) -> Unit)? = null
         var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
 
         fun getItem(position: Int): MyActivityInfo = activities[position]
 
-        fun removeItem(position: Int) {
-            activities.removeAt(position)
-            notifyItemRemoved(position)
+        fun submitList(newActivities: List<MyActivityInfo>) {
+            activities = newActivities
+            notifyDataSetChanged()
         }
 
         inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {

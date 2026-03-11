@@ -18,7 +18,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.internal.getActivityIntent
 import javax.inject.Inject
@@ -38,7 +38,7 @@ interface IconCreatorService {
 }
 
 class IconCreatorServiceImpl @Inject constructor(
-    @ActivityContext private val context: Context,
+    @ApplicationContext private val context: Context,
     private val signingService: IntentSigningService
 ) : IconCreatorService {
     override fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
@@ -210,4 +210,3 @@ class IconCreatorServiceImpl @Inject constructor(
         return shortcutIntent
     }
 }
-

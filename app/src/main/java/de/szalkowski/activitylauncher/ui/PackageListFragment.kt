@@ -7,17 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentPackageListBinding
 import de.szalkowski.activitylauncher.services.ViewIntentParserService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,8 +27,9 @@ class PackageListFragment : Fragment() {
     @Inject
     internal lateinit var viewIntentParserService: ViewIntentParserService
 
+    private val viewModel: PackageListViewModel by viewModels()
+
     private var _binding: FragmentPackageListBinding? = null
-    private var filterJob: Job? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -47,12 +47,24 @@ class PackageListFragment : Fragment() {
 
         val actionBar = activity as? ActionBarSearch
         
-        // Ensure the adapter has the latest data from the service
-        packageListAdapter.updatePackages()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.packages.collect { packages ->
+                        packageListAdapter.submitList(packages)
+                    }
+                }
+                launch {
+                    viewModel.isSearching.collect { isSearching ->
+                        actionBar?.isSearching = isSearching
+                    }
+                }
+            }
+        }
 
-        updateFilter(actionBar?.actionBarSearchText.orEmpty(), false)
+        viewModel.filter(actionBar?.actionBarSearchText.orEmpty())
         actionBar?.onActionBarSearchListener = { search ->
-            updateFilter(search, true)
+            viewModel.filter(search)
         }
 
         packageListAdapter.onItemClick = {
@@ -76,22 +88,6 @@ class PackageListFragment : Fragment() {
                 Toast.LENGTH_LONG
             )
                 .show()
-        }
-    }
-
-    private fun updateFilter(query: String, debounce: Boolean) {
-        val actionBar = activity as? ActionBarSearch
-        filterJob?.cancel()
-        filterJob = lifecycleScope.launch {
-            if (debounce) {
-                delay(300)
-            }
-            actionBar?.isSearching = true
-            val filtered = withContext(Dispatchers.Default) {
-                packageListAdapter.performFilter(query)
-            }
-            packageListAdapter.submitList(filtered)
-            actionBar?.isSearching = false
         }
     }
 

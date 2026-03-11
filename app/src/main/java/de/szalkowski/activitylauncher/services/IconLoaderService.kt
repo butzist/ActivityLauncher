@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.DisplayMetrics
 import android.widget.Toast
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.ui.AsyncProvider
 import de.szalkowski.activitylauncher.ui.IconListAdapter
@@ -30,7 +30,7 @@ interface IconLoaderService {
 }
 
 class IconLoaderServiceImpl @Inject constructor(
-    @ActivityContext private val context: Context,
+    @ApplicationContext private val context: Context,
     private val packageListService: PackageListService,
     private val activityListService: ActivityListService,
     settingsService: SettingsService,

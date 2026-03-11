@@ -6,7 +6,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.componentName
 import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
@@ -22,7 +22,7 @@ interface ActivityListService {
 }
 
 class ActivityListServiceImpl @Inject constructor(
-    @ActivityContext context: Context,
+    @ApplicationContext context: Context,
     settingsService: SettingsService,
     private val packageListService: PackageListService
 ) : ActivityListService {
