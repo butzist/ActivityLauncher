@@ -36,7 +36,9 @@ class PackageListFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentPackageListBinding.inflate(inflater, container, false)
         return binding.root
@@ -46,7 +48,7 @@ class PackageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = activity as? ActionBarSearch
-        
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -72,7 +74,6 @@ class PackageListFragment : Fragment() {
                 val action = PackageListFragmentDirections.actionSelectPackage(it.packageName)
                 findNavController().navigate(action)
             }.onFailure { Log.e("Navigation", "Error while navigating from PackageListFragment") }
-
         }
         binding.rvPackages.adapter = packageListAdapter
 
@@ -85,7 +86,7 @@ class PackageListFragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.error_invalid_activity_link),
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             )
                 .show()
         }

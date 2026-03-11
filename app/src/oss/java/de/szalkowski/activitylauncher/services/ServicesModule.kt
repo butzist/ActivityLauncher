@@ -3,93 +3,87 @@ package de.szalkowski.activitylauncher.services
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class ServicesModule {
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindActivityLauncherService(
-        activityLauncherServiceImpl: ActivityLauncherServiceImpl
+        activityLauncherServiceImpl: ActivityLauncherServiceImpl,
     ): ActivityLauncherService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindActivityListService(
-        activityListServiceImpl: ActivityListServiceImpl
+        activityListServiceImpl: ActivityListServiceImpl,
     ): ActivityListService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindPackageListService(
-        packageListServiceImpl: PackageListServiceImpl
+        packageListServiceImpl: PackageListServiceImpl,
     ): PackageListService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindIconCreatorService(
-        iconCreatorServiceImpl: IconCreatorServiceImpl
+        iconCreatorServiceImpl: IconCreatorServiceImpl,
     ): IconCreatorService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindIconLoaderService(
-        iconLoaderServiceImpl: IconLoaderServiceImpl
+        iconLoaderServiceImpl: IconLoaderServiceImpl,
     ): IconLoaderService
 
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindShareActivityService(
-        shareActivityServiceImpl: ShareActivityServiceImpl
+        shareActivityServiceImpl: ShareActivityServiceImpl,
     ): ShareActivityService
-}
 
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class ApplicationServicesModule {
     @Singleton
     @Binds
     abstract fun bindIntentSigningService(
-        intentSigningServiceImpl: IntentSigningServiceImpl
+        intentSigningServiceImpl: IntentSigningServiceImpl,
     ): IntentSigningService
 
     @Singleton
     @Binds
     abstract fun bindViewIntentParserService(
-        viewIntentParserServiceImpl: ViewIntentParserServiceImpl
+        viewIntentParserServiceImpl: ViewIntentParserServiceImpl,
     ): ViewIntentParserService
 
     @Singleton
     @Binds
     abstract fun bindRootDetectionService(
-        rootDetectionServiceImpl: RootDetectionServiceImpl
+        rootDetectionServiceImpl: RootDetectionServiceImpl,
     ): RootDetectionService
 
     @Singleton
     @Binds
     abstract fun bindSettingsService(
-        settingsServiceImpl: SettingsServiceImpl
+        settingsServiceImpl: SettingsServiceImpl,
     ): SettingsService
 
     @Singleton
     @Binds
     abstract fun bindInAppReviewService(
-        inAppReviewServiceImpl: InAppReviewServiceImpl
+        inAppReviewServiceImpl: InAppReviewServiceImplStub,
     ): InAppReviewService
 
     @Singleton
     @Binds
     abstract fun bindFavoritesService(
-        favoritesServiceImpl: FavoritesServiceImpl
+        favoritesServiceImpl: FavoritesServiceImpl,
     ): FavoritesService
 
     @Singleton
     @Binds
     abstract fun bindRecentActivitiesService(
-        recentActivitiesServiceImpl: RecentActivitiesServiceImpl
+        recentActivitiesServiceImpl: RecentActivitiesServiceImpl,
     ): RecentActivitiesService
 }

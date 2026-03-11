@@ -23,7 +23,8 @@ interface IconLoaderService {
     fun loadIcons(updater: AsyncProvider<IconListAdapter>.Updater?): List<IconInfo>
 
     data class IconInfo(
-        val iconResourceName: String, val icon: Drawable
+        val iconResourceName: String,
+        val icon: Drawable,
     )
 
     class NullResourceException : Exception("Resource ID is zero")
@@ -49,7 +50,6 @@ class IconLoaderServiceImpl @Inject constructor(
             Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
             pm.defaultActivityIcon
         }
-
 
     override fun tryGetIcon(iconResourceString: String): Result<Drawable> {
         return runCatching {

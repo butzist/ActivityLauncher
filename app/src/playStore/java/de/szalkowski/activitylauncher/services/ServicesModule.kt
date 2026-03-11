@@ -12,78 +12,78 @@ abstract class ServicesModule {
     @Singleton
     @Binds
     abstract fun bindActivityLauncherService(
-        activityLauncherServiceImpl: ActivityLauncherServiceImpl
+        activityLauncherServiceImpl: ActivityLauncherServiceImpl,
     ): ActivityLauncherService
 
     @Singleton
     @Binds
     abstract fun bindActivityListService(
-        activityListServiceImpl: ActivityListServiceImpl
+        activityListServiceImpl: ActivityListServiceImpl,
     ): ActivityListService
 
     @Singleton
     @Binds
     abstract fun bindPackageListService(
-        packageListServiceImpl: PackageListServiceImpl
+        packageListServiceImpl: PackageListServiceImpl,
     ): PackageListService
 
     @Singleton
     @Binds
     abstract fun bindIconCreatorService(
-        iconCreatorServiceImpl: IconCreatorServiceImpl
+        iconCreatorServiceImpl: IconCreatorServiceImpl,
     ): IconCreatorService
 
     @Singleton
     @Binds
     abstract fun bindIconLoaderService(
-        iconLoaderServiceImpl: IconLoaderServiceImpl
+        iconLoaderServiceImpl: IconLoaderServiceImpl,
     ): IconLoaderService
 
     @Singleton
     @Binds
     abstract fun bindShareActivityService(
-        shareActivityServiceImpl: ShareActivityServiceImpl
+        shareActivityServiceImpl: ShareActivityServiceImpl,
     ): ShareActivityService
 
     @Singleton
     @Binds
     abstract fun bindIntentSigningService(
-        intentSigningServiceImpl: IntentSigningServiceImpl
+        intentSigningServiceImpl: IntentSigningServiceImpl,
     ): IntentSigningService
 
     @Singleton
     @Binds
     abstract fun bindViewIntentParserService(
-        viewIntentParserServiceImpl: ViewIntentParserServiceImpl
+        viewIntentParserServiceImpl: ViewIntentParserServiceImpl,
     ): ViewIntentParserService
 
     @Singleton
     @Binds
     abstract fun bindRootDetectionService(
-        rootDetectionServiceImpl: RootDetectionServiceImpl
+        rootDetectionServiceImpl: RootDetectionServiceImpl,
     ): RootDetectionService
 
     @Singleton
     @Binds
     abstract fun bindSettingsService(
-        settingsServiceImpl: SettingsServiceImpl
+        settingsServiceImpl: SettingsServiceImpl,
     ): SettingsService
 
     @Singleton
     @Binds
     abstract fun bindInAppReviewService(
-        inAppReviewServiceImpl: InAppReviewServiceImplStub
+        inAppReviewServiceImpl: InAppReviewServiceImpl,
     ): InAppReviewService
 
     @Singleton
     @Binds
     abstract fun bindFavoritesService(
-        favoritesServiceImpl: FavoritesServiceImpl
+        favoritesServiceImpl: FavoritesServiceImpl,
     ): FavoritesService
 
     @Singleton
     @Binds
     abstract fun bindRecentActivitiesService(
-        recentActivitiesServiceImpl: RecentActivitiesServiceImpl
+        recentActivitiesServiceImpl: RecentActivitiesServiceImpl,
     ): RecentActivitiesService
 }

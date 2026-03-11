@@ -15,10 +15,10 @@ import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 import kotlinx.coroutines.yield
-import javax.inject.Inject
 
 class ActivityListAdapter @AssistedInject constructor(
-    activityListService: ActivityListService, @Assisted private val packageName: String
+    activityListService: ActivityListService,
+    @Assisted private val packageName: String,
 ) : ListAdapter<MyActivityInfo, ActivityListAdapter.ViewHolder>(ActivityDiffCallback) {
     @AssistedFactory
     interface ActivityListAdapterFactory {
@@ -50,7 +50,7 @@ class ActivityListAdapter @AssistedInject constructor(
         if (query.isEmpty()) return combinedActivities
 
         val result = mutableListOf<MyActivityInfo>()
-        
+
         // Check default activity with special rules (matches package/app name too)
         allActivities.defaultActivity?.let { a ->
             yield()
@@ -74,7 +74,7 @@ class ActivityListAdapter @AssistedInject constructor(
                 }
             }
         }
-        
+
         return result
     }
 
@@ -99,8 +99,8 @@ class ActivityListAdapter @AssistedInject constructor(
 
         override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
             return oldItem.name == newItem.name &&
-                    oldItem.isPrivate == newItem.isPrivate &&
-                    oldItem.iconResourceName == newItem.iconResourceName
+                oldItem.isPrivate == newItem.isPrivate &&
+                oldItem.iconResourceName == newItem.iconResourceName
         }
     }
 }

@@ -5,9 +5,7 @@ import android.content.Context
 import com.google.android.play.core.review.ReviewManagerFactory
 import javax.inject.Inject
 
-
-class InAppReviewServiceImpl @Inject constructor(
-) : InAppReviewService {
+class InAppReviewServiceImpl @Inject constructor() : InAppReviewService {
     override fun showInAppReview(activity: Activity) {
         if (!shouldShowInAppReview(activity)) {
             return

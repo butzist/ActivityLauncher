@@ -58,7 +58,7 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
             if (filteredActivities.isNotEmpty() || defaultActivity != null) {
                 p.copy(
                     activityNames = filteredActivities,
-                    defaultActivityName = defaultActivity
+                    defaultActivityName = defaultActivity,
                 )
             } else {
                 null
@@ -80,12 +80,12 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.item = item
-        
+
         val activityCount = item.activityNames.size + (item.defaultActivityName?.let { 1 } ?: 0)
         holder.tvName.text = item.name
         holder.tvVersion.text = item.version
         holder.tvPackage.text = item.packageName
-        holder.tvActivities.text = "(${activityCount})"
+        holder.tvActivities.text = "($activityCount)"
         holder.ivIcon.setImageDrawable(item.icon)
     }
 
@@ -96,10 +96,10 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
 
         override fun areContentsTheSame(oldItem: MyPackageInfo, newItem: MyPackageInfo): Boolean {
             return oldItem.packageName == newItem.packageName &&
-                    oldItem.name == newItem.name &&
-                    oldItem.version == newItem.version &&
-                    oldItem.activityNames == newItem.activityNames &&
-                    oldItem.defaultActivityName == newItem.defaultActivityName
+                oldItem.name == newItem.name &&
+                oldItem.version == newItem.version &&
+                oldItem.activityNames == newItem.activityNames &&
+                oldItem.defaultActivityName == newItem.defaultActivityName
         }
     }
 }

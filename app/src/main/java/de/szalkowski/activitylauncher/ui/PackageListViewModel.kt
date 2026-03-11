@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PackageListViewModel @Inject constructor(
-    private val packageListService: PackageListService
+    private val packageListService: PackageListService,
 ) : ViewModel() {
 
     private val _packages = MutableStateFlow<List<MyPackageInfo>>(emptyList())
@@ -68,7 +68,7 @@ class PackageListViewModel @Inject constructor(
             if (filteredActivities.isNotEmpty() || defaultActivity != null) {
                 p.copy(
                     activityNames = filteredActivities,
-                    defaultActivityName = defaultActivity
+                    defaultActivityName = defaultActivity,
                 )
             } else {
                 null

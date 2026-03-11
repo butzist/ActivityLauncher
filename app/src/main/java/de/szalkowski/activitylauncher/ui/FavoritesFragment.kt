@@ -36,7 +36,9 @@ class FavoritesFragment : Fragment() {
     private lateinit var adapter: FavoritesListAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
@@ -44,7 +46,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         adapter = FavoritesListAdapter()
         adapter.onItemClick = { info ->
             activityLauncherService.launchActivity(info.componentName, asRoot = false, showToast = true)

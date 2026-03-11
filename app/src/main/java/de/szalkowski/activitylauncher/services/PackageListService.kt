@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
@@ -23,7 +22,8 @@ interface PackageListService {
 
 @Singleton
 class PackageListServiceImpl @Inject constructor(
-    @ApplicationContext context: Context, val settingsService: SettingsService
+    @ApplicationContext context: Context,
+    val settingsService: SettingsService,
 ) : PackageListService {
 
     private val packageManager: PackageManager = context.packageManager
@@ -39,9 +39,9 @@ class PackageListServiceImpl @Inject constructor(
                 if (!allLoaded) {
                     packageManager.getInstalledPackages(
                         PackageManager.GET_ACTIVITIES
-                                or PackageManager.MATCH_ALL
-                                or PackageManager.MATCH_DISABLED_COMPONENTS
-                                or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                            or PackageManager.MATCH_ALL
+                            or PackageManager.MATCH_DISABLED_COMPONENTS
+                            or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
                     ).forEach { p ->
                         getPackageInfo(p)?.let { cache[it.packageName] = it }
                     }
@@ -60,9 +60,9 @@ class PackageListServiceImpl @Inject constructor(
             val info = packageManager.getPackageInfo(
                 packageName,
                 PackageManager.GET_ACTIVITIES
-                        or PackageManager.MATCH_ALL
-                        or PackageManager.MATCH_DISABLED_COMPONENTS
-                        or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                    or PackageManager.MATCH_ALL
+                    or PackageManager.MATCH_DISABLED_COMPONENTS
+                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
             )
             getPackageInfo(info)
         }.getOrNull()
@@ -108,12 +108,13 @@ class PackageListServiceImpl @Inject constructor(
             defaultActivityName,
             activities,
             icon,
-            iconResourceName
+            iconResourceName,
         )
     }
 
     private fun getDefaultActivityName(
-        packageName: String, appRes: Resources?
+        packageName: String,
+        appRes: Resources?,
     ): ActivityName? {
         if (appRes == null) {
             return null
@@ -126,7 +127,6 @@ class PackageListServiceImpl @Inject constructor(
             val defaultActivityName = getActivityName(activityInfo, appRes)
             return defaultActivityName
         }.getOrNull()
-
     }
 
     private fun getIcon(app: ApplicationInfo): Drawable {
@@ -138,7 +138,8 @@ class PackageListServiceImpl @Inject constructor(
     }
 
     private fun getIconResourceName(
-        app: ApplicationInfo, appRes: Resources?
+        app: ApplicationInfo,
+        appRes: Resources?,
     ): String? {
         val iconResource = app.icon
 
@@ -150,7 +151,6 @@ class PackageListServiceImpl @Inject constructor(
             appRes.getResourceName(iconResource)
         }.getOrNull()
     }
-
 
     private fun getName(app: ApplicationInfo, appRes: Resources?): String {
         var name = app.loadLabel(packageManager).toString()

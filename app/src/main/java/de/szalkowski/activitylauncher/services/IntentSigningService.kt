@@ -9,7 +9,6 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import javax.inject.Inject
 
-
 interface IntentSigningService {
     fun signIntent(intent: Intent): String
     fun validateIntentSignature(intent: Intent, signature: String): Boolean
@@ -55,4 +54,3 @@ class IntentSigningServiceImpl @Inject constructor(@ApplicationContext context: 
         }
     }
 }
-

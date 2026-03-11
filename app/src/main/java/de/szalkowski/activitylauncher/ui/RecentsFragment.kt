@@ -36,7 +36,9 @@ class RecentsFragment : Fragment() {
     private lateinit var adapter: RecentsListAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentRecentsBinding.inflate(inflater, container, false)
         return binding.root

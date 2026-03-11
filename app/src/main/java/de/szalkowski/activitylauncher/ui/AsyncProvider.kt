@@ -10,7 +10,9 @@ import java.text.NumberFormat
 import java.util.Locale
 
 abstract class AsyncProvider<ReturnType> internal constructor(
-    context: Context, private val listener: Listener<ReturnType>?, showProgressDialog: Boolean
+    context: Context,
+    private val listener: Listener<ReturnType>?,
+    showProgressDialog: Boolean,
 ) : AsyncTask<Void?, Int?, ReturnType>() {
     private val message = context.getText(R.string.dialog_progress_loading)
     private var dialog: AlertDialog? = null
@@ -40,7 +42,10 @@ abstract class AsyncProvider<ReturnType> internal constructor(
 
             binding?.progress?.progress = value
             binding?.progressNumber?.text = String.format(
-                Locale.getDefault(), "%1d/%2d", value, this.max
+                Locale.getDefault(),
+                "%1d/%2d",
+                value,
+                this.max,
             )
             val percent = value.toDouble() / max.toDouble()
             binding?.progressPercent?.text = progressPercentFormat.format(percent)

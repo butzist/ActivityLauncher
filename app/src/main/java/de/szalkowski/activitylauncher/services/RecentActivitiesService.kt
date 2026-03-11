@@ -11,7 +11,7 @@ interface RecentActivitiesService {
     data class RecentActivity(
         val componentName: ComponentName,
         val wasRoot: Boolean,
-        val timestamp: Long
+        val timestamp: Long,
     )
 
     fun getRecentActivities(): List<RecentActivity>
@@ -21,7 +21,7 @@ interface RecentActivitiesService {
 
 @Singleton
 class RecentActivitiesServiceImpl @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext context: Context,
 ) : RecentActivitiesService {
     private val prefs: SharedPreferences = context.getSharedPreferences("al_recent_activities", Context.MODE_PRIVATE)
     private val recentsKey = "recents"

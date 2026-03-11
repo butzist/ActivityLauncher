@@ -86,6 +86,7 @@ spotless {
                 "android" to "true",
                 "ktlint_standard_no-wildcard-imports" to "disabled",
                 "ktlint_standard_chain-rule-first" to "disabled",
+                "ktlint_standard_backing-property-naming" to "disabled",
             ),
         )
     }

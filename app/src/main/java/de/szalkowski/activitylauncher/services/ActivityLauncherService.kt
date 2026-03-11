@@ -14,12 +14,11 @@ import java.nio.charset.StandardCharsets
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-
 interface ActivityLauncherService {
     fun launchActivity(
         activity: ComponentName,
         asRoot: Boolean,
-        showToast: Boolean
+        showToast: Boolean,
     )
 }
 
@@ -33,18 +32,20 @@ class ActivityLauncherServiceImpl @Inject constructor(@ApplicationContext privat
     override fun launchActivity(
         activity: ComponentName,
         asRoot: Boolean,
-        showToast: Boolean
+        showToast: Boolean,
     ) {
         val intent = getActivityIntent(activity, null)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        if (showToast) Toast.makeText(
-            context,
-            String.format(
-                context.getText(R.string.starting_activity).toString(),
-                activity.flattenToShortString()
-            ),
-            Toast.LENGTH_LONG
-        ).show()
+        if (showToast) {
+            Toast.makeText(
+                context,
+                String.format(
+                    context.getText(R.string.starting_activity).toString(),
+                    activity.flattenToShortString(),
+                ),
+                Toast.LENGTH_LONG,
+            ).show()
+        }
         try {
             if (!asRoot) {
                 context.startActivity(intent)
@@ -56,7 +57,7 @@ class ActivityLauncherServiceImpl @Inject constructor(@ApplicationContext privat
             Toast.makeText(
                 context,
                 context.getText(R.string.error).toString() + ": " + e,
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             ).show()
         }
     }
@@ -68,15 +69,16 @@ class ActivityLauncherServiceImpl @Inject constructor(@ApplicationContext privat
         require(isValid) {
             String.format(
                 context.getString(R.string.exception_invalid_component_name),
-                component
+                component,
             )
         }
 
         val process = Runtime.getRuntime().exec(
             arrayOf(
-                "su", "-c",
-                "am start -n $component"
-            )
+                "su",
+                "-c",
+                "am start -n $component",
+            ),
         )
         val output = getProcessOutput(process)
         val exitValue = process.waitFor()
@@ -85,8 +87,8 @@ class ActivityLauncherServiceImpl @Inject constructor(@ApplicationContext privat
                 String.format(
                     context.getString(R.string.exception_command_error),
                     exitValue,
-                    output
-                )
+                    output,
+                ),
             )
         }
     }

@@ -31,7 +31,7 @@ class ActivityDetailsViewModel @Inject constructor(
     private val iconLoaderService: IconLoaderService,
     private val recentActivitiesService: RecentActivitiesService,
     val settingsService: SettingsService,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val componentName: ComponentName = savedStateHandle.get<ComponentName>("activityComponentName")
@@ -67,7 +67,7 @@ class ActivityDetailsViewModel @Inject constructor(
             val info = activityListService.getActivity(componentName)
             _activityInfo.value = info
             _isFavorite.value = favoritesService.isFavorite(componentName)
-            
+
             _editedName.value = info.name
             _editedPackage.value = info.componentName.packageName
             _editedClass.value = info.componentName.className
@@ -132,7 +132,7 @@ class ActivityDetailsViewModel @Inject constructor(
             _editedName.value,
             _editedIconDrawable.value!!,
             _editedIconResourceName.value.ifBlank { null },
-            false
+            false,
         )
     }
 }

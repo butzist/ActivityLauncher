@@ -81,7 +81,8 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
         val config = getLocaleConfiguration()
         Locale.setDefault(config.locale)
         context.resources.updateConfiguration(
-            config, context.resources.displayMetrics
+            config,
+            context.resources.displayMetrics,
         )
     }
 
@@ -107,7 +108,7 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
             if (name == locale.language + '_' + locale.country) {
                 val language = locale.getDisplayName(locale)
                 return language.substring(0, 1).uppercase(Locale.getDefault()) + language.substring(
-                    1
+                    1,
                 )
             }
         }
@@ -123,4 +124,3 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
         }
     }
 }
-

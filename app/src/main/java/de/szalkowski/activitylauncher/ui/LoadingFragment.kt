@@ -25,7 +25,9 @@ class LoadingFragment : Fragment() {
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {

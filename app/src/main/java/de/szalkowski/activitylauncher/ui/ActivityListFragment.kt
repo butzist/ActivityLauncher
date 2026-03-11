@@ -23,7 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ActivityListFragment : Fragment() {
     private val args: ActivityListFragmentArgs by navArgs()
-    
+
     @Inject
     internal lateinit var activityListAdapterFactory: ActivityListAdapter.ActivityListAdapterFactory
     private lateinit var activityListAdapter: ActivityListAdapter
@@ -41,12 +41,14 @@ class ActivityListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         activityListAdapter = activityListAdapterFactory.create(args.packageName)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentActivityListBinding.inflate(inflater, container, false)
         return binding.root
@@ -56,7 +58,7 @@ class ActivityListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = activity as? ActionBarSearch
-        
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -99,7 +101,7 @@ class ActivityListFragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.error_invalid_activity_link),
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             )
                 .show()
         }

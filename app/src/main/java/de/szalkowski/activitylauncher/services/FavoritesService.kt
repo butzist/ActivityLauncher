@@ -16,7 +16,7 @@ interface FavoritesService {
 
 @Singleton
 class FavoritesServiceImpl @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext context: Context,
 ) : FavoritesService {
     private val prefs: SharedPreferences = context.getSharedPreferences("al_favorites", Context.MODE_PRIVATE)
     private val favoritesKey = "favorites"

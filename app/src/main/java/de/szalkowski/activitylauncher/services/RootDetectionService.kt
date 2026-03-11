@@ -3,7 +3,6 @@ package de.szalkowski.activitylauncher.services
 import java.io.File
 import javax.inject.Inject
 
-
 interface RootDetectionService {
     fun detectSU(): Boolean
 }

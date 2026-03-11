@@ -105,8 +105,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     R.id.LoadingFragment,
                     R.id.PackageListFragment,
                     R.id.FavoritesFragment,
-                    R.id.RecentsFragment
-                )
+                    R.id.RecentsFragment,
+                ),
             )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -131,8 +131,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.GONE
                     params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
-                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
-                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
                     toolbar.layoutParams = params
                 }
                 R.id.ActivityDetailsFragment -> {
@@ -146,8 +146,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.VISIBLE
                     params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
-                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
-                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
                     toolbar.layoutParams = params
                 }
             }
@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         if (savedInstanceState == null) {
             val intent = intent
             val hasIntent = intent != null && viewIntentParserService.packageFromIntent(intent) != null
-            
+
             if (hasIntent) {
                 navigateToAll(navController)
             } else if (favoritesService.getFavorites().isNotEmpty()) {

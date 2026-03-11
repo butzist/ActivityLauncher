@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ActivityListViewModel @Inject constructor(
     private val activityListService: ActivityListService,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val packageName: String = savedStateHandle.get<String>("packageName") ?: ""
