@@ -13,6 +13,8 @@
     <string name="context_action_shortcut_as_root">Create shortcut as root</string>
     <string name="context_action_edit">Edit shortcut</string>
     <string name="context_action_share_shortcut">Share shortcut</string>
+    <string name="context_action_favorite_add">Add to favorites</string>
+    <string name="context_action_favorite_remove">Remove from favorites</string>
     <string name="label_name">Name</string>
     <string name="label_package">Package</string>
     <string name="label_class">Class</string>

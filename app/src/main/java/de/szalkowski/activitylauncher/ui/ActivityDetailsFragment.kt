@@ -80,6 +80,12 @@ class ActivityDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        updateFavoriteUI()
+
+        binding.btFavorite.setOnClickListener {
+            toggleFavorite()
+        }
+
         binding.tiName.setText(activityInfo.name)
         binding.tiPackage.setText(activityInfo.componentName.packageName)
         binding.tiClass.setText(activityInfo.componentName.className)
@@ -157,13 +163,7 @@ class ActivityDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_favorite -> {
-                isFavorite = !isFavorite
-                if (isFavorite) {
-                    favoritesService.addFavorite(activityInfo.componentName)
-                } else {
-                    favoritesService.removeFavorite(activityInfo.componentName)
-                }
-                activity?.invalidateOptionsMenu()
+                toggleFavorite()
                 true
             }
             R.id.action_share -> {
@@ -177,6 +177,27 @@ class ActivityDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun toggleFavorite() {
+        isFavorite = !isFavorite
+        if (isFavorite) {
+            favoritesService.addFavorite(activityInfo.componentName)
+        } else {
+            favoritesService.removeFavorite(activityInfo.componentName)
+        }
+        updateFavoriteUI()
+        activity?.invalidateOptionsMenu()
+    }
+
+    private fun updateFavoriteUI() {
+        if (isFavorite) {
+            binding.btFavorite.setText(R.string.context_action_favorite_remove)
+            binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite, 0, 0, 0)
+        } else {
+            binding.btFavorite.setText(R.string.context_action_favorite_add)
+            binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border, 0, 0, 0)
+        }
     }
 
     private val editedActivityInfo: MyActivityInfo

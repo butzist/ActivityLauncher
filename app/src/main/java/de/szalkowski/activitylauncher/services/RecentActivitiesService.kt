@@ -16,6 +16,7 @@ interface RecentActivitiesService {
 
     fun getRecentActivities(): List<RecentActivity>
     fun addActivity(componentName: ComponentName, wasRoot: Boolean)
+    fun removeActivity(componentName: ComponentName)
 }
 
 @Singleton
@@ -41,6 +42,13 @@ class RecentActivitiesServiceImpl @Inject constructor(
         val newRecents = recents.take(maxRecents)
 
         val newStringSet = newRecents.map { toString(it) }.toSet()
+        prefs.edit().putStringSet(recentsKey, newStringSet).apply()
+    }
+
+    override fun removeActivity(componentName: ComponentName) {
+        val recents = getRecentActivities().toMutableList()
+        recents.removeAll { it.componentName == componentName }
+        val newStringSet = recents.map { toString(it) }.toSet()
         prefs.edit().putStringSet(recentsKey, newStringSet).apply()
     }
 

@@ -138,5 +138,15 @@
             android:text="@string/context_action_share_shortcut"
             app:layout_constraintTop_toBottomOf="@+id/btCreateShortcutAsRoot" />
 
+        <Button
+            android:id="@+id/btFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableLeft="@drawable/ic_favorite_border"
+            android:drawableTint="?attr/colorOnPrimary"
+            android:text="@string/context_action_favorite_add"
+            app:layout_constraintTop_toBottomOf="@+id/btShareShortcut" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

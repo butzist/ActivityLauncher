@@ -9,10 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentRecentsBinding
+import de.szalkowski.activitylauncher.services.ActivityLauncherService
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 import de.szalkowski.activitylauncher.services.RecentActivitiesService
@@ -29,6 +31,11 @@ class RecentsFragment : Fragment() {
     @Inject
     internal lateinit var activityListService: ActivityListService
 
+    @Inject
+    internal lateinit var activityLauncherService: ActivityLauncherService
+
+    private lateinit var adapter: RecentsListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -38,6 +45,17 @@ class RecentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val item = adapter.getItem(position)
+                recentActivitiesService.removeActivity(item.componentName)
+                adapter.removeItem(position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.rvRecents)
     }
 
     override fun onResume() {
@@ -54,10 +72,13 @@ class RecentsFragment : Fragment() {
                 // Activity might be uninstalled or not found
                 null
             }
-        }
+        }.toMutableList()
         
-        val adapter = RecentsListAdapter(activityInfos)
+        adapter = RecentsListAdapter(activityInfos)
         adapter.onItemClick = { info ->
+            activityLauncherService.launchActivity(info.componentName, asRoot = false, showToast = true)
+        }
+        adapter.onItemLongClick = { info ->
             runCatching {
                 val action = RecentsFragmentDirections.actionSelectActivity(info.componentName)
                 findNavController().navigate(action)
@@ -71,10 +92,18 @@ class RecentsFragment : Fragment() {
         _binding = null
     }
 
-    class RecentsListAdapter(private val activities: List<MyActivityInfo>) :
+    class RecentsListAdapter(private val activities: MutableList<MyActivityInfo>) :
         RecyclerView.Adapter<RecentsListAdapter.ViewHolder>() {
 
         var onItemClick: ((MyActivityInfo) -> Unit)? = null
+        var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
+
+        fun getItem(position: Int): MyActivityInfo = activities[position]
+
+        fun removeItem(position: Int) {
+            activities.removeAt(position)
+            notifyItemRemoved(position)
+        }
 
         inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
             val tvName: TextView = viewItem.findViewById(R.id.tvName)
@@ -84,6 +113,10 @@ class RecentsFragment : Fragment() {
             init {
                 itemView.setOnClickListener {
                     onItemClick?.invoke(activities[bindingAdapterPosition])
+                }
+                itemView.setOnLongClickListener {
+                    onItemLongClick?.invoke(activities[bindingAdapterPosition])
+                    true
                 }
             }
         }

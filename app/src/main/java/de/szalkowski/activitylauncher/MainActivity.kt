@@ -18,6 +18,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.services.FavoritesService
@@ -70,6 +71,11 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             onActionBarSearchListener?.invoke(query)
         }
 
+        val tilSearch = findViewById<TextInputLayout>(R.id.tilSearch)
+        tilSearch.setEndIconOnClickListener {
+            actionBarSearchText = ""
+        }
+
         progressBar = findViewById(R.id.pbSearch)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -100,6 +106,14 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                 R.id.LoadingFragment -> {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.GONE
+                }
+                R.id.FavoritesFragment, R.id.RecentsFragment -> {
+                    appBarLayout.visibility = View.VISIBLE
+                    searchContainer?.visibility = View.GONE
+                    params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                    toolbar.layoutParams = params
                 }
                 R.id.ActivityDetailsFragment -> {
                     appBarLayout.visibility = View.VISIBLE
