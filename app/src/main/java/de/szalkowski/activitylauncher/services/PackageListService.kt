@@ -18,6 +18,7 @@ interface PackageListService {
     val packages: List<MyPackageInfo>
     val isLoaded: Boolean
     fun getPackage(packageName: String): MyPackageInfo?
+    fun invalidate()
 }
 
 @Singleton
@@ -25,7 +26,6 @@ class PackageListServiceImpl @Inject constructor(
     @ApplicationContext context: Context, val settingsService: SettingsService
 ) : PackageListService {
 
-    private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager: PackageManager = context.packageManager
     private val cache = mutableMapOf<String, MyPackageInfo>()
     private var allLoaded = false
@@ -71,6 +71,13 @@ class PackageListServiceImpl @Inject constructor(
             synchronized(cache) {
                 cache[packageName] = it
             }
+        }
+    }
+
+    override fun invalidate() {
+        synchronized(cache) {
+            cache.clear()
+            allLoaded = false
         }
     }
 
@@ -176,13 +183,14 @@ class PackageListServiceImpl @Inject constructor(
     private fun getLocalizedResources(packageName: String): Resources? {
         return runCatching {
             val appRes = packageManager.getResourcesForApplication(packageName)
-            appRes.updateConfiguration(config, DisplayMetrics())
+            appRes.updateConfiguration(settingsService.getLocaleConfiguration(), DisplayMetrics())
             appRes
         }.getOrNull()
     }
 
     private fun createNameFromClass(cls: String): String {
         val name = cls.substringAfterLast('.')
+        val config = settingsService.getLocaleConfiguration()
         return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(config.locale) else it.toString() }
     }
 }

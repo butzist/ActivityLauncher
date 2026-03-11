@@ -10,6 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.componentName
 import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface ActivityListService {
     fun getActivities(
@@ -19,15 +20,17 @@ interface ActivityListService {
     fun getActivity(
         componentName: ComponentName,
     ): MyActivityInfo
+
+    fun invalidate()
 }
 
+@Singleton
 class ActivityListServiceImpl @Inject constructor(
     @ApplicationContext context: Context,
-    settingsService: SettingsService,
+    private val settingsService: SettingsService,
     private val packageListService: PackageListService
 ) : ActivityListService {
 
-    private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager = context.packageManager
 
     override fun getActivities(packageName: String): PackageActivities {
@@ -68,6 +71,10 @@ class ActivityListServiceImpl @Inject constructor(
         )
 
         return getActivityInfo(activityInfo, name)
+    }
+
+    override fun invalidate() {
+        this.packageListService.invalidate()
     }
 
     private fun getActivityInfo(
@@ -111,6 +118,7 @@ class ActivityListServiceImpl @Inject constructor(
 
     private fun createNameFromClass(cls: String): String {
         val name = cls.substringAfterLast('.')
+        val config = settingsService.getLocaleConfiguration()
         return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(config.locale) else it.toString() }
     }
 }

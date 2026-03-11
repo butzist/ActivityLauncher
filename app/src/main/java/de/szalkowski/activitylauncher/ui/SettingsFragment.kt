@@ -11,6 +11,7 @@ import androidx.preference.SwitchPreference
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.MainActivity
 import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.RootDetectionService
 import de.szalkowski.activitylauncher.services.SettingsService
 import java.util.Objects
@@ -27,6 +28,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
     internal lateinit var settingsService: SettingsService
+
+    @Inject
+    internal lateinit var activityListService: ActivityListService
 
     override fun onDestroy() {
         super.onDestroy()
@@ -93,6 +97,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Toast.makeText(activity, getText(R.string.warning_root_check), Toast.LENGTH_LONG).show()
         }
         prefs.edit().putBoolean("allow_root", newValue).apply()
+        activityListService.invalidate()
         needsRestart = true
         return true
     }
@@ -105,6 +110,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun onHidePrivateUpdated(newValue: Boolean): Boolean {
         prefs.edit().putBoolean("hide_hide_private", newValue).apply()
+        activityListService.invalidate()
         needsRestart = true
         return true
     }
@@ -113,8 +119,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         prefs.edit().putString("language", newValue).apply()
 
         settingsService.applyLocaleConfiguration(requireActivity().baseContext)
+        activityListService.invalidate()
         needsRestart = true
         return true
     }
 }
-
