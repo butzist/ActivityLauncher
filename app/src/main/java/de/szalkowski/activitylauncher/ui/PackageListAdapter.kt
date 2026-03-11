@@ -15,15 +15,19 @@ import de.szalkowski.activitylauncher.services.PackageListService
 import kotlinx.coroutines.yield
 import javax.inject.Inject
 
-class PackageListAdapter @Inject constructor(packageListService: PackageListService) :
+class PackageListAdapter @Inject constructor(private val packageListService: PackageListService) :
     ListAdapter<MyPackageInfo, PackageListAdapter.ViewHolder>(PackageDiffCallback) {
 
-    private val allPackages = packageListService.packages
+    private var allPackages: List<MyPackageInfo> = emptyList()
 
     var onItemClick: ((MyPackageInfo) -> Unit)? = null
 
     init {
         setHasStableIds(true)
+    }
+
+    fun updatePackages() {
+        allPackages = packageListService.packages
         submitList(allPackages)
     }
 

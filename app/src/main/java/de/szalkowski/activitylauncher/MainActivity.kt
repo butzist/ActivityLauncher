@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.services.FavoritesService
+import de.szalkowski.activitylauncher.services.PackageListService
 import de.szalkowski.activitylauncher.services.RecentActivitiesService
 import de.szalkowski.activitylauncher.services.SettingsService
 import de.szalkowski.activitylauncher.services.ViewIntentParserService
@@ -46,6 +48,9 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     @Inject
     internal lateinit var viewIntentParserService: ViewIntentParserService
+
+    @Inject
+    internal lateinit var packageListService: PackageListService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +85,18 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
+        bottomNav.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.PackageListFragment && !packageListService.isLoaded) {
+                navController.navigate(R.id.LoadingFragment)
+                true
+            } else {
+                // Default behavior for other items or if already loaded
+                if (item.itemId != navController.currentDestination?.id) {
+                    navController.navigate(item.itemId)
+                }
+                true
+            }
+        }
 
         // define top level destinations (no back button)
         appBarConfiguration =
@@ -97,6 +114,9 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val appBarLayout = findViewById<AppBarLayout>(R.id.appBar)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            // Update bottom navigation selection to reflect current destination
+            binding.bottomNavigation.menu.findItem(destination.id)?.isChecked = true
+
             // Bottom Navigation visibility
             binding.bottomNavigation.visibility = View.VISIBLE
 
@@ -136,13 +156,25 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         // Handle initial navigation if not already deep-linked
         if (savedInstanceState == null) {
             val intent = intent
-            if (intent != null && viewIntentParserService.packageFromIntent(intent) != null) {
-                // Keep default start destination (PackageListFragment) or let deep link handle it
+            val hasIntent = intent != null && viewIntentParserService.packageFromIntent(intent) != null
+            
+            if (hasIntent) {
+                navigateToAll(navController)
             } else if (favoritesService.getFavorites().isNotEmpty()) {
                 navController.navigate(R.id.FavoritesFragment)
             } else if (recentActivitiesService.getRecentActivities().isNotEmpty()) {
                 navController.navigate(R.id.RecentsFragment)
+            } else {
+                navigateToAll(navController)
             }
+        }
+    }
+
+    private fun navigateToAll(navController: NavController) {
+        if (packageListService.isLoaded) {
+            navController.navigate(R.id.PackageListFragment)
+        } else {
+            navController.navigate(R.id.LoadingFragment)
         }
     }
 

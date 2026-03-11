@@ -16,6 +16,7 @@ import javax.inject.Singleton
 
 interface PackageListService {
     val packages: List<MyPackageInfo>
+    val isLoaded: Boolean
     fun getPackage(packageName: String): MyPackageInfo?
 }
 
@@ -29,26 +30,33 @@ class PackageListServiceImpl @Inject constructor(
     private val cache = mutableMapOf<String, MyPackageInfo>()
     private var allLoaded = false
 
+    override val isLoaded: Boolean
+        get() = synchronized(cache) { allLoaded }
+
     override val packages: List<MyPackageInfo>
         get() {
-            if (!allLoaded) {
-                packageManager.getInstalledPackages(
-                    PackageManager.GET_ACTIVITIES
-                            or PackageManager.MATCH_ALL
-                            or PackageManager.MATCH_DISABLED_COMPONENTS
-                            or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-                ).forEach { p ->
-                    getPackageInfo(p)?.let { cache[it.packageName] = it }
+            synchronized(cache) {
+                if (!allLoaded) {
+                    packageManager.getInstalledPackages(
+                        PackageManager.GET_ACTIVITIES
+                                or PackageManager.MATCH_ALL
+                                or PackageManager.MATCH_DISABLED_COMPONENTS
+                                or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                    ).forEach { p ->
+                        getPackageInfo(p)?.let { cache[it.packageName] = it }
+                    }
+                    allLoaded = true
                 }
-                allLoaded = true
+                return cache.values.sortedBy { it.name.lowercase() }
             }
-            return cache.values.sortedBy { it.name.lowercase() }
         }
 
     override fun getPackage(packageName: String): MyPackageInfo? {
-        cache[packageName]?.let { return it }
+        synchronized(cache) {
+            cache[packageName]?.let { return it }
+        }
 
-        return runCatching {
+        val result = runCatching {
             val info = packageManager.getPackageInfo(
                 packageName,
                 PackageManager.GET_ACTIVITIES
@@ -57,8 +65,12 @@ class PackageListServiceImpl @Inject constructor(
                         or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
             )
             getPackageInfo(info)
-        }.getOrNull()?.also {
-            cache[packageName] = it
+        }.getOrNull()
+
+        return result?.also {
+            synchronized(cache) {
+                cache[packageName] = it
+            }
         }
     }
 

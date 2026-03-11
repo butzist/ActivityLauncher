@@ -46,6 +46,10 @@ class PackageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = activity as? ActionBarSearch
+        
+        // Ensure the adapter has the latest data from the service
+        packageListAdapter.updatePackages()
+
         updateFilter(actionBar?.actionBarSearchText.orEmpty(), false)
         actionBar?.onActionBarSearchListener = { search ->
             updateFilter(search, true)
