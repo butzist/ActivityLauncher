@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class ServicesModule {
+abstract class CoreServicesModule {
     @Singleton
     @Binds
     abstract fun bindActivityLauncherService(
@@ -68,12 +68,6 @@ abstract class ServicesModule {
     abstract fun bindSettingsService(
         settingsServiceImpl: SettingsServiceImpl,
     ): SettingsService
-
-    @Singleton
-    @Binds
-    abstract fun bindInAppReviewService(
-        inAppReviewServiceImpl: InAppReviewServiceImplStub,
-    ): InAppReviewService
 
     @Singleton
     @Binds

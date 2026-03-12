@@ -22,13 +22,17 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
+import de.szalkowski.activitylauncher.services.AdmobService
+import de.szalkowski.activitylauncher.services.AnalyticsService
 import de.szalkowski.activitylauncher.services.FavoritesService
 import de.szalkowski.activitylauncher.services.PackageListService
+import de.szalkowski.activitylauncher.services.PaidReminderService
 import de.szalkowski.activitylauncher.services.RecentActivitiesService
 import de.szalkowski.activitylauncher.services.SettingsService
 import de.szalkowski.activitylauncher.services.ViewIntentParserService
 import de.szalkowski.activitylauncher.ui.ActionBarSearch
 import de.szalkowski.activitylauncher.ui.DisclaimerDialogFragment
+import de.szalkowski.activitylauncher.ui.PaidDialogFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,6 +56,15 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     @Inject
     internal lateinit var packageListService: PackageListService
 
+    @Inject
+    internal lateinit var admobService: AdmobService
+
+    @Inject
+    internal lateinit var analyticsService: AnalyticsService
+
+    @Inject
+    internal lateinit var paidReminderService: PaidReminderService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,14 +74,24 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        admobService.initialize(this)
+
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
+        } else if (paidReminderService.shouldDisplayReminder()) {
+            PaidDialogFragment().show(supportFragmentManager, "PaidDialogFragment")
         }
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         val navController = navHostFragment.navController
+
+        analyticsService.logDestination(navController.currentDestination)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            analyticsService.logDestination(destination)
+        }
 
         actionBarSearchView = findViewById(R.id.tiSearch)
         actionBarSearchView?.addTextChangedListener {

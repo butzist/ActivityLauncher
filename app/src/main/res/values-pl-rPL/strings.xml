@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Uruchamiacz aktywności</string>
+    <string name="app_name">Launcher Aktywności</string>
     <string name="short_description">Startuje ukryte działalności i tworzy skróty na ekranie głównym</string>
     <string name="nav_all">Wszystkie</string>
     <string name="nav_favorites">Ulubione</string>
@@ -24,8 +24,6 @@
     <string name="label_package">Pakiet</string>
     <string name="label_class">Klasa</string>
     <string name="label_icon">Ikona</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">prywatne</string>
     <string name="starting_activity">Rozpoczynanie aktywności: %s</string>
     <string name="creating_application_shortcut">Tworzenie skrótu aplikacji dla %s</string>
     <string name="error">Błąd</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">O aplikacji</string>
     <string name="action_view_source">Pokaż kod źródłowy</string>
     <string name="summary_action_view_source">Kod źródłowy tej aplikacji jest dostępny do czytania i modyfikowania na GitHub. Możesz wysłać nam pull requesty z poprawkami i poprawkami błędów.</string>
-    <string name="action_view_translation">Pomóż w tłumaczeniu!</string>
-    <string name="summary_action_view_translation">Jeśli podoba Ci się Activity Launcher, rozważ tłumaczenie aplikacji na swój język.</string>
-    <string name="action_view_bugs">Zgłoś problem</string>
-    <string name="summary_action_view_bugs">Jeśli masz jakieś sugestie lub problemy, zgłoś je do naszego projektu na GitHubie.</string>
-    <string name="action_filter">Filtr...</string>
     <string name="filter_hint">pakiet/akcja</string>
     <string name="activity_settings">Ustawienia</string>
     <string name="settings_hide_private">Ukryj aktywności prywatne</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Domyślne systemowe</string>
     <string name="theme_light">Jasny motyw</string>
     <string name="theme_dark">Ciemny motyw</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Chcesz wesprzeć aplikację i pozbyć się reklam? Pobierz Launcher Aktywności Pro w Google Play — to pomaga finansować rozwój i jest w pełni open source.</string>
+    <string name="settings_github">Projekt GitHub</string>
+    <string name="settings_summary_github">Możesz pobrać gotowy plik APK z projektu Activity Launcher o otwartym kodzie źródłowym w serwisie GitHub. Zaawansowani użytkownicy mogą również zapoznać się z kodem źródłowym, wesprzeć programistów i współtworzyć tłumaczenia lub żądania pull.</string>
+    <string name="category_title_ad_free">Wersje bez reklam</string>
+    <string name="title_dialog_support">Dziękujemy za korzystanie z Launcher Aktywności</string>
+    <string name="dialog_support">Dodaliśmy reklamy, aby pomóc w finansowaniu dalszego rozwoju. Wolisz bez reklam? Uaktualnij do Launcher Aktywności Pro w Google Play — jest w pełni open-source i wspiera dalsze prace nad aplikacją. Możesz także pobrać aplikację za darmo na GitHubie. Wsparcie tam jest opcjonalne, ale bardzo nam pomaga.</string>
+    <string name="action_view_paid">Launcher Aktywności Pro</string>
+    <string name="action_view_github">Projekt GitHub</string>
+    <string name="action_personalized_ads_consent">Reklamy spersonalizowane</string>
+    <string name="summary_personalized_ads_consent">Dostosuj uprawnienia dla spersonalizowanych reklam</string>
 </resources>

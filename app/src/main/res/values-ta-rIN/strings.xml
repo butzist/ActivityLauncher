@@ -24,8 +24,6 @@
     <string name="label_package">தொகுப்பு</string>
     <string name="label_class">வகுப்பு</string>
     <string name="label_icon">சின்னம்</string>
-    <string name="label_menu">பட்டியல்</string>
-    <string name="label_private">தனிப்பட்ட</string>
     <string name="starting_activity">செயல்பாடு தொடங்குகிறது: %s</string>
     <string name="creating_application_shortcut">%s க்கான பயன்பாட்டு குறுக்குவழியை உருவாக்குகிறது</string>
     <string name="error">பிழை</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">பற்றி</string>
     <string name="action_view_source">மூலக் குறியீட்டைக் காண்க</string>
     <string name="summary_action_view_source">இந்த பயன்பாட்டின் மூலக் குறியீடு GitHub இல் படிக்கவும் மாற்றவும் கிடைக்கிறது. மேம்பாடுகள் மற்றும் பிழைத் திருத்தங்களுடன் புல் கோரிக்கைகளை எங்களுக்கு அனுப்ப தயங்காதீர்கள்.</string>
-    <string name="action_view_translation">மொழிபெயர்க்க உதவவும்</string>
-    <string name="summary_action_view_translation">நீங்கள் செயல்பாடு துவக்கியை அனுபவித்தால், பயன்பாட்டை உங்கள் மொழியில் மொழிபெயர்ப்பதைக் கவனியுங்கள்.</string>
-    <string name="action_view_bugs">ஒரு சிக்கலைப் புகாரளி</string>
-    <string name="summary_action_view_bugs">எங்கள் GitHub திட்ட பக்கத்தில் உங்கள் ஆலோசனைகள் அல்லது சிக்கல்களைச் சமர்ப்பிக்கவும்.</string>
-    <string name="action_filter">வடிகட்டி…</string>
     <string name="filter_hint">தொகுப்பு/செயல்</string>
     <string name="activity_settings">அமைப்புகள்</string>
     <string name="settings_hide_private">தனிப்பட்ட செயல்பாடுகளை மறை</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">கணினி இயல்புநிலை</string>
     <string name="theme_light">ஒளி தீம்</string>
     <string name="theme_dark">இருண்ட தீம்</string>
+    <string name="settings_pro_version">செயல்பாடு துவக்கி Pro</string>
+    <string name="settings_summary_pro_version">பயன்பாட்டை ஆதரித்து விளம்பரங்களை அகற்ற விரும்புகிறீர்களா? Google Play இல் செயல்பாடு துவக்கி Pro ஐப் பெறுங்கள் - இது மேம்பாட்டுக்கு நிதியளிக்கிறது மற்றும் முற்றிலும் திறந்த மூலமாகும்.</string>
+    <string name="settings_github">கிட்ஹப் திட்டம்</string>
+    <string name="settings_summary_github">GitHub இல் உள்ள செயல்பாடு துவக்கி திறந்த மூல திட்டத்திலிருந்து முன் கட்டமைக்கப்பட்ட APK ஐப் பதிவிறக்கலாம். மேம்பட்ட பயனர்கள் மூலக் குறியீட்டை ஆராய்ந்து, டெவலப்பர்களை ஆதரிக்கலாம் மற்றும் மொழிபெயர்ப்புகள் அல்லது புல் கோரிக்கைகளுடன் பங்களிக்கலாம்.</string>
+    <string name="category_title_ad_free">விளம்பரமில்லா பதிப்புகள்</string>
+    <string name="title_dialog_support">செயல்பாடு துவக்கியைப் பயன்படுத்தியதற்கு நன்றி</string>
+    <string name="dialog_support">எதிர்கால மேம்பாட்டுக்கு நிதியளிக்க விளம்பரங்களைச் சேர்த்துள்ளோம். விளம்பரங்கள் வேண்டாம் என விரும்புகிறீர்களா? Google Play இல் செயல்பாடு துவக்கி Pro க்கு மேம்படுத்தவும் - இது முற்றிலும் திறந்த-மூலமானது மற்றும் பயன்பாட்டில் தொடர்ந்து பணியாற்ற உதவுகிறது. GitHub இல் பயன்பாட்டை இலவசமாகவும் பெறலாம். அங்கு ஆதரவு விருப்பமானது ஆனால் எங்களுக்கு நிறைய உதவுகிறது.</string>
+    <string name="action_view_paid">செயல்பாடு துவக்கி Pro</string>
+    <string name="action_view_github">கிட்ஹப் திட்டம்</string>
+    <string name="action_personalized_ads_consent">தனிப்பட்ட விளம்பரங்கள்</string>
+    <string name="summary_personalized_ads_consent">தனிப்பட்ட விளம்பரங்களுக்கான அனுமதிகளை தனிப்பயனாக்கவும்</string>
 </resources>

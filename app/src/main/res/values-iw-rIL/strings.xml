@@ -24,8 +24,6 @@
     <string name="label_package">חבילה</string>
     <string name="label_class">מחלקה</string>
     <string name="label_icon">סמל</string>
-    <string name="label_menu">תפריט</string>
-    <string name="label_private">פרטי</string>
     <string name="starting_activity">מתחיל פעילות : %s</string>
     <string name="creating_application_shortcut">יוצר קיצור לאפליקציה %s</string>
     <string name="error">שגיאה</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">אודות</string>
     <string name="action_view_source">צפה בקוד המקור</string>
     <string name="summary_action_view_source">קוד המקור של אפליקציה זו זמין לקריאה ושינוי ב-GitHub.  אל תהסס לשלוח לנו בקשות משיכה עם שיפורים ותיקוני באגים.</string>
-    <string name="action_view_translation">עזרו בתרגום האפליקציה!</string>
-    <string name="summary_action_view_translation">אם נהנתם ממשגר הפעילויות, אנא שיקלו לעזור לתרגם את האפליקציה לשפתכם.</string>
-    <string name="action_view_bugs">דווח על בעיה</string>
-    <string name="summary_action_view_bugs">אנא שלח את ההצעות או הבעיות שלך בדף פרויקט GitHub שלנו.</string>
-    <string name="action_filter">סנן</string>
     <string name="filter_hint">חבילה/פעולה</string>
     <string name="activity_settings">הגדרות</string>
     <string name="settings_hide_private">הסתר פעילויות פרטיות</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">מערכת</string>
     <string name="theme_light">מואר</string>
     <string name="theme_dark">כהה</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">רוצה לתמוך באפליקציה ולהסיר פרסומות? קבל את Activity Launcher Pro ב-Google Play - זה עוזר לממן את הפיתוח והוא בקוד פתוח מלא.</string>
+    <string name="settings_github">פרויקט GitHub</string>
+    <string name="settings_summary_github">אתה יכול להוריד את ה-APK הבנוי מראש מפרויקט הקוד הפתוח Activity Launcher ב-GitHub. משתמשים מתקדמים יכולים גם לחקור את קוד המקור, לתמוך במפתחים ולתרום בתרגומים או בקשות משיכה.</string>
+    <string name="category_title_ad_free">גרסאות ללא פרסומות</string>
+    <string name="title_dialog_support">תודה על השימוש ב-"Activity Launcher"</string>
+    <string name="dialog_support">הוספנו פרסומות כדי לעזור לממן פיתוח עתידי. מעדיפים בלי פרסומות? שדרגו ל-"Activity Launcher Pro" ב-Google Play – הוא בקוד פתוח לחלוטין ותומך בהמשך העבודה על האפליקציה. תוכלו גם לקבל את האפליקציה בחינם ב-GitHub. תמיכה שם היא אופציונלית אבל עוזרת לנו מאוד.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">פרויקט GitHub</string>
+    <string name="action_personalized_ads_consent">פרסומות מותאמות אישית</string>
+    <string name="summary_personalized_ads_consent">התאמת הרשאות לפרסומות מותאמות אישית</string>
 </resources>

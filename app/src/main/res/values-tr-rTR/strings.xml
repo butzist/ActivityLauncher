@@ -24,13 +24,11 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Sınıf</string>
     <string name="label_icon">Simge</string>
-    <string name="label_menu">Menü</string>
-    <string name="label_private">özel</string>
     <string name="starting_activity">%s etkinliği başlatılıyor</string>
     <string name="creating_application_shortcut">%s için uygulama kısayolu oluşturuluyor</string>
     <string name="error">Hata</string>
     <string name="error_creating_shortcut">Kısayol oluşturulurken hata oluştu</string>
-    <string name="error_icons">Simgeler yüklenirken hata oluştu. </string>
+    <string name="error_icons">Simgeler yüklenirken hata oluştu.</string>
     <string name="error_invalid_icon_resource">Hata: geçersiz simge kaynağı</string>
     <string name="error_invalid_icon_format">Hata: geçersiz simge formatı</string>
     <string name="error_verbose_pin_shortcut">Geçerli başlatıcısı "PinShortcut" özelliğini desteklemiyor. Kısayol oluşturulamıyor.</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Hakkında</string>
     <string name="action_view_source">Kaynak Kodunu Göster</string>
     <string name="summary_action_view_source">Bu uygulamanın kaynak kodu GitHub\'da mevcuttur. Okunabilir veya düzenlenebilir. İyileştirmeler ve hata düzeltmeleri için yardım etmekten çekinmeyin.</string>
-    <string name="action_view_translation">Çeviriye Yardım Et!</string>
-    <string name="summary_action_view_translation">Activity Launcher\'dan hoşlanıyorsanız, lütfen uygulamayı kendi dilinize çevirmeyi düşünün.</string>
-    <string name="action_view_bugs">Bir Sorun Bildirin</string>
-    <string name="summary_action_view_bugs">Lütfen önerilerinizi veya sorunlarınızı GitHub proje sayfamıza gönderin.</string>
-    <string name="action_filter">Filtre…</string>
     <string name="filter_hint">paket/eylem</string>
     <string name="activity_settings">Ayarlar</string>
     <string name="settings_hide_private">Gizli etkinlikleri gizle</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Sistem Varsayılanı</string>
     <string name="theme_light">Açık Tema</string>
     <string name="theme_dark">Koyu Tema</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Uygulamayı desteklemek ve reklamlardan kurtulmak mı istiyorsunuz? Google Play\'den Activity Launcher Pro\'yu edinin; bu, geliştirmeyi finanse etmeye yardımcı olur ve tamamen açık kaynaklıdır.</string>
+    <string name="settings_github">GitHub projesi</string>
+    <string name="settings_summary_github">Önceden oluşturulmuş APK\'yı GitHub\'daki Activity Launcher açık kaynak projesinden indirebilirsiniz. İleri düzey kullanıcılar ayrıca kaynak kodunu keşfedebilir, geliştiricileri destekleyebilir ve çeviriler veya çekme istekleriyle katkıda bulunabilir.</string>
+    <string name="category_title_ad_free">Reklamsız sürümler</string>
+    <string name="title_dialog_support">Activity Launcher kullandığınız için teşekkürler</string>
+    <string name="dialog_support">Gelecekteki geliştirmeleri finanse etmeye yardımcı olmak için reklamlar ekledik. Reklamsız kullanmayı mı tercih edersiniz? Google Play\'de Activity Launcher Pro\'ya yükseltin. Tamamen açık kaynaklıdır ve uygulamanın geliştirilmesine destek olur. Uygulamayı GitHub\'dan da ücretsiz olarak edinebilirsiniz. Oradaki destek isteğe bağlıdır, ancak bize çok yardımcı olur.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub projesi</string>
+    <string name="action_personalized_ads_consent">Kişiselleştirilmiş Reklamlar</string>
+    <string name="summary_personalized_ads_consent">Kişiselleştirilmiş reklamlar için izinleri özelleştir</string>
 </resources>

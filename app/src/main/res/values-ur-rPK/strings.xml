@@ -24,8 +24,6 @@
     <string name="label_package">پیکیج</string>
     <string name="label_class">کلاس</string>
     <string name="label_icon">آئیکن</string>
-    <string name="label_menu">مینو</string>
-    <string name="label_private">نجی</string>
     <string name="starting_activity">سرگرمی شروع کی جا رہی ہے: %s</string>
     <string name="creating_application_shortcut">%s کے لیے ایپلیکیشن شارٹ کٹ بنایا جا رہا ہے</string>
     <string name="error">خرابی</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">کے بارے میں</string>
     <string name="action_view_source">سورس کوڈ دیکھیں</string>
     <string name="summary_action_view_source">اس ایپ کا سورس کوڈ GitHub پر پڑھنے اور ترمیم کرنے کے لیے دستیاب ہے۔ بہتری اور بگ فکسز کے لیے ہمیں پل ریکوئسٹس بھیجنے میں ہچکچائیں نہیں۔</string>
-    <string name="action_view_translation">ترجمہ میں مدد کریں</string>
-    <string name="summary_action_view_translation">اگر آپ Activity Launcher پسند کر رہے ہیں، تو براہ کرم اس ایپ کا اپنی زبان میں ترجمہ کرنے پر غور کریں۔</string>
-    <string name="action_view_bugs">مسئلہ رپورٹ کریں</string>
-    <string name="summary_action_view_bugs">براہ کرم ہماری GitHub پروجیکٹ صفحے پر اپنی تجاویز یا مسائل جمع کروائیں۔</string>
-    <string name="action_filter">فلٹر کریں…</string>
     <string name="filter_hint">پیکیج/سرگرمی</string>
     <string name="activity_settings">ترتیبات</string>
     <string name="settings_hide_private">نجی سرگرمیاں چھپائیں</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">سسٹم ڈیفالٹ</string>
     <string name="theme_light">ہلکی تھیم</string>
     <string name="theme_dark">گہری تھیم</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">ایپ کو سپورٹ کرنا چاہتے ہیں اور اشتہارات کو ہٹانا چاہتے ہیں؟ گوگل پلے پر Activity Launcher Pro حاصل کریں — یہ ترقی کے لیے مالی اعانت فراہم کرنے میں مدد کرتا ہے اور مکمل طور پر اوپن سورس ہے۔</string>
+    <string name="settings_github">GitHub پروجیکٹ</string>
+    <string name="settings_summary_github">آپ GitHub پر Activity Launcher اوپن سورس پروجیکٹ سے پہلے سے تیار کردہ APK ڈاؤن لوڈ کرسکتے ہیں۔ ایڈوانسڈ صارفین سورس کوڈ بھی دیکھ سکتے ہیں، ڈویلپرز کی مدد کرسکتے ہیں، اور ترجمے یا پل کی درخواستوں میں حصہ لے سکتے ہیں۔</string>
+    <string name="category_title_ad_free">اشتہار سے پاک ورژن</string>
+    <string name="title_dialog_support">ایکٹیویٹی لانچر استعمال کرنے کے لئے آپ کا شکریہ</string>
+    <string name="dialog_support">ہم نے مستقبل کی ترقی کے لئے فنڈ دینے میں مدد کے لئے اشتہارات شامل کیے ہیں۔ کوئی اشتہار نہیں چاہتے؟ گوگل پلے پر ایکٹیویٹی لانچر پرو میں اپ گریڈ کریں - یہ مکمل طور پر اوپن سورس ہے اور ایپ پر جاری کام کی حمایت کرتا ہے۔ آپ گٹ ہب پر مفت میں ایپ بھی حاصل کرسکتے ہیں۔ وہاں سپورٹ اختیاری ہے لیکن اس سے ہمیں بہت مدد ملتی ہے۔</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub پروجیکٹ</string>
+    <string name="action_personalized_ads_consent">ذاتی نوعیت کے اشتہارات</string>
+    <string name="summary_personalized_ads_consent">ذاتی نوعیت کے اشتہارات کے لیے اجازت نامے حسب ضرورت بنائیں</string>
 </resources>

@@ -24,9 +24,7 @@
     <string name="label_package">पैकेज</string>
     <string name="label_class">वर्ग(class)</string>
     <string name="label_icon">आइकॉन</string>
-    <string name="label_menu">मेनू</string>
-    <string name="label_private">निजी</string>
-    <string name="starting_activity">%s गतिविधि शुरू हो रही है </string>
+    <string name="starting_activity">%s गतिविधि शुरू हो रही है</string>
     <string name="creating_application_shortcut">%s एप्लिकेशन के लिए शॉर्टकट बनाया जा रहा है</string>
     <string name="error">असफल(Error)</string>
     <string name="error_creating_shortcut">शॉर्टकट सृजन असफल</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">विषय में</string>
     <string name="action_view_source">सोर्स कोड देखें</string>
     <string name="summary_action_view_source">इस ऐप का सोर्स कोड GitHub पर पढ़ने और संशोधित करने के लिए उपलब्ध है। बेझिझक हमें सुधार और बग फिक्स के साथ पुल अनुरोध (pull requests) भेजें।</string>
-    <string name="action_view_translation">अनुवाद करने में हमारी मदद करें।</string>
-    <string name="summary_action_view_translation">यदि आप गतिविधि लांचर का आनंद ले रहे हैं, तो कृपया ऐप का अपनी भाषा में अनुवाद करने पर विचार करें।</string>
-    <string name="action_view_bugs">समस्या की रिपोर्ट करें</string>
-    <string name="summary_action_view_bugs">कृपया अपने सुझाव या मुद्दे हमारे GitHub प्रोजेक्ट पेज पर सबमिट करें।</string>
-    <string name="action_filter">फ़िल्टर...</string>
     <string name="filter_hint">पैकेज/गतिविधि</string>
     <string name="activity_settings">सेटिंग्स</string>
     <string name="settings_hide_private">निजी गतिविधियों को छुपाएं</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">सिस्टम डिफ़ॉल्ट</string>
     <string name="theme_light">लाइट थीम</string>
     <string name="theme_dark">डार्क थीम</string>
+    <string name="settings_pro_version">एक्टिविटी लॉन्चर प्रो</string>
+    <string name="settings_summary_pro_version">ऐप को सपोर्ट करना चाहते हैं और विज्ञापन हटाना चाहते हैं? Google Play पर एक्टिविटी लॉन्चर प्रो प्राप्त करें - यह विकास को निधि देने में मदद करता है और पूरी तरह से ओपन-सोर्स है।</string>
+    <string name="settings_github">GitHub प्रोजेक्ट</string>
+    <string name="settings_summary_github">आप GitHub पर एक्टिविटी लॉन्चर ओपन-सोर्स प्रोजेक्ट से पहले से निर्मित APK डाउनलोड कर सकते हैं. उन्नत उपयोगकर्ता स्रोत कोड का भी पता लगा सकते हैं, डेवलपर्स का समर्थन कर सकते हैं, और अनुवाद या पुल अनुरोधों के साथ योगदान कर सकते हैं.</string>
+    <string name="category_title_ad_free">विज्ञापन-मुक्त संस्करण</string>
+    <string name="title_dialog_support">एक्टिविटी लॉन्चर का उपयोग करने के लिए धन्यवाद</string>
+    <string name="dialog_support">हमने भविष्य के विकास के लिए फंड देने में मदद करने के लिए विज्ञापन जोड़े हैं। कोई विज्ञापन नहीं चाहिए? Google Play पर एक्टिविटी लॉन्चर प्रो में अपग्रेड करें - यह पूरी तरह से ओपन-सोर्स है और ऐप पर लगातार काम करने में मदद करता है। आप GitHub पर ऐप मुफ्त में भी प्राप्त कर सकते हैं। वहाँ समर्थन वैकल्पिक है लेकिन इससे हमें बहुत मदद मिलती है।</string>
+    <string name="action_view_paid">एक्टिविटी लॉन्चर प्रो</string>
+    <string name="action_view_github">GitHub प्रोजेक्ट</string>
+    <string name="action_personalized_ads_consent">व्यक्तिगत विज्ञापन</string>
+    <string name="summary_personalized_ads_consent">व्यक्तिगत विज्ञापनों के लिए अनुमतियाँ अनुकूलित करें</string>
 </resources>

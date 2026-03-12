@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">اکتیویتی لانچر</string>
-    <string name="short_description">فعالبت‌های مخفی را نمایش می‌دهد و برای برنامه‌های نصب شده میان‌بر درست می‌کند</string>
+    <string name="short_description">فعالیت‌های مخفی را نمایش می‌دهد و برای برنامه‌های نصب شده میان‌بر درست می‌کند</string>
     <string name="nav_all">همه</string>
     <string name="nav_favorites">مورد علاقه</string>
     <string name="nav_recents">اخیر</string>
@@ -24,8 +24,6 @@
     <string name="label_package">بسته</string>
     <string name="label_class">کلاس</string>
     <string name="label_icon">آیکون</string>
-    <string name="label_menu">منو</string>
-    <string name="label_private">خصوصی</string>
     <string name="starting_activity">در حال شروع اکتیویتی: %s</string>
     <string name="creating_application_shortcut">در حال ایجاد میان‌بر برای برنامه: %s</string>
     <string name="error">خطا</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">درباره</string>
     <string name="action_view_source">مشاهده کد منبع</string>
     <string name="summary_action_view_source">کد منبع این برنامه برای مشاهده و ویرایش در GitHub در دسترس است. در صورت تمایل در خواست‌های بهبود و رفع اشکال را برای ما ارسال کنید.</string>
-    <string name="action_view_translation">کمک به ترجمه</string>
-    <string name="summary_action_view_translation">اگر از اکتیویتی لانچر لذت می‌برید، لطفاً در ترجمه برنامه به زبان خودتان مشارکت کنید.</string>
-    <string name="action_view_bugs">گزارش مشکل</string>
-    <string name="summary_action_view_bugs">لطفاً پیشنهادها یا مشکلات خود را در صفحه GitHub پروژه درج کنید.</string>
-    <string name="action_filter">پالایش…</string>
     <string name="filter_hint">بسته/فعالیت</string>
     <string name="activity_settings">تنظيمات</string>
     <string name="settings_hide_private">پنهان‌سازی اکتیویتی‌های خصوصی</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">پیش‌فرض سیستم</string>
     <string name="theme_light">پوسته روشن</string>
     <string name="theme_dark">پوسته تاریک</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">آیا می خواهید از برنامه حمایت کنید و تبلیغات را حذف کنید؟ اکتیویتی لانچر حرفه ای را در گوگل پلی دریافت کنید — این به تأمین مالی توسعه کمک می کند و کاملاً متن باز است.</string>
+    <string name="settings_github">پروژه گیت هاب</string>
+    <string name="settings_summary_github">می توانید APK از پیش ساخته شده را از پروژه متن باز اکتیویتی لانچر در GitHub دانلود کنید. کاربران حرفه ای همچنین می توانند کد منبع را بررسی کنند، از توسعه دهندگان پشتیبانی کنند و با ترجمه ها یا درخواست های pull مشارکت کنند.</string>
+    <string name="category_title_ad_free">نسخه های بدون تبلیغات</string>
+    <string name="title_dialog_support">با تشکر از استفاده شما از Activity Launcher</string>
+    <string name="dialog_support">ما برای کمک به تأمین بودجه توسعه آینده، تبلیغاتی را اضافه کرده‌ایم. ترجیح می‌دهید بدون تبلیغات باشد؟ به Activity Launcher Pro در Google Play ارتقا دهید - این برنامه کاملاً متن باز است و از ادامه کار بر روی برنامه پشتیبانی می‌کند. همچنین می‌توانید این برنامه را به صورت رایگان در GitHub دریافت کنید. پشتیبانی در آنجا اختیاری است اما کمک زیادی به ما می‌کند.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">پروژه گیت هاب</string>
+    <string name="action_personalized_ads_consent">تبلیغات شخصی‌سازی‌شده</string>
+    <string name="summary_personalized_ads_consent">تنظیم مجوزها برای تبلیغات شخصی‌سازی‌شده</string>
 </resources>

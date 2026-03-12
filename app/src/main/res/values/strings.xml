@@ -14,7 +14,7 @@
     <string name="context_action_launch_as_root" comment="Context menu action to launch an activity using root/administrator privileges">Launch activity as root</string>
     <string name="context_action_shortcut" comment="Context menu action to create a home screen shortcut for an activity">Create shortcut</string>
     <string name="context_action_shortcut_as_root" comment="Context menu action to create a home screen shortcut with root privileges">Create shortcut as root</string>
-    <string name="context_action_edit" comment="Context menu action to edit an existing shortcut's properties">Edit shortcut</string>
+    <string name="context_action_edit" comment="Context menu action to edit an existing shortcut\'s properties">Edit shortcut</string>
     <string name="context_action_share_shortcut" comment="Context menu action to share a created shortcut as a link">Share shortcut</string>
     <string name="context_action_favorite_add" comment="Context menu action to add an activity to the favorites list">Add to favorites</string>
     <string name="context_action_favorite_remove" comment="Context menu action to remove an activity from the favorites list">Remove from favorites</string>
@@ -23,8 +23,6 @@
     <string name="label_package" comment="Form label for the package name field">Package</string>
     <string name="label_class" comment="Form label for the activity class name field">Class</string>
     <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
-    <string name="label_menu" comment="Accessibility label for the overflow menu button in the app bar">Menu</string>
-    <string name="label_private" comment="Badge label indicating an activity is private (not exported and requires root)">private</string>
     <string name="starting_activity" comment="Toast message shown when starting an activity. %s is the activity name or class">Starting activity: %s</string>
     <string name="creating_application_shortcut" comment="Toast message shown when creating a shortcut. %s is the app/activity name">Creating application shortcut for %s</string>
     <string name="error" comment="Generic error dialog title">Error</string>
@@ -38,13 +36,8 @@
     <string name="exception_invalid_component_name" comment="Error message for dangerous or invalid component names. %s is the problematic component">Invalid or potentially harmful component name: %s</string>
     <string name="exception_command_error" comment="Error message when a shell command fails. %d is error code, %s is command output">Command returned error code: %d, output: %s</string>
     <string name="category_title_about" comment="Settings category header for about and info section">About</string>
-    <string name="action_view_source" comment="Settings action to view the app's source code on GitHub">View source code</string>
+    <string name="action_view_source" comment="Settings action to view the app\'s source code on GitHub">View source code</string>
     <string name="summary_action_view_source" comment="Description for the view source code setting">The source code of this App is available for reading and modifying on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
-    <string name="action_view_translation" comment="Settings action to open the translation contribute page">Help translate</string>
-    <string name="summary_action_view_translation" comment="Description encouraging users to translate the app">If you are enjoying Activity Launcher, please consider translating the App into your language.</string>
-    <string name="action_view_bugs" comment="Settings action to report bugs or issues">Report a problem</string>
-    <string name="summary_action_view_bugs" comment="Description for the bug report setting">Please submit your suggestions or issues on our GitHub project page.</string>
-    <string name="action_filter" comment="Content description for the filter/search icon in the app bar">Filter…</string>
     <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
     <string name="activity_settings" comment="Navigation item label for the settings screen">Settings</string>
     <string name="settings_hide_private" comment="Settings switch to hide private/unexported activities">Hide private activities</string>
@@ -56,4 +49,15 @@
     <string name="theme_default" comment="Theme option to follow system theme">System Default</string>
     <string name="theme_light" comment="Theme option for light color scheme">Light Theme</string>
     <string name="theme_dark" comment="Theme option for dark color scheme">Dark Theme</string>
+    <string name="settings_pro_version" comment="Settings link to the Pro/ad-free version of the app">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version" comment="Description for the Pro version setting">Want to support the app and remove ads? Get Activity Launcher Pro on Google Play — it helps fund development and is fully open-source.</string>
+    <string name="settings_github" comment="Settings link to the GitHub project page">GitHub project</string>
+    <string name="settings_summary_github" comment="Description for the GitHub project setting">You can download the pre-built APK from the Activity Launcher open-source project on GitHub. Advanced users can also explore the source code, support the developers, and contribute with translations or pull requests.</string>
+    <string name="category_title_ad_free" comment="Settings category header for ad-free version options">Ad-free versions</string>
+    <string name="title_dialog_support" comment="Dialog title for the support/donate dialog">Thanks for using Activity Launcher</string>
+    <string name="dialog_support" comment="Dialog message encouraging users to support the app">We\'ve added ads to help fund future development. Prefer no ads? Upgrade to Activity Launcher Pro on Google Play — it\'s fully open-source and supports continued work on the app. You can also get the app for free on GitHub. Support there is optional but helps us a lot.</string>
+    <string name="action_view_paid" comment="Settings action to view the paid Pro version on Google Play">Activity Launcher Pro</string>
+    <string name="action_view_github" comment="Settings action to view the GitHub project">GitHub project</string>
+    <string name="action_personalized_ads_consent" comment="Settings action for personalized ads consent">Personalized Ads</string>
+    <string name="summary_personalized_ads_consent" comment="Description for the personalized ads consent setting">Customize permissions for personalized advertisements</string>
 </resources>

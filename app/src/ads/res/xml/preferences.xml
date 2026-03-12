@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="category_ad_free"
+        android:title="@string/category_title_ad_free">
+        <Preference
+            android:key="action_view_pro_version"
+            android:summary="@string/settings_summary_pro_version"
+            android:title="@string/settings_pro_version"
+            app:singleLineTitle="true">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_pro" />
+        </Preference>
+        <Preference
+            android:key="action_view_github"
+            android:summary="@string/settings_summary_github"
+            android:title="@string/settings_github"
+            app:singleLineTitle="true">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_github_project" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_settings"
+        android:title="@string/activity_settings">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="hide_private"
+            android:summary="@string/settings_summary_hide_private"
+            android:title="@string/settings_hide_private" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="allow_root"
+            android:summary="@string/settings_summary_allow_root"
+            android:title="@string/settings_allow_root" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/theme_settings"
+            android:entryValues="@array/theme_settings_values"
+            android:key="theme"
+            android:title="@string/settings_theme" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entryValues="@array/locales"
+            android:key="language"
+            android:title="@string/settings_language" />
+        <Preference
+            android:key="action_personalized_ads_consent"
+            android:summary="@string/summary_personalized_ads_consent"
+            android:title="@string/action_personalized_ads_consent"
+            app:singleLineTitle="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
