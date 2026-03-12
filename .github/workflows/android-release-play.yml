@@ -15,11 +15,11 @@ jobs:
     - name: Set version
       id: version
       run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-    - name: set up JDK 17
+    - name: set up JDK 21
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: 17
+        java-version: 21
         cache: 'gradle'
     - name: Prepare Android keystore
       run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
