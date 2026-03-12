@@ -8,9 +8,8 @@
     <fragment
         android:id="@+id/LoadingFragment"
         android:name="de.szalkowski.activitylauncher.ui.LoadingFragment"
-        android:label="@string/app_name"
+        android:label="@string/title_fragment_package_list"
         tools:layout="@layout/fragment_loading">
-
         <action
             android:id="@+id/actionLoadingFinished"
             app:destination="@id/PackageListFragment"
@@ -69,7 +68,7 @@
     <fragment
         android:id="@+id/FavoritesFragment"
         android:name="de.szalkowski.activitylauncher.ui.FavoritesFragment"
-        android:label="Favorites"
+        android:label="@string/nav_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
             android:id="@+id/actionSelectActivity"
@@ -83,7 +82,7 @@
     <fragment
         android:id="@+id/RecentsFragment"
         android:name="de.szalkowski.activitylauncher.ui.RecentsFragment"
-        android:label="Recents"
+        android:label="@string/nav_recents"
         tools:layout="@layout/fragment_recents">
         <action
             android:id="@+id/actionSelectActivity"

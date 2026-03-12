@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">دەستپێکەرەوەی چالاکی</string>
-    <string name="short_description">چالاکییەشاراوەکان دەکاتەوە و کورتەڕێگا بۆ ئەپە دامەزراوەکان دروست دەکات</string>
+    <string name="short_description">چالاکییە شاراوەکان دەکاتەوە و کورتەڕێگا بۆ ئەپە دامەزراوەکان دروست دەکات</string>
     <string name="nav_all">هەموو</string>
     <string name="nav_favorites">خۆشەویستەکان</string>
     <string name="nav_recents">نوێ</string>
@@ -10,7 +10,7 @@
     <string name="title_dialog_disclaimer">ئاگادارکردنەوە</string>
     <string name="title_dialog_icon_picker">هەڵبژێرەری ئایکۆن</string>
     <string name="dialog_progress_loading">چاوەڕێبە...</string>
-    <string name="dialog_disclaimer">ئەم ئەپە ڕێگە بەچالاکییەشاراوەکان دەدات کە ئاساییانە لەبەرهەمێنەرانەوە شیناکرێنەوە. لەوانەیە هەندێکیان بەو شێوەیەی کە پێدەچێت کارنەکەن یان بەکارهێنانیان ناپارێزرێت. تۆ دەتوانیت و تۆزێکتر دەتەوێت بەردەوامبیت؟</string>
+    <string name="dialog_disclaimer">ئەم ئەپە ڕێگە بە چالاکییە شاراوەکان دەدات کە ئاساییانە لە بەرهەمێنەرانەوە شیناکرێنەوە. لەوانەیە هەندێکیان بەو شێوەیەی کە پێدەچێت کارنەکەن یان بەکارهێنانیان ناپارێزرێت. تۆ دەتوانیت و تۆزێکتر دەتەوێت بەردەوام بیت؟</string>
     <string name="context_action_launch">دەستپێکردنی چالاکی</string>
     <string name="context_action_launch_as_root">دەستپێکردنی چالاکی وەک ڕووت</string>
     <string name="context_action_shortcut">دروستکردنی کورتەڕێگا</string>
@@ -24,8 +24,6 @@
     <string name="label_package">پاکێج</string>
     <string name="label_class">کلاس</string>
     <string name="label_icon">ئایکۆن</string>
-    <string name="label_menu">مینیو</string>
-    <string name="label_private">تایبەت</string>
     <string name="starting_activity">دەستپێکردنی چالاکی: %s</string>
     <string name="creating_application_shortcut">دروستکردنی کورتەڕێگای ئەپ بۆ %s</string>
     <string name="error">هەڵە</string>
@@ -40,21 +38,27 @@
     <string name="exception_command_error">فەرمانەکە کۆدی هەڵەی گەڕاندەوە: %d، دەرچوون: %s</string>
     <string name="category_title_about">دەربارە</string>
     <string name="action_view_source">بینینی سەرچاوەی کۆد</string>
-    <string name="summary_action_view_source">سەرچاوەی کۆدی ئەم ئەپە بۆ خوێندەوە و دەستکاریکردن لەسەر GitHub بەردەستە. ئازادانە داواکاری ڕاکێشانمان بۆ بنێرن لەگەڵ باشترکردن و چاککردنی هەڵەکان.</string>
-    <string name="action_view_translation">هاوکاری بۆ وەرگێڕان</string>
-    <string name="summary_action_view_translation">ئەگەر دەستپێکەرەوەی چالاکیت خۆشەوێت، تکایە وەرگێڕاندنی ئەپەکە بۆ زمانەکەت لەبیربکە.</string>
-    <string name="action_view_bugs">ڕاپۆڕتکردنی کێشەکان</string>
-    <string name="summary_action_view_bugs">تکایە پێشنیارەکان یان کێشەکانتان لە پەڕەی پڕۆژەی GitHub بنێرن.</string>
-    <string name="action_filter">فیلتەر...</string>
+    <string name="summary_action_view_source">سەرچاوەی کۆدی ئەم ئەپە بۆ خوێندنەوە و دەستکاریکردن لەسەر GitHub بەردەستە. ئازادانە داواکاری ڕاکێشانمان بۆ بنێرن لەگەڵ باشترکردن و چاککردنی هەڵەکان.</string>
     <string name="filter_hint">پاکێج/چالاکی</string>
     <string name="activity_settings">ڕێکخستنەکان</string>
     <string name="settings_hide_private">شاردنەوەی چالاکییە تایبەتەکان</string>
-    <string name="settings_summary_hide_private">چالاکییە تایبەتەکان (نەهێنراوەکان و ناچالاکەکان) بشارەوە، کە بەبێ گەیشتن بە ڕەنگە دەستپێنەکەن</string>
+    <string name="settings_summary_hide_private">چالاکییە تایبەتەکان (نەهێنراوەکان و ناچالاکەکان) بشارەوە، کە بەبێ گەیشتن بە ڕووت دەست پێ ناکەن</string>
     <string name="settings_allow_root">چالاککردنی دۆخی ڕووت</string>
-    <string name="settings_summary_allow_root">ڕێگەبدە بە دەستپێکردنی چالاکییە تایبەتەکان بە بەکارهێنانی مۆڵەتەکانی ڕووت</string>
+    <string name="settings_summary_allow_root">ڕێگە بدە بە دەستپێکردنی چالاکییە تایبەتەکان بە بەکارهێنانی مۆڵەتەکانی ڕووت</string>
     <string name="settings_language">زمان</string>
     <string name="settings_theme">تێمە</string>
     <string name="theme_default">بنەڕەتی سیستەم</string>
     <string name="theme_light">تێمەی ڕووناک</string>
     <string name="theme_dark">تێمەی تاریک</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">دەتەوێت پشتگیری لە ئەپەکە بکەیت و ڕیکلامەکان لابەریت؟ Activity Launcher Pro لە Google Play بەدەستبهێنە — یارمەتی دابینکردنی بودجەی گەشەپێدان دەدات و بەتەواوی سەرچاوە کراوەیە.</string>
+    <string name="settings_github">پڕۆژەی GitHub</string>
+    <string name="settings_summary_github">تۆ دەتوانیت APK ئامادەکراو لە پڕۆژەی سەرچاوە کراوەی Activity Launcher لەسەر GitHub دابگریت. بەکارهێنەرە پێشکەوتووەکان دەتوانن سەیری سەرچاوە کۆدەکە بکەن، پشتگیری لە گەشەپێدەران بکەن، و بەشدار بن لە وەرگێڕان یان داواکاری ڕاکێشان.</string>
+    <string name="category_title_ad_free">وەشانەکانی بێ ڕیکلام</string>
+    <string name="title_dialog_support">سپاس بۆ بەکارهێنانی Activity Launcher</string>
+    <string name="dialog_support">ئێمە ڕیکلاممان زیاد کردووە بۆ یارمەتیدانی دابینکردنی بودجەی گەشەپێدانی داهاتوو. حەزت لە بێ ڕیکلامە؟ نوێی بکەرەوە بۆ Activity Launcher Pro لە Google Play — بەتەواوی سەرچاوە کراوەیە و پشتگیری لە بەردەوامبوونی کارکردن لەسەر ئەپەکە دەکات. هەروەها دەتوانیت ئەپەکە بەخۆڕایی لە GitHub بەدەستبهێنیت. پشتگیری لەوێ ئارەزوومەندانەیە بەڵام زۆر یارمەتیمان دەدات.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">پڕۆژەی GitHub</string>
+    <string name="action_personalized_ads_consent">ڕیکلامە تایبەتەکان</string>
+    <string name="summary_personalized_ads_consent">دەستکاریکردنی مۆڵەتەکان بۆ ڕیکلامە تایبەتەکان</string>
 </resources>

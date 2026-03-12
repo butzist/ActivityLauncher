@@ -24,8 +24,6 @@
     <string name="label_package">Numele Pachetului</string>
     <string name="label_class">Clasă</string>
     <string name="label_icon">Pitogramă</string>
-    <string name="label_menu">Meniu</string>
-    <string name="label_private">personal</string>
     <string name="starting_activity">Se lansează activitatea %s</string>
     <string name="creating_application_shortcut">Se crează scurtătură la aplicație pentru %s</string>
     <string name="error">Eroare</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Despre</string>
     <string name="action_view_source">Vezi codul sursă</string>
     <string name="summary_action_view_source">Codul sursă al acestei aplicații este disponibil pentru citire și modificare pe GitHub. Puteți să ne trimiteți cereri pull cu îmbunătățiri și erori.</string>
-    <string name="action_view_translation">Ajută la traducere!</string>
-    <string name="summary_action_view_translation">Dacă vă place Activity Launcher,  luați în considerare traducerea aplicației în limba dvs.</string>
-    <string name="action_view_bugs">Semnalează o problemă</string>
-    <string name="summary_action_view_bugs">Dacă aveți sugestii sau probleme, vă rugăm să le raportați în proiectul nostru pe GitHub.</string>
-    <string name="action_filter">Filtrare...</string>
     <string name="filter_hint">pachet/acțiune</string>
     <string name="activity_settings">Setări</string>
     <string name="settings_hide_private">Ascunde activitățile private</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Implicit</string>
     <string name="theme_light">Temă deschisă</string>
     <string name="theme_dark">Temă întunecată</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Doriți să susțineți aplicația și să eliminați reclamele? Obțineți Activity Launcher Pro pe Google Play — ajută la finanțarea dezvoltării și este complet open-source.</string>
+    <string name="settings_github">Proiect GitHub</string>
+    <string name="settings_summary_github">Puteți descărca APK-ul pre-construit din proiectul open-source Activity Launcher de pe GitHub. Utilizatorii avansați pot explora, de asemenea, codul sursă, pot sprijini dezvoltatorii și pot contribui cu traduceri sau cereri de pull.</string>
+    <string name="category_title_ad_free">Versiuni fără reclame</string>
+    <string name="title_dialog_support">Mulțumim că folosești Lansator Activități</string>
+    <string name="dialog_support">Am adăugat reclame pentru a ajuta la finanțarea dezvoltării viitoare. Preferi fără reclame? Fă upgrade la Lansator Activități Pro pe Google Play – este complet open-source și sprijină continuarea lucrărilor la aplicație. Poți obține, de asemenea, aplicația gratuit pe GitHub. Sprijinul acolo este opțional, dar ne ajută foarte mult.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">Proiect GitHub</string>
+    <string name="action_personalized_ads_consent">Reclame personalizate</string>
+    <string name="summary_personalized_ads_consent">Personalizează permisiunile pentru reclamele personalizate</string>
 </resources>

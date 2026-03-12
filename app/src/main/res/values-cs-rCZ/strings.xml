@@ -24,8 +24,6 @@
     <string name="label_package">Balíček</string>
     <string name="label_class">Třída</string>
     <string name="label_icon">Ikona</string>
-    <string name="label_menu">Nabídka</string>
-    <string name="label_private">soukromé</string>
     <string name="starting_activity">Spouštění aktivity: %s</string>
     <string name="creating_application_shortcut">Vytváření zástupce aplikace pro %s</string>
     <string name="error">Chyba</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">O aplikaci</string>
     <string name="action_view_source">Zobrazit zdrojový kód</string>
     <string name="summary_action_view_source">Zdrojový kód této aplikace je k dispozici pro čtení a úpravy na GitHubu. Neváhejte nám posílat pull requests s vylepšeními a opravami chyb.</string>
-    <string name="action_view_translation">Pomozte s překladem!</string>
-    <string name="summary_action_view_translation">Pokud se vám Activity Launcher líbí, zvažte prosím překlad aplikace do vašeho jazyka.</string>
-    <string name="action_view_bugs">Nahlásit problém</string>
-    <string name="summary_action_view_bugs">Pokud máte jakékoliv návrhy nebo problémy, nahlaste je v našem projektu na GitHubu.</string>
-    <string name="action_filter">Filtrovat…</string>
     <string name="filter_hint">balíček/akce</string>
     <string name="activity_settings">Nastavení</string>
     <string name="settings_hide_private">Skrýt soukromé aktivity</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Výchozí nastavení systému</string>
     <string name="theme_light">Světlý motiv</string>
     <string name="theme_dark">Tmavý motiv</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Chcete podpořit aplikaci a zbavit se reklam? Získejte Activity Launcher Pro na Google Play – pomáhá financovat vývoj a je plně open-source.</string>
+    <string name="settings_github">Projekt na GitHubu</string>
+    <string name="settings_summary_github">Předem sestavený APK si můžete stáhnout z open-source projektu Activity Launcher na GitHubu. Pokročilí uživatelé mohou také prozkoumat zdrojový kód, podpořit vývojáře a přispět překlady nebo žádostmi o začlenění.</string>
+    <string name="category_title_ad_free">Verze bez reklam</string>
+    <string name="title_dialog_support">Děkujeme, že používáte Activity Launcher</string>
+    <string name="dialog_support">Přidali jsme reklamy, abychom mohli financovat budoucí vývoj. Nechcete reklamy? Upgradujte na Activity Launcher Pro na Google Play – je plně open-source a podporuje pokračující práci na aplikaci. Aplikaci můžete získat zdarma také na GitHubu. Podpora je zde dobrovolná, ale hodně nám pomáhá.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">Projekt na GitHubu</string>
+    <string name="action_personalized_ads_consent">Personalizované reklamy</string>
+    <string name="summary_personalized_ads_consent">Přizpůsobit oprávnění pro personalizované reklamy</string>
 </resources>

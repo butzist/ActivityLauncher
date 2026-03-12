@@ -24,8 +24,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Kelas</string>
     <string name="label_icon">Ikon</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">Privasi</string>
     <string name="starting_activity">Memulai aktivitas: %s.</string>
     <string name="creating_application_shortcut">Membuat pintasan aplikasi untuk %s</string>
     <string name="error">Kesalahan</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Tentang</string>
     <string name="action_view_source">Lihat kode sumber</string>
     <string name="summary_action_view_source">Kode sumber Aplikasi ini tersedia untuk dibaca dan dimodifikasi di GitHub. Jangan ragu untuk mengirimi kami permintaan tarik dengan peningkatan dan perbaikan bug.</string>
-    <string name="action_view_translation">Bantu Terjemahkan!</string>
-    <string name="summary_action_view_translation">Jika Anda menyukai Activity Launcher, pertimbangkan untuk menerjemahkan Aplikasi ke dalam bahasa Anda.</string>
-    <string name="action_view_bugs">Laporkan Masalah</string>
-    <string name="summary_action_view_bugs">Silakan kirimkan saran atau masalah Anda di halaman proyek GitHub kami.</string>
-    <string name="action_filter">Filter...</string>
     <string name="filter_hint">paket/tindakan</string>
     <string name="activity_settings">Pengaturan</string>
     <string name="settings_hide_private">Sembunyikan aktifitas privat</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Bawaan Sistem</string>
     <string name="theme_light">Tema Terang</string>
     <string name="theme_dark">Tema Gelap</string>
+    <string name="settings_pro_version">Peluncur Aktivitas Pro</string>
+    <string name="settings_summary_pro_version">Ingin mendukung aplikasi ini dan menghilangkan iklan? Dapatkan Peluncur Aktivitas Pro di Google Play — ini membantu mendanai pengembangan dan sepenuhnya sumber terbuka.</string>
+    <string name="settings_github">Proyek GitHub</string>
+    <string name="settings_summary_github">Anda dapat mengunduh APK pra-bangun dari proyek sumber terbuka Activity Launcher di GitHub. Pengguna tingkat lanjut juga dapat menjelajahi kode sumber, mendukung pengembang, dan berkontribusi dengan terjemahan atau permintaan pull.</string>
+    <string name="category_title_ad_free">Versi bebas iklan</string>
+    <string name="title_dialog_support">Terima kasih telah menggunakan Peluncur Aktivitas</string>
+    <string name="dialog_support">Kami telah menambahkan iklan untuk membantu mendanai pengembangan di masa mendatang. Lebih suka tanpa iklan? Tingkatkan ke Peluncur Aktivitas Pro di Google Play — sepenuhnya sumber terbuka dan mendukung kelanjutan pekerjaan pada aplikasi. Anda juga bisa mendapatkan aplikasi ini secara gratis di GitHub. Dukungan di sana bersifat opsional tetapi sangat membantu kami.</string>
+    <string name="action_view_paid">Peluncur Aktivitas Pro</string>
+    <string name="action_view_github">Proyek GitHub</string>
+    <string name="action_personalized_ads_consent">Iklan yang Dipersonalisasi</string>
+    <string name="summary_personalized_ads_consent">Sesuaikan izin untuk iklan yang dipersonalisasi</string>
 </resources>

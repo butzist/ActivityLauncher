@@ -1,5 +1,4 @@
 <resources>
-    <string name="url_source" translatable="false">https://github.com/butzist/ActivityLauncher</string>
-    <string name="url_translation" translatable="false">https://crowdin.net/project/activitylauncher/invite</string>
-    <string name="url_bugs" translatable="false">https://github.com/butzist/ActivityLauncher/issues</string>
+    <string name="url_pro" translatable="false">https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro</string>
+    <string name="url_github_project" translatable="false">https://github.com/butzist/ActivityLauncher</string>
 </resources>

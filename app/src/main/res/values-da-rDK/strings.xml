@@ -24,8 +24,6 @@
     <string name="label_package">Pakke</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Ikon</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">privat</string>
     <string name="starting_activity">Starter aktivitet: %s</string>
     <string name="creating_application_shortcut">Opretter app-genvej til %s</string>
     <string name="error">Fejl</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Om</string>
     <string name="action_view_source">Vis kildekode</string>
     <string name="summary_action_view_source">Denne Apps kildekoden kan læses og ændres på GitHub. Send os gerne pull requests med forbedringer og fejlrettelser.</string>
-    <string name="action_view_translation">Hjælp med oversættelse!</string>
-    <string name="summary_action_view_translation">Synes man om Activity Launcher, så overvej gerne at oversætte den til dit sprog.</string>
-    <string name="action_view_bugs">Rapportér et problem</string>
-    <string name="summary_action_view_bugs">Har man forslag/problemer, bedes disse indsendt/anmeldt via vores projekt på GitHub.</string>
-    <string name="action_filter">Filtrér...</string>
     <string name="filter_hint">pakke/handling</string>
     <string name="activity_settings">Indstillinger</string>
     <string name="settings_hide_private">Skjul private aktiviteter</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Systemstandard</string>
     <string name="theme_light">Lyst tema</string>
     <string name="theme_dark">Mørkt tema</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Ønsker at støtte appen og fjerne annoncer? Få Activity Launcher Pro fra Google Play – det hjælper med at finansiere udviklingen og er fuldt open-source.</string>
+    <string name="settings_github">GitHub-projekt</string>
+    <string name="settings_summary_github">Man kan downloade den præ-build APK fra Activity Launchers open-source projekt på GitHub. Avancerede brugere kan også studere kildekoden, støtte udviklerne og bidrage med oversættelser eller pull requests.</string>
+    <string name="category_title_ad_free">Annoncefrie versioner</string>
+    <string name="title_dialog_support">Tak fordi brugen af Activity Launcher</string>
+    <string name="dialog_support">Vi har tilføjet annoncer mhp. at finansiere fremtidig udvikling. Foretrækker man nul annoncer? Opgradér til Activity Launcher Pro på Google Play – den er fuldt open-source og støtter fortsat udvikling af appen. Man kan også få appen gratis på GitHub. Support dér er valgfrit, men hjælper os meget.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub-projekt</string>
+    <string name="action_personalized_ads_consent">Personlige annoncer</string>
+    <string name="summary_personalized_ads_consent">Tilpas tilladelser for personlige annoncer</string>
 </resources>

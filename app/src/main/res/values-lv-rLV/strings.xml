@@ -24,8 +24,6 @@
     <string name="label_package">Lietotne</string>
     <string name="label_class">Klase</string>
     <string name="label_icon">Ikona</string>
-    <string name="label_menu">Izvēlne</string>
-    <string name="label_private">privāts</string>
     <string name="starting_activity">Notiek %s darbības izpildīšana</string>
     <string name="creating_application_shortcut">Izveido %s lietotnes saīsni</string>
     <string name="error">Kļūda</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Par lietotni</string>
     <string name="action_view_source">Skatīt pirmkodu</string>
     <string name="summary_action_view_source">Šīs lietotnes pirmkods ir pieejams skatīšanai un modificēšanai GitHub vietnē. Jūtieties brīvi sūtīt mums izvilkšanas pieprasījumus ar uzlabojumiem un kļūdu labojumiem.</string>
-    <string name="action_view_translation">Palīdziet iztulkot</string>
-    <string name="summary_action_view_translation">Ja jums patīk Darbības Palaidējs - Activity Launcher, lūdzu, apsveriet iztulkot šo lietotni savā valodā.</string>
-    <string name="action_view_bugs">Ziņot par problēmu</string>
-    <string name="summary_action_view_bugs">Lūdzu, iesniedziet savus ieteikumus vai problēmas mūsu GitHub projekta lapā.</string>
-    <string name="action_filter">Filtrēt…</string>
     <string name="filter_hint">lietotne/darbība</string>
     <string name="activity_settings">Iestatījumi</string>
     <string name="settings_hide_private">Slēpt privātās darbības</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Sistēmas iestatījums</string>
     <string name="theme_light">Gaišais</string>
     <string name="theme_dark">Tumšais</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Vai vēlaties atbalstīt lietotni un noņemt reklāmas? Iegūstiet Activity Launcher Pro pakalpojumā Google Play — tas palīdz finansēt izstrādi un ir pilnībā atvērtā pirmkoda.</string>
+    <string name="settings_github">GitHub projekts</string>
+    <string name="settings_summary_github">Varat lejupielādēt iepriekš izveidoto APK no Activity Launcher atvērtā pirmkoda projekta vietnē GitHub. Pieredzējuši lietotāji var arī izpētīt pirmkodu, atbalstīt izstrādātājus un sniegt ieguldījumu ar tulkojumiem vai vilkšanas pieprasījumiem.</string>
+    <string name="category_title_ad_free">Versijas bez reklāmām</string>
+    <string name="title_dialog_support">Paldies, ka izmantojat Activity Launcher</string>
+    <string name="dialog_support">Esam pievienojuši reklāmas, lai palīdzētu finansēt turpmāko izstrādi. Vai vēlaties bez reklāmām? Atjauniniet uz Activity Launcher Pro pakotni Google Play veikalā — tā ir pilnībā atvērtā koda un atbalsta turpmāku darbu pie lietotnes. Jūs varat arī iegūt lietotni bez maksas GitHub vietnē. Atbalsts tur ir neobligāts, bet ļoti mums palīdz.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub projekts</string>
+    <string name="action_personalized_ads_consent">Personalizētās reklāmas</string>
+    <string name="summary_personalized_ads_consent">Pielāgot atļaujas personalizētajām reklāmām</string>
 </resources>

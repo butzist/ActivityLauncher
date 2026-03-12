@@ -24,8 +24,6 @@
     <string name="label_package">Пакет</string>
     <string name="label_class">Разред</string>
     <string name="label_icon">Икона</string>
-    <string name="label_menu">Меню</string>
-    <string name="label_private">частна</string>
     <string name="starting_activity">Стартиране на активност: %s</string>
     <string name="creating_application_shortcut">Създаване на пряк път за приложение %s</string>
     <string name="error">Грешка</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Описание</string>
     <string name="action_view_source">Преглед на изходния код</string>
     <string name="summary_action_view_source">Изходният код на това приложение е достъпен за преглеждане и модифициране в GitHub. Чувствайте се свободни да ни изпратите заявки за изтегляне с подобрения и корекции на грешки.</string>
-    <string name="action_view_translation">Помогнете ни с превода</string>
-    <string name="summary_action_view_translation">Ако приложението Activity Launcher ви харесва, моля, обмислете да го преведете на вашия език.</string>
-    <string name="action_view_bugs">Съобщаване за проблем</string>
-    <string name="summary_action_view_bugs">Моля, изпратете вашите предложения или проблеми на нашата страница за проекта в GitHub.</string>
-    <string name="action_filter">Филтриране…</string>
     <string name="filter_hint">пакет/действие</string>
     <string name="activity_settings">Настройки</string>
     <string name="settings_hide_private">Скриване на поверителни активности</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Според системата</string>
     <string name="theme_light">Светла тема</string>
     <string name="theme_dark">Тъмна тема</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Искате да подкрепите приложението и да премахнете рекламите? Вземете Activity Launcher Pro в Google Play — това помага за финансиране на разработката и е с отворен код.</string>
+    <string name="settings_github">GitHub проект</string>
+    <string name="settings_summary_github">Можете да изтеглите предварително създадения APK от проекта с отворен код Activity Launcher в GitHub. Напредналите потребители могат също да разгледат изходния код, да подкрепят разработчиците и да допринесат с преводи или заявки за изтегляне.</string>
+    <string name="category_title_ad_free">Версии без реклами</string>
+    <string name="title_dialog_support">Благодарим ви, че използвате Activity Launcher</string>
+    <string name="dialog_support">Добавихме реклами, за да подпомогнем финансирането на бъдещото развитие. Предпочитате без реклами? Надстройте до Activity Launcher Pro в Google Play – той е с отворен код и поддържа продължаваща работа по приложението. Можете също да получите приложението безплатно в GitHub. Подкрепата там е незадължителна, но ни помага много.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub проект</string>
+    <string name="action_personalized_ads_consent">Персонализирани реклами</string>
+    <string name="summary_personalized_ads_consent">Персонализирайте разрешенията за персонализирани реклами</string>
 </resources>

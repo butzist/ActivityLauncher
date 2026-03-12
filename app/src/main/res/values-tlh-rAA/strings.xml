@@ -2,21 +2,21 @@
 <resources>
     <string name="app_name">Qu\' taghmoHwI\'</string>
     <string name="short_description">Qu\' So\'lu\'bogh taghmoH \'ej nIqHom lI\'lu\'boghvaD qIgh chenmoH</string>
-    <string name="nav_all"> Hoch</string>
+    <string name="nav_all">Hoch</string>
     <string name="nav_favorites">yIchenmoH</string>
     <string name="nav_recents">potlh</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
+    <string name="title_fragment_package_list">qelI\'Daq paq lulo\'</string>
+    <string name="title_fragment_activity_list">Hochmey</string>
     <string name="title_dialog_disclaimer">chut ghuH</string>
     <string name="title_dialog_icon_picker">Degh yIwIv</string>
-    <string name="dialog_disclaimer">nIqHomvam Dalo\'taHvIS bISuD. chaq QapHa\' \'op nIqHommey, mItHa\'chugh Qu\'chaj taghmoHmeH ghu\'. De\' DaweSlaH \'ej DuH qaqHa\' lutu\'lu\'. DaghuHmoHlu\'pu\'. Dayaj\'a\'? nIqHom Dalo\' DaneHtaH\'a\'?</string>
     <string name="dialog_progress_loading">SImlI\'…</string>
+    <string name="dialog_disclaimer">nIqHomvam Dalo\'taHvIS bISuD. chaq QapHa\' \'op nIqHommey, mItHa\'chugh Qu\'chaj taghmoHmeH ghu\'. De\' DaweSlaH \'ej DuH qaqHa\' lutu\'lu\'. DaghuHmoHlu\'pu\'. Dayaj\'a\'? nIqHom Dalo\' DaneHtaH\'a\'?</string>
     <string name="context_action_launch">Qu\' taghmoH</string>
     <string name="context_action_launch_as_root">Qu\' taghmoH; loHwI\'</string>
     <string name="context_action_shortcut">qIgh chenmoH</string>
     <string name="context_action_shortcut_as_root">qIgh chenmoH; loHwI\'</string>
     <string name="context_action_edit">qIgh DI\'</string>
-    <string name="context_action_share_shortcut">Share shortcut</string>
+    <string name="context_action_share_shortcut">qIgh chenmoH pat</string>
     <string name="context_action_favorite_add">yIchenmoH</string>
     <string name="context_action_favorite_remove">yIchenmoH</string>
     <string name="context_action_share">yIquv</string>
@@ -24,8 +24,6 @@
     <string name="label_package">vey</string>
     <string name="label_class">Segh</string>
     <string name="label_icon">Degh</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">\'em</string>
     <string name="starting_activity">Qu\' taghmoHlI\': %s</string>
     <string name="creating_application_shortcut">%svaD nIqHom qIgh chenmoHlI\'</string>
     <string name="error">Qagh</string>
@@ -34,18 +32,13 @@
     <string name="error_invalid_icon_resource">Qagh: Degh Sup waS</string>
     <string name="error_invalid_icon_format">Qagh: Degh Ho\'DoS waS</string>
     <string name="error_verbose_pin_shortcut">‹PinShortcut› leHbe\' taghmoHwI\' Sarvam. qIgh chenmoHlaHbe\'.</string>
-    <string name="error_invalid_activity_link">Invalid activity link provided</string>
+    <string name="error_invalid_activity_link">Hochmey pat lungqIj be\'lu\'</string>
     <string name="warning_root_check">ghuH: ghaytan loHwI\' DIb lo\'laHbe\' janvam.</string>
     <string name="exception_invalid_component_name">waSbogh qoj jochbogh \'ay\' pong: %s</string>
     <string name="exception_command_error">«Qagh mI\' %d» ja\' ra\'wI\', %s lIng</string>
     <string name="category_title_about">De\' ghItlh</string>
     <string name="action_view_source">mung De\' legh</string>
     <string name="summary_action_view_source">‹GitHub›Daq nIqHomvam mung De\' laDlaH vay\' \'ej choHlaH vay\'. tI\'meH \'ej DubmeH choHmey DaghItlhchugh, ghongeH.</string>
-    <string name="action_view_translation">mughmeH yIboQ</string>
-    <string name="summary_action_view_translation">Qu\' taghmoHwI\' DatIvtaHchugh, HollIjvaD nIqHomvam DamughlaH \'e\' yIqel.</string>
-    <string name="action_view_bugs">ghunwI\'vaD Qagh SovmoH</string>
-    <string name="summary_action_view_bugs">‹GitHub› jInmol DaqmajDaq QInHomlIj ghongeH.</string>
-    <string name="action_filter">QIb…</string>
     <string name="filter_hint">vey/ghIgh</string>
     <string name="activity_settings">SeHlaw</string>
     <string name="settings_hide_private">\'em Qu\' So\'</string>
@@ -57,4 +50,17 @@
     <string name="theme_default">pat motlh</string>
     <string name="theme_light">tu\'qom wov</string>
     <string name="theme_dark">tu\'qom Hurgh</string>
+    <string name="settings_pro_version">Qu\' taghmoHwI\' Pro law\'</string>
+    <string name="settings_summary_pro_version">Qu\' taghmoHwI\' Pro Google PlayDaq bIqu\'meH \'ej Daq ủng SIQpu\'bI\' je DIl? Qu\' taghmoHwI\' Pro Google PlayDaq bIqu\'meH \'ej Daq ủng SIQpu\'bI\' je DIl?</string>
+    <string name="settings_github">GitHub pong</string>
+    <string name="settings_summary_github">Activity Launcher GitHub pongDaq APK luQatlh download law\'. ngoDvam vIleghpu\' \'ej developers ủng, Hol yIlo\'law\' \'ej pull requests yIlo\'law\'.</string>
+    <string name="category_title_ad_free">meywI\'pu\' Hoch</string>
+    <string name="title_dialog_support">Activity Launcher lo’meH Qatlho’!</string>
+    <string name="dialog_support">maH qeylIS Dalo\' \'e\' ghu\'vam rur \'ej ghu\'vam vIqel. tlhutlhmey vIchegh\'a\'?
+Activity Launcher Pro Google PlayDaq yIlo\' — Hoch vItlhutlh, \'ej De\'vamDaq Qapchu\' vItu\' \'e\' Qap.
+qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qapla\' Hoch.</string>
+    <string name="action_view_paid">Qu\' taghmoHwI\' Pro law\'</string>
+    <string name="action_view_github">GitHub pong</string>
+    <string name="action_personalized_ads_consent">toHchu’ qonwI’pu’</string>
+    <string name="summary_personalized_ads_consent">ToHchu’ qonwI’pu’ je lo’laHghach</string>
 </resources>

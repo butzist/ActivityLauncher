@@ -24,8 +24,6 @@
     <string name="label_package">Πακέτο</string>
     <string name="label_class">Κατηγορία</string>
     <string name="label_icon">Εικονίδιο</string>
-    <string name="label_menu">Μενού</string>
-    <string name="label_private">Ιδιωτικό</string>
     <string name="starting_activity">Έναρξη δραστηριότητας: %s</string>
     <string name="creating_application_shortcut">Δημιουργία συντόμευσης εφαρμογής για %s</string>
     <string name="error">Σφάλμα</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Σχετικά</string>
     <string name="action_view_source">Προβολή πηγαίου κώδικα</string>
     <string name="summary_action_view_source">Ο πηγαίος κώδικας αυτής της εφαρμογής είναι διαθέσιμος για ανάγνωση και τροποποίηση στο GitHub. Μη διστάσετε να μας στείλετε αιτήματα με βελτιώσεις και διορθώσεις σφαλμάτων.</string>
-    <string name="action_view_translation">Βοηθήστε στη μετάφραση!</string>
-    <string name="summary_action_view_translation">Αν απολαμβάνετε τον Εκκινητή Δραστηριοτήτων, παρακαλούμε σκεφτείτε να μεταφράσετε την εφαρμογή στη γλώσσα σας.</string>
-    <string name="action_view_bugs">Αναφορά προβλήματος</string>
-    <string name="summary_action_view_bugs">Αν έχετε οποιεσδήποτε προτάσεις ή προβλήματα, παρακαλούμε να τις αναφέρετε στο έργο μας στο GitHub.</string>
-    <string name="action_filter">Φίλτρο...</string>
     <string name="filter_hint">πακέτο/δράση</string>
     <string name="activity_settings">Ρυθμίσεις</string>
     <string name="settings_hide_private">Απόκρυψη ιδιωτικών δραστηριοτήτων</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Προεπιλογή Συστήματος</string>
     <string name="theme_light">Φωτεινό θέμα</string>
     <string name="theme_dark">Σκοτεινό θέμα</string>
+    <string name="settings_pro_version">Εκκινητής Δραστηριότητας Pro</string>
+    <string name="settings_summary_pro_version">Θέλετε να υποστηρίξετε την εφαρμογή και να καταργήσετε τις διαφημίσεις; Αποκτήστε το Activity Launcher Pro στο Google Play — βοηθά στη χρηματοδότηση της ανάπτυξης και είναι πλήρως ανοιχτού κώδικα.</string>
+    <string name="settings_github">Έργο GitHub</string>
+    <string name="settings_summary_github">Μπορείτε να κατεβάσετε το προ-δημιουργημένο APK από το έργο ανοικτού κώδικα Activity Launcher στο GitHub. Οι προχωρημένοι χρήστες μπορούν επίσης να εξερευνήσουν τον πηγαίο κώδικα, να υποστηρίξουν τους προγραμματιστές και να συνεισφέρουν με μεταφράσεις ή αιτήματα έλξης.</string>
+    <string name="category_title_ad_free">Εκδόσεις χωρίς διαφημίσεις</string>
+    <string name="title_dialog_support">Ευχαριστούμε που χρησιμοποιείτε το Activity Launcher</string>
+    <string name="dialog_support">Προσθέσαμε διαφημίσεις για να χρηματοδοτήσουμε τη μελλοντική ανάπτυξη. Προτιμάτε χωρίς διαφημίσεις; Αναβαθμίστε σε Activity Launcher Pro στο Google Play — είναι πλήρως ανοιχτού κώδικα και υποστηρίζει τη συνεχή εργασία στην εφαρμογή. Μπορείτε επίσης να αποκτήσετε την εφαρμογή δωρεάν στο GitHub. Η υποστήριξη εκεί είναι προαιρετική, αλλά μας βοηθάει πολύ.</string>
+    <string name="action_view_paid">Εκκινητής Δραστηριότητας Pro</string>
+    <string name="action_view_github">Έργο GitHub</string>
+    <string name="action_personalized_ads_consent">Προσαρμοσμένες διαφημίσεις</string>
+    <string name="summary_personalized_ads_consent">Προσαρμόστε τα δικαιώματα για τις προσαρμοσμένες διαφημίσεις</string>
 </resources>
