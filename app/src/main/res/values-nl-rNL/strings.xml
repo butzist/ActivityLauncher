@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Activiteit Launcher</string>
     <string name="short_description">Start verborgen activiteiten en creëert snelkoppelingen voor geïnstalleerde apps</string>
+    <string name="nav_all">Alle</string>
+    <string name="nav_favorites">Favorieten</string>
+    <string name="nav_recents">Recent</string>
     <string name="title_fragment_package_list">Geïnstalleerde pakketten</string>
     <string name="title_fragment_activity_list">Activiteiten</string>
     <string name="title_dialog_disclaimer">Disclaimer</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">Maak snelkoppeling aan als root</string>
     <string name="context_action_edit">Bewerk snelkoppeling</string>
     <string name="context_action_share_shortcut">Snelkoppeling delen</string>
+    <string name="context_action_favorite_add">Toevoegen aan favorieten</string>
+    <string name="context_action_favorite_remove">Verwijderen uit favorieten</string>
+    <string name="context_action_share">Delen</string>
     <string name="label_name">Naam</string>
     <string name="label_package">Pakket</string>
     <string name="label_class">Class</string>
     <string name="label_icon">Icoon</string>
+    <string name="label_menu">Menu</string>
     <string name="label_private">Privé</string>
     <string name="starting_activity">Activiteit beginnen: %s</string>
-    <string name="starting_application">Starten applicatie: %s</string>
-    <string name="creating_activity_shortcut">Activiteiten snelkoppeling maken voor %s</string>
     <string name="creating_application_shortcut">Applicatie snelkoppeling maken voor %s</string>
     <string name="error">Fout</string>
     <string name="error_creating_shortcut">Snelkoppeling maken fout</string>
     <string name="error_icons">Fout bij het laden van de iconen</string>
     <string name="error_invalid_icon_resource">Fout: ongeldige icoon bron</string>
     <string name="error_invalid_icon_format">Fout: ongeldig icoon formaat</string>
-    <string name="error_no_default_activity">Pakket bevat geen standaard activiteit -  Probeer om expliciet een te selecteren</string>
-    <string name="error_verbose_pin_shortcut">Current launcher does not support \"PinShortcut\". Unable to create shortcut.</string>
+    <string name="error_verbose_pin_shortcut">Huidige launcher ondersteunt geen "PinShortcut". Kan geen snelkoppeling maken.</string>
     <string name="error_invalid_activity_link">Ongeldige activiteitenlink opgegeven</string>
     <string name="warning_root_check">Waarschuwing: Root rechten zijn waarschijnlijk niet beschikbaar op dit apparaat.</string>
     <string name="exception_invalid_component_name">Ongeldige of mogelijk schadelijke onderdeel naam: %s</string>

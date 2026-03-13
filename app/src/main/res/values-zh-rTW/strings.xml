@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Activity Launcher</string>
     <string name="short_description">啟動隱藏的活動並為已安裝的應用程式建立捷徑</string>
+    <string name="nav_all">全部</string>
+    <string name="nav_favorites">收藏</string>
+    <string name="nav_recents">最近</string>
     <string name="title_fragment_package_list">已安裝的套件</string>
     <string name="title_fragment_activity_list">活動</string>
     <string name="title_dialog_disclaimer">免責聲明</string>
@@ -14,21 +17,22 @@
     <string name="context_action_shortcut_as_root">建立捷徑 (Root)</string>
     <string name="context_action_edit">編輯捷徑</string>
     <string name="context_action_share_shortcut">分享捷徑</string>
+    <string name="context_action_favorite_add">新增至收藏</string>
+    <string name="context_action_favorite_remove">從收藏移除</string>
+    <string name="context_action_share">分享</string>
     <string name="label_name">名稱</string>
     <string name="label_package">套件</string>
     <string name="label_class">類別</string>
     <string name="label_icon">圖示</string>
+    <string name="label_menu">選單</string>
     <string name="label_private">私人</string>
     <string name="starting_activity">正在啟動活動：%s</string>
-    <string name="starting_application">正在啟動應用程式：%s</string>
-    <string name="creating_activity_shortcut">正在為 %s 建立活動捷徑</string>
     <string name="creating_application_shortcut">正在為 %s 建立應用程式捷徑</string>
     <string name="error">錯誤</string>
     <string name="error_creating_shortcut">無法建立捷徑</string>
     <string name="error_icons">無法載入圖示</string>
     <string name="error_invalid_icon_resource">錯誤：無效的圖示資源</string>
     <string name="error_invalid_icon_format">錯誤：無效的圖示格式</string>
-    <string name="error_no_default_activity">套件沒有預設活動 - 請嘗試明確選取項目</string>
     <string name="error_verbose_pin_shortcut">目前啟動器不支援「釘選捷徑」，無法建立捷徑。</string>
     <string name="error_invalid_activity_link">提供的活動連結無效</string>
     <string name="warning_root_check">警告：Root 權限可能無在此裝置上使用。</string>

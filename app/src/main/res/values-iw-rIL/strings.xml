@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">משגר פעילויות</string>
     <string name="short_description">פתיחת פעילויות מוסתרות ויצירת קיצורי דרך ליישומים מותקנים</string>
+    <string name="nav_all">הכל</string>
+    <string name="nav_favorites">מועדפים</string>
+    <string name="nav_recents">אחרונים</string>
     <string name="title_fragment_package_list">חבילות מותקנות</string>
     <string name="title_fragment_activity_list">פעילויות</string>
     <string name="title_dialog_disclaimer">כתב ויתור</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">צור קיצור דרך כשורש</string>
     <string name="context_action_edit">ערוך קיצור דרך</string>
     <string name="context_action_share_shortcut">שתף קיצור דרך</string>
+    <string name="context_action_favorite_add">הוסף למועדפים</string>
+    <string name="context_action_favorite_remove">הסר ממועדפים</string>
+    <string name="context_action_share">שתף</string>
     <string name="label_name">שם</string>
     <string name="label_package">חבילה</string>
     <string name="label_class">מחלקה</string>
     <string name="label_icon">סמל</string>
-    <string name="label_private">פרטי </string>
+    <string name="label_menu">תפריט</string>
+    <string name="label_private">פרטי</string>
     <string name="starting_activity">מתחיל פעילות : %s</string>
-    <string name="starting_application">מפעיל אפליקציה: %s</string>
-    <string name="creating_activity_shortcut">יוצר קיצור לאפליקציה %s</string>
     <string name="creating_application_shortcut">יוצר קיצור לאפליקציה %s</string>
     <string name="error">שגיאה</string>
     <string name="error_creating_shortcut">שגיאה ביצירת קיצור דרך</string>
     <string name="error_icons">שגיאה בטעינת סמלים</string>
     <string name="error_invalid_icon_resource">שגיאה: סמל לא חוקי</string>
     <string name="error_invalid_icon_format">שגיאה: תבנית לא חוקית של הסמל</string>
-    <string name="error_no_default_activity">חבילה אין פעילות ברירת מחדל - נסה לבחור אחת </string>
-    <string name="error_verbose_pin_shortcut">משגר היישומים הנוכחי לא תומך ב-\"PinShortcut\". לא יכול ליצור קיצור.</string>
+    <string name="error_verbose_pin_shortcut">משגר היישומים הנוכחי לא תומך ב-"PinShortcut". לא יכול ליצור קיצור.</string>
     <string name="error_invalid_activity_link">קישור פעילות לא חוקי סופק</string>
     <string name="warning_root_check">אזהרה: הרשאות שורש כנראה אינן זמינות במכשיר זה.</string>
     <string name="exception_invalid_component_name">שם רכיב לא חוקי או שעלול להזיק: %s</string>
@@ -37,7 +41,7 @@
     <string name="category_title_about">אודות</string>
     <string name="action_view_source">צפה בקוד המקור</string>
     <string name="summary_action_view_source">קוד המקור של אפליקציה זו זמין לקריאה ושינוי ב-GitHub.  אל תהסס לשלוח לנו בקשות משיכה עם שיפורים ותיקוני באגים.</string>
-    <string name="action_view_translation">עיזרו בתרגום האפליקציה!</string>
+    <string name="action_view_translation">עזרו בתרגום האפליקציה!</string>
     <string name="summary_action_view_translation">אם נהנתם ממשגר הפעילויות, אנא שיקלו לעזור לתרגם את האפליקציה לשפתכם.</string>
     <string name="action_view_bugs">דווח על בעיה</string>
     <string name="summary_action_view_bugs">אנא שלח את ההצעות או הבעיות שלך בדף פרויקט GitHub שלנו.</string>

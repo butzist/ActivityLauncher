@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_favorite"
-        android:title="Favorite"
+        android:title="@string/context_action_favorite_add"
         android:icon="@drawable/ic_favorite_border"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_share"
-        android:title="Share"
+        android:title="@string/context_action_share"
         android:icon="@drawable/ic_share"
         app:showAsAction="ifRoom" />
 </menu>

@@ -1,59 +1,59 @@
 <resources>
-    <string name="app_name">Activity Launcher</string>
-    <string name="short_description">Launches hidden activities and creates shortcuts for installed apps</string>
-    <string name="title_fragment_package_list">Installed packages</string>
-    <string name="title_fragment_activity_list">Activities</string>
-    <string name="title_dialog_disclaimer">Disclaimer</string>
-    <string name="title_dialog_icon_picker">Pick an icon</string>
-    <string name="dialog_progress_loading">Loading…</string>
-    <string name="dialog_disclaimer">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
-    <string name="context_action_launch">Launch activity</string>
-    <string name="context_action_launch_as_root">Launch activity as root</string>
-    <string name="context_action_shortcut">Create shortcut</string>
-    <string name="context_action_shortcut_as_root">Create shortcut as root</string>
-    <string name="context_action_edit">Edit shortcut</string>
-    <string name="context_action_share_shortcut">Share shortcut</string>
-    <string name="context_action_favorite_add">Add to favorites</string>
-    <string name="context_action_favorite_remove">Remove from favorites</string>
-    <string name="label_name">Name</string>
-    <string name="label_package">Package</string>
-    <string name="label_class">Class</string>
-    <string name="label_icon">Icon</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">private</string>
-    <string name="label_as_root">As root</string>
-    <string name="starting_activity">Starting activity: %s</string>
-    <string name="starting_application">Starting application: %s</string>
-    <string name="creating_activity_shortcut">Creating activity shortcut for %s</string>
-    <string name="creating_application_shortcut">Creating application shortcut for %s</string>
-    <string name="error">Error</string>
-    <string name="error_creating_shortcut">Error creating shortcut</string>
-    <string name="error_icons">Error loading icons</string>
-    <string name="error_invalid_icon_resource">Error: invalid icon resource</string>
-    <string name="error_invalid_icon_format">Error: invalid icon format</string>
-    <string name="error_no_default_activity">Package does not have a default activity - try to select one explicitly</string>
-    <string name="error_verbose_pin_shortcut">Current launcher does not support "PinShortcut". Unable to create shortcut.</string>
-    <string name="error_invalid_activity_link">Invalid activity link provided</string>
-    <string name="warning_root_check">Warning: Root privileges are probably not available on this device.</string>
-    <string name="exception_invalid_component_name">Invalid or potentially harmful component name: %s</string>
-    <string name="exception_command_error">Command returned error code: %d, output: %s</string>
-    <string name="category_title_about">About</string>
-    <string name="action_view_source">View source code</string>
-    <string name="summary_action_view_source">The source code of this App is available for reading and modifying on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
-    <string name="action_view_translation">Help translate</string>
-    <string name="summary_action_view_translation">If you are enjoying Activity Launcher, please consider translating the App into your language.</string>
-    <string name="action_view_bugs">Report a problem</string>
-    <string name="summary_action_view_bugs">Please submit your suggestions or issues on our GitHub project page.</string>
-    <string name="action_filter">Filter&#8230;</string>
-    <string name="filter_hint">package/action</string>
-    <string name="activity_settings">Settings</string>
-    <string name="settings_hide_private">Hide private activities</string>
-    <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
-    <string name="settings_allow_root">Enable privileged mode</string>
-    <string name="settings_summary_allow_root">Allow launching private activities by using root privileges</string>
-    <string name="settings_language">Language</string>
-    <string name="settings_theme">Theme</string>
-    <string name="theme_default">System Default</string>
-    <string name="theme_light">Light Theme</string>
-    <string name="theme_dark">Dark Theme</string>
+    <string name="app_name" comment="App name displayed in the device launcher and app drawer">Activity Launcher</string>
+    <string name="short_description" comment="Short description shown in app store listings (Play Store, F-Droid)">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="nav_all" comment="Tab label showing all installed apps">All</string>
+    <string name="nav_favorites" comment="Tab label showing favorited activities">Favorites</string>
+    <string name="nav_recents" comment="Tab label showing recently launched activities">Recents</string>
+    <string name="title_fragment_package_list" comment="Screen title for the list of installed packages/apps">Installed packages</string>
+    <string name="title_fragment_activity_list" comment="Screen title showing activities within a selected package">Activities</string>
+    <string name="title_dialog_disclaimer" comment="Dialog title for the warning dialog shown on first launch">Disclaimer</string>
+    <string name="title_dialog_icon_picker" comment="Dialog title for selecting an icon when creating or editing a shortcut">Pick an icon</string>
+    <string name="dialog_progress_loading" comment="Progress message shown while loading the list of installed apps">Loading…</string>
+    <string name="dialog_disclaimer" comment="Warning text in the disclaimer dialog about accessing hidden/advanced features">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
+    <string name="context_action_launch" comment="Context menu action to launch an activity normally (without root)">Launch activity</string>
+    <string name="context_action_launch_as_root" comment="Context menu action to launch an activity using root/administrator privileges">Launch activity as root</string>
+    <string name="context_action_shortcut" comment="Context menu action to create a home screen shortcut for an activity">Create shortcut</string>
+    <string name="context_action_shortcut_as_root" comment="Context menu action to create a home screen shortcut with root privileges">Create shortcut as root</string>
+    <string name="context_action_edit" comment="Context menu action to edit an existing shortcut's properties">Edit shortcut</string>
+    <string name="context_action_share_shortcut" comment="Context menu action to share a created shortcut as a link">Share shortcut</string>
+    <string name="context_action_favorite_add" comment="Context menu action to add an activity to the favorites list">Add to favorites</string>
+    <string name="context_action_favorite_remove" comment="Context menu action to remove an activity from the favorites list">Remove from favorites</string>
+    <string name="context_action_share" comment="App bar action to share the current activity or app info">Share</string>
+    <string name="label_name" comment="Form label for the shortcut name field">Name</string>
+    <string name="label_package" comment="Form label for the package name field">Package</string>
+    <string name="label_class" comment="Form label for the activity class name field">Class</string>
+    <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
+    <string name="label_menu" comment="Accessibility label for the overflow menu button in the app bar">Menu</string>
+    <string name="label_private" comment="Badge label indicating an activity is private (not exported and requires root)">private</string>
+    <string name="starting_activity" comment="Toast message shown when starting an activity. %s is the activity name or class">Starting activity: %s</string>
+    <string name="creating_application_shortcut" comment="Toast message shown when creating a shortcut. %s is the app/activity name">Creating application shortcut for %s</string>
+    <string name="error" comment="Generic error dialog title">Error</string>
+    <string name="error_creating_shortcut" comment="Error message displayed when shortcut creation fails">Error creating shortcut</string>
+    <string name="error_icons" comment="Error message shown when app icons fail to load">Error loading icons</string>
+    <string name="error_invalid_icon_resource" comment="Error message for invalid or non-existent icon resource">Error: invalid icon resource</string>
+    <string name="error_invalid_icon_format" comment="Error message when the selected icon file format is not supported">Error: invalid icon format</string>
+    <string name="error_verbose_pin_shortcut" comment="Error message when the device launcher does not support pinning shortcuts">Current launcher does not support "PinShortcut". Unable to create shortcut.</string>
+    <string name="error_invalid_activity_link" comment="Error message for invalid deep link or activity reference">Invalid activity link provided</string>
+    <string name="warning_root_check" comment="Warning toast when root privileges are not available on the device">Warning: Root privileges are probably not available on this device.</string>
+    <string name="exception_invalid_component_name" comment="Error message for dangerous or invalid component names. %s is the problematic component">Invalid or potentially harmful component name: %s</string>
+    <string name="exception_command_error" comment="Error message when a shell command fails. %d is error code, %s is command output">Command returned error code: %d, output: %s</string>
+    <string name="category_title_about" comment="Settings category header for about and info section">About</string>
+    <string name="action_view_source" comment="Settings action to view the app's source code on GitHub">View source code</string>
+    <string name="summary_action_view_source" comment="Description for the view source code setting">The source code of this App is available for reading and modifying on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
+    <string name="action_view_translation" comment="Settings action to open the translation contribute page">Help translate</string>
+    <string name="summary_action_view_translation" comment="Description encouraging users to translate the app">If you are enjoying Activity Launcher, please consider translating the App into your language.</string>
+    <string name="action_view_bugs" comment="Settings action to report bugs or issues">Report a problem</string>
+    <string name="summary_action_view_bugs" comment="Description for the bug report setting">Please submit your suggestions or issues on our GitHub project page.</string>
+    <string name="action_filter" comment="Content description for the filter/search icon in the app bar">Filter…</string>
+    <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
+    <string name="activity_settings" comment="Navigation item label for the settings screen">Settings</string>
+    <string name="settings_hide_private" comment="Settings switch to hide private/unexported activities">Hide private activities</string>
+    <string name="settings_summary_hide_private" comment="Description explaining the hide private activities setting">Hide private (unexported and disabled) activities, that cannot be started without root access</string>
+    <string name="settings_allow_root" comment="Settings switch to enable privileged/root mode">Enable privileged mode</string>
+    <string name="settings_summary_allow_root" comment="Description for the privileged mode setting">Allow launching private activities by using root privileges</string>
+    <string name="settings_language" comment="Settings option for app language selection">Language</string>
+    <string name="settings_theme" comment="Settings option for app theme selection">Theme</string>
+    <string name="theme_default" comment="Theme option to follow system theme">System Default</string>
+    <string name="theme_light" comment="Theme option for light color scheme">Light Theme</string>
+    <string name="theme_dark" comment="Theme option for dark color scheme">Dark Theme</string>
 </resources>

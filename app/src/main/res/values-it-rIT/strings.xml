@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Activity Launcher</string>
-    <string name="short_description">Avvia le attività nascoste e crea collegamenti nella schermata home</string>
+    <string name="short_description">Avvia le attività nascoste e crea scorciatoie nella schermata home</string>
+    <string name="nav_all">Tutto</string>
+    <string name="nav_favorites">Preferiti</string>
+    <string name="nav_recents">Recenti</string>
     <string name="title_fragment_package_list">Pacchetti installati</string>
     <string name="title_fragment_activity_list">Attività</string>
     <string name="title_dialog_disclaimer">Dichiarazione di non responsabilità</string>
@@ -13,23 +16,24 @@
     <string name="context_action_shortcut">Crea scorciatoia</string>
     <string name="context_action_shortcut_as_root">Crea scorciatoia come root</string>
     <string name="context_action_edit">Modifica scorciatoia</string>
-    <string name="context_action_share_shortcut">Condividi collegamento</string>
+    <string name="context_action_share_shortcut">Condividi scorciatoia</string>
+    <string name="context_action_favorite_add">Aggiungi ai preferiti</string>
+    <string name="context_action_favorite_remove">Rimuovi dai preferiti</string>
+    <string name="context_action_share">Condividi</string>
     <string name="label_name">Nome</string>
     <string name="label_package">Pacchetto</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icona</string>
+    <string name="label_menu">Menu</string>
     <string name="label_private">privato</string>
     <string name="starting_activity">Avvio attività: %s</string>
-    <string name="starting_application">Avvio applicazione: %s</string>
-    <string name="creating_activity_shortcut">Creazione collegamento attività per %s</string>
-    <string name="creating_application_shortcut">Creazione collegamento applicazione per %s</string>
+    <string name="creating_application_shortcut">Creazione scorciatoia applicazione per %s</string>
     <string name="error">Errore</string>
     <string name="error_creating_shortcut">Errore nella creazione della scorciatoia</string>
     <string name="error_icons">Errore caricamento icone</string>
-    <string name="error_invalid_icon_resource">Errore: risorsa icona non valido</string>
+    <string name="error_invalid_icon_resource">Errore: risorsa icona non valida</string>
     <string name="error_invalid_icon_format">Errore: formato icona non valido</string>
-    <string name="error_no_default_activity">Il package non ha una attività di default - prova a selezionarne una esplicitamente</string>
-    <string name="error_verbose_pin_shortcut">Il launcher attuale non supporta \"PinShortcut\". Impossibile creare scorciatoia.</string>
+    <string name="error_verbose_pin_shortcut">Il launcher attuale non supporta "PinShortcut". Impossibile creare scorciatoia.</string>
     <string name="error_invalid_activity_link">Link attività fornito non valido</string>
     <string name="warning_root_check">Attenzione: i privilegi di root probabilmente non sono disponibili su questo dispositivo.</string>
     <string name="exception_invalid_component_name">Nome componente non valido o potenzialmente dannoso: %s</string>
@@ -41,7 +45,7 @@
     <string name="summary_action_view_translation">Se apprezzi Activity Launcher, considera di tradurre l\'App nella tua lingua.</string>
     <string name="action_view_bugs">Segnala un problema</string>
     <string name="summary_action_view_bugs">Se avete qualche suggerimento o problema, segnalateli prego nel nostro progetto su GitHub.</string>
-    <string name="action_filter">Filtro...</string>
+    <string name="action_filter">Filtro…</string>
     <string name="filter_hint">package/azione</string>
     <string name="activity_settings">Impostazioni</string>
     <string name="settings_hide_private">Nascondi attività private</string>
@@ -50,7 +54,7 @@
     <string name="settings_summary_allow_root">Consenti l\'avvio di attività private utilizzando i privilegi di root</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_theme">Tema</string>
-    <string name="theme_default">Default di Sistema</string>
-    <string name="theme_light">Tema Chiaro</string>
-    <string name="theme_dark">Tema Scuro</string>
+    <string name="theme_default">Predefinito di sistema</string>
+    <string name="theme_light">Tema chiaro</string>
+    <string name="theme_dark">Tema scuro</string>
 </resources>

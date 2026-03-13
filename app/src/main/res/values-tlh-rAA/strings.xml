@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Qu\' taghmoHwI\'</string>
     <string name="short_description">Qu\' So\'lu\'bogh taghmoH \'ej nIqHom lI\'lu\'boghvaD qIgh chenmoH</string>
+    <string name="nav_all"> Hoch</string>
+    <string name="nav_favorites">yIchenmoH</string>
+    <string name="nav_recents">potlh</string>
     <string name="title_fragment_package_list">Installed packages</string>
     <string name="title_fragment_activity_list">Activities</string>
     <string name="title_dialog_disclaimer">chut ghuH</string>
@@ -14,21 +17,22 @@
     <string name="context_action_shortcut_as_root">qIgh chenmoH; loHwI\'</string>
     <string name="context_action_edit">qIgh DI\'</string>
     <string name="context_action_share_shortcut">Share shortcut</string>
+    <string name="context_action_favorite_add">yIchenmoH</string>
+    <string name="context_action_favorite_remove">yIchenmoH</string>
+    <string name="context_action_share">yIquv</string>
     <string name="label_name">pong</string>
     <string name="label_package">vey</string>
     <string name="label_class">Segh</string>
     <string name="label_icon">Degh</string>
+    <string name="label_menu">Menu</string>
     <string name="label_private">\'em</string>
     <string name="starting_activity">Qu\' taghmoHlI\': %s</string>
-    <string name="starting_application">nIqHom taghmoHlI\': %s</string>
-    <string name="creating_activity_shortcut">%svaD Qu\' qIgh chenmoHlI\'</string>
     <string name="creating_application_shortcut">%svaD nIqHom qIgh chenmoHlI\'</string>
     <string name="error">Qagh</string>
     <string name="error_creating_shortcut">qIgh Qagh</string>
     <string name="error_icons">Degh Qagh</string>
     <string name="error_invalid_icon_resource">Qagh: Degh Sup waS</string>
     <string name="error_invalid_icon_format">Qagh: Degh Ho\'DoS waS</string>
-    <string name="error_no_default_activity">Qu\' motlh ghajbe\' vey - chIch DawIv \'e\' yInID</string>
     <string name="error_verbose_pin_shortcut">‹PinShortcut› leHbe\' taghmoHwI\' Sarvam. qIgh chenmoHlaHbe\'.</string>
     <string name="error_invalid_activity_link">Invalid activity link provided</string>
     <string name="warning_root_check">ghuH: ghaytan loHwI\' DIb lo\'laHbe\' janvam.</string>

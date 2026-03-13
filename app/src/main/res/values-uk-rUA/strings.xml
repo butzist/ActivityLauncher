@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Лаунчер Активіті</string>
     <string name="short_description">Запускає приховані активіті та створює ярлики для встановлених додатків</string>
+    <string name="nav_all">Всі</string>
+    <string name="nav_favorites">Обране</string>
+    <string name="nav_recents">Нещодавні</string>
     <string name="title_fragment_package_list">Встановлені пакети</string>
     <string name="title_fragment_activity_list">Активіті</string>
     <string name="title_dialog_disclaimer">Відмова від відповідальності</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">Створити ярлик (root)</string>
     <string name="context_action_edit">Змінити ярлик</string>
     <string name="context_action_share_shortcut">Поділитися ярликом</string>
+    <string name="context_action_favorite_add">Додати до улюбленого</string>
+    <string name="context_action_favorite_remove">Видалити з улюбленого</string>
+    <string name="context_action_share">Поділитися</string>
     <string name="label_name">Назва</string>
     <string name="label_package">Пакет</string>
     <string name="label_class">Клас</string>
     <string name="label_icon">Іконка</string>
+    <string name="label_menu">Меню</string>
     <string name="label_private">приватний</string>
     <string name="starting_activity">Запуск активіті: %s</string>
-    <string name="starting_application">Запуск додатку: %s</string>
-    <string name="creating_activity_shortcut">Створення ярлика активіті для %s</string>
     <string name="creating_application_shortcut">Створення ярлика додатку для %s</string>
     <string name="error">Помилка</string>
     <string name="error_creating_shortcut">Помилка створення ярлика</string>
     <string name="error_icons">Помилка завантаження іконок</string>
     <string name="error_invalid_icon_resource">Помилка: недопустиме джерело іконки</string>
     <string name="error_invalid_icon_format">Помилка: недопустимий формат іконки</string>
-    <string name="error_no_default_activity">Пакет не містить жодного активіті за замовчуванням, тож спробуйте вибрати власноруч</string>
-    <string name="error_verbose_pin_shortcut">Поточний лаунчер не підтримує \"PinShortcut\". Неможливо створити ярлик.</string>
+    <string name="error_verbose_pin_shortcut">Поточний лаунчер не підтримує "PinShortcut". Неможливо створити ярлик.</string>
     <string name="error_invalid_activity_link">Надано неправильне посилання на діяльність</string>
     <string name="warning_root_check">Попередження: Ймовірно, на цьому пристрої відсутні root-права.</string>
     <string name="exception_invalid_component_name">Недопустима або потенційно небезпечна назва компоненту: %s</string>

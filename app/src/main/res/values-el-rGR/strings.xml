@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Εκκινητής Δραστηριοτήτων</string>
     <string name="short_description">Εκκινεί κρυφές δραστηριότητες και δημιουργεί συντομεύσεις εφαρμογών</string>
+    <string name="nav_all">Όλα</string>
+    <string name="nav_favorites">Αγαπημένα</string>
+    <string name="nav_recents">Πρόσφατα</string>
     <string name="title_fragment_package_list">Εγκατεστημένα πακέτα</string>
     <string name="title_fragment_activity_list">Δραστηριότητες</string>
     <string name="title_dialog_disclaimer">Αποποίηση ευθυνών</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">Δημιουργία συντόμευσης ως root</string>
     <string name="context_action_edit">Επεξεργασία συντόμευσης</string>
     <string name="context_action_share_shortcut">Κοινή χρήση συντόμευσης</string>
+    <string name="context_action_favorite_add">Προσθήκη στα αγαπημένα</string>
+    <string name="context_action_favorite_remove">Αφαίρεση από τα αγαπημένα</string>
+    <string name="context_action_share">Κοινοποίηση</string>
     <string name="label_name">Όνομα</string>
     <string name="label_package">Πακέτο</string>
     <string name="label_class">Κατηγορία</string>
     <string name="label_icon">Εικονίδιο</string>
+    <string name="label_menu">Μενού</string>
     <string name="label_private">Ιδιωτικό</string>
     <string name="starting_activity">Έναρξη δραστηριότητας: %s</string>
-    <string name="starting_application">Έναρξη εφαρμογής: %s</string>
-    <string name="creating_activity_shortcut">Δημιουργία συντόμευσης δραστηριότητας για %s</string>
     <string name="creating_application_shortcut">Δημιουργία συντόμευσης εφαρμογής για %s</string>
     <string name="error">Σφάλμα</string>
     <string name="error_creating_shortcut">Σφάλμα κατά τη δημιουργία συντόμευσης</string>
     <string name="error_icons">Σφάλμα κατά τη φόρτωση των εικονιδίων</string>
     <string name="error_invalid_icon_resource">Σφάλμα: μη έγκυρος πόρος εικονιδίων</string>
     <string name="error_invalid_icon_format">Σφάλμα: μη έγκυρη μορφή εικονιδίων</string>
-    <string name="error_no_default_activity">Το πακέτο δεν έχει προεπιλεγμένη δραστηριότητα - προσπαθήστε να επιλέξετε μία ρητά</string>
-    <string name="error_verbose_pin_shortcut">Ο τρέχων εκκινητής δεν υποστηρίζει το \"PinShortcut\". Δεν είναι δυνατή η δημιουργία συντόμευσης.</string>
+    <string name="error_verbose_pin_shortcut">Ο τρέχων εκκινητής δεν υποστηρίζει το "PinShortcut". Δεν είναι δυνατή η δημιουργία συντόμευσης.</string>
     <string name="error_invalid_activity_link">Δόθηκε μη έγκυρος σύνδεσμος δραστηριότητας</string>
     <string name="warning_root_check">Προειδοποίηση: Τα δικαιώματα root πιθανόν να μην είναι διαθέσιμα σε αυτήν τη συσκευή.</string>
     <string name="exception_invalid_component_name">Μη έγκυρο ή δυνητικά επιβλαβές όνομα στοιχείου: %s</string>
