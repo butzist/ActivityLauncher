@@ -1,10 +1,19 @@
-Bu açık kaynaklı Android Uygulaması, gizli etkinlikleri başlatır ve yüklü uygulamalar için ana ekran kısayolları oluşturur.
+Reklamsız, analiz içermeyen, gizli uygulama etkinliklerinin kilidini açan, özel kısayollar oluşturmanıza olanak tanıyan ve gelecekteki iyileştirmelere güç veren bir araç olan Activity Launcher Pro'ya yükselterek Activity Launcher'ın sürekli gelişimini destekleyin.
 
-Bu projede hala birkaç özellik ve çeviri eksikliği var. Sizinde bir katkınız bulunsun!
+İster deneyimli bir kullanıcı, ister geliştirici veya sadece meraklı olun, Activity Launcher Pro cihazınız üzerinde daha derin bir kontrol ve özelleştirme sağlar.
 
-Kaynak kodu:
-https://github.com/butzist/ActivityLauncher
-Çeviriler bu link altında toplanıyor
-http://crowdin.net/project/activitylauncher/invite
-Beta programına katıl:
-https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Temel Özellikler:
+- Yüklü uygulamalar içinde gizli veya dahili etkinlikleri başlatın
+- Belirli özelliklere veya ekranlara hızlı erişim için kısayollar oluşturun
+- Basit bir arayüze sahip temiz ve hafif
+
+💡 Proje Hakkında:
+Activity Launcher Pro, https://github.com/butzist/ActivityLauncher adresinde bulunan açık kaynaklı bir projedir.
+
+🤝 Katılın:
+Bu, topluluk odaklı bir projedir; kod, çeviri veya fikir katkısında bulunabilirsiniz. Gelişmemize ve büyümemize yardım edin!
+
+Web sitesi: https://activitylauncher.net
+Web sitesi: https://activitylauncher.net
+Kaynak kod ve çeviriler: https://github.com/butzist/ActivityLauncher
+Beta sürümüne kaydolun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

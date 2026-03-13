@@ -1,0 +1,27 @@
+Avvia facilmente le attività nascoste delle app e crea scorciatoie personalizzate!
+
+Scopri il pieno potenziale delle tue app Android con Activity Launcher: un potente strumento che ti consente di accedere alle attività nascoste e creare scorciatoie nella schermata Home per qualsiasi app installata.
+
+Che tu sia un utente esperto, uno sviluppatore o semplicemente curioso, Activity Launcher ti offre un controllo e una personalizzazione più approfonditi del tuo dispositivo.
+
+🔍 Funzionalità chiave:
+- Avvia attività nascoste o interne all'interno delle app installate
+- Crea scorciatoie per un rapido accesso a funzioni o schermate specifiche
+- Pulito e leggero con un'interfaccia semplice
+
+💡 Informazioni sul progetto:
+Activity Launcher si basa sul progetto open source disponibile all'indirizzo https://github.com/butzist/ActivityLauncher.
+
+🎁 Passa alla versione senza pubblicità e supportaci
+Preferisci un'esperienza senza annunci? Scarica Activity Launcher Pro dal Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Oppure scarica l’APK open-source gratuito da GitHub e supporta lo sviluppo futuro sponsorizzando il progetto:
+https://github.com/sponsors/butzist
+— Grazie per averci aiutato a far crescere Activity Launcher!
+
+🤝 Partecipa:
+Questo è un progetto guidato dalla comunità: sei invitato a contribuire con codice, traduzioni o idee. Aiutaci a migliorare e crescere!
+
+Sito web: https://activitylauncher.net
+Codice sorgente e traduzioni: https://github.com/butzist/ActivityLauncher
+Iscriviti alla versione beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

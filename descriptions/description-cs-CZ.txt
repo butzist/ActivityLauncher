@@ -1,7 +1,18 @@
-Tato Android open‑source aplikace umožňuje spouštět skryté aktivity a\u00a0vytvářet zástupce na domovské obrazovce pro nainstalované aplikace.
+Podpořte další vývoj aplikace Activity Launcher upgradem na Activity Launcher Pro – nástroj bez reklam a analytiky, který odemyká skryté aktivity aplikací, umožňuje vytvářet vlastní zástupce a pomáhá zlepšovat budoucí vylepšení.
 
-Tomuto projektu stále schází několik funkcí a\u00a0překlad. Pokud chcete, můžete směle přispět!
+Ať už jste pokročilý uživatel, vývojář nebo jen zvědaví, Activity Launcher Pro vám poskytne hlubší kontrolu a přizpůsobení vašeho zařízení.
 
-Zdrojový kód: https://github.com/butzist/ActivityLauncher
-Překlady: http://crowdin.net/project/activitylauncher/invite
-Přihlášení do vydání betaverze: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Klíčové funkce:
+- Spouštějte skryté nebo interní aktivity v rámci nainstalovaných aplikací
+- Vytvářejte zástupce pro rychlý přístup ke konkrétním funkcím nebo obrazovkám
+- Čistý a nenáročný s jednoduchým rozhraním
+
+💡 O projektu:
+Activity Launcher Pro je open-source projekt dostupný na https://github.com/butzist/ActivityLauncher.
+
+🤝 Zapojte se:
+Toto je komunitní projekt. Jsou vítány příspěvky do kódu, do překladu nebo čistě jen nápady. Pomozte nám aplikaci vylepšovat a růst!
+
+Web: https://activitylauncher.net
+Zdrojový kód a překlady: https://github.com/butzist/ActivityLauncher
+Přihlaste se k odběru beta verzí: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

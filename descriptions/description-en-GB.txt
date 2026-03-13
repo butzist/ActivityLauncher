@@ -1,6 +1,6 @@
 Support the continued development of Activity Launcher by upgrading to Activity Launcher Pro—an ad-free, analytics-free tool that unlocks hidden app activities, lets you create custom shortcuts, and helps power future improvements.
 
-Whether you're a power user, developer, or just curious, Activity Launcher Pro gives you deeper control and customization over your device.
+Whether you're a power user, developer or just curious, Activity Launcher Pro gives you deeper control and customisation over your device.
 
 🔍 Key Features:
 - Launch hidden or internal activities within installed apps
@@ -14,6 +14,5 @@ Activity Launcher Pro is an open-source project available at https://github.com/
 This is a community-driven project – you're welcome to contribute code, translations, or ideas. Help us improve and grow!
 
 Website: https://activitylauncher.net
-Source code: https://github.com/butzist/ActivityLauncher
-Translations: http://crowdin.net/project/activitylauncher/invite
+Source code and translations: https://github.com/butzist/ActivityLauncher
 Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

@@ -1,0 +1,28 @@
+Könnyedén indítson el rejtett alkalmazástevékenységeket és hozzon létre egyéni parancsikonokat!
+
+Fedezze fel Android-alkalmazásai teljes potenciálját a Tevékenység Launcher segítségével – egy hatékony eszköz, amely lehetővé teszi a rejtett tevékenységek elérését és a kezdőképernyőn lévő parancsikonok létrehozását bármely telepített alkalmazáshoz.
+
+Akár tapasztalt felhasználó, fejlesztő vagy csak kíváncsi, a Tevékenység Launcher mélyebb irányítást és testreszabást biztosít eszköze felett.
+
+🔍 Főbb jellemzők:
+- Rejtett vagy belső tevékenységek indítása a telepített alkalmazásokon belül
+- Parancsikonok létrehozása az adott funkciókhoz vagy képernyőkhöz való gyors hozzáféréshez
+- Tiszta és könnyű, egyszerű felülettel
+
+💡 A projektről:
+A Tevékenység Launcher a https://github.com/butzist/ActivityLauncher címen elérhető nyílt forráskódú projekten alapul.
+
+🎁 Váltson hirdetésmentes verzióra és támogasson minket
+Előnyben részesíti a hirdetésmentes élményt? Töltse le az Activity Launcher Pro alkalmazást a Play Áruházból:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Vagy szerezze be az ingyenes, nyílt forráskódú APK-t a GitHubról, és támogassa a jövőbeni fejlesztést a projekt szponzorálásával:
+https://github.com/sponsors/butzist
+— Köszönjük, hogy segít továbbfejleszteni az Activity Launcher alkalmazást!
+
+🤝 Vegyen részt:
+Ez egy közösség által vezérelt projekt – szívesen fogadunk kódokat, fordításokat vagy ötleteket. Segítsen nekünk fejlődni és növekedni!
+
+Weboldal: https://activitylauncher.net
+Weboldal: https://activitylauncher.net
+Forráskód és fordítások: https://github.com/butzist/ActivityLauncher
+Feliratkozás a béta verzióra: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

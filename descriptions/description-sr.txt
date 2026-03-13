@@ -1,11 +1,19 @@
-Ova Android aplikacija otvorenog koda pokreće skrivene aktivnosti i stvara prečice na početnom ekranu za instalirane aplikacije.
+Podržite dalji razvoj Activity Launcher-a nadogradnjom na Activity Launcher Pro — alat bez reklama i bez analitike koji otključava skrivene aktivnosti aplikacija, omogućava pravljenje prilagođenih prečica i pomaže u budućim unapređenjima.
 
-Ovom projektu i dalje nedostaju neke funkcije i prevodi. Dobrodošli ste da doprinesete!
+Bez obzira da li ste napredni korisnik, programer, ili ste samo radoznali, Activity Launcher Pro vam daje kontrolu i mogućnost prilagođavanja vašeg uređaja. 
 
-Otvoreni kod:
-https://github.com/butzist/ActivityLauncher
-Prevodi:
-http://crowdin.net/project/activitylauncher/invite
-Prijavite se za Beta izdanje:
-https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Ključne karakteristike:
+- Pokrenite skrivene ili interne aktivnosti unitar instaliranih aplikacija
+- Kreirajte prečice za brz pristup određenim funkcijama ili ekranima
+-Čist i lagan sa jednostavnim interfejsom
 
+💡 О projektu:
+Activity Launcher Pro je open-source projekat, dostupan ovde https://github.com/butzist/ActivityLauncher
+
+🤝 Uključite se:
+Ovo je projekat koji pokreće zajednica – dobrodošli ste da doprinesete kodom, prevodima ili idejama. Помозите нам да се побољшамо и растемо!
+
+Sajt: https://activitylauncher.net
+Veb sajt: https://activitylauncher.net
+Izvorni kod i prevodi: https://github.com/butzist/ActivityLauncher
+Prijavite se za beta izdanje aplikacije: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

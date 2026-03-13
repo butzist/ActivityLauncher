@@ -1,0 +1,27 @@
+Luncurkan aktivitas aplikasi tersembunyi dengan mudah dan buat pintasan khusus!
+
+Temukan potensi penuh aplikasi Android Anda dengan Peluncur Aktivitas – alat hebat yang memungkinkan Anda mengakses aktivitas tersembunyi dan membuat pintasan layar beranda untuk aplikasi apa pun yang terinstal.
+
+Baik Anda pengguna tingkat lanjut, pengembang, atau hanya ingin tahu, Peluncur Aktivitas memberi Anda kontrol dan penyesuaian yang lebih dalam pada perangkat Anda.
+
+🔍 Fitur Utama:
+- Luncurkan aktivitas tersembunyi atau internal di dalam aplikasi yang terpasang
+- Buat pintasan untuk akses cepat ke fitur atau layar tertentu
+- Bersih dan ringan dengan antarmuka yang sederhana
+
+💡 Tentang Proyek:
+Peluncur Aktivitas didasarkan pada proyek sumber terbuka yang tersedia di https://github.com/butzist/ActivityLauncher.
+
+🎁 Beralih ke versi tanpa iklan dan dukung kami
+Lebih suka pengalaman tanpa iklan? Unduh Peluncur Aktivitas Pro dari Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Atau dapatkan APK open-source gratis dari GitHub dan dukung pengembangan di masa depan dengan menjadi sponsor proyek:
+https://github.com/sponsors/butzist
+— Terima kasih telah membantu kami mengembangkan Peluncur Aktivitas!
+
+🤝 Terlibat:
+Ini adalah proyek yang digerakkan oleh komunitas – Anda dipersilakan untuk menyumbangkan kode, terjemahan, atau ide. Bantu kami meningkatkan dan berkembang!
+
+Situs web: https://activitylauncher.net
+Kode sumber dan terjemahan: https://github.com/butzist/ActivityLauncher
+Ikut serta untuk rilis Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

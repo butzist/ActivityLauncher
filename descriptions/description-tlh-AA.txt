@@ -1,7 +1,18 @@
-tlhab ‹Android› nIqHomvam mung De'. Qu' So'lu'bogh taghmoH nIqHom 'ej latlh nIqHomvaD juH HaSta qIgh chenmoH.
+Qu' taghmoHwI' ghItlh development pat vIleghDI' Activity Launcher Pro—ad-free, analytics-free tool cha' unlocks hidden app activities, lets you create custom shortcuts, je helps power future improvements.
 
-'op DI'on, ghItlh mughlu'ta'bogh je HutlhtaH jInmolvam. Daghaq net rIt!
+’ejDaq Qatlh ghojmoH, QIn mIgh, pagh SuvwI’ pe’vIl, Activity Launcher DuQwI’ Daq ‘ej Ha’ vIghro’ SoH ‘e’ vItu’!
 
-mung De': https://github.com/butzist/ActivityLauncher
-mughtaHghach: http://crowdin.net/project/activitylauncher/invite
-waHmeH SarvaD jeS 'e' SapmeH: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 mIw nIvbogh meqmey:
+- yuQmey Dalo' 'ej neH QumpInDaq veSmey Qey'
+- Qapchu' lo'taHghachmey yIqaw je meqmey pagh ngevwI' yIqaw
+- wIleghmey 'ej nItebHa' 'ej tIq qonwI' pagh
+
+💡 De'vam'e' Qu'vam:
+Activity Launcher Pro vItlhutlh vIqIj 'ej De'vam'e' Qu'vam github.com/butzist/ActivityLauncher Dalo'lu'.
+
+🤝 qatlh wej
+maQa’pu’ ‘ej maHvaD – tlhIngan Hol, QInmey, HIvje’ ghojmoHmey, pagh wIqel! Qapchu' wIleghmeH 'ej wIbuS!
+
+Website: https://activitylauncher.net
+mung De'pu' mughtaHghach: https://github.com/butzist/ActivityLauncher
+waHmeH SarvaD jeS 'e' SapmeH: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

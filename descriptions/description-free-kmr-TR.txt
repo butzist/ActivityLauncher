@@ -1,0 +1,27 @@
+Bi hêsanî çalakiyên appê yên veşartî bidin destpêkirin û kurteriyên xwerû biafirînin!
+
+Bi Activity Launcher-ê potansiyela tevahî ya sepanên xwe yên Android-ê kifş bikin - amûrek bihêz ku dihêle hûn bigihîjin çalakiyên veşartî û ji bo her sepanê ku hatî saz kirin kurteriyên ekrana malê biafirînin.
+
+Çi hûn bikarhênerek hêzdar, pêşdebir, an jî tenê meraq dikin, Activity Launcher li ser cîhaza we kontrol û xwerûkirinek kûrtir dide we.
+
+🔍 Taybetmendiyên Serekî:
+- Çalakiyên veşartî an navxweyî di nav sepanên sazkirî de bidin destpêkirin
+- Ji bo gihîştina bilez a taybetmendî an dîmenên taybetî kurteriyan biafirînin
+- Paqij û sivik bi navgînek sade
+
+💡 Derbarê Projeyê:
+Activity Launcher li ser projeya çavkaniya vekirî ya ku li https://github.com/butzist/ActivityLauncher heye, hatî damezrandin.
+
+🎁 Bi guhertoya bê-reklam ve bibin û alîkarî me bikin
+Dixwazî tecrûbeyek bê-reklam? Activity Launcher Pro ji Play Store-ê daxwazê:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+An jî APK‑ya belaş û vekirî ji GitHub ve daxe û bi sponsor kirina projeyê piştgirî bidin pêşveçûna wê:
+https://github.com/sponsors/butzist
+— Spas ji we re ku hûn alîkar in ku Activity Launcher herî zêde berdewam bike!
+
+🤝 Tevlî Bibin:
+Ev proje ji hêla civakê ve tê rêvebirin - hûn bi xêr hatin ku hûn kod, werger an ramanan bexşînin. Alîkariya me bikin ku em baştir bibin û mezin bibin!
+
+Malper: https://activitylauncher.net
+کۆدی سەرچاوە و وەرگێڕان: https://github.com/butzist/ActivityLauncher
+Ji bo beta release opt-in: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

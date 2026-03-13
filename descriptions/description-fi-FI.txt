@@ -1,7 +1,18 @@
-Tämä Avoimen lähdekoodin Android sovellus käynnistää piilotetut toiminnot ja luo aloitusnäyttöön pikakuvakkeen asennetuista sovelluksista.
+Tue Activity Launcherin jatkokehitystä päivittämällä Activity Launcher Pro -versioon – mainokseton ja analytiikaton työkalu, joka avaa sovellusten piilotetut toiminnot, luo mukautettuja pikakuvakkeita ja auttaa tehostamaan tulevia parannuksia.
 
-Tästä projektista puuttuu vielä joitain ominaisuuksia ja käänöksiä. Olet tervetullut osallistumaan!
+Olitpa tehokäyttäjä, kehittäjä tai vain utelias, Activity Launcher Pro antaa sinulle syvemmän hallinnan ja mukautuksen laitteeseesi.
 
-Lähdekoodi: https://github.com/butzist/ActivityLauncher
-Käännökset: http://crowdin.net/project/activitylauncher/invite
-Osallistu Betaan: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Tärkeimmät ominaisuudet:
+- Käynnistä piilotettuja tai sisäisiä toimintoja asennetuissa sovelluksissa
+- Luo pikakuvakkeita, joilla pääset nopeasti tiettyihin ominaisuuksiin tai näyttöihin
+- Puhdas ja kevyt yksinkertaisella käyttöliittymällä
+
+💡 Tietoja projektista:
+Activity Launcher Pro on avoimen lähdekoodin projekti, joka on saatavilla osoitteessa https://github.com/butzist/ActivityLauncher.
+
+🤝 Osallistu:
+Tämä on yhteisölähtöinen projekti – olet tervetullut osallistumaan koodilla, käännöksillä tai ideoilla. Auta meitä kehittämään ja kasvamaan!
+
+Verkkosivusto: https://activitylauncher.net
+Lähdekoodi ja käännökset: https://github.com/butzist/ActivityLauncher
+Osallistu Beta-julkaisuun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

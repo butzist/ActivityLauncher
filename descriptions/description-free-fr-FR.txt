@@ -1,0 +1,27 @@
+Lancez facilement les activités cachées de l'application et créez des raccourcis personnalisés!
+
+Découvrez tout le potentiel de vos applications Android avec Lanceur d'activités – un outil puissant qui vous permet d'accéder aux activités cachées et de créer des raccourcis d'écran d'accueil pour toute application installée.
+
+Que vous soyez un utilisateur expérimenté, un développeur ou simplement curieux, Lanceur d'activités vous offre un contrôle et une personnalisation plus approfondis de votre appareil.
+
+🔍 Principales fonctionnalités :
+- Lancez des activités cachées ou internes au sein des applications installées
+- Créez des raccourcis pour un accès rapide à des fonctionnalités ou des écrans spécifiques
+- Propre et léger avec une interface simple
+
+💡 À propos du projet :
+Lanceur d'activités est basé sur le projet open source disponible sur https://github.com/butzist/ActivityLauncher.
+
+🎁 Passez à la version sans publicité et soutenez-nous
+Vous préférez une expérience sans publicité? Téléchargez Lanceur d'activités Pro sur le Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Ou récupérez gratuitement l’APK open-source sur GitHub et soutenez le développement futur en parrainant le projet:
+https://github.com/sponsors/butzist
+— Merci de nous aider à faire grandir Lanceur d'activités !
+
+🤝 Impliquez-vous :
+Il s'agit d'un projet communautaire : vous êtes invités à contribuer du code, des traductions ou des idées. Aidez-nous à nous améliorer et à nous développer !
+
+Site Web : https://activitylauncher.net
+Code source et traductions : https://github.com/butzist/ActivityLauncher
+Inscription à la version bêta : https://play.google.com/apps/testing/de.szalkowski.activitylauncher

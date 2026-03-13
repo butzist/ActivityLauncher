@@ -1,7 +1,18 @@
-這個開放原始碼的 Android 應用程式可以啟動隱藏的活動，並為已安裝的應用程式建立主畫面捷徑。
+透過升級至 Activity Launcher Pro 來支持 Activity Launcher 的持續開發，這是一個無廣告、無分析的工具，可解鎖隱藏的應用程式活動、讓您建立自訂捷徑，並有助於推動未來的改進。
 
-此專案仍缺少一些功能和翻譯。 我們歡迎您的參與！
+無論您是超級使用者、開發人員，還是只是好奇，Activity Launcher Pro 都能讓您更深入地控制和自訂您的裝置。
 
-原始碼：https://github.com/butzist/ActivityLauncher
-翻譯：http://crowdin.net/project/activitylauncher/invite
-加入測試版：https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 主要功能：
+- 啟動已安裝應用程式中隱藏或內部的活動
+- 建立捷徑，以便快速存取特定功能或畫面
+- 乾淨輕巧，介面簡單
+
+💡 關於專案：
+Activity Launcher Pro 是一個開放原始碼專案，可在 https://github.com/butzist/ActivityLauncher 取得。
+
+🤝 參與：
+這是一個社群驅動的專案 – 歡迎您貢獻程式碼、翻譯或想法。 幫助我們改進和成長！
+
+網站：https://activitylauncher.net
+原始碼和翻譯：https://github.com/butzist/ActivityLauncher
+選擇加入 Beta 版本：https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

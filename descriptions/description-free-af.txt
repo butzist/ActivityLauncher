@@ -1,0 +1,27 @@
+Begin maklik versteekte programaktiwiteite en skep pasgemaakte kortpaaie!
+
+Ontdek die volle potensiaal van jou Android-programme met Aktiwiteit Launcher – 'n kragtige instrument waarmee jy toegang tot versteekte aktiwiteite kan kry en tuisskermkortpaaie vir enige geïnstalleerde program kan skep.
+
+Of jy nou 'n kraggebruiker, ontwikkelaar of net nuuskierig is, Aktiwiteit Launcher gee jou dieper beheer en aanpassing oor jou toestel.
+
+🔍 Sleutelkenmerke:
+- Begin versteekte of interne aktiwiteite binne geïnstalleerde toepassings
+- Skep kortpaaie vir vinnige toegang tot spesifieke kenmerke of skerms
+- Skoon en liggewig met 'n eenvoudige koppelvlak
+
+💡 Oor die Projek:
+Aktiwiteit Launcher is gebaseer op die oopbronprojek beskikbaar by https://github.com/butzist/ActivityLauncher.
+
+🎁 Skakel oor na advertensievry & steun ons
+ Lewer jy ’n voorkeur vir ’n advertensievrye ervaring?  Laai Aktiwiteit Launcher Pro af by die Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+ Of kry die gratis, open‑source APK op GitHub en steun toekomstige ontwikkeling deur die projek te borg:
+https://github.com/sponsors/butzist
+ — Dankie dat jy ons help om Aktiwiteit Launcher te laat groei!
+
+🤝 Raak Betrokke:
+Dit is 'n gemeenskapsgedrewe projek – jy is welkom om kode, vertalings of idees by te dra. Help ons om te verbeter en te groei!
+
+Webwerf: https://activitylauncher.net
+Bronkode en vertalings: https://github.com/butzist/ActivityLauncher
+Kies in vir Beta-vrystelling: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

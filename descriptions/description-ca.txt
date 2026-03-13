@@ -1,7 +1,18 @@
-Aquesta aplicació d'Android de codi obert llança activitats ocultes i crea dreceres de la pantalla d'inici per a les aplicacions instal·lades.
+Dona suport al desenvolupament continu d'Activity Launcher actualitzant a Activity Launcher Pro, una eina sense anuncis ni analítiques que desbloqueja activitats d'aplicacions ocultes, et permet crear dreceres personalitzades i ajuda a impulsar millores futures.
 
-Aquest projecte encara no té algunes funcions i traduccions. Esteu convidats a contribuir!
+Tant si ets un usuari avançat, un desenvolupador o simplement tens curiositat, Activity Launcher Pro et proporciona un control i una personalització més profunds del teu dispositiu.
 
-Codi font: https://github.com/butzist/ActivityLauncher
-Traduccions: http://crowdin.net/project/activitylauncher/invite
-Activa la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Característiques principals:
+- Inicia activitats ocultes o internes dins de les aplicacions instal·lades
+- Crea dreceres per accedir ràpidament a funcions o pantalles específiques
+- Neteja i lleugera amb una interfície senzilla
+
+💡 Quant al projecte:
+Activity Launcher Pro és un projecte de codi obert disponible a https://github.com/butzist/ActivityLauncher.
+
+🤝 Participa:
+Aquest és un projecte impulsat per la comunitat: pots contribuir amb codi, traduccions o idees. Ajuda'ns a millorar i créixer!
+
+Lloc web: https://activitylauncher.net
+Codi font i traduccions: https://github.com/butzist/ActivityLauncher
+Participa a la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

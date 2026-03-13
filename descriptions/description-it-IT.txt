@@ -1,7 +1,18 @@
-Quest'app open-source avvia le attività nascoste e crea collegamenti nella schermata home per le app installate.
+Supporta lo sviluppo continuo di Avvio di attività effettuando l'upgrade ad Avvio di attività Pro, uno strumento senza pubblicità e senza analisi che sblocca attività nascoste delle app, ti consente di creare scorciatoie personalizzate e aiuta a potenziare i miglioramenti futuri.
 
-A questo progetto mancano ancora alcune funzioni e traduzioni. Siete invitati a contribuire!
+Che tu sia un utente esperto, uno sviluppatore o semplicemente curioso, Avvio di attività Pro ti offre un controllo e una personalizzazione più approfonditi sul tuo dispositivo.
 
-Codice sorgente: https://github.com/butzist/ActivityLauncher
-Traduzioni: http://crowdin.net/project/activitylauncher/invite
-Opt-in per la versione Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Funzionalità chiave:
+- Avvia attività nascoste o interne all'interno delle app installate
+- Crea scorciatoie per un rapido accesso a funzioni o schermate specifiche
+- Pulito e leggero con un'interfaccia semplice
+
+💡 Informazioni sul progetto:
+Avvio di attività Pro è un progetto open source disponibile all'indirizzo https://github.com/butzist/ActivityLauncher.
+
+🤝 Partecipa:
+Questo è un progetto guidato dalla comunità: sei invitato a contribuire con codice, traduzioni o idee. Aiutaci a migliorare e crescere!
+
+Sito web: https://activitylauncher.net
+Codice sorgente e traduzioni: https://github.com/butzist/ActivityLauncher
+Opt-in per la versione beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

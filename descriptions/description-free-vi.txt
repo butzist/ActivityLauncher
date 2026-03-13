@@ -1,0 +1,27 @@
+Dễ dàng khởi chạy các hoạt động ứng dụng ẩn và tạo các lối tắt tùy chỉnh!
+
+Khám phá toàn bộ tiềm năng của các ứng dụng Android của bạn với Activity Launcher – một công cụ mạnh mẽ cho phép bạn truy cập các hoạt động ẩn và tạo các lối tắt trên màn hình chính cho bất kỳ ứng dụng đã cài đặt nào.
+
+Cho dù bạn là người dùng thành thạo, nhà phát triển hay chỉ đơn giản là tò mò, Activity Launcher sẽ cung cấp cho bạn khả năng kiểm soát và tùy chỉnh sâu hơn đối với thiết bị của bạn.
+
+🔍 Các tính năng chính:
+- Khởi chạy các hoạt động ẩn hoặc bên trong trong các ứng dụng đã cài đặt
+- Tạo lối tắt để truy cập nhanh vào các tính năng hoặc màn hình cụ thể
+- Giao diện gọn gàng và nhẹ với giao diện đơn giản
+
+💡 Giới thiệu về dự án:
+Activity Launcher dựa trên dự án mã nguồn mở có tại https://github.com/butzist/ActivityLauncher.
+
+🎁 Chuyển sang phiên bản không quảng cáo và ủng hộ chúng tôi
+Bạn muốn trải nghiệm không quảng cáo? Tải Activity Launcher Pro từ cửa hàng Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Hoặc tải APK mã nguồn mở miễn phí từ GitHub và hỗ trợ phát triển trong tương lai bằng cách tài trợ cho dự án:
+https://github.com/sponsors/butzist
+— Cảm ơn bạn đã giúp Activity Launcher phát triển!
+
+🤝 Tham gia:
+Đây là một dự án do cộng đồng điều hành – bạn có thể đóng góp mã, bản dịch hoặc ý tưởng. Giúp chúng tôi cải thiện và phát triển!
+
+Trang web: https://activitylauncher.net
+Mã nguồn và bản dịch: https://github.com/butzist/ActivityLauncher
+Tham gia bản Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

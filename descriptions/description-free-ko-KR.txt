@@ -1,0 +1,27 @@
+숨겨진 앱 활동을 쉽게 실행하고 사용자 지정 바로가기를 만드세요!
+
+액티비티 런처와 함께 Android 앱의 잠재력을 최대한 활용해 보세요 — 설치된 모든 앱의 숨겨진 활동에 접근하고 홈 화면 바로가기를 만들 수 있는 강력한 도구입니다.
+
+액티비티 런처는 파워 유저, 개발자 또는 단순히 호기심이 많은 사용자에게 장치에 대한 더 깊은 제어 및 사용자 지정을 제공합니다.
+
+🔍 주요 기능:
+- 설치된 앱 내에서 숨겨진 또는 내부 활동 실행
+- 특정 기능 또는 화면에 빠르게 액세스할 수 있는 바로 가기 만들기
+- 간단한 인터페이스로 깔끔하고 가벼움
+
+💡 프로젝트 정보:
+액티비티 런처는 https://github.com/butzist/ActivityLauncher에서 사용할 수 있는 오픈 소스 프로젝트를 기반으로 합니다.
+
+🎁 광고 없는 버전으로 전환하고 저희를 지원해 주세요
+광고 없는 사용 환경을 선호하시나요? Play 스토어에서 액티비티 런처 프로를 다운로드하세요:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+또는 GitHub에서 무료 오픈 소스 APK를 받아 프로젝트를 후원하여 향후 개발을 지원해 주세요:
+https://github.com/sponsors/butzist
+— 액티비티 런처의 성장을 도와주셔서 감사합니다!
+
+🤝 참여하기:
+이것은 커뮤니티 기반 프로젝트입니다. 코드, 번역 또는 아이디어를 자유롭게 기여해 주세요. 개선하고 성장하도록 도와주세요!
+
+웹사이트: https://activitylauncher.net
+소스 코드 및 번역: https://github.com/butzist/ActivityLauncher
+베타 버전 옵트인: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

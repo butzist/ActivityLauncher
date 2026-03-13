@@ -1,0 +1,27 @@
+Start eenvoudig verborgen app-activiteiten en maak aangepaste snelkoppelingen!
+
+Ontdek het volledige potentieel van uw Android-apps met Activity Launcher – een krachtige tool waarmee u toegang krijgt tot verborgen activiteiten en snelkoppelingen op het startscherm kunt maken voor elke geïnstalleerde app.
+
+Of u nu een power user, ontwikkelaar of gewoon nieuwsgierig bent, Activity Launcher geeft u meer controle en aanpassingsmogelijkheden over uw apparaat.
+
+🔍 Belangrijkste functies:
+- Start verborgen of interne activiteiten binnen geïnstalleerde apps
+- Maak snelkoppelingen voor snelle toegang tot specifieke functies of schermen
+- Schoon en lichtgewicht met een eenvoudige interface
+
+💡 Over het project:
+Activity Launcher is gebaseerd op het open-source project dat beschikbaar is op https://github.com/butzist/ActivityLauncher.
+
+🎁 Ga voor een advertentievrije versie en steun ons
+Geef je de voorkeur aan een ervaring zonder advertenties? Download Activity Launcher Pro via de Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Of haal de gratis open‑source APK op via GitHub en steun de verdere ontwikkeling door het project te sponsoren:
+https://github.com/sponsors/butzist
+— Bedankt dat je helpt om Activity Launcher verder te laten groeien!
+
+🤝 Doe mee:
+Dit is een project dat door de gemeenschap wordt gedreven – je bent welkom om code, vertalingen of ideeën bij te dragen. Help ons verbeteren en groeien!
+
+Website: https://activitylauncher.net
+Broncode en vertalingen: https://github.com/butzist/ActivityLauncher
+Aanmelden voor bètaversie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

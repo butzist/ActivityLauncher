@@ -1,0 +1,27 @@
+Inicie facilmente atividades ocultas de aplicativos e crie atalhos personalizados!
+
+Descubra todo o potencial de seus aplicativos Android com o Activity Launcher – uma ferramenta poderosa que permite acessar atividades ocultas e criar atalhos na tela inicial para qualquer aplicativo instalado.
+
+Se você é um usuário avançado, desenvolvedor ou apenas curioso, o Activity Launcher oferece maior controle e personalização sobre seu dispositivo.
+
+🔍 Principais recursos:
+- Inicie atividades ocultas ou internas em aplicativos instalados
+- Crie atalhos para acesso rápido a recursos ou telas específicos
+- Limpo e leve com uma interface simples
+
+💡 Sobre o Projeto:
+O Activity Launcher é baseado no projeto de código aberto disponível em https://github.com/butzist/ActivityLauncher.
+
+🎁 Vá para a versão sem anúncios e apoie-nos
+Prefere uma experiência sem anúncios? Descarregue o Activity Launcher Pro na Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Ou obtenha o APK gratuito e open-source no GitHub e apoie o desenvolvimento futuro patrocinando o projeto:
+https://github.com/sponsors/butzist
+— Obrigado por ajudar a manter o crescimento do Activity Launcher!
+
+🤝 Envolva-se:
+Este é um projeto conduzido pela comunidade – você pode contribuir com código, traduções ou ideias. Ajude-nos a melhorar e crescer!
+
+Website: https://activitylauncher.net
+Código fonte e traduções: https://github.com/butzist/ActivityLauncher
+Ative a versão Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

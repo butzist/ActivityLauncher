@@ -1,7 +1,18 @@
-Deze Android App start verborgen activiteiten en maakt snelkoppelingen op het startscherm voor geïnstalleerde apps.
+Steun de voortdurende ontwikkeling van Activity Launcher door te upgraden naar Activity Launcher Pro: een advertentievrije, analysevrije tool waarmee je verborgen app-activiteiten kunt ontgrendelen, aangepaste snelkoppelingen kunt maken en toekomstige verbeteringen kunt stimuleren.
 
-Dit project mist nog enkele functies en vertalingen. Uw bijdrage is welkom!
+Of je nu een power user, ontwikkelaar of gewoon nieuwsgierig bent, Activity Launcher Pro geeft je meer controle en aanpassingsmogelijkheden over je apparaat.
 
-Broncode: https://github.com/butzist/ActivityLauncher
-Vertalingen: http://crowdin.net/project/activitylauncher/invite
-Opt-in voor Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Belangrijkste functies:
+- Start verborgen of interne activiteiten binnen geïnstalleerde apps
+- Maak snelkoppelingen voor snelle toegang tot specifieke functies of schermen
+- Schoon en lichtgewicht met een eenvoudige interface
+
+💡 Over het project:
+Activity Launcher Pro is een open-source project dat beschikbaar is op https://github.com/butzist/ActivityLauncher.
+
+🤝 Doe mee:
+Dit is een project dat door de gemeenschap wordt gedreven – je bent welkom om code, vertalingen of ideeën bij te dragen. Help ons verbeteren en groeien!
+
+Website: https://activitylauncher.net
+Broncode en vertalingen: https://github.com/butzist/ActivityLauncher
+Meld je aan voor de bètaversie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro
