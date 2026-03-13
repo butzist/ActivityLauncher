@@ -18,7 +18,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.internal.getActivityIntent
 import javax.inject.Inject
@@ -38,8 +38,8 @@ interface IconCreatorService {
 }
 
 class IconCreatorServiceImpl @Inject constructor(
-    @ActivityContext private val context: Context,
-    private val signingService: IntentSigningService
+    @ApplicationContext private val context: Context,
+    private val signingService: IntentSigningService,
 ) : IconCreatorService {
     override fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
         createLauncherIcon(activity, optionalExtras, false)
@@ -52,7 +52,7 @@ class IconCreatorServiceImpl @Inject constructor(
     private fun createLauncherIcon(
         activity: MyActivityInfo,
         optionalExtras: Bundle?,
-        asRoot: Boolean
+        asRoot: Boolean,
     ) {
         try {
             val pack = extractIconPackageName(activity)
@@ -67,7 +67,7 @@ class IconCreatorServiceImpl @Inject constructor(
                     intent,
                     activity.icon,
                     asRoot,
-                    activity.iconResourceName
+                    activity.iconResourceName,
                 )
             }
         } catch (e: Exception) {
@@ -75,7 +75,7 @@ class IconCreatorServiceImpl @Inject constructor(
             Toast.makeText(
                 context,
                 context.getText(R.string.error_creating_shortcut).toString() + ": " + e,
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             ).show()
         }
     }
@@ -119,7 +119,9 @@ class IconCreatorServiceImpl @Inject constructor(
             return Icon.createWithBitmap(drawable.bitmap)
         }
         val bmp = Bitmap.createBitmap(
-            drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888,
         )
         val canvas = Canvas(bmp)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
@@ -128,12 +130,19 @@ class IconCreatorServiceImpl @Inject constructor(
     }
 
     private fun createShortcut(
-        appName: String, intent: Intent, draw: Drawable, asRoot: Boolean, iconResourceName: String?
+        appName: String,
+        intent: Intent,
+        draw: Drawable,
+        asRoot: Boolean,
+        iconResourceName: String?,
     ) {
         Toast.makeText(
-            context, String.format(
-                context.getText(R.string.creating_application_shortcut).toString(), appName
-            ), Toast.LENGTH_LONG
+            context,
+            String.format(
+                context.getText(R.string.creating_application_shortcut).toString(),
+                appName,
+            ),
+            Toast.LENGTH_LONG,
         ).show()
         if (Build.VERSION.SDK_INT >= 26) {
             doCreateShortcut(appName, intent, asRoot, draw)
@@ -143,14 +152,17 @@ class IconCreatorServiceImpl @Inject constructor(
     }
 
     private fun doCreateShortcut(
-        appName: String, intent: Intent, asRoot: Boolean, iconResourceName: String?
+        appName: String,
+        intent: Intent,
+        asRoot: Boolean,
+        iconResourceName: String?,
     ) {
         val shortcutIntent = Intent()
         if (asRoot) {
             // wrap only if root access needed
             shortcutIntent.putExtra(
                 Intent.EXTRA_SHORTCUT_INTENT,
-                createShortcutIntent(intent, true)
+                createShortcutIntent(intent, true),
             )
         } else {
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
@@ -165,7 +177,6 @@ class IconCreatorServiceImpl @Inject constructor(
             }
             ir.resourceName = iconResourceName
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir)
-
         }
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT")
         context.sendBroadcast(shortcutIntent)
@@ -173,7 +184,10 @@ class IconCreatorServiceImpl @Inject constructor(
 
     @TargetApi(26)
     private fun doCreateShortcut(
-        appName: String, intent: Intent, asRoot: Boolean, draw: Drawable
+        appName: String,
+        intent: Intent,
+        asRoot: Boolean,
+        draw: Drawable,
     ) {
         val shortcutManager = context.getSystemService(ShortcutManager::class.java)!!
         if (shortcutManager.isRequestPinShortcutSupported) {
@@ -186,7 +200,7 @@ class IconCreatorServiceImpl @Inject constructor(
         } else {
             AlertDialog.Builder(context).setTitle(context.getText(R.string.error_creating_shortcut))
                 .setMessage(context.getText(R.string.error_verbose_pin_shortcut)).setPositiveButton(
-                    context.getText(android.R.string.ok)
+                    context.getText(android.R.string.ok),
                 ) { dialog: DialogInterface, _: Int ->
                     // Just close dialog don't do anything
                     dialog.cancel()
@@ -206,8 +220,6 @@ class IconCreatorServiceImpl @Inject constructor(
         val signature = signingService.signIntent(intent)
         shortcutIntent.putExtra(IconCreatorService.INTENT_EXTRA_SIGNATURE, signature)
 
-
         return shortcutIntent
     }
 }
-

@@ -1,0 +1,27 @@
+Käynnistä helposti piilotettuja sovellustoimintoja ja luo mukautettuja pikakuvakkeita!
+
+Löydä Android-sovellustesi koko potentiaali Activity Launcherilla – tehokkaalla työkalulla, jonka avulla voit käyttää piilotettuja toimintoja ja luoda aloitusnäytön pikakuvakkeita mille tahansa asennetulle sovellukselle.
+
+Olitpa kokenut käyttäjä, kehittäjä tai vain utelias, Activity Launcher antaa sinulle syvemmän hallinnan ja mukautuksen laitteeseesi.
+
+🔍 Tärkeimmät ominaisuudet:
+- Käynnistä piilotettuja tai sisäisiä toimintoja asennetuissa sovelluksissa
+- Luo pikakuvakkeita, joilla pääset nopeasti tiettyihin ominaisuuksiin tai näyttöihin
+- Puhdas ja kevyt yksinkertaisella käyttöliittymällä
+
+💡 Tietoja projektista:
+Activity Launcher perustuu avoimen lähdekoodin projektiin, joka on saatavilla osoitteessa https://github.com/butzist/ActivityLauncher.
+
+🎁 Siirry mainoksettomaan versioon ja tue meitä
+Haluatko mainoksettomman käyttökokemuksen? Lataa Activity Launcher Pro Play Storesta:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Tai lataa ilmainen, avoimen lähdekoodin APK GitHubista ja tue tulevaa kehitystä sponsoroimalla projektia:
+https://github.com/sponsors/butzist
+— Kiitos, että autat meitä kehittämään Activity Launcheria!
+
+🤝 Osallistu:
+Tämä on yhteisölähtöinen projekti – olet tervetullut osallistumaan koodilla, käännöksillä tai ideoilla. Auta meitä kehittämään ja kasvamaan!
+
+Verkkosivusto: https://activitylauncher.net
+Lähdekoodi ja käännökset: https://github.com/butzist/ActivityLauncher
+Beetaversioon tilaus: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

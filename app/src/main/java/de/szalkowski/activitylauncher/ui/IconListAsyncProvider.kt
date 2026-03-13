@@ -6,11 +6,10 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ActivityContext
 
-
 class IconListAsyncProvider @AssistedInject constructor(
     @ActivityContext context: Context,
     private val adapter: IconListAdapter,
-    @Assisted listener: Listener<IconListAdapter>?
+    @Assisted listener: Listener<IconListAdapter>?,
 ) : AsyncProvider<IconListAdapter>(context, listener, false) {
     @AssistedFactory
     interface IconListAsyncProviderFactory {

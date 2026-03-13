@@ -9,14 +9,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 17
+    - name: set up JDK 21
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: 17
+        java-version: 21
         cache: 'gradle'
     - name: Download dependencies
       run: ./gradlew androidDependencies
+    - name: Check code formatting
+      run: ./gradlew spotlessCheck
     - name: Build debug
       run: ./gradlew assembleOssDebug
     - name: Upload debug APK

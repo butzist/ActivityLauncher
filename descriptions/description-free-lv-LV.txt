@@ -1,0 +1,27 @@
+Viegli palaidiet slēptās lietotņu darbības un izveidojiet pielāgotus saīsnes!
+
+Atklājiet pilnu savu Android lietotņu potenciālu ar Darbības Palaidēju – jaudīgu rīku, kas ļauj piekļūt slēptām darbībām un izveidot sākuma ekrāna saīsnes jebkurai instalētai lietotnei.
+
+Neatkarīgi no tā, vai esat pieredzējis lietotājs, izstrādātājs vai vienkārši zinātkārs, Darbības Palaidējs sniedz jums dziļāku kontroli un pielāgošanu pār jūsu ierīci.
+
+🔍 Galvenās funkcijas:
+- Palaidiet slēptās vai iekšējās darbības instalētajās lietotnēs
+- Izveidojiet saīsnes, lai ātri piekļūtu konkrētām funkcijām vai ekrāniem
+- Tīrs un viegls ar vienkāršu saskarni
+
+💡 Par projektu:
+Darbību palaidējs ir balstīts uz atvērtā pirmkoda projektu, kas pieejams vietnē https://github.com/butzist/ActivityLauncher.
+
+🎁 Pārejiet uz versiju bez reklāmām un atbalstiet mūs
+Vēlaties pieredzi bez reklāmām? Lejupielādējiet Activity Launcher Pro no Play veikala:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Vai arī iegūstiet bezmaksas, atvērtā koda APK no GitHub un atbalstiet turpmāku attīstību, sponsorējot projektu:
+https://github.com/sponsors/butzist
+— Paldies, ka palīdzat Activity Launcher augt!
+
+🤝 Iesaistieties:
+Šis ir kopienas virzīts projekts — esat laipni aicināti sniegt ieguldījumu kodā, tulkojumos vai idejās. Palīdziet mums uzlabot un augt!
+
+Vietne: https://activitylauncher.net
+Pirmkods un tulkojumi: https://github.com/butzist/ActivityLauncher
+Pievienojieties Beta versijai: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

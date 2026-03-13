@@ -5,36 +5,81 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface PackageListService {
     val packages: List<MyPackageInfo>
+    val isLoaded: Boolean
+    fun getPackage(packageName: String): MyPackageInfo?
+    fun invalidate()
 }
 
+@Singleton
 class PackageListServiceImpl @Inject constructor(
-    @ApplicationContext context: Context, val settingsService: SettingsService
+    @ApplicationContext context: Context,
+    val settingsService: SettingsService,
 ) : PackageListService {
 
-    private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager: PackageManager = context.packageManager
-    private val installedPackages: List<MyPackageInfo> =
-        packageManager.getInstalledPackages(
-            PackageManager.GET_ACTIVITIES
-                    or PackageManager.MATCH_ALL
-                    or PackageManager.MATCH_DISABLED_COMPONENTS
-                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-        ).mapNotNull {
-            getPackageInfo(it)
-        }.sortedBy { it.name.lowercase() }
+    private val cache = mutableMapOf<String, MyPackageInfo>()
+    private var allLoaded = false
+
+    override val isLoaded: Boolean
+        get() = synchronized(cache) { allLoaded }
 
     override val packages: List<MyPackageInfo>
-        get() = installedPackages
+        get() {
+            synchronized(cache) {
+                if (!allLoaded) {
+                    packageManager.getInstalledPackages(
+                        PackageManager.GET_ACTIVITIES
+                            or PackageManager.MATCH_ALL
+                            or PackageManager.MATCH_DISABLED_COMPONENTS
+                            or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
+                    ).forEach { p ->
+                        getPackageInfo(p)?.let { cache[it.packageName] = it }
+                    }
+                    allLoaded = true
+                }
+                return cache.values.sortedBy { it.name.lowercase() }
+            }
+        }
+
+    override fun getPackage(packageName: String): MyPackageInfo? {
+        synchronized(cache) {
+            cache[packageName]?.let { return it }
+        }
+
+        val result = runCatching {
+            val info = packageManager.getPackageInfo(
+                packageName,
+                PackageManager.GET_ACTIVITIES
+                    or PackageManager.MATCH_ALL
+                    or PackageManager.MATCH_DISABLED_COMPONENTS
+                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
+            )
+            getPackageInfo(info)
+        }.getOrNull()
+
+        return result?.also {
+            synchronized(cache) {
+                cache[packageName] = it
+            }
+        }
+    }
+
+    override fun invalidate() {
+        synchronized(cache) {
+            cache.clear()
+            allLoaded = false
+        }
+    }
 
     private fun getPackageInfo(info: PackageInfo): MyPackageInfo? {
         val packageName = info.packageName as String? // do not trust Android implementations
@@ -56,12 +101,20 @@ class PackageListServiceImpl @Inject constructor(
             .filter { it != defaultActivityName }
 
         return MyPackageInfo(
-            packageName, name, version, defaultActivityName, activities, icon, iconResourceName
+            packageName.hashCode().toLong(),
+            packageName,
+            name,
+            version,
+            defaultActivityName,
+            activities,
+            icon,
+            iconResourceName,
         )
     }
 
     private fun getDefaultActivityName(
-        packageName: String, appRes: Resources?
+        packageName: String,
+        appRes: Resources?,
     ): ActivityName? {
         if (appRes == null) {
             return null
@@ -74,7 +127,6 @@ class PackageListServiceImpl @Inject constructor(
             val defaultActivityName = getActivityName(activityInfo, appRes)
             return defaultActivityName
         }.getOrNull()
-
     }
 
     private fun getIcon(app: ApplicationInfo): Drawable {
@@ -86,7 +138,8 @@ class PackageListServiceImpl @Inject constructor(
     }
 
     private fun getIconResourceName(
-        app: ApplicationInfo, appRes: Resources?
+        app: ApplicationInfo,
+        appRes: Resources?,
     ): String? {
         val iconResource = app.icon
 
@@ -98,7 +151,6 @@ class PackageListServiceImpl @Inject constructor(
             appRes.getResourceName(iconResource)
         }.getOrNull()
     }
-
 
     private fun getName(app: ApplicationInfo, appRes: Resources?): String {
         var name = app.loadLabel(packageManager).toString()
@@ -131,18 +183,20 @@ class PackageListServiceImpl @Inject constructor(
     private fun getLocalizedResources(packageName: String): Resources? {
         return runCatching {
             val appRes = packageManager.getResourcesForApplication(packageName)
-            appRes.updateConfiguration(config, DisplayMetrics())
+            appRes.updateConfiguration(settingsService.getLocaleConfiguration(), DisplayMetrics())
             appRes
         }.getOrNull()
     }
 
     private fun createNameFromClass(cls: String): String {
         val name = cls.substringAfterLast('.')
+        val config = settingsService.getLocaleConfiguration()
         return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(config.locale) else it.toString() }
     }
 }
 
 data class MyPackageInfo(
+    val id: Long,
     val packageName: String,
     val name: String,
     val version: String,

@@ -1,7 +1,18 @@
-ئەم ئەپەی ئەندرۆید سەرچاوە کراوە چالاکییە شاراوەکان دەستپێدەکات و کورتکراوەی شاشەی سەرەکی بۆ ئەپەکانی دامەزراو دروست دەکات.
+Piştgiriya pêşveçûna domdar a Aktivit desbekirin bi bilindkirina guhertoya Pro ya Aktivit desbekirin bikin—amûrek bê reklam, bê analîtîk ku çalakiyên veşartî yên sepanan vedike, dihêle hûn kurteriyên xwerû biafirînin, û alîkariya hêzkirina pêşkeftinên pêşerojê dike.
 
-ئەم پڕۆژەیە هێشتا چەند تایبەتمەندی و وەرگێڕانی تێدا نییە. بەخێرهاتنتان دەکەین بۆ بەشداریکردن!
+Ka hûn bikarhênerek hêzdar, pêşdebir an tenê meraqdar bin, Aktivit desbekirin Pro kontrol û xwerûkirinek kûrtir li ser cîhaza we dide we.
 
-کۆدی سەرچاوە: https://github.com/butzist/ActivityLauncher
-وەرگێڕان: http://crowdin.net/project/activitylauncher/invite
-هەڵبژاردن بۆ بڵاوکردنەوەی بێتا: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Taybetmendiyên Serekî:
+- Çalakiyên veşartî an navxweyî di nav sepanên sazkirî de bidin destpêkirin
+- Ji bo gihîştina bilez a taybetmendî an dîmenên taybetî kurteriyan biafirînin
+- Paqij û sivik bi navgînek sade
+
+💡 Derbarê Projeyê:
+Aktivit desbekirin Pro projeyek çavkaniya vekirî ye ku li https://github.com/butzist/ActivityLauncher heye.
+
+🤝 Tevlî Bibin:
+Ev proje ji hêla civakê ve tê rêvebirin - hûn bi xêr hatin ku hûn kod, werger an ramanan bexşînin. Alîkariya me bikin ku em baştir bibin û mezin bibin!
+
+Malper: https://activitylauncher.net
+کۆدی سەرچاوە و وەرگێڕان: https://github.com/butzist/ActivityLauncher
+Ji bo serbestberdana Beta hilbijêrin: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

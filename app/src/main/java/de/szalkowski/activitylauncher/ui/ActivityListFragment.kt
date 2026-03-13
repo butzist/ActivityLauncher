@@ -7,12 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
 import de.szalkowski.activitylauncher.services.ViewIntentParserService
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,6 +27,8 @@ class ActivityListFragment : Fragment() {
     @Inject
     internal lateinit var activityListAdapterFactory: ActivityListAdapter.ActivityListAdapterFactory
     private lateinit var activityListAdapter: ActivityListAdapter
+
+    private val viewModel: ActivityListViewModel by viewModels()
 
     @Inject
     internal lateinit var viewIntentParserService: ViewIntentParserService
@@ -39,7 +46,9 @@ class ActivityListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentActivityListBinding.inflate(inflater, container, false)
         return binding.root
@@ -49,9 +58,25 @@ class ActivityListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = activity as? ActionBarSearch
-        activityListAdapter.filter = actionBar?.actionBarSearchText.orEmpty()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.activities.collect { activities ->
+                        activityListAdapter.submitList(activities)
+                    }
+                }
+                launch {
+                    viewModel.isSearching.collect { isSearching ->
+                        actionBar?.isSearching = isSearching
+                    }
+                }
+            }
+        }
+
+        viewModel.filter(actionBar?.actionBarSearchText.orEmpty())
         actionBar?.onActionBarSearchListener = { search ->
-            activityListAdapter.filter = search
+            viewModel.filter(search)
         }
 
         activityListAdapter.onItemClick = {
@@ -62,7 +87,6 @@ class ActivityListFragment : Fragment() {
         }
 
         binding.rvActivities.adapter = activityListAdapter
-        binding.rvActivities.isNestedScrollingEnabled = false
 
         runCatching {
             val intent = activity?.intent ?: return
@@ -77,7 +101,7 @@ class ActivityListFragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.error_invalid_activity_link),
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             )
                 .show()
         }

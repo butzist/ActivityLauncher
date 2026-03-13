@@ -1,0 +1,27 @@
+Lansează cu ușurință activități ascunse ale aplicațiilor și creează comenzi rapide personalizate!
+
+Descoperă întregul potențial al aplicațiilor tale Android cu Lansator Activități – un instrument puternic care îți permite să accesezi activități ascunse și să creezi comenzi rapide pe ecranul principal pentru orice aplicație instalată.
+
+Fie că ești un utilizator avansat, dezvoltator sau doar curios, Lansator Activități îți oferă un control mai profund și personalizare asupra dispozitivului tău.
+
+🔍 Caracteristici cheie:
+- Lansează activități ascunse sau interne în cadrul aplicațiilor instalate
+- Creează comenzi rapide pentru acces rapid la anumite funcții sau ecrane
+- Curat și ușor, cu o interfață simplă
+
+💡 Despre proiect:
+Lansator Activități are la bază proiectul open-source disponibil la https://github.com/butzist/ActivityLauncher.
+
+🎁 Treceți la versiunea fără reclame și susțineți-ne
+Preferi o experiență fără reclame? Descarcă Lansator Activități Pro din Magazinul Play:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Sau descarcă APK-ul gratuit și open-source de pe GitHub și susține dezvoltarea viitoare sponsorizând proiectul:
+https://github.com/sponsors/butzist
+— Mulțumim că ne ajuți să menținem creșterea Lansator Activități!
+
+🤝 Implică-te:
+Acesta este un proiect bazat pe comunitate – ești binevenit să contribui cu cod, traduceri sau idei. Ajută-ne să ne îmbunătățim și să creștem!
+
+Site web: https://activitylauncher.net
+Cod sursă și traduceri: https://github.com/butzist/ActivityLauncher
+Înscrie-te pentru versiunea Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

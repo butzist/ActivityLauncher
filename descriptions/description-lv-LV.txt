@@ -1,7 +1,18 @@
-Atvērtā pirmkoda Android lietotne, kas nodrošina izpildīt lietotnes slēptās darbības un izveidot sākuma ekrāna saīsnes no uzstādītajām lietotnēm.
+Atbalstiet Darbības Palaidēja turpmāko izstrādi, jauninot uz Activity Launcher Pro — rīku bez reklāmām un analītikas, kas atbloķē slēptās lietotņu darbības, ļauj izveidot pielāgotas saīsnes un palīdz nodrošināt turpmākus uzlabojumus.
 
-Šim projektam joprojām trūkst dažas funkcijas un tulkojumi. Esiet laipni aicināti sniegt savu ieguldījumu!
+Neatkarīgi no tā, vai esat pieredzējis lietotājs, izstrādātājs vai vienkārši ziņkārīgs, Activity Launcher Pro sniedz jums dziļāku kontroli un pielāgošanu pār savu ierīci.
 
-Pirmkods: https://github.com/butzist/ActivityLauncher
-Tulkojumi: http://crowdin.net/project/activitylauncher/invite
-Kļūt par beta versijas testētāju: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Galvenās funkcijas:
+- Palaidiet slēptās vai iekšējās darbības instalētajās lietotnēs
+- Izveidojiet saīsnes, lai ātri piekļūtu konkrētām funkcijām vai ekrāniem
+- Tīrs un viegls ar vienkāršu saskarni
+
+💡 Par projektu:
+Activity Launcher Pro ir atvērtā pirmkoda projekts, kas pieejams vietnē https://github.com/butzist/ActivityLauncher.
+
+🤝 Iesaistieties:
+Šis ir kopienas virzīts projekts — esat laipni aicināti sniegt ieguldījumu kodā, tulkojumos vai idejās. Palīdziet mums uzlabot un augt!
+
+Vietne: https://activitylauncher.net
+Pirmkods un tulkojumi: https://github.com/butzist/ActivityLauncher
+Pievienojieties Beta versijai: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

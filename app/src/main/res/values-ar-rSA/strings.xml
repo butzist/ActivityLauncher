@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">مشغل النشاط</string>
     <string name="short_description">يطلق الأنشطة المخفية وينشئ اختصارات للتطبيقات المثبتة</string>
+    <string name="nav_all">الكل</string>
+    <string name="nav_favorites">المفضلة</string>
+    <string name="nav_recents">الأخيرة</string>
     <string name="title_fragment_package_list">الحزم المثبتة</string>
     <string name="title_fragment_activity_list">الأنشطة</string>
     <string name="title_dialog_disclaimer">إخلاء مسؤولية</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">إنشاء اختصار عبر صلاحيات الروت</string>
     <string name="context_action_edit">تحرير الاختصار</string>
     <string name="context_action_share_shortcut">مشاركة الاختصار</string>
+    <string name="context_action_favorite_add">أضف إلى المفضلة</string>
+    <string name="context_action_favorite_remove">إزالة من المفضلة</string>
+    <string name="context_action_share">مشاركة</string>
     <string name="label_name">الاسم</string>
     <string name="label_package">حزمة</string>
     <string name="label_class">فئة</string>
     <string name="label_icon">رمز</string>
+    <string name="label_menu">القائمة</string>
     <string name="label_private">خاص</string>
     <string name="starting_activity">بدء النشاط: %s</string>
-    <string name="starting_application">بدء تشغيل تطبيق: %s</string>
-    <string name="creating_activity_shortcut">إنشاء اختصار النشاط ل %s</string>
     <string name="creating_application_shortcut">إنشاء اختصار للتطبيق ل %s</string>
     <string name="error">خطأ</string>
     <string name="error_creating_shortcut">خطأ في إنشاء الاختصار</string>
     <string name="error_icons">خطأ في أثناء تحميل الأيقونات</string>
     <string name="error_invalid_icon_resource">خطأ: مورد الأيقونة غير صالح</string>
     <string name="error_invalid_icon_format">خطأ: نسق الأيقونة غير صالح</string>
-    <string name="error_no_default_activity">الحزمة ليس لديها نشاط افتراضي - حاول تحديد واحد</string>
-    <string name="error_verbose_pin_shortcut">لا يدعم مشغل الحالي \"تثبيت الاختصار\". غير قادر على إنشاء الاختصار.</string>
+    <string name="error_verbose_pin_shortcut">لا يدعم مشغل الحالي "تثبيت الاختصار". غير قادر على إنشاء الاختصار.</string>
     <string name="error_invalid_activity_link">رابط النشاط غير صالح</string>
     <string name="warning_root_check">تحذير: ربما لا تتوفر امتيازات الجذر على هذا الجهاز.</string>
     <string name="exception_invalid_component_name">اسم المكون غير صالح أو يحتمل أن يكون ضارًا: %s</string>

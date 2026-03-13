@@ -1,0 +1,27 @@
+Jednoducho spúšťajte skryté aktivity aplikácií a vytvárajte vlastné skratky!
+
+Objavte plný potenciál svojich aplikácií pre Android s Activity Launcher – výkonným nástrojom, ktorý vám umožní prístup ku skrytým aktivitám a vytváranie skratiek na domovskej obrazovke pre akúkoľvek nainštalovanú aplikáciu.
+
+Či už ste pokročilý používateľ, vývojár alebo len zvedavý, Activity Launcher vám poskytuje hlbšiu kontrolu a prispôsobenie vášho zariadenia.
+
+🔍 Hlavné funkcie:
+- Spúšťajte skryté alebo interné aktivity v rámci nainštalovaných aplikácií
+- Vytvárajte skratky pre rýchly prístup ku konkrétnym funkciám alebo obrazovkám
+- Čistý a ľahký s jednoduchým rozhraním
+
+💡 Informácie o projekte:
+Activity Launcher je založený na open-source projekte dostupnom na https://github.com/butzist/ActivityLauncher.
+
+🎁 Prejdite na verziu bez reklám a podporte nás
+Uprednostňujete používanie bez reklám? Stiahnite si Activity Launcher Pro z Obchodu Play:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Alebo si stiahnite bezplatný open-source APK z GitHubu a podporte ďalší vývoj sponzorovaním projektu:
+https://github.com/sponsors/butzist
+— Ďakujeme, že pomáhate rozvíjať Activity Launcher!
+
+🤝 Zapojte sa:
+Toto je komunitný projekt – môžete prispievať kódom, prekladmi alebo nápadmi. Pomôžte nám zlepšovať sa a rásť!
+
+Webová stránka: https://activitylauncher.net
+Zdrojový kód a preklady: https://github.com/butzist/ActivityLauncher
+Prihláste sa na odber Beta verzie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

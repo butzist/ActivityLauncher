@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.DisplayMetrics
 import android.widget.Toast
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.ui.AsyncProvider
 import de.szalkowski.activitylauncher.ui.IconListAdapter
@@ -23,14 +23,15 @@ interface IconLoaderService {
     fun loadIcons(updater: AsyncProvider<IconListAdapter>.Updater?): List<IconInfo>
 
     data class IconInfo(
-        val iconResourceName: String, val icon: Drawable
+        val iconResourceName: String,
+        val icon: Drawable,
     )
 
     class NullResourceException : Exception("Resource ID is zero")
 }
 
 class IconLoaderServiceImpl @Inject constructor(
-    @ActivityContext private val context: Context,
+    @ApplicationContext private val context: Context,
     private val packageListService: PackageListService,
     private val activityListService: ActivityListService,
     settingsService: SettingsService,
@@ -49,7 +50,6 @@ class IconLoaderServiceImpl @Inject constructor(
             Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
             pm.defaultActivityIcon
         }
-
 
     override fun tryGetIcon(iconResourceString: String): Result<Drawable> {
         return runCatching {

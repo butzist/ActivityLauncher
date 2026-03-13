@@ -1,7 +1,18 @@
-Ứng dụng mã nguồn mở Android này khởi chạy các hoạt động ẩn và tạo lối tắt ra màn hình chính cho các ứng dụng đã được cài đặt.
+Hỗ trợ phát triển liên tục Activity Launcher bằng cách nâng cấp lên Activity Launcher Pro — một công cụ không có quảng cáo, không có phân tích, mở khóa các hoạt động ứng dụng ẩn, cho phép bạn tạo các lối tắt tùy chỉnh và giúp tăng cường các cải tiến trong tương lai.
 
-Dự án này vẫn còn thiếu một vài tính năng và dịch thuật. Bạn được chào đón để được đóng góp!
+Cho dù bạn là người dùng thành thạo, nhà phát triển hay chỉ đơn giản là tò mò, Activity Launcher Pro sẽ giúp bạn kiểm soát và tùy chỉnh thiết bị của mình sâu hơn.
 
-Mã nguồn: https://github.com/butzist/ActivityLauncher
-Bản dịch: http://crowdin.net/project/activitylauncher/invite
-Tham gia vào các bản phát hành thử nghiệm: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Các tính năng chính:
+- Khởi chạy các hoạt động ẩn hoặc bên trong trong các ứng dụng đã cài đặt
+- Tạo lối tắt để truy cập nhanh vào các tính năng hoặc màn hình cụ thể
+- Giao diện gọn gàng và nhẹ với giao diện đơn giản
+
+💡 Giới thiệu về dự án:
+Activity Launcher Pro là một dự án mã nguồn mở có tại https://github.com/butzist/ActivityLauncher.
+
+🤝 Tham gia:
+Đây là một dự án do cộng đồng điều hành – bạn có thể đóng góp mã, bản dịch hoặc ý tưởng. Giúp chúng tôi cải thiện và phát triển!
+
+Trang web: https://activitylauncher.net
+Mã nguồn và bản dịch: https://github.com/butzist/ActivityLauncher
+Chọn tham gia phiên bản Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

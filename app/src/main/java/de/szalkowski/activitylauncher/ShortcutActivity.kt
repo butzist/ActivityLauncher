@@ -18,7 +18,6 @@ class ShortcutActivity : AppCompatActivity() {
     @Inject
     internal lateinit var signingService: IntentSigningService
 
-
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -35,7 +34,7 @@ class ShortcutActivity : AppCompatActivity() {
             launcherService.launchActivity(
                 launchIntent.component!!,
                 asRoot,
-                showToast = false
+                showToast = false,
             )
         } catch (e: Exception) {
             e.printStackTrace()
@@ -44,4 +43,3 @@ class ShortcutActivity : AppCompatActivity() {
         }
     }
 }
-

@@ -1,7 +1,18 @@
-Este aplicativo de código aberto abre atividades ocultas e cria atalhos na tela inicial para apps instalados.
+Apoie o desenvolvimento contínuo do Activity Launcher atualizando para o Activity Launcher Pro: uma ferramenta sem anúncios e sem análises que desbloqueia atividades ocultas de aplicativos, permite criar atalhos personalizados e ajuda a impulsionar melhorias futuras.
 
-Este projeto ainda carece de alguns recursos e traduções. Está convidado a contribuir!
+Seja você um usuário avançado, desenvolvedor ou apenas curioso, o Activity Launcher Pro oferece controle e personalização mais profundos sobre seu dispositivo.
 
-Source code: https://github.com/butzist/ActivityLauncher
-Traduções: http://crowdin.net/project/activitylauncher/invite
-Opt-in para versão Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Principais recursos:
+- Inicie atividades ocultas ou internas em aplicativos instalados
+- Crie atalhos para acesso rápido a recursos ou telas específicos
+- Limpo e leve com uma interface simples
+
+💡 Sobre o Projeto:
+Activity Launcher Pro é um projeto de código aberto disponível em https://github.com/butzist/ActivityLauncher.
+
+🤝 Envolva-se:
+Este é um projeto conduzido pela comunidade – você pode contribuir com código, traduções ou ideias. Ajude-nos a melhorar e crescer!
+
+Website: https://activitylauncher.net
+Código fonte e traduções: https://github.com/butzist/ActivityLauncher
+Aceite a versão Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

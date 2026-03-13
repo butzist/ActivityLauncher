@@ -1,0 +1,27 @@
+Einfach versteckte App-Aktivitäten starten und benutzerdefinierte Verknüpfungen erstellen!
+
+Entdecke das volle Potenzial deiner Android-Apps mit Activity Launcher – einem leistungsstarken Tool, mit dem du auf versteckte Aktivitäten zugreifen und Home-Bildschirm-Verknüpfungen für jede installierte App erstellen kannst.
+
+Egal, ob du ein Poweruser, Entwickler oder einfach nur neugierig bist, Activity Launcher bietet dir mehr Kontrolle und Anpassungsmöglichkeiten für dein Gerät.
+
+🔍 Hauptmerkmale:
+- Starte versteckte oder interne Aktivitäten innerhalb installierter Apps
+- Erstelle Verknüpfungen für den schnellen Zugriff auf bestimmte Funktionen oder Bildschirme
+- Sauber und schlank mit einer einfachen Benutzeroberfläche
+
+💡 Über das Projekt:
+Activity Launcher basiert auf dem Open-Source-Projekt, das unter https://github.com/butzist/ActivityLauncher verfügbar ist.
+
+🎁 Gehen Sie werbefrei und unterstützen Sie uns
+Bevorzugen Sie ein werbefreies Erlebnis? Laden Sie Activity Launcher Pro im Play Store herunter:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Oder laden Sie die kostenlose Open‑Source-APK von GitHub herunter und unterstützen Sie die weitere Entwicklung durch eine Projektförderung:
+https://github.com/sponsors/butzist
+— Vielen Dank, dass Sie helfen, Activity Launcher weiter wachsen zu lassen!
+
+🤝 Mitmachen:
+Dies ist ein Community-gesteuertes Projekt – du kannst gerne Code, Übersetzungen oder Ideen beitragen. Hilf uns, uns zu verbessern und zu wachsen!
+
+Webseite: https://activitylauncher.net
+Quellcode und Übersetzungen: https://github.com/butzist/ActivityLauncher
+Opt-in für Beta-Version: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

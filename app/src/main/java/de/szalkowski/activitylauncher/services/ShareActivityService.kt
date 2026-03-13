@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher.services
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 interface ShareActivityService {
@@ -11,7 +11,7 @@ interface ShareActivityService {
 }
 
 class ShareActivityServiceImpl @Inject constructor(
-    @ActivityContext private val context: Context,
+    @ApplicationContext private val context: Context,
 ) : ShareActivityService {
     override fun shareActivity(activity: ComponentName) {
         val url = "https://activitylauncher.net/activity/${activity.flattenToShortString()}"
@@ -20,6 +20,8 @@ class ShareActivityServiceImpl @Inject constructor(
             putExtra(Intent.EXTRA_TEXT, url)
             type = "text/plain"
         }
-        context.startActivity(Intent.createChooser(shareIntent, "Share link via"))
+        val chooser = Intent.createChooser(shareIntent, "Share link via")
+        chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(chooser)
     }
 }

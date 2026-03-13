@@ -25,16 +25,18 @@ class LoadingFragment : Fragment() {
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                // preload package list
-                packageListService.get()
+                // Trigger the heavy package list loading
+                packageListService.get().packages
             }
 
             withResumed {
-                // navigate to next screen
+                // Once loaded, always navigate to the package list
                 val action = LoadingFragmentDirections.actionLoadingFinished()
                 findNavController().navigate(action)
             }

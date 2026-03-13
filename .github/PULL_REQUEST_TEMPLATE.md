@@ -9,8 +9,10 @@
   - Emulator or physical device: <!-- e.g., Emulator, Real device -->
   - Screen size/resolution (if relevant):
 
-- [ ] I fully **own** this contribution and confirm it does **not contain
-      AI-generated code**.
+- [ ] I confirm that if any part of this contribution is **AI-generated**, I have
+      **carefully reviewed** it for **correctness and copyright compliance**, and I
+      accept full responsibility for the code.
+- [ ] I certify that I am not an AI agent and I do not create empty or useless PRs.
 - [ ] I agree that this contribution will be published under the **ISC License**
       of the project.
 - [ ] I have followed all relevant **code style, documentation, and testing

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LoadingFragment">
+    app:startDestination="@id/FavoritesFragment">
 
     <fragment
         android:id="@+id/LoadingFragment"
@@ -19,15 +19,15 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/nav_graph"
+            app:popUpTo="@id/LoadingFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
     <fragment
         android:id="@+id/PackageListFragment"
         android:name="de.szalkowski.activitylauncher.ui.PackageListFragment"
         android:label="@string/title_fragment_package_list"
         tools:layout="@layout/fragment_package_list">
-
         <action
             android:id="@+id/actionSelectPackage"
             app:destination="@id/ActivityListFragment"
@@ -36,6 +36,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/ActivityListFragment"
         android:name="de.szalkowski.activitylauncher.ui.ActivityListFragment"
@@ -45,7 +46,6 @@
             android:name="packageName"
             app:argType="string"
             app:nullable="false" />
-
         <action
             android:id="@+id/actionSelectActivity"
             app:destination="@id/ActivityDetailsFragment"
@@ -54,6 +54,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/ActivityDetailsFragment"
         android:name="de.szalkowski.activitylauncher.ui.ActivityDetailsFragment"
@@ -63,5 +64,33 @@
             android:name="activityComponentName"
             app:argType="android.content.ComponentName"
             app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FavoritesFragment"
+        android:name="de.szalkowski.activitylauncher.ui.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/actionSelectActivity"
+            app:destination="@id/ActivityDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/RecentsFragment"
+        android:name="de.szalkowski.activitylauncher.ui.RecentsFragment"
+        android:label="Recents"
+        tools:layout="@layout/fragment_recents">
+        <action
+            android:id="@+id/actionSelectActivity"
+            app:destination="@id/ActivityDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

@@ -1,0 +1,27 @@
+Preprosto zaženite skrite dejavnosti aplikacij in ustvarite bližnjice po meri!
+
+Odkrijte celoten potencial svojih aplikacij za Android z Activity Launcher – zmogljivim orodjem, ki vam omogoča dostop do skritih dejavnosti in ustvarjanje bližnjic na začetnem zaslonu za katero koli nameščeno aplikacijo.
+
+Ne glede na to, ali ste zahteven uporabnik, razvijalec ali samo radovedni, vam Zaganjalnik Aktivnosti omogoča globlji nadzor in prilagajanje vaše naprave.
+
+🔍 Ključne funkcije:
+- Zaženite skrite ali notranje dejavnosti v nameščenih aplikacijah
+- Ustvarite bližnjice za hiter dostop do določenih funkcij ali zaslonov
+- Čist in lahek s preprostim vmesnikom
+
+💡 O projektu:
+Activity Launcher temelji na odprtokodnem projektu, ki je na voljo na https://github.com/butzist/ActivityLauncher.
+
+🎁 Preklopite na različico brez oglasov in nas podprite
+Imate raje izkušnjo brez oglasov? Prenesite Activity Launcher Pro iz Trgovine Play:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Ali pa prenesite brezplačni odprtokodni APK iz GitHuba in podprite nadaljnji razvoj s sponzorstvom projekta:
+https://github.com/sponsors/butzist
+— Hvala, ker pomagate razvijati Activity Launcher!
+
+🤝 Sodelujte:
+To je projekt, ki ga vodi skupnost – dobrodošli ste, da prispevate kodo, prevode ali ideje. Pomagajte nam izboljšati in rasti!
+
+Spletna stran: https://activitylauncher.net
+Izvorna koda in prevodi: https://github.com/butzist/ActivityLauncher
+Vključitev v beta različico: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

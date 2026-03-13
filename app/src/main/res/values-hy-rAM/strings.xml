@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Activity Launcher</string>
-    <string name="short_description">Գործարկում է թաքնված գործողություններ և ստեղծում է տեղադրված հավելվածների համար կարճուղիներ:</string>
+    <string name="short_description">Գործարկում է թաքնված գործողություններ և ստեղծում է տեղադրված հավելվածների համար կարճուղիներ</string>
+    <string name="nav_all">Բոլոր</string>
+    <string name="nav_favorites">Սիրելի</string>
+    <string name="nav_recents">Վերջին</string>
     <string name="title_fragment_package_list">Տեղադրված փաթեթներ</string>
     <string name="title_fragment_activity_list">Գործողություններ</string>
     <string name="title_dialog_disclaimer">Հրաժարում</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">Ստեղծել կարճուղի որպես root</string>
     <string name="context_action_edit">Խմբագրել դյուրանցումը</string>
     <string name="context_action_share_shortcut">Կիսվել դյուրանցումով</string>
+    <string name="context_action_favorite_add">Ավելացնել սիրելիներին</string>
+    <string name="context_action_favorite_remove">Հեռացնել սիրելիներից</string>
+    <string name="context_action_share">Կիսվել</string>
     <string name="label_name">Անուն</string>
     <string name="label_package">Փաթեթ</string>
     <string name="label_class">Դաս</string>
     <string name="label_icon">Պատկեր</string>
+    <string name="label_menu">Մենյու</string>
     <string name="label_private">անձնական</string>
     <string name="starting_activity">Գործողության մեկնարկ. %s</string>
-    <string name="starting_application">Հավելվածի մեկնարկ. %s</string>
-    <string name="creating_activity_shortcut">%s-ի համար գործողության դյուրանցման ստեղծում</string>
     <string name="creating_application_shortcut">%s-ի համար հավելվածի դյուրանցման ստեղծում</string>
     <string name="error">Սխալ</string>
     <string name="error_creating_shortcut">Դյուրանցման ստեղծման սխալ</string>
     <string name="error_icons">Պատկերների բեռնման սխալ</string>
     <string name="error_invalid_icon_resource">Սխալ. պատկերի անվավեր ռեսուրս</string>
     <string name="error_invalid_icon_format">Սխալ. պատկերի անվավեր ձևաչափ</string>
-    <string name="error_no_default_activity">Փաթեթը չունի լռելյայն գործողություն. փորձեք ընտրել մեկը հստակորեն</string>
-    <string name="error_verbose_pin_shortcut">Ընթացիկ գործարկիչը չի ապահովում «PinShortcut»-ը: Հնարավոր չէ դյուրանցում ստեղծել:</string>
+    <string name="error_verbose_pin_shortcut">Ընթացիկ գործարկիչը չի ապահովում "PinShortcut"-ը: Հնարավոր չէ դյուրանցում ստեղծել:</string>
     <string name="error_invalid_activity_link">Տրամադրված է անվավեր գործողության հղում</string>
     <string name="warning_root_check">Զգուշացում. արմատային արտոնությունները, հավանաբար, մատչելի չեն այս սարքում:</string>
     <string name="exception_invalid_component_name">Անվավեր կամ պոտենցիալ վնասակար բաղադրիչի անուն. %s</string>

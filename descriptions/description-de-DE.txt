@@ -1,7 +1,18 @@
-Diese Open-Source Android App startet versteckte Aktivitäten und erstellt Startbildschirm-Verknüpfungen für installierte Apps.
+Unterstütze die Weiterentwicklung von Activity Launcher, indem du auf Activity Launcher Pro upgradest – ein werbe- und Analyse-freies Tool, das versteckte App-Aktivitäten freischaltet, benutzerdefinierte Verknüpfungen erstellt und zukünftige Verbesserungen ermöglicht.
 
-Diesem Projekt fehlen noch immer ein paar Features und Übersetzungen. Sie sind herzlich eingeladen, sich zu beteiligen!
+Egal, ob du ein Poweruser, Entwickler oder einfach nur neugierig bist, Activity Launcher Pro bietet dir mehr Kontrolle und Anpassungsmöglichkeiten für dein Gerät.
 
-Quellcode: https://github.com/butzist/ActivityLauncher
-Übersetzungen: http://crowdin.net/project/activitylauncher/invite
-Opt-in für Beta-Release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Hauptmerkmale:
+- Starte versteckte oder interne Aktivitäten innerhalb installierter Apps
+- Erstelle Verknüpfungen für den schnellen Zugriff auf bestimmte Funktionen oder Bildschirme
+- Sauber und schlank mit einer einfachen Benutzeroberfläche
+
+💡 Über das Projekt:
+Activity Launcher Pro ist ein Open-Source-Projekt, das unter https://github.com/butzist/ActivityLauncher verfügbar ist.
+
+🤝 Mitmachen:
+Dies ist ein Community-gesteuertes Projekt – du kannst gerne Code, Übersetzungen oder Ideen beitragen. Hilf uns, uns zu verbessern und zu wachsen!
+
+Webseite: https://activitylauncher.net
+Quellcode und Übersetzungen: https://github.com/butzist/ActivityLauncher
+Opt-in für Beta-Version: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

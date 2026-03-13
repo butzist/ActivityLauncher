@@ -1,7 +1,18 @@
-Această aplicație Android open-source lansează activități ascunse și creează scurtături pe ecranul de pornire pentru aplicațiile instalate.
+Sprijină dezvoltarea continuă a Lansatorului de activități, făcând upgrade la Lansatorul de activități Pro – un instrument fără reclame și fără funcții de analiză, care deblochează activitățile ascunse ale aplicațiilor, îți permite să creezi comenzi rapide personalizate și ajută la îmbunătățirile viitoare.
 
-Acest proiect încă nu are câteva caracteristici și traducere. Sunteți bineveniți să contribuiți!
+Fie că ești un utilizator avansat, un dezvoltator sau doar un curios, Lansatorul de activități Pro îți oferă un control și o personalizare mai profunde asupra dispozitivului tău.
 
-Cod sursă: https://github.com/butzist/ActivityLauncher
-Traduceri: http://crowdin.net/project/activitylauncher/invite
-Accesați versiunea Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Caracteristici cheie:
+- Lansează activități ascunse sau interne în cadrul aplicațiilor instalate
+- Creează comenzi rapide pentru acces rapid la anumite funcții sau ecrane
+- Curat și ușor, cu o interfață simplă
+
+💡 Despre proiect:
+Lansatorul de activități Pro este un proiect open-source disponibil la https://github.com/butzist/ActivityLauncher.
+
+🤝 Implică-te:
+Acesta este un proiect bazat pe comunitate – ești binevenit să contribui cu cod, traduceri sau idei. Ajută-ne să ne îmbunătățim și să creștem!
+
+Site web: https://activitylauncher.net
+Cod sursă și traduceri: https://github.com/butzist/ActivityLauncher
+Înscrie-te pentru versiunea beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

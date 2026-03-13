@@ -4,12 +4,12 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.graphics.drawable.Drawable
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.componentName
 import de.szalkowski.activitylauncher.services.internal.isPrivate
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface ActivityListService {
     fun getActivities(
@@ -19,15 +19,17 @@ interface ActivityListService {
     fun getActivity(
         componentName: ComponentName,
     ): MyActivityInfo
+
+    fun invalidate()
 }
 
+@Singleton
 class ActivityListServiceImpl @Inject constructor(
-    @ActivityContext context: Context,
-    settingsService: SettingsService,
-    private val packageListService: PackageListService
+    @ApplicationContext context: Context,
+    private val settingsService: SettingsService,
+    private val packageListService: PackageListService,
 ) : ActivityListService {
 
-    private val config: Configuration = settingsService.getLocaleConfiguration()
     private val packageManager = context.packageManager
 
     override fun getActivities(packageName: String): PackageActivities {
@@ -35,7 +37,7 @@ class ActivityListServiceImpl @Inject constructor(
             packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities
         }.getOrNull().orEmpty().associateBy { i -> i.name }
 
-        val pack = this.packageListService.packages.find { p -> p.packageName == packageName }
+        val pack = this.packageListService.getPackage(packageName)
             ?: return PackageActivities(packageName, packageName, null, listOf())
         val defaultActivity = pack.defaultActivityName?.let { name ->
             infos[name.fullCls]?.let { info -> getActivityInfo(info, name) }
@@ -47,12 +49,12 @@ class ActivityListServiceImpl @Inject constructor(
             defaultActivity,
             pack.activityNames.associateWith { n -> infos[n.fullCls] }
                 .filterValues { v -> v != null }
-                .map { (name, info) -> getActivityInfo(info!!, name) })
+                .map { (name, info) -> getActivityInfo(info!!, name) },
+        )
     }
 
     override fun getActivity(componentName: ComponentName): MyActivityInfo {
-        val pack =
-            this.packageListService.packages.find { p -> p.packageName == componentName.packageName }
+        val pack = this.packageListService.getPackage(componentName.packageName)
         val activityInfo = runCatching {
             packageManager.getActivityInfo(componentName, 0)
         }.getOrNull()
@@ -60,15 +62,21 @@ class ActivityListServiceImpl @Inject constructor(
         val names = pack?.let { listOfNotNull(it.defaultActivityName) + it.activityNames }
         val name = names?.find { n -> n.fullCls == componentName.className }
 
-        if (activityInfo == null || name == null) return MyActivityInfo(
-            componentName,
-            createNameFromClass(componentName.className),
-            packageManager.defaultActivityIcon,
-            null,
-            false
-        )
+        if (activityInfo == null || name == null) {
+            return MyActivityInfo(
+                componentName,
+                createNameFromClass(componentName.className),
+                packageManager.defaultActivityIcon,
+                null,
+                false,
+            )
+        }
 
         return getActivityInfo(activityInfo, name)
+    }
+
+    override fun invalidate() {
+        this.packageListService.invalidate()
     }
 
     private fun getActivityInfo(
@@ -90,9 +98,8 @@ class ActivityListServiceImpl @Inject constructor(
         )
     }
 
-
     private fun getIconResourceName(
-        activityInfo: ActivityInfo
+        activityInfo: ActivityInfo,
     ): String? {
         if (activityInfo.iconResource == 0) {
             return null
@@ -112,6 +119,7 @@ class ActivityListServiceImpl @Inject constructor(
 
     private fun createNameFromClass(cls: String): String {
         val name = cls.substringAfterLast('.')
+        val config = settingsService.getLocaleConfiguration()
         return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(config.locale) else it.toString() }
     }
 }
@@ -120,7 +128,7 @@ data class PackageActivities(
     val packageName: String,
     val name: String,
     val defaultActivity: MyActivityInfo?,
-    val activities: List<MyActivityInfo>
+    val activities: List<MyActivityInfo>,
 )
 
 data class MyActivityInfo(

@@ -1,0 +1,27 @@
+Łatwo uruchamiaj ukryte aktywności aplikacji i twórz niestandardowe skróty!
+
+Odkryj pełny potencjał swoich aplikacji na Androida dzięki Launcherowi Aktywności – potężnemu narzędziu, które umożliwia dostęp do ukrytych aktywności i tworzenie skrótów na ekranie głównym dla dowolnej zainstalowanej aplikacji.
+
+Niezależnie od tego, czy jesteś zaawansowanym użytkownikiem, programistą, czy po prostu ciekawskim, Launcher Aktywności daje Ci większą kontrolę i możliwość dostosowania urządzenia.
+
+🔍 Najważniejsze funkcje:
+- Uruchamianie ukrytych lub wewnętrznych aktywności w zainstalowanych aplikacjach
+- Tworzenie skrótów umożliwiających szybki dostęp do określonych funkcji lub ekranów
+- Czysty i lekki z prostym interfejsem
+
+💡 O projekcie:
+Launcher Aktywności jest oparty na projekcie open-source dostępnym na stronie https://github.com/butzist/ActivityLauncher.
+
+🎁 Przejdź na wersję bez reklam i wesprzyj nas
+Wolisz korzystać z aplikacji bez reklam? Pobierz Launcher Aktywności Pro ze Sklepu Play:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Lub pobierz darmowy, otwartoźródłowy plik APK z GitHub i wspieraj dalszy rozwój, sponsorując projekt:
+https://github.com/sponsors/butzist
+— Dziękujemy, że pomagasz rozwijać Launcher Aktywności!
+
+🤝 Zaangażuj się:
+Jest to projekt tworzony przez społeczność – możesz wnosić wkład w postaci kodu, tłumaczeń lub pomysłów. Pomóż nam ulepszać i rozwijać się!
+
+Strona internetowa: https://activitylauncher.net
+Kod źródłowy i tłumaczenia: https://github.com/butzist/ActivityLauncher
+Zapisz się do wersji Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

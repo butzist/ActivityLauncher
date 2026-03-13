@@ -1,0 +1,27 @@
+隠されたアプリのアクティビティを簡単に起動し、カスタムショートカットを作成できます!
+
+Activity Launcher で Android アプリの可能性を最大限に引き出しましょう。隠されたアクティビティにアクセスし、インストールされているアプリのホーム画面ショートカットを作成できる強力なツールです。
+
+あなたがパワーユーザー、開発者、または単に好奇心旺盛な人であっても、Activity Launcher を使用すると、デバイスをより深く制御およびカスタマイズできます。
+
+🔍 主な機能:
+- インストールされているアプリ内の隠されたアクティビティまたは内部アクティビティを起動する
+- 特定の機能や画面にすばやくアクセスするためのショートカットを作成する
+- シンプルなインターフェースを備えたクリーンで軽量
+
+💡 プロジェクトについて:
+Activity Launcher は、https://github.com/butzist/ActivityLauncher で公開されているオープンソースプロジェクトに基づいています。
+
+🎁 広告なしバージョンに切り替えて、私たちをサポートしよう
+広告のない体験を好みますか？ Playストアから Activity Launcher Pro をダウンロード：
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+または、GitHubから無料のオープンソースAPKをダウンロードして、プロジェクトをスポンサーすることで今後の開発をサポートしてください：
+https://github.com/sponsors/butzist
+— Activity Launcher の成長を支えていただき、ありがとうございます！
+
+🤝 参加する:
+これはコミュニティ主導のプロジェクトです。コード、翻訳、またはアイデアを貢献することを歓迎します。 改善と成長にご協力ください!
+
+ウェブサイト: https://activitylauncher.net
+ソースコードと翻訳: https://github.com/butzist/ActivityLauncher
+ベータ版へのオプトイン: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

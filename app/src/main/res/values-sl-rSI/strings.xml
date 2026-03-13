@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Zaganjalnik Aktivnosti</string>
     <string name="short_description">Zažene skrite dejavnosti in ustvari bližnjice do nameščenih aplikacij</string>
+    <string name="nav_all">Vse</string>
+    <string name="nav_favorites">Priljubljene</string>
+    <string name="nav_recents">Nedavno</string>
     <string name="title_fragment_package_list">Nameščeni paketi</string>
     <string name="title_fragment_activity_list">Dejavnosti</string>
     <string name="title_dialog_disclaimer">Zavrnitev odgovornosti</string>
@@ -14,22 +17,23 @@
     <string name="context_action_shortcut_as_root">Ustvarite bližnjico kot root</string>
     <string name="context_action_edit">Uredi bližnjico</string>
     <string name="context_action_share_shortcut">Deli bližnjico</string>
+    <string name="context_action_favorite_add">Dodaj med priljubljene</string>
+    <string name="context_action_favorite_remove">Odstrani iz priljubljenih</string>
+    <string name="context_action_share">Deli</string>
     <string name="label_name">Ime</string>
     <string name="label_package">Paket</string>
     <string name="label_class">Razred</string>
     <string name="label_icon">Ikona</string>
+    <string name="label_menu">Meni</string>
     <string name="label_private">zasebno</string>
     <string name="starting_activity">Začetna dejavnost: %s</string>
-    <string name="starting_application">Zagon aplikacije: %s</string>
-    <string name="creating_activity_shortcut">Ustvarjanje bližnjice dejavnosti za %s</string>
     <string name="creating_application_shortcut">Ustvarjanje bližnjice do aplikacije za %s</string>
     <string name="error">Napaka</string>
     <string name="error_creating_shortcut">Napaka pri ustvarjanju bližnjice</string>
     <string name="error_icons">Napaka pri nalaganju ikon</string>
     <string name="error_invalid_icon_resource">Napaka: neveljaven vir ikone</string>
     <string name="error_invalid_icon_format">Napaka: neveljavna oblika ikone</string>
-    <string name="error_no_default_activity">Paket nima privzete dejavnosti – poskusite jo izbrati izrecno</string>
-    <string name="error_verbose_pin_shortcut">Trenutni zaganjalnik ne podpira funkcije \"PinShortcut\". Bližnjice ni mogoče ustvariti.</string>
+    <string name="error_verbose_pin_shortcut">Trenutni zaganjalnik ne podpira funkcije "PinShortcut". Bližnjice ni mogoče ustvariti.</string>
     <string name="error_invalid_activity_link">Podana je neveljavna povezava do dejavnosti</string>
     <string name="warning_root_check">Opozorilo: Root privilegiji verjetno niso na voljo na tej napravi.</string>
     <string name="exception_invalid_component_name">Neveljavno ali potencialno škodljivo ime komponente: %s</string>

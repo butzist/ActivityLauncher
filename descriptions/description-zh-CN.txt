@@ -1,10 +1,18 @@
-这个开源的安卓应用能够启动隐藏的活动，以及为您已安装的应用增加桌面快捷方式。
+通过升级到 活动启动器专业版 来支持 Activity Launcher 的持续开发——这是一个无广告、无分析工具，可以解锁隐藏的应用程序活动，让您创建自定义快捷方式，并帮助推动未来的改进。
 
-本项目仍然缺少一些功能及翻译支持。 欢迎您来贡献！
+无论您是高级用户、开发人员，还是仅仅出于好奇，活动启动器专业版 都能让您更深入地控制和自定义您的设备。
 
-源代码：
-https://github.com/butzist/ActivityLauncher
-翻译：
-http://crowdin.net/project/activitylauncher/invite
-想参与“测试中”版本：
-https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 主要特点：
+- 启动已安装应用程序中隐藏的或内部的活动
+- 创建快捷方式，以便快速访问特定功能或屏幕
+- 简洁轻巧，界面简单
+
+💡 关于项目：
+活动启动器专业版 是一个开源项目，可在 https://github.com/butzist/ActivityLauncher 上找到。
+
+🤝 参与进来：
+这是一个社区驱动的项目——欢迎您贡献代码、翻译或想法。 帮助我们改进和发展！
+
+网站：https://activitylauncher.net
+源代码和翻译：https://github.com/butzist/ActivityLauncher
+选择加入 Beta 版本：https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

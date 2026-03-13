@@ -1,0 +1,27 @@
+Qatlhmey neH veS moQ Dalo' 'ej qaStaHvIS poH je Qapchu' pIgh!
+
+Qu' taghmoHwI'Daq DaHjaj Android app, vaj qIchlIj Home Screen shortcut installed app.
+
+’ejDaq Qatlh ghojmoH, QIn mIgh, pagh SuvwI’ pe’vIl, Activity Launcher DuQwI’ Daq ‘ej Ha’ vIghro’ SoH ‘e’ vItu’!
+
+🔍 mIw nIvbogh meqmey:
+- yuQmey Dalo' 'ej neH QumpInDaq veSmey Qey'
+- Qapchu' lo'taHghachmey yIqaw je meqmey pagh ngevwI' yIqaw
+- wIleghmey 'ej nItebHa' 'ej tIq qonwI' pagh
+
+💡 De'vam'e' Qu'vam:
+Activity Launcher vItlhutlh vIqIj 'ej De'vam'e' Qu'vam github.com/butzist/ActivityLauncher Dalo'lu'.
+
+🎁 yIqawbe' tlhutlhmey 'ej maH qo'
+tlhutlhmey 'e' HIvje'chu'? Qu' taghmoHwI' Pro law' chu' Play StoreDaq lo'
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+ghobe' pagh, GitHubDaq lo' Open Source APK je lo' 'ej Qapchu' development 'e' support Qapchu' project qechmey:
+https://github.com/sponsors/butzist
+— Qu' taghmoHwI' chu' tIqwIj yIta'!
+
+🤝 qatlh wej
+maQa’pu’ ‘ej maHvaD – tlhIngan Hol, QInmey, HIvje’ ghojmoHmey, pagh wIqel! Qapchu' wIleghmeH 'ej wIbuS!
+
+Website: https://activitylauncher.net
+mung De'pu' mughtaHghach: https://github.com/butzist/ActivityLauncher
+yItIv Beta qelDaq: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

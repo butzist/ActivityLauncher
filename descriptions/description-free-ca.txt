@@ -1,0 +1,27 @@
+Inicia fàcilment les activitats ocultes de l'aplicació i crea dreceres personalitzades!
+
+Descobriu tot el potencial de les vostres aplicacions d'Android amb Activity Launcher, una eina potent que us permet accedir a activitats ocultes i crear dreceres a la pantalla d'inici per a qualsevol aplicació instal·lada.
+
+Tant si sou un usuari avançat, un desenvolupador o simplement teniu curiositat, Activity Launcher us ofereix un control i una personalització més grans sobre el vostre dispositiu.
+
+🔍 Característiques principals:
+- Inicia activitats ocultes o internes dins de les aplicacions instal·lades
+- Crea dreceres per accedir ràpidament a funcions o pantalles específiques
+- Neteja i lleugera amb una interfície senzilla
+
+💡 Quant al projecte:
+Activity Launcher es basa en el projecte de codi obert disponible a https://github.com/butzist/ActivityLauncher.
+
+🎁 Passa’t a la versió sense anuncis i dona’ns suport
+Prefereixes una experiència sense anuncis? Descarrega Activity Launcher Pro des de la Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+O bé baixa l’APK gratuït i de codi obert des de GitHub i dona suport al desenvolupament futur esponsoritzant el projecte:
+https://github.com/sponsors/butzist
+— Gràcies per ajudar-nos a fer créixer Activity Launcher!
+
+🤝 Participa:
+Aquest és un projecte impulsat per la comunitat: pots contribuir amb codi, traduccions o idees. Ajuda'ns a millorar i créixer!
+
+Lloc web: https://activitylauncher.net
+Codi font i traduccions: https://github.com/butzist/ActivityLauncher
+Participa en la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

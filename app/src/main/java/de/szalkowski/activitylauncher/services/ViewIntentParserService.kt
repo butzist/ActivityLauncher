@@ -14,8 +14,7 @@ interface ViewIntentParserService {
     ): ComponentName?
 }
 
-class ViewIntentParserServiceImpl @Inject constructor(
-) : ViewIntentParserService {
+class ViewIntentParserServiceImpl @Inject constructor() : ViewIntentParserService {
     override fun packageFromIntent(intent: Intent): String? {
         val componentName = componentNameFromIntent(intent)
         return componentName?.packageName

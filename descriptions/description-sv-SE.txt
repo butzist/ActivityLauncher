@@ -1,7 +1,18 @@
-Denna Android-app med öppen källkod startar dolda aktiviteter och skapar genvägar på hemskärmen för installerade appar.
+Stöd den fortsatta utvecklingen av Activity Launcher genom att uppgradera till Activity Launcher Pro – ett annonsfritt och analysfritt verktyg som låser upp dolda appaktiviteter, låter dig skapa anpassade genvägar och hjälper till att driva framtida förbättringar.
 
-Det här projektet saknar fortfarande några funktioner och översättning. Du är välkommen att bidra!
+Oavsett om du är en avancerad användare, utvecklare eller bara nyfiken, ger Activity Launcher Pro dig djupare kontroll och anpassning över din enhet.
 
-Källkod: https://github.com/butzist/ActivityLauncher
-Översättningar: http://crowdin.net/project/activitylauncher/invite
-Installera betaversion: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Viktiga funktioner:
+- Starta dolda eller interna aktiviteter i installerade appar
+- Skapa genvägar för snabb åtkomst till specifika funktioner eller skärmar
+- Ren och lätt med ett enkelt gränssnitt
+
+💡 Om projektet:
+Activity Launcher Pro är ett projekt med öppen källkod som finns tillgängligt på https://github.com/butzist/ActivityLauncher.
+
+🤝 Engagera dig:
+Detta är ett gemenskapsdrivet projekt – du är välkommen att bidra med kod, översättningar eller idéer. Hjälp oss att förbättra och växa!
+
+Webbplats: https://activitylauncher.net
+Källkod och översättningar: https://github.com/butzist/ActivityLauncher
+Anmäl dig till betaversionen: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

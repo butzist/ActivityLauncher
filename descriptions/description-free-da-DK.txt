@@ -1,0 +1,27 @@
+Start nemt skjulte app-aktiviteter, og opret tilpassede genveje!
+
+Opdag det fulde potentiale af Android-apps med Activity Launcher – et effektivt værktøj, der giver adgang til skjulte aktiviteter og opretter genveje på startskærmen til alle installerede apps.
+
+Uanset om man er superbruger, udvikler eller blot nysgerrig, muliggør Activity Launcher dybere kontrol og tilpasning af enheden.
+
+🔍 Nøglefunktioner:
+- Start skjulte eller interne aktiviteter i installerede apps
+- Opret genveje for hurtig adgang til bestemte funktioner eller skærme
+- Ren og letvægt med en enkel brugerflade
+
+💡 Om projektet:
+Activity Launcher er baseret på open source-projektet, der er tilgængeligt på https://github.com/butzist/ActivityLauncher.
+
+🎁 Gå til en reklamefri version og støt os
+Foretrækker du en oplevelse uden reklamer? Hent Activity Launcher Pro fra Play Store:
+https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro
+Eller download den gratis open source-APK fra GitHub og støt den videre udvikling ved at sponsorere projektet:
+https://github.com/sponsors/butzist
+— Tak fordi du hjælper os med at videreudvikle Activity Launcher!
+
+🤝 Bliv involveret:
+Dette er et fællesskabsdrevet projekt – man er velkommen til at bidrage med kode, oversættelser eller idéer. Hjælp os med at forbedre og vokse!
+
+Websted: https://activitylauncher.net
+Kildekode og oversættelser: https://github.com/butzist/ActivityLauncher
+Tilvælg betaudgivelsen: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

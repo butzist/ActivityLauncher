@@ -1,7 +1,18 @@
-Ta odprtokodna aplikacija za Android zažene skrite dejavnosti in ustvari bližnjice na začetnem zaslonu za nameščene aplikacije.
+Podprite nadaljnji razvoj programa Activity Launcher s prehodom na Activity Launcher Pro – orodje brez oglasov in analitike, ki odklene skrite dejavnosti aplikacij, vam omogoča ustvarjanje bližnjic po meri in pomaga pri prihodnjih izboljšavah.
 
-Ta projekt še vedno nima nekaj funkcij in prevodov. Dobrodošli, da prispevate!
+Ne glede na to, ali ste napredni uporabnik, razvijalec ali vas preprosto zanima, vam Activity Launcher Pro omogoča globlji nadzor in prilagajanje vaše naprave.
 
-Izvorna koda: https://github.com/butzist/ActivityLauncher
-Prevodi: http://crowdin.net/project/activitylauncher/invite
-Vključitev v beta različico: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Ključne funkcije:
+- Zaženite skrite ali notranje dejavnosti v nameščenih aplikacijah
+- Ustvarite bližnjice za hiter dostop do določenih funkcij ali zaslonov
+- Čist in lahek s preprostim vmesnikom
+
+💡 O projektu:
+Activity Launcher Pro je odprtokodni projekt, ki je na voljo na https://github.com/butzist/ActivityLauncher.
+
+🤝 Sodelujte:
+To je projekt, ki ga vodi skupnost – dobrodošli ste, da prispevate kodo, prevode ali ideje. Pomagajte nam izboljšati in rasti!
+
+Spletna stran: https://activitylauncher.net
+Izvorna koda in prevodi: https://github.com/butzist/ActivityLauncher
+Vključite se v beta različico: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

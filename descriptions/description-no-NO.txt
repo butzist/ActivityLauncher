@@ -1,7 +1,18 @@
-Denne åpen-kilden Android App lanserer skjulte aktiviteter og oppretter startsiden snarveier for installerte programmer.
+Støtt den videre utviklingen av Activity Launcher ved å oppgradere til Activity Launcher Pro – et reklamefritt, analysefritt verktøy som låser opp skjulte appaktiviteter, lar deg lage egendefinerte snarveier og bidrar til å drive fremtidige forbedringer.
 
-Dette prosjektet mangler fortsatt mange funksjoner og oversettelse. Du er velkommen til å delta!
+Enten du er en superbruker, utvikler eller bare nysgjerrig, gir Activity Launcher Pro deg dypere kontroll og tilpasning over enheten din.
 
-Kildekode: https://github.com/butzist/ActivityLauncher
-Oversettelser: http://crowdin.net/project/activitylauncher/invite
-Opt-in for betaversjon: https://play.google.com/apps/testing/de.szalkowski.activitylauncher
+🔍 Viktige funksjoner:
+- Start skjulte eller interne aktiviteter i installerte apper
+- Lag snarveier for rask tilgang til spesifikke funksjoner eller skjermer
+- Rent og lett med et enkelt grensesnitt
+
+💡 Om prosjektet:
+Activity Launcher Pro er et åpen kildekode-prosjekt som er tilgjengelig på https://github.com/butzist/ActivityLauncher.
+
+🤝 Bli involvert:
+Dette er et fellesskapsdrevet prosjekt – du er velkommen til å bidra med kode, oversettelser eller ideer. Hjelp oss å forbedre og vokse!
+
+Nettsted: https://activitylauncher.net
+Kildekode og oversettelser: https://github.com/butzist/ActivityLauncher
+Meld deg på for Beta-utgivelse: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro
