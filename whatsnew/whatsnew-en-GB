@@ -2,16 +2,15 @@
 
 ## Features
 
+- Favorites and recently used activities
 - Sharing of shortcuts via URL
 - In-app reviews
 - Translation updates
 
 ## Fixes
 
-- Missing selectable languages in settings
+- App crashes when rotated
 
 ## Other improvements/changes
 
-- Package on GitHub renamed to de.szalkowski.activitylauncher.oss to prevent unwanted
-  updates from Google Play
-- Publishing of APK in GitHub release
+- Improved startup time: Loading of all packages skipped when opening favorites or recents
