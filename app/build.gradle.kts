@@ -15,8 +15,8 @@ android {
         applicationId = System.getenv("APPID") ?: "de.szalkowski.activitylauncher"
         minSdk = 16
         targetSdk = 36
-        versionCode = 71
-        versionName = "2.2.1"
+        versionCode = 72
+        versionName = "2.2.2"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
