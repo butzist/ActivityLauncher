@@ -6,11 +6,11 @@
         android:title="@string/nav_all" />
     <item
         android:id="@+id/FavoritesFragment"
-        android:icon="@drawable/ic_rocket_launch"
+        android:icon="@drawable/ic_favorite"
         android:title="@string/nav_favorites" />
     <item
         android:id="@+id/RecentsFragment"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_rocket_launch"
         android:title="@string/nav_recents" />
 
 </menu>
