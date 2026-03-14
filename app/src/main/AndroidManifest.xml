@@ -55,7 +55,8 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:label="@string/activity_settings" />
+            android:label="@string/activity_settings"
+            android:theme="@style/Theme.ActivityLauncher.NoActionBar" />
     </application>
 
 </manifest>
