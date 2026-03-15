@@ -1,4 +1,4 @@
-name: Release to Play Store
+name: Release to Play Store (Free)
 
 on:
   push:
@@ -23,25 +23,27 @@ jobs:
         cache: 'gradle'
     - name: Prepare Android keystore
       run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
+    - name: Prepare Google Services
+      run: echo ${{ secrets.GOOGLE_SERVICES_JSON }} > app/google-services.json
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release AAB
-      run: ./gradlew bundlePlayStoreRelease
+      run: ./gradlew bundlePlayStoreAdsRelease
       env:
-        APPID: de.szalkowski.activitylauncher.pro
+        APPID: de.szalkowski.activitylauncher
         KEYSTORE: keystore.jks
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
-        KEY_ALIAS: de.szalkowski.activitylauncher.pro
+        KEY_ALIAS: de.szalkowski.activitylauncher
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
         serviceAccountJsonPlainText: ${{ secrets.SERVICEACCOUNT }}
-        packageName: de.szalkowski.activitylauncher.pro
-        releaseFiles: app/build/outputs/bundle/playStoreRelease/app-playStore-release.aab
+        packageName: de.szalkowski.activitylauncher
+        releaseFiles: app/build/outputs/bundle/playStoreAdsRelease/app-playStore-ads-release.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: alpha
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew
-        mappingFile: app/build/outputs/mapping/playStoreRelease/mapping.txt
+        mappingFile: app/build/outputs/mapping/playStoreAdsRelease/mapping.txt
