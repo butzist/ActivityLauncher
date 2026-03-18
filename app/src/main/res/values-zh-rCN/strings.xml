@@ -24,8 +24,6 @@
     <string name="label_package">包</string>
     <string name="label_class">类</string>
     <string name="label_icon">图标</string>
-    <string name="label_menu">菜单</string>
-    <string name="label_private">私有</string>
     <string name="starting_activity">启动活动: %s</string>
     <string name="creating_application_shortcut">为%s应用创建快捷方式</string>
     <string name="error">错误</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">关于</string>
     <string name="action_view_source">查看源代码</string>
     <string name="summary_action_view_source">此应用的源代码可在GitHub上读取和修改。请随时向我们发送含有改进和缺陷修复的请求。</string>
-    <string name="action_view_translation">帮助我们翻译</string>
-    <string name="summary_action_view_translation">如果您喜欢活动启动器，请考虑将应用程序翻译成您的语言。</string>
-    <string name="action_view_bugs">报告问题</string>
-    <string name="summary_action_view_bugs">如果您有任何建议或问题，请在我们的GitHub项目中报告。</string>
-    <string name="action_filter">筛选</string>
     <string name="filter_hint">包/操作</string>
     <string name="activity_settings">设置</string>
     <string name="settings_hide_private">隐藏私有活动</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">系统默认</string>
     <string name="theme_light">浅色</string>
     <string name="theme_dark">深色</string>
+    <string name="settings_pro_version">活动启动器专业版</string>
+    <string name="settings_summary_pro_version">想要支持此应用并移除广告吗？请在 Google Play 上获取活动启动器专业版——它有助于资助开发，并且完全是开源的。</string>
+    <string name="settings_github">GitHub 项目</string>
+    <string name="settings_summary_github">您可以从 GitHub 上的活动启动器开源项目下载预构建的 APK。高级用户还可以探索源代码、支持开发者，并通过翻译或拉取请求做出贡献。</string>
+    <string name="category_title_ad_free">无广告版本</string>
+    <string name="title_dialog_support">感谢您使用 Activity Launcher</string>
+    <string name="dialog_support">我们添加了广告来帮助资助未来的开发。不喜欢广告？请在 Google Play 上升级到 活动启动器专业版——它是完全开源的，并支持该应用程序的持续开发。您也可以在 GitHub 上免费获取该应用程序。那里的支持是可选的，但对我们有很大帮助。</string>
+    <string name="action_view_paid">活动启动器专业版</string>
+    <string name="action_view_github">GitHub 项目</string>
+    <string name="action_personalized_ads_consent">个性化广告</string>
+    <string name="summary_personalized_ads_consent">自定义个性化广告的权限</string>
 </resources>

@@ -15,23 +15,44 @@ android {
         applicationId = System.getenv("APPID") ?: "de.szalkowski.activitylauncher"
         minSdk = 16
         targetSdk = 36
-        versionCode = 71
-        versionName = "2.2.1"
+        versionCode = 7200
+        versionName = "2.2.2"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions += "distribution"
+    flavorDimensions += listOf("distribution", "ads")
     productFlavors {
         create("oss") {
-            // for direct distribution
             dimension = "distribution"
+            minSdk = 16
         }
         create("playStore") {
-            // includes Google Play Store specific additions
             dimension = "distribution"
             minSdk = 23
+        }
+    }
+
+    productFlavors {
+        create("noads") {
+            dimension = "ads"
+            resValue("string", "admob_banner_id", "unused")
+        }
+        create("ads") {
+            dimension = "ads"
+            val bannerId = System.getenv("ADMOB_BANNER_ID") ?: "ca-app-pub-3940256099942544/6300978111"
+            val appId = System.getenv("ADMOB_APP_ID") ?: "ca-app-pub-3940256099942544~3347511713"
+            resValue("string", "admob_banner_id", bannerId)
+            manifestPlaceholders["ADMOB_APP_ID"] = appId
+        }
+    }
+
+    variantFilter {
+        val distribution = flavors.find { it.dimension == "distribution" }?.name
+        val ads = flavors.find { it.dimension == "ads" }?.name
+        if (distribution == "oss" && ads == "ads") {
+            ignore = true
         }
     }
 
@@ -68,7 +89,19 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+}
+
+// Conditionally apply Google services and Firebase plugins
+// These are only applied if the 'ads' flavor is present in the current build task
+val taskNames = gradle.startParameter.taskNames.joinToString(",")
+val isAdsBuild = !taskNames.contains("Noads", ignoreCase = true)
+
+if (isAdsBuild) {
+    apply(plugin = "com.google.gms.google-services")
+    apply(plugin = "com.google.firebase.crashlytics")
+    apply(plugin = "com.google.firebase.firebase-perf")
 }
 
 // Allow references to generated code
@@ -128,6 +161,16 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("com.google.dagger:hilt-android:2.50")
     "playStoreImplementation"("com.google.android.play:review-ktx:2.0.2")
+
+    "adsImplementation"("com.google.android.gms:play-services-ads:22.6.0")
+    "adsImplementation"(platform("com.google.firebase:firebase-bom:30.1.0"))
+    "adsImplementation"("com.google.firebase:firebase-analytics")
+    "adsImplementation"("com.google.firebase:firebase-crashlytics")
+    "adsImplementation"("com.google.firebase:firebase-analytics-ktx")
+    "adsImplementation"("com.google.firebase:firebase-perf")
+    "adsImplementation"("com.google.android.ump:user-messaging-platform:2.2.0")
+    "adsImplementation"("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
     kapt("com.google.dagger:hilt-compiler:2.50")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

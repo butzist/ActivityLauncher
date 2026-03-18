@@ -2,7 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/activity_settings">
+    <PreferenceCategory
+        android:key="category_settings"
+        android:title="@string/activity_settings">
         <SwitchPreference
             android:defaultValue="false"
             android:key="hide_private"
@@ -26,7 +28,9 @@
             android:title="@string/settings_language" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/category_title_about">
+    <PreferenceCategory
+        android:key="category_about"
+        android:title="@string/category_title_about">
         <Preference
             android:key="action_view_source"
             android:summary="@string/summary_action_view_source"
@@ -34,26 +38,7 @@
             app:singleLineTitle="true">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="@string/url_source" />
-        </Preference>
-
-        <Preference
-            android:key="action_view_translation"
-            android:summary="@string/summary_action_view_translation"
-            android:title="@string/action_view_translation"
-            app:singleLineTitle="true">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="@string/url_translation" />
-        </Preference>
-        <Preference
-            android:key="action_view_bugs"
-            android:summary="@string/summary_action_view_bugs"
-            android:title="@string/action_view_bugs"
-            app:singleLineTitle="true">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="@string/url_bugs" />
+                android:data="@string/url_github_project" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

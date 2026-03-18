@@ -24,8 +24,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Razred</string>
     <string name="label_icon">Ikona</string>
-    <string name="label_menu">Meni</string>
-    <string name="label_private">zasebno</string>
     <string name="starting_activity">Začetna dejavnost: %s</string>
     <string name="creating_application_shortcut">Ustvarjanje bližnjice do aplikacije za %s</string>
     <string name="error">Napaka</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">O aplikaciji</string>
     <string name="action_view_source">Poglej izvorno kodo</string>
     <string name="summary_action_view_source">Izvorna koda te aplikacije je na voljo za branje in spreminjanje na GitHubu. Pošljite nam zahteve za vlečenje z izboljšavami in popravki napak.</string>
-    <string name="action_view_translation">Pomagajte pri prevajanju</string>
-    <string name="summary_action_view_translation">Če uživate v programu Activity Launcher, razmislite o prevodu aplikacije v svoj jezik.</string>
-    <string name="action_view_bugs">Prijavite težavo</string>
-    <string name="summary_action_view_bugs">Prosimo, pošljite svoje predloge ali težave na naši strani projekta GitHub.</string>
-    <string name="action_filter">Filter ...</string>
     <string name="filter_hint">paket/dejanje</string>
     <string name="activity_settings">Nastavitve</string>
     <string name="settings_hide_private">Skrij zasebne dejavnosti</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Privzeto sistemsko</string>
     <string name="theme_light">Svetla tema</string>
     <string name="theme_dark">Temna tema</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Želite podpreti aplikacijo in odstraniti oglase? Prenesite Activity Launcher Pro iz Google Play – s tem pomagate financirati razvoj in je popolnoma odprtokoden.</string>
+    <string name="settings_github">Projekt GitHub</string>
+    <string name="settings_summary_github">Predhodno izdelano APK lahko prenesete iz odprtokodnega projekta Activity Launcher na GitHubu. Napredni uporabniki lahko tudi raziskujejo izvorno kodo, podpirajo razvijalce in prispevajo s prevodi ali zahtevami za vlečenje.</string>
+    <string name="category_title_ad_free">Različice brez oglasov</string>
+    <string name="title_dialog_support">Hvala, ker uporabljate Activity Launcher</string>
+    <string name="dialog_support">Dodali smo oglase, da bi financirali prihodnji razvoj. Ne želite oglasov? Nadgradite na Activity Launcher Pro v Googlu Play – je popolnoma odprtokoden in podpira nadaljnje delo na aplikaciji. Aplikacijo lahko dobite tudi brezplačno na GitHubu. Podpora tam je neobvezna, vendar nam zelo pomaga.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">Projekt GitHub</string>
+    <string name="action_personalized_ads_consent">Personalizirani oglasi</string>
+    <string name="summary_personalized_ads_consent">Prilagodite dovoljenja za personalizirane oglase</string>
 </resources>

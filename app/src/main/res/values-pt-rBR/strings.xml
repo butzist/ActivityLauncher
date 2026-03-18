@@ -24,8 +24,6 @@
     <string name="label_package">Pacote</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Ícone</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">privado</string>
     <string name="starting_activity">Iniciando atividade: %s</string>
     <string name="creating_application_shortcut">Criando atalho para "%s"</string>
     <string name="error">Erro</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Sobre</string>
     <string name="action_view_source">Exibir código fonte</string>
     <string name="summary_action_view_source">O código fonte deste App está disponível para leitura e modificação no GitHub. Sinta-se à vontade para nos enviar pull requests com melhorias e correções de bugs.</string>
-    <string name="action_view_translation">Ajude a traduzir!</string>
-    <string name="summary_action_view_translation">Se você está gostando do Activity Launcher, considere traduzir o aplicativo para o seu idioma.</string>
-    <string name="action_view_bugs">Relatar um problema</string>
-    <string name="summary_action_view_bugs">Se você tiver sugestões ou problemas, informe-os em nosso projeto no GitHub.</string>
-    <string name="action_filter">Filtrar…</string>
     <string name="filter_hint">pacote/ação</string>
     <string name="activity_settings">Configurações</string>
     <string name="settings_hide_private">Ocultar atividades privadas</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Padrão do sistema</string>
     <string name="theme_light">Tema claro</string>
     <string name="theme_dark">Tema escuro</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Quer apoiar o app e remover os anúncios? Obtenha o Activity Launcher Pro no Google Play. Ele ajuda a financiar o desenvolvimento e é totalmente de código aberto.</string>
+    <string name="settings_github">Projeto GitHub</string>
+    <string name="settings_summary_github">Você pode baixar o APK pré-compilado do projeto de código aberto Activity Launcher no GitHub. Usuários avançados também podem explorar o código-fonte, apoiar os desenvolvedores e contribuir com traduções ou pull requests.</string>
+    <string name="category_title_ad_free">Versões sem anúncios</string>
+    <string name="title_dialog_support">Obrigado por usar o Activity Launcher</string>
+    <string name="dialog_support">Adicionamos anúncios para ajudar a financiar o desenvolvimento futuro. Prefere sem anúncios? Faça upgrade para o Activity Launcher Pro no Google Play — é totalmente de código aberto e oferece suporte ao trabalho contínuo no aplicativo. Você também pode obter o aplicativo gratuitamente no GitHub. O suporte lá é opcional, mas nos ajuda muito.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">Projeto GitHub</string>
+    <string name="action_personalized_ads_consent">Anúncios personalizados</string>
+    <string name="summary_personalized_ads_consent">Personalize as permissões para anúncios personalizados</string>
 </resources>

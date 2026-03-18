@@ -24,8 +24,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Sinif</string>
     <string name="label_icon">Nişan</string>
-    <string name="label_menu">Menyu</string>
-    <string name="label_private">şəxsi</string>
     <string name="starting_activity">Fəaliyyət başladılır: %s</string>
     <string name="creating_application_shortcut">%s üçün tətbiq qısayolu yaradılır</string>
     <string name="error">Xəta</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Haqqında</string>
     <string name="action_view_source">Mənbə koduna bax</string>
     <string name="summary_action_view_source">Bu tətbiqin mənbə kodu GitHub-da mövcuddur, oxuna və dəyişdirilə bilər. Təkmilləşdirmələr və xəta düzəlişləri üçün kömək etməkdən çəkinməyin.</string>
-    <string name="action_view_translation">Tərcüməyə kömək et</string>
-    <string name="summary_action_view_translation">"Activity Launcher"i bəyənirsinizsə, zəhmət olmasa tətbiqi öz dilinizə tərcümə etməyi düşünün.</string>
-    <string name="action_view_bugs">Bir problem bildir</string>
-    <string name="summary_action_view_bugs">Zəhmət olmasa təklif və ya problemləri GitHub layihə səhifəmizə göndərin.</string>
-    <string name="action_filter">Filtr…</string>
     <string name="filter_hint">paket/əməliyyat</string>
     <string name="activity_settings">Ayarlar</string>
     <string name="settings_hide_private">Şəxsi fəaliyyətləri gizlət</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">İlkin sistem</string>
     <string name="theme_light">İşıqlı tema</string>
     <string name="theme_dark">Qaranlıq tema</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Proqramı dəstəkləmək və reklamlardan qurtulmaq istəyirsiniz? Google Play-də Activity Launcher Pro-nu əldə edin — bu, inkişafa kömək edir və tamamilə açıq mənbəlidir.</string>
+    <string name="settings_github">GitHub layihəsi</string>
+    <string name="settings_summary_github">Əvvəlcədən qurulmuş APK-nı GitHub-dakı Activity Launcher açıq mənbə layihəsindən yükləyə bilərsiniz. Təcrübəli istifadəçilər həmçinin mənbə kodunu araşdıra, tərtibatçıları dəstəkləyə və tərcümələr və ya çəkmə sorğuları ilə töhfə verə bilərlər.</string>
+    <string name="category_title_ad_free">Reklamsız versiyalar</string>
+    <string name="title_dialog_support">Activity Launcher-dən istifadə etdiyiniz üçün təşəkkür edirik</string>
+    <string name="dialog_support">Gələcək inkişafı maliyyələşdirməyə kömək etmək üçün reklamlar əlavə etdik. Reklamların olmasını istəmirsiniz? Google Play-də Activity Launcher Pro-ya keçin - tamamilə açıq mənbəlidir və tətbiqin davamlı işini dəstəkləyir. Siz həmçinin GitHub-da tətbiqi pulsuz əldə edə bilərsiniz. Orada dəstək seçimli olsa da, bizə çox kömək edir.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub layihəsi</string>
+    <string name="action_personalized_ads_consent">Fərdiləşdirilmiş reklamlar</string>
+    <string name="summary_personalized_ads_consent">Fərdiləşdirilmiş reklamlar üçün icazələri fərdiləşdirin</string>
 </resources>

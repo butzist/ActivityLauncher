@@ -24,8 +24,6 @@
     <string name="label_package">حزمة</string>
     <string name="label_class">فئة</string>
     <string name="label_icon">رمز</string>
-    <string name="label_menu">القائمة</string>
-    <string name="label_private">خاص</string>
     <string name="starting_activity">بدء النشاط: %s</string>
     <string name="creating_application_shortcut">إنشاء اختصار للتطبيق ل %s</string>
     <string name="error">خطأ</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">حول التطبيق</string>
     <string name="action_view_source">عرض الرمز البرمجي الأساس</string>
     <string name="summary_action_view_source">رمز المصدر لهذا التطبيق متاح للقراءة والتعديل على GitHub. لا تتردد في إرسال طلبات السحب مع التحسينات و الأخطاء.</string>
-    <string name="action_view_translation">ساعدني في الترجمة!</string>
-    <string name="summary_action_view_translation">إذا كنت تستمتع بمشغل النشاط، يرجى النظر في ترجمة التطبيق إلى لغتك.</string>
-    <string name="action_view_bugs">أبلغ عن خطأ ما</string>
-    <string name="summary_action_view_bugs">إذا كان لديك أي اقتراحات أو مشكلات، يرجى الإبلاغ عنها في مشروعنا على GitHub.</string>
-    <string name="action_filter">فلتر...</string>
     <string name="filter_hint">حزمة/إجراء</string>
     <string name="activity_settings">الإعدادات</string>
     <string name="settings_hide_private">إخفاء الأنشطة الخاصة</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">الإعدادات الإفتراضية</string>
     <string name="theme_light">سمة فاتحة</string>
     <string name="theme_dark">سمة مظلمة</string>
+    <string name="settings_pro_version">مشغل النشاط برو</string>
+    <string name="settings_summary_pro_version">هل تريد دعم التطبيق وإزالة الإعلانات؟ احصل على Activity Launcher Pro على Google Play - فهو يساعد في تمويل التطوير وهو مفتوح المصدر بالكامل.</string>
+    <string name="settings_github">مشروع GitHub</string>
+    <string name="settings_summary_github">يمكنك تنزيل APK مسبق الإنشاء من مشروع مشغل النشاط مفتوح المصدر على GitHub. يمكن للمستخدمين المتقدمين أيضًا استكشاف التعليمات البرمجية المصدر ودعم المطورين والمساهمة في الترجمات أو طلبات السحب.</string>
+    <string name="category_title_ad_free">إصدارات خالية من الإعلانات</string>
+    <string name="title_dialog_support">شكرا لاستخدام مشغل النشاط</string>
+    <string name="dialog_support">لقد أضفنا إعلانات للمساعدة في تمويل التطوير المستقبلي. هل تفضل عدم وجود إعلانات؟ قم بالترقية إلى مشغل النشاط برو على Google Play - إنه مفتوح المصدر بالكامل ويدعم استمرار العمل على التطبيق. يمكنك أيضا الحصول على التطبيق مجانا على GitHub. الدعم هناك اختياري ولكنه يساعدنا كثيرا.</string>
+    <string name="action_view_paid">مشغل النشاط برو</string>
+    <string name="action_view_github">مشروع GitHub</string>
+    <string name="action_personalized_ads_consent">إعلانات مخصّصة</string>
+    <string name="summary_personalized_ads_consent">تخصيص الأذونات للإعلانات المخصّصة</string>
 </resources>

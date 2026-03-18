@@ -1,5 +1,4 @@
 [![Debug Build](https://github.com/butzist/ActivityLauncher/actions/workflows/android-master.yml/badge.svg)](https://github.com/butzist/ActivityLauncher/actions/workflows/android-master.yml)
-[![Crowdin](https://badges.crowdin.net/activitylauncher/localized.svg)](https://crowdin.com/project/activitylauncher)
 
 # Activity Launcher
 
@@ -20,6 +19,4 @@ See [#267](https://github.com/butzist/ActivityLauncher/issues/267).
 
 ## Translations
 
-The [Crowdin project](https://crowdin.com/project/ActivityLauncher) contains
-detailed credits for the translations and allows anyone to contribute by
-translating the app.
+Translations can be updated via Pull Requests on GitHub. Feel free to contribute by submitting PRs to improve or add translations.

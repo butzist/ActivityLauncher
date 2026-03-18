@@ -24,8 +24,6 @@
     <string name="label_package">パッケージ</string>
     <string name="label_class">クラス</string>
     <string name="label_icon">アイコン</string>
-    <string name="label_menu">メニュー</string>
-    <string name="label_private">プライベート</string>
     <string name="starting_activity">アクティビティの開始: %s</string>
     <string name="creating_application_shortcut">%s のアプリケーションのショートカットを作成しています</string>
     <string name="error">エラー</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">について</string>
     <string name="action_view_source">ソースコードを表示</string>
     <string name="summary_action_view_source">このアプリのソースコードはGitHub上で見たり変更したりすることができます。改善点やバグ修正があれば、プルリクエストをお気軽に送信してください。</string>
-    <string name="action_view_translation">翻訳を手伝ってください!</string>
-    <string name="summary_action_view_translation">アクティビティランチャーを楽しんでいる場合は、このアプリをあなたの言語に翻訳することもご検討ください。</string>
-    <string name="action_view_bugs">問題を報告</string>
-    <string name="summary_action_view_bugs">GitHub上のプロジェクトページで提案や問題点を提出してください。</string>
-    <string name="action_filter">フィルター…</string>
     <string name="filter_hint">パッケージ/アクション</string>
     <string name="activity_settings">設定</string>
     <string name="settings_hide_private">プライベートアクティビティを表示しない</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">システムの設定に従う</string>
     <string name="theme_light">ライトテーマ</string>
     <string name="theme_dark">ダークテーマ</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">アプリを支援して広告を削除したいですか？Google PlayでActivity Launcher Proを入手してください。開発資金の援助になり、完全にオープンソースです。</string>
+    <string name="settings_github">GitHubプロジェクト</string>
+    <string name="settings_summary_github">Activity Launcherのオープンソースプロジェクトから、ビルド済みのAPKをダウンロードできます。上級ユーザーは、ソースコードを調べたり、開発者を支援したり、翻訳やプルリクエストで貢献することもできます。</string>
+    <string name="category_title_ad_free">広告なしバージョン</string>
+    <string name="title_dialog_support">Activity Launcherをご利用いただきありがとうございます</string>
+    <string name="dialog_support">今後の開発資金を援助するため、広告を追加しました。広告なしをご希望ですか？ Google PlayでActivity Launcher Proにアップグレードしてください。完全にオープンソースで、アプリの継続的な作業をサポートします。 GitHubでアプリを無料で入手することもできます。そちらでのサポートは任意ですが、私たちにとって非常に役立ちます。</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHubプロジェクト</string>
+    <string name="action_personalized_ads_consent">パーソナライズ広告</string>
+    <string name="summary_personalized_ads_consent">パーソナライズ広告の権限をカスタマイズ</string>
 </resources>

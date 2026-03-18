@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreference
@@ -12,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.MainActivity
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.ActivityListService
+import de.szalkowski.activitylauncher.services.AdmobService
 import de.szalkowski.activitylauncher.services.RootDetectionService
 import de.szalkowski.activitylauncher.services.SettingsService
 import java.util.Objects
@@ -30,6 +32,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
     internal lateinit var activityListService: ActivityListService
+
+    @Inject
+    internal lateinit var admobService: AdmobService
 
     override fun onDestroy() {
         super.onDestroy()
@@ -59,6 +64,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val allowRoot: SwitchPreference = Objects.requireNonNull(findPreference("allow_root"))
         val theme: ListPreference = Objects.requireNonNull(findPreference("theme"))
         val languages: ListPreference = Objects.requireNonNull(findPreference("language"))
+
+        findPreference<Preference>("action_personalized_ads_consent")?.let { adsConsent ->
+            adsConsent.isVisible = admobService.isPrivacyOptionsRequired
+            adsConsent.setOnPreferenceClickListener {
+                admobService.showPrivacyOptionsDialog(requireActivity())
+                true
+            }
+        }
 
         languages.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance())
         populateLanguages(languages)

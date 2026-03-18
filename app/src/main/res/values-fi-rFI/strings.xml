@@ -24,8 +24,6 @@
     <string name="label_package">Paketti</string>
     <string name="label_class">Luokka</string>
     <string name="label_icon">Ikoni</string>
-    <string name="label_menu">Valikko</string>
-    <string name="label_private">yksityinen</string>
     <string name="starting_activity">Aloitetaan toimintaa: %s</string>
     <string name="creating_application_shortcut">Luodaan pikakuvaketta sovellukselle: %s</string>
     <string name="error">Virhe</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Tietoja</string>
     <string name="action_view_source">Näytä lähdekoodi</string>
     <string name="summary_action_view_source">Tämän sovelluksen lähdekoodi on luettavissa ja muokattavissa GitHubissa. Voit vapaasti lähettää meille parannuksia ja virheenkorjauksia.</string>
-    <string name="action_view_translation">Auta kääntämisessä!</string>
-    <string name="summary_action_view_translation">Jos pidät Activity Launcherista, harkitse sovelluksen kääntämistä omalle kielellesi.</string>
-    <string name="action_view_bugs">Ilmoita ongelmasta</string>
-    <string name="summary_action_view_bugs">Lähetä ehdotuksesi tai ongelmasi GitHub-projektisivullemme.</string>
-    <string name="action_filter">Suodata…</string>
     <string name="filter_hint">paketti/toiminto</string>
     <string name="activity_settings">Asetukset</string>
     <string name="settings_hide_private">Piilota yksityiset toiminnot</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Järjestelmän oletus</string>
     <string name="theme_light">Vaalea Teema</string>
     <string name="theme_dark">Tumma Teema</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Haluatko tukea sovelluksen kehitystä ja poistaa mainokset? Hanki Activity Launcher Pro Google Playsta – se auttaa rahoittamaan kehitystä ja on täysin avoimen lähdekoodin sovellus.</string>
+    <string name="settings_github">GitHub-projekti</string>
+    <string name="settings_summary_github">Voit ladata valmiin APK-tiedoston Activity Launcherin avoimen lähdekoodin projektista GitHubista. Edistyneet käyttäjät voivat myös tutkia lähdekoodia, tukea kehittäjiä ja osallistua käännöksiin tai pull-pyyntöihin.</string>
+    <string name="category_title_ad_free">Mainoksettomat versiot</string>
+    <string name="title_dialog_support">Kiitos, kun käytät Activity Launcheria</string>
+    <string name="dialog_support">Olemme lisänneet mainoksia rahoittamaan tulevaa kehitystä. Haluatko mieluummin ilman mainoksia? Päivitä Activity Launcher Pro -versioon Google Playssa – se on täysin avoimen lähdekoodin ja tukee sovelluksen jatkuvaa kehitystä. Voit myös hankkia sovelluksen ilmaiseksi GitHubista. Tuki siellä on vapaaehtoista, mutta auttaa meitä paljon.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub-projekti</string>
+    <string name="action_personalized_ads_consent">Personoidut mainokset</string>
+    <string name="summary_personalized_ads_consent">Mukauta luvan asetuksia personoiduille mainoksille</string>
 </resources>

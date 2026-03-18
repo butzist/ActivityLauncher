@@ -24,8 +24,6 @@
     <string name="label_package">පැකේජය</string>
     <string name="label_class">පන්තිය</string>
     <string name="label_icon">අයිකනය</string>
-    <string name="label_menu">මෙනුව</string>
-    <string name="label_private">පෞද්ගලික</string>
     <string name="starting_activity">ක්‍රියාකාරකම ආරම්භ කරමින්: %s</string>
     <string name="creating_application_shortcut">%s සඳහා යෙදුම් කෙටිමඟක් නිර්මාණය කිරීම</string>
     <string name="error">දෝෂයකි</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">ගැන</string>
     <string name="action_view_source">මූලාශ්‍ර කේතය බලන්න</string>
     <string name="summary_action_view_source">මෙම යෙදුමේ මූල කේතය GitHub හි කියවීමට සහ වෙනස් කිරීමට ලබා ගත හැකිය. වැඩිදියුණු කිරීම් සහ දෝෂ නිවැරදි කිරීම් සමඟ අපට  pull requests එවීමට නිදහස ඇත.</string>
-    <string name="action_view_translation">පරිවර්තනයෙන් සහාය වන්න!</string>
-    <string name="summary_action_view_translation">ඔබ ක්‍රියාකාරකම් දියත්කරනය භුක්ති විඳින්නේ නම්, කරුණාකර යෙදුම ඔබේ භාෂාවට පරිවර්තනය කිරීම සලකා බලන්න.</string>
-    <string name="action_view_bugs">ගැටළුවක් වාර්තා කරන්න</string>
-    <string name="summary_action_view_bugs">ඔබට කිසියම් යෝජනා හෝ ගැටළු ඇත්නම්, කරුණාකර GitHub හි අපගේ ව්‍යාපෘතියේ ඒවා වාර්තා කරන්න.</string>
-    <string name="action_filter">පෙරහන...</string>
     <string name="filter_hint">පැකේජය/ක්‍රියාව</string>
     <string name="activity_settings">සැකසුම්</string>
     <string name="settings_hide_private">පුද්ගලික ක්‍රියාකාරකම් සඟවන්න</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">පද්ධති පෙරනිමිය</string>
     <string name="theme_light">එළිය තේමාව</string>
     <string name="theme_dark">අඳුරු තේමාව</string>
+    <string name="settings_pro_version">ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ</string>
+    <string name="settings_summary_pro_version">යෙදුමට සහය වී දැන්වීම් ඉවත් කිරීමට අවශ්‍යද? Google Play වෙතින් ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ ලබා ගන්න - එය සංවර්ධනය සඳහා අරමුදල් සපයන අතර සම්පූර්ණයෙන්ම විවෘත මූලාශ්‍ර වේ.</string>
+    <string name="settings_github">GitHub ව්‍යාපෘතිය</string>
+    <string name="settings_summary_github">GitHub හි Activity Launcher විවෘත මූලාශ්‍ර ව්‍යාපෘතියෙන් ඔබට පෙර-සාදන ලද APK බාගත හැකිය. උසස් පරිශීලකයින්ට මූලාශ්‍ර කේතය ගවේෂණය කිරීමට, සංවර්ධකයින්ට සහාය වීමට සහ පරිවර්තන හෝ ඉල්ලීම් සමඟ දායක වීමටද හැකිය.</string>
+    <string name="category_title_ad_free">දැන්වීම් රහිත අනුවාද</string>
+    <string name="title_dialog_support">ක්‍රියාකාරකම් දියත්කාරකය භාවිතා කිරීම ගැන ඔබට ස්තූතියි</string>
+    <string name="dialog_support">අනාගත සංවර්ධනය සඳහා අරමුදල් සැපයීමට දැන්වීම් එකතු කර ඇත. දැන්වීම් අවශ්‍ය නැද්ද? Google Play හි ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ වෙත උත්ශ්‍රේණි කරන්න - එය සම්පූර්ණයෙන්ම විවෘත මූලාශ්‍ර වන අතර යෙදුම පිළිබඳ අඛණ්ඩ වැඩ සඳහා සහාය වේ. ඔබට GitHub වෙතින් යෙදුම නොමිලේ ලබා ගත හැකිය. එහිදී සහාය විකල්පයක් වුවද අපට බොහෝ උපකාර කරයි.</string>
+    <string name="action_view_paid">ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ</string>
+    <string name="action_view_github">GitHub ව්‍යාපෘතිය</string>
+    <string name="action_personalized_ads_consent">අයෙකුට අයත් දැන්වීම්</string>
+    <string name="summary_personalized_ads_consent">අයෙකුට අයත් දැන්වීම් සඳහා අවසරයන් අභිරුචි කරන්න</string>
 </resources>

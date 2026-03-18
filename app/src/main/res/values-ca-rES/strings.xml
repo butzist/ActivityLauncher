@@ -24,8 +24,6 @@
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icona</string>
-    <string name="label_menu">Menú</string>
-    <string name="label_private">Privat</string>
     <string name="starting_activity">Començant l\'activitat: %s</string>
     <string name="creating_application_shortcut">Creant drecera de l\'aplicació per a %s</string>
     <string name="error">Error</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">Quant a</string>
     <string name="action_view_source">Visualitza el codi font</string>
     <string name="summary_action_view_source">El codi font d\'aquesta aplicació està disponible per llegir i modificar a GitHub. No dubteu a enviar-nos sol·licituds d\'extracció (pull requests) amb millores i correccions d\'errors.</string>
-    <string name="action_view_translation">Ajuda a traduir</string>
-    <string name="summary_action_view_translation">Si us agrada Activity Launcher, considereu traduir l\'aplicació al vostre idioma.</string>
-    <string name="action_view_bugs">Informa un problema</string>
-    <string name="summary_action_view_bugs">Envieu els vostres suggeriments o problemes a la nostra pàgina del projecte GitHub.</string>
-    <string name="action_filter">Filtra…</string>
     <string name="filter_hint">paquet/acció</string>
     <string name="activity_settings">Configuració</string>
     <string name="settings_hide_private">Amaga les activitats privades</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Sistema per defecte</string>
     <string name="theme_light">Tema clar</string>
     <string name="theme_dark">Tema fosc</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Voleu donar suport a l\'aplicació i eliminar els anuncis? Obteniu Activity Launcher Pro a Google Play; ajuda a finançar el desenvolupament i és totalment de codi obert.</string>
+    <string name="settings_github">Projecte GitHub</string>
+    <string name="settings_summary_github">Podeu descarregar l\'APK precompilat del projecte de codi obert Activity Launcher a GitHub. Els usuaris avançats també poden explorar el codi font, donar suport als desenvolupadors i col·laborar amb traduccions o sol·licituds d\'extracció.</string>
+    <string name="category_title_ad_free">Versions sense anuncis</string>
+    <string name="title_dialog_support">Gràcies per utilitzar l\'Activity Launcher</string>
+    <string name="dialog_support">Hem afegit anuncis per ajudar a finançar el desenvolupament futur. Preferiu no tenir anuncis? Actualitzeu a Activity Launcher Pro a Google Play: és completament de codi obert i permet continuar treballant en l\'aplicació. També podeu obtenir l\'aplicació de forma gratuïta a GitHub. El suport allà és opcional, però ens ajuda molt.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">Projecte GitHub</string>
+    <string name="action_personalized_ads_consent">Anuncis personalitzats</string>
+    <string name="summary_personalized_ads_consent">Personalitza els permisos per als anuncis personalitzats</string>
 </resources>

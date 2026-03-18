@@ -23,7 +23,7 @@ jobs:
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release APK
-      run: ./gradlew assembleOssRelease
+      run: ./gradlew assembleOssNoadsRelease
       env:
         APPID: de.szalkowski.activitylauncher.oss
         KEYSTORE: keystore.jks
@@ -34,4 +34,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: release.apk
-        path: app/build/outputs/apk/oss/release/app-oss-release.apk
+        path: app/build/outputs/apk/ossNoads/release/app-oss-noads-release.apk

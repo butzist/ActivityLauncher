@@ -1,0 +1,47 @@
+name: Release to Play Store (Pro)
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set version
+      id: version
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+    - name: set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: 21
+        cache: 'gradle'
+    - name: Prepare Android keystore
+      run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
+    - name: Download dependencies
+      run: ./gradlew androidDependencies
+    - name: Build release AAB
+      run: ./gradlew bundlePlayStoreNoadsRelease
+      env:
+        APPID: de.szalkowski.activitylauncher.pro
+        KEYSTORE: keystore.jks
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
+        KEY_ALIAS: de.szalkowski.activitylauncher.pro
+        KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
+    - name: Upload Android Release to Play Store
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.SERVICEACCOUNT }}
+        packageName: de.szalkowski.activitylauncher.pro
+        releaseFiles: app/build/outputs/bundle/playStoreNoadsRelease/app-playStore-noads-release.aab
+        releaseName: ${{ steps.version.outputs.tag }}
+        track: alpha
+        inAppUpdatePriority: 0
+        status: completed
+        whatsNewDirectory: whatsnew
+        mappingFile: app/build/outputs/mapping/playStoreNoadsRelease/mapping.txt

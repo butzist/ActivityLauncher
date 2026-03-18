@@ -24,8 +24,6 @@
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icône</string>
-    <string name="label_menu">Menu</string>
-    <string name="label_private">privé</string>
     <string name="starting_activity">Lancement de l\'activité : %s</string>
     <string name="creating_application_shortcut">Création du raccourci de l\'application pour %s</string>
     <string name="error">Erreur</string>
@@ -41,11 +39,6 @@
     <string name="category_title_about">À propos</string>
     <string name="action_view_source">Afficher le code source</string>
     <string name="summary_action_view_source">Le code source de cette application est disponible pour la lecture et la modification sur GitHub. N\'hésitez pas à nous envoyer des demandes de fusion avec des améliorations et des corrections de bugs.</string>
-    <string name="action_view_translation">Aidez-nous à traduire!</string>
-    <string name="summary_action_view_translation">Si vous appréciez le lanceur d\'activité, veuillez envisager de traduire l\'application dans votre langue.</string>
-    <string name="action_view_bugs">Signaler un problème</string>
-    <string name="summary_action_view_bugs">Si vous avez des suggestions ou des problèmes, veuillez les signaler dans notre projet sur GitHub.</string>
-    <string name="action_filter">Filtrer…</string>
     <string name="filter_hint">paquet/action</string>
     <string name="activity_settings">Paramètres</string>
     <string name="settings_hide_private">Masquer les activités privées</string>
@@ -56,5 +49,16 @@
     <string name="settings_theme">Thème</string>
     <string name="theme_default">Par défaut</string>
     <string name="theme_light">Thème clair</string>
-    <string name="theme_dark">Thème sombre</string>
+    <string name="theme_dark">Thème Noir</string>
+    <string name="settings_pro_version">Lanceur d\'activités Pro</string>
+    <string name="settings_summary_pro_version">Vous voulez soutenir l\'application et supprimer les publicités ? Obtenez Lanceur d\'activités Pro sur Google Play - cela aide à financer le développement et est entièrement open source.</string>
+    <string name="settings_github">Projet GitHub</string>
+    <string name="settings_summary_github">Vous pouvez télécharger l\'APK pré-construit à partir du projet open source Activity Launcher sur GitHub. Les utilisateurs avancés peuvent également explorer le code source, soutenir les développeurs et contribuer avec des traductions ou des demandes de tirage.</string>
+    <string name="category_title_ad_free">Versions sans publicité</string>
+    <string name="title_dialog_support">Merci d\'utiliser Lanceur d\'activités</string>
+    <string name="dialog_support">Nous avons ajouté des publicités pour aider à financer le développement futur. Vous préférez sans publicité, mettez à niveau Lanceur d\'activités Pro sur Google Play – c\'est entièrement open source et prend en charge le travail continu sur l\'application. Vous pouvez également obtenir l\'application gratuitement sur GitHub. Le support là-bas est facultatif mais nous aide beaucoup.</string>
+    <string name="action_view_paid">Lanceur d\'activités Pro</string>
+    <string name="action_view_github">Projet GitHub</string>
+    <string name="action_personalized_ads_consent">Publicités personnalisées</string>
+    <string name="summary_personalized_ads_consent">Personnaliser les autorisations pour les publicités personnalisées</string>
 </resources>

@@ -24,8 +24,6 @@
     <string name="label_package">Csomag</string>
     <string name="label_class">Osztály</string>
     <string name="label_icon">Ikon</string>
-    <string name="label_menu">Menü</string>
-    <string name="label_private">privát</string>
     <string name="starting_activity">%s tevékenység indítása</string>
     <string name="creating_application_shortcut">%s alkalmazás parancsikonjának létrehozása</string>
     <string name="error">Hiba</string>
@@ -35,19 +33,14 @@
     <string name="error_invalid_icon_format">Hiba: érvénytelen ikonformátum</string>
     <string name="error_verbose_pin_shortcut">A jelenlegi launcher nem támogatja a "PinShortcut" funkciót. A parancsikon létrehozása nem lehetséges.</string>
     <string name="error_invalid_activity_link">Érvénytelen tevékenységre mutató hivatkozás</string>
-    <string name="warning_root_check">Figyelem: Valószínűleg nincs rootolva a készülék </string>
+    <string name="warning_root_check">Figyelem: Valószínűleg nincs rootolva a készülék</string>
     <string name="exception_invalid_component_name">Érvénytelen vagy potenciálisan káros összetevőnév: %s</string>
     <string name="exception_command_error">A parancs hibakódot adott vissza: %d, kimenet: %s</string>
     <string name="category_title_about">Névjegy</string>
     <string name="action_view_source">Forráskód megtekintése</string>
     <string name="summary_action_view_source">Az alkalmazás forráskódja elérhető és módosítható a GitHubon. Küldj nekünk pull requesteket fejlesztésekkel és hibajavításokkal!</string>
-    <string name="action_view_translation">Segíts a fordításban!</string>
-    <string name="summary_action_view_translation">Ha tetszik az Activity Launcher, segíts lefordítani az anyanyelvedre!</string>
-    <string name="action_view_bugs">Hibajelentés</string>
-    <string name="summary_action_view_bugs">Jelezd a javaslataidat vagy problémáidat a GitHub projekt oldalunkon</string>
-    <string name="action_filter">Szűrő...</string>
     <string name="filter_hint">csomag/tevékenység</string>
-    <string name="activity_settings">Beállítások </string>
+    <string name="activity_settings">Beállítások</string>
     <string name="settings_hide_private">Privát tevékenységek elrejtése</string>
     <string name="settings_summary_hide_private">Rejtse el a privát (nem exportált és letiltott) tevékenységeket, amiket nem lehet root engedélyek nélkül elindítani</string>
     <string name="settings_allow_root">Engedélyezze a privilegizált módot</string>
@@ -57,4 +50,15 @@
     <string name="theme_default">Rendszer alapértelmezett</string>
     <string name="theme_light">Világos téma</string>
     <string name="theme_dark">Sötét téma</string>
+    <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_pro_version">Szeretnéd támogatni az alkalmazást és eltávolítani a hirdetéseket? Szerezd be az Activity Launcher Pro verziót a Google Playen – ez segít finanszírozni a fejlesztést, és teljesen nyílt forráskódú.</string>
+    <string name="settings_github">GitHub projekt</string>
+    <string name="settings_summary_github">A kész APK-t letöltheted az Activity Launcher nyílt forráskódú projektből a GitHubon. A haladó felhasználók megvizsgálhatják a forráskódot, támogathatják a fejlesztőket, és fordításokkal vagy pull requestekkel járulhatnak hozzá.</string>
+    <string name="category_title_ad_free">Hirdetésmentes verziók</string>
+    <string name="title_dialog_support">Köszönjük, hogy az Activity Launchert használod</string>
+    <string name="dialog_support">Hirdetéseket helyeztünk el a jövőbeni fejlesztések finanszírozása érdekében. Nem szeretnél hirdetéseket? Frissíts Activity Launcher Pro-ra a Google Playen – teljesen nyílt forráskódú, és támogatja az alkalmazás további fejlesztését. Ingyenesen is letöltheted az alkalmazást a GitHubon. Az ottani támogatás nem kötelező, de sokat segít nekünk.</string>
+    <string name="action_view_paid">Activity Launcher Pro</string>
+    <string name="action_view_github">GitHub projekt</string>
+    <string name="action_personalized_ads_consent">Személyre szabott hirdetések</string>
+    <string name="summary_personalized_ads_consent">Személyre szabott hirdetések engedélyeinek testreszabása</string>
 </resources>
