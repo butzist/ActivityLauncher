@@ -62,8 +62,10 @@ class RecentsFragment : Fragment() {
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
-                val item = adapter.getItem(position)
-                viewModel.removeRecent(item.componentName)
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = adapter.getItem(position)
+                    viewModel.removeRecent(item.componentName)
+                }
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
@@ -108,10 +110,16 @@ class RecentsFragment : Fragment() {
 
             init {
                 itemView.setOnClickListener {
-                    onItemClick?.invoke(activities[bindingAdapterPosition])
+                    val position = bindingAdapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        onItemClick?.invoke(activities[position])
+                    }
                 }
                 itemView.setOnLongClickListener {
-                    onItemLongClick?.invoke(activities[bindingAdapterPosition])
+                    val position = bindingAdapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        onItemLongClick?.invoke(activities[position])
+                    }
                     true
                 }
             }
