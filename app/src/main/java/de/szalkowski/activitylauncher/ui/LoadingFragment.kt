@@ -36,9 +36,12 @@ class LoadingFragment : Fragment() {
             }
 
             withResumed {
-                // Once loaded, always navigate to the package list
-                val action = LoadingFragmentDirections.actionLoadingFinished()
-                findNavController().navigate(action)
+                val navController = findNavController()
+                if (navController.currentDestination?.id == R.id.LoadingFragment) {
+                    // Once loaded, always navigate to the package list
+                    val action = LoadingFragmentDirections.actionLoadingFinished()
+                    runCatching { navController.navigate(action) }
+                }
             }
         }
 
