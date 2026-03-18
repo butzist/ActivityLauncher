@@ -41,6 +41,7 @@ jobs:
         releaseFiles: app/build/outputs/bundle/playStoreNoadsRelease/app-playStore-noads-release.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: alpha
+        changesNotSentForReview: true
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew

@@ -24,7 +24,9 @@ jobs:
     - name: Prepare Android keystore
       run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
     - name: Prepare Google Services
-      run: echo ${{ secrets.GOOGLE_SERVICES_JSON }} > app/google-services.json
+      run: echo "$GOOGLE_SERVICES_JSON" > app/google-services.json
+      env:
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
     - name: Download dependencies
       run: ./gradlew androidDependencies
     - name: Build release AAB
@@ -43,6 +45,7 @@ jobs:
         releaseFiles: app/build/outputs/bundle/playStoreAdsRelease/app-playStore-ads-release.aab
         releaseName: ${{ steps.version.outputs.tag }}
         track: alpha
+        changesNotSentForReview: true
         inAppUpdatePriority: 0
         status: completed
         whatsNewDirectory: whatsnew
