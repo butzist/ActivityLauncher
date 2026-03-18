@@ -8,6 +8,7 @@ import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 import de.szalkowski.activitylauncher.services.PackageActivities
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,6 +34,7 @@ class ActivityListViewModel @Inject constructor(
     private var allPackageActivities: PackageActivities? = null
     private var combinedActivities: List<MyActivityInfo> = emptyList()
     private var currentQuery: String = ""
+    private var filterJob: Job? = null
 
     init {
         loadActivities()
@@ -47,19 +49,22 @@ class ActivityListViewModel @Inject constructor(
             allPackageActivities = result
             combinedActivities = listOfNotNull(result.defaultActivity) + result.activities
             filter(currentQuery)
-            _isSearching.value = false
         }
     }
 
     fun filter(query: String) {
         currentQuery = query
-        viewModelScope.launch {
+        filterJob?.cancel()
+        filterJob = viewModelScope.launch {
             _isSearching.value = true
-            val filtered = withContext(Dispatchers.Default) {
-                performFilter(query)
+            try {
+                val filtered = withContext(Dispatchers.Default) {
+                    performFilter(query)
+                }
+                _activities.value = filtered
+            } finally {
+                _isSearching.value = false
             }
-            _activities.value = filtered
-            _isSearching.value = false
         }
     }
 

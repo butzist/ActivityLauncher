@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.services.MyPackageInfo
 import de.szalkowski.activitylauncher.services.PackageListService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,6 +28,7 @@ class PackageListViewModel @Inject constructor(
 
     private var allPackages: List<MyPackageInfo> = emptyList()
     private var currentQuery: String = ""
+    private var filterJob: Job? = null
 
     init {
         loadPackages()
@@ -40,19 +42,22 @@ class PackageListViewModel @Inject constructor(
             }
             allPackages = result
             filter(currentQuery)
-            _isSearching.value = false
         }
     }
 
     fun filter(query: String) {
         currentQuery = query
-        viewModelScope.launch {
+        filterJob?.cancel()
+        filterJob = viewModelScope.launch {
             _isSearching.value = true
-            val filtered = withContext(Dispatchers.Default) {
-                performFilter(query)
+            try {
+                val filtered = withContext(Dispatchers.Default) {
+                    performFilter(query)
+                }
+                _packages.value = filtered
+            } finally {
+                _isSearching.value = false
             }
-            _packages.value = filtered
-            _isSearching.value = false
         }
     }
 
