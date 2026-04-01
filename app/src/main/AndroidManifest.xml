@@ -31,13 +31,16 @@
             android:theme="@style/Theme.ActivityLauncher.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="activitylauncher.net"
                     android:pathPrefix="/activity/"
@@ -50,9 +53,10 @@
             android:noHistory="true"
             android:theme="@style/Theme.ActivityLauncher.NoDisplay">
             <intent-filter>
-                <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT"/>
-                <action android:name="activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT" />
+                <action android:name="activitylauncher.intent.action.LAUNCH_ROOT_SHORTCUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -60,6 +64,22 @@
             android:exported="false"
             android:label="@string/activity_settings"
             android:theme="@style/Theme.ActivityLauncher.NoActionBar" />
+
+        <activity
+            android:name=".QSTileNavHostActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ActivityLauncher.Translucent" />
+
+        <service
+            android:name=".services.QSTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_rocket_launch"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
