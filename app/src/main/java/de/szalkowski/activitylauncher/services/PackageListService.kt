@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.isPrivate
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,34 +28,37 @@ class PackageListServiceImpl @Inject constructor(
 ) : PackageListService {
 
     private val packageManager: PackageManager = context.packageManager
-    private val cache = mutableMapOf<String, MyPackageInfo>()
-    private var allLoaded = false
+    private val cache = ConcurrentHashMap<String, MyPackageInfo>()
 
-    override val isLoaded: Boolean
-        get() = synchronized(cache) { allLoaded }
+    @Volatile
+    override var isLoaded: Boolean = false
+        private set
 
     override val packages: List<MyPackageInfo>
         get() {
-            synchronized(cache) {
-                if (!allLoaded) {
-                    packageManager.getInstalledPackages(
-                        PackageManager.GET_ACTIVITIES
-                            or PackageManager.MATCH_ALL
-                            or PackageManager.MATCH_DISABLED_COMPONENTS
-                            or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
-                    ).forEach { p ->
-                        getPackageInfo(p)?.let { cache[it.packageName] = it }
-                    }
-                    allLoaded = true
-                }
-                return cache.values.sortedBy { it.name.lowercase() }
+            if (!isLoaded) {
+                loadPackagesInternal()
             }
+            return cache.values.sortedBy { it.name.lowercase() }
         }
 
-    override fun getPackage(packageName: String): MyPackageInfo? {
-        synchronized(cache) {
-            cache[packageName]?.let { return it }
+    @Synchronized
+    private fun loadPackagesInternal() {
+        if (!isLoaded) {
+            packageManager.getInstalledPackages(
+                PackageManager.GET_ACTIVITIES
+                    or PackageManager.MATCH_ALL
+                    or PackageManager.MATCH_DISABLED_COMPONENTS
+                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
+            ).forEach { p ->
+                getPackageInfo(p)?.let { cache[it.packageName] = it }
+            }
+            isLoaded = true
         }
+    }
+
+    override fun getPackage(packageName: String): MyPackageInfo? {
+        cache[packageName]?.let { return it }
 
         val result = runCatching {
             val info = packageManager.getPackageInfo(
@@ -68,17 +72,13 @@ class PackageListServiceImpl @Inject constructor(
         }.getOrNull()
 
         return result?.also {
-            synchronized(cache) {
-                cache[packageName] = it
-            }
+            cache[packageName] = it
         }
     }
 
     override fun invalidate() {
-        synchronized(cache) {
-            cache.clear()
-            allLoaded = false
-        }
+        cache.clear()
+        isLoaded = false
     }
 
     private fun getPackageInfo(info: PackageInfo): MyPackageInfo? {
