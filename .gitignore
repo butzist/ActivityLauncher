@@ -8,3 +8,4 @@ local.properties
 /ActivityLauncherApp/release
 /ActivityLauncherApp/keystore.jks
 *.iml
+/.safedk

@@ -1,12 +1,13 @@
 buildscript {
     repositories {
-        google()
+        maven { url = uri("https://artifacts.applovin.com/android") }
     }
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
-        classpath("com.google.gms:google-services:4.4.2")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.6")
+        classpath("com.google.gms:google-services:4.4.4")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.7")
         classpath("com.google.firebase:perf-plugin:2.0.2")
+        classpath("com.applovin.quality:AppLovinQualityServiceGradlePlugin:5.12.5")
     }
 }
 

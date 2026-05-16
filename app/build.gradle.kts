@@ -12,16 +12,16 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = System.getenv("APPID") ?: "de.szalkowski.activitylauncher"
+        applicationId =
+            providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 36
-        versionCode = 7400
-        versionName = "2.2.4"
+        versionCode = 7500
+        versionName = "2.2.5"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     flavorDimensions += listOf("distribution", "ads")
     productFlavors {
         create("oss") {
@@ -32,36 +32,30 @@ android {
             dimension = "distribution"
             minSdk = 23
         }
-    }
-
-    productFlavors {
         create("noads") {
             dimension = "ads"
             resValue("string", "admob_banner_id", "unused")
+            resValue("string", "publisher_id", "")
+            resValue("string", "app_id", "")
         }
         create("ads") {
             dimension = "ads"
-            val bannerId = System.getenv("ADMOB_BANNER_ID") ?: "ca-app-pub-3940256099942544/6300978111"
-            val appId = System.getenv("ADMOB_APP_ID") ?: "ca-app-pub-3940256099942544~3347511713"
-            resValue("string", "admob_banner_id", bannerId)
-            manifestPlaceholders["ADMOB_APP_ID"] = appId
+            val admobAppId =
+                System.getenv("ADMOB_APP_ID") ?: "ca-app-pub-3940256099942544~3347511713"
+            val publisherId = providers.environmentVariable("PUBLISHER_ID").getOrElse("")
+            val appId = providers.environmentVariable("APP_ID").getOrElse("")
+            manifestPlaceholders["ADMOB_APP_ID"] = admobAppId
+            resValue("string", "publisher_id", publisherId)
+            resValue("string", "app_id", appId)
         }
     }
-
-    variantFilter {
-        val distribution = flavors.find { it.dimension == "distribution" }?.name
-        val ads = flavors.find { it.dimension == "ads" }?.name
-        if (distribution == "oss" && ads == "ads") {
-            ignore = true
-        }
-    }
-
     signingConfigs {
         create("release") {
-            storeFile = file(System.getenv("KEYSTORE") ?: "keystore.jks")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+            val keystorePath = providers.environmentVariable("KEYSTORE").orElse("keystore.jks")
+            storeFile = file(keystorePath)
+            storePassword = providers.environmentVariable("KEYSTORE_PASSWORD").orNull
+            keyAlias = providers.environmentVariable("KEY_ALIAS").orNull
+            keyPassword = providers.environmentVariable("KEY_PASSWORD").orNull
         }
     }
     buildTypes {
@@ -69,6 +63,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -93,6 +88,12 @@ android {
     }
 }
 
+androidComponents {
+    beforeVariants(selector().withFlavor("distribution", "oss").withFlavor("ads", "ads")) {
+        it.enable = false
+    }
+}
+
 // Conditionally apply Google services and Firebase plugins
 // These are only applied if the 'ads' flavor is present in the current build task
 val taskNames = gradle.startParameter.taskNames.joinToString(",")
@@ -102,11 +103,24 @@ if (isAdsBuild) {
     apply(plugin = "com.google.gms.google-services")
     apply(plugin = "com.google.firebase.crashlytics")
     apply(plugin = "com.google.firebase.firebase-perf")
+    apply(plugin = "applovin-quality-service")
+}
+
+// Configure AppLovin Quality Service if applied
+if (isAdsBuild) {
+    extensions.findByName("applovin")?.let { extension ->
+        val adReviewKey = providers.environmentVariable("AD_REVIEW_KEY").getOrElse("")
+        val method = extension.javaClass.methods.find { it.name == "setApiKey" }
+        method?.invoke(extension, adReviewKey)
+    }
 }
 
 // Allow references to generated code
 kapt {
     correctErrorTypes = true
+    javacOptions {
+        option("-Xmaxerrs", "500")
+    }
 }
 
 // Configure Spotless for code formatting
@@ -162,13 +176,14 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.55")
     "playStoreImplementation"("com.google.android.play:review-ktx:2.0.2")
 
-    "adsImplementation"("com.google.android.gms:play-services-ads:22.6.0")
     "adsImplementation"(platform("com.google.firebase:firebase-bom:33.10.0"))
     "adsImplementation"("com.google.firebase:firebase-analytics")
     "adsImplementation"("com.google.firebase:firebase-crashlytics")
     "adsImplementation"("com.google.firebase:firebase-perf")
-    "adsImplementation"("com.google.android.ump:user-messaging-platform:2.2.0")
     "adsImplementation"("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    "adsImplementation"("com.intergi.playwire:playwiresdk_total:12.1.1")
+    "adsImplementation"("com.applovin:applovin-sdk:13.6.2")
+    "adsImplementation"("com.google.android.gms:play-services-ads-identifier:18.1.0")
 
     kapt("com.google.dagger:hilt-compiler:2.55")
     testImplementation("junit:junit:4.13.2")
