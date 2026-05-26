@@ -41,7 +41,7 @@ android {
         create("ads") {
             dimension = "ads"
             val admobAppId =
-                System.getenv("ADMOB_APP_ID") ?: "ca-app-pub-3940256099942544~3347511713"
+                providers.environmentVariable("ADMOB_APP_ID").getOrElse("ca-app-pub-3940256099942544~3347511713")
             val publisherId = providers.environmentVariable("PUBLISHER_ID").getOrElse("")
             val appId = providers.environmentVariable("APP_ID").getOrElse("")
             manifestPlaceholders["ADMOB_APP_ID"] = admobAppId

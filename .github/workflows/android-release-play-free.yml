@@ -37,6 +37,10 @@ jobs:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
         KEY_ALIAS: de.szalkowski.activitylauncher
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
+        PUBLISHER_ID: ${{ secrets.PUBLISHER_ID }}
+        APP_ID: ${{ secrets.APP_ID }}
+        ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
+        AD_REVIEW_KEY: ${{ secrets.AD_REVIEW_KEY }}
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
