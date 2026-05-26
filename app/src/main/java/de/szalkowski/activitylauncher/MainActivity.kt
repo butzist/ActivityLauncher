@@ -22,7 +22,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
-import de.szalkowski.activitylauncher.services.AdmobService
+import de.szalkowski.activitylauncher.services.AdService
 import de.szalkowski.activitylauncher.services.AnalyticsService
 import de.szalkowski.activitylauncher.services.FavoritesService
 import de.szalkowski.activitylauncher.services.PackageListService
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     internal lateinit var packageListService: PackageListService
 
     @Inject
-    internal lateinit var admobService: AdmobService
+    internal lateinit var adService: AdService
 
     @Inject
     internal lateinit var analyticsService: AnalyticsService
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        admobService.initialize(this)
+        adService.initialize(this, binding.adContainer)
 
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {

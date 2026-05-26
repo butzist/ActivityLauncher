@@ -49,10 +49,5 @@
             android:entryValues="@array/locales"
             android:key="language"
             android:title="@string/settings_language" />
-        <Preference
-            android:key="action_personalized_ads_consent"
-            android:summary="@string/summary_personalized_ads_consent"
-            android:title="@string/action_personalized_ads_consent"
-            app:singleLineTitle="true" />
     </PreferenceCategory>
 </PreferenceScreen>

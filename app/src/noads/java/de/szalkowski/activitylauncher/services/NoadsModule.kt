@@ -11,9 +11,9 @@ import javax.inject.Singleton
 abstract class NoadsModule {
     @Singleton
     @Binds
-    abstract fun bindAdmobService(
-        admobServiceImpl: AdmobServiceImpl,
-    ): AdmobService
+    abstract fun bindAdService(
+        adServiceImpl: AdServiceImpl,
+    ): AdService
 
     @Singleton
     @Binds
