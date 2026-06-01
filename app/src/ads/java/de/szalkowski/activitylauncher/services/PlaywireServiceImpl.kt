@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher.services
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import com.intergi.playwiremobile.notifier.PMNotifier
+import com.intergi.playwiresdk.PWNotifier
 import com.intergi.playwiresdk.PlaywireSDK
 import com.intergi.playwiresdk.ads.view.PWViewAd
 import com.intergi.playwiresdk.ads.view.banner.PWBannerView
@@ -29,7 +29,7 @@ class PlaywireServiceImpl @Inject constructor(
             return
         }
 
-        PMNotifier.startConsoleLogger()
+        PWNotifier.startConsoleLogger()
         PlaywireSDK.start(publisherId, appId, activity) { success, _ ->
             if (success) {
                 isInitialized = true

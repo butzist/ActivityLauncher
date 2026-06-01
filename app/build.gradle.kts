@@ -16,7 +16,7 @@ android {
             providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 36
-        versionCode = 7500
+        versionCode = 7501
         versionName = "2.2.5"
 
         multiDexEnabled = true
