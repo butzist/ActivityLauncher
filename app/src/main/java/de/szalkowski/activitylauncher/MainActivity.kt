@@ -74,7 +74,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        adService.initialize(this, binding.adContainer)
+        adService.initialize(this)
+        adService.loadBanner(this, binding.adContainer)
 
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {
@@ -191,6 +192,11 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                 navigateToAll(navController)
             }
         }
+    }
+
+    override fun onDestroy() {
+        adService.destroyBanner()
+        super.onDestroy()
     }
 
     private fun navigateToAll(navController: NavController) {
