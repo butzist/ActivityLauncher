@@ -16,7 +16,7 @@ android {
             providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 36
-        versionCode = 7501
+        versionCode = 7502
         versionName = "2.2.5"
 
         multiDexEnabled = true
@@ -41,9 +41,9 @@ android {
         create("ads") {
             dimension = "ads"
             val admobAppId =
-                providers.environmentVariable("ADMOB_APP_ID").getOrElse("ca-app-pub-3940256099942544~3347511713")
-            val publisherId = providers.environmentVariable("PUBLISHER_ID").getOrElse("")
-            val appId = providers.environmentVariable("APP_ID").getOrElse("")
+                providers.environmentVariable("ADMOB_APP_ID").get()
+            val publisherId = providers.environmentVariable("PUBLISHER_ID").get()
+            val appId = providers.environmentVariable("APP_ID").get()
             manifestPlaceholders["ADMOB_APP_ID"] = admobAppId
             resValue("string", "publisher_id", publisherId)
             resValue("string", "app_id", appId)
@@ -109,7 +109,7 @@ if (isAdsBuild) {
 // Configure AppLovin Quality Service if applied
 if (isAdsBuild) {
     extensions.findByName("applovin")?.let { extension ->
-        val adReviewKey = providers.environmentVariable("AD_REVIEW_KEY").getOrElse("")
+        val adReviewKey = providers.environmentVariable("AD_REVIEW_KEY").get()
         val method = extension.javaClass.methods.find { it.name == "setApiKey" }
         method?.invoke(extension, adReviewKey)
     }
