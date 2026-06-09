@@ -74,15 +74,14 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        adService.initialize(this)
-        adService.loadBanner(this, binding.adContainer)
-
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
         } else if (paidReminderService.shouldDisplayReminder()) {
             PaidDialogFragment().show(supportFragmentManager, "PaidDialogFragment")
         }
+
+        adService.loadBanner(this, binding.adContainer)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
@@ -195,7 +194,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     }
 
     override fun onDestroy() {
-        adService.destroyBanner()
+        adService.removeBanner(binding.adContainer)
         super.onDestroy()
     }
 
