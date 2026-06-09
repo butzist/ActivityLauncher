@@ -40,10 +40,9 @@ android {
         }
         create("ads") {
             dimension = "ads"
-            val admobAppId =
-                providers.environmentVariable("ADMOB_APP_ID").get()
-            val publisherId = providers.environmentVariable("PUBLISHER_ID").get()
-            val appId = providers.environmentVariable("APP_ID").get()
+            val admobAppId = providers.environmentVariable("ADMOB_APP_ID").getOrElse("")
+            val publisherId = providers.environmentVariable("PUBLISHER_ID").getOrElse("")
+            val appId = providers.environmentVariable("APP_ID").getOrElse("")
             manifestPlaceholders["ADMOB_APP_ID"] = admobAppId
             resValue("string", "publisher_id", publisherId)
             resValue("string", "app_id", appId)
@@ -94,20 +93,32 @@ androidComponents {
     }
 }
 
-// Conditionally apply Google services and Firebase plugins
-// These are only applied if the 'ads' flavor is present in the current build task
-val taskNames = gradle.startParameter.taskNames.joinToString(",")
-val isAdsBuild = !taskNames.contains("Noads", ignoreCase = true)
+// Conditionally apply Google services, Firebase, and AppLovin plugins
+// and validate required environment variables
+val taskNames = gradle.startParameter.taskNames
+val isAdsBuild =
+    !taskNames.any { it.contains("Noads", ignoreCase = true) } &&
+        taskNames.any { name ->
+            name.contains("Debug", ignoreCase = true) ||
+                name.contains("Release", ignoreCase = true)
+        }
 
 if (isAdsBuild) {
+    check(providers.environmentVariable("ADMOB_APP_ID").isPresent) {
+        "ADMOB_APP_ID environment variable must be set for ads builds"
+    }
+    check(providers.environmentVariable("PUBLISHER_ID").isPresent) {
+        "PUBLISHER_ID environment variable must be set for ads builds"
+    }
+    check(providers.environmentVariable("APP_ID").isPresent) {
+        "APP_ID environment variable must be set for ads builds"
+    }
+
     apply(plugin = "com.google.gms.google-services")
     apply(plugin = "com.google.firebase.crashlytics")
     apply(plugin = "com.google.firebase.firebase-perf")
     apply(plugin = "applovin-quality-service")
-}
 
-// Configure AppLovin Quality Service if applied
-if (isAdsBuild) {
     extensions.findByName("applovin")?.let { extension ->
         val adReviewKey = providers.environmentVariable("AD_REVIEW_KEY").get()
         val method = extension.javaClass.methods.find { it.name == "setApiKey" }
