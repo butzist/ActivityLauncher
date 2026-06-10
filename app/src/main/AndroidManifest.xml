@@ -71,7 +71,7 @@
             android:theme="@style/Theme.ActivityLauncher.Translucent" />
 
         <service
-            android:name=".services.QSTileService"
+            android:name=".QSTileService"
             android:exported="true"
             android:icon="@drawable/ic_rocket_launch"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

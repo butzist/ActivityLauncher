@@ -1,11 +1,10 @@
-package de.szalkowski.activitylauncher.services
+package de.szalkowski.activitylauncher
 
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
-import de.szalkowski.activitylauncher.QSTileNavHostActivity
 
 @RequiresApi(Build.VERSION_CODES.N)
 class QSTileService : TileService() {
