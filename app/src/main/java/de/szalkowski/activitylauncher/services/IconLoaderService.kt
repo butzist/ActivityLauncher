@@ -1,15 +1,12 @@
 package de.szalkowski.activitylauncher.services
 
-import android.annotation.TargetApi
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
-import android.content.res.Resources
-import android.content.res.Resources.Theme
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.util.DisplayMetrics
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.ui.AsyncProvider
@@ -51,6 +48,7 @@ class IconLoaderServiceImpl @Inject constructor(
             pm.defaultActivityIcon
         }
 
+    @SuppressLint("DiscouragedApi")
     override fun tryGetIcon(iconResourceString: String): Result<Drawable> {
         return runCatching {
             val pack = iconResourceString.substringBefore(":")
@@ -59,16 +57,13 @@ class IconLoaderServiceImpl @Inject constructor(
             val name = typeAndName.substringAfter("/")
 
             val res = pm.getResourcesForApplication(pack)
-            res.updateConfiguration(configuration, DisplayMetrics())
+            // TODO: Replace with createConfigurationContext when minSdk is high enough
+            res.updateConfiguration(configuration, res.displayMetrics)
             val id = res.getIdentifier(name, type, pack)
 
             if (id == 0) throw IconLoaderService.NullResourceException()
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                getDrawable(res, id, context.theme)
-            } else {
-                getDrawable(res, id)
-            }
+            ResourcesCompat.getDrawable(res, id, context.theme) ?: throw IconLoaderService.NullResourceException()
         }
     }
 
@@ -91,16 +86,5 @@ class IconLoaderServiceImpl @Inject constructor(
         }
 
         return icons.map { entry -> IconLoaderService.IconInfo(entry.key, entry.value) }.toList()
-    }
-
-    companion object {
-        private fun getDrawable(res: Resources, id: Int): Drawable {
-            return res.getDrawable(id)
-        }
-
-        @TargetApi(21)
-        private fun getDrawable(res: Resources, id: Int, theme: Theme?): Drawable {
-            return res.getDrawable(id, theme)
-        }
     }
 }

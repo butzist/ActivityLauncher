@@ -120,7 +120,8 @@ class ActivityListServiceImpl @Inject constructor(
     private fun createNameFromClass(cls: String): String {
         val name = cls.substringAfterLast('.')
         val config = settingsService.getLocaleConfiguration()
-        return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(config.locale) else it.toString() }
+        val locale = androidx.core.os.ConfigurationCompat.getLocales(config).get(0) ?: java.util.Locale.getDefault()
+        return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
     }
 }
 

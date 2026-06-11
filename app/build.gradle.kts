@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
     id("com.diffplug.spotless")
@@ -9,7 +8,7 @@ plugins {
 
 android {
     namespace = "de.szalkowski.activitylauncher"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId =
@@ -20,6 +19,7 @@ android {
         versionName = "2.2.6"
 
         multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions += listOf("distribution", "ads")
@@ -30,7 +30,7 @@ android {
         }
         create("playStore") {
             dimension = "distribution"
-            minSdk = 23
+            minSdk = 24
         }
         create("noads") {
             dimension = "ads"
@@ -73,9 +73,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = "21"
-    }
     bundle {
         language {
             enableSplit = false
@@ -84,6 +81,13 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        resValues = true
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
     }
 }
 
@@ -97,11 +101,8 @@ androidComponents {
 // and validate required environment variables
 val taskNames = gradle.startParameter.taskNames
 val isAdsBuild =
-    !taskNames.any { it.contains("Noads", ignoreCase = true) } &&
-        taskNames.any { name ->
-            name.contains("Debug", ignoreCase = true) ||
-                name.contains("Release", ignoreCase = true)
-        }
+    taskNames.any { it.contains("Ads", ignoreCase = true) } &&
+        !taskNames.any { it.contains("Noads", ignoreCase = true) }
 
 if (isAdsBuild) {
     check(providers.environmentVariable("ADMOB_APP_ID").isPresent) {
@@ -123,14 +124,6 @@ if (isAdsBuild) {
         val adReviewKey = providers.environmentVariable("AD_REVIEW_KEY").get()
         val method = extension.javaClass.methods.find { it.name == "setApiKey" }
         method?.invoke(extension, adReviewKey)
-    }
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-    javacOptions {
-        option("-Xmaxerrs", "500")
     }
 }
 
@@ -158,7 +151,7 @@ spotless {
     format("xml") {
         target("**/*.xml")
         targetExclude("**/build/**/*.xml")
-        indentWithSpaces(4)
+        leadingTabsToSpaces(4)
         trimTrailingWhitespace()
         endWithNewline()
     }
@@ -177,27 +170,27 @@ tasks.named("preBuild") {
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.multidex:multidex:2.0.1")
+    "ossImplementation"("androidx.multidex:multidex:2.0.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("com.google.dagger:hilt-android:2.55")
+    implementation("com.google.dagger:hilt-android:2.59.2")
     "playStoreImplementation"("com.google.android.play:review-ktx:2.0.2")
 
-    "adsImplementation"(platform("com.google.firebase:firebase-bom:33.10.0"))
+    "adsImplementation"(platform("com.google.firebase:firebase-bom:34.14.1"))
     "adsImplementation"("com.google.firebase:firebase-analytics")
     "adsImplementation"("com.google.firebase:firebase-crashlytics")
     "adsImplementation"("com.google.firebase:firebase-perf")
-    "adsImplementation"("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    "adsImplementation"("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
     "adsImplementation"("com.intergi.playwire:playwiresdk_total:12.1.1")
-    "adsImplementation"("com.applovin:applovin-sdk:13.6.2")
-    "adsImplementation"("com.google.android.gms:play-services-ads-identifier:18.1.0")
+    "adsImplementation"("com.google.android.gms:play-services-ads-identifier:18.3.0")
+    "adsImplementation"("com.applovin:applovin-sdk:13.6.3")
 
-    kapt("com.google.dagger:hilt-compiler:2.55")
+    "ksp"("com.google.dagger:hilt-compiler:2.59.2")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 }

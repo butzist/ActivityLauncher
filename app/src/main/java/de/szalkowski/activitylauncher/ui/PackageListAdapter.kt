@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.ui
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +75,6 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
         return getItem(position).id
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.item = item
@@ -89,6 +87,7 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
         holder.ivIcon.setImageDrawable(item.icon)
     }
 
+    @Suppress("DiffUtilEquals")
     private object PackageDiffCallback : DiffUtil.ItemCallback<MyPackageInfo>() {
         override fun areItemsTheSame(oldItem: MyPackageInfo, newItem: MyPackageInfo): Boolean {
             return oldItem.id == newItem.id

@@ -7,9 +7,13 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import android.util.DisplayMetrics
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.core.content.pm.PackageInfoCompat
+import androidx.core.os.ConfigurationCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.services.internal.isPrivate
+import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -45,15 +49,31 @@ class PackageListServiceImpl @Inject constructor(
     @Synchronized
     private fun loadPackagesInternal() {
         if (!isLoaded) {
-            packageManager.getInstalledPackages(
-                PackageManager.GET_ACTIVITIES
-                    or PackageManager.MATCH_ALL
-                    or PackageManager.MATCH_DISABLED_COMPONENTS
-                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
-            ).forEach { p ->
-                getPackageInfo(p)?.let { cache[it.packageName] = it }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                loadAllPackagesV24()
+            } else {
+                loadAllPackagesLegacy()
             }
             isLoaded = true
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun loadAllPackagesV24() {
+        packageManager.getInstalledPackages(
+            PackageManager.GET_ACTIVITIES
+                or PackageManager.MATCH_ALL
+                or PackageManager.MATCH_DISABLED_COMPONENTS
+                or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
+        ).forEach { p ->
+            getPackageInfo(p)?.let { cache[it.packageName] = it }
+        }
+    }
+
+    private fun loadAllPackagesLegacy() {
+        @Suppress("DEPRECATION")
+        packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES).forEach { p ->
+            getPackageInfo(p)?.let { cache[it.packageName] = it }
         }
     }
 
@@ -61,19 +81,27 @@ class PackageListServiceImpl @Inject constructor(
         cache[packageName]?.let { return it }
 
         val result = runCatching {
-            val info = packageManager.getPackageInfo(
-                packageName,
-                PackageManager.GET_ACTIVITIES
-                    or PackageManager.MATCH_ALL
-                    or PackageManager.MATCH_DISABLED_COMPONENTS
-                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
-            )
+            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                getPackageFlagsV24()
+            } else {
+                getPackageFlagsLegacy()
+            }
+            val info = packageManager.getPackageInfo(packageName, flags)
             getPackageInfo(info)
         }.getOrNull()
 
         return result?.also {
             cache[packageName] = it
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getPackageFlagsV24(): Int {
+        return PackageManager.GET_ACTIVITIES or PackageManager.MATCH_ALL or PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+    }
+
+    private fun getPackageFlagsLegacy(): Int {
+        return PackageManager.GET_ACTIVITIES
     }
 
     override fun invalidate() {
@@ -91,7 +119,7 @@ class PackageListServiceImpl @Inject constructor(
         val appRes = getLocalizedResources(packageName)
 
         val name = getName(app, appRes)
-        val version = "${info.versionName} (${info.versionCode})"
+        val version = "${info.versionName} (${PackageInfoCompat.getLongVersionCode(info)})"
         val icon = getIcon(app)
         val iconResourceName = getIconResourceName(app, appRes)
         val defaultActivityName = getDefaultActivityName(packageName, appRes)
@@ -183,7 +211,9 @@ class PackageListServiceImpl @Inject constructor(
     private fun getLocalizedResources(packageName: String): Resources? {
         return runCatching {
             val appRes = packageManager.getResourcesForApplication(packageName)
-            appRes.updateConfiguration(settingsService.getLocaleConfiguration(), DisplayMetrics())
+            val config = settingsService.getLocaleConfiguration()
+            // TODO: Replace with createConfigurationContext when minSdk is high enough
+            appRes.updateConfiguration(config, appRes.displayMetrics)
             appRes
         }.getOrNull()
     }
@@ -191,7 +221,8 @@ class PackageListServiceImpl @Inject constructor(
     private fun createNameFromClass(cls: String): String {
         val name = cls.substringAfterLast('.')
         val config = settingsService.getLocaleConfiguration()
-        return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(config.locale) else it.toString() }
+        val locale = ConfigurationCompat.getLocales(config).get(0) ?: Locale.getDefault()
+        return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
     }
 }
 

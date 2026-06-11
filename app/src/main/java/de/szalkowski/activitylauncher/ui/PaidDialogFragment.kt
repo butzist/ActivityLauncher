@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
@@ -24,7 +23,7 @@ class PaidDialogFragment : DialogFragment() {
     internal lateinit var analyticsService: AnalyticsService
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_pro_options, null)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_pro_options, null)
 
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(R.string.title_dialog_support)

@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,6 @@ class LoadingFragment : Fragment() {
     @Inject
     internal lateinit var packageListService: Provider<PackageListService>
 
-    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

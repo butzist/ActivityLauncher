@@ -59,6 +59,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
                 android:indeterminate="true"
                 android:visibility="gone"
                 app:indicatorSize="24dp"
