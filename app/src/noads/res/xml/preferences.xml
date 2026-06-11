@@ -5,12 +5,12 @@
     <PreferenceCategory
         android:key="category_settings"
         android:title="@string/activity_settings">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="hide_private"
             android:summary="@string/settings_summary_hide_private"
             android:title="@string/settings_hide_private" />
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="allow_root"
             android:summary="@string/settings_summary_allow_root"

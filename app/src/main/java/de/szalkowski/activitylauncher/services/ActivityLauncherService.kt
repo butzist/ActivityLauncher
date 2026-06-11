@@ -10,7 +10,7 @@ import de.szalkowski.activitylauncher.services.internal.getActivityIntent
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.Reader
-import java.nio.charset.StandardCharsets
+import java.nio.charset.Charset
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -103,7 +103,7 @@ class ActivityLauncherServiceImpl @Inject constructor(@ApplicationContext privat
         val bufferSize = 1024
         val buffer = CharArray(bufferSize)
         val out = StringBuilder()
-        val `in`: Reader = InputStreamReader(stream, StandardCharsets.UTF_8)
+        val `in`: Reader = InputStreamReader(stream, Charset.forName("UTF-8"))
         var numRead: Int
         while (`in`.read(buffer, 0, buffer.size).also { numRead = it } > 0) {
             out.appendRange(buffer, 0, numRead)

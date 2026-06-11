@@ -7,14 +7,13 @@ import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.MainActivity
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.RootDetectionService
 import de.szalkowski.activitylauncher.services.SettingsService
-import java.util.Objects
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,10 +54,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().baseContext)
 
-        val hidePrivate: SwitchPreference = Objects.requireNonNull(findPreference("hide_private"))
-        val allowRoot: SwitchPreference = Objects.requireNonNull(findPreference("allow_root"))
-        val theme: ListPreference = Objects.requireNonNull(findPreference("theme"))
-        val languages: ListPreference = Objects.requireNonNull(findPreference("language"))
+        val hidePrivate: SwitchPreferenceCompat = checkNotNull(findPreference("hide_private"))
+        val allowRoot: SwitchPreferenceCompat = checkNotNull(findPreference("allow_root"))
+        val theme: ListPreference = checkNotNull(findPreference("theme"))
+        val languages: ListPreference = checkNotNull(findPreference("language"))
 
         languages.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance())
         populateLanguages(languages)

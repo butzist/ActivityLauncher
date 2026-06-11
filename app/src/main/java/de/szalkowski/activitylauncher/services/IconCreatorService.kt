@@ -1,13 +1,11 @@
 package de.szalkowski.activitylauncher.services
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.Intent.ShortcutIconResource
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
@@ -17,7 +15,9 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.createBitmap
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.services.internal.getActivityIntent
@@ -98,7 +98,7 @@ class IconCreatorServiceImpl @Inject constructor(
      * https://stackoverflow.com/questions/44447056/convert-adaptiveicondrawable-to-bitmap-in-android-o-preview
      * https://stackoverflow.com/questions/46130594/android-get-apps-adaptive-icons-from-package-manager
      */
-    @TargetApi(26)
+    @RequiresApi(26)
     private fun getIconFromDrawable(drawable: Drawable): Icon {
         if (drawable is AdaptiveIconDrawable) {
             val backgroundDr = drawable.background
@@ -109,7 +109,7 @@ class IconCreatorServiceImpl @Inject constructor(
             val layerDrawable = LayerDrawable(drr)
             val width = layerDrawable.intrinsicWidth
             val height = layerDrawable.intrinsicHeight
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val bitmap = createBitmap(width, height)
             val canvas = Canvas(bitmap)
             layerDrawable.setBounds(0, 0, canvas.width, canvas.height)
             layerDrawable.draw(canvas)
@@ -118,11 +118,7 @@ class IconCreatorServiceImpl @Inject constructor(
         if (drawable is BitmapDrawable) {
             return Icon.createWithBitmap(drawable.bitmap)
         }
-        val bmp = Bitmap.createBitmap(
-            drawable.intrinsicWidth,
-            drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888,
-        )
+        val bmp = createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight)
         val canvas = Canvas(bmp)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)
@@ -151,6 +147,9 @@ class IconCreatorServiceImpl @Inject constructor(
         }
     }
 
+    // This branch is specifically for legacy launcher support on older Android versions.
+    // Replaced with ShortcutManager for API 26+ in overloaded method
+    @Suppress("DEPRECATION")
     private fun doCreateShortcut(
         appName: String,
         intent: Intent,
@@ -167,6 +166,7 @@ class IconCreatorServiceImpl @Inject constructor(
         } else {
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
         }
+
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName)
         if (!iconResourceName.isNullOrEmpty()) {
             val ir = ShortcutIconResource()
@@ -175,14 +175,16 @@ class IconCreatorServiceImpl @Inject constructor(
             } else {
                 ir.packageName = intent.component!!.packageName
             }
+
             ir.resourceName = iconResourceName
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir)
         }
+
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT")
         context.sendBroadcast(shortcutIntent)
     }
 
-    @TargetApi(26)
+    @RequiresApi(26)
     private fun doCreateShortcut(
         appName: String,
         intent: Intent,

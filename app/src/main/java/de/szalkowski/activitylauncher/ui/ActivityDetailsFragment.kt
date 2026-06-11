@@ -7,6 +7,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,7 +34,6 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -46,6 +47,40 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_activity_details, menu)
+                }
+
+                override fun onPrepareMenu(menu: Menu) {
+                    val favoriteItem = menu.findItem(R.id.action_favorite)
+                    if (viewModel.isFavorite.value) {
+                        favoriteItem.setIcon(R.drawable.ic_favorite)
+                    } else {
+                        favoriteItem.setIcon(R.drawable.ic_favorite_border)
+                    }
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.action_favorite -> {
+                            viewModel.toggleFavorite()
+                            true
+                        }
+                        R.id.action_share -> {
+                            viewModel.shareActivity()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED,
+        )
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -120,35 +155,6 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         activity?.let { inAppReviewService.showInAppReview(it) }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_activity_details, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        val favoriteItem = menu.findItem(R.id.action_favorite)
-        if (viewModel.isFavorite.value) {
-            favoriteItem.setIcon(R.drawable.ic_favorite)
-        } else {
-            favoriteItem.setIcon(R.drawable.ic_favorite_border)
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_favorite -> {
-                viewModel.toggleFavorite()
-                true
-            }
-            R.id.action_share -> {
-                viewModel.shareActivity()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onDestroyView() {

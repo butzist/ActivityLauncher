@@ -17,7 +17,7 @@ class DisclaimerDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle(R.string.title_dialog_disclaimer).setMessage(R.string.dialog_disclaimer)
-            .setPositiveButton(android.R.string.yes) { _, _ ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 settingsService.disclaimerAccepted = true
             }.setNegativeButton(android.R.string.cancel) { _, _ ->
                 settingsService.disclaimerAccepted = false

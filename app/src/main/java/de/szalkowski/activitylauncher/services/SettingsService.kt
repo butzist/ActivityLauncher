@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
+import androidx.core.os.ConfigurationCompat
+import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Locale
@@ -49,21 +52,21 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
 
         if (!prefs.contains(PREF_ALLOW_ROOT)) {
             val hasSU = rootDetectionService.detectSU()
-            prefs.edit().putBoolean(PREF_ALLOW_ROOT, hasSU).apply()
+            prefs.edit { putBoolean(PREF_ALLOW_ROOT, hasSU) }
         }
 
         if (!prefs.contains(PREF_HIDE_HIDE_PRIVATE)) {
-            prefs.edit().putBoolean(PREF_HIDE_HIDE_PRIVATE, false).apply()
+            prefs.edit { putBoolean(PREF_HIDE_HIDE_PRIVATE, false) }
         }
 
         if (!prefs.contains(PREF_LANGUAGE)) {
-            prefs.edit().putString(PREF_LANGUAGE, LANGUAGE_DEFAULT).apply()
+            prefs.edit { putString(PREF_LANGUAGE, LANGUAGE_DEFAULT) }
         }
     }
 
     override var disclaimerAccepted: Boolean
         get() = prefs.getBoolean(PREF_DISCLAIMER_ACCEPTED, false)
-        set(value) = prefs.edit().putBoolean(PREF_DISCLAIMER_ACCEPTED, value).apply()
+        set(value) = prefs.edit { putBoolean(PREF_DISCLAIMER_ACCEPTED, value) }
 
     override val theme: String
         get() = prefs.getString(PREF_THEME, THEME_DEFAULT)!!
@@ -78,17 +81,20 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
         get() = prefs.getBoolean(PREF_HIDE_HIDE_PRIVATE, false)
 
     override fun applyLocaleConfiguration(context: Context) {
-        val config = getLocaleConfiguration()
-        Locale.setDefault(config.locale)
-        context.resources.updateConfiguration(
-            config,
-            context.resources.displayMetrics,
-        )
+        val languageTag = if (language == LANGUAGE_DEFAULT) {
+            ""
+        } else {
+            language.replace("_", "-")
+        }
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageTag)
+        AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
     override fun getLocaleConfiguration(): Configuration {
         val language = if (language == LANGUAGE_DEFAULT) {
-            Resources.getSystem().configuration.locale.toString()
+            val systemLocale = ConfigurationCompat.getLocales(Resources.getSystem().configuration).get(0)
+                ?: Locale.getDefault()
+            systemLocale.toString()
         } else {
             language
         }
@@ -96,8 +102,20 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
         val config = Configuration()
         if (language.contains("_")) {
             val parts = language.split("_".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            val locale = Locale(parts[0], parts[1])
-            config.locale = locale // FIXME
+            val locale = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                Locale.forLanguageTag(language.replace("_", "-"))
+            } else {
+                // Replaced with Locale.forLanguageTag when minSdk >= 21
+                @Suppress("DEPRECATION")
+                Locale(parts[0], parts[1])
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                config.setLocale(locale)
+            } else {
+                // Replaced with Configuration.setLocale when minSdk >= 17
+                @Suppress("DEPRECATION")
+                config.locale = locale
+            }
         }
 
         return config

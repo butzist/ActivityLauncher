@@ -13,7 +13,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
@@ -90,18 +92,12 @@ class FavoritesFragment : Fragment() {
         _binding = null
     }
 
-    class FavoritesListAdapter : RecyclerView.Adapter<FavoritesListAdapter.ViewHolder>() {
+    class FavoritesListAdapter : ListAdapter<MyActivityInfo, FavoritesListAdapter.ViewHolder>(ActivityDiffCallback) {
 
-        private var activities: List<MyActivityInfo> = emptyList()
         var onItemClick: ((MyActivityInfo) -> Unit)? = null
         var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
 
-        fun getItem(position: Int): MyActivityInfo = activities[position]
-
-        fun submitList(newActivities: List<MyActivityInfo>) {
-            activities = newActivities
-            notifyDataSetChanged()
-        }
+        public override fun getItem(position: Int): MyActivityInfo = super.getItem(position)
 
         inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
             val tvName: TextView = viewItem.findViewById(R.id.tvName)
@@ -112,13 +108,13 @@ class FavoritesFragment : Fragment() {
                 itemView.setOnClickListener {
                     val position = bindingAdapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        onItemClick?.invoke(activities[position])
+                        onItemClick?.invoke(getItem(position))
                     }
                 }
                 itemView.setOnLongClickListener {
                     val position = bindingAdapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        onItemLongClick?.invoke(activities[position])
+                        onItemLongClick?.invoke(getItem(position))
                     }
                     true
                 }
@@ -132,12 +128,20 @@ class FavoritesFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = activities[position]
+            val item = getItem(position)
             holder.tvName.text = item.name
             holder.tvClass.text = item.componentName.shortClassName
             holder.ivIcon.setImageDrawable(item.icon)
         }
+    }
 
-        override fun getItemCount(): Int = activities.size
+    private object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
+        override fun areItemsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+            return oldItem.componentName == newItem.componentName
+        }
+
+        override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+            return oldItem == newItem
+        }
     }
 }

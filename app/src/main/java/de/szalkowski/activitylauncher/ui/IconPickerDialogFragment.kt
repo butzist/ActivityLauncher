@@ -1,7 +1,6 @@
 package de.szalkowski.activitylauncher.ui
 
 import android.app.Dialog
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
@@ -10,6 +9,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.IconPickerBinding
@@ -28,11 +28,11 @@ class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconLi
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onAttach(activity: Context) {
-        super.onAttach(activity)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         val provider = iconListAsyncProviderFactory.create(this)
-        provider.execute()
+        provider.execute(lifecycleScope)
     }
 
     fun attachIconPickerListener(listener: IconPickerListener) {
