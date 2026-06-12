@@ -17,13 +17,12 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: 21
-        cache: 'gradle'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
     - name: Prepare Android keystore
       run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
-    - name: Download dependencies
-      run: ./gradlew androidDependencies
     - name: Build release APK
-      run: ./gradlew assembleOssNoadsRelease
+      run: ./gradlew assembleOssNoadsRelease --build-cache
       env:
         APPID: de.szalkowski.activitylauncher.oss
         KEYSTORE: keystore.jks

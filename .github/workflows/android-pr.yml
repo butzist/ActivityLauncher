@@ -14,13 +14,12 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: 21
-        cache: 'gradle'
-    - name: Download dependencies
-      run: ./gradlew androidDependencies
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
     - name: Check code formatting
-      run: ./gradlew spotlessCheck
+      run: ./gradlew spotlessCheck --build-cache
     - name: Build debug
-      run: ./gradlew assembleOssNoadsDebug
+      run: ./gradlew assembleOssNoadsDebug --build-cache
     - name: Upload debug APK
       uses: actions/upload-artifact@v4
       with:
