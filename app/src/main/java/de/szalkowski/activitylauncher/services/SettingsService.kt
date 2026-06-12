@@ -81,12 +81,11 @@ class SettingsServiceImpl @Inject constructor(@ApplicationContext val context: C
         get() = prefs.getBoolean(PREF_HIDE_HIDE_PRIVATE, false)
 
     override fun applyLocaleConfiguration(context: Context) {
-        val languageTag = if (language == LANGUAGE_DEFAULT) {
-            ""
+        val appLocale = if (language == LANGUAGE_DEFAULT) {
+            LocaleListCompat.getEmptyLocaleList()
         } else {
-            language.replace("_", "-")
+            LocaleListCompat.forLanguageTags(language.replace("_", "-"))
         }
-        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageTag)
         AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
