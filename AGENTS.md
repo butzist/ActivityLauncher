@@ -5,8 +5,8 @@ Activity Launcher is an Android application that launches hidden activities and 
 - **Language**: Kotlin
 - **Build System**: Gradle (Kotlin DSL)
 - **Minimum SDK**: 16
-- **Target SDK**: 36
-- **Compile SDK**: 36
+- **Target SDK**: 37
+- **Compile SDK**: 37
 
 ## Key Libraries
 - **Dependency Injection**: Hilt
@@ -16,7 +16,7 @@ Activity Launcher is an Android application that launches hidden activities and 
 - **Compatibility**: AndroidX (AppCompat, Core-KTX, Preference, MultiDex)
 
 # Project Structure
-The project follows a standard Android Gradle project structure with a single module `:app`.
+The project follows a Domain-Driven Design (DDD) structure.
 
 ## Root Directory
 - `app/`: Main application module
@@ -25,36 +25,39 @@ The project follows a standard Android Gradle project structure with a single mo
 - `update-listing.py` & `update-translations.sh`: Maintenance scripts
 
 ## App Module (`app/src/main/java/de/szalkowski/activitylauncher/`)
-- `ui/`: UI related classes (Fragments, Adapters, etc.)
-- `services/`: Background services or logic
-- `MainActivity.kt`: The main entry point of the application. Handles navigation hosting.
-- `ShortcutActivity.kt`: Handles the launching of shortcuts created by the app.
-- `ActivityLauncherApp.kt`: The Application class, annotated with `@HiltAndroidApp`.
-- `SettingsActivity.kt`: Manages application settings.
+- `domain/`: Domain models and repository/infrastructure interfaces.
+- `data/`: Data source implementations, repositories, and infrastructure.
+- `presentation/`: UI Layer (Fragments, ViewModels, Adapters).
+- `app/`: Application class and DI modules.
+- `entrypoint/`: Activities, Services, Receivers (App entry points).
+- `core/`: Shared utilities and base classes.
 
 # Build Variants
-The project uses `productFlavors` with a "distribution" dimension:
-1.  **oss**: For direct distribution (F-Droid, etc.). Pure FOSS.
-2.  **playStore**: For Google Play Store distribution. Includes `com.google.android.play:review-ktx` for in-app reviews.
+The project uses `productFlavors` with a "distribution" dimension and an "ads" dimension.
+Distribution:
+1.  **oss**: Pure FOSS.
+2.  **playStore**: Includes Play Store specific features like in-app reviews.
+
+Ads:
+1.  **noads**: Ad-free version.
+2.  **ads**: Version with ads (Playwire).
 
 # Development Guidelines
 - **View Binding**: Used for interacting with XML layouts.
-- **Hilt**: Used for dependency injection. Ensure new components are properly annotated (e.g., `@AndroidEntryPoint`).
-- **Navigation**: Uses the Navigation Component. Navigation graph is likely defined in `res/navigation`.
-- **Service Implementation**: The interface and the default implementation are co-located in the same file (e.g., `FavoritesService.kt`). This is the default/noop convention in all services.
+- **Hilt**: Used for dependency injection.
+- **Navigation**: Uses the Navigation Component. Navigation graph is in `res/navigation`.
+- **Naming Conventions**: 
+    - Interfaces for data access are named `*Repository`.
+    - Specific action performers are named by their role (e.g., `ShortcutCreator`, `ActivitySharer`).
+    - Interfaces are defined in `domain`, implementations in `data`.
+- **Use Cases**: Complex business logic should be extracted from Repositories and ViewModels into standalone Use Cases (Interactors) in the `domain` layer.
 
 # Handling non-FOSS features
-Features that are not free and open-source (like Google Play Services APIs) should not be part of the `oss` build. To achieve this, the project uses Hilt and different service bindings for different product flavors.
-
-An interface for the feature is defined in the `main` source set (e.g., `InAppReviewService`).
-Two implementations of this interface are created:
-1.  A real implementation that uses non-FOSS APIs, located in the `playStore` source set (e.g., `InAppReviewServiceImpl`).
-2.  A stub or no-op implementation that does nothing, located in the `oss` source set (e.g., `InAppReviewServiceImplStub`).
-
-Hilt's `@Binds` in flavor-specific `Bindings.kt` files are used to provide the correct implementation for each build variant. This ensures that the `oss` version remains fully FOSS.
+Features that are not free and open-source (like Google Play Services APIs) are abstracted into interfaces in the `domain` layer.
+Implementations are provided in flavor-specific source sets and bound using Hilt modules in each flavor.
 
 # Verification
-Always check if the project builds after applying changes and ensure all build issues are fixed.
+Always check if the project builds after applying changes.
 
 ## Relevant Commands
 - **Build Debug APK**: `./gradlew app:assembleDebug`
@@ -62,30 +65,5 @@ Always check if the project builds after applying changes and ensure all build i
 - **Run Unit Tests**: `./gradlew app:testDebugUnitTest`
 
 # Code Style and Formatting
-
-This project uses Spotless for automatic code formatting and style checking.
-
-## Code Style Commands
-
-- **Check code formatting**: `./gradlew spotlessCheck`
-- **Apply code formatting**: `./gradlew spotlessApply`
-- **Format Kotlin files**: `./gradlew spotlessApply`
-- **Check only Kotlin formatting**: `./gradlew app:spotlessKotlinCheck`
-
-## Automatic Formatting
-
-- **Development builds**: Code is automatically formatted during
-  `./gradlew build` or `./gradlew assembleDebug`
-- **Git pre-commit**: Code is automatically formatted before each commit
-- **CI/CD**: Pull requests are blocked if code formatting fails
-
-## IDE Integration (Android Studio)
-
-1. Install the "Spotless" plugin from JetBrains Marketplace
-2. Enable "Format on save" in Settings → Editor → Code Style
-3. Configure actions to run `spotlessApply` on save
-
-## Configuration Files
-
-- `app/build.gradle.kts`: Spotless configuration with ktlint rules
-- `.editorconfig`: Basic formatting rules for IDEs
+This project uses Spotless for automatic code formatting.
+- `spotlessApply` on save or before commit.

@@ -1,0 +1,216 @@
+package de.szalkowski.activitylauncher.data.launcher
+
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.Intent.ShortcutIconResource
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.Canvas
+import android.graphics.drawable.AdaptiveIconDrawable
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.Icon
+import android.graphics.drawable.LayerDrawable
+import android.os.Build
+import android.os.Bundle
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.createBitmap
+import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
+import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import javax.inject.Inject
+
+class ShortcutCreatorImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val intentSigner: IntentSigner,
+) : ShortcutCreator {
+    override fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
+        createLauncherIcon(activity, optionalExtras, false)
+    }
+
+    override fun createRootLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
+        createLauncherIcon(activity, optionalExtras, true)
+    }
+
+    private fun createLauncherIcon(
+        activity: MyActivityInfo,
+        optionalExtras: Bundle?,
+        asRoot: Boolean,
+    ) {
+        try {
+            val pack = extractIconPackageName(activity)
+            val intent = getActivityIntent(activity.componentName, optionalExtras)
+
+            // Use bitmap version, if icon from different package is used
+            if (pack != null && pack != activity.componentName.packageName) {
+                createShortcut(activity.name, intent, activity.icon, asRoot, null)
+            } else {
+                createShortcut(
+                    activity.name,
+                    intent,
+                    activity.icon,
+                    asRoot,
+                    activity.iconResourceName,
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(
+                context,
+                context.getText(R.string.error_creating_shortcut).toString() + ": " + e,
+                Toast.LENGTH_LONG,
+            ).show()
+        }
+    }
+
+    private fun extractIconPackageName(
+        activity: MyActivityInfo,
+    ): String? {
+        if (activity.iconResourceName == null) return null
+
+        val indexOfSeparator = activity.iconResourceName.indexOf(':')
+        if (indexOfSeparator < 0) {
+            return null
+        }
+
+        return activity.iconResourceName.substring(0, indexOfSeparator)
+    }
+
+    /**
+     * Got reference from stackoverflow.com URL:
+     * https://stackoverflow.com/questions/44447056/convert-adaptiveicondrawable-to-bitmap-in-android-o-preview
+     * https://stackoverflow.com/questions/46130594/android-get-apps-adaptive-icons-from-package-manager
+     */
+    @RequiresApi(26)
+    private fun getIconFromDrawable(drawable: Drawable): Icon {
+        if (drawable is AdaptiveIconDrawable) {
+            val backgroundDr = drawable.background
+            val foregroundDr = drawable.foreground
+            val drr = arrayOfNulls<Drawable>(2)
+            drr[0] = backgroundDr
+            drr[1] = foregroundDr
+            val layerDrawable = LayerDrawable(drr)
+            val width = layerDrawable.intrinsicWidth
+            val height = layerDrawable.intrinsicHeight
+            val bitmap = createBitmap(width, height)
+            val canvas = Canvas(bitmap)
+            layerDrawable.setBounds(0, 0, canvas.width, canvas.height)
+            layerDrawable.draw(canvas)
+            return Icon.createWithAdaptiveBitmap(bitmap)
+        }
+        if (drawable is BitmapDrawable) {
+            return Icon.createWithBitmap(drawable.bitmap)
+        }
+        val bmp = createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight)
+        val canvas = Canvas(bmp)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return Icon.createWithBitmap(bmp)
+    }
+
+    private fun createShortcut(
+        appName: String,
+        intent: Intent,
+        draw: Drawable,
+        asRoot: Boolean,
+        iconResourceName: String?,
+    ) {
+        Toast.makeText(
+            context,
+            String.format(
+                context.getText(R.string.creating_application_shortcut).toString(),
+                appName,
+            ),
+            Toast.LENGTH_LONG,
+        ).show()
+        if (Build.VERSION.SDK_INT >= 26) {
+            doCreateShortcut(appName, intent, asRoot, draw)
+        } else {
+            doCreateShortcut(appName, intent, asRoot, iconResourceName)
+        }
+    }
+
+    // This branch is specifically for legacy launcher support on older Android versions.
+    // Replaced with ShortcutManager for API 26+ in overloaded method
+    @Suppress("DEPRECATION")
+    private fun doCreateShortcut(
+        appName: String,
+        intent: Intent,
+        asRoot: Boolean,
+        iconResourceName: String?,
+    ) {
+        val shortcutIntent = Intent()
+        if (asRoot) {
+            // wrap only if root access needed
+            shortcutIntent.putExtra(
+                Intent.EXTRA_SHORTCUT_INTENT,
+                createShortcutIntent(intent, true),
+            )
+        } else {
+            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
+        }
+
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName)
+        if (!iconResourceName.isNullOrEmpty()) {
+            val ir = ShortcutIconResource()
+            if (intent.component == null) {
+                ir.packageName = intent.getPackage()
+            } else {
+                ir.packageName = intent.component!!.packageName
+            }
+
+            ir.resourceName = iconResourceName
+            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, ir)
+        }
+
+        shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT")
+        context.sendBroadcast(shortcutIntent)
+    }
+
+    @RequiresApi(26)
+    private fun doCreateShortcut(
+        appName: String,
+        intent: Intent,
+        asRoot: Boolean,
+        draw: Drawable,
+    ) {
+        val shortcutManager = context.getSystemService(ShortcutManager::class.java)!!
+        if (shortcutManager.isRequestPinShortcutSupported) {
+            val icon = getIconFromDrawable(draw)
+            val shortcutIntent = createShortcutIntent(intent, asRoot)
+            val shortcutInfo =
+                ShortcutInfo.Builder(context, appName).setShortLabel(appName).setLongLabel(appName)
+                    .setIcon(icon).setIntent(shortcutIntent).build()
+            shortcutManager.requestPinShortcut(shortcutInfo, null)
+        } else {
+            AlertDialog.Builder(context).setTitle(context.getText(R.string.error_creating_shortcut))
+                .setMessage(context.getText(R.string.error_verbose_pin_shortcut)).setPositiveButton(
+                    context.getText(android.R.string.ok),
+                ) { dialog: DialogInterface, _: Int ->
+                    // Just close dialog don't do anything
+                    dialog.cancel()
+                }.show()
+        }
+    }
+
+    private fun createShortcutIntent(intent: Intent, asRoot: Boolean): Intent {
+        val action = if (asRoot) {
+            ShortcutCreator.INTENT_LAUNCH_ROOT_SHORTCUT
+        } else {
+            ShortcutCreator.INTENT_LAUNCH_SHORTCUT
+        }
+        val shortcutIntent = Intent(action)
+        shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, intent.toUri(0))
+
+        val signature = intentSigner.signIntent(intent)
+        shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
+
+        return shortcutIntent
+    }
+}

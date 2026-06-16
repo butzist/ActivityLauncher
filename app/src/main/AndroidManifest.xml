@@ -15,7 +15,7 @@
         android:required="false" />
 
     <application
-        android:name=".ActivityLauncherApp"
+        android:name=".app.ActivityLauncherApp"
         android:allowBackup="true"
         android:banner="@drawable/launcher_banner"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,7 +27,7 @@
         android:theme="@style/Theme.ActivityLauncher"
         tools:targetApi="37">
         <activity
-            android:name=".MainActivity"
+            android:name=".entrypoint.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ActivityLauncher.NoActionBar">
             <intent-filter>
@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShortcutActivity"
+            android:name=".entrypoint.ShortcutActivity"
             android:exported="true"
             android:noHistory="true"
             android:theme="@style/Theme.ActivityLauncher.NoDisplay">
@@ -61,18 +61,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".entrypoint.SettingsActivity"
             android:exported="false"
             android:label="@string/activity_settings"
             android:theme="@style/Theme.ActivityLauncher.NoActionBar" />
 
         <activity
-            android:name=".QSTileNavHostActivity"
+            android:name=".entrypoint.QSTileNavHostActivity"
             android:exported="false"
             android:theme="@style/Theme.ActivityLauncher.Translucent" />
 
         <service
-            android:name=".QSTileService"
+            android:name=".entrypoint.QSTileService"
             android:exported="true"
             android:icon="@drawable/ic_rocket_launch"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -82,7 +82,7 @@
         </service>
 
         <receiver
-            android:name=".services.PackageChangeReceiver"
+            android:name=".entrypoint.PackageChangeReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />

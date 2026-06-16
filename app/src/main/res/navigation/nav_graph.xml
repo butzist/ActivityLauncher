@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/LoadingFragment"
-        android:name="de.szalkowski.activitylauncher.ui.LoadingFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.common.LoadingFragment"
         android:label="@string/title_fragment_package_list"
         tools:layout="@layout/fragment_loading">
         <action
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/PackageListFragment"
-        android:name="de.szalkowski.activitylauncher.ui.PackageListFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.packages.PackageListFragment"
         android:label="@string/title_fragment_package_list"
         tools:layout="@layout/fragment_package_list">
         <action
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/ActivityListFragment"
-        android:name="de.szalkowski.activitylauncher.ui.ActivityListFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.activities.ActivityListFragment"
         android:label="@string/title_fragment_activity_list"
         tools:layout="@layout/fragment_activity_list">
         <argument
@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/ActivityDetailsFragment"
-        android:name="de.szalkowski.activitylauncher.ui.ActivityDetailsFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.activities.ActivityDetailsFragment"
         android:label="@string/context_action_edit"
         tools:layout="@layout/fragment_activity_details">
         <argument
@@ -67,7 +67,7 @@
 
     <fragment
         android:id="@+id/FavoritesFragment"
-        android:name="de.szalkowski.activitylauncher.ui.FavoritesFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.favorites.FavoritesFragment"
         android:label="@string/nav_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -81,7 +81,7 @@
 
     <fragment
         android:id="@+id/RecentsFragment"
-        android:name="de.szalkowski.activitylauncher.ui.RecentsFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.recents.RecentsFragment"
         android:label="@string/nav_recents"
         tools:layout="@layout/fragment_recents">
         <action

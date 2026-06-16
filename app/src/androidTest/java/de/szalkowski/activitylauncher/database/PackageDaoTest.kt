@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher.database
+package de.szalkowski.activitylauncher.data.database
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
@@ -32,7 +32,7 @@ class PackageDaoTest {
 
     @Test
     fun insertAndGetPackage() = runBlocking {
-        val pkg = AppPackageEntity("com.test.app", "Test App", "1.0", null)
+        val pkg = AppPackageEntity("com.test.app", "Test App", "1.0", null, true, 0)
         packageDao.insertPackage(pkg)
         val loaded = packageDao.getPackage("com.test.app")
         assertNotNull(loaded)
@@ -41,8 +41,8 @@ class PackageDaoTest {
 
     @Test
     fun insertAndGetWithActivities() = runBlocking {
-        val pkg = AppPackageEntity("com.test.app", "Test App", "1.0", null)
-        val activity = ActivityEntity(packageName = "com.test.app", name = "Main", shortCls = "Main", fullCls = "com.test.app.Main", isDefault = true)
+        val pkg = AppPackageEntity("com.test.app", "Test App", "1.0", null, true, 0)
+        val activity = ActivityEntity(id = 0, packageName = "com.test.app", name = "Main", shortCls = "Main", fullCls = "com.test.app.Main", isDefault = true)
 
         packageDao.insertPackage(pkg)
         packageDao.insertActivities(listOf(activity))
