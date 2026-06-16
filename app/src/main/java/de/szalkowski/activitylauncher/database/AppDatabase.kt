@@ -20,7 +20,7 @@ interface PackageDao {
 
     @Transaction
     @Query("DELETE FROM packages WHERE packageName = :packageName")
-    suspend fun deletePackageByName(packageName: String)
+    suspend fun deletePackageByName(packageName: String): Int
 
     @Query("SELECT * FROM packages WHERE isFullyLoaded = 0")
     suspend fun getNotFullyLoadedPackages(): List<AppPackageEntity>
@@ -34,7 +34,7 @@ interface PackageDao {
 
     @Transaction
     @Query("DELETE FROM activities WHERE packageName = :packageName")
-    suspend fun deleteActivitiesForPackage(packageName: String)
+    suspend fun deleteActivitiesForPackage(packageName: String): Int
 }
 
 data class PackageWithActivities(
