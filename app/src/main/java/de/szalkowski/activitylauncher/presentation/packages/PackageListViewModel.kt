@@ -19,6 +19,12 @@ import javax.inject.Inject
 class PackageListViewModel @Inject constructor(
     private val packageRepository: PackageRepository,
 ) : ViewModel() {
+    private var defaultDispatcher: kotlinx.coroutines.CoroutineDispatcher = kotlinx.coroutines.Dispatchers.Default
+
+    // Internal for testing
+    internal fun setDispatcher(dispatcher: kotlinx.coroutines.CoroutineDispatcher) {
+        defaultDispatcher = dispatcher
+    }
 
     private val _packages = MutableStateFlow<List<MyPackageInfo>>(emptyList())
     val packages: StateFlow<List<MyPackageInfo>> = _packages.asStateFlow()
@@ -45,7 +51,7 @@ class PackageListViewModel @Inject constructor(
         filterJob = viewModelScope.launch {
             _isSearching.value = true
             try {
-                val filtered = withContext(Dispatchers.Default) {
+                val filtered = withContext(defaultDispatcher) {
                     performFilter(query)
                 }
                 _packages.value = filtered

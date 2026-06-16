@@ -6,13 +6,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
@@ -29,7 +29,7 @@ class ActivityDetailsViewModel @Inject constructor(
     private val launchActivityUseCase: LaunchActivityUseCase,
     private val createShortcutUseCase: CreateShortcutUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
-    private val activitySharer: ActivitySharer,
+    private val shareActivityUseCase: ShareActivityUseCase,
     private val iconLoader: IconLoader,
     private val recentsRepository: RecentsRepository,
     val settingsRepository: SettingsRepository,
@@ -112,7 +112,7 @@ class ActivityDetailsViewModel @Inject constructor(
 
     fun shareActivity() {
         val info = getEditedActivityInfo()
-        activitySharer.shareActivity(info.componentName)
+        shareActivityUseCase(info.componentName)
     }
 
     private fun getEditedActivityInfo(): MyActivityInfo {
