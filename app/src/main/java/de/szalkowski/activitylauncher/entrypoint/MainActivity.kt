@@ -25,12 +25,12 @@ import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.domain.external.AdManager
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
-import de.szalkowski.activitylauncher.domain.external.SupportReminder
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.usecase.external.CalculateSupportReminderUseCase
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import de.szalkowski.activitylauncher.presentation.common.DisclaimerDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.PaidDialogFragment
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     internal lateinit var analyticsLogger: AnalyticsLogger
 
     @Inject
-    internal lateinit var supportReminder: SupportReminder
+    internal lateinit var calculateSupportReminderUseCase: CalculateSupportReminderUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         settingsRepository.applyLocaleConfiguration(baseContext)
         if (!settingsRepository.disclaimerAccepted) {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
-        } else if (supportReminder.shouldDisplayReminder()) {
+        } else if (calculateSupportReminderUseCase()) {
             PaidDialogFragment().show(supportFragmentManager, "PaidDialogFragment")
         }
 

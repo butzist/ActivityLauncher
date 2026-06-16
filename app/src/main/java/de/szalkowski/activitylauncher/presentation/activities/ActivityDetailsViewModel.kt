@@ -8,13 +8,14 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
-import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
-import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,8 +26,9 @@ import javax.inject.Inject
 class ActivityDetailsViewModel @Inject constructor(
     private val activityRepository: ActivityRepository,
     private val favoritesRepository: FavoritesRepository,
-    private val activityLauncher: ActivityLauncher,
-    private val shortcutCreator: ShortcutCreator,
+    private val launchActivityUseCase: LaunchActivityUseCase,
+    private val createShortcutUseCase: CreateShortcutUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val activitySharer: ActivitySharer,
     private val iconLoader: IconLoader,
     private val recentsRepository: RecentsRepository,
@@ -77,13 +79,8 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun toggleFavorite() {
-        val currentFavorite = _isFavorite.value
-        if (currentFavorite) {
-            favoritesRepository.removeFavorite(componentName)
-        } else {
-            favoritesRepository.addFavorite(componentName)
-        }
-        _isFavorite.value = !currentFavorite
+        toggleFavoriteUseCase(componentName)
+        _isFavorite.value = favoritesRepository.isFavorite(componentName)
     }
 
     fun updateName(name: String) {
@@ -105,19 +102,12 @@ class ActivityDetailsViewModel @Inject constructor(
 
     fun createShortcut(asRoot: Boolean) {
         val info = getEditedActivityInfo()
-        if (asRoot) {
-            shortcutCreator.createRootLauncherIcon(info)
-            recentsRepository.addActivity(info.componentName, true)
-        } else {
-            shortcutCreator.createLauncherIcon(info)
-            recentsRepository.addActivity(info.componentName, false)
-        }
+        createShortcutUseCase(info, asRoot)
     }
 
     fun launchActivity(asRoot: Boolean) {
         val info = getEditedActivityInfo()
-        activityLauncher.launchActivity(info.componentName, asRoot = asRoot, showToast = true)
-        recentsRepository.addActivity(info.componentName, asRoot)
+        launchActivityUseCase(info.componentName, asRoot, showToast = true)
     }
 
     fun shareActivity() {
