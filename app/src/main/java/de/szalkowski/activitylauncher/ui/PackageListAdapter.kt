@@ -36,6 +36,7 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
         val tvVersion: TextView = viewItem.findViewById(R.id.tvVersion)
         val tvActivities: TextView = viewItem.findViewById(R.id.tvActivities)
         val ivIcon: ImageView = viewItem.findViewById(R.id.ivIcon)
+        val pbLoading: View = viewItem.findViewById(R.id.pbLoading)
         lateinit var item: MyPackageInfo
 
         init {
@@ -85,6 +86,16 @@ class PackageListAdapter @Inject constructor(private val packageListService: Pac
         holder.tvPackage.text = item.packageName
         holder.tvActivities.text = "($activityCount)"
         holder.ivIcon.setImageDrawable(item.icon)
+
+        if (item.isFullyLoaded) {
+            holder.itemView.alpha = 1.0f
+            holder.pbLoading.visibility = View.GONE
+            holder.tvActivities.visibility = View.VISIBLE
+        } else {
+            holder.itemView.alpha = 0.5f
+            holder.pbLoading.visibility = View.VISIBLE
+            holder.tvActivities.visibility = View.GONE
+        }
     }
 
     @Suppress("DiffUtilEquals")

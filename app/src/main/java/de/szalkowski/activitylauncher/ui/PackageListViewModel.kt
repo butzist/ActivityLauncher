@@ -31,17 +31,11 @@ class PackageListViewModel @Inject constructor(
     private var filterJob: Job? = null
 
     init {
-        loadPackages()
-    }
-
-    fun loadPackages() {
         viewModelScope.launch {
-            _isSearching.value = true
-            val result = withContext(Dispatchers.Default) {
-                packageListService.packages
+            packageListService.packagesFlow.collect {
+                allPackages = it
+                filter(currentQuery)
             }
-            allPackages = result
-            filter(currentQuery)
         }
     }
 

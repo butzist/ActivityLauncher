@@ -1,228 +1,99 @@
 package de.szalkowski.activitylauncher.services
 
 import android.content.Context
-import android.content.pm.ActivityInfo
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.core.content.pm.PackageInfoCompat
-import androidx.core.os.ConfigurationCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.services.internal.isPrivate
-import java.util.Locale
-import java.util.concurrent.ConcurrentHashMap
+import de.szalkowski.activitylauncher.data.PackageRepository
+import de.szalkowski.activitylauncher.database.PackageWithActivities
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 interface PackageListService {
     val packages: List<MyPackageInfo>
+    val packagesFlow: StateFlow<List<MyPackageInfo>>
     val isLoaded: Boolean
     fun getPackage(packageName: String): MyPackageInfo?
     fun invalidate()
+    fun sync()
 }
 
 @Singleton
 class PackageListServiceImpl @Inject constructor(
-    @ApplicationContext context: Context,
-    val settingsService: SettingsService,
+    @ApplicationContext private val context: Context,
+    private val repository: PackageRepository,
 ) : PackageListService {
 
     private val packageManager: PackageManager = context.packageManager
-    private val cache = ConcurrentHashMap<String, MyPackageInfo>()
+    private val scope = CoroutineScope(Dispatchers.Main)
+    private val _packagesFlow = MutableStateFlow<List<MyPackageInfo>>(emptyList())
+    override val packagesFlow = _packagesFlow.asStateFlow()
 
     @Volatile
     override var isLoaded: Boolean = false
         private set
 
+    init {
+        scope.launch {
+            repository.allPackagesFlow.collect { entities ->
+                val myPackages = entities.map { it.toMyPackageInfo() }
+                _packagesFlow.value = myPackages.sortedBy { it.name.lowercase() }
+                isLoaded = true
+            }
+        }
+        sync()
+    }
+
     override val packages: List<MyPackageInfo>
-        get() {
-            if (!isLoaded) {
-                loadPackagesInternal()
-            }
-            return cache.values.sortedBy { it.name.lowercase() }
-        }
+        get() = _packagesFlow.value
 
-    @Synchronized
-    private fun loadPackagesInternal() {
-        if (!isLoaded) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                loadAllPackagesV24()
-            } else {
-                loadAllPackagesLegacy()
-            }
-            isLoaded = true
+    override fun sync() {
+        scope.launch {
+            repository.sync()
+            repository.loadAllDetails()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun loadAllPackagesV24() {
-        packageManager.getInstalledPackages(
-            PackageManager.GET_ACTIVITIES
-                or PackageManager.MATCH_ALL
-                or PackageManager.MATCH_DISABLED_COMPONENTS
-                or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
-        ).forEach { p ->
-            getPackageInfo(p)?.let { cache[it.packageName] = it }
-        }
-    }
-
-    private fun loadAllPackagesLegacy() {
-        @Suppress("DEPRECATION")
-        packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES).forEach { p ->
-            getPackageInfo(p)?.let { cache[it.packageName] = it }
-        }
-    }
-
-    override fun getPackage(packageName: String): MyPackageInfo? {
-        cache[packageName]?.let { return it }
-
-        val result = runCatching {
-            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                getPackageFlagsV24()
-            } else {
-                getPackageFlagsLegacy()
-            }
-            val info = packageManager.getPackageInfo(packageName, flags)
-            getPackageInfo(info)
-        }.getOrNull()
-
-        return result?.also {
-            cache[packageName] = it
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun getPackageFlagsV24(): Int {
-        return PackageManager.GET_ACTIVITIES or PackageManager.MATCH_ALL or PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-    }
-
-    private fun getPackageFlagsLegacy(): Int {
-        return PackageManager.GET_ACTIVITIES
-    }
-
-    override fun invalidate() {
-        cache.clear()
-        isLoaded = false
-    }
-
-    private fun getPackageInfo(info: PackageInfo): MyPackageInfo? {
-        val packageName = info.packageName as String? // do not trust Android implementations
-        if (packageName.isNullOrEmpty()) {
-            return null
+    private fun PackageWithActivities.toMyPackageInfo(): MyPackageInfo {
+        val app = runCatching { packageManager.getApplicationInfo(pkg.packageName, 0) }.getOrNull()
+        val icon = if (app != null) {
+            packageManager.getApplicationIcon(app)
+        } else {
+            packageManager.defaultActivityIcon
         }
 
-        val app = info.applicationInfo ?: return null
-        val appRes = getLocalizedResources(packageName)
-
-        val name = getName(app, appRes)
-        val version = "${info.versionName} (${PackageInfoCompat.getLongVersionCode(info)})"
-        val icon = getIcon(app)
-        val iconResourceName = getIconResourceName(app, appRes)
-        val defaultActivityName = getDefaultActivityName(packageName, appRes)
-        val activities = info.activities.orEmpty()
-            .filter { !settingsService.hidePrivate || !it.isPrivate(packageManager) }
-            .map { getActivityName(it, appRes) }
-            .filter { it != defaultActivityName }
+        val activityNames = activities.filter { !it.isDefault }.map {
+            ActivityName(it.name, it.shortCls, it.fullCls)
+        }
+        val defaultActivityName = activities.find { it.isDefault }?.let {
+            ActivityName(it.name, it.shortCls, it.fullCls)
+        }
 
         return MyPackageInfo(
-            packageName.hashCode().toLong(),
-            packageName,
-            name,
-            version,
-            defaultActivityName,
-            activities,
-            icon,
-            iconResourceName,
+            id = pkg.packageName.hashCode().toLong(),
+            packageName = pkg.packageName,
+            name = pkg.name,
+            version = pkg.version,
+            defaultActivityName = defaultActivityName,
+            activityNames = activityNames,
+            icon = icon,
+            iconResourceName = pkg.iconResourceName,
+            isFullyLoaded = pkg.isFullyLoaded,
         )
     }
 
-    private fun getDefaultActivityName(
-        packageName: String,
-        appRes: Resources?,
-    ): ActivityName? {
-        if (appRes == null) {
-            return null
-        }
-
-        return runCatching {
-            val defaultIntent = packageManager.getLaunchIntentForPackage(packageName)
-            val activityInfo =
-                defaultIntent?.resolveActivityInfo(packageManager, 0) ?: return null
-            val defaultActivityName = getActivityName(activityInfo, appRes)
-            return defaultActivityName
-        }.getOrNull()
+    override fun getPackage(packageName: String): MyPackageInfo? {
+        return packages.find { it.packageName == packageName }
     }
 
-    private fun getIcon(app: ApplicationInfo): Drawable {
-        return runCatching {
-            packageManager.getApplicationIcon(app)
-        }.getOrElse {
-            packageManager.defaultActivityIcon
-        }
-    }
-
-    private fun getIconResourceName(
-        app: ApplicationInfo,
-        appRes: Resources?,
-    ): String? {
-        val iconResource = app.icon
-
-        if (iconResource == 0 || appRes == null) {
-            return null
-        }
-
-        return runCatching {
-            appRes.getResourceName(iconResource)
-        }.getOrNull()
-    }
-
-    private fun getName(app: ApplicationInfo, appRes: Resources?): String {
-        var name = app.loadLabel(packageManager).toString()
-        if (name == app.packageName) {
-            name = createNameFromClass(name)
-        }
-
-        if (appRes == null) {
-            return name
-        }
-
-        return runCatching {
-            appRes.getString(app.labelRes)
-        }.getOrElse { name }
-    }
-
-    private fun getActivityName(activity: ActivityInfo, appRes: Resources?): ActivityName {
-        var name = createNameFromClass(activity.name)
-
-        if (appRes != null) {
-            runCatching {
-                name = appRes.getString(activity.labelRes)
-            }
-        }
-
-        val cls = activity.name.substringAfterLast('.')
-        return ActivityName(name, cls, activity.name)
-    }
-
-    private fun getLocalizedResources(packageName: String): Resources? {
-        return runCatching {
-            val appRes = packageManager.getResourcesForApplication(packageName)
-            val config = settingsService.getLocaleConfiguration()
-            // TODO: Replace with createConfigurationContext when minSdk is high enough
-            appRes.updateConfiguration(config, appRes.displayMetrics)
-            appRes
-        }.getOrNull()
-    }
-
-    private fun createNameFromClass(cls: String): String {
-        val name = cls.substringAfterLast('.')
-        val config = settingsService.getLocaleConfiguration()
-        val locale = ConfigurationCompat.getLocales(config).get(0) ?: Locale.getDefault()
-        return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
+    override fun invalidate() {
+        sync()
     }
 }
 
@@ -235,6 +106,7 @@ data class MyPackageInfo(
     val activityNames: List<ActivityName>,
     val icon: Drawable,
     val iconResourceName: String?,
+    val isFullyLoaded: Boolean = true,
 )
 
 data class ActivityName(

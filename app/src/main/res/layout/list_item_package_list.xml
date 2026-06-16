@@ -28,6 +28,18 @@
         app:layout_constraintEnd_toStartOf="@+id/tvActivities"
         app:layout_constraintStart_toEndOf="@+id/ivIcon" />
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvActivities"
+        app:layout_constraintEnd_toStartOf="@+id/tvActivities"
+        app:layout_constraintTop_toTopOf="@+id/tvActivities" />
+
     <TextView
         android:id="@+id/tvActivities"
         android:layout_width="wrap_content"
