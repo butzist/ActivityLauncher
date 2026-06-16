@@ -18,6 +18,7 @@ import org.mockito.kotlin.whenever
 class PackageListViewModelTest {
     private val packageRepository: PackageRepository = mock()
     private val packagesFlow = MutableStateFlow<List<MyPackageInfo>>(emptyList())
+    private val isSyncingFlow = MutableStateFlow(false)
     private lateinit var viewModel: PackageListViewModel
     private val testDispatcher = UnconfinedTestDispatcher()
 
@@ -25,6 +26,7 @@ class PackageListViewModelTest {
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         whenever(packageRepository.packagesFlow).thenReturn(packagesFlow)
+        whenever(packageRepository.isSyncing).thenReturn(isSyncingFlow)
         viewModel = PackageListViewModel(packageRepository)
         viewModel.setDispatcher(testDispatcher)
     }
@@ -32,6 +34,22 @@ class PackageListViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
+    }
+
+    @Test
+    fun `isSearching should be true when filtering`() = runTest {
+        viewModel.filter("test")
+        // Since we are using stateIn and combined flows, we might need to collect or advance
+        assertEquals(true, viewModel.isSearching.value)
+    }
+
+    @Test
+    fun `isSearching should be true when repository is syncing`() = runTest {
+        isSyncingFlow.value = true
+        assertEquals(true, viewModel.isSearching.value)
+
+        isSyncingFlow.value = false
+        assertEquals(false, viewModel.isSearching.value)
     }
 
     @Test

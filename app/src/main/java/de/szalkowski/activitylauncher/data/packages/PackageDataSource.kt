@@ -24,6 +24,7 @@ class PackageDataSource @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
     private val packageManager: PackageManager = context.packageManager
+    private val loadingPackages = mutableSetOf<String>()
 
     val allPackagesFlow: Flow<List<PackageWithActivities>> = packageDao.getAllPackagesFlow()
 
@@ -75,48 +76,59 @@ class PackageDataSource @Inject constructor(
     }
 
     suspend fun loadDetails(packageName: String) = withContext(Dispatchers.IO) {
-        runCatching {
-            val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                PackageManager.GET_ACTIVITIES or PackageManager.MATCH_ALL or PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-            } else {
-                @Suppress("DEPRECATION")
-                PackageManager.GET_ACTIVITIES
-            }
-            val info = packageManager.getPackageInfo(packageName, flags)
-            val app = info.applicationInfo ?: return@runCatching
-            val appRes = getLocalizedResources(packageName)
+        synchronized(loadingPackages) {
+            if (loadingPackages.contains(packageName)) return@withContext
+            loadingPackages.add(packageName)
+        }
 
-            val activities = info.activities.orEmpty()
-                .filter { !settingsRepository.hidePrivate || !it.isPrivate(packageManager) }
-                .map { activity ->
-                    val name = if (appRes != null) {
-                        runCatching { appRes.getString(activity.labelRes) }.getOrElse { activity.loadLabel(packageManager).toString() }
-                    } else {
-                        activity.loadLabel(packageManager).toString()
-                    }
-                    ActivityEntity(
-                        id = 0,
-                        packageName = packageName,
-                        name = name,
-                        shortCls = activity.name.substringAfterLast('.'),
-                        fullCls = activity.name,
-                        isDefault = false,
-                    )
+        try {
+            runCatching {
+                val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    PackageManager.GET_ACTIVITIES or PackageManager.MATCH_ALL or PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                } else {
+                    @Suppress("DEPRECATION")
+                    PackageManager.GET_ACTIVITIES
                 }
+                val info = packageManager.getPackageInfo(packageName, flags)
+                val app = info.applicationInfo ?: return@runCatching
+                val appRes = getLocalizedResources(packageName)
 
-            val updatedPkg = AppPackageEntity(
-                packageName = packageName,
-                name = app.loadLabel(packageManager).toString(),
-                version = getVersion(info),
-                iconResourceName = runCatching { appRes?.getResourceName(app.icon) }.getOrNull(),
-                isFullyLoaded = true,
-                lastUpdated = System.currentTimeMillis(),
-            )
+                val activities = info.activities.orEmpty()
+                    .filter { !settingsRepository.hidePrivate || !it.isPrivate(packageManager) }
+                    .map { activity ->
+                        val name = if (appRes != null) {
+                            runCatching { appRes.getString(activity.labelRes) }.getOrElse { activity.loadLabel(packageManager).toString() }
+                        } else {
+                            activity.loadLabel(packageManager).toString()
+                        }
+                        ActivityEntity(
+                            id = 0,
+                            packageName = packageName,
+                            name = name,
+                            shortCls = activity.name.substringAfterLast('.'),
+                            fullCls = activity.name,
+                            isDefault = false,
+                        )
+                    }
 
-            // Perform in a manual transaction or just sequentially
-            packageDao.insertPackage(updatedPkg)
-            packageDao.deleteActivitiesForPackage(packageName)
-            packageDao.insertActivities(activities)
+                val updatedPkg = AppPackageEntity(
+                    packageName = packageName,
+                    name = app.loadLabel(packageManager).toString(),
+                    version = getVersion(info),
+                    iconResourceName = runCatching { appRes?.getResourceName(app.icon) }.getOrNull(),
+                    isFullyLoaded = true,
+                    lastUpdated = System.currentTimeMillis(),
+                )
+
+                // Perform in a manual transaction or just sequentially
+                packageDao.insertPackage(updatedPkg)
+                packageDao.deleteActivitiesForPackage(packageName)
+                packageDao.insertActivities(activities)
+            }
+        } finally {
+            synchronized(loadingPackages) {
+                loadingPackages.remove(packageName)
+            }
         }
     }
 

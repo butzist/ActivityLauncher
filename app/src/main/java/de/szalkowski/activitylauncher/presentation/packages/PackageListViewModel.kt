@@ -8,8 +8,11 @@ import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
@@ -29,8 +32,10 @@ class PackageListViewModel @Inject constructor(
     private val _packages = MutableStateFlow<List<MyPackageInfo>>(emptyList())
     val packages: StateFlow<List<MyPackageInfo>> = _packages.asStateFlow()
 
-    private val _isSearching = MutableStateFlow(false)
-    val isSearching: StateFlow<Boolean> = _isSearching.asStateFlow()
+    private val _isFiltering = MutableStateFlow(false)
+    val isSearching: StateFlow<Boolean> = combine(_isFiltering, packageRepository.isSyncing) { filtering, syncing ->
+        filtering || syncing
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     private var allPackages: List<MyPackageInfo> = emptyList()
     private var currentQuery: String = ""
@@ -49,14 +54,14 @@ class PackageListViewModel @Inject constructor(
         currentQuery = query
         filterJob?.cancel()
         filterJob = viewModelScope.launch {
-            _isSearching.value = true
+            _isFiltering.value = true
             try {
                 val filtered = withContext(defaultDispatcher) {
                     performFilter(query)
                 }
                 _packages.value = filtered
             } finally {
-                _isSearching.value = false
+                _isFiltering.value = false
             }
         }
     }

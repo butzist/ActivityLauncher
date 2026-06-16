@@ -92,10 +92,13 @@ class PackageListAdapter @Inject constructor(private val packageRepository: Pack
             holder.itemView.alpha = 1.0f
             holder.pbLoading.visibility = View.GONE
             holder.tvActivities.visibility = View.VISIBLE
+            holder.itemView.isEnabled = true
         } else {
             holder.itemView.alpha = 0.5f
             holder.pbLoading.visibility = View.VISIBLE
             holder.tvActivities.visibility = View.GONE
+            holder.itemView.isEnabled = false
+            packageRepository.loadDetails(item.packageName)
         }
     }
 

@@ -27,6 +27,9 @@ class PackageRepositoryImpl @Inject constructor(
     private val _packagesFlow = MutableStateFlow<List<MyPackageInfo>>(emptyList())
     override val packagesFlow: StateFlow<List<MyPackageInfo>> = _packagesFlow.asStateFlow()
 
+    private val _isSyncing = MutableStateFlow(false)
+    override val isSyncing: StateFlow<Boolean> = _isSyncing.asStateFlow()
+
     @Volatile
     override var isLoaded: Boolean = false
         private set
@@ -47,7 +50,18 @@ class PackageRepositoryImpl @Inject constructor(
 
     override fun sync() {
         scope.launch {
-            performSync()
+            _isSyncing.value = true
+            try {
+                performSync()
+            } finally {
+                _isSyncing.value = false
+            }
+        }
+    }
+
+    override fun loadDetails(packageName: String) {
+        scope.launch {
+            dataSource.loadDetails(packageName)
         }
     }
 
