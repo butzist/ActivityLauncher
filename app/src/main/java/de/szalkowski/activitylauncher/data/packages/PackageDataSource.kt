@@ -124,6 +124,10 @@ class PackageDataSource @Inject constructor(
         packageDao.deletePackageByName(packageName)
     }
 
+    suspend fun clear() = withContext(Dispatchers.IO) {
+        packageDao.deleteAllPackages()
+    }
+
     private fun getVersion(info: PackageInfo): String =
         "${info.versionName} (${PackageInfoCompat.getLongVersionCode(info)})"
 

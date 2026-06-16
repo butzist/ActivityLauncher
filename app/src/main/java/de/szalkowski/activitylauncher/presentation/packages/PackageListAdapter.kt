@@ -85,7 +85,8 @@ class PackageListAdapter @Inject constructor(private val packageRepository: Pack
         holder.tvVersion.text = item.version
         holder.tvPackage.text = item.packageName
         holder.tvActivities.text = "($activityCount)"
-        holder.ivIcon.setImageDrawable(item.icon)
+
+        holder.ivIcon.setImageDrawable(packageRepository.getIcon(item.packageName))
 
         if (item.isFullyLoaded) {
             holder.itemView.alpha = 1.0f

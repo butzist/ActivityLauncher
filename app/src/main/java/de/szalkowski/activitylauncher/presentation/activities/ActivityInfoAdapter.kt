@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 
-class ActivityInfoAdapter : ListAdapter<MyActivityInfo, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
+class ActivityInfoAdapter(
+    private val iconProvider: (android.content.ComponentName) -> android.graphics.drawable.Drawable,
+) : ListAdapter<MyActivityInfo, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
 
     var onItemClick: ((MyActivityInfo) -> Unit)? = null
     var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
@@ -50,7 +52,7 @@ class ActivityInfoAdapter : ListAdapter<MyActivityInfo, ActivityInfoAdapter.View
         val item = getItem(position)
         holder.tvName.text = item.name
         holder.tvClass.text = item.componentName.shortClassName
-        holder.ivIcon.setImageDrawable(item.icon)
+        holder.ivIcon.setImageDrawable(iconProvider(item.componentName))
     }
 
     private object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {

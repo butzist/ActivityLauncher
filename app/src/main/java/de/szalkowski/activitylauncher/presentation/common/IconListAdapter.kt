@@ -33,8 +33,8 @@ class IconListAdapter @Inject constructor(private val iconLoader: IconLoader) :
         val view = ImageView(parent.context)
         val layout = AbsListView.LayoutParams(50, 50)
         view.layoutParams = layout
-        val icon = icons[position]
-        view.setImageDrawable(icon.icon)
+        val iconInfo = icons[position]
+        view.setImageDrawable(iconLoader.getIcon(iconInfo.iconResourceName))
         return view
     }
 }

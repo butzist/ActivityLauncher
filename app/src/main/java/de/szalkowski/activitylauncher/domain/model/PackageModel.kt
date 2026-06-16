@@ -1,7 +1,6 @@
 package de.szalkowski.activitylauncher.domain.model
 
 import android.content.ComponentName
-import android.graphics.drawable.Drawable
 
 data class MyPackageInfo(
     val id: Long,
@@ -10,7 +9,6 @@ data class MyPackageInfo(
     val version: String,
     val defaultActivityName: ActivityName?,
     val activityNames: List<ActivityName>,
-    val icon: Drawable,
     val iconResourceName: String?,
     val isFullyLoaded: Boolean = true,
 )
@@ -31,12 +29,10 @@ data class PackageActivities(
 data class MyActivityInfo(
     val componentName: ComponentName,
     val name: String,
-    val icon: Drawable,
     val iconResourceName: String?,
     val isPrivate: Boolean,
 )
 
 data class IconInfo(
     val iconResourceName: String,
-    val icon: Drawable,
 )

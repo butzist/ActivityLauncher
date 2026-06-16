@@ -1,7 +1,6 @@
 package de.szalkowski.activitylauncher.presentation.favorites
 
 import android.content.ComponentName
-import android.graphics.drawable.Drawable
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
@@ -34,7 +33,7 @@ class FavoritesViewModelTest {
     @Test
     fun `should load favorites`() = runTest {
         val component = ComponentName("com.test", "Activity")
-        val activityInfo = MyActivityInfo(component, "Activity", mock<Drawable>(), null, false)
+        val activityInfo = MyActivityInfo(component, "Activity", null, false)
 
         whenever(favoritesRepository.getFavorites()).thenReturn(setOf(component))
         whenever(activityRepository.getActivity(component)).thenReturn(activityInfo)

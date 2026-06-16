@@ -35,6 +35,9 @@ interface PackageDao {
     @Transaction
     @Query("DELETE FROM activities WHERE packageName = :packageName")
     suspend fun deleteActivitiesForPackage(packageName: String): Int
+
+    @Query("DELETE FROM packages")
+    suspend fun deleteAllPackages(): Int
 }
 
 data class PackageWithActivities(

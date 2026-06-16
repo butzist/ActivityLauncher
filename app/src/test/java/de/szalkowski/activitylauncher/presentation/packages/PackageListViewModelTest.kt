@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.presentation.packages
 
-import android.graphics.drawable.Drawable
 import de.szalkowski.activitylauncher.domain.model.ActivityName
 import de.szalkowski.activitylauncher.domain.model.MyPackageInfo
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
@@ -87,7 +86,6 @@ class PackageListViewModelTest {
         version = "1.0",
         defaultActivityName = null,
         activityNames = activities,
-        icon = mock<Drawable>(),
         iconResourceName = null,
         isFullyLoaded = true,
     )

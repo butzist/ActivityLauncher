@@ -58,13 +58,21 @@ class ActivityRepositoryImpl @Inject constructor(
             return MyActivityInfo(
                 componentName,
                 createNameFromClass(componentName.className),
-                packageManager.defaultActivityIcon,
                 null,
                 false,
             )
         }
 
         return getActivityInfo(activityInfo, name)
+    }
+
+    override fun getIcon(componentName: ComponentName): Drawable {
+        return runCatching {
+            val activityInfo = packageManager.getActivityInfo(componentName, 0)
+            activityInfo.loadIcon(packageManager)
+        }.getOrElse {
+            packageManager.defaultActivityIcon
+        }
     }
 
     override fun invalidate() {
@@ -77,14 +85,12 @@ class ActivityRepositoryImpl @Inject constructor(
     ): MyActivityInfo {
         val componentName = activityInfo.componentName
         val name = nameInfo.name
-        val icon = getIcon(activityInfo)
         val iconResourceName = getIconResourceName(activityInfo)
         val isPrivate = activityInfo.isPrivate(packageManager)
 
         return MyActivityInfo(
             componentName,
             name,
-            icon,
             iconResourceName,
             isPrivate,
         )
@@ -101,12 +107,6 @@ class ActivityRepositoryImpl @Inject constructor(
             packageManager.getResourcesForActivity(activityInfo.componentName)
                 .getResourceName(activityInfo.iconResource)
         }.getOrNull()
-    }
-
-    private fun getIcon(activityInfo: ActivityInfo): Drawable = runCatching {
-        activityInfo.loadIcon(packageManager)
-    }.getOrElse {
-        packageManager.defaultActivityIcon
     }
 
     private fun createNameFromClass(cls: String): String {

@@ -74,7 +74,7 @@ class ActivityDetailsViewModel @Inject constructor(
             _editedPackage.value = info.componentName.packageName
             _editedClass.value = info.componentName.className
             _editedIconResourceName.value = info.iconResourceName ?: ""
-            _editedIconDrawable.value = info.icon
+            _editedIconDrawable.value = activityRepository.getIcon(componentName)
         }
     }
 
@@ -120,7 +120,6 @@ class ActivityDetailsViewModel @Inject constructor(
         return MyActivityInfo(
             componentName,
             _editedName.value,
-            _editedIconDrawable.value!!,
             _editedIconResourceName.value.ifBlank { null },
             false,
         )

@@ -47,19 +47,16 @@ class PackageRepositoryImpl @Inject constructor(
 
     override fun sync() {
         scope.launch {
-            dataSource.sync()
-            dataSource.loadAllDetails()
+            performSync()
         }
     }
 
-    private fun PackageWithActivities.toMyPackageInfo(): MyPackageInfo {
-        val app = runCatching { packageManager.getApplicationInfo(pkg.packageName, 0) }.getOrNull()
-        val icon = if (app != null) {
-            packageManager.getApplicationIcon(app)
-        } else {
-            packageManager.defaultActivityIcon
-        }
+    private suspend fun performSync() {
+        dataSource.sync()
+        dataSource.loadAllDetails()
+    }
 
+    private fun PackageWithActivities.toMyPackageInfo(): MyPackageInfo {
         val activityNames = activities.filter { !it.isDefault }.map {
             ActivityName(it.name, it.shortCls, it.fullCls)
         }
@@ -74,10 +71,16 @@ class PackageRepositoryImpl @Inject constructor(
             version = pkg.version,
             defaultActivityName = defaultActivityName,
             activityNames = activityNames,
-            icon = icon,
             iconResourceName = pkg.iconResourceName,
             isFullyLoaded = pkg.isFullyLoaded,
         )
+    }
+
+    override fun getIcon(packageName: String): android.graphics.drawable.Drawable {
+        return runCatching {
+            val app = packageManager.getApplicationInfo(packageName, 0)
+            packageManager.getApplicationIcon(app)
+        }.getOrElse { packageManager.defaultActivityIcon }
     }
 
     override fun getPackage(packageName: String): MyPackageInfo? {
@@ -85,6 +88,9 @@ class PackageRepositoryImpl @Inject constructor(
     }
 
     override fun invalidate() {
-        sync()
+        scope.launch {
+            dataSource.clear()
+            performSync()
+        }
     }
 }

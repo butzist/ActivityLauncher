@@ -13,5 +13,7 @@ interface ActivityRepository {
         componentName: ComponentName,
     ): MyActivityInfo
 
+    fun getIcon(componentName: ComponentName): android.graphics.drawable.Drawable
+
     fun invalidate()
 }

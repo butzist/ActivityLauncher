@@ -16,7 +16,6 @@ import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.presentation.common.AsyncProvider
 import de.szalkowski.activitylauncher.presentation.common.IconListAdapter
-import java.util.TreeMap
 import javax.inject.Inject
 
 class IconLoaderImpl @Inject constructor(
@@ -60,7 +59,7 @@ class IconLoaderImpl @Inject constructor(
     }
 
     override fun loadIcons(updater: AsyncProvider<IconListAdapter>.Updater?): List<IconInfo> {
-        val icons: TreeMap<String, Drawable> = TreeMap()
+        val icons: java.util.TreeSet<String> = java.util.TreeSet()
 
         val packages = packageRepository.packages
         updater?.updateMax(packages.size)
@@ -72,11 +71,11 @@ class IconLoaderImpl @Inject constructor(
             runCatching {
                 val activities = activityRepository.getActivities(pack.value.packageName)
                 for (activity in listOfNotNull(activities.defaultActivity) + activities.activities) {
-                    activity.iconResourceName?.let { icons[it] = activity.icon }
+                    activity.iconResourceName?.let { icons.add(it) }
                 }
             }
         }
 
-        return icons.map { entry -> IconInfo(entry.key, entry.value) }.toList()
+        return icons.map { IconInfo(it) }.toList()
     }
 }

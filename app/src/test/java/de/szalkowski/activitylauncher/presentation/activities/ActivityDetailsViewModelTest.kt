@@ -1,7 +1,6 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.SavedStateHandle
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
@@ -53,7 +52,6 @@ class ActivityDetailsViewModelTest {
             val activityInfo = MyActivityInfo(
                 componentName,
                 "Test Activity",
-                mock<Drawable>(),
                 "res:icon",
                 false,
             )

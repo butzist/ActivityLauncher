@@ -84,12 +84,14 @@ class ActivityListAdapter @AssistedInject constructor(
         return ViewHolder(view)
     }
 
+    private val activityRepository = activityRepository
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.item = item
         holder.tvName.text = if (item.isPrivate) "(${item.name})" else item.name
         holder.tvPackage.text = item.componentName.shortClassName
-        holder.ivIcon.setImageDrawable(item.icon)
+        holder.ivIcon.setImageDrawable(activityRepository.getIcon(item.componentName))
     }
 
     object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {

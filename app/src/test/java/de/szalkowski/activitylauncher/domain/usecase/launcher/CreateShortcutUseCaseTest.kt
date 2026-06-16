@@ -1,7 +1,6 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
 import android.content.ComponentName
-import android.graphics.drawable.Drawable
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
@@ -15,7 +14,7 @@ class CreateShortcutUseCaseTest {
     private lateinit var useCase: CreateShortcutUseCase
 
     private val componentName = ComponentName("com.test", "Activity")
-    private val activityInfo = MyActivityInfo(componentName, "Test", mock<Drawable>(), null, false)
+    private val activityInfo = MyActivityInfo(componentName, "Test", null, false)
 
     @Before
     fun setup() {
