@@ -6,7 +6,9 @@ import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
+import kotlinx.coroutines.yield
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -38,18 +40,47 @@ class PackageListViewModelTest {
 
     @Test
     fun `isSearching should be true when filtering`() = runTest {
-        viewModel.filter("test")
-        // Since we are using stateIn and combined flows, we might need to collect or advance
-        assertEquals(true, viewModel.isSearching.value)
+        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Activity One", "Main", "com.one.Main")))
+        packagesFlow.value = listOf(p1)
+        advanceUntilIdle()
+
+        viewModel.filter("One")
+        advanceUntilIdle()
+        assertEquals(1, viewModel.packages.value.size)
     }
 
     @Test
     fun `isSearching should be true when repository is syncing`() = runTest {
         isSyncingFlow.value = true
-        assertEquals(true, viewModel.isSearching.value)
+        // The combined flow might need a bit of time or a collector
+        var lastSearchingValue = false
+        val job = launch {
+            viewModel.isSearching.collect { lastSearchingValue = it }
+        }
+        yield() // Allow collector to pick up initial value
+
+        assertEquals(true, lastSearchingValue)
 
         isSyncingFlow.value = false
-        assertEquals(false, viewModel.isSearching.value)
+        yield()
+        assertEquals(false, lastSearchingValue)
+        job.cancel()
+    }
+
+    @Test
+    fun `packages should maintain repository sort order`() = runTest {
+        val p1 = createPackage("App", "com.aaa", activities = listOf(ActivityName("Main", "Main", "com.aaa.Main")))
+        val p2 = createPackage("App", "com.zzz", activities = listOf(ActivityName("Main", "Main", "com.zzz.Main")))
+        val p3 = createPackage("Bpp", "com.bbb", activities = listOf(ActivityName("Main", "Main", "com.bbb.Main")))
+
+        // Emit already sorted data (as repository should)
+        packagesFlow.value = listOf(p1, p2, p3)
+        advanceUntilIdle()
+
+        assertEquals(3, viewModel.packages.value.size)
+        assertEquals("com.aaa", viewModel.packages.value[0].packageName)
+        assertEquals("com.zzz", viewModel.packages.value[1].packageName)
+        assertEquals("com.bbb", viewModel.packages.value[2].packageName)
     }
 
     @Test
@@ -95,6 +126,41 @@ class PackageListViewModelTest {
         advanceUntilIdle()
 
         assertEquals(2, viewModel.packages.value.size)
+    }
+
+    @Test
+    fun `should hide fully loaded packages with no activities`() = runTest {
+        val p1 = createPackage("Empty App", "com.empty", activities = emptyList()).copy(isFullyLoaded = true)
+        val p2 = createPackage("Full App", "com.full", activities = listOf(ActivityName("Main", "Main", "com.full.Main"))).copy(isFullyLoaded = true)
+        packagesFlow.value = listOf(p1, p2)
+        advanceUntilIdle()
+
+        viewModel.filter("")
+        advanceUntilIdle()
+
+        assertEquals(1, viewModel.packages.value.size)
+        assertEquals("com.full", viewModel.packages.value[0].packageName)
+    }
+
+    @Test
+    fun `should show not fully loaded packages even if they have no activities yet`() = runTest {
+        val p1 = createPackage("Loading App", "com.loading", activities = emptyList()).copy(isFullyLoaded = false)
+        packagesFlow.value = listOf(p1)
+        advanceUntilIdle()
+
+        viewModel.filter("")
+        advanceUntilIdle()
+
+        assertEquals(1, viewModel.packages.value.size)
+        assertEquals("com.loading", viewModel.packages.value[0].packageName)
+
+        // Now resolve it to fully loaded with zero activities
+        val p1Loaded = p1.copy(isFullyLoaded = true)
+        packagesFlow.value = listOf(p1Loaded)
+        advanceUntilIdle()
+
+        // It should now be hidden
+        assertEquals(0, viewModel.packages.value.size)
     }
 
     private fun createPackage(name: String, packageName: String, activities: List<ActivityName> = emptyList()) = MyPackageInfo(

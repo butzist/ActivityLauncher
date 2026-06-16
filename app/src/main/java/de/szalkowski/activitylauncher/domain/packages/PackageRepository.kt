@@ -13,4 +13,5 @@ interface PackageRepository {
     fun invalidate()
     fun sync()
     fun loadDetails(packageName: String)
+    fun removePackage(packageName: String)
 }

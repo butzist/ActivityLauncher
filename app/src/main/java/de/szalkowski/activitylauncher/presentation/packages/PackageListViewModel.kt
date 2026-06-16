@@ -67,20 +67,24 @@ class PackageListViewModel @Inject constructor(
     }
 
     private suspend fun performFilter(query: String): List<MyPackageInfo> {
-        if (query.isEmpty()) return allPackages
-
         return allPackages.mapNotNull { p ->
             yield()
+            // If not fully loaded, always show it (it will show with a spinner)
+            if (!p.isFullyLoaded) return@mapNotNull p
+
             val packageMatches = p.name.contains(query, ignoreCase = true) || p.packageName.contains(query, ignoreCase = true)
             val filteredActivities = p.activityNames.filter { it.name.contains(query, ignoreCase = true) || it.shortCls.contains(query, ignoreCase = true) }
             val defaultActivity = p.defaultActivityName?.takeIf { packageMatches || it.name.contains(query, ignoreCase = true) || it.shortCls.contains(query, ignoreCase = true) }
 
-            if (filteredActivities.isNotEmpty() || defaultActivity != null) {
+            val hasActivities = filteredActivities.isNotEmpty() || defaultActivity != null
+
+            if (hasActivities) {
                 p.copy(
                     activityNames = filteredActivities,
                     defaultActivityName = defaultActivity,
                 )
             } else {
+                // Hide fully loaded packages with no matching activities (or no activities at all)
                 null
             }
         }

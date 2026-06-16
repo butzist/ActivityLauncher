@@ -98,7 +98,14 @@ class PackageListAdapter @Inject constructor(private val packageRepository: Pack
             holder.pbLoading.visibility = View.VISIBLE
             holder.tvActivities.visibility = View.GONE
             holder.itemView.isEnabled = false
-            packageRepository.loadDetails(item.packageName)
+            // Prioritize loading from the start of the list up to the current position
+            // to ensure stability of the top of the list
+            for (i in 0..position) {
+                val p = getItem(i)
+                if (!p.isFullyLoaded) {
+                    packageRepository.loadDetails(p.packageName)
+                }
+            }
         }
     }
 
@@ -113,7 +120,8 @@ class PackageListAdapter @Inject constructor(private val packageRepository: Pack
                 oldItem.name == newItem.name &&
                 oldItem.version == newItem.version &&
                 oldItem.activityNames == newItem.activityNames &&
-                oldItem.defaultActivityName == newItem.defaultActivityName
+                oldItem.defaultActivityName == newItem.defaultActivityName &&
+                oldItem.isFullyLoaded == newItem.isFullyLoaded
         }
     }
 }

@@ -4,40 +4,48 @@ import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface PackageDao {
+abstract class PackageDao {
     @Transaction
-    @Query("SELECT * FROM packages ORDER BY name COLLATE NOCASE ASC")
-    fun getAllPackagesFlow(): Flow<List<PackageWithActivities>>
+    @Query("SELECT * FROM packages ORDER BY name COLLATE NOCASE ASC, packageName ASC")
+    abstract fun getAllPackagesFlow(): Flow<List<PackageWithActivities>>
 
     @Query("SELECT * FROM packages WHERE packageName = :packageName")
-    suspend fun getPackage(packageName: String): AppPackageEntity?
+    abstract suspend fun getPackage(packageName: String): AppPackageEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPackage(pkg: AppPackageEntity): Long
+    abstract suspend fun insertPackage(pkg: AppPackageEntity): Long
 
     @Delete
-    suspend fun deletePackage(pkg: AppPackageEntity): Int
+    abstract suspend fun deletePackage(pkg: AppPackageEntity): Int
 
     @Transaction
     @Query("DELETE FROM packages WHERE packageName = :packageName")
-    suspend fun deletePackageByName(packageName: String): Int
+    abstract suspend fun deletePackageByName(packageName: String): Int
 
-    @Query("SELECT * FROM packages WHERE isFullyLoaded = 0")
-    suspend fun getNotFullyLoadedPackages(): List<AppPackageEntity>
+    @Query("SELECT * FROM packages WHERE isFullyLoaded = 0 ORDER BY name COLLATE NOCASE ASC, packageName ASC")
+    abstract suspend fun getNotFullyLoadedPackages(): List<AppPackageEntity>
 
     @Transaction
     @Query("SELECT * FROM packages WHERE packageName = :packageName")
-    suspend fun getPackageWithActivities(packageName: String): PackageWithActivities?
+    abstract suspend fun getPackageWithActivities(packageName: String): PackageWithActivities?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertActivities(activities: List<ActivityEntity>): List<Long>
+    abstract suspend fun insertActivities(activities: List<ActivityEntity>): List<Long>
 
     @Transaction
     @Query("DELETE FROM activities WHERE packageName = :packageName")
-    suspend fun deleteActivitiesForPackage(packageName: String): Int
+    abstract suspend fun deleteActivitiesForPackage(packageName: String): Int
+
+    @Transaction
+    open suspend fun updatePackageDetails(pkg: AppPackageEntity, activities: List<ActivityEntity>): Int {
+        insertPackage(pkg)
+        deleteActivitiesForPackage(pkg.packageName)
+        insertActivities(activities)
+        return 0
+    }
 
     @Query("DELETE FROM packages")
-    suspend fun deleteAllPackages(): Int
+    abstract suspend fun deleteAllPackages(): Int
 }
 
 data class PackageWithActivities(

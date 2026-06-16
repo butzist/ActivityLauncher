@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import de.szalkowski.activitylauncher.data.database.ActivityEntity
 import de.szalkowski.activitylauncher.data.database.AppPackageEntity
 import de.szalkowski.activitylauncher.data.database.PackageDao
 import de.szalkowski.activitylauncher.data.database.PackageWithActivities
@@ -31,6 +30,7 @@ class PackageDataSourceTest {
     fun setup() {
         Dispatchers.setMain(Dispatchers.Unconfined)
         whenever(context.packageManager).thenReturn(packageManager)
+
         dataSource = PackageDataSource(context, packageDao, settingsRepository)
     }
 
@@ -101,12 +101,50 @@ class PackageDataSourceTest {
 
         dataSource.loadDetails(packageName)
 
-        verify(packageDao).insertActivities(
-            argThat { activities: List<ActivityEntity> ->
-                activities.size == 2 && activities.any { it.fullCls == "$packageName.MainActivity" } && activities.any { it.fullCls == "$packageName.SettingsActivity" }
-            },
+        verify(packageDao).updatePackageDetails(
+            argThat { pkg -> pkg.packageName == packageName && pkg.isFullyLoaded },
+            argThat { activities -> activities.size == 2 && activities.any { it.fullCls == "$packageName.MainActivity" } },
         )
-        verify(packageDao).insertPackage(argThat { pkg: AppPackageEntity -> pkg.packageName == packageName && pkg.isFullyLoaded })
+    }
+
+    @Test
+    fun `loading package without activities`() = runTest {
+        val packageName = "com.empty.app"
+        val packageInfo = createMockPackage(packageName, "1.0", 100L)
+        packageInfo.activities = null // Zero activities
+
+        whenever(packageManager.getPackageInfo(eq(packageName), any<Int>())).thenReturn(packageInfo)
+        whenever(settingsRepository.hidePrivate).thenReturn(false)
+
+        dataSource.loadDetails(packageName)
+
+        verify(packageDao).updatePackageDetails(
+            argThat { pkg -> pkg.packageName == packageName && pkg.isFullyLoaded },
+            argThat { activities -> activities.isEmpty() },
+        )
+    }
+
+    @Test
+    fun `loadDetails should mark package as loaded even if getPackageInfo fails`() = runTest {
+        val packageName = "com.error.app"
+        whenever(packageManager.getPackageInfo(eq(packageName), any<Int>())).thenThrow(RuntimeException("Security error"))
+
+        // We need to mock getPackage from DAO because the fallback uses it
+        val existingPkg = AppPackageEntity(packageName, "Error App", "1.0", null, false, 0L)
+        whenever(packageDao.getPackage(packageName)).thenReturn(existingPkg)
+        whenever(packageDao.insertPackage(any())).thenReturn(0L)
+
+        dataSource.loadDetails(packageName)
+
+        // It should still be marked as fully loaded to avoid retries
+        verify(packageDao).insertPackage(argThat { pkg -> pkg.packageName == packageName && pkg.isFullyLoaded })
+    }
+
+    @Test
+    fun `removePackage should call dao`() = runTest {
+        val packageName = "com.test.app"
+        dataSource.removePackage(packageName)
+        verify(packageDao).deletePackageByName(packageName)
     }
 
     private fun createMockPackage(packageName: String, versionName: String, versionCode: Long): PackageInfo {

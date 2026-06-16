@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import de.szalkowski.activitylauncher.data.packages.PackageDataSource
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -15,13 +15,13 @@ import org.mockito.kotlin.*
 @RunWith(AndroidJUnit4::class)
 class PackageChangeReceiverTest {
     private lateinit var receiver: PackageChangeReceiver
-    private val dataSource: PackageDataSource = mock()
+    private val packageRepository: PackageRepository = mock()
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
     fun setup() {
         receiver = PackageChangeReceiver()
-        receiver.dataSource = dataSource
+        receiver.packageRepository = packageRepository
     }
 
     @Test
@@ -33,8 +33,18 @@ class PackageChangeReceiverTest {
 
         receiver.onReceive(context, intent)
 
-        Thread.sleep(100)
-        verify(dataSource).loadDetails(packageName)
+        // Give some time for the coroutine in receiver to run
+        var verified = false
+        for (i in 1..10) {
+            try {
+                verify(packageRepository).loadDetails(packageName)
+                verified = true
+                break
+            } catch (e: Throwable) {
+                Thread.sleep(50)
+            }
+        }
+        if (!verified) verify(packageRepository).loadDetails(packageName)
     }
 
     @Test
@@ -42,11 +52,35 @@ class PackageChangeReceiverTest {
         val packageName = "com.test.app"
         val intent = Intent(Intent.ACTION_PACKAGE_REMOVED).apply {
             data = Uri.parse("package:$packageName")
+            putExtra(Intent.EXTRA_REPLACING, false)
         }
 
         receiver.onReceive(context, intent)
 
-        Thread.sleep(100)
-        verify(dataSource).removePackage(packageName)
+        // Give some time for the coroutine in receiver to run
+        var verified = false
+        for (i in 1..10) {
+            try {
+                verify(packageRepository).removePackage(packageName)
+                verified = true
+                break
+            } catch (e: Throwable) {
+                Thread.sleep(50)
+            }
+        }
+        if (!verified) verify(packageRepository).removePackage(packageName)
+    }
+
+    @Test
+    fun testPackageRemovedWithReplacingDoesNotTriggerRemove() = runBlocking {
+        val packageName = "com.test.app"
+        val intent = Intent(Intent.ACTION_PACKAGE_REMOVED).apply {
+            data = Uri.parse("package:$packageName")
+            putExtra(Intent.EXTRA_REPLACING, true)
+        }
+
+        receiver.onReceive(context, intent)
+
+        verify(packageRepository, never()).removePackage(packageName)
     }
 }
