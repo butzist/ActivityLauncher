@@ -64,4 +64,14 @@ class AnalyticsServiceImpl @Inject constructor(
             firebaseAnalytics.logEvent("support_option", bundle)
         }
     }
+
+    override fun logQsTileAction(action: String) {
+        runCatching {
+            val bundle = Bundle().apply {
+                putString("action", action)
+            }
+
+            firebaseAnalytics.logEvent("qs_tile_action", bundle)
+        }
+    }
 }

@@ -5,11 +5,29 @@ import android.content.Intent
 import android.os.Build
 import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
+import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
+import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.N)
+@AndroidEntryPoint
 class QSTileService : TileService() {
+    @Inject
+    lateinit var analyticsLogger: AnalyticsLogger
+
+    override fun onTileAdded() {
+        super.onTileAdded()
+        analyticsLogger.logQsTileAction("add")
+    }
+
+    override fun onTileRemoved() {
+        super.onTileRemoved()
+        analyticsLogger.logQsTileAction("remove")
+    }
+
     override fun onClick() {
         super.onClick()
+        analyticsLogger.logQsTileAction("clicked")
 
         val intent = Intent(
             this,

@@ -10,4 +10,5 @@ class AnalyticsServiceImpl @Inject constructor() : AnalyticsService {
     override fun logActivityAction(kind: String, activity: MyActivityInfo, asRoot: Boolean) {}
     override fun logDisclaimerAccepted(accepted: Boolean) {}
     override fun logSupportOption(option: String) {}
+    override fun logQsTileAction(action: String) {}
 }

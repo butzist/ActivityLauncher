@@ -7,4 +7,5 @@ interface AnalyticsService {
     fun logActivityAction(kind: String, activity: MyActivityInfo, asRoot: Boolean)
     fun logDisclaimerAccepted(accepted: Boolean)
     fun logSupportOption(option: String)
+    fun logQsTileAction(action: String)
 }
