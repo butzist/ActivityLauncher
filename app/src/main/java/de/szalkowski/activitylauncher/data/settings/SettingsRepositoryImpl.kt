@@ -10,13 +10,11 @@ import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
-import de.szalkowski.activitylauncher.domain.system.RootDetector
 import java.util.Locale
 import javax.inject.Inject
 
 class SettingsRepositoryImpl @Inject constructor(
     @ApplicationContext val context: Context,
-    private val rootDetector: RootDetector,
 ) : SettingsRepository {
     companion object {
         const val THEME_DEFAULT = "0"
@@ -25,7 +23,6 @@ class SettingsRepositoryImpl @Inject constructor(
 
         const val LANGUAGE_DEFAULT = "System Default"
 
-        const val PREF_ALLOW_ROOT = "allow_root"
         const val PREF_THEME = "theme"
         const val PREF_HIDE_HIDE_PRIVATE = "hide_hide_private"
         const val PREF_LANGUAGE = "language"
@@ -36,11 +33,6 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override fun init() {
         setTheme(theme)
-
-        if (!prefs.contains(PREF_ALLOW_ROOT)) {
-            val hasSU = rootDetector.detectSU()
-            prefs.edit { putBoolean(PREF_ALLOW_ROOT, hasSU) }
-        }
 
         if (!prefs.contains(PREF_HIDE_HIDE_PRIVATE)) {
             prefs.edit { putBoolean(PREF_HIDE_HIDE_PRIVATE, false) }
@@ -57,9 +49,6 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override val theme: String
         get() = prefs.getString(PREF_THEME, THEME_DEFAULT)!!
-
-    override val allowRoot: Boolean
-        get() = prefs.getBoolean(PREF_ALLOW_ROOT, false)
 
     override val language: String
         get() = prefs.getString(PREF_LANGUAGE, LANGUAGE_DEFAULT)!!

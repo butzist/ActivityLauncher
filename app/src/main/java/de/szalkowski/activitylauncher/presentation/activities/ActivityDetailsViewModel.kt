@@ -2,7 +2,7 @@ package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
 import android.content.pm.PackageManager.NameNotFoundException
-import android.graphics.drawable.Drawable
+import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -67,8 +67,8 @@ class ActivityDetailsViewModel @Inject constructor(
     private val _editedIconResourceName = MutableStateFlow("")
     val editedIconResourceName: StateFlow<String> = _editedIconResourceName.asStateFlow()
 
-    private val _editedIconDrawable = MutableStateFlow<Drawable?>(null)
-    val editedIconDrawable: StateFlow<Drawable?> = _editedIconDrawable.asStateFlow()
+    private val _editedIcon = MutableStateFlow<IconCompat?>(null)
+    val editedIcon: StateFlow<IconCompat?> = _editedIcon.asStateFlow()
 
     private val _iconErrorTrigger = MutableStateFlow<String?>(null)
 
@@ -110,7 +110,8 @@ class ActivityDetailsViewModel @Inject constructor(
             _editedPackage.value = info.componentName.packageName
             _editedClass.value = info.componentName.className
             _editedIconResourceName.value = info.iconResourceName ?: ""
-            _editedIconDrawable.value = getActivityIconUseCase(info.iconResourceName, componentName)
+
+            _editedIcon.value = getActivityIconUseCase(info.iconResourceName, componentName)
         }
     }
 
@@ -134,20 +135,20 @@ class ActivityDetailsViewModel @Inject constructor(
     fun updateIconResourceName(iconResourceName: String) {
         _editedIconResourceName.value = iconResourceName
         val result = iconLoader.tryGetIcon(iconResourceName)
-        _editedIconDrawable.value = result.getOrElse {
+        _editedIcon.value = result.getOrElse {
             getActivityIconUseCase(null, componentName)
         }
         _iconErrorTrigger.value = iconResourceName
     }
 
-    fun createShortcut(asRoot: Boolean) {
+    fun createShortcut() {
         val info = getEditedActivityInfo()
-        createShortcutUseCase(info, asRoot)
+        createShortcutUseCase(info)
     }
 
-    fun launchActivity(asRoot: Boolean) {
+    fun launchActivity() {
         val info = getEditedActivityInfo()
-        launchActivityUseCase(info.componentName, asRoot, showToast = true)
+        launchActivityUseCase(info.componentName, showToast = true)
     }
 
     fun shareActivity() {

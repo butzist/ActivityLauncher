@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Cargando…</string>
     <string name="dialog_disclaimer">Esta aplicación da acceso a funciones normalmente no visibles para los usuarios. Algunas opciones pueden no funcionar como se esperaba o no ser seguras de usar. ¿Entiendes y quieres continuar?</string>
     <string name="context_action_launch">Ejecutar actividad</string>
-    <string name="context_action_launch_as_root">Ejecutar actividad como root</string>
     <string name="context_action_shortcut">Crear acceso directo</string>
-    <string name="context_action_shortcut_as_root">Crear acceso directo como root</string>
     <string name="context_action_edit">Editar acceso directo</string>
     <string name="context_action_share_shortcut">Compartir acceso directo</string>
     <string name="context_action_favorite_add">Añadir a favoritos</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Error: formato de icono inválido</string>
     <string name="error_verbose_pin_shortcut">El lanzador actual no soporta "PinShortcut". No se puede crear el acceso directo.</string>
     <string name="error_invalid_activity_link">Enlace de actividad no válido proporcionado</string>
-    <string name="warning_root_check">Advertencia: Los privilegios root probablemente no estén disponibles en este dispositivo.</string>
     <string name="exception_invalid_component_name">Nombre del componente inválido o potencialmente dañino: %s</string>
-    <string name="exception_command_error">Código de error devuelto por el comando: %d, salida: %s</string>
     <string name="category_title_about">Acerca de</string>
     <string name="action_view_source">Ver código fuente</string>
     <string name="summary_action_view_source">El código fuente de esta aplicación está disponible para leer y modificar en GitHub. No dudes en enviarnos pull requests con mejoras y correcciones de errores.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Configuración</string>
     <string name="settings_hide_private">Ocultar actividades privadas</string>
     <string name="settings_summary_hide_private">Ocultar actividades privadas (no exportadas o desactivadas) que no pueden iniciarse sin acceso root</string>
-    <string name="settings_allow_root">Activar modo privilegiado</string>
-    <string name="settings_summary_allow_root">Permitir el lanzamiento de actividades privadas usando privilegios root</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Predeterminado del sistema</string>

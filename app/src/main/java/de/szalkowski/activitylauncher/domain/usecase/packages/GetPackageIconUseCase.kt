@@ -1,13 +1,13 @@
 package de.szalkowski.activitylauncher.domain.usecase.packages
 
-import android.graphics.drawable.Drawable
+import androidx.core.graphics.drawable.IconCompat
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import javax.inject.Inject
 
-class GetPackageIconUseCase @Inject constructor(
+open class GetPackageIconUseCase @Inject constructor(
     private val iconLoader: IconLoader,
 ) {
-    operator fun invoke(iconResourceName: String?, packageName: String): Drawable {
+    operator fun invoke(iconResourceName: String?, packageName: String): IconCompat {
         if (iconResourceName != null) {
             val result = iconLoader.tryGetIcon(iconResourceName)
             if (result.isSuccess) {

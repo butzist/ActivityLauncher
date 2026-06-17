@@ -3,7 +3,6 @@ package de.szalkowski.activitylauncher.presentation.settings
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -12,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
-import de.szalkowski.activitylauncher.domain.system.RootDetector
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
 import javax.inject.Inject
 
@@ -20,9 +18,6 @@ import javax.inject.Inject
 class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var prefs: SharedPreferences
     private var needsRestart: Boolean = false
-
-    @Inject
-    internal lateinit var rootDetector: RootDetector
 
     @Inject
     internal lateinit var settingsRepository: SettingsRepository
@@ -55,7 +50,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().baseContext)
 
         val hidePrivate: SwitchPreferenceCompat = findPreference("hide_private")!!
-        val allowRoot: SwitchPreferenceCompat = findPreference("allow_root")!!
         val theme: ListPreference = findPreference("theme")!!
         val languages: ListPreference = findPreference("language")!!
 
@@ -73,12 +67,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             )
         }
 
-        allowRoot.setOnPreferenceChangeListener { _, newValue ->
-            onAllowRootUpdated(
-                newValue as Boolean,
-            )
-        }
-
         theme.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance())
         theme.setOnPreferenceChangeListener { _, newValue -> onThemeUpdated(newValue as String) }
     }
@@ -87,17 +75,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val languageValues = resources.getStringArray(R.array.locales)
             .map { locale -> settingsRepository.getCountryName(locale) }
         languages.entries = languageValues.toTypedArray()
-    }
-
-    private fun onAllowRootUpdated(newValue: Boolean): Boolean {
-        val hasSU = rootDetector.detectSU()
-        if (newValue && !hasSU) {
-            Toast.makeText(activity, getText(R.string.warning_root_check), Toast.LENGTH_LONG).show()
-        }
-        prefs.edit().putBoolean("allow_root", newValue).apply()
-        activityRepository.invalidate()
-        needsRestart = true
-        return true
     }
 
     private fun onThemeUpdated(newValue: String): Boolean {

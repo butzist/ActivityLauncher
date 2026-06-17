@@ -22,11 +22,11 @@ class RecentsRepositoryImpl @Inject constructor(
             .sortedByDescending { it.timestamp }
     }
 
-    override fun addActivity(componentName: ComponentName, wasRoot: Boolean) {
+    override fun addActivity(componentName: ComponentName) {
         val recents = getRecentActivities().toMutableList()
-        // Remove if already exists to update its timestamp and wasRoot status
+        // Remove if already exists to update its timestamp
         recents.removeAll { it.componentName == componentName }
-        recents.add(0, RecentsRepository.RecentActivity(componentName, wasRoot, System.currentTimeMillis()))
+        recents.add(0, RecentsRepository.RecentActivity(componentName, System.currentTimeMillis()))
 
         val newRecents = recents.take(maxRecents)
 
@@ -42,16 +42,15 @@ class RecentsRepositoryImpl @Inject constructor(
     }
 
     private fun toString(activity: RecentsRepository.RecentActivity): String {
-        return "${activity.componentName.flattenToString()};${activity.wasRoot};${activity.timestamp}"
+        return "${activity.componentName.flattenToString()};${activity.timestamp}"
     }
 
     private fun fromString(string: String): RecentsRepository.RecentActivity? {
         return try {
             val parts = string.split(';')
             val componentName = ComponentName.unflattenFromString(parts[0])!!
-            val wasRoot = parts[1].toBoolean()
-            val timestamp = parts[2].toLong()
-            RecentsRepository.RecentActivity(componentName, wasRoot, timestamp)
+            val timestamp = if (parts.size > 2) parts[2].toLong() else parts[1].toLong()
+            RecentsRepository.RecentActivity(componentName, timestamp)
         } catch (e: Exception) {
             null
         }

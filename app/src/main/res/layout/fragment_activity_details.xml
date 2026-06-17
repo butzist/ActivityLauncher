@@ -99,16 +99,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tilIcon" />
 
         <Button
-            android:id="@+id/btLaunchAsRoot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:drawableLeft="@drawable/ic_rocket_launch"
-            android:drawableTint="#ff4444"
-            android:text="@string/context_action_launch_as_root"
-            app:layout_constraintTop_toBottomOf="@+id/btLaunch" />
-
-        <Button
             android:id="@+id/btCreateShortcut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,17 +106,7 @@
             android:drawableLeft="@drawable/ic_add_home_work"
             android:drawableTint="?attr/colorOnPrimary"
             android:text="@string/context_action_shortcut"
-            app:layout_constraintTop_toBottomOf="@+id/btLaunchAsRoot" />
-
-        <Button
-            android:id="@+id/btCreateShortcutAsRoot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:drawableLeft="@drawable/ic_add_home_work"
-            android:drawableTint="#ff4444"
-            android:text="@string/context_action_shortcut_as_root"
-            app:layout_constraintTop_toBottomOf="@+id/btCreateShortcut" />
+            app:layout_constraintTop_toBottomOf="@+id/btLaunch" />
 
         <Button
             android:id="@+id/btShareShortcut"
@@ -136,7 +116,7 @@
             android:drawableLeft="@drawable/ic_share"
             android:drawableTint="?attr/colorOnPrimary"
             android:text="@string/context_action_share_shortcut"
-            app:layout_constraintTop_toBottomOf="@+id/btCreateShortcutAsRoot" />
+            app:layout_constraintTop_toBottomOf="@+id/btCreateShortcut" />
 
         <Button
             android:id="@+id/btFavorite"

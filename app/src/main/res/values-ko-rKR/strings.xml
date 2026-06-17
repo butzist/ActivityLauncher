@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">불러오는 중...</string>
     <string name="dialog_disclaimer">이 앱은 일반적으로 사용자에게 보이지 않는 기능에 접근할 수 있게 해줍니다. 일부 옵션은 예상대로 작동하지 않거나 사용하기에 안전하지 않을 수 있습니다. 이해하셨나요? 계속 진행하시겠습니까?</string>
     <string name="context_action_launch">액티비티 시작</string>
-    <string name="context_action_launch_as_root">루트 권한으로 액티비티 시작</string>
     <string name="context_action_shortcut">바로가기 생성</string>
-    <string name="context_action_shortcut_as_root">루트 권한으로 바로가기 생성</string>
     <string name="context_action_edit">바로가기 편집</string>
     <string name="context_action_share_shortcut">바로 가기 공유</string>
     <string name="context_action_favorite_add">즐겨찾기에 추가</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">오류: 잘못된 아이콘 형식</string>
     <string name="error_verbose_pin_shortcut">현재 런처가 \'PinShortcut\' 을 지원하지 않아 바로가기를 생성할 수 없습니다.</string>
     <string name="error_invalid_activity_link">제공된 활동 링크가 유효하지 않습니다.</string>
-    <string name="warning_root_check">주의: 이 기기에서는 루트 권한을 이용할 수 없는 것으로 보입니다.</string>
     <string name="exception_invalid_component_name">유효하지 않거나 잠재적으로 위험한 구성 요소 이름: %s</string>
-    <string name="exception_command_error">명령어가 오류 코드를 반환함: %d, 출력: %s</string>
     <string name="category_title_about">정보</string>
     <string name="action_view_source">소스 코드 보기</string>
     <string name="summary_action_view_source">본 앱의 소스코드는 GitHub에서 읽거나 수정할 수 있습니다. 개선 사항이나 버그 수정 사항이 있는 경우 편하게 풀 리퀘스트를 보내십시오.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">설정</string>
     <string name="settings_hide_private">비활성 액티비티 숨김</string>
     <string name="settings_summary_hide_private">루트 권한 없이는 실행할 수 없는, 비활성(출시되지 않은, 숨은) 액티비티를 숨김</string>
-    <string name="settings_allow_root">루트 허용</string>
-    <string name="settings_summary_allow_root">루트 권한을 이용하여 비활성 액티비티 실행 허용</string>
     <string name="settings_language">언어</string>
     <string name="settings_theme">테마</string>
     <string name="theme_default">시스템 기본값</string>

@@ -10,11 +10,6 @@
             android:key="hide_private"
             android:summary="@string/settings_summary_hide_private"
             android:title="@string/settings_hide_private" />
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="allow_root"
-            android:summary="@string/settings_summary_allow_root"
-            android:title="@string/settings_allow_root" />
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/theme_settings"

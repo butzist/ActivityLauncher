@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Wczytywanie …</string>
     <string name="dialog_disclaimer">Ta aplikacja daje dostęp do funkcji, które nie są zwykle widoczne dla użytkowników. Niektóre opcje mogą nie działać zgodnie z oczekiwaniami lub mogą nie być bezpieczne. Czy rozumiesz i nadal chcesz kontynuować?</string>
     <string name="context_action_launch">Rozpocznij aktywność</string>
-    <string name="context_action_launch_as_root">Uruchom aktywność jako root</string>
     <string name="context_action_shortcut">Utwórz skrót</string>
-    <string name="context_action_shortcut_as_root">Utwórz skrót jako root</string>
     <string name="context_action_edit">Edytuj skrót</string>
     <string name="context_action_share_shortcut">Udostępnij skrót</string>
     <string name="context_action_favorite_add">Dodaj do ulubionych</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Błąd: nieprawidłowy format ikony</string>
     <string name="error_verbose_pin_shortcut">Obecny launcher nie wspiera "PinShortcut". Nie można utworzyć skrótu.</string>
     <string name="error_invalid_activity_link">Podano nieprawidłowy link do aktywności</string>
-    <string name="warning_root_check">Ostrzeżenie: Uprawnienia roota nie są dostępne na tym urządzeniu.</string>
     <string name="exception_invalid_component_name">Nieprawidłowa lub potencjalnie szkodliwa nazwa komponentu: %s</string>
-    <string name="exception_command_error">Polecenie zwróciło kod błędu: %d, wyjście: %s</string>
     <string name="category_title_about">O aplikacji</string>
     <string name="action_view_source">Pokaż kod źródłowy</string>
     <string name="summary_action_view_source">Kod źródłowy tej aplikacji jest dostępny do czytania i modyfikowania na GitHub. Możesz wysłać nam pull requesty z poprawkami i poprawkami błędów.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Ustawienia</string>
     <string name="settings_hide_private">Ukryj aktywności prywatne</string>
     <string name="settings_summary_hide_private">Ukryj aktywności prywatne (niespodziewane i wyłączone), których nie można uruchomić bez dostępu do roota</string>
-    <string name="settings_allow_root">Zezwalaj na roota</string>
-    <string name="settings_summary_allow_root">Zezwalaj na uruchamianie prywatnych aktywności przez korzystanie z uprawnień roota</string>
     <string name="settings_language">Język</string>
     <string name="settings_theme">Motyw</string>
     <string name="theme_default">Domyślne systemowe</string>

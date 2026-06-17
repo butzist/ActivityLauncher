@@ -89,7 +89,10 @@ class PackageListAdapter @Inject constructor(
         holder.tvPackage.text = item.packageName
         holder.tvActivities.text = "($activityCount)"
 
-        holder.ivIcon.setImageDrawable(getPackageIconUseCase(item.iconResourceName, item.packageName))
+        val icon = getPackageIconUseCase(item.iconResourceName, item.packageName)
+        val context = holder.itemView.context
+        val drawable = icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon
+        holder.ivIcon.setImageDrawable(drawable)
 
         if (item.isFullyLoaded) {
             holder.itemView.alpha = 1.0f

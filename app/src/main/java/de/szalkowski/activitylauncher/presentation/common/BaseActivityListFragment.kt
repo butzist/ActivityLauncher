@@ -12,19 +12,23 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
+import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import de.szalkowski.activitylauncher.presentation.activities.ActivityInfoAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 abstract class BaseActivityListFragment : Fragment() {
     @Inject
-    internal lateinit var activityLauncher: ActivityLauncher
+    internal lateinit var launchActivityUseCase: LaunchActivityUseCase
 
     @Inject
     internal lateinit var activityRepository: ActivityRepository
+
+    @Inject
+    internal lateinit var iconLoader: IconLoader
 
     @Inject
     internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
@@ -39,9 +43,12 @@ abstract class BaseActivityListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ActivityInfoAdapter { getActivityIconUseCase(it.iconResourceName, it.componentName) }
+        adapter = ActivityInfoAdapter { info ->
+            val icon = getActivityIconUseCase(info.iconResourceName, info.componentName)
+            icon.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
+        }
         adapter.onItemClick = { info ->
-            activityLauncher.launchActivity(info.componentName, asRoot = false, showToast = true)
+            launchActivityUseCase(info.componentName, showToast = true)
         }
         adapter.onItemLongClick = { info ->
             runCatching {

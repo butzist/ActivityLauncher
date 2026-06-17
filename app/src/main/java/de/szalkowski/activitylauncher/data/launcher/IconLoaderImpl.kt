@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.core.util.drawableToBitmap
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
@@ -25,32 +25,38 @@ class IconLoaderImpl @Inject constructor(
     private val pm: PackageManager = context.packageManager
     private val configuration = settingsRepository.getLocaleConfiguration()
 
-    override fun getIcon(iconResourceString: String): Drawable {
+    override fun getIcon(iconResourceString: String): IconCompat {
         return tryGetIcon(iconResourceString).getOrElse {
-            pm.defaultActivityIcon
+            IconCompat.createWithBitmap(drawableToBitmap(pm.defaultActivityIcon))
         }
     }
 
-    override fun getIcon(componentName: ComponentName): Drawable {
-        return runCatching {
+    override fun getIcon(componentName: ComponentName): IconCompat {
+        return try {
             val activityInfo = pm.getActivityInfo(componentName, 0)
-            activityInfo.loadIcon(pm)
-        }.getOrElse {
-            pm.defaultActivityIcon
+            if (activityInfo.iconResource != 0) {
+                val packageContext = context.createPackageContext(componentName.packageName, 0)
+                IconCompat.createWithResource(packageContext, activityInfo.iconResource)
+            } else {
+                getPackageIcon(componentName.packageName)
+            }
+        } catch (e: Exception) {
+            IconCompat.createWithBitmap(drawableToBitmap(pm.defaultActivityIcon))
         }
     }
 
-    override fun getPackageIcon(packageName: String): Drawable {
-        return runCatching {
-            val app = pm.getApplicationInfo(packageName, 0)
-            pm.getApplicationIcon(app)
-        }.getOrElse {
-            pm.defaultActivityIcon
+    override fun getPackageIcon(packageName: String): IconCompat {
+        return try {
+            val appInfo = pm.getApplicationInfo(packageName, 0)
+            val packageContext = context.createPackageContext(packageName, 0)
+            IconCompat.createWithResource(packageContext, appInfo.icon)
+        } catch (e: Exception) {
+            IconCompat.createWithBitmap(drawableToBitmap(pm.defaultActivityIcon))
         }
     }
 
     @SuppressLint("DiscouragedApi")
-    override fun tryGetIcon(iconResourceString: String): Result<Drawable> {
+    override fun tryGetIcon(iconResourceString: String): Result<IconCompat> {
         return runCatching {
             val pack = iconResourceString.substringBefore(":")
             val typeAndName = iconResourceString.substringAfter(":")
@@ -64,7 +70,8 @@ class IconLoaderImpl @Inject constructor(
 
             if (id == 0) throw IconLoader.NullResourceException()
 
-            ResourcesCompat.getDrawable(res, id, context.theme) ?: throw IconLoader.NullResourceException()
+            val packageContext = context.createPackageContext(pack, 0)
+            IconCompat.createWithResource(packageContext, id)
         }
     }
 

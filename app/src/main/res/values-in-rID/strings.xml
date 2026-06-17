@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Memuat…</string>
     <string name="dialog_disclaimer">Aplikasi ini memberikan akses ke fitur yang biasanya tidak terlihat oleh pengguna. Beberapa opsi mungkin tidak berfungsi seperti yang diharapkan atau mungkin tidak aman untuk digunakan. Apakah Anda mengerti dan tetap ingin melanjutkan?</string>
     <string name="context_action_launch">Luncuran aktivitas</string>
-    <string name="context_action_launch_as_root">Luncuran aktivitas sebagai root</string>
     <string name="context_action_shortcut">Buat pintasan</string>
-    <string name="context_action_shortcut_as_root">Membuat Pintasan Sebagai Akar</string>
     <string name="context_action_edit">Edit pintasan</string>
     <string name="context_action_share_shortcut">Bagikan pintasan</string>
     <string name="context_action_favorite_add">Tambah ke favorit</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Kesalahan: format ikon tidak sesuai</string>
     <string name="error_verbose_pin_shortcut">Peluncur saat ini tidak mendukung "PinShortcut". Tidak dapat membuat shortcut.</string>
     <string name="error_invalid_activity_link">Tautan aktivitas tidak valid diberikan</string>
-    <string name="warning_root_check">Peringatan: Hak akses root mungkin tidak tersedia di perangkat ini.</string>
     <string name="exception_invalid_component_name">Nama komponen tidak valid atau berpotensi berbahaya: %s</string>
-    <string name="exception_command_error">Perintah mengembalikan kode kesalahan: %d, keluaran: %s</string>
     <string name="category_title_about">Tentang</string>
     <string name="action_view_source">Lihat kode sumber</string>
     <string name="summary_action_view_source">Kode sumber Aplikasi ini tersedia untuk dibaca dan dimodifikasi di GitHub. Jangan ragu untuk mengirimi kami permintaan tarik dengan peningkatan dan perbaikan bug.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Pengaturan</string>
     <string name="settings_hide_private">Sembunyikan aktifitas privat</string>
     <string name="settings_summary_hide_private">Sembunyikan aktivitas privat (tidak diekspor dan dinonaktifkan), yang tidak dapat dimulai tanpa akses root</string>
-    <string name="settings_allow_root">Aktifkan mode hak istimewa</string>
-    <string name="settings_summary_allow_root">Izinkan peluncuran aktifitas privat menggunakan hak akses root</string>
     <string name="settings_language">Bahasa</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Bawaan Sistem</string>

@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Учитавање…</string>
     <string name="dialog_disclaimer">Ова апликација омогућава приступ функцијама које обично нису видљиве корисницима. Неке опције можда неће радити како се очекује или можда неће бити безбедне за употребу. Да ли разумете и даље желите да наставите?</string>
     <string name="context_action_launch">Покрени активност</string>
-    <string name="context_action_launch_as_root">Покрени активност као root</string>
     <string name="context_action_shortcut">Направи пречицу</string>
-    <string name="context_action_shortcut_as_root">Направи пречицу као root</string>
     <string name="context_action_edit">Уреди пречицу</string>
     <string name="context_action_share_shortcut">Дели пречицу</string>
     <string name="context_action_favorite_add">Додај у омиљене</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Грешка: неисправна иконица</string>
     <string name="error_verbose_pin_shortcut">Тренутни покретач не подржава "PinShortcut". Није могуће креирати пречицу.</string>
     <string name="error_invalid_activity_link">Неисправна веза ка активности</string>
-    <string name="warning_root_check">Упозорење: Root привилегије вероватно нису доступне на овом уређају.</string>
     <string name="exception_invalid_component_name">Неисправно или потенцијално штетно име компоненте: %s</string>
-    <string name="exception_command_error">Команда је дала код грешке: %d, излаз: %s</string>
     <string name="category_title_about">О апликацији</string>
     <string name="action_view_source">Прикажи изворни код</string>
     <string name="summary_action_view_source">Изворни код ове апликације је доступан за читање и измену на GitHub-у. Слободно нам шаљите pull захтеве са побољшањима и исправкама грешака.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Подешавања</string>
     <string name="settings_hide_private">Сакриј приватне активности</string>
     <string name="settings_summary_hide_private">Сакриј приватне (неизвезене и онемогућене) активности које не могу бити покренуте без root приступа</string>
-    <string name="settings_allow_root">Омогући привилеговани режим</string>
-    <string name="settings_summary_allow_root">Омогући покретање приватних активности користећи root привилегије</string>
     <string name="settings_language">Језик</string>
     <string name="settings_theme">Тема</string>
     <string name="theme_default">Подразумевано за систем</string>

@@ -5,11 +5,10 @@ import android.content.ComponentName
 interface RecentsRepository {
     data class RecentActivity(
         val componentName: ComponentName,
-        val wasRoot: Boolean,
         val timestamp: Long,
     )
 
     fun getRecentActivities(): List<RecentActivity>
-    fun addActivity(componentName: ComponentName, wasRoot: Boolean)
+    fun addActivity(componentName: ComponentName)
     fun removeActivity(componentName: ComponentName)
 }

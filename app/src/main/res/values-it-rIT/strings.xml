@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Caricamento…</string>
     <string name="dialog_disclaimer">Questa app dà accesso a funzionalità normalmente non visibili agli utenti. Alcune opzioni potrebbero non funzionare come previsto o potrebbero non essere sicuri da usare. Si capisce e si desidera procedere?</string>
     <string name="context_action_launch">Avvia attività</string>
-    <string name="context_action_launch_as_root">Avvia attività come root</string>
     <string name="context_action_shortcut">Crea scorciatoia</string>
-    <string name="context_action_shortcut_as_root">Crea scorciatoia come root</string>
     <string name="context_action_edit">Modifica scorciatoia</string>
     <string name="context_action_share_shortcut">Condividi scorciatoia</string>
     <string name="context_action_favorite_add">Aggiungi ai preferiti</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Errore: formato icona non valido</string>
     <string name="error_verbose_pin_shortcut">Il launcher attuale non supporta "PinShortcut". Impossibile creare scorciatoia.</string>
     <string name="error_invalid_activity_link">Link attività fornito non valido</string>
-    <string name="warning_root_check">Attenzione: i privilegi di root probabilmente non sono disponibili su questo dispositivo.</string>
     <string name="exception_invalid_component_name">Nome componente non valido o potenzialmente dannoso: %s</string>
-    <string name="exception_command_error">Il comando ha restituito il codice di errore: %d, output: %s</string>
     <string name="category_title_about">Informazioni</string>
     <string name="action_view_source">Visualizza il codice sorgente</string>
     <string name="summary_action_view_source">Il codice sorgente di questa app è disponibile per la lettura e la modifica su GitHub. Sentiti libero di inviarci richieste di pull con miglioramenti e correzioni di bug.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Impostazioni</string>
     <string name="settings_hide_private">Nascondi attività private</string>
     <string name="settings_summary_hide_private">Nascondi le attività private (non esportate e disabilitate), che non possono essere avviate senza accesso root</string>
-    <string name="settings_allow_root">Abilita modalità privilegiata</string>
-    <string name="settings_summary_allow_root">Consenti l\'avvio di attività private utilizzando i privilegi di root</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Predefinito di sistema</string>

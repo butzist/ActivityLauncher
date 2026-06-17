@@ -13,6 +13,5 @@ interface SettingsRepository {
     var disclaimerAccepted: Boolean
     val hidePrivate: Boolean
     val language: String
-    val allowRoot: Boolean
     val theme: String
 }

@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">چاوەڕێبە...</string>
     <string name="dialog_disclaimer">ئەم ئەپە ڕێگە بە چالاکییە شاراوەکان دەدات کە ئاساییانە لە بەرهەمێنەرانەوە شیناکرێنەوە. لەوانەیە هەندێکیان بەو شێوەیەی کە پێدەچێت کارنەکەن یان بەکارهێنانیان ناپارێزرێت. تۆ دەتوانیت و تۆزێکتر دەتەوێت بەردەوام بیت؟</string>
     <string name="context_action_launch">دەستپێکردنی چالاکی</string>
-    <string name="context_action_launch_as_root">دەستپێکردنی چالاکی وەک ڕووت</string>
     <string name="context_action_shortcut">دروستکردنی کورتەڕێگا</string>
-    <string name="context_action_shortcut_as_root">دروستکردنی کورتەڕێگا وەک ڕووت</string>
     <string name="context_action_edit">دەستکاریکردنی کورتەڕێگا</string>
     <string name="context_action_share_shortcut">بڵاوکردنەوەی کورتەڕێگا</string>
     <string name="context_action_favorite_add">زیادکردن بۆ خۆشەویستەکان</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">هەڵە: جۆری ئایکۆنێکی نادروست</string>
     <string name="error_verbose_pin_shortcut">ئەم دەستپێکەرەوەیە پشتگیری لە "PinShortcut" ناکات. ناتوانرێت کورتەڕێگا دروستبکرێت.</string>
     <string name="error_invalid_activity_link">بەستەری چالاکی نادروست دراوە</string>
-    <string name="warning_root_check">ئاگاداری: لەوانەیە مۆڵەتەکانی ڕووت لەم ئامێرەدا بەردەست نەبن.</string>
     <string name="exception_invalid_component_name">ناوی پێکهێنەرێکی نادروست یان مەترسیدار: %s</string>
-    <string name="exception_command_error">فەرمانەکە کۆدی هەڵەی گەڕاندەوە: %d، دەرچوون: %s</string>
     <string name="category_title_about">دەربارە</string>
     <string name="action_view_source">بینینی سەرچاوەی کۆد</string>
     <string name="summary_action_view_source">سەرچاوەی کۆدی ئەم ئەپە بۆ خوێندنەوە و دەستکاریکردن لەسەر GitHub بەردەستە. ئازادانە داواکاری ڕاکێشانمان بۆ بنێرن لەگەڵ باشترکردن و چاککردنی هەڵەکان.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">ڕێکخستنەکان</string>
     <string name="settings_hide_private">شاردنەوەی چالاکییە تایبەتەکان</string>
     <string name="settings_summary_hide_private">چالاکییە تایبەتەکان (نەهێنراوەکان و ناچالاکەکان) بشارەوە، کە بەبێ گەیشتن بە ڕووت دەست پێ ناکەن</string>
-    <string name="settings_allow_root">چالاککردنی دۆخی ڕووت</string>
-    <string name="settings_summary_allow_root">ڕێگە بدە بە دەستپێکردنی چالاکییە تایبەتەکان بە بەکارهێنانی مۆڵەتەکانی ڕووت</string>
     <string name="settings_language">زمان</string>
     <string name="settings_theme">تێمە</string>
     <string name="theme_default">بنەڕەتی سیستەم</string>

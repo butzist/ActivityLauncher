@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">SImlI\'…</string>
     <string name="dialog_disclaimer">nIqHomvam Dalo\'taHvIS bISuD. chaq QapHa\' \'op nIqHommey, mItHa\'chugh Qu\'chaj taghmoHmeH ghu\'. De\' DaweSlaH \'ej DuH qaqHa\' lutu\'lu\'. DaghuHmoHlu\'pu\'. Dayaj\'a\'? nIqHom Dalo\' DaneHtaH\'a\'?</string>
     <string name="context_action_launch">Qu\' taghmoH</string>
-    <string name="context_action_launch_as_root">Qu\' taghmoH; loHwI\'</string>
     <string name="context_action_shortcut">qIgh chenmoH</string>
-    <string name="context_action_shortcut_as_root">qIgh chenmoH; loHwI\'</string>
     <string name="context_action_edit">qIgh DI\'</string>
     <string name="context_action_share_shortcut">qIgh chenmoH pat</string>
     <string name="context_action_favorite_add">yIchenmoH</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Qagh: Degh Ho\'DoS waS</string>
     <string name="error_verbose_pin_shortcut">‹PinShortcut› leHbe\' taghmoHwI\' Sarvam. qIgh chenmoHlaHbe\'.</string>
     <string name="error_invalid_activity_link">Hochmey pat lungqIj be\'lu\'</string>
-    <string name="warning_root_check">ghuH: ghaytan loHwI\' DIb lo\'laHbe\' janvam.</string>
     <string name="exception_invalid_component_name">waSbogh qoj jochbogh \'ay\' pong: %s</string>
-    <string name="exception_command_error">«Qagh mI\' %d» ja\' ra\'wI\', %s lIng</string>
     <string name="category_title_about">De\' ghItlh</string>
     <string name="action_view_source">mung De\' legh</string>
     <string name="summary_action_view_source">‹GitHub›Daq nIqHomvam mung De\' laDlaH vay\' \'ej choHlaH vay\'. tI\'meH \'ej DubmeH choHmey DaghItlhchugh, ghongeH.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">SeHlaw</string>
     <string name="settings_hide_private">\'em Qu\' So\'</string>
     <string name="settings_summary_hide_private">\'em (labbe\'lu\'bogh \'ej chu\'Ha\'lu\'bogh) Qu\'mey So\'. Qu\'meyvam taghmoHlaH loHwI\' neH.</string>
-    <string name="settings_allow_root">loHwI\' lo\' chu\'</string>
-    <string name="settings_summary_allow_root">\'em Qu\' taghmoHlaH loHwI\' \'e\' chaw\'</string>
     <string name="settings_language">Hol</string>
     <string name="settings_theme">tu\'qom</string>
     <string name="theme_default">pat motlh</string>

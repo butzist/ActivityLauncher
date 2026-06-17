@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
     <string name="dialog_disclaimer">ਇਹ ਐਪ ਉਪਭੋਗਤਾਵਾਂ ਨੂੰ ਉਹਨਾਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਦਿੰਦੀ ਹੈ ਜੋ ਆਮ ਤੌਰ \'ਤੇ ਦਿਖਾਈ ਨਹੀਂ ਦਿੰਦੀਆਂ। ਕੁਝ ਵਿਕਲਪ ਉਮੀਦ ਅਨੁਸਾਰ ਕੰਮ ਨਹੀਂ ਕਰ ਸਕਦੇ ਜਾਂ ਵਰਤਣ ਲਈ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕਦੇ। ਕੀ ਤੁਸੀਂ ਸਮਝਦੇ ਹੋ ਅਤੇ ਅਜੇ ਵੀ ਅੱਗੇ ਵਧਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
     <string name="context_action_launch">ਐਕਟੀਵਿਟੀ ਲਾਂਚ ਕਰੋ</string>
-    <string name="context_action_launch_as_root">ਰੂਟ ਵਜੋਂ ਐਕਟੀਵਿਟੀ ਲਾਂਚ ਕਰੋ</string>
     <string name="context_action_shortcut">ਸ਼ਾਰਟਕੱਟ ਬਣਾਓ</string>
-    <string name="context_action_shortcut_as_root">ਰੂਟ ਦੇ ਤੌਰ \'ਤੇ ਸ਼ਾਰਟਕੱਟ ਬਣਾਓ</string>
     <string name="context_action_edit">ਸ਼ਾਰਟਕੱਟ ਸੋਧੋ</string>
     <string name="context_action_share_shortcut">ਸ਼ਾਰਟਕੱਟ ਸਾਂਝਾ ਕਰੋ</string>
     <string name="context_action_favorite_add">ਪਸੰਦੀਦਾ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">ਗਲਤੀ: ਅਵੈਧ ਆਈਕਨ ਫਾਰਮੈਟ</string>
     <string name="error_verbose_pin_shortcut">ਮੌਜੂਦਾ ਲਾਂਚਰ "PinShortcut" ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦਾ ਹੈ। ਸ਼ਾਰਟਕੱਟ ਬਣਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ।</string>
     <string name="error_invalid_activity_link">ਪ੍ਰਦਾਨ ਕੀਤਾ ਗਿਆ ਅਵੈਧ ਐਕਟੀਵਿਟੀ ਲਿੰਕ</string>
-    <string name="warning_root_check">ਚੇਤਾਵਨੀ: ਇਸ ਡਿਵਾਈਸ \'ਤੇ ਸ਼ਾਇਦ ਰੂਟ ਵਿਸ਼ੇਸ਼ ਅਧਿਕਾਰ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।</string>
     <string name="exception_invalid_component_name">ਅਵੈਧ ਜਾਂ ਸੰਭਾਵੀ ਤੌਰ \'ਤੇ ਨੁਕਸਾਨਦੇਹ ਕੰਪੋਨੈਂਟ ਦਾ ਨਾਮ: %s</string>
-    <string name="exception_command_error">ਕਮਾਂਡ ਨੇ ਗਲਤੀ ਕੋਡ ਵਾਪਸ ਕੀਤਾ: %d, ਆਉਟਪੁੱਟ: %s</string>
     <string name="category_title_about">ਇਸ ਬਾਰੇ</string>
     <string name="action_view_source">ਸਰੋਤ ਕੋਡ ਵੇਖੋ</string>
     <string name="summary_action_view_source">ਇਸ ਐਪ ਦਾ ਸਰੋਤ ਕੋਡ GitHub \'ਤੇ ਪੜ੍ਹਨ ਅਤੇ ਸੋਧਣ ਲਈ ਉਪਲਬਧ ਹੈ। ਸੁਧਾਰਾਂ ਅਤੇ ਬੱਗਫਿਕਸ ਦੇ ਨਾਲ ਸਾਨੂੰ ਬੇਝਿਜਕ ਪੁੱਲ ਬੇਨਤੀਆਂ ਭੇਜੋ।</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">ਸੈਟਿੰਗਾਂ</string>
     <string name="settings_hide_private">ਨਿੱਜੀ ਗਤੀਵਿਧੀਆਂ ਛੁਪਾਓ</string>
     <string name="settings_summary_hide_private">ਨਿੱਜੀ (ਅਨ-ਐਕਸਪੋਰਟਡ ਅਤੇ ਅਸਮਰੱਥ) ਗਤੀਵਿਧੀਆਂ ਛੁਪਾਓ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਰੂਟ ਐਕਸੈਸ ਤੋਂ ਬਿਨਾਂ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ</string>
-    <string name="settings_allow_root">ਵਿਸ਼ੇਸ਼ ਅਧਿਕਾਰ ਮੋਡ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ</string>
-    <string name="settings_summary_allow_root">ਰੂਟ ਵਿਸ਼ੇਸ਼ ਅਧਿਕਾਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਨਿੱਜੀ ਗਤੀਵਿਧੀਆਂ ਨੂੰ ਲਾਂਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿਓ</string>
     <string name="settings_language">ਭਾਸ਼ਾ</string>
     <string name="settings_theme">ਥੀਮ</string>
     <string name="theme_default">ਸਿਸਟਮ ਡਿਫੌਲਟ</string>

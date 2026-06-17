@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">लोडिंग…</string>
     <string name="dialog_disclaimer">यह ऐप उन फीचर्स तक पहुँच प्रदान करता है जो सामान्यतः उपयोगकर्ताओं को दिखाई नहीं देते। कुछ विकल्प उम्मीद के अनुसार काम नहीं कर सकते हैं या उपयोग के लिए सुरक्षित नहीं हो सकते हैं। क्या आप समझते हैं और फिर भी आगे बढ़ना चाहते हैं?</string>
     <string name="context_action_launch">गतिविधि शुरू करे</string>
-    <string name="context_action_launch_as_root">रूट(Root) रूप में शुरू करें</string>
     <string name="context_action_shortcut">शॉर्टकट बनाएं</string>
-    <string name="context_action_shortcut_as_root">रूट के रूप में शॉर्टकट बनाएं</string>
     <string name="context_action_edit">शॉर्टकट एडिट करें</string>
     <string name="context_action_share_shortcut">शॉर्टकट साझा करें</string>
     <string name="context_action_favorite_add">पसंदीदा में जोड़ें</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Error: आइकन का फॉर्मेट वैध नहीं</string>
     <string name="error_verbose_pin_shortcut">वर्तमान लांचर "पिनशॉर्टकट" को सपोर्ट नहीं करता है। शॉर्टकट बनाने में असमर्थ।</string>
     <string name="error_invalid_activity_link">अमान्य गतिविधि लिंक प्रदान किया गया है</string>
-    <string name="warning_root_check">चेतावनी: रूट (root) विशेषाधिकार शायद इस डिवाइस पर उपलब्ध नहीं हैं।</string>
     <string name="exception_invalid_component_name">अमान्य या संभावित रूप से हानिकारक अंश नाम: %s</string>
-    <string name="exception_command_error">कमांड ने त्रुटि कोड(error code) लौटाया: %d, आउटपुट: %s</string>
     <string name="category_title_about">विषय में</string>
     <string name="action_view_source">सोर्स कोड देखें</string>
     <string name="summary_action_view_source">इस ऐप का सोर्स कोड GitHub पर पढ़ने और संशोधित करने के लिए उपलब्ध है। बेझिझक हमें सुधार और बग फिक्स के साथ पुल अनुरोध (pull requests) भेजें।</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">सेटिंग्स</string>
     <string name="settings_hide_private">निजी गतिविधियों को छुपाएं</string>
     <string name="settings_summary_hide_private">निजी (निर्यातित और अक्षम) गतिविधियों को छिपाएं, जिन्हें रूट एक्सेस के बिना शुरू नहीं किया जा सकता</string>
-    <string name="settings_allow_root">विशेषाधिकार मोड चालू करें</string>
-    <string name="settings_summary_allow_root">रूट विशेषाधिकारों का उपयोग करके निजी गतिविधियों को शुरू करने की अनुमति दें</string>
     <string name="settings_language">भाषा</string>
     <string name="settings_theme">थीम</string>
     <string name="theme_default">सिस्टम डिफ़ॉल्ट</string>

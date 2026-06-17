@@ -34,13 +34,12 @@ class AnalyticsLoggerImpl @Inject constructor(
         }
     }
 
-    override fun logActivityAction(kind: String, activity: MyActivityInfo, asRoot: Boolean) {
+    override fun logActivityAction(kind: String, activity: MyActivityInfo) {
         runCatching {
             val bundle = Bundle().apply {
                 putString("action_type", kind)
                 putString("package_name", activity.componentName.packageName)
                 putString("activity_name", activity.componentName.className)
-                putString("launch_mode", if (asRoot) "root" else "normal")
             }
 
             firebaseAnalytics.logEvent("activity_action", bundle)

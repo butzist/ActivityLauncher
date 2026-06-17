@@ -91,7 +91,11 @@ class ActivityListAdapter @AssistedInject constructor(
         holder.item = item
         holder.tvName.text = if (item.isPrivate) "(${item.name})" else item.name
         holder.tvPackage.text = item.componentName.shortClassName
-        holder.ivIcon.setImageDrawable(getActivityIconUseCase(item.iconResourceName, item.componentName))
+
+        val icon = getActivityIconUseCase(item.iconResourceName, item.componentName)
+        val context = holder.itemView.context
+        val drawable = icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon
+        holder.ivIcon.setImageDrawable(drawable)
     }
 
     object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {

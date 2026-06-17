@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Tê barkirin…</string>
     <string name="dialog_disclaimer">Ev sepan gihîştina taybetmendiyên ku bi gelemperî ji bikarhêneran re nayên xuyakirin dide. Dibe ku hin vebijark wekî ku tê hêvîkirin nexebitin an jî dibe ku karanîna wan ne ewle be. Ma hûn fêm dikin û hîn jî dixwazin bidomînin?</string>
     <string name="context_action_launch">Çalakiyê bide destpêkirin</string>
-    <string name="context_action_launch_as_root">Çalakiyê wekî root bide destpêkirin</string>
     <string name="context_action_shortcut">Kurtebirê biafirîne</string>
-    <string name="context_action_shortcut_as_root">Kurtebirê wekî root biafirîne</string>
     <string name="context_action_edit">Kurtebirê biguherîne</string>
     <string name="context_action_share_shortcut">Kurtebirê parve bike</string>
     <string name="context_action_favorite_add">Zêde bike li bijareyan</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Çewtî: forma îkonê ne derbasdar e</string>
     <string name="error_verbose_pin_shortcut">Destpêkera heyî "PinShortcut" piştgirî nake. Kurtebir nehat afirandin.</string>
     <string name="error_invalid_activity_link">Girêdana çalakiyê ya ne derbasdar hat peyda kirin</string>
-    <string name="warning_root_check">Hişyarî: Dibe ku destûrên root li ser vê cîhazê peyda nebin.</string>
     <string name="exception_invalid_component_name">Navê pêkhateyê ne derbasdar e an jî dibe ku zirardar be: %s</string>
-    <string name="exception_command_error">Fermanê koda çewtiyê vegerand: %d, derketin: %s</string>
     <string name="category_title_about">Derbar</string>
     <string name="action_view_source">Koda çavkaniyê bibîne</string>
     <string name="summary_action_view_source">Koda çavkaniyê ya vê sepanê ji bo xwendin û guherandinê li ser GitHub peyda dibe. Hûn dikarin daxwazên kişandinê (pull requests) bi çêtirkirin û sererastkirina xeletiyan ji me re bişînin.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Mîheng</string>
     <string name="settings_hide_private">Çalakiyên taybet veşêre</string>
     <string name="settings_summary_hide_private">Çalakiyên taybet (yên nehatine derxistin û neçalak) veşêre, ku bêyî gihîştina root nikarin bên destpêkirin</string>
-    <string name="settings_allow_root">Moda îmtiyazdar çalak bike</string>
-    <string name="settings_summary_allow_root">Destûr bide destpêkirina çalakiyên taybet bi karanîna destûrên root</string>
     <string name="settings_language">Ziman</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Xwerûya Sîstemê</string>

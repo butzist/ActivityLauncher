@@ -99,12 +99,12 @@ class ActivityDetailsFragment : Fragment() {
                             binding.tiPackage.setText(viewModel.editedPackage.value)
                             binding.tiClass.setText(viewModel.editedClass.value)
                             binding.tiIcon.setText(viewModel.editedIconResourceName.value)
-                            binding.ibIconPicker.setImageDrawable(viewModel.editedIconDrawable.value)
                         }
                     }
                 }
                 launch {
-                    viewModel.editedIconDrawable.collect { drawable ->
+                    viewModel.editedIcon.collect { icon ->
+                        val drawable = icon?.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
                         binding.ibIconPicker.setImageDrawable(drawable)
                     }
                 }
@@ -134,31 +134,15 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btCreateShortcut.setOnClickListener {
-            viewModel.createShortcut(asRoot = false)
-        }
-
-        binding.btCreateShortcutAsRoot.setOnClickListener {
-            viewModel.createShortcut(asRoot = true)
+            viewModel.createShortcut()
         }
 
         binding.btLaunch.setOnClickListener {
-            viewModel.launchActivity(asRoot = false)
-        }
-
-        binding.btLaunchAsRoot.setOnClickListener {
-            viewModel.launchActivity(asRoot = true)
+            viewModel.launchActivity()
         }
 
         binding.btShareShortcut.setOnClickListener {
             viewModel.shareActivity()
-        }
-
-        if (!viewModel.settingsRepository.allowRoot) {
-            binding.btCreateShortcutAsRoot.visibility = View.GONE
-            binding.btLaunchAsRoot.visibility = View.GONE
-        } else {
-            binding.btCreateShortcutAsRoot.visibility = View.VISIBLE
-            binding.btLaunchAsRoot.visibility = View.VISIBLE
         }
 
         activity?.let { reviewRequester.showInAppReview(it) }

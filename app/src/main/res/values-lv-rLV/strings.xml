@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Notiek ielāde…</string>
     <string name="dialog_disclaimer">Šī lietotne nodrošina piekļuvi funkcijām, kas parasti nav redzamas lietotājiem. Dažas opcijas var nedarboties, kā paredzēts, vai tās var būt nedrošas lietošanā. Vai jūs saprotat un joprojām vēlaties turpināt?</string>
     <string name="context_action_launch">Izpildīt darbību</string>
-    <string name="context_action_launch_as_root">Izpildīt darbību ar root tiesībām</string>
     <string name="context_action_shortcut">Izveidot saīsni</string>
-    <string name="context_action_shortcut_as_root">Izveidot saīsni ar root tiesībām</string>
     <string name="context_action_edit">Rediģēt saīsni</string>
     <string name="context_action_share_shortcut">Kopīgot saīsni</string>
     <string name="context_action_favorite_add">Pievienot favorītiem</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Kļūda: nederīks ikonas formāts</string>
     <string name="error_verbose_pin_shortcut">Pašreizējais palaidējs neatbalsta "PinShortcut". Nevar izveidot saīsni.</string>
     <string name="error_invalid_activity_link">Norādīta nederīga aktivitātes saite</string>
-    <string name="warning_root_check">Brīdinājums: iespējams root piekļuves tiesības nav pieejamas šajā ierīcē.</string>
     <string name="exception_invalid_component_name">Nederīgs vai potenciāli bīstams komponenta nosaukums: %s</string>
-    <string name="exception_command_error">Komanda atgrieza kļūdas kodu: %d, izvade: %s</string>
     <string name="category_title_about">Par lietotni</string>
     <string name="action_view_source">Skatīt pirmkodu</string>
     <string name="summary_action_view_source">Šīs lietotnes pirmkods ir pieejams skatīšanai un modificēšanai GitHub vietnē. Jūtieties brīvi sūtīt mums izvilkšanas pieprasījumus ar uzlabojumiem un kļūdu labojumiem.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Iestatījumi</string>
     <string name="settings_hide_private">Slēpt privātās darbības</string>
     <string name="settings_summary_hide_private">Slēpt privātās (neizgūtās un atspējotās) darbības, kuras nevar palaist bez root piekļuves tiesībām</string>
-    <string name="settings_allow_root">Iespējot priviliģēto režīmu</string>
-    <string name="settings_summary_allow_root">Atļaut izpildīt privātās darbības, izmantojot root tiesības</string>
     <string name="settings_language">Valoda</string>
     <string name="settings_theme">Motīvs</string>
     <string name="theme_default">Sistēmas iestatījums</string>

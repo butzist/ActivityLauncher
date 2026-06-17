@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class AnalyticsLoggerImpl @Inject constructor() : AnalyticsLogger {
     override fun logDestination(destination: NavDestination?) {}
-    override fun logActivityAction(kind: String, activity: MyActivityInfo, asRoot: Boolean) {}
+    override fun logActivityAction(kind: String, activity: MyActivityInfo) {}
     override fun logDisclaimerAccepted(accepted: Boolean) {}
     override fun logSupportOption(option: String) {}
     override fun logQsTileAction(action: String) {}

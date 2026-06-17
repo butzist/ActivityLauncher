@@ -10,14 +10,12 @@ import de.szalkowski.activitylauncher.data.launcher.*
 import de.szalkowski.activitylauncher.data.packages.*
 import de.szalkowski.activitylauncher.data.recents.RecentsRepositoryImpl
 import de.szalkowski.activitylauncher.data.settings.SettingsRepositoryImpl
-import de.szalkowski.activitylauncher.data.system.RootDetectorImpl
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
 import de.szalkowski.activitylauncher.domain.packages.*
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
-import de.szalkowski.activitylauncher.domain.system.RootDetector
 import javax.inject.Singleton
 
 @Module
@@ -28,6 +26,12 @@ abstract class CoreServicesModule {
     abstract fun bindActivityLauncher(
         activityLauncherImpl: ActivityLauncherImpl,
     ): ActivityLauncher
+
+    @Singleton
+    @Binds
+    abstract fun bindActivityLauncherProxy(
+        activityLauncherProxyImpl: ActivityLauncherProxyImpl,
+    ): ActivityLauncherProxy
 
     @Singleton
     @Binds
@@ -46,6 +50,12 @@ abstract class CoreServicesModule {
     abstract fun bindShortcutCreator(
         shortcutCreatorImpl: ShortcutCreatorImpl,
     ): ShortcutCreator
+
+    @Singleton
+    @Binds
+    abstract fun bindShortcutCreatorProxy(
+        shortcutCreatorProxyImpl: ShortcutCreatorProxyImpl,
+    ): ShortcutCreatorProxy
 
     @Singleton
     @Binds
@@ -70,12 +80,6 @@ abstract class CoreServicesModule {
     abstract fun bindViewIntentParser(
         viewIntentParserImpl: ViewIntentParserImpl,
     ): ViewIntentParser
-
-    @Singleton
-    @Binds
-    abstract fun bindRootDetector(
-        rootDetectorImpl: RootDetectorImpl,
-    ): RootDetector
 
     @Singleton
     @Binds

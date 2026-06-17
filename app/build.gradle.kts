@@ -19,7 +19,7 @@ android {
         versionName = "2.3.1"
 
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "de.szalkowski.activitylauncher.HiltTestRunner"
     }
     testBuildType = "debug"
     flavorDimensions += listOf("distribution", "ads")

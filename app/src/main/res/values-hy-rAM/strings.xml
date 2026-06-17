@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Բեռնում…</string>
     <string name="dialog_disclaimer">Այս հավելվածը հնարավորություն է տալիս օգտվել այն գործառույթներից, որոնք սովորաբար տեսանելի չեն օգտատերերին: Որոշ ընտրանքներ կարող են չաշխատել այնպես, ինչպես սպասվում է, կամ կարող են անվտանգ չլինել օգտագործելու համար: Դուք հասկանո՞ւմ եք և դեռ ցանկանո՞ւմ եք շարունակել:</string>
     <string name="context_action_launch">Գործարկել գործողությունը</string>
-    <string name="context_action_launch_as_root">Գործարկել գործողությունը որպես root</string>
     <string name="context_action_shortcut">Ստեղծել դյուրանցում</string>
-    <string name="context_action_shortcut_as_root">Ստեղծել կարճուղի որպես root</string>
     <string name="context_action_edit">Խմբագրել դյուրանցումը</string>
     <string name="context_action_share_shortcut">Կիսվել դյուրանցումով</string>
     <string name="context_action_favorite_add">Ավելացնել սիրելիներին</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Սխալ. պատկերի անվավեր ձևաչափ</string>
     <string name="error_verbose_pin_shortcut">Ընթացիկ գործարկիչը չի ապահովում «PinShortcut»-ը: Հնարավոր չէ դյուրանցում ստեղծել:</string>
     <string name="error_invalid_activity_link">Տրամադրված է անվավեր գործողության հղում</string>
-    <string name="warning_root_check">Զգուշացում. արմատային արտոնությունները, հավանաբար, մատչելի չեն այս սարքում:</string>
     <string name="exception_invalid_component_name">Անվավեր կամ պոտենցիալ վնասակար բաղադրիչի անուն. %s</string>
-    <string name="exception_command_error">Հրամանը վերադարձրեց սխալի կոդ. %d, արդյունք. %s</string>
     <string name="category_title_about">Մասին</string>
     <string name="action_view_source">Դիտել սկզբնական կոդը</string>
     <string name="summary_action_view_source">Այս հավելվածի սկզբնական կոդը հասանելի է GitHub-ում կարդալու և փոփոխելու համար: Ազատ զգացեք ուղարկել մեզ բարելավումներով և սխալների ուղղումներով ձգման հարցումներ:</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Կարգավորումներ</string>
     <string name="settings_hide_private">Թաքցնել անձնական գործողությունները</string>
     <string name="settings_summary_hide_private">Թաքցնել անձնական (չարտահանված և անջատված) գործողությունները, որոնք հնարավոր չէ մեկնարկել առանց արմատային մուտքի</string>
-    <string name="settings_allow_root">Միացնել արտոնյալ ռեժիմը</string>
-    <string name="settings_summary_allow_root">Թույլատրել անձնական գործողությունների մեկնարկը՝ օգտագործելով արմատային արտոնություններ</string>
     <string name="settings_language">Լեզու</string>
     <string name="settings_theme">Թեմա</string>
     <string name="theme_default">Համակարգի լռելյայն</string>

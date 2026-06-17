@@ -12,9 +12,7 @@
     <string name="dialog_progress_loading">Yükleniyor…</string>
     <string name="dialog_disclaimer">Bu uygulama, kullanıcılara genellikle görünmeyen özelliklere erişim sağlar. Bazı seçenekler beklendiği gibi çalışmayabilir veya kullanmak güvenli olmayabilir. Anladınız mı ve yine de devam etmek istiyor musunuz?</string>
     <string name="context_action_launch">Aktiviteyi başlat</string>
-    <string name="context_action_launch_as_root">Etkinliği root yetkisiyle çalıştır</string>
     <string name="context_action_shortcut">Kısayol oluştur</string>
-    <string name="context_action_shortcut_as_root">Yönetici olarak kısayol oluştur</string>
     <string name="context_action_edit">Kısayolu düzenle</string>
     <string name="context_action_share_shortcut">Kısayolu paylaş</string>
     <string name="context_action_favorite_add">Favorilere ekle</string>
@@ -33,9 +31,7 @@
     <string name="error_invalid_icon_format">Hata: geçersiz simge formatı</string>
     <string name="error_verbose_pin_shortcut">Geçerli başlatıcısı "PinShortcut" özelliğini desteklemiyor. Kısayol oluşturulamıyor.</string>
     <string name="error_invalid_activity_link">Geçersiz etkinlik bağlantısı sağlandı</string>
-    <string name="warning_root_check">Uyarı: Kök ayrıcalıkları muhtemelen bu cihazda mevcut değildir.</string>
     <string name="exception_invalid_component_name">Geçersiz veya potansiyel olarak zararlı bileşen adı: %s</string>
-    <string name="exception_command_error">Komut, hata kodunu döndürdü: %d, çıktı: %s</string>
     <string name="category_title_about">Hakkında</string>
     <string name="action_view_source">Kaynak Kodunu Göster</string>
     <string name="summary_action_view_source">Bu uygulamanın kaynak kodu GitHub\'da mevcuttur. Okunabilir veya düzenlenebilir. İyileştirmeler ve hata düzeltmeleri için yardım etmekten çekinmeyin.</string>
@@ -43,8 +39,6 @@
     <string name="activity_settings">Ayarlar</string>
     <string name="settings_hide_private">Gizli etkinlikleri gizle</string>
     <string name="settings_summary_hide_private">Kök erişimi olmadan başlatılamayan özel (dışa aktarılmamış ve devre dışı bırakılmış) etkinlikleri gizleyin</string>
-    <string name="settings_allow_root">Ayrıcalıklı modu etkinleştir</string>
-    <string name="settings_summary_allow_root">Kök ayrıcalıklarını kullanarak özel etkinliklerin başlatılmasına izin ver</string>
     <string name="settings_language">Dil</string>
     <string name="settings_theme">Tema</string>
     <string name="theme_default">Sistem Varsayılanı</string>
