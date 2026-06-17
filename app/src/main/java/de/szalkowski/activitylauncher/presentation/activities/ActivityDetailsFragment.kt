@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.widget.doAfterTextChanged
@@ -105,6 +106,11 @@ class ActivityDetailsFragment : Fragment() {
                 launch {
                     viewModel.editedIconDrawable.collect { drawable ->
                         binding.ibIconPicker.setImageDrawable(drawable)
+                    }
+                }
+                launch {
+                    viewModel.errorMessage.collect { resId ->
+                        Toast.makeText(requireContext(), resId, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

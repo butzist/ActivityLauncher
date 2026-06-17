@@ -1,11 +1,13 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
+import android.content.pm.PackageManager.NameNotFoundException
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
@@ -16,9 +18,15 @@ import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCa
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -60,8 +68,34 @@ class ActivityDetailsViewModel @Inject constructor(
     private val _editedIconDrawable = MutableStateFlow<Drawable?>(null)
     val editedIconDrawable: StateFlow<Drawable?> = _editedIconDrawable.asStateFlow()
 
+    private val _iconErrorTrigger = MutableStateFlow<String?>(null)
+
+    private val _errorMessage = MutableSharedFlow<Int>()
+    val errorMessage = _errorMessage.asSharedFlow()
+
     init {
         loadActivityDetails()
+        setupIconErrorDebounce()
+    }
+
+    @OptIn(FlowPreview::class)
+    private fun setupIconErrorDebounce() {
+        viewModelScope.launch {
+            _iconErrorTrigger
+                .filter { it != null }
+                .debounce(2000)
+                .collectLatest { iconResourceName ->
+                    val result = iconLoader.tryGetIcon(iconResourceName!!)
+                    result.onFailure {
+                        val errorText = when (it) {
+                            is IconLoader.NullResourceException -> R.string.error_invalid_icon_resource
+                            is NameNotFoundException -> R.string.error_invalid_icon_resource
+                            else -> R.string.error_invalid_icon_format
+                        }
+                        _errorMessage.emit(errorText)
+                    }
+                }
+        }
     }
 
     private fun loadActivityDetails() {
@@ -97,7 +131,11 @@ class ActivityDetailsViewModel @Inject constructor(
 
     fun updateIconResourceName(iconResourceName: String) {
         _editedIconResourceName.value = iconResourceName
-        _editedIconDrawable.value = iconLoader.getIcon(iconResourceName)
+        val result = iconLoader.tryGetIcon(iconResourceName)
+        _editedIconDrawable.value = result.getOrElse {
+            iconLoader.getIcon("")
+        }
+        _iconErrorTrigger.value = iconResourceName
     }
 
     fun createShortcut(asRoot: Boolean) {

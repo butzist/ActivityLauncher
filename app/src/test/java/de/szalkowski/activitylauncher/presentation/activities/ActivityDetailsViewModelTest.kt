@@ -2,6 +2,7 @@ package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
 import androidx.lifecycle.SavedStateHandle
+import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
@@ -14,8 +15,12 @@ import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseC
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -123,5 +128,46 @@ class ActivityDetailsViewModelTest {
 
         viewModel.updateClass("com.new.package.NewActivity")
         assertEquals("com.new.package.NewActivity", viewModel.editedClass.value)
+    }
+
+    @Test
+    fun `should update icon resource name and load icon`() = runTest {
+        val iconRes = "com.test:drawable/icon"
+        val mockDrawable: android.graphics.drawable.Drawable = mock()
+        whenever(iconLoader.tryGetIcon(iconRes)).thenReturn(Result.success(mockDrawable))
+
+        viewModel.updateIconResourceName(iconRes)
+        testDispatcher.scheduler.runCurrent()
+
+        assertEquals(iconRes, viewModel.editedIconResourceName.value)
+        assertEquals(mockDrawable, viewModel.editedIconDrawable.value)
+    }
+
+    @Test
+    fun `should emit error message with debounce when icon loading fails`() = runTest {
+        val iconRes = "invalid_icon"
+        whenever(iconLoader.tryGetIcon(iconRes)).thenReturn(Result.failure(IconLoader.NullResourceException()))
+        val defaultDrawable: android.graphics.drawable.Drawable = mock()
+        whenever(iconLoader.getIcon("")).thenReturn(defaultDrawable)
+
+        val errorMessages = mutableListOf<Int>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            viewModel.errorMessage.collect { errorMessages.add(it) }
+        }
+
+        viewModel.updateIconResourceName(iconRes)
+
+        // Immediately after update, error should NOT be there yet
+        assertEquals(0, errorMessages.size)
+        assertEquals(defaultDrawable, viewModel.editedIconDrawable.value)
+
+        // Advance time by 2 seconds
+        advanceTimeBy(2000)
+        runCurrent()
+
+        assertEquals(1, errorMessages.size)
+        assertEquals(R.string.error_invalid_icon_resource, errorMessages[0])
+
+        job.cancel()
     }
 }

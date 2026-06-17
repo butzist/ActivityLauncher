@@ -3,12 +3,9 @@ package de.szalkowski.activitylauncher.data.launcher
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.NameNotFoundException
 import android.graphics.drawable.Drawable
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
@@ -29,13 +26,6 @@ class IconLoaderImpl @Inject constructor(
 
     override fun getIcon(iconResourceString: String): Drawable =
         tryGetIcon(iconResourceString).getOrElse {
-            val errorText = when (it) {
-                is IconLoader.NullResourceException -> R.string.error_invalid_icon_resource
-                is NameNotFoundException -> R.string.error_invalid_icon_resource
-                else -> R.string.error_invalid_icon_format
-            }
-
-            Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
             pm.defaultActivityIcon
         }
 
