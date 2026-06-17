@@ -4,7 +4,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.componentName
 import de.szalkowski.activitylauncher.core.util.isPrivate
@@ -64,15 +63,6 @@ class ActivityRepositoryImpl @Inject constructor(
         }
 
         return getActivityInfo(activityInfo, name)
-    }
-
-    override fun getIcon(componentName: ComponentName): Drawable {
-        return runCatching {
-            val activityInfo = packageManager.getActivityInfo(componentName, 0)
-            activityInfo.loadIcon(packageManager)
-        }.getOrElse {
-            packageManager.defaultActivityIcon
-        }
     }
 
     override fun invalidate() {

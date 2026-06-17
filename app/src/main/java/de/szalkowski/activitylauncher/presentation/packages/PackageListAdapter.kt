@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.model.MyPackageInfo
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
+import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import kotlinx.coroutines.yield
 import javax.inject.Inject
 
-class PackageListAdapter @Inject constructor(private val packageRepository: PackageRepository) :
-    ListAdapter<MyPackageInfo, PackageListAdapter.ViewHolder>(PackageDiffCallback) {
+class PackageListAdapter @Inject constructor(
+    private val packageRepository: PackageRepository,
+    private val getPackageIconUseCase: GetPackageIconUseCase,
+) : ListAdapter<MyPackageInfo, PackageListAdapter.ViewHolder>(PackageDiffCallback) {
 
     private var allPackages: List<MyPackageInfo> = emptyList()
 
@@ -86,7 +89,7 @@ class PackageListAdapter @Inject constructor(private val packageRepository: Pack
         holder.tvPackage.text = item.packageName
         holder.tvActivities.text = "($activityCount)"
 
-        holder.ivIcon.setImageDrawable(packageRepository.getIcon(item.packageName))
+        holder.ivIcon.setImageDrawable(getPackageIconUseCase(item.iconResourceName, item.packageName))
 
         if (item.isFullyLoaded) {
             holder.itemView.alpha = 1.0f

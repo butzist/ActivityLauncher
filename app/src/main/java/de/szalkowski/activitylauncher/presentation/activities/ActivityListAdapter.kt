@@ -14,10 +14,12 @@ import dagger.assisted.AssistedInject
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import kotlinx.coroutines.yield
 
 class ActivityListAdapter @AssistedInject constructor(
     activityRepository: ActivityRepository,
+    private val getActivityIconUseCase: GetActivityIconUseCase,
     @Assisted private val packageName: String,
 ) : ListAdapter<MyActivityInfo, ActivityListAdapter.ViewHolder>(ActivityDiffCallback) {
     @AssistedFactory
@@ -84,14 +86,12 @@ class ActivityListAdapter @AssistedInject constructor(
         return ViewHolder(view)
     }
 
-    private val activityRepository = activityRepository
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.item = item
         holder.tvName.text = if (item.isPrivate) "(${item.name})" else item.name
         holder.tvPackage.text = item.componentName.shortClassName
-        holder.ivIcon.setImageDrawable(activityRepository.getIcon(item.componentName))
+        holder.ivIcon.setImageDrawable(getActivityIconUseCase(item.iconResourceName, item.componentName))
     }
 
     object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {

@@ -3,7 +3,6 @@ package de.szalkowski.activitylauncher.data.packages
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.data.database.PackageWithActivities
 import de.szalkowski.activitylauncher.domain.model.ActivityName
@@ -29,7 +28,6 @@ class PackageRepositoryImpl @Inject constructor(
     private val dataSource: PackageDataSource,
 ) : PackageRepository {
 
-    private val packageManager: PackageManager = context.packageManager
     private val scope = CoroutineScope(Dispatchers.Main)
     private val _packagesFlow = MutableStateFlow<List<MyPackageInfo>>(emptyList())
     override val packagesFlow: StateFlow<List<MyPackageInfo>> = _packagesFlow.asStateFlow()
@@ -134,13 +132,6 @@ class PackageRepositoryImpl @Inject constructor(
             iconResourceName = pkg.iconResourceName,
             isFullyLoaded = pkg.isFullyLoaded,
         )
-    }
-
-    override fun getIcon(packageName: String): android.graphics.drawable.Drawable {
-        return runCatching {
-            val app = packageManager.getApplicationInfo(packageName, 0)
-            packageManager.getApplicationIcon(app)
-        }.getOrElse { packageManager.defaultActivityIcon }
     }
 
     override fun getPackage(packageName: String): MyPackageInfo? {

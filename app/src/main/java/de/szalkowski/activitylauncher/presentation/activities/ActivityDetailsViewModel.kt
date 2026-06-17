@@ -17,6 +17,7 @@ import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -38,6 +39,7 @@ class ActivityDetailsViewModel @Inject constructor(
     private val createShortcutUseCase: CreateShortcutUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val shareActivityUseCase: ShareActivityUseCase,
+    private val getActivityIconUseCase: GetActivityIconUseCase,
     private val iconLoader: IconLoader,
     private val recentsRepository: RecentsRepository,
     val settingsRepository: SettingsRepository,
@@ -108,7 +110,7 @@ class ActivityDetailsViewModel @Inject constructor(
             _editedPackage.value = info.componentName.packageName
             _editedClass.value = info.componentName.className
             _editedIconResourceName.value = info.iconResourceName ?: ""
-            _editedIconDrawable.value = activityRepository.getIcon(componentName)
+            _editedIconDrawable.value = getActivityIconUseCase(info.iconResourceName, componentName)
         }
     }
 
@@ -133,7 +135,7 @@ class ActivityDetailsViewModel @Inject constructor(
         _editedIconResourceName.value = iconResourceName
         val result = iconLoader.tryGetIcon(iconResourceName)
         _editedIconDrawable.value = result.getOrElse {
-            iconLoader.getIcon("")
+            getActivityIconUseCase(null, componentName)
         }
         _iconErrorTrigger.value = iconResourceName
     }

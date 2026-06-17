@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher.data.launcher
 
 import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -24,10 +25,29 @@ class IconLoaderImpl @Inject constructor(
     private val pm: PackageManager = context.packageManager
     private val configuration = settingsRepository.getLocaleConfiguration()
 
-    override fun getIcon(iconResourceString: String): Drawable =
-        tryGetIcon(iconResourceString).getOrElse {
+    override fun getIcon(iconResourceString: String): Drawable {
+        return tryGetIcon(iconResourceString).getOrElse {
             pm.defaultActivityIcon
         }
+    }
+
+    override fun getIcon(componentName: ComponentName): Drawable {
+        return runCatching {
+            val activityInfo = pm.getActivityInfo(componentName, 0)
+            activityInfo.loadIcon(pm)
+        }.getOrElse {
+            pm.defaultActivityIcon
+        }
+    }
+
+    override fun getPackageIcon(packageName: String): Drawable {
+        return runCatching {
+            val app = pm.getApplicationInfo(packageName, 0)
+            pm.getApplicationIcon(app)
+        }.getOrElse {
+            pm.defaultActivityIcon
+        }
+    }
 
     @SuppressLint("DiscouragedApi")
     override fun tryGetIcon(iconResourceString: String): Result<Drawable> {

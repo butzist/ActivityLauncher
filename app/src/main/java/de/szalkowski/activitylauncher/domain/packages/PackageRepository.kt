@@ -9,7 +9,6 @@ interface PackageRepository {
     val isLoaded: Boolean
     val isSyncing: StateFlow<Boolean>
     fun getPackage(packageName: String): MyPackageInfo?
-    fun getIcon(packageName: String): android.graphics.drawable.Drawable
     fun invalidate()
     fun sync()
     fun loadDetails(packageName: String)

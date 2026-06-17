@@ -12,6 +12,7 @@ import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,6 +38,7 @@ class ActivityDetailsViewModelTest {
     private val createShortcutUseCase: CreateShortcutUseCase = mock()
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase = mock()
     private val shareActivityUseCase: ShareActivityUseCase = mock()
+    private val getActivityIconUseCase: GetActivityIconUseCase = mock()
     private val iconLoader: IconLoader = mock()
     private val recentsRepository: RecentsRepository = mock()
     private val settingsRepository: SettingsRepository = mock()
@@ -62,13 +64,14 @@ class ActivityDetailsViewModelTest {
             )
             whenever(activityRepository.getActivity(any())).thenReturn(activityInfo)
             whenever(favoritesRepository.isFavorite(any())).thenReturn(false)
+            whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(mock<android.graphics.drawable.Drawable>())
         }
 
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         viewModel = ActivityDetailsViewModel(
             activityRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
         )
     }
 
@@ -148,7 +151,7 @@ class ActivityDetailsViewModelTest {
         val iconRes = "invalid_icon"
         whenever(iconLoader.tryGetIcon(iconRes)).thenReturn(Result.failure(IconLoader.NullResourceException()))
         val defaultDrawable: android.graphics.drawable.Drawable = mock()
-        whenever(iconLoader.getIcon("")).thenReturn(defaultDrawable)
+        whenever(getActivityIconUseCase.invoke(null, componentName)).thenReturn(defaultDrawable)
 
         val errorMessages = mutableListOf<Int>()
         val job = launch(UnconfinedTestDispatcher(testScheduler)) {

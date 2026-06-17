@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.presentation.activities.ActivityInfoAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,6 +26,9 @@ abstract class BaseActivityListFragment : Fragment() {
     @Inject
     internal lateinit var activityRepository: ActivityRepository
 
+    @Inject
+    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
+
     protected abstract val viewModel: BaseActivityListViewModel
     protected abstract val recyclerViewId: Int
     protected abstract val logTag: String
@@ -35,7 +39,7 @@ abstract class BaseActivityListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ActivityInfoAdapter { activityRepository.getIcon(it) }
+        adapter = ActivityInfoAdapter { getActivityIconUseCase(it.iconResourceName, it.componentName) }
         adapter.onItemClick = { info ->
             activityLauncher.launchActivity(info.componentName, asRoot = false, showToast = true)
         }

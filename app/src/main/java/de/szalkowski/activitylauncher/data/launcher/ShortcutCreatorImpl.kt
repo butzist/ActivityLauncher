@@ -30,23 +30,31 @@ class ShortcutCreatorImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val intentSigner: IntentSigner,
 ) : ShortcutCreator {
-    override fun createLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
-        createLauncherIcon(activity, optionalExtras, false)
-    }
-
-    override fun createRootLauncherIcon(activity: MyActivityInfo, optionalExtras: Bundle?) {
-        createLauncherIcon(activity, optionalExtras, true)
-    }
-
-    private fun createLauncherIcon(
+    override fun createLauncherIcon(
         activity: MyActivityInfo,
+        icon: Drawable,
+        optionalExtras: Bundle?,
+    ) {
+        doCreateLauncherIcon(activity, icon, optionalExtras, false)
+    }
+
+    override fun createRootLauncherIcon(
+        activity: MyActivityInfo,
+        icon: Drawable,
+        optionalExtras: Bundle?,
+    ) {
+        doCreateLauncherIcon(activity, icon, optionalExtras, true)
+    }
+
+    private fun doCreateLauncherIcon(
+        activity: MyActivityInfo,
+        icon: Drawable,
         optionalExtras: Bundle?,
         asRoot: Boolean,
     ) {
         try {
             val pack = extractIconPackageName(activity)
             val intent = getActivityIntent(activity.componentName, optionalExtras)
-            val icon = getIcon(activity.componentName)
 
             // Use bitmap version, if icon from different package is used
             if (pack != null && pack != activity.componentName.packageName) {
@@ -68,14 +76,6 @@ class ShortcutCreatorImpl @Inject constructor(
                 Toast.LENGTH_LONG,
             ).show()
         }
-    }
-
-    private fun getIcon(componentName: android.content.ComponentName): Drawable = runCatching {
-        val pm = context.packageManager
-        val activityInfo = pm.getActivityInfo(componentName, 0)
-        activityInfo.loadIcon(pm)
-    }.getOrElse {
-        context.packageManager.defaultActivityIcon
     }
 
     private fun extractIconPackageName(

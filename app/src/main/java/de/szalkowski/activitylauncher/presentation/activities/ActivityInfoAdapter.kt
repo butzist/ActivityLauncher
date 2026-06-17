@@ -12,7 +12,7 @@ import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 
 class ActivityInfoAdapter(
-    private val iconProvider: (android.content.ComponentName) -> android.graphics.drawable.Drawable,
+    private val iconProvider: (MyActivityInfo) -> android.graphics.drawable.Drawable,
 ) : ListAdapter<MyActivityInfo, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
 
     var onItemClick: ((MyActivityInfo) -> Unit)? = null
@@ -52,7 +52,7 @@ class ActivityInfoAdapter(
         val item = getItem(position)
         holder.tvName.text = item.name
         holder.tvClass.text = item.componentName.shortClassName
-        holder.ivIcon.setImageDrawable(iconProvider(item.componentName))
+        holder.ivIcon.setImageDrawable(iconProvider(item))
     }
 
     private object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
