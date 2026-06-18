@@ -14,7 +14,7 @@ class LaunchActivityUseCase @Inject constructor(
     private val activityLauncher: ActivityLauncherProxy,
     private val recentsRepository: RecentsRepository,
 ) {
-    operator fun invoke(componentName: ComponentName, showToast: Boolean = true) {
+    operator fun invoke(componentName: ComponentName, showToast: Boolean = true, useChooser: Boolean = false) {
         if (showToast) {
             Toast.makeText(
                 context,
@@ -25,7 +25,9 @@ class LaunchActivityUseCase @Inject constructor(
                 Toast.LENGTH_LONG,
             ).show()
         }
-        activityLauncher.launchActivity(componentName)
+        activityLauncher.launchActivity(componentName, useChooser = useChooser)
         recentsRepository.addActivity(componentName)
     }
+
+    fun hasMultipleHandlers(): Boolean = activityLauncher.hasMultipleHandlers()
 }

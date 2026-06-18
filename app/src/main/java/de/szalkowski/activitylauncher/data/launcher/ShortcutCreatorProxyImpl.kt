@@ -3,7 +3,6 @@ package de.szalkowski.activitylauncher.data.launcher
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
@@ -19,6 +18,7 @@ class ShortcutCreatorProxyImpl @Inject constructor(
     override fun createLauncherIcon(
         activity: MyActivityInfo,
         optionalExtras: Bundle?,
+        useChooser: Boolean,
     ) {
         val launchIntent = getActivityIntent(activity.componentName, optionalExtras)
         val icon = getActivityIconUseCase(activity.iconResourceName, activity.componentName)
@@ -29,6 +29,19 @@ class ShortcutCreatorProxyImpl @Inject constructor(
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_ICON, icon.toBundle())
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+
+        if (useChooser) {
+            val chooser = Intent.createChooser(intent, "…")
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(chooser)
+        } else {
+            context.startActivity(intent)
+        }
+    }
+
+    override fun hasMultipleHandlers(): Boolean {
+        val intent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT)
+        val handlers = context.packageManager.queryIntentActivities(intent, 0)
+        return handlers.size > 1
     }
 }

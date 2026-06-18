@@ -70,6 +70,12 @@ class ActivityDetailsViewModel @Inject constructor(
     private val _editedIcon = MutableStateFlow<IconCompat?>(null)
     val editedIcon: StateFlow<IconCompat?> = _editedIcon.asStateFlow()
 
+    private val _showLaunchChooser = MutableStateFlow(false)
+    val showLaunchChooser: StateFlow<Boolean> = _showLaunchChooser.asStateFlow()
+
+    private val _showShortcutChooser = MutableStateFlow(false)
+    val showShortcutChooser: StateFlow<Boolean> = _showShortcutChooser.asStateFlow()
+
     private val _iconErrorTrigger = MutableStateFlow<String?>(null)
 
     private val _errorMessage = MutableSharedFlow<Int>()
@@ -78,6 +84,8 @@ class ActivityDetailsViewModel @Inject constructor(
     init {
         loadActivityDetails()
         setupIconErrorDebounce()
+        _showLaunchChooser.value = launchActivityUseCase.hasMultipleHandlers()
+        _showShortcutChooser.value = createShortcutUseCase.hasMultipleHandlers()
     }
 
     @OptIn(FlowPreview::class)
@@ -141,14 +149,14 @@ class ActivityDetailsViewModel @Inject constructor(
         _iconErrorTrigger.value = iconResourceName
     }
 
-    fun createShortcut() {
+    fun createShortcut(useChooser: Boolean = false) {
         val info = getEditedActivityInfo()
-        createShortcutUseCase(info)
+        createShortcutUseCase(info, useChooser = useChooser)
     }
 
-    fun launchActivity() {
+    fun launchActivity(useChooser: Boolean = false) {
         val info = getEditedActivityInfo()
-        launchActivityUseCase(info.componentName, showToast = true)
+        launchActivityUseCase(info.componentName, showToast = true, useChooser = useChooser)
     }
 
     fun shareActivity() {

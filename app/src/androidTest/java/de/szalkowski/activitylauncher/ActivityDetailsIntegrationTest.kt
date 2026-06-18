@@ -43,8 +43,17 @@ class ActivityDetailsIntegrationTest {
         // 3. Test Launch Button (doesn't crash)
         onView(withId(R.id.btLaunch)).perform(click())
 
+        // 3a. Test Launch Chooser Button
+        onView(withId(R.id.btLaunchChooser)).perform(click())
+        // (Note: System chooser might appear, we just ensure clicking doesn't crash)
+        // We might need to press back if the chooser is blocking the UI,
+        // but often in tests we just care it doesn't crash.
+
         // 4. Test Create Shortcut (doesn't crash)
         onView(withId(R.id.btCreateShortcut)).perform(click())
+
+        // 4a. Test Create Shortcut Chooser Button
+        onView(withId(R.id.btCreateShortcutChooser)).perform(click())
 
         scenario.close()
     }

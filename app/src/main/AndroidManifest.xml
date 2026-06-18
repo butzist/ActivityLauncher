@@ -58,19 +58,25 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".entrypoint.ShortcutActivity"
-            android:exported="true"
+            android:exported="false"
             android:noHistory="true"
             android:theme="@style/Theme.ActivityLauncher.Translucent">
+        </activity>
+
+        <activity-alias
+            android:name=".ShortcutActivity"
+            android:exported="true"
+            android:targetActivity=".entrypoint.ShortcutActivity">
+
             <intent-filter>
                 <action android:name="activitylauncher.intent.action.LAUNCH_SHORTCUT" />
-                <action android:name="activitylauncher.intent.action.CREATE_SHORTCUT" />
-                <action android:name="activitylauncher.intent.action.LAUNCH_ACTIVITY" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity-alias
             android:name=".CreateShortcutActivity"

@@ -14,11 +14,25 @@ class ActivityLauncherProxyImpl @Inject constructor(
     override fun launchActivity(
         activity: ComponentName,
         optionalExtras: Bundle?,
+        useChooser: Boolean,
     ) {
         val intent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
         intent.putExtra(ActivityLauncherProxy.INTENT_EXTRA_COMPONENT, activity.flattenToString())
         intent.putExtra(ActivityLauncherProxy.INTENT_EXTRA_EXTRAS, optionalExtras)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+
+        if (useChooser) {
+            val chooser = Intent.createChooser(intent, "…")
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(chooser)
+        } else {
+            context.startActivity(intent)
+        }
+    }
+
+    override fun hasMultipleHandlers(): Boolean {
+        val intent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
+        val handlers = context.packageManager.queryIntentActivities(intent, 0)
+        return handlers.size > 1
     }
 }

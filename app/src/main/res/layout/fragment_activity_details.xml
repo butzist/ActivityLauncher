@@ -86,45 +86,81 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tilIcon" />
 
-        <Button
-            android:id="@+id/btLaunch"
+        <LinearLayout
+            android:id="@+id/llLaunch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="8dp"
-            android:drawableLeft="@drawable/ic_rocket_launch"
-            android:drawableTint="?attr/colorOnPrimary"
-            android:text="@string/context_action_launch"
-            app:layout_constraintTop_toBottomOf="@+id/tilIcon" />
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tilIcon">
 
-        <Button
-            android:id="@+id/btCreateShortcut"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btLaunch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/ic_rocket_launch"
+                app:iconTint="?attr/colorOnPrimary"
+                android:text="@string/context_action_launch" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btLaunchChooser"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                app:icon="@drawable/ic_more_vert" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llCreateShortcut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:drawableLeft="@drawable/ic_add_home_work"
-            android:drawableTint="?attr/colorOnPrimary"
-            android:text="@string/context_action_shortcut"
-            app:layout_constraintTop_toBottomOf="@+id/btLaunch" />
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/llLaunch">
 
-        <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btCreateShortcut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/ic_add_home_work"
+                app:iconTint="?attr/colorOnPrimary"
+                android:text="@string/context_action_shortcut" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btCreateShortcutChooser"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                app:icon="@drawable/ic_more_vert" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btShareShortcut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:drawableLeft="@drawable/ic_share"
-            android:drawableTint="?attr/colorOnPrimary"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_share"
+            app:iconTint="?attr/colorOnPrimary"
             android:text="@string/context_action_share_shortcut"
-            app:layout_constraintTop_toBottomOf="@+id/btCreateShortcut" />
+            app:layout_constraintTop_toBottomOf="@+id/llCreateShortcut" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btFavorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:drawableLeft="@drawable/ic_favorite_border"
-            android:drawableTint="?attr/colorOnPrimary"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_favorite_border"
+            app:iconTint="?attr/colorOnPrimary"
             android:text="@string/context_action_favorite_add"
             app:layout_constraintTop_toBottomOf="@+id/btShareShortcut" />
 

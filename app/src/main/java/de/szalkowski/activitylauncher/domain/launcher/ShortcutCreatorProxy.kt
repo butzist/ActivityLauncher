@@ -7,7 +7,10 @@ interface ShortcutCreatorProxy {
     fun createLauncherIcon(
         activity: MyActivityInfo,
         optionalExtras: Bundle? = null,
+        useChooser: Boolean = false,
     )
+
+    fun hasMultipleHandlers(): Boolean
 
     companion object {
         const val INTENT_CREATE_SHORTCUT = "activitylauncher.intent.action.CREATE_SHORTCUT"

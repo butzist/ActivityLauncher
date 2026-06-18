@@ -101,13 +101,59 @@ class ActivityDetailsViewModelTest {
     @Test
     fun `should launch activity`() {
         viewModel.launchActivity()
-        verify(launchActivityUseCase).invoke(any(), any())
+        verify(launchActivityUseCase).invoke(any(), any(), eq(false))
+    }
+
+    @Test
+    fun `should launch activity with chooser`() {
+        viewModel.launchActivity(useChooser = true)
+        verify(launchActivityUseCase).invoke(any(), any(), eq(true))
     }
 
     @Test
     fun `should create shortcut`() {
         viewModel.createShortcut()
-        verify(createShortcutUseCase).invoke(any(), anyOrNull())
+        verify(createShortcutUseCase).invoke(any(), anyOrNull(), any(), eq(false))
+    }
+
+    @Test
+    fun `should create shortcut with chooser`() {
+        viewModel.createShortcut(useChooser = true)
+        verify(createShortcutUseCase).invoke(any(), anyOrNull(), any(), eq(true))
+    }
+
+    @Test
+    fun `should show chooser buttons if multiple handlers exist`() {
+        whenever(launchActivityUseCase.hasMultipleHandlers()).thenReturn(true)
+        whenever(createShortcutUseCase.hasMultipleHandlers()).thenReturn(true)
+
+        // Re-init viewModel to pick up new mock values
+        val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
+        val newViewModel = ActivityDetailsViewModel(
+            activityRepository, favoritesRepository, launchActivityUseCase,
+            createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+        )
+
+        assertTrue(newViewModel.showLaunchChooser.value)
+        assertTrue(newViewModel.showShortcutChooser.value)
+    }
+
+    @Test
+    fun `should hide chooser buttons if only one handler exists`() {
+        whenever(launchActivityUseCase.hasMultipleHandlers()).thenReturn(false)
+        whenever(createShortcutUseCase.hasMultipleHandlers()).thenReturn(false)
+
+        // Re-init viewModel to pick up new mock values
+        val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
+        val newViewModel = ActivityDetailsViewModel(
+            activityRepository, favoritesRepository, launchActivityUseCase,
+            createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+        )
+
+        assertFalse(newViewModel.showLaunchChooser.value)
+        assertFalse(newViewModel.showShortcutChooser.value)
     }
 
     @Test

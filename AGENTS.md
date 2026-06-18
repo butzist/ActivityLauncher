@@ -58,6 +58,7 @@ Implementations are provided in flavor-specific source sets and bound using Hilt
 
 # Verification
 Always check if the project builds after applying changes.
+When adding new features or modifying existing ones, you **MUST** add or update relevant unit tests and Android (instrumented) tests where possible to ensure correctness and prevent regressions.
 
 ## Relevant Commands
 - **Build Debug APK**: `./gradlew app:assembleDebug`

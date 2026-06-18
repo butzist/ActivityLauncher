@@ -15,7 +15,7 @@ class CreateShortcutUseCase @Inject constructor(
     private val shortcutCreator: ShortcutCreatorProxy,
     private val recentsRepository: RecentsRepository,
 ) {
-    operator fun invoke(activity: MyActivityInfo, optionalExtras: Bundle? = null, showToast: Boolean = true) {
+    operator fun invoke(activity: MyActivityInfo, optionalExtras: Bundle? = null, showToast: Boolean = true, useChooser: Boolean = false) {
         if (showToast) {
             Toast.makeText(
                 context,
@@ -26,7 +26,9 @@ class CreateShortcutUseCase @Inject constructor(
                 Toast.LENGTH_LONG,
             ).show()
         }
-        shortcutCreator.createLauncherIcon(activity, null, optionalExtras)
+        shortcutCreator.createLauncherIcon(activity, optionalExtras, useChooser)
         recentsRepository.addActivity(activity.componentName)
     }
+
+    fun hasMultipleHandlers(): Boolean = shortcutCreator.hasMultipleHandlers()
 }
