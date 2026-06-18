@@ -22,8 +22,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Kelas</string>
     <string name="label_icon">Ikon</string>
-    <string name="starting_activity">Memulai aktivitas: %s.</string>
-    <string name="creating_application_shortcut">Membuat pintasan aplikasi untuk %s</string>
     <string name="error">Kesalahan</string>
     <string name="error_creating_shortcut">Terjadi kesalahan saat membuat pintasan.</string>
     <string name="error_icons">Terjadi kesalahan ketika memuat ikon.</string>

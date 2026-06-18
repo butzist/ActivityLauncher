@@ -10,7 +10,6 @@ import org.junit.Test
 import org.mockito.kotlin.*
 
 class LaunchActivityUseCaseTest {
-    private val context: android.content.Context = mock()
     private val activityLauncher: ActivityLauncherProxy = mock()
     private val recentsRepository: RecentsRepository = mock()
     private lateinit var useCase: LaunchActivityUseCase
@@ -18,13 +17,12 @@ class LaunchActivityUseCaseTest {
 
     @Before
     fun setup() {
-        whenever(context.getText(any())).thenReturn("Test")
-        useCase = LaunchActivityUseCase(context, activityLauncher, recentsRepository)
+        useCase = LaunchActivityUseCase(activityLauncher, recentsRepository)
     }
 
     @Test
     fun `should launch activity and add to recents`() {
-        useCase.invoke(componentName, showToast = false, useChooser = false)
+        useCase.invoke(componentName, useChooser = false)
 
         verify(activityLauncher).launchActivity(componentName, useChooser = false)
         verify(recentsRepository).addActivity(componentName)
@@ -32,7 +30,7 @@ class LaunchActivityUseCaseTest {
 
     @Test
     fun `should launch activity with chooser and add to recents`() {
-        useCase.invoke(componentName, showToast = false, useChooser = true)
+        useCase.invoke(componentName, useChooser = true)
 
         verify(activityLauncher).launchActivity(componentName, useChooser = true)
         verify(recentsRepository).addActivity(componentName)

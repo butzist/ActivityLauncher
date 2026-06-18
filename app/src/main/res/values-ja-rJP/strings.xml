@@ -22,8 +22,6 @@
     <string name="label_package">パッケージ</string>
     <string name="label_class">クラス</string>
     <string name="label_icon">アイコン</string>
-    <string name="starting_activity">アクティビティの開始: %s</string>
-    <string name="creating_application_shortcut">%s のアプリケーションのショートカットを作成しています</string>
     <string name="error">エラー</string>
     <string name="error_creating_shortcut">ショートカットの作成エラー</string>
     <string name="error_icons">アイコンの読み込みエラー</string>

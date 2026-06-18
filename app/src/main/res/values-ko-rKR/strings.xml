@@ -22,8 +22,6 @@
     <string name="label_package">패키지</string>
     <string name="label_class">종류</string>
     <string name="label_icon">아이콘</string>
-    <string name="starting_activity">액티비티를 시작하는 중: %s</string>
-    <string name="creating_application_shortcut">애플리케이션 바로가기 생성 %s</string>
     <string name="error">오류</string>
     <string name="error_creating_shortcut">바로가기 만들기에 오류발생</string>
     <string name="error_icons">아이콘을 불러오는 중 오류 발생</string>

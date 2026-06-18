@@ -22,8 +22,6 @@
     <string name="label_package">පැකේජය</string>
     <string name="label_class">පන්තිය</string>
     <string name="label_icon">අයිකනය</string>
-    <string name="starting_activity">ක්‍රියාකාරකම ආරම්භ කරමින්: %s</string>
-    <string name="creating_application_shortcut">%s සඳහා යෙදුම් කෙටිමඟක් නිර්මාණය කිරීම</string>
     <string name="error">දෝෂයකි</string>
     <string name="error_creating_shortcut">කෙටි මග සෑදීමේ දෝෂයකි</string>
     <string name="error_icons">අයිකන පූරණය කිරීමේ දෝෂයකි</string>

@@ -22,8 +22,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Sınıf</string>
     <string name="label_icon">Simge</string>
-    <string name="starting_activity">%s etkinliği başlatılıyor</string>
-    <string name="creating_application_shortcut">%s için uygulama kısayolu oluşturuluyor</string>
     <string name="error">Hata</string>
     <string name="error_creating_shortcut">Kısayol oluşturulurken hata oluştu</string>
     <string name="error_icons">Simgeler yüklenirken hata oluştu.</string>

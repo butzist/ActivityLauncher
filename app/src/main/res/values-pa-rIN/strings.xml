@@ -22,8 +22,6 @@
     <string name="label_package">ਪੈਕੇਜ</string>
     <string name="label_class">ਕਲਾਸ</string>
     <string name="label_icon">ਆਈਕਨ</string>
-    <string name="starting_activity">ਸ਼ੁਰੂਆਤੀ ਐਕਟੀਵਿਟੀ: %s</string>
-    <string name="creating_application_shortcut">%s ਲਈ ਐਪਲੀਕੇਸ਼ਨ ਸ਼ਾਰਟਕੱਟ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ</string>
     <string name="error">ਗਲਤੀ</string>
     <string name="error_creating_shortcut">ਸ਼ਾਰਟਕੱਟ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ</string>
     <string name="error_icons">ਆਈਕਨ ਲੋਡ ਕਰਨ ਵਿੱਚ ਗਲਤੀ</string>

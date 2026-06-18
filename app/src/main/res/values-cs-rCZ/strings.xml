@@ -22,8 +22,6 @@
     <string name="label_package">Balíček</string>
     <string name="label_class">Třída</string>
     <string name="label_icon">Ikona</string>
-    <string name="starting_activity">Spouštění aktivity: %s</string>
-    <string name="creating_application_shortcut">Vytváření zástupce aplikace pro %s</string>
     <string name="error">Chyba</string>
     <string name="error_creating_shortcut">Chyba při vytváření zástupce</string>
     <string name="error_icons">Chyba při načítání ikon</string>

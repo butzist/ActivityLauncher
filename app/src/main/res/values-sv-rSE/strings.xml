@@ -22,8 +22,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Klass</string>
     <string name="label_icon">Ikon</string>
-    <string name="starting_activity">Startar aktivitet: %s</string>
-    <string name="creating_application_shortcut">Skapar applikationsgenväg för %s</string>
     <string name="error">Fel</string>
     <string name="error_creating_shortcut">Ett fel uppstod när genvägen skulle skapas</string>
     <string name="error_icons">Ett fel uppstod när ikonerna skulle laddas</string>

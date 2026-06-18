@@ -92,6 +92,9 @@ android {
         buildConfig = true
         resValues = true
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 ksp {

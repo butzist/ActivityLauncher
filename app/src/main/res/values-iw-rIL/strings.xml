@@ -22,8 +22,6 @@
     <string name="label_package">חבילה</string>
     <string name="label_class">מחלקה</string>
     <string name="label_icon">סמל</string>
-    <string name="starting_activity">מתחיל פעילות : %s</string>
-    <string name="creating_application_shortcut">יוצר קיצור לאפליקציה %s</string>
     <string name="error">שגיאה</string>
     <string name="error_creating_shortcut">שגיאה ביצירת קיצור דרך</string>
     <string name="error_icons">שגיאה בטעינת סמלים</string>

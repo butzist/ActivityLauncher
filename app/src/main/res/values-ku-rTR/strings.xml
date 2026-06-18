@@ -22,8 +22,6 @@
     <string name="label_package">پاکێج</string>
     <string name="label_class">کلاس</string>
     <string name="label_icon">ئایکۆن</string>
-    <string name="starting_activity">دەستپێکردنی چالاکی: %s</string>
-    <string name="creating_application_shortcut">دروستکردنی کورتەڕێگای ئەپ بۆ %s</string>
     <string name="error">هەڵە</string>
     <string name="error_creating_shortcut">هەڵە لە دروستکردنی کورتەڕێگادا</string>
     <string name="error_icons">هەڵە لە بارکردنی ئایکۆنەکاندا</string>

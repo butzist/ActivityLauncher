@@ -22,8 +22,6 @@
     <string name="label_package">Pakêt</string>
     <string name="label_class">Çîn</string>
     <string name="label_icon">Îkon</string>
-    <string name="starting_activity">Çalakî tê destpêkirin: %s</string>
-    <string name="creating_application_shortcut">Kurtebira sepanê ji bo %s tê afirandin</string>
     <string name="error">Çewtî</string>
     <string name="error_creating_shortcut">Di afirandina kurtebirê de çewtî derket</string>
     <string name="error_icons">Di barkirina îkonan de çewtî derket</string>

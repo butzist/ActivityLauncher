@@ -22,8 +22,6 @@
     <string name="label_package">Пакет</string>
     <string name="label_class">Разред</string>
     <string name="label_icon">Икона</string>
-    <string name="starting_activity">Стартиране на активност: %s</string>
-    <string name="creating_application_shortcut">Създаване на пряк път за приложение %s</string>
     <string name="error">Грешка</string>
     <string name="error_creating_shortcut">Грешка при създаване на пряк път</string>
     <string name="error_icons">Възникна грешка при зареждане на иконите</string>

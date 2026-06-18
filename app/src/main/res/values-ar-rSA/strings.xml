@@ -22,8 +22,6 @@
     <string name="label_package">حزمة</string>
     <string name="label_class">فئة</string>
     <string name="label_icon">رمز</string>
-    <string name="starting_activity">بدء النشاط: %s</string>
-    <string name="creating_application_shortcut">إنشاء اختصار للتطبيق ل %s</string>
     <string name="error">خطأ</string>
     <string name="error_creating_shortcut">خطأ في إنشاء الاختصار</string>
     <string name="error_icons">خطأ في أثناء تحميل الأيقونات</string>

@@ -156,7 +156,7 @@ class ActivityDetailsViewModel @Inject constructor(
 
     fun launchActivity(useChooser: Boolean = false) {
         val info = getEditedActivityInfo()
-        launchActivityUseCase(info.componentName, showToast = true, useChooser = useChooser)
+        launchActivityUseCase(info.componentName, useChooser = useChooser)
     }
 
     fun shareActivity() {

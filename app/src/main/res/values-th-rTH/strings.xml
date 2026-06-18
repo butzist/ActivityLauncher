@@ -22,8 +22,6 @@
     <string name="label_package">แพ็คเกจ</string>
     <string name="label_class">ระดับ</string>
     <string name="label_icon">ไอคอน</string>
-    <string name="starting_activity">กำลังเริ่มต้น activity: %s</string>
-    <string name="creating_application_shortcut">กำลังสร้างทางลัดแอพพลิเคชันสำหรับ %s</string>
     <string name="error">เกิดข้อผิดพลาด</string>
     <string name="error_creating_shortcut">เกิดข้อผิดพลาดเมื่อสร้างทางลัด</string>
     <string name="error_icons">เกิดข้อผิดพลาดในการโหลดไอคอน</string>

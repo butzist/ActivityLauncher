@@ -22,8 +22,6 @@
     <string name="label_package">پیکیج</string>
     <string name="label_class">کلاس</string>
     <string name="label_icon">آئیکن</string>
-    <string name="starting_activity">سرگرمی شروع کی جا رہی ہے: %s</string>
-    <string name="creating_application_shortcut">%s کے لیے ایپلیکیشن شارٹ کٹ بنایا جا رہا ہے</string>
     <string name="error">خرابی</string>
     <string name="error_creating_shortcut">شارٹ کٹ بنانے میں خرابی</string>
     <string name="error_icons">آئیکنز لوڈ کرنے میں خرابی</string>

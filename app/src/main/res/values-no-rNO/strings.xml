@@ -22,8 +22,6 @@
     <string name="label_package">Pakke</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Ikon</string>
-    <string name="starting_activity">Starter aktivitet: %s</string>
-    <string name="creating_application_shortcut">Oppretter snarvei for %s</string>
     <string name="error">Feil</string>
     <string name="error_creating_shortcut">Feil ved oppretting av snarvei</string>
     <string name="error_icons">Feil ved lasting av ikoner</string>

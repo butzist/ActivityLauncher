@@ -101,25 +101,25 @@ class ActivityDetailsViewModelTest {
     @Test
     fun `should launch activity`() {
         viewModel.launchActivity()
-        verify(launchActivityUseCase).invoke(any(), any(), eq(false))
+        verify(launchActivityUseCase).invoke(any(), eq(false))
     }
 
     @Test
     fun `should launch activity with chooser`() {
         viewModel.launchActivity(useChooser = true)
-        verify(launchActivityUseCase).invoke(any(), any(), eq(true))
+        verify(launchActivityUseCase).invoke(any(), eq(true))
     }
 
     @Test
     fun `should create shortcut`() {
         viewModel.createShortcut()
-        verify(createShortcutUseCase).invoke(any(), anyOrNull(), any(), eq(false))
+        verify(createShortcutUseCase).invoke(any(), anyOrNull(), eq(false))
     }
 
     @Test
     fun `should create shortcut with chooser`() {
         viewModel.createShortcut(useChooser = true)
-        verify(createShortcutUseCase).invoke(any(), anyOrNull(), any(), eq(true))
+        verify(createShortcutUseCase).invoke(any(), anyOrNull(), eq(true))
     }
 
     @Test

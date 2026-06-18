@@ -22,8 +22,6 @@
     <string name="label_package">Пакет</string>
     <string name="label_class">Класа</string>
     <string name="label_icon">Иконица</string>
-    <string name="starting_activity">Покретање активности: %s</string>
-    <string name="creating_application_shortcut">Креирање пречице апликације за %s</string>
     <string name="error">Грешка</string>
     <string name="error_creating_shortcut">Грешка при креирању пречице</string>
     <string name="error_icons">Грешка при учитавању иконица</string>

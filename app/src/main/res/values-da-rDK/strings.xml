@@ -22,8 +22,6 @@
     <string name="label_package">Pakke</string>
     <string name="label_class">Klasse</string>
     <string name="label_icon">Ikon</string>
-    <string name="starting_activity">Starter aktivitet: %s</string>
-    <string name="creating_application_shortcut">Opretter app-genvej til %s</string>
     <string name="error">Fejl</string>
     <string name="error_creating_shortcut">Fejl ved oprettelse af genvej</string>
     <string name="error_icons">Fejl ved indlæsning af ikoner</string>

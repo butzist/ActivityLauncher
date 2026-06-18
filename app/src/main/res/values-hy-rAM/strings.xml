@@ -22,8 +22,6 @@
     <string name="label_package">Փաթեթ</string>
     <string name="label_class">Դաս</string>
     <string name="label_icon">Պատկեր</string>
-    <string name="starting_activity">Գործողության մեկնարկ. %s</string>
-    <string name="creating_application_shortcut">%s-ի համար հավելվածի դյուրանցման ստեղծում</string>
     <string name="error">Սխալ</string>
     <string name="error_creating_shortcut">Դյուրանցման ստեղծման սխալ</string>
     <string name="error_icons">Պատկերների բեռնման սխալ</string>

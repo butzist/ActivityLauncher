@@ -22,8 +22,6 @@
     <string name="label_package">Пакет</string>
     <string name="label_class">Клас</string>
     <string name="label_icon">Іконка</string>
-    <string name="starting_activity">Запуск активіті: %s</string>
-    <string name="creating_application_shortcut">Створення ярлика додатку для %s</string>
     <string name="error">Помилка</string>
     <string name="error_creating_shortcut">Помилка створення ярлика</string>
     <string name="error_icons">Помилка завантаження іконок</string>

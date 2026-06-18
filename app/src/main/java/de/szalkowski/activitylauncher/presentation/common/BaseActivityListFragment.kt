@@ -48,7 +48,7 @@ abstract class BaseActivityListFragment : Fragment() {
             icon.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
         }
         adapter.onItemClick = { info ->
-            launchActivityUseCase(info.componentName, showToast = true)
+            launchActivityUseCase(info.componentName)
         }
         adapter.onItemLongClick = { info ->
             runCatching {

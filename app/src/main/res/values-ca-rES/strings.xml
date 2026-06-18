@@ -22,8 +22,6 @@
     <string name="label_package">Paquet</string>
     <string name="label_class">Classe</string>
     <string name="label_icon">Icona</string>
-    <string name="starting_activity">Començant l\'activitat: %s</string>
-    <string name="creating_application_shortcut">Creant drecera de l\'aplicació per a %s</string>
     <string name="error">Error</string>
     <string name="error_creating_shortcut">Error creant drecera</string>
     <string name="error_icons">S\'ha produït un error en carregar les icones</string>

@@ -22,8 +22,6 @@
     <string name="label_package">Lietotne</string>
     <string name="label_class">Klase</string>
     <string name="label_icon">Ikona</string>
-    <string name="starting_activity">Notiek %s darbības izpildīšana</string>
-    <string name="creating_application_shortcut">Izveido %s lietotnes saīsni</string>
     <string name="error">Kļūda</string>
     <string name="error_creating_shortcut">Veidojot saīsni, radās kļūda</string>
     <string name="error_icons">Ielādējot ikonas, radās kļūda</string>

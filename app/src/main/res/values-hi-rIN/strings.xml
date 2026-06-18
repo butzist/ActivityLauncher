@@ -22,8 +22,6 @@
     <string name="label_package">पैकेज</string>
     <string name="label_class">वर्ग(class)</string>
     <string name="label_icon">आइकॉन</string>
-    <string name="starting_activity">%s गतिविधि शुरू हो रही है</string>
-    <string name="creating_application_shortcut">%s एप्लिकेशन के लिए शॉर्टकट बनाया जा रहा है</string>
     <string name="error">असफल(Error)</string>
     <string name="error_creating_shortcut">शॉर्टकट सृजन असफल</string>
     <string name="error_icons">आइकॉन लोड करने में असफल</string>

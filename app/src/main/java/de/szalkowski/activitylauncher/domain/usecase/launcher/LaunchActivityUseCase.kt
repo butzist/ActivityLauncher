@@ -1,30 +1,17 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
 import android.content.ComponentName
-import android.content.Context
-import android.widget.Toast
-import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.R
+import android.util.Log
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import javax.inject.Inject
 
 class LaunchActivityUseCase @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val activityLauncher: ActivityLauncherProxy,
     private val recentsRepository: RecentsRepository,
 ) {
-    operator fun invoke(componentName: ComponentName, showToast: Boolean = true, useChooser: Boolean = false) {
-        if (showToast) {
-            Toast.makeText(
-                context,
-                String.format(
-                    context.getText(R.string.starting_activity).toString(),
-                    componentName.flattenToShortString(),
-                ),
-                Toast.LENGTH_LONG,
-            ).show()
-        }
+    operator fun invoke(componentName: ComponentName, useChooser: Boolean = false) {
+        Log.i("LaunchActivityUseCase", "Launching activity: ${componentName.flattenToShortString()}")
         activityLauncher.launchActivity(componentName, useChooser = useChooser)
         recentsRepository.addActivity(componentName)
     }

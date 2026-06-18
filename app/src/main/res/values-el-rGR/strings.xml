@@ -22,8 +22,6 @@
     <string name="label_package">Πακέτο</string>
     <string name="label_class">Κατηγορία</string>
     <string name="label_icon">Εικονίδιο</string>
-    <string name="starting_activity">Έναρξη δραστηριότητας: %s</string>
-    <string name="creating_application_shortcut">Δημιουργία συντόμευσης εφαρμογής για %s</string>
     <string name="error">Σφάλμα</string>
     <string name="error_creating_shortcut">Σφάλμα κατά τη δημιουργία συντόμευσης</string>
     <string name="error_icons">Σφάλμα κατά τη φόρτωση των εικονιδίων</string>

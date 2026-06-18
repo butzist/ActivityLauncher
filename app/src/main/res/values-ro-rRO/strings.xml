@@ -22,8 +22,6 @@
     <string name="label_package">Numele Pachetului</string>
     <string name="label_class">Clasă</string>
     <string name="label_icon">Pitogramă</string>
-    <string name="starting_activity">Se lansează activitatea %s</string>
-    <string name="creating_application_shortcut">Se crează scurtătură la aplicație pentru %s</string>
     <string name="error">Eroare</string>
     <string name="error_creating_shortcut">Eroare Creare comandă rapidă</string>
     <string name="error_icons">Eroare la încărcarea pitogramelor</string>

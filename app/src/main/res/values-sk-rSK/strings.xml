@@ -22,8 +22,6 @@
     <string name="label_package">Balíček</string>
     <string name="label_class">Trieda</string>
     <string name="label_icon">Ikona</string>
-    <string name="starting_activity">Spúšťanie aktivity: %s</string>
-    <string name="creating_application_shortcut">Vytváranie odkazu aplikácie pre %s</string>
     <string name="error">Chyba</string>
     <string name="error_creating_shortcut">Chyba pri vytváraní odkazu</string>
     <string name="error_icons">Chyba pri načítavaní ikony</string>

@@ -21,8 +21,6 @@
     <string name="label_package" comment="Form label for the package name field">Package</string>
     <string name="label_class" comment="Form label for the activity class name field">Class</string>
     <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
-    <string name="starting_activity" comment="Toast message shown when starting an activity. %s is the activity name or class">Starting activity: %s</string>
-    <string name="creating_application_shortcut" comment="Toast message shown when creating a shortcut. %s is the app/activity name">Creating application shortcut for %s</string>
     <string name="error" comment="Generic error dialog title">Error</string>
     <string name="error_creating_shortcut" comment="Error message displayed when shortcut creation fails">Error creating shortcut</string>
     <string name="error_icons" comment="Error message shown when app icons fail to load">Error loading icons</string>

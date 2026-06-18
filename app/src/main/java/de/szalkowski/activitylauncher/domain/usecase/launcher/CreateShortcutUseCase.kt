@@ -1,31 +1,18 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
-import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
-import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.R
+import android.util.Log
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import javax.inject.Inject
 
 class CreateShortcutUseCase @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val shortcutCreator: ShortcutCreatorProxy,
     private val recentsRepository: RecentsRepository,
 ) {
-    operator fun invoke(activity: MyActivityInfo, optionalExtras: Bundle? = null, showToast: Boolean = true, useChooser: Boolean = false) {
-        if (showToast) {
-            Toast.makeText(
-                context,
-                String.format(
-                    context.getText(R.string.creating_application_shortcut).toString(),
-                    activity.name,
-                ),
-                Toast.LENGTH_LONG,
-            ).show()
-        }
+    operator fun invoke(activity: MyActivityInfo, optionalExtras: Bundle? = null, useChooser: Boolean = false) {
+        Log.i("CreateShortcutUseCase", "Creating shortcut for: ${activity.name}")
         shortcutCreator.createLauncherIcon(activity, optionalExtras, useChooser)
         recentsRepository.addActivity(activity.componentName)
     }

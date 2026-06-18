@@ -22,8 +22,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Razred</string>
     <string name="label_icon">Ikona</string>
-    <string name="starting_activity">Začetna dejavnost: %s</string>
-    <string name="creating_application_shortcut">Ustvarjanje bližnjice do aplikacije za %s</string>
     <string name="error">Napaka</string>
     <string name="error_creating_shortcut">Napaka pri ustvarjanju bližnjice</string>
     <string name="error_icons">Napaka pri nalaganju ikon</string>

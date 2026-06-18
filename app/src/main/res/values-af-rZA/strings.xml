@@ -22,8 +22,6 @@
     <string name="label_package">Pakket</string>
     <string name="label_class">Klas</string>
     <string name="label_icon">Ikoon</string>
-    <string name="starting_activity">Begin aktiwiteit: %s</string>
-    <string name="creating_application_shortcut">Skep toepassingskortpad vir %s</string>
     <string name="error">Fout</string>
     <string name="error_creating_shortcut">Fout met die skep van kortpad</string>
     <string name="error_icons">Fout met die laai van ikone</string>

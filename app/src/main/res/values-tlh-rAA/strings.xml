@@ -22,8 +22,6 @@
     <string name="label_package">vey</string>
     <string name="label_class">Segh</string>
     <string name="label_icon">Degh</string>
-    <string name="starting_activity">Qu\' taghmoHlI\': %s</string>
-    <string name="creating_application_shortcut">%svaD nIqHom qIgh chenmoHlI\'</string>
     <string name="error">Qagh</string>
     <string name="error_creating_shortcut">qIgh Qagh</string>
     <string name="error_icons">Degh Qagh</string>

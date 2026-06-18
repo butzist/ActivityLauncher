@@ -22,8 +22,6 @@
     <string name="label_package">Paquete</string>
     <string name="label_class">Clase</string>
     <string name="label_icon">Icono</string>
-    <string name="starting_activity">Iniciando actividad: %s</string>
-    <string name="creating_application_shortcut">Creando un acceso directo para la aplicación %s</string>
     <string name="error">Error</string>
     <string name="error_creating_shortcut">Error al crear el acceso directo</string>
     <string name="error_icons">Error al cargar iconos</string>

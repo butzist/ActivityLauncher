@@ -22,8 +22,6 @@
     <string name="label_package">Paket</string>
     <string name="label_class">Sinif</string>
     <string name="label_icon">Nişan</string>
-    <string name="starting_activity">Fəaliyyət başladılır: %s</string>
-    <string name="creating_application_shortcut">%s üçün tətbiq qısayolu yaradılır</string>
     <string name="error">Xəta</string>
     <string name="error_creating_shortcut">Qısayol yaratma xətası</string>
     <string name="error_icons">Nişanları yükləmə xətası</string>

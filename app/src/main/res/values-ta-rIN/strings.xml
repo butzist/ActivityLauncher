@@ -22,8 +22,6 @@
     <string name="label_package">தொகுப்பு</string>
     <string name="label_class">வகுப்பு</string>
     <string name="label_icon">சின்னம்</string>
-    <string name="starting_activity">செயல்பாடு தொடங்குகிறது: %s</string>
-    <string name="creating_application_shortcut">%s க்கான பயன்பாட்டு குறுக்குவழியை உருவாக்குகிறது</string>
     <string name="error">பிழை</string>
     <string name="error_creating_shortcut">குறுக்குவழியை உருவாக்குவதில் பிழை</string>
     <string name="error_icons">சின்னங்களை ஏற்றுவதில் பிழை</string>

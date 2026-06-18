@@ -22,8 +22,6 @@
     <string name="label_package">套件</string>
     <string name="label_class">類別</string>
     <string name="label_icon">圖示</string>
-    <string name="starting_activity">正在啟動活動：%s</string>
-    <string name="creating_application_shortcut">正在為 %s 建立應用程式捷徑</string>
     <string name="error">錯誤</string>
     <string name="error_creating_shortcut">無法建立捷徑</string>
     <string name="error_icons">無法載入圖示</string>

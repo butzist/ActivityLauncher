@@ -22,8 +22,6 @@
     <string name="label_package">Package</string>
     <string name="label_class">Class</string>
     <string name="label_icon">Icon</string>
-    <string name="starting_activity">Starting activity: %s</string>
-    <string name="creating_application_shortcut">Creating application shortcut for %s</string>
     <string name="error">Error</string>
     <string name="error_creating_shortcut">Error creating shortcut</string>
     <string name="error_icons">Error loading icons</string>

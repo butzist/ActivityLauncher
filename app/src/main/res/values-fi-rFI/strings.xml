@@ -22,8 +22,6 @@
     <string name="label_package">Paketti</string>
     <string name="label_class">Luokka</string>
     <string name="label_icon">Ikoni</string>
-    <string name="starting_activity">Aloitetaan toimintaa: %s</string>
-    <string name="creating_application_shortcut">Luodaan pikakuvaketta sovellukselle: %s</string>
     <string name="error">Virhe</string>
     <string name="error_creating_shortcut">Virhe pikakuvakkeen luomisessa</string>
     <string name="error_icons">Virhe ladattaessa ikoneita</string>

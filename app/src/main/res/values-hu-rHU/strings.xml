@@ -22,8 +22,6 @@
     <string name="label_package">Csomag</string>
     <string name="label_class">Osztály</string>
     <string name="label_icon">Ikon</string>
-    <string name="starting_activity">%s tevékenység indítása</string>
-    <string name="creating_application_shortcut">%s alkalmazás parancsikonjának létrehozása</string>
     <string name="error">Hiba</string>
     <string name="error_creating_shortcut">Hiba a parancsikon létrehozásakor</string>
     <string name="error_icons">Hiba az ikonok betöltése közben</string>

@@ -22,8 +22,6 @@
     <string name="label_package">包</string>
     <string name="label_class">类</string>
     <string name="label_icon">图标</string>
-    <string name="starting_activity">启动活动: %s</string>
-    <string name="creating_application_shortcut">为%s应用创建快捷方式</string>
     <string name="error">错误</string>
     <string name="error_creating_shortcut">无法创建快捷方式</string>
     <string name="error_icons">加载图标时出错</string>

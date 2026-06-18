@@ -22,8 +22,6 @@
     <string name="label_package">بسته</string>
     <string name="label_class">کلاس</string>
     <string name="label_icon">آیکون</string>
-    <string name="starting_activity">در حال شروع اکتیویتی: %s</string>
-    <string name="creating_application_shortcut">در حال ایجاد میان‌بر برای برنامه: %s</string>
     <string name="error">خطا</string>
     <string name="error_creating_shortcut">خطا در ایجاد میان‌بر</string>
     <string name="error_icons">خطا در بارگذاری آیکون‌ها</string>

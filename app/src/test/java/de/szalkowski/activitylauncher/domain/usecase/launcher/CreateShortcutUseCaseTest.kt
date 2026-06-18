@@ -11,7 +11,6 @@ import org.junit.Test
 import org.mockito.kotlin.*
 
 class CreateShortcutUseCaseTest {
-    private val context: android.content.Context = mock()
     private val shortcutCreator: ShortcutCreatorProxy = mock()
     private val recentsRepository: RecentsRepository = mock()
     private lateinit var useCase: CreateShortcutUseCase
@@ -21,13 +20,12 @@ class CreateShortcutUseCaseTest {
 
     @Before
     fun setup() {
-        whenever(context.getText(any())).thenReturn("Test")
-        useCase = CreateShortcutUseCase(context, shortcutCreator, recentsRepository)
+        useCase = CreateShortcutUseCase(shortcutCreator, recentsRepository)
     }
 
     @Test
     fun `should create shortcut and add to recents`() {
-        useCase.invoke(activityInfo, null, showToast = false, useChooser = false)
+        useCase.invoke(activityInfo, null, useChooser = false)
 
         verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull(), eq(false))
         verify(recentsRepository).addActivity(componentName)
@@ -35,7 +33,7 @@ class CreateShortcutUseCaseTest {
 
     @Test
     fun `should create shortcut with chooser and add to recents`() {
-        useCase.invoke(activityInfo, null, showToast = false, useChooser = true)
+        useCase.invoke(activityInfo, null, useChooser = true)
 
         verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull(), eq(true))
         verify(recentsRepository).addActivity(componentName)
