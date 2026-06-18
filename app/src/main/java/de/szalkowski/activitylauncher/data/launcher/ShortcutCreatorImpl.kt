@@ -12,8 +12,8 @@ import androidx.annotation.RequiresApi
 import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.core.util.drawableToBitmap
 import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.core.util.toBitmap
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
@@ -37,7 +37,7 @@ class ShortcutCreatorImpl @Inject constructor(
         if (Build.VERSION.SDK_INT >= 26) {
             doCreateShortcut(appName, launchIntent, finalIcon)
         } else {
-            val bitmap = drawableToBitmap(finalIcon.loadDrawable(context)!!)
+            val bitmap = finalIcon.loadDrawable(context)!!.toBitmap()
             doCreateShortcutLegacy(appName, launchIntent, bitmap)
         }
     }

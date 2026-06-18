@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.core.util.drawableToBitmap
+import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
 import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
@@ -27,7 +27,7 @@ class IconLoaderImpl @Inject constructor(
 
     override fun getIcon(iconResourceString: String): IconCompat {
         return tryGetIcon(iconResourceString).getOrElse {
-            IconCompat.createWithBitmap(drawableToBitmap(pm.defaultActivityIcon))
+            pm.defaultActivityIcon.toIconCompat()
         }
     }
 
@@ -35,23 +35,33 @@ class IconLoaderImpl @Inject constructor(
         return try {
             val activityInfo = pm.getActivityInfo(componentName, 0)
             if (activityInfo.iconResource != 0) {
-                val packageContext = context.createPackageContext(componentName.packageName, 0)
-                IconCompat.createWithResource(packageContext, activityInfo.iconResource)
+                if (componentName.packageName == context.packageName) {
+                    val packageContext = context.createPackageContext(componentName.packageName, 0)
+                    IconCompat.createWithResource(packageContext, activityInfo.iconResource)
+                } else {
+                    val drawable = activityInfo.loadIcon(pm)
+                    drawable.toIconCompat()
+                }
             } else {
                 getPackageIcon(componentName.packageName)
             }
         } catch (e: Exception) {
-            IconCompat.createWithBitmap(drawableToBitmap(pm.defaultActivityIcon))
+            pm.defaultActivityIcon.toIconCompat()
         }
     }
 
     override fun getPackageIcon(packageName: String): IconCompat {
         return try {
             val appInfo = pm.getApplicationInfo(packageName, 0)
-            val packageContext = context.createPackageContext(packageName, 0)
-            IconCompat.createWithResource(packageContext, appInfo.icon)
+            if (packageName == context.packageName) {
+                val packageContext = context.createPackageContext(packageName, 0)
+                IconCompat.createWithResource(packageContext, appInfo.icon)
+            } else {
+                val drawable = appInfo.loadIcon(pm)
+                drawable.toIconCompat()
+            }
         } catch (e: Exception) {
-            IconCompat.createWithBitmap(drawableToBitmap(pm.defaultActivityIcon))
+            pm.defaultActivityIcon.toIconCompat()
         }
     }
 
@@ -70,8 +80,13 @@ class IconLoaderImpl @Inject constructor(
 
             if (id == 0) throw IconLoader.NullResourceException()
 
-            val packageContext = context.createPackageContext(pack, 0)
-            IconCompat.createWithResource(packageContext, id)
+            if (pack == context.packageName) {
+                val packageContext = context.createPackageContext(pack, 0)
+                IconCompat.createWithResource(packageContext, id)
+            } else {
+                val drawable = pm.getDrawable(pack, id, null)!!
+                drawable.toIconCompat()
+            }
         }
     }
 

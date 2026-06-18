@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.AndroidEntryPoint
@@ -78,7 +79,7 @@ class ShortcutActivity : AppCompatActivity() {
             return true
         }
 
-        android.util.Log.e("ShortcutActivity", "Permission denied: $permission")
+        Log.e("ShortcutActivity", "Permission denied: $permission")
         return false
     }
 

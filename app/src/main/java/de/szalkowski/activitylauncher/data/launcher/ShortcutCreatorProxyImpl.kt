@@ -18,16 +18,15 @@ class ShortcutCreatorProxyImpl @Inject constructor(
 ) : ShortcutCreatorProxy {
     override fun createLauncherIcon(
         activity: MyActivityInfo,
-        icon: IconCompat?,
         optionalExtras: Bundle?,
     ) {
         val launchIntent = getActivityIntent(activity.componentName, optionalExtras)
-        val finalIcon = icon ?: getActivityIconUseCase(activity.iconResourceName, activity.componentName)
+        val icon = getActivityIconUseCase(activity.iconResourceName, activity.componentName)
 
         val intent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT)
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_NAME, activity.name)
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(0))
-        intent.putExtra(ShortcutCreator.INTENT_EXTRA_ICON, finalIcon.toBundle())
+        intent.putExtra(ShortcutCreator.INTENT_EXTRA_ICON, icon.toBundle())
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
