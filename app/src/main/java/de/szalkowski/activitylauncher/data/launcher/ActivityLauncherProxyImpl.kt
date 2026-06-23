@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
+import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import javax.inject.Inject
 
 class ActivityLauncherProxyImpl @Inject constructor(
@@ -16,9 +18,9 @@ class ActivityLauncherProxyImpl @Inject constructor(
         optionalExtras: Bundle?,
         useChooser: Boolean,
     ) {
+        val launchIntent = getActivityIntent(activity, optionalExtras)
         val intent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
-        intent.putExtra(ActivityLauncherProxy.INTENT_EXTRA_COMPONENT, activity.flattenToString())
-        intent.putExtra(ActivityLauncherProxy.INTENT_EXTRA_EXTRAS, optionalExtras)
+        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         if (useChooser) {

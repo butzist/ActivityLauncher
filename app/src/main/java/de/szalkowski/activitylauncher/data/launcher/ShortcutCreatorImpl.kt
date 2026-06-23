@@ -90,9 +90,14 @@ class ShortcutCreatorImpl @Inject constructor(
     private fun createShortcutIntent(intent: Intent): Intent {
         val shortcutIntent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT)
         shortcutIntent.setPackage(context.packageName)
-        shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, intent.toUri(0))
+        shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, intent.toUri(Intent.URI_INTENT_SCHEME))
 
-        val signature = intentSigner.signIntent(intent)
+        val launchPlugin = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
+        if (launchPlugin != null) {
+            shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, launchPlugin)
+        }
+
+        val signature = intentSigner.signIntent(intent, launchPlugin)
         shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
 
         return shortcutIntent

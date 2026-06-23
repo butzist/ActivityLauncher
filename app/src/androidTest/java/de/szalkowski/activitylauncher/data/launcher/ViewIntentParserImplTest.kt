@@ -40,4 +40,30 @@ class ViewIntentParserImplTest {
 
         assertNull(parser.componentNameFromIntent(intent))
     }
+
+    @Test
+    fun testParseShortcutIntentLegacy() {
+        val originalIntent = Intent().apply {
+            component = android.content.ComponentName("com.test", "com.test.Activity")
+            putExtra("key", "value")
+        }
+        val uri = originalIntent.toUri(0)
+
+        val parsedIntent = parser.parseShortcutIntent(uri)
+        assertEquals("com.test", parsedIntent?.component?.packageName)
+        assertEquals("value", parsedIntent?.getStringExtra("key"))
+    }
+
+    @Test
+    fun testParseShortcutIntentModern() {
+        val originalIntent = Intent().apply {
+            component = android.content.ComponentName("com.test", "com.test.Activity")
+            putExtra("key", "value")
+        }
+        val uri = originalIntent.toUri(Intent.URI_INTENT_SCHEME)
+
+        val parsedIntent = parser.parseShortcutIntent(uri)
+        assertEquals("com.test", parsedIntent?.component?.packageName)
+        assertEquals("value", parsedIntent?.getStringExtra("key"))
+    }
 }

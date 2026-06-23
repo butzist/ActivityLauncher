@@ -11,4 +11,8 @@ interface ViewIntentParser {
     fun componentNameFromIntent(
         intent: Intent,
     ): ComponentName?
+
+    fun parseShortcutIntent(
+        uri: String,
+    ): Intent?
 }

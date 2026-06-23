@@ -13,6 +13,7 @@ import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
+import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import javax.inject.Inject
 
@@ -26,6 +27,9 @@ class ShortcutActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var intentSigner: IntentSigner
+
+    @Inject
+    internal lateinit var viewIntentParser: ViewIntentParser
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,11 +89,25 @@ class ShortcutActivity : AppCompatActivity() {
 
     private fun handleLaunchShortcut() {
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return
-        val launchIntent = Intent.parseUri(launchIntentStr, 0)
+        val launchIntent = viewIntentParser.parseShortcutIntent(launchIntentStr) ?: return
         val signature = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE).orEmpty()
+        val launchPlugin = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
 
-        if (!intentSigner.validateIntentSignature(launchIntent, signature)) {
+        if (!intentSigner.validateIntentSignature(launchIntent, signature, launchPlugin)) {
+            Log.e("ShortcutActivity", "Invalid signature for shortcut")
             return
+        }
+
+        if (launchPlugin != null) {
+            val component = ComponentName.unflattenFromString(launchPlugin)
+            if (component != null) {
+                val delegationIntent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
+                delegationIntent.component = component
+                delegationIntent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+                delegationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(delegationIntent)
+                return
+            }
         }
 
         activityLauncher.launchActivity(
@@ -99,23 +117,23 @@ class ShortcutActivity : AppCompatActivity() {
     }
 
     private fun handleLaunchActivity() {
-        val componentStr = intent.getStringExtra(ActivityLauncherProxy.INTENT_EXTRA_COMPONENT) ?: return
-        val component = ComponentName.unflattenFromString(componentStr) ?: return
-        val extras = intent.getBundleExtra(ActivityLauncherProxy.INTENT_EXTRA_EXTRAS)
+        val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return
+        val launchIntent = viewIntentParser.parseShortcutIntent(launchIntentStr) ?: return
 
         activityLauncher.launchActivity(
-            component,
-            extras,
+            launchIntent.component!!,
+            launchIntent.extras,
         )
     }
 
     private fun handleCreateShortcut() {
         val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: ""
-        val launchIntent = Intent.parseUri(launchIntentStr, 0)
+        val launchIntent = viewIntentParser.parseShortcutIntent(launchIntentStr) ?: return
         val iconBundle = intent.getBundleExtra(ShortcutCreator.INTENT_EXTRA_ICON) ?: return
         val iconCompat = IconCompat.createFromBundle(iconBundle) ?: return
         val component = launchIntent.component ?: return
+        val launchPlugin = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
 
         val activityInfo = MyActivityInfo(
             component,
@@ -124,6 +142,11 @@ class ShortcutActivity : AppCompatActivity() {
             false, // isPrivate
         )
 
-        shortcutCreator.createLauncherIcon(activityInfo, iconCompat, launchIntent.extras)
+        val extras = launchIntent.extras ?: Bundle()
+        if (launchPlugin != null) {
+            extras.putString(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, launchPlugin)
+        }
+
+        shortcutCreator.createLauncherIcon(activityInfo, iconCompat, extras)
     }
 }

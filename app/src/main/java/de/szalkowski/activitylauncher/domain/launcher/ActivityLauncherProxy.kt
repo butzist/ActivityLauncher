@@ -14,7 +14,5 @@ interface ActivityLauncherProxy {
 
     companion object {
         const val INTENT_LAUNCH_ACTIVITY = "activitylauncher.intent.action.LAUNCH_ACTIVITY"
-        const val INTENT_EXTRA_COMPONENT = "extra_component"
-        const val INTENT_EXTRA_EXTRAS = "extra_extras"
     }
 }

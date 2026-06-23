@@ -27,13 +27,18 @@ class IntentSignerImpl @Inject constructor(@ApplicationContext context: Context)
         }
     }
 
-    override fun signIntent(intent: Intent): String {
+    override fun signIntent(intent: Intent, launchPlugin: String?): String {
         val uri = intent.toUri(0)
-        return hmac256(key, uri)
+        val message = if (launchPlugin == null) {
+            uri
+        } else {
+            "$uri;$launchPlugin"
+        }
+        return hmac256(key, message)
     }
 
-    override fun validateIntentSignature(intent: Intent, signature: String): Boolean {
-        val compSignature = signIntent(intent)
+    override fun validateIntentSignature(intent: Intent, signature: String, launchPlugin: String?): Boolean {
+        val compSignature = signIntent(intent, launchPlugin)
         return signature == compSignature
     }
 

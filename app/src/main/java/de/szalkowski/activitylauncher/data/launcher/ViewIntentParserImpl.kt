@@ -23,4 +23,16 @@ class ViewIntentParserImpl @Inject constructor() : ViewIntentParser {
                 ?: throw Exception("Invalid component name")
         }.getOrNull()
     }
+
+    override fun parseShortcutIntent(uri: String): Intent? {
+        return try {
+            Intent.parseUri(uri, Intent.URI_INTENT_SCHEME)
+        } catch (_: Exception) {
+            try {
+                Intent.parseUri(uri, 0)
+            } catch (_: Exception) {
+                null
+            }
+        }
+    }
 }

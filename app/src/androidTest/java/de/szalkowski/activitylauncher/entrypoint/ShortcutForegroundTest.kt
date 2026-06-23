@@ -99,7 +99,7 @@ class ShortcutForegroundTest {
 
         val intent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test App")
-            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(0))
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
             putExtra(ShortcutCreator.INTENT_EXTRA_ICON, icon.toBundle())
             setClassName(ApplicationProvider.getApplicationContext(), ShortcutActivity::class.java.name)
         }

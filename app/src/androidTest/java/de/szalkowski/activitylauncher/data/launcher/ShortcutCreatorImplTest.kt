@@ -34,7 +34,7 @@ class ShortcutCreatorImplTest {
             android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888),
         )
         whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
-        whenever(intentSigner.signIntent(any())).thenReturn("signature")
+        whenever(intentSigner.signIntent(any(), anyOrNull())).thenReturn("signature")
     }
 
     @Test
