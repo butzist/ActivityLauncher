@@ -34,4 +34,6 @@ data class ActivityEntity(
     val shortCls: String,
     val fullCls: String,
     val isDefault: Boolean,
+    val isPrivate: Boolean,
+    val iconResourceName: String?,
 )

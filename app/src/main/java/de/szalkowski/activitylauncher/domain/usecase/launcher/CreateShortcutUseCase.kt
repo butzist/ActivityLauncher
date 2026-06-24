@@ -1,21 +1,24 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
 import android.os.Bundle
-import android.util.Log
+import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import javax.inject.Inject
 
 class CreateShortcutUseCase @Inject constructor(
-    private val shortcutCreator: ShortcutCreatorProxy,
-    private val recentsRepository: RecentsRepository,
+    private val shortcutCreator: ShortcutCreator,
+    private val shortcutCreatorProxy: ShortcutCreatorProxy,
 ) {
-    operator fun invoke(activity: MyActivityInfo, optionalExtras: Bundle? = null, useChooser: Boolean = false) {
-        Log.i("CreateShortcutUseCase", "Creating shortcut for: ${activity.name}")
-        shortcutCreator.createLauncherIcon(activity, optionalExtras, useChooser)
-        recentsRepository.addActivity(activity.componentName)
+    operator fun invoke(activity: SystemActivity, optionalExtras: Bundle? = null, useChooser: Boolean = false) {
+        if (shortcutCreatorProxy.hasMultipleHandlers()) {
+            shortcutCreatorProxy.createLauncherIcon(activity, optionalExtras, useChooser)
+        } else {
+            shortcutCreator.createLauncherIcon(activity, optionalExtras, useChooser)
+        }
     }
 
-    fun hasMultipleHandlers(): Boolean = shortcutCreator.hasMultipleHandlers()
+    fun hasMultipleHandlers(): Boolean {
+        return shortcutCreatorProxy.hasMultipleHandlers()
+    }
 }

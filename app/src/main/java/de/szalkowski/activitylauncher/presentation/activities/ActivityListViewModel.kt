@@ -4,9 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PackageActivities
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,20 +19,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ActivityListViewModel @Inject constructor(
-    private val activityRepository: ActivityRepository,
+    private val packageRepository: PackageRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val packageName: String = savedStateHandle.get<String>("packageName") ?: ""
 
-    private val _activities = MutableStateFlow<List<MyActivityInfo>>(emptyList())
-    val activities: StateFlow<List<MyActivityInfo>> = _activities.asStateFlow()
+    private val _activities = MutableStateFlow<List<SystemActivity>>(emptyList())
+    val activities: StateFlow<List<SystemActivity>> = _activities.asStateFlow()
 
     private val _isSearching = MutableStateFlow(false)
     val isSearching: StateFlow<Boolean> = _isSearching.asStateFlow()
 
     private var allPackageActivities: PackageActivities? = null
-    private var combinedActivities: List<MyActivityInfo> = emptyList()
+    private var combinedActivities: List<SystemActivity> = emptyList()
     private var currentQuery: String = ""
     private var filterJob: Job? = null
 
@@ -44,10 +44,10 @@ class ActivityListViewModel @Inject constructor(
         viewModelScope.launch {
             _isSearching.value = true
             val result = withContext(Dispatchers.Default) {
-                activityRepository.getActivities(packageName)
+                packageRepository.getActivities(packageName)
             }
             allPackageActivities = result
-            combinedActivities = listOfNotNull(result.defaultActivity) + result.activities
+            combinedActivities = result.activities
             filter(currentQuery)
         }
     }
@@ -68,17 +68,19 @@ class ActivityListViewModel @Inject constructor(
         }
     }
 
-    private suspend fun performFilter(query: String): List<MyActivityInfo> {
+    private suspend fun performFilter(query: String): List<SystemActivity> {
         val pack = allPackageActivities ?: return emptyList()
         if (query.isEmpty()) return combinedActivities
 
-        val result = mutableListOf<MyActivityInfo>()
+        val packageMatches = pack.packageName.contains(query, ignoreCase = true) ||
+            pack.name.contains(query, ignoreCase = true)
+
+        val result = mutableListOf<SystemActivity>()
 
         // Check default activity
         pack.defaultActivity?.let { a ->
             yield()
-            if (pack.packageName.contains(query, ignoreCase = true) ||
-                pack.name.contains(query, ignoreCase = true) ||
+            if (packageMatches ||
                 a.name.contains(query, ignoreCase = true) ||
                 a.componentName.className.contains(query, ignoreCase = true)
             ) {
@@ -89,7 +91,8 @@ class ActivityListViewModel @Inject constructor(
         // Check regular activities
         for (a in pack.activities) {
             yield()
-            if (a.name.contains(query, ignoreCase = true) ||
+            if (packageMatches ||
+                a.name.contains(query, ignoreCase = true) ||
                 a.componentName.shortClassName.contains(query, ignoreCase = true)
             ) {
                 if (!result.contains(a)) {

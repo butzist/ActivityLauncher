@@ -57,7 +57,7 @@ data class PackageWithActivities(
     val activities: List<ActivityEntity>,
 )
 
-@Database(entities = [AppPackageEntity::class, ActivityEntity::class], version = 1, exportSchema = false)
+@Database(entities = [AppPackageEntity::class, ActivityEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun packageDao(): PackageDao
 }

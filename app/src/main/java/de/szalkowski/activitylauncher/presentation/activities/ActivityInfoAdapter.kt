@@ -9,34 +9,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 
 class ActivityInfoAdapter(
-    private val iconProvider: (MyActivityInfo) -> android.graphics.drawable.Drawable,
-) : ListAdapter<MyActivityInfo, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
+    private val iconProvider: (SystemActivity) -> android.graphics.drawable.Drawable,
+) : ListAdapter<SystemActivity, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
 
-    var onItemClick: ((MyActivityInfo) -> Unit)? = null
-    var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
+    var onItemClick: ((SystemActivity) -> Unit)? = null
+    var onItemLongClick: ((SystemActivity) -> Unit)? = null
 
-    public override fun getItem(position: Int): MyActivityInfo = super.getItem(position)
+    public override fun getItem(position: Int): SystemActivity = super.getItem(position)
 
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
         val tvName: TextView = viewItem.findViewById(R.id.tvName)
-        val tvClass: TextView = viewItem.findViewById(R.id.tvClass)
+        val tvPackage: TextView = viewItem.findViewById(R.id.tvClass)
         val ivIcon: ImageView = viewItem.findViewById(R.id.ivIcon)
+        lateinit var item: SystemActivity
 
         init {
             itemView.setOnClickListener {
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    onItemClick?.invoke(getItem(position))
-                }
+                onItemClick?.invoke(item)
             }
             itemView.setOnLongClickListener {
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    onItemLongClick?.invoke(getItem(position))
-                }
+                onItemLongClick?.invoke(item)
                 true
             }
         }
@@ -50,17 +45,19 @@ class ActivityInfoAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        holder.item = item
         holder.tvName.text = item.name
-        holder.tvClass.text = item.componentName.shortClassName
+        holder.tvPackage.text = item.componentName.shortClassName
+
         holder.ivIcon.setImageDrawable(iconProvider(item))
     }
 
-    private object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
-        override fun areItemsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+    private object ActivityDiffCallback : DiffUtil.ItemCallback<SystemActivity>() {
+        override fun areItemsTheSame(oldItem: SystemActivity, newItem: SystemActivity): Boolean {
             return oldItem.componentName == newItem.componentName
         }
 
-        override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+        override fun areContentsTheSame(oldItem: SystemActivity, newItem: SystemActivity): Boolean {
             return oldItem == newItem
         }
     }

@@ -9,7 +9,7 @@ import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     internal lateinit var settingsRepository: SettingsRepository
 
     @Inject
-    internal lateinit var activityRepository: ActivityRepository
+    internal lateinit var packageRepository: PackageRepository
 
     override fun onDestroy() {
         super.onDestroy()
@@ -85,7 +85,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun onHidePrivateUpdated(newValue: Boolean): Boolean {
         prefs.edit().putBoolean("hide_hide_private", newValue).apply()
-        activityRepository.invalidate()
+        packageRepository.invalidate()
         needsRestart = true
         return true
     }
@@ -94,7 +94,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         prefs.edit().putString("language", newValue).apply()
 
         settingsRepository.applyLocaleConfiguration(requireActivity().baseContext)
-        activityRepository.invalidate()
+        packageRepository.invalidate()
         needsRestart = true
         return true
     }

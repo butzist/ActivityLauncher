@@ -1,27 +1,30 @@
-package de.szalkowski.activitylauncher.app.di
+package de.szalkowski.activitylauncher.di
 
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.testing.TestInstallIn
+import de.szalkowski.activitylauncher.app.di.DatabaseModule
 import de.szalkowski.activitylauncher.data.database.AppDatabase
 import de.szalkowski.activitylauncher.data.database.PackageDao
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
+@TestInstallIn(
+    components = [SingletonComponent::class],
+    replaces = [DatabaseModule::class],
+)
+object TestDatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(
             context,
             AppDatabase::class.java,
-            "activity_launcher.db",
-        ).fallbackToDestructiveMigration().build()
+        ).allowMainThreadQueries().build()
     }
 
     @Provides

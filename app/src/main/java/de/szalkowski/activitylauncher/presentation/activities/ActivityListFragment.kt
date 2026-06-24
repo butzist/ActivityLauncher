@@ -84,7 +84,7 @@ class ActivityListFragment : Fragment() {
             runCatching {
                 val action = ActivityListFragmentDirections.actionSelectActivity(it.componentName)
                 findNavController().navigate(action)
-            }.onFailure { Log.e("Navigation", "Error while navigating from PackageListFragment") }
+            }.onFailure { Log.e("Navigation", "Error while navigating from ActivityListFragment") }
         }
 
         binding.rvActivities.adapter = activityListAdapter

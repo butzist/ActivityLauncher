@@ -1,13 +1,14 @@
 package de.szalkowski.activitylauncher.data.packages
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.data.database.PackageWithActivities
-import de.szalkowski.activitylauncher.domain.model.ActivityName
-import de.szalkowski.activitylauncher.domain.model.MyPackageInfo
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
+import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.entrypoint.PackageChangeReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,7 @@ import javax.inject.Singleton
 class PackageRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val dataSource: PackageDataSource,
+    private val settingsRepository: SettingsRepository,
 ) : PackageRepository {
 
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -116,10 +118,10 @@ class PackageRepositoryImpl @Inject constructor(
 
     private fun PackageWithActivities.toMyPackageInfo(): MyPackageInfo {
         val activityNames = activities.filter { !it.isDefault }.map {
-            ActivityName(it.name, it.shortCls, it.fullCls)
+            ActivityName(it.name, it.shortCls, it.fullCls, it.isPrivate, it.iconResourceName)
         }
         val defaultActivityName = activities.find { it.isDefault }?.let {
-            ActivityName(it.name, it.shortCls, it.fullCls)
+            ActivityName(it.name, it.shortCls, it.fullCls, it.isPrivate, it.iconResourceName)
         }
 
         return MyPackageInfo(
@@ -135,7 +137,66 @@ class PackageRepositoryImpl @Inject constructor(
     }
 
     override fun getPackage(packageName: String): MyPackageInfo? {
-        return packages.find { it.packageName == packageName }
+        return _packagesFlow.value.find { it.packageName == packageName }
+    }
+
+    override fun getActivities(packageName: String): PackageActivities {
+        val pack = getPackage(packageName)
+            ?: return PackageActivities(packageName, packageName, null, listOf())
+
+        val activityNames = (listOfNotNull(pack.defaultActivityName) + pack.activityNames)
+        val activities = activityNames.map { name ->
+            SystemActivity(
+                ComponentName(pack.packageName, name.fullCls),
+                name.name,
+                name.iconResourceName,
+                name.isPrivate,
+            )
+        }
+
+        val defaultActivity = pack.defaultActivityName?.let { name ->
+            activities.find { it.componentName.className == name.fullCls }
+        }
+
+        return PackageActivities(
+            pack.packageName,
+            pack.name,
+            defaultActivity,
+            activities,
+        )
+    }
+
+    override fun getActivity(componentName: ComponentName): SystemActivity {
+        val pack = getPackage(componentName.packageName)
+        val activityNames = pack?.let { listOfNotNull(it.defaultActivityName) + it.activityNames }
+        val name = activityNames?.find { n -> n.fullCls == componentName.className }
+
+        if (name == null) {
+            return SystemActivity(
+                componentName,
+                createNameFromClass(componentName.className),
+                null,
+                false,
+            )
+        }
+
+        return SystemActivity(
+            componentName,
+            name.name,
+            name.iconResourceName,
+            name.isPrivate,
+        )
+    }
+
+    private fun createNameFromClass(cls: String): String {
+        val name = cls.substringAfterLast('.')
+        val locale = try {
+            val config = settingsRepository.getLocaleConfiguration()
+            androidx.core.os.ConfigurationCompat.getLocales(config).get(0)
+        } catch (e: Exception) {
+            null
+        } ?: java.util.Locale.getDefault()
+        return name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
     }
 
     override fun invalidate() {

@@ -12,24 +12,24 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import kotlinx.coroutines.yield
 
 class ActivityListAdapter @AssistedInject constructor(
-    activityRepository: ActivityRepository,
+    packageRepository: PackageRepository,
     private val getActivityIconUseCase: GetActivityIconUseCase,
     @Assisted private val packageName: String,
-) : ListAdapter<MyActivityInfo, ActivityListAdapter.ViewHolder>(ActivityDiffCallback) {
+) : ListAdapter<SystemActivity, ActivityListAdapter.ViewHolder>(ActivityDiffCallback) {
     @AssistedFactory
     interface ActivityListAdapterFactory {
         fun create(packageName: String): ActivityListAdapter
     }
 
-    private val allActivities = activityRepository.getActivities(packageName)
-    private val combinedActivities = listOfNotNull(allActivities.defaultActivity) + allActivities.activities
-    var onItemClick: ((MyActivityInfo) -> Unit)? = null
+    private val allActivities = packageRepository.getActivities(packageName)
+    private val combinedActivities = allActivities.activities
+    var onItemClick: ((SystemActivity) -> Unit)? = null
 
     init {
         submitList(combinedActivities)
@@ -39,7 +39,7 @@ class ActivityListAdapter @AssistedInject constructor(
         val tvName: TextView = viewItem.findViewById(R.id.tvName)
         val tvPackage: TextView = viewItem.findViewById(R.id.tvClass)
         val ivIcon: ImageView = viewItem.findViewById(R.id.ivIcon)
-        lateinit var item: MyActivityInfo
+        lateinit var item: SystemActivity
 
         init {
             itemView.setOnClickListener {
@@ -48,10 +48,10 @@ class ActivityListAdapter @AssistedInject constructor(
         }
     }
 
-    suspend fun performFilter(query: String): List<MyActivityInfo> {
+    suspend fun performFilter(query: String): List<SystemActivity> {
         if (query.isEmpty()) return combinedActivities
 
-        val result = mutableListOf<MyActivityInfo>()
+        val result = mutableListOf<SystemActivity>()
 
         // Check default activity with special rules (matches package/app name too)
         allActivities.defaultActivity?.let { a ->
@@ -98,12 +98,12 @@ class ActivityListAdapter @AssistedInject constructor(
         holder.ivIcon.setImageDrawable(drawable)
     }
 
-    object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
-        override fun areItemsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+    object ActivityDiffCallback : DiffUtil.ItemCallback<SystemActivity>() {
+        override fun areItemsTheSame(oldItem: SystemActivity, newItem: SystemActivity): Boolean {
             return oldItem.componentName == newItem.componentName
         }
 
-        override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+        override fun areContentsTheSame(oldItem: SystemActivity, newItem: SystemActivity): Boolean {
             return oldItem.name == newItem.name &&
                 oldItem.isPrivate == newItem.isPrivate &&
                 oldItem.iconResourceName == newItem.iconResourceName

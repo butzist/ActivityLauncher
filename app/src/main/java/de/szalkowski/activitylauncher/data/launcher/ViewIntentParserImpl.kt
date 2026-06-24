@@ -25,14 +25,20 @@ class ViewIntentParserImpl @Inject constructor() : ViewIntentParser {
     }
 
     override fun parseShortcutIntent(uri: String): Intent? {
-        return try {
+        val intent = try {
             Intent.parseUri(uri, Intent.URI_INTENT_SCHEME)
         } catch (_: Exception) {
-            try {
-                Intent.parseUri(uri, 0)
-            } catch (_: Exception) {
-                null
-            }
+            null
+        }
+
+        if (intent != null && intent.component != null) {
+            return intent
+        }
+
+        return try {
+            Intent.parseUri(uri, 0)
+        } catch (_: Exception) {
+            null
         }
     }
 }

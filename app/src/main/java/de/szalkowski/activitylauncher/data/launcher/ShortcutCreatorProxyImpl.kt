@@ -9,7 +9,7 @@ import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
 import javax.inject.Inject
@@ -20,7 +20,7 @@ class ShortcutCreatorProxyImpl @Inject constructor(
     private val intentSigner: IntentSigner,
 ) : ShortcutCreatorProxy {
     override fun createLauncherIcon(
-        activity: MyActivityInfo,
+        activity: SystemActivity,
         optionalExtras: Bundle?,
         useChooser: Boolean,
     ) {

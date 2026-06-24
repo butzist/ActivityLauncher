@@ -46,9 +46,6 @@ class ShortcutForegroundTest {
     val getActivityIconUseCase: de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase = mock()
 
     @BindValue
-    val activityRepository: de.szalkowski.activitylauncher.domain.packages.ActivityRepository = mock()
-
-    @BindValue
     val packageRepository: de.szalkowski.activitylauncher.domain.packages.PackageRepository = mock()
 
     @BindValue

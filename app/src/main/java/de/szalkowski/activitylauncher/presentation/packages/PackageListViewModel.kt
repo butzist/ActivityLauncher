@@ -74,14 +74,19 @@ class PackageListViewModel @Inject constructor(
 
             val packageMatches = p.name.contains(query, ignoreCase = true) || p.packageName.contains(query, ignoreCase = true)
             val filteredActivities = p.activityNames.filter { it.name.contains(query, ignoreCase = true) || it.shortCls.contains(query, ignoreCase = true) }
-            val defaultActivity = p.defaultActivityName?.takeIf { packageMatches || it.name.contains(query, ignoreCase = true) || it.shortCls.contains(query, ignoreCase = true) }
+            val defaultActivity = p.defaultActivityName?.takeIf { it.name.contains(query, ignoreCase = true) || it.shortCls.contains(query, ignoreCase = true) }
 
-            val hasActivities = filteredActivities.isNotEmpty() || defaultActivity != null
+            // If package name matches and query is not empty, show all activities in that package
+            // Otherwise, show only matching activities
+            val finalActivities = if (packageMatches && query.isNotEmpty()) p.activityNames else filteredActivities
+            val finalDefaultActivity = if (packageMatches && query.isNotEmpty()) p.defaultActivityName else (defaultActivity ?: p.defaultActivityName?.takeIf { packageMatches })
+
+            val hasActivities = finalActivities.isNotEmpty() || finalDefaultActivity != null
 
             if (hasActivities) {
                 p.copy(
-                    activityNames = filteredActivities,
-                    defaultActivityName = defaultActivity,
+                    activityNames = finalActivities,
+                    defaultActivityName = finalDefaultActivity,
                 )
             } else {
                 // Hide fully loaded packages with no matching activities (or no activities at all)

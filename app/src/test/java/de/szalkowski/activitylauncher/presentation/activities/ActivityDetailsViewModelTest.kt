@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
@@ -33,7 +33,7 @@ import org.mockito.kotlin.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ActivityDetailsViewModelTest {
-    private val activityRepository: ActivityRepository = mock()
+    private val packageRepository: PackageRepository = mock()
     private val favoritesRepository: FavoritesRepository = mock()
     private val launchActivityUseCase: LaunchActivityUseCase = mock()
     private val createShortcutUseCase: CreateShortcutUseCase = mock()
@@ -57,20 +57,20 @@ class ActivityDetailsViewModelTest {
         whenever(componentName.flattenToShortString()).thenReturn("com.test/.Activity")
 
         runTest {
-            val activityInfo = MyActivityInfo(
+            val activityInfo = SystemActivity(
                 componentName,
                 "Test Activity",
                 "res:icon",
                 false,
             )
-            whenever(activityRepository.getActivity(any())).thenReturn(activityInfo)
+            whenever(packageRepository.getActivity(any())).thenReturn(activityInfo)
             whenever(favoritesRepository.isFavorite(any())).thenReturn(false)
             whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(mock<IconCompat>())
         }
 
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         viewModel = ActivityDetailsViewModel(
-            activityRepository, favoritesRepository, launchActivityUseCase,
+            packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
             getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
         )
@@ -130,7 +130,7 @@ class ActivityDetailsViewModelTest {
         // Re-init viewModel to pick up new mock values
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
-            activityRepository, favoritesRepository, launchActivityUseCase,
+            packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
             getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
         )
@@ -147,7 +147,7 @@ class ActivityDetailsViewModelTest {
         // Re-init viewModel to pick up new mock values
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
-            activityRepository, favoritesRepository, launchActivityUseCase,
+            packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
             getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
         )

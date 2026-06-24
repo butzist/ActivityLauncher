@@ -5,16 +5,18 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -95,6 +97,7 @@ class ShortcutActivity : AppCompatActivity() {
 
         if (!intentSigner.validateIntentSignature(launchIntent, signature, launchPlugin)) {
             Log.e("ShortcutActivity", "Invalid signature for shortcut")
+            Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -105,7 +108,11 @@ class ShortcutActivity : AppCompatActivity() {
                 delegationIntent.component = component
                 delegationIntent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
                 delegationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(delegationIntent)
+                runCatching {
+                    startActivity(delegationIntent)
+                }.onFailure {
+                    Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
+                }
                 return
             }
         }
@@ -135,7 +142,7 @@ class ShortcutActivity : AppCompatActivity() {
         val component = launchIntent.component ?: return
         val launchPlugin = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
 
-        val activityInfo = MyActivityInfo(
+        val activityInfo = SystemActivity(
             component,
             appName,
             null, // iconResourceName
@@ -147,6 +154,6 @@ class ShortcutActivity : AppCompatActivity() {
             extras.putString(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, launchPlugin)
         }
 
-        shortcutCreator.createLauncherIcon(activityInfo, iconCompat, extras)
+        shortcutCreator.createLauncherIcon(activityInfo.name, activityInfo.componentName, iconCompat, extras)
     }
 }

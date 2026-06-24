@@ -1,27 +1,33 @@
 package de.szalkowski.activitylauncher.data.database
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
 
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class PackageDaoTest {
-    private lateinit var database: AppDatabase
+
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    @Inject
+    lateinit var database: AppDatabase
+
     private lateinit var packageDao: PackageDao
 
     @Before
-    fun createDb() {
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            AppDatabase::class.java,
-        ).build()
+    fun init() {
+        hiltRule.inject()
         packageDao = database.packageDao()
     }
 
@@ -42,7 +48,7 @@ class PackageDaoTest {
     @Test
     fun insertAndGetWithActivities() = runBlocking {
         val pkg = AppPackageEntity("com.test.app", "Test App", "1.0", null, true, 0)
-        val activity = ActivityEntity(id = 0, packageName = "com.test.app", name = "Main", shortCls = "Main", fullCls = "com.test.app.Main", isDefault = true)
+        val activity = ActivityEntity(id = 0, packageName = "com.test.app", name = "Main", shortCls = "Main", fullCls = "com.test.app.Main", isDefault = true, isPrivate = false, iconResourceName = null)
 
         packageDao.insertPackage(pkg)
         packageDao.insertActivities(listOf(activity))

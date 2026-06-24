@@ -1,11 +1,11 @@
 package de.szalkowski.activitylauncher.domain.launcher
 
 import android.os.Bundle
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 
 interface ShortcutCreatorProxy {
     fun createLauncherIcon(
-        activity: MyActivityInfo,
+        activity: SystemActivity,
         optionalExtras: Bundle? = null,
         useChooser: Boolean = false,
     )
@@ -13,6 +13,6 @@ interface ShortcutCreatorProxy {
     fun hasMultipleHandlers(): Boolean
 
     companion object {
-        const val INTENT_CREATE_SHORTCUT = "activitylauncher.intent.action.CREATE_SHORTCUT"
+        const val INTENT_CREATE_SHORTCUT = "de.szalkowski.activitylauncher.intent.action.CREATE_SHORTCUT"
     }
 }

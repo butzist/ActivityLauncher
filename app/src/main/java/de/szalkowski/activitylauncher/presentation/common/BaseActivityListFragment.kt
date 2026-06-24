@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import de.szalkowski.activitylauncher.presentation.activities.ActivityInfoAdapter
@@ -25,7 +25,7 @@ abstract class BaseActivityListFragment : Fragment() {
     internal lateinit var launchActivityUseCase: LaunchActivityUseCase
 
     @Inject
-    internal lateinit var activityRepository: ActivityRepository
+    internal lateinit var packageRepository: PackageRepository
 
     @Inject
     internal lateinit var iconLoader: IconLoader

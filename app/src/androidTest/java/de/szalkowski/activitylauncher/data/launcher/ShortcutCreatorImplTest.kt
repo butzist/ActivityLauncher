@@ -2,63 +2,93 @@ package de.szalkowski.activitylauncher.data.launcher
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
-import android.os.Build
-import android.os.Bundle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.BindValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
+import de.szalkowski.activitylauncher.app.di.CoreServicesModule
+import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
+import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
-import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.*
 
+@HiltAndroidTest
+@UninstallModules(CoreServicesModule::class)
 @RunWith(AndroidJUnit4::class)
 class ShortcutCreatorImplTest {
-    private lateinit var context: Context
-    private val intentSigner: IntentSigner = mock()
-    private val getActivityIconUseCase: GetActivityIconUseCase = mock()
-    private lateinit var shortcutCreator: ShortcutCreator
-    private val spyContext = spy(ApplicationProvider.getApplicationContext<Context>())
+
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    @BindValue
+    val activityLauncher: ActivityLauncher = mock()
+
+    @BindValue
+    val intentSigner: IntentSigner = mock()
+
+    @BindValue
+    val getActivityIconUseCase: GetActivityIconUseCase = mock()
+
+    @BindValue
+    val packageRepository: de.szalkowski.activitylauncher.domain.packages.PackageRepository = mock()
+
+    @BindValue
+    val shortcutCreator: ShortcutCreator = mock()
+
+    @BindValue
+    val activityLauncherProxy: ActivityLauncherProxy = mock()
+
+    @BindValue
+    val shortcutCreatorProxy: ShortcutCreatorProxy = mock()
+
+    @BindValue
+    val iconLoader: de.szalkowski.activitylauncher.domain.launcher.IconLoader = mock()
+
+    @BindValue
+    val activitySharer: de.szalkowski.activitylauncher.domain.external.ActivitySharer = mock()
+
+    @BindValue
+    val viewIntentParser: de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser = mock()
+
+    @BindValue
+    val settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository = mock()
+
+    @BindValue
+    val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()
+
+    @BindValue
+    val recentsRepository: de.szalkowski.activitylauncher.domain.recents.RecentsRepository = mock()
+
+    private lateinit var shortcutCreatorImpl: ShortcutCreatorImpl
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
-    fun setup() {
-        context = spyContext
-        shortcutCreator = ShortcutCreatorImpl(context, intentSigner, getActivityIconUseCase)
-
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithBitmap(
-            android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888),
-        )
-        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
-        whenever(intentSigner.signIntent(any(), anyOrNull())).thenReturn("signature")
+    fun init() {
+        hiltRule.inject()
+        shortcutCreatorImpl = ShortcutCreatorImpl(context, getActivityIconUseCase)
     }
 
     @Test
     fun testCreateLauncherIcon() {
         val componentName = ComponentName("com.test", "com.test.Activity")
-        val activityInfo = MyActivityInfo(componentName, "Test App", null, false)
-        val extras = Bundle().apply { putString("key", "value") }
+        val activityInfo = SystemActivity(componentName, "Test App", null, false)
+        val icon = androidx.core.graphics.drawable.IconCompat.createWithBitmap(android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888))
 
-        if (Build.VERSION.SDK_INT >= 26) {
-            // On API 26+, it uses ShortcutManager. We might not be able to verify it easily
-            // without a lot of mocking of system services, but we can at least ensure it runs.
-            shortcutCreator.createLauncherIcon(activityInfo, null, extras)
-        } else {
-            // On older APIs it sends a broadcast.
-            shortcutCreator.createLauncherIcon(activityInfo, null, extras)
+        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
 
-            argumentCaptor<Intent>().apply {
-                verify(spyContext).sendBroadcast(capture())
-                val intent = firstValue
-                assertEquals("com.android.launcher.action.INSTALL_SHORTCUT", intent.action)
-                val launchIntent = intent.getParcelableExtra<Intent>(Intent.EXTRA_SHORTCUT_INTENT)
-                assertEquals(componentName, launchIntent?.component)
-                assertEquals("value", launchIntent?.getStringExtra("key"))
-            }
-        }
+        shortcutCreatorImpl.createLauncherIcon(activityInfo)
+
+        verify(getActivityIconUseCase).invoke(isNull(), eq(componentName))
+        // We can't easily verify the actual pin shortcut request as it's a static call to ShortcutManagerCompat
     }
 }

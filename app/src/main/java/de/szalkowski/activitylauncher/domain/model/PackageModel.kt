@@ -17,20 +17,30 @@ data class ActivityName(
     val name: String,
     val shortCls: String,
     val fullCls: String,
+    val isPrivate: Boolean,
+    val iconResourceName: String?,
 )
 
 data class PackageActivities(
     val packageName: String,
     val name: String,
-    val defaultActivity: MyActivityInfo?,
-    val activities: List<MyActivityInfo>,
+    val defaultActivity: SystemActivity?,
+    val activities: List<SystemActivity>,
 )
 
-data class MyActivityInfo(
+data class SystemActivity(
     val componentName: ComponentName,
     val name: String,
     val iconResourceName: String?,
     val isPrivate: Boolean,
+    val isDefault: Boolean = false,
+)
+
+data class SystemPackage(
+    val packageName: String,
+    val name: String,
+    val version: String,
+    val iconResourceName: String?,
 )
 
 data class IconInfo(

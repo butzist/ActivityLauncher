@@ -1,9 +1,13 @@
 package de.szalkowski.activitylauncher.data.packages
 
+import android.content.ComponentName
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import de.szalkowski.activitylauncher.FakeSystemPackageRepository
 import de.szalkowski.activitylauncher.data.database.PackageDao
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
@@ -26,9 +30,19 @@ class CacheLanguageTest {
     @Inject
     lateinit var packageDao: PackageDao
 
+    @Inject
+    lateinit var systemRepository: FakeSystemPackageRepository
+
     @Before
     fun init() {
         hiltRule.inject()
+
+        // Setup fake data
+        val pkg = SystemPackage("com.test.app", "Test App", "1.0 (1)", null)
+        val activities = listOf(
+            SystemActivity(ComponentName("com.test.app", "com.test.app.MainActivity"), "Main", null, false),
+        )
+        systemRepository.addPackage(pkg, activities)
     }
 
     @Test
@@ -37,7 +51,7 @@ class CacheLanguageTest {
         dataSource.sync()
 
         val initialPackages = packageDao.getAllPackagesFlow().first()
-        if (initialPackages.isEmpty()) return@runBlocking
+        assertTrue("Cache should not be empty", initialPackages.isNotEmpty())
 
         // 2. Clear cache via data source (simulating invalidate behavior)
         dataSource.clear()

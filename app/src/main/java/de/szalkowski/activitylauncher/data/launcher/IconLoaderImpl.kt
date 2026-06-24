@@ -9,7 +9,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.presentation.common.AsyncProvider
@@ -19,7 +18,6 @@ import javax.inject.Inject
 class IconLoaderImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val packageRepository: PackageRepository,
-    private val activityRepository: ActivityRepository,
     settingsRepository: SettingsRepository,
 ) : IconLoader {
     private val pm: PackageManager = context.packageManager
@@ -101,7 +99,7 @@ class IconLoaderImpl @Inject constructor(
             updater?.update(pack.index + 1)
 
             runCatching {
-                val activities = activityRepository.getActivities(pack.value.packageName)
+                val activities = packageRepository.getActivities(pack.value.packageName)
                 for (activity in listOfNotNull(activities.defaultActivity) + activities.activities) {
                     activity.iconResourceName?.let { icons.add(it) }
                 }

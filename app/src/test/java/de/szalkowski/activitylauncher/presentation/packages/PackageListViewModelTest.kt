@@ -40,7 +40,7 @@ class PackageListViewModelTest {
 
     @Test
     fun `isSearching should be true when filtering`() = runTest {
-        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Activity One", "Main", "com.one.Main")))
+        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Activity One", "Main", "com.one.Main", false, null)))
         packagesFlow.value = listOf(p1)
         advanceUntilIdle()
 
@@ -69,9 +69,9 @@ class PackageListViewModelTest {
 
     @Test
     fun `packages should maintain repository sort order`() = runTest {
-        val p1 = createPackage("App", "com.aaa", activities = listOf(ActivityName("Main", "Main", "com.aaa.Main")))
-        val p2 = createPackage("App", "com.zzz", activities = listOf(ActivityName("Main", "Main", "com.zzz.Main")))
-        val p3 = createPackage("Bpp", "com.bbb", activities = listOf(ActivityName("Main", "Main", "com.bbb.Main")))
+        val p1 = createPackage("App", "com.aaa", activities = listOf(ActivityName("Main", "Main", "com.aaa.Main", false, null)))
+        val p2 = createPackage("App", "com.zzz", activities = listOf(ActivityName("Main", "Main", "com.zzz.Main", false, null)))
+        val p3 = createPackage("Bpp", "com.bbb", activities = listOf(ActivityName("Main", "Main", "com.bbb.Main", false, null)))
 
         // Emit already sorted data (as repository should)
         packagesFlow.value = listOf(p1, p2, p3)
@@ -85,8 +85,8 @@ class PackageListViewModelTest {
 
     @Test
     fun `should filter packages by name`() = runTest {
-        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Activity One", "Main", "com.one.Main")))
-        val p2 = createPackage("App Two", "com.two", activities = listOf(ActivityName("Activity Two", "Main", "com.two.Main")))
+        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Activity One", "Main", "com.one.Main", false, null)))
+        val p2 = createPackage("App Two", "com.two", activities = listOf(ActivityName("Activity Two", "Main", "com.two.Main", false, null)))
         packagesFlow.value = listOf(p1, p2)
         advanceUntilIdle()
 
@@ -99,8 +99,8 @@ class PackageListViewModelTest {
 
     @Test
     fun `should filter packages by activity name`() = runTest {
-        val a1 = ActivityName("Main", "Main", "com.test.Main")
-        val a2 = ActivityName("Settings", "Settings", "com.test.Settings")
+        val a1 = ActivityName("Main", "Main", "com.test.Main", false, null)
+        val a2 = ActivityName("Settings", "Settings", "com.test.Settings", false, null)
         val p1 = createPackage("Test App", "com.test", activities = listOf(a1, a2))
         packagesFlow.value = listOf(p1)
         advanceUntilIdle()
@@ -115,13 +115,13 @@ class PackageListViewModelTest {
 
     @Test
     fun `should update when repository changes`() = runTest {
-        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Main", "Main", "com.one.Main")))
+        val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Main", "Main", "com.one.Main", false, null)))
         packagesFlow.value = listOf(p1)
         advanceUntilIdle()
 
         assertEquals(1, viewModel.packages.value.size)
 
-        val p2 = createPackage("App Two", "com.two", activities = listOf(ActivityName("Main", "Main", "com.two.Main")))
+        val p2 = createPackage("App Two", "com.two", activities = listOf(ActivityName("Main", "Main", "com.two.Main", false, null)))
         packagesFlow.value = listOf(p1, p2)
         advanceUntilIdle()
 
@@ -131,7 +131,7 @@ class PackageListViewModelTest {
     @Test
     fun `should hide fully loaded packages with no activities`() = runTest {
         val p1 = createPackage("Empty App", "com.empty", activities = emptyList()).copy(isFullyLoaded = true)
-        val p2 = createPackage("Full App", "com.full", activities = listOf(ActivityName("Main", "Main", "com.full.Main"))).copy(isFullyLoaded = true)
+        val p2 = createPackage("Full App", "com.full", activities = listOf(ActivityName("Main", "Main", "com.full.Main", false, null))).copy(isFullyLoaded = true)
         packagesFlow.value = listOf(p1, p2)
         advanceUntilIdle()
 

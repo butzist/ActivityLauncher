@@ -39,9 +39,6 @@ class ShortcutFlowTest {
     val getActivityIconUseCase: de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase = mock()
 
     @BindValue
-    val activityRepository: de.szalkowski.activitylauncher.domain.packages.ActivityRepository = mock()
-
-    @BindValue
     val packageRepository: de.szalkowski.activitylauncher.domain.packages.PackageRepository = mock()
 
     @BindValue
@@ -101,7 +98,7 @@ class ShortcutFlowTest {
         }
         val signature = "valid_signature"
 
-        whenever(intentSigner.validateIntentSignature(any(), eq(signature), isNull())).thenReturn(true)
+        whenever(intentSigner.validateIntentSignature(any<Intent>(), eq(signature), isNull())).thenReturn(true)
 
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -121,7 +118,7 @@ class ShortcutFlowTest {
         val launchIntent = Intent().apply { component = componentName }
         val signature = "invalid_signature"
 
-        whenever(intentSigner.validateIntentSignature(any(), eq(signature), isNull())).thenReturn(false)
+        whenever(intentSigner.validateIntentSignature(any<Intent>(), eq(signature), isNull())).thenReturn(false)
 
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -155,7 +152,7 @@ class ShortcutFlowTest {
             }
             // Success if it doesn't crash and reaches destroyed state (finishes)
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
-            verify(shortcutCreator).createLauncherIcon(any(), any(), anyOrNull())
+            verify(shortcutCreator).createLauncherIcon(any<String>(), any<ComponentName>(), any<androidx.core.graphics.drawable.IconCompat>(), anyOrNull<android.os.Bundle>(), any<Boolean>())
         }
     }
 
@@ -170,7 +167,7 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher).launchActivity(eq(componentName), anyOrNull())
+            verify(activityLauncher).launchActivity(eq(componentName), anyOrNull<android.os.Bundle>())
         }
     }
 
@@ -181,7 +178,7 @@ class ShortcutFlowTest {
         val signature = "valid_signature"
         val launchPlugin = "com.plugin/.LaunchActivity"
 
-        whenever(intentSigner.validateIntentSignature(any(), eq(signature), eq(launchPlugin))).thenReturn(true)
+        whenever(intentSigner.validateIntentSignature(any<Intent>(), eq(signature), eq(launchPlugin))).thenReturn(true)
 
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -191,7 +188,7 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher, never()).launchActivity(any(), anyOrNull())
+            verify(activityLauncher, never()).launchActivity(any<ComponentName>(), anyOrNull<android.os.Bundle>())
             // It should start the plugin activity instead.
             // We can't easily verify startActivity from here without mocking Context,
             // but ShortcutActivity is using the real Context.

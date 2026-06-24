@@ -2,104 +2,51 @@ package de.szalkowski.activitylauncher.data.launcher
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
-import android.graphics.Bitmap
-import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
-import de.szalkowski.activitylauncher.core.util.toBitmap
-import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ShortcutCreatorImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val intentSigner: IntentSigner,
     private val getActivityIconUseCase: GetActivityIconUseCase,
 ) : ShortcutCreator {
+
     override fun createLauncherIcon(
-        activity: MyActivityInfo,
-        icon: IconCompat?,
+        activity: SystemActivity,
         optionalExtras: Bundle?,
+        useChooser: Boolean,
     ) {
-        val appName = activity.name
-        val launchIntent = getActivityIntent(activity.componentName, optionalExtras)
-        val finalIcon = icon ?: getActivityIconUseCase(activity.iconResourceName, activity.componentName)
-
-        if (Build.VERSION.SDK_INT >= 26) {
-            doCreateShortcut(appName, launchIntent, finalIcon)
-        } else {
-            val bitmap = finalIcon.loadDrawable(context)!!.toBitmap()
-            doCreateShortcutLegacy(appName, launchIntent, bitmap)
-        }
+        val icon = getActivityIconUseCase(activity.iconResourceName, activity.componentName)
+        createLauncherIcon(activity.name, activity.componentName, icon, optionalExtras, useChooser)
     }
 
-    @Suppress("DEPRECATION")
-    private fun doCreateShortcutLegacy(
-        appName: String,
-        intent: Intent,
-        iconBitmap: Bitmap,
+    override fun createLauncherIcon(
+        name: String,
+        componentName: android.content.ComponentName,
+        icon: IconCompat,
+        optionalExtras: Bundle?,
+        useChooser: Boolean,
     ) {
-        val shortcutIntent = Intent()
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent)
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, appName)
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, iconBitmap)
-        shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT")
-        context.sendBroadcast(shortcutIntent)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun doCreateShortcut(
-        appName: String,
-        intent: Intent,
-        iconCompat: IconCompat,
-    ) {
-        val shortcutManager = context.getSystemService(ShortcutManager::class.java)!!
-        if (shortcutManager.isRequestPinShortcutSupported) {
-            val icon = iconCompat.toIcon(context)
-            val shortcutIntent = createShortcutIntent(intent)
-            val shortcutInfo =
-                ShortcutInfo.Builder(context, appName).setShortLabel(appName).setLongLabel(appName)
-                    .setIcon(icon).setIntent(shortcutIntent).build()
-
-            try {
-                shortcutManager.requestPinShortcut(shortcutInfo, null)
-            } catch (e: Exception) {
-                // In some environments (like some tests), this might still throw even if foregrounded
-                // We re-throw it if it's an IllegalStateException to allow the test to catch it,
-                // or just log it if we want to be safe.
-                if (e is IllegalStateException) {
-                    throw e
-                }
-                e.printStackTrace()
-                Toast.makeText(context, R.string.error_creating_shortcut, Toast.LENGTH_LONG).show()
-            }
-        } else {
-            Toast.makeText(context, R.string.error_verbose_pin_shortcut, Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun createShortcutIntent(intent: Intent): Intent {
-        val shortcutIntent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT)
-        shortcutIntent.setPackage(context.packageName)
-        shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, intent.toUri(Intent.URI_INTENT_SCHEME))
-
-        val launchPlugin = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
-        if (launchPlugin != null) {
-            shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, launchPlugin)
+        val launchIntent = Intent(Intent.ACTION_MAIN)
+        launchIntent.component = componentName
+        if (optionalExtras != null) {
+            launchIntent.putExtras(optionalExtras)
         }
 
-        val signature = intentSigner.signIntent(intent, launchPlugin)
-        shortcutIntent.putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
+        val shortcut = ShortcutInfoCompat.Builder(context, componentName.flattenToShortString())
+            .setShortLabel(name)
+            .setIcon(icon)
+            .setIntent(launchIntent)
+            .build()
 
-        return shortcutIntent
+        ShortcutManagerCompat.requestPinShortcut(context, shortcut, null)
     }
 }

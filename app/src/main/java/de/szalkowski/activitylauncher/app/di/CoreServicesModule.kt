@@ -35,12 +35,6 @@ abstract class CoreServicesModule {
 
     @Singleton
     @Binds
-    abstract fun bindActivityRepository(
-        activityRepositoryImpl: ActivityRepositoryImpl,
-    ): ActivityRepository
-
-    @Singleton
-    @Binds
     abstract fun bindPackageRepository(
         packageRepositoryImpl: PackageRepositoryImpl,
     ): PackageRepository

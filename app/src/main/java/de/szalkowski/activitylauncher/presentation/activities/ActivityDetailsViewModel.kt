@@ -10,8 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.packages.ActivityRepository
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
@@ -33,7 +33,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ActivityDetailsViewModel @Inject constructor(
-    private val activityRepository: ActivityRepository,
+    private val packageRepository: PackageRepository,
     private val favoritesRepository: FavoritesRepository,
     private val launchActivityUseCase: LaunchActivityUseCase,
     private val createShortcutUseCase: CreateShortcutUseCase,
@@ -49,8 +49,8 @@ class ActivityDetailsViewModel @Inject constructor(
     private val componentName: ComponentName = savedStateHandle.get<ComponentName>("activityComponentName")
         ?: throw IllegalArgumentException("activityComponentName is required")
 
-    private val _activityInfo = MutableStateFlow<MyActivityInfo?>(null)
-    val activityInfo: StateFlow<MyActivityInfo?> = _activityInfo.asStateFlow()
+    private val _activityInfo = MutableStateFlow<SystemActivity?>(null)
+    val activityInfo: StateFlow<SystemActivity?> = _activityInfo.asStateFlow()
 
     private val _isFavorite = MutableStateFlow(false)
     val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
@@ -110,7 +110,7 @@ class ActivityDetailsViewModel @Inject constructor(
 
     private fun loadActivityDetails() {
         viewModelScope.launch {
-            val info = activityRepository.getActivity(componentName)
+            val info = packageRepository.getActivity(componentName)
             _activityInfo.value = info
             _isFavorite.value = favoritesRepository.isFavorite(componentName)
 
@@ -164,9 +164,9 @@ class ActivityDetailsViewModel @Inject constructor(
         shareActivityUseCase(info.componentName)
     }
 
-    private fun getEditedActivityInfo(): MyActivityInfo {
+    private fun getEditedActivityInfo(): SystemActivity {
         val componentName = ComponentName(_editedPackage.value, _editedClass.value)
-        return MyActivityInfo(
+        return SystemActivity(
             componentName,
             _editedName.value,
             _editedIconResourceName.value.ifBlank { null },

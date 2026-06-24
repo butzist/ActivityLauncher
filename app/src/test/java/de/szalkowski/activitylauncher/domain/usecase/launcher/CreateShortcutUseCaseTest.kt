@@ -1,50 +1,42 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
 import android.content.ComponentName
+import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.*
 
 class CreateShortcutUseCaseTest {
-    private val shortcutCreator: ShortcutCreatorProxy = mock()
-    private val recentsRepository: RecentsRepository = mock()
-    private lateinit var useCase: CreateShortcutUseCase
-
+    private val shortcutCreator: ShortcutCreator = mock()
+    private val shortcutCreatorProxy: ShortcutCreatorProxy = mock()
     private val componentName = ComponentName("com.test", "Activity")
-    private val activityInfo = MyActivityInfo(componentName, "Test", null, false)
+    private val activityInfo = SystemActivity(componentName, "Test", null, false)
+    private lateinit var useCase: CreateShortcutUseCase
 
     @Before
     fun setup() {
-        useCase = CreateShortcutUseCase(shortcutCreator, recentsRepository)
+        useCase = CreateShortcutUseCase(shortcutCreator, shortcutCreatorProxy)
     }
 
     @Test
-    fun `should create shortcut and add to recents`() {
-        useCase.invoke(activityInfo, null, useChooser = false)
+    fun `should use shortcutCreator if only one handler exists`() {
+        whenever(shortcutCreatorProxy.hasMultipleHandlers()).thenReturn(false)
+
+        useCase(activityInfo)
 
         verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull(), eq(false))
-        verify(recentsRepository).addActivity(componentName)
+        verify(shortcutCreatorProxy, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull(), any<Boolean>())
     }
 
     @Test
-    fun `should create shortcut with chooser and add to recents`() {
-        useCase.invoke(activityInfo, null, useChooser = true)
+    fun `should use shortcutCreatorProxy if multiple handlers exist`() {
+        whenever(shortcutCreatorProxy.hasMultipleHandlers()).thenReturn(true)
 
-        verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull(), eq(true))
-        verify(recentsRepository).addActivity(componentName)
-    }
+        useCase(activityInfo)
 
-    @Test
-    fun `should check for multiple handlers`() {
-        whenever(shortcutCreator.hasMultipleHandlers()).thenReturn(true)
-        assertTrue(useCase.hasMultipleHandlers())
-
-        whenever(shortcutCreator.hasMultipleHandlers()).thenReturn(false)
-        assertFalse(useCase.hasMultipleHandlers())
+        verify(shortcutCreatorProxy).createLauncherIcon(eq(activityInfo), isNull(), eq(false))
+        verify(shortcutCreator, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull(), any<Boolean>())
     }
 }
