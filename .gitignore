@@ -1,11 +1,15 @@
 /build
-local.properties
 /.idea
 /.vscode
 /.venv
 /.gradle
 /ActivityLauncherApp/build
 /ActivityLauncherApp/release
-/ActivityLauncherApp/keystore.jks
+/app/ossNoads
+/app/playStoreAds
 *.iml
 /.safedk
+local.properties
+local.env
+google-services.json
+keystore*.jks
