@@ -70,18 +70,29 @@ class PluginChooserDialogFragment : BottomSheetDialogFragment() {
                         shortcutAdapter.setSelectedPlugin(selected)
                     }
                 }
+                launch {
+                    viewModel.isSelectionComplete.collect { complete ->
+                        if (complete) {
+                            submitResult()
+                        }
+                    }
+                }
             }
         }
 
-        binding.btOk.setOnClickListener {
-            val result = viewModel.getResult()
-            val bundle = Bundle().apply {
-                putParcelable(RESULT_LAUNCH_PLUGIN, result.launchPlugin)
-                putParcelable(RESULT_SHORTCUT_PLUGIN, result.shortcutPlugin)
-            }
-            setFragmentResult(REQUEST_KEY, bundle)
+        binding.btCancel.setOnClickListener {
             dismiss()
         }
+    }
+
+    private fun submitResult() {
+        val result = viewModel.getResult()
+        val bundle = Bundle().apply {
+            putParcelable(RESULT_LAUNCH_PLUGIN, result.launchPlugin)
+            putParcelable(RESULT_SHORTCUT_PLUGIN, result.shortcutPlugin)
+        }
+        setFragmentResult(REQUEST_KEY, bundle)
+        dismiss()
     }
 
     override fun onDestroyView() {

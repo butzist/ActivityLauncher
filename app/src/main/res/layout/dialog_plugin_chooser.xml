@@ -33,10 +33,11 @@
         android:layout_marginTop="8dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btOk"
+        android:id="@+id/btCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="16dp"
-        android:text="@android:string/ok" />
+        style="?attr/borderlessButtonStyle"
+        android:text="@android:string/cancel" />
 </LinearLayout>
