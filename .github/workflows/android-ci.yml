@@ -1,0 +1,63 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Check code formatting
+        run: ./gradlew spotlessCheck --build-cache
+      - name: Run unit tests
+        run: ./gradlew testOssNoadsDebugUnitTest --build-cache
+
+  build-debug:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build debug APK
+        run: ./gradlew assembleOssNoadsDebug --build-cache
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug.apk
+          path: app/build/outputs/apk/ossNoads/debug/app-oss-noads-debug.apk
+
+  integration-tests:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          disable-animations: true
+          script: ./gradlew connectedOssNoadsDebugAndroidTest --build-cache
