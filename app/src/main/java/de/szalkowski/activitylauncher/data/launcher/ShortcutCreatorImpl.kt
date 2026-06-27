@@ -22,10 +22,9 @@ class ShortcutCreatorImpl @Inject constructor(
     override fun createLauncherIcon(
         activity: SystemActivity,
         optionalExtras: Bundle?,
-        useChooser: Boolean,
     ) {
         val icon = getActivityIconUseCase(activity.iconResourceName, activity.componentName)
-        createLauncherIcon(activity.name, activity.componentName, icon, optionalExtras, useChooser)
+        createLauncherIcon(activity.name, activity.componentName, icon, optionalExtras)
     }
 
     override fun createLauncherIcon(
@@ -33,7 +32,6 @@ class ShortcutCreatorImpl @Inject constructor(
         componentName: android.content.ComponentName,
         icon: IconCompat,
         optionalExtras: Bundle?,
-        useChooser: Boolean,
     ) {
         val launchIntent = Intent(Intent.ACTION_MAIN)
         launchIntent.component = componentName

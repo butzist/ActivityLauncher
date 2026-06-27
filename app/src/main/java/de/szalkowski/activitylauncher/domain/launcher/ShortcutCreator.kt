@@ -9,7 +9,6 @@ interface ShortcutCreator {
     fun createLauncherIcon(
         activity: SystemActivity,
         optionalExtras: Bundle? = null,
-        useChooser: Boolean = false,
     )
 
     fun createLauncherIcon(
@@ -17,7 +16,6 @@ interface ShortcutCreator {
         componentName: ComponentName,
         icon: IconCompat,
         optionalExtras: Bundle? = null,
-        useChooser: Boolean = false,
     )
 
     companion object {

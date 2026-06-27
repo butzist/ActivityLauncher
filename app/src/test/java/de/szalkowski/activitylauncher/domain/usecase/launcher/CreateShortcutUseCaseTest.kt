@@ -26,8 +26,8 @@ class CreateShortcutUseCaseTest {
 
         useCase(activityInfo)
 
-        verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull(), eq(false))
-        verify(shortcutCreatorProxy, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull(), any<Boolean>())
+        verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull())
+        verify(shortcutCreatorProxy, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull(), anyOrNull(), anyOrNull())
     }
 
     @Test
@@ -36,7 +36,16 @@ class CreateShortcutUseCaseTest {
 
         useCase(activityInfo)
 
-        verify(shortcutCreatorProxy).createLauncherIcon(eq(activityInfo), isNull(), eq(false))
-        verify(shortcutCreator, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull(), any<Boolean>())
+        verify(shortcutCreatorProxy).createLauncherIcon(eq(activityInfo), isNull(), isNull(), isNull())
+        verify(shortcutCreator, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull())
+    }
+
+    @Test
+    fun `should use shortcutCreatorProxy if plugin is provided`() {
+        val plugin = ComponentName("com.plugin", "Plugin")
+        useCase(activityInfo, shortcutPlugin = plugin)
+
+        verify(shortcutCreatorProxy).createLauncherIcon(eq(activityInfo), isNull(), eq(plugin), isNull())
+        verify(shortcutCreator, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull())
     }
 }

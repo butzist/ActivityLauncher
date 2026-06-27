@@ -21,6 +21,8 @@
     <string name="label_package" comment="Form label for the package name field">Package</string>
     <string name="label_class" comment="Form label for the activity class name field">Class</string>
     <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
+    <string name="label_launch_plugins">Launch Plugins</string>
+    <string name="label_shortcut_plugins">Shortcut Plugins</string>
     <string name="error" comment="Generic error dialog title">Error</string>
     <string name="error_creating_shortcut" comment="Error message displayed when shortcut creation fails">Error creating shortcut</string>
     <string name="error_icons" comment="Error message shown when app icons fail to load">Error loading icons</string>

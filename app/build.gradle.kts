@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
     id("com.diffplug.spotless")

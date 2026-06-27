@@ -22,17 +22,18 @@ class LaunchActivityUseCaseTest {
 
     @Test
     fun `should launch activity and add to recents`() {
-        useCase.invoke(componentName, useChooser = false)
+        useCase.invoke(componentName)
 
-        verify(activityLauncher).launchActivity(componentName, useChooser = false)
+        verify(activityLauncher).launchActivity(componentName, plugin = null)
         verify(recentsRepository).addActivity(componentName)
     }
 
     @Test
-    fun `should launch activity with chooser and add to recents`() {
-        useCase.invoke(componentName, useChooser = true)
+    fun `should launch activity with plugin and add to recents`() {
+        val plugin = ComponentName("com.plugin", "Plugin")
+        useCase.invoke(componentName, launchPlugin = plugin)
 
-        verify(activityLauncher).launchActivity(componentName, useChooser = true)
+        verify(activityLauncher).launchActivity(componentName, plugin = plugin)
         verify(recentsRepository).addActivity(componentName)
     }
 

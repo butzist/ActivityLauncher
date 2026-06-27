@@ -2,6 +2,7 @@ package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
 import android.content.pm.PackageManager.NameNotFoundException
+import android.os.Bundle
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
+import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
@@ -76,16 +78,45 @@ class ActivityDetailsViewModel @Inject constructor(
     private val _showShortcutChooser = MutableStateFlow(false)
     val showShortcutChooser: StateFlow<Boolean> = _showShortcutChooser.asStateFlow()
 
+    private val _launchPlugins = MutableStateFlow<List<PluginInfo>>(emptyList())
+    val launchPlugins: StateFlow<List<PluginInfo>> = _launchPlugins.asStateFlow()
+
+    private val _shortcutPlugins = MutableStateFlow<List<PluginInfo>>(emptyList())
+    val shortcutPlugins: StateFlow<List<PluginInfo>> = _shortcutPlugins.asStateFlow()
+
+    private val _selectedLaunchPlugin = MutableStateFlow<PluginInfo?>(null)
+    val selectedLaunchPlugin: StateFlow<PluginInfo?> = _selectedLaunchPlugin.asStateFlow()
+
+    private val _selectedShortcutPlugin = MutableStateFlow<PluginInfo?>(null)
+    val selectedShortcutPlugin: StateFlow<PluginInfo?> = _selectedShortcutPlugin.asStateFlow()
+
     private val _iconErrorTrigger = MutableStateFlow<String?>(null)
 
     private val _errorMessage = MutableSharedFlow<Int>()
     val errorMessage = _errorMessage.asSharedFlow()
 
     init {
-        loadActivityDetails()
         setupIconErrorDebounce()
-        _showLaunchChooser.value = launchActivityUseCase.hasMultipleHandlers()
-        _showShortcutChooser.value = createShortcutUseCase.hasMultipleHandlers()
+
+        val launchPluginList = launchActivityUseCase.getPlugins()
+        val shortcutPluginList = createShortcutUseCase.getPlugins()
+
+        _launchPlugins.value = launchPluginList
+        _shortcutPlugins.value = shortcutPluginList
+
+        _showLaunchChooser.value = launchPluginList.size > 1
+        _showShortcutChooser.value = shortcutPluginList.size > 1
+
+        val info = packageRepository.getActivity(componentName)
+        _activityInfo.value = info
+        _isFavorite.value = favoritesRepository.isFavorite(componentName)
+
+        _editedName.value = info.name
+        _editedPackage.value = info.componentName.packageName
+        _editedClass.value = info.componentName.className
+        _editedIconResourceName.value = info.iconResourceName ?: ""
+
+        _editedIcon.value = getActivityIconUseCase(info.iconResourceName, componentName)
     }
 
     @OptIn(FlowPreview::class)
@@ -105,21 +136,6 @@ class ActivityDetailsViewModel @Inject constructor(
                         _errorMessage.emit(errorText)
                     }
                 }
-        }
-    }
-
-    private fun loadActivityDetails() {
-        viewModelScope.launch {
-            val info = packageRepository.getActivity(componentName)
-            _activityInfo.value = info
-            _isFavorite.value = favoritesRepository.isFavorite(componentName)
-
-            _editedName.value = info.name
-            _editedPackage.value = info.componentName.packageName
-            _editedClass.value = info.componentName.className
-            _editedIconResourceName.value = info.iconResourceName ?: ""
-
-            _editedIcon.value = getActivityIconUseCase(info.iconResourceName, componentName)
         }
     }
 
@@ -149,14 +165,23 @@ class ActivityDetailsViewModel @Inject constructor(
         _iconErrorTrigger.value = iconResourceName
     }
 
-    fun createShortcut(useChooser: Boolean = false) {
+    fun createShortcut() {
         val info = getEditedActivityInfo()
-        createShortcutUseCase(info, useChooser = useChooser)
+        val extras = Bundle()
+        createShortcutUseCase(info, extras, shortcutPlugin = _selectedShortcutPlugin.value?.componentName, launchPlugin = _selectedLaunchPlugin.value?.componentName)
     }
 
-    fun launchActivity(useChooser: Boolean = false) {
+    fun selectLaunchPlugin(componentName: ComponentName?) {
+        _selectedLaunchPlugin.value = _launchPlugins.value.find { it.componentName == componentName }
+    }
+
+    fun selectShortcutPlugin(componentName: ComponentName?) {
+        _selectedShortcutPlugin.value = _shortcutPlugins.value.find { it.componentName == componentName }
+    }
+
+    fun launchActivity() {
         val info = getEditedActivityInfo()
-        launchActivityUseCase(info.componentName, useChooser = useChooser)
+        launchActivityUseCase(info.componentName, launchPlugin = _selectedLaunchPlugin.value?.componentName)
     }
 
     fun shareActivity() {
@@ -165,7 +190,16 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     private fun getEditedActivityInfo(): SystemActivity {
-        val componentName = ComponentName(_editedPackage.value, _editedClass.value)
+        val packageName = _editedPackage.value
+        val className = _editedClass.value
+        val componentName = if (packageName == this.componentName.packageName && className == this.componentName.className) {
+            this.componentName
+        } else if (packageName.isNotEmpty() && className.isNotEmpty()) {
+            ComponentName(packageName, className)
+        } else {
+            this.componentName
+        }
+
         return SystemActivity(
             componentName,
             _editedName.value,

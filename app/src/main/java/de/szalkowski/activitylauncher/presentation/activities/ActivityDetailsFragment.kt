@@ -1,5 +1,6 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
+import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -13,6 +14,7 @@ import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +24,7 @@ import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
 import de.szalkowski.activitylauncher.domain.external.ReviewRequester
 import de.szalkowski.activitylauncher.presentation.common.IconPickerDialogFragment
+import de.szalkowski.activitylauncher.presentation.common.PluginChooserDialogFragment
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,6 +40,12 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setFragmentResultListener(PluginChooserDialogFragment.REQUEST_KEY) { _, bundle ->
+            val launchPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN)
+            val shortcutPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN)
+            viewModel.selectLaunchPlugin(launchPlugin)
+            viewModel.selectShortcutPlugin(shortcutPlugin)
+        }
     }
 
     override fun onCreateView(
@@ -149,7 +158,8 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btCreateShortcutChooser.setOnClickListener {
-            viewModel.createShortcut(useChooser = true)
+            val dialog = PluginChooserDialogFragment.newInstance(viewModel.launchPlugins.value, viewModel.shortcutPlugins.value)
+            dialog.show(childFragmentManager, "plugin chooser")
         }
 
         binding.btLaunch.setOnClickListener {
@@ -157,7 +167,8 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btLaunchChooser.setOnClickListener {
-            viewModel.launchActivity(useChooser = true)
+            val dialog = PluginChooserDialogFragment.newInstance(viewModel.launchPlugins.value, viewModel.shortcutPlugins.value)
+            dialog.show(childFragmentManager, "plugin chooser")
         }
 
         binding.btShareShortcut.setOnClickListener {
