@@ -2,13 +2,11 @@ package de.szalkowski.activitylauncher.data.launcher
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,29 +17,19 @@ class ShortcutCreatorImpl @Inject constructor(
     private val getActivityIconUseCase: GetActivityIconUseCase,
 ) : ShortcutCreator {
 
-    override fun createLauncherIcon(
-        activity: SystemActivity,
-        optionalExtras: Bundle?,
-    ) {
-        val icon = getActivityIconUseCase(activity.iconResourceName, activity.componentName)
-        createLauncherIcon(activity.name, activity.componentName, icon, optionalExtras)
-    }
-
-    override fun createLauncherIcon(
-        name: String,
-        componentName: android.content.ComponentName,
-        icon: IconCompat,
-        optionalExtras: Bundle?,
-    ) {
+    override fun createLauncherIcon(request: ShortcutRequest) {
         val launchIntent = Intent(Intent.ACTION_MAIN)
-        launchIntent.component = componentName
-        if (optionalExtras != null) {
-            launchIntent.putExtras(optionalExtras)
+        launchIntent.component = request.component
+        request.extras?.let {
+            launchIntent.putExtras(it)
+        }
+        request.launcherPlugin?.let {
+            launchIntent.putExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, it.flattenToString())
         }
 
-        val shortcut = ShortcutInfoCompat.Builder(context, componentName.flattenToShortString())
-            .setShortLabel(name)
-            .setIcon(icon)
+        val shortcut = ShortcutInfoCompat.Builder(context, request.component.flattenToShortString())
+            .setShortLabel(request.name)
+            .setIcon(request.icon)
             .setIntent(launchIntent)
             .build()
 

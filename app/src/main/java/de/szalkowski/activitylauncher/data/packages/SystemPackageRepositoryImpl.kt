@@ -10,7 +10,7 @@ import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.isPrivate
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.SystemPackageRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -44,7 +44,7 @@ class SystemPackageRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getActivities(packageName: String): List<SystemActivity> {
+    override fun getActivities(packageName: String): List<MyActivityInfo> {
         return try {
             val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 PackageManager.GET_ACTIVITIES or PackageManager.MATCH_ALL or PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
@@ -71,7 +71,7 @@ class SystemPackageRepositoryImpl @Inject constructor(
                     activity.loadLabel(packageManager).toString()
                 }
 
-                SystemActivity(
+                MyActivityInfo(
                     componentName = ComponentName(packageName, activity.name),
                     name = name,
                     isPrivate = activity.isPrivate(packageManager),

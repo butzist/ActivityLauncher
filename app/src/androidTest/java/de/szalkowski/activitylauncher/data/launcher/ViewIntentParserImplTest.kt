@@ -1,22 +1,26 @@
 package de.szalkowski.activitylauncher.data.launcher
 
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.*
 
 @RunWith(AndroidJUnit4::class)
 class ViewIntentParserImplTest {
     private lateinit var parser: ViewIntentParserImpl
+    private val getActivityIconUseCase: GetActivityIconUseCase = mock()
 
     @Before
     fun setup() {
-        parser = ViewIntentParserImpl()
+        parser = ViewIntentParserImpl(getActivityIconUseCase)
     }
 
     @Test
@@ -25,12 +29,10 @@ class ViewIntentParserImplTest {
             data = Uri.parse("https://activitylauncher.net/activity/com.example/.MainActivity")
         }
 
-        val component = parser.componentNameFromIntent(intent)
-        val packageName = parser.packageFromIntent(intent)
+        val request = parser.parseLaunchRequest(intent)
 
-        assertEquals("com.example", component?.packageName)
-        assertEquals("com.example.MainActivity", component?.className)
-        assertEquals("com.example", packageName)
+        assertEquals("com.example", request?.component?.packageName)
+        assertEquals("com.example.MainActivity", request?.component?.className)
     }
 
     @Test
@@ -42,9 +44,9 @@ class ViewIntentParserImplTest {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
         }
 
-        val component = parser.componentNameFromIntent(intent)
-        assertEquals("com.test", component?.packageName)
-        assertEquals("com.test.Activity", component?.className)
+        val request = parser.parseLaunchRequest(intent)
+        assertEquals("com.test", request?.component?.packageName)
+        assertEquals("com.test.Activity", request?.component?.className)
     }
 
     @Test
@@ -53,34 +55,24 @@ class ViewIntentParserImplTest {
             data = Uri.parse("https://activitylauncher.net/activity/com.example/.MainActivity")
         }
 
-        assertNull(parser.componentNameFromIntent(intent))
-        assertNull(parser.packageFromIntent(intent))
+        assertNull(parser.parseLaunchRequest(intent))
     }
 
     @Test
-    fun testParseShortcutIntentLegacy() {
-        val originalIntent = Intent(Intent.ACTION_MAIN).apply {
+    fun testParseShortcutRequest() {
+        val launchIntent = Intent().apply {
             component = android.content.ComponentName("com.test", "com.test.Activity")
-            putExtra("key", "value")
         }
-        val uri = originalIntent.toUri(0)
-
-        val parsedIntent = parser.parseShortcutIntent(uri)
-        assertEquals("com.test", parsedIntent?.component?.packageName)
-        assertEquals(Intent.ACTION_MAIN, parsedIntent?.action)
-        assertEquals("value", parsedIntent?.getStringExtra("key"))
-    }
-
-    @Test
-    fun testParseShortcutIntentModern() {
-        val originalIntent = Intent().apply {
-            component = android.content.ComponentName("com.test", "com.test.Activity")
-            putExtra("key", "value")
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test Name")
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
         }
-        val uri = originalIntent.toUri(Intent.URI_INTENT_SCHEME)
 
-        val parsedIntent = parser.parseShortcutIntent(uri)
-        assertEquals("com.test", parsedIntent?.component?.packageName)
-        assertEquals("value", parsedIntent?.getStringExtra("key"))
+        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(mock())
+
+        val request = parser.parseShortcutRequest(intent)
+        assertEquals("Test Name", request?.name)
+        assertEquals("com.test", request?.component?.packageName)
+        assertEquals("com.test.Activity", request?.component?.className)
     }
 }

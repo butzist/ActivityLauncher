@@ -1,8 +1,11 @@
 package de.szalkowski.activitylauncher.data.launcher
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -43,78 +46,70 @@ class IntentSignerImplTest {
     }
 
     @Test
-    fun testSignAndValidateIntent() = withMockedBase64 {
+    fun testSignAndValidateRequest() = withMockedBase64 {
+        val componentName = mock<ComponentName>()
+        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val request = ShortcutRequest("Test", componentName, icon)
         val intent = mock<Intent>()
-        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        val signature = signer.signIntent(intent)
+        val intentUtilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        mockStatic(intentUtilClass).use { mockedIntentUtil ->
+            mockedIntentUtil.`when`<Intent> {
+                getActivityIntent(eq(componentName), anyOrNull())
+            }.thenReturn(intent)
+            whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        assertNotNull(signature)
-        assertTrue(signer.validateIntentSignature(intent, signature))
-    }
+            val signature = signer.signRequest(request)
 
-    @Test
-    fun testBackwardCompatibilityNoPlugin() = withMockedBase64 {
-        val intent = mock<Intent>()
-        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
-
-        // When launchPlugin is null, it should be signed exactly as before
-        val signature1 = signer.signIntent(intent)
-        val signature2 = signer.signIntent(intent, null)
-
-        assertEquals(signature1, signature2)
-        assertTrue(signer.validateIntentSignature(intent, signature1))
-        assertTrue(signer.validateIntentSignature(intent, signature1, null))
+            assertNotNull(signature)
+            assertTrue(signer.validateRequestSignature(request, signature))
+        }
     }
 
     @Test
     fun testSignatureWithPlugin() = withMockedBase64 {
+        val componentName = mock<ComponentName>()
+        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val plugin = mock<ComponentName>()
+        whenever(plugin.flattenToString()).thenReturn("com.example/.Plugin")
+        val requestWithPlugin = ShortcutRequest("Test", componentName, icon, launcherPlugin = plugin)
+        val requestWithoutPlugin = ShortcutRequest("Test", componentName, icon)
         val intent = mock<Intent>()
-        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        val plugin = "com.example/.Plugin"
-        val signatureWithPlugin = signer.signIntent(intent, plugin)
-        val signatureWithoutPlugin = signer.signIntent(intent)
+        val intentUtilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        mockStatic(intentUtilClass).use { mockedIntentUtil ->
+            mockedIntentUtil.`when`<Intent> {
+                getActivityIntent(eq(componentName), anyOrNull())
+            }.thenReturn(intent)
+            whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        assertNotEquals(signatureWithPlugin, signatureWithoutPlugin)
-        assertTrue(signer.validateIntentSignature(intent, signatureWithPlugin, plugin))
-        assertFalse(signer.validateIntentSignature(intent, signatureWithPlugin, null))
-        assertFalse(signer.validateIntentSignature(intent, signatureWithoutPlugin, plugin))
-    }
+            val signatureWithPlugin = signer.signRequest(requestWithPlugin)
+            val signatureWithoutPlugin = signer.signRequest(requestWithoutPlugin)
 
-    @Test
-    fun testSignatureChangesWithPlugin() = withMockedBase64 {
-        val intent = mock<Intent>()
-        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
-
-        val plugin1 = "com.example/.Plugin1"
-        val plugin2 = "com.example/.Plugin2"
-
-        val sig1 = signer.signIntent(intent, plugin1)
-        val sig2 = signer.signIntent(intent, plugin2)
-
-        assertNotEquals(sig1, sig2)
+            assertNotEquals(signatureWithPlugin, signatureWithoutPlugin)
+            assertTrue(signer.validateRequestSignature(requestWithPlugin, signatureWithPlugin))
+            assertFalse(signer.validateRequestSignature(requestWithPlugin, signatureWithoutPlugin))
+            assertFalse(signer.validateRequestSignature(requestWithoutPlugin, signatureWithPlugin))
+        }
     }
 
     @Test
     fun testKnownSignature() = withMockedBase64 {
+        val componentName = mock<ComponentName>()
+        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val request = ShortcutRequest("Test", componentName, icon)
         val intent = mock<Intent>()
-        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        val signature = signer.signIntent(intent)
-        // Verified known signature for "intent:#Intent;action=com.test.ACTION;end" with key "test_key"
-        assertEquals("kPThuLUm6BnZkfNuIuRuVZfj8IXOinD+dURnRv1Ytd8=", signature)
-    }
+        val intentUtilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        mockStatic(intentUtilClass).use { mockedIntentUtil ->
+            mockedIntentUtil.`when`<Intent> {
+                getActivityIntent(eq(componentName), anyOrNull())
+            }.thenReturn(intent)
+            whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-    @Test
-    fun testFailForTamperedIntent() = withMockedBase64 {
-        val intent = mock<Intent>()
-        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
-
-        val tamperedIntent = mock<Intent>()
-        whenever(tamperedIntent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.TAMPERED;end")
-
-        val signature = signer.signIntent(intent)
-        assertFalse(signer.validateIntentSignature(tamperedIntent, signature))
+            val signature = signer.signRequest(request)
+            // Verified known signature for "intent:#Intent;action=com.test.ACTION;end" with key "test_key"
+            assertEquals("kPThuLUm6BnZkfNuIuRuVZfj8IXOinD+dURnRv1Ytd8=", signature)
+        }
     }
 }

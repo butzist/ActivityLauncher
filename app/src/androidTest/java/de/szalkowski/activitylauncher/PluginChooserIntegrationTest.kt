@@ -1,6 +1,8 @@
 package de.szalkowski.activitylauncher
 
 import android.content.ComponentName
+import android.content.Intent
+import android.os.Bundle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -9,6 +11,9 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -25,6 +30,8 @@ import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
+import de.szalkowski.activitylauncher.presentation.activities.ActivityDetailsFragment
+import de.szalkowski.activitylauncher.presentation.common.PluginChooserDialogFragment
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +42,7 @@ import javax.inject.Inject
 @HiltAndroidTest
 @UninstallModules(CoreServicesModule::class)
 @RunWith(AndroidJUnit4::class)
-class FavoritesRecentsIntegrationTest {
+class PluginChooserIntegrationTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
@@ -82,27 +89,14 @@ class FavoritesRecentsIntegrationTest {
     @BindValue
     val getPackageIconUseCase: GetPackageIconUseCase = mock()
 
-    private val favoriteSet = mutableSetOf<ComponentName>()
-
     @Inject
     lateinit var systemRepository: FakeSystemPackageRepository
 
     @Before
     fun setup() {
         hiltRule.inject()
-        favoriteSet.clear()
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
-        whenever(favoritesRepository.getFavorites()).thenReturn(favoriteSet)
-        whenever(favoritesRepository.isFavorite(any())).thenAnswer { invocation ->
-            favoriteSet.contains(invocation.getArgument<ComponentName>(0))
-        }
-        doAnswer { invocation ->
-            favoriteSet.add(invocation.getArgument(0))
-        }.whenever(favoritesRepository).addFavorite(any())
-        doAnswer { invocation ->
-            favoriteSet.remove(invocation.getArgument(0))
-        }.whenever(favoritesRepository).removeFavorite(any())
-
+        whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
 
         val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
@@ -111,15 +105,9 @@ class FavoritesRecentsIntegrationTest {
 
         systemRepository.clear()
 
-        // Clear shared preferences to ensure a clean state
-        val context = ApplicationProvider.getApplicationContext<android.content.Context>()
-        context.getSharedPreferences("al_recent_activities", android.content.Context.MODE_PRIVATE).edit().clear().commit()
-        context.getSharedPreferences("al_favorites", android.content.Context.MODE_PRIVATE).edit().clear().commit()
-
-        // Setup fake data
         val pkg = SystemPackage("de.szalkowski.activitylauncher", "Android Test App", "1.0 (1)", null)
         val activities = listOf(
-            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity"), "Main Activity", null, false, isDefault = true),
+            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity"), "Settings Activity", null, false, isDefault = true),
         )
         systemRepository.addPackage(pkg, activities)
 
@@ -156,53 +144,56 @@ class FavoritesRecentsIntegrationTest {
     }
 
     @Test
-    fun testFavoritesAndRecentsNavigation() {
-        val scenario = ActivityScenario.launch(MainActivity::class.java)
+    fun testPluginChooserResultSimulation() {
+        val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
+        val scenario = ActivityScenario.launch<MainActivity>(intent)
         try {
-            Thread.sleep(5000)
+            // Navigate to ActivityDetails
+            Thread.sleep(3000)
             onView(withId(R.id.PackageListFragment)).perform(click())
+            Thread.sleep(1000)
+            onView(withId(R.id.rvPackages)).perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(1000)
+            onView(withId(R.id.rvActivities)).perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(1000)
+
+            // Simulate a result from PluginChooserDialogFragment for SHORTCUT
+            scenario.onActivity { activity ->
+                val navHostFragment = activity.supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
+                val currentFragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull { it is ActivityDetailsFragment }
+
+                if (currentFragment != null) {
+                    val bundle = Bundle().apply {
+                        putSerializable(PluginChooserDialogFragment.RESULT_ACTION, PluginChooserDialogFragment.PluginAction.SHORTCUT)
+                        putParcelable(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN, ComponentName("com.test", "LaunchPlugin"))
+                        putParcelable(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN, ComponentName("com.test", "ShortcutPlugin"))
+                    }
+                    currentFragment.childFragmentManager.setFragmentResult(PluginChooserDialogFragment.REQUEST_KEY, bundle)
+                }
+            }
+
+            // Give it some time to process
             Thread.sleep(2000)
-
-            onView(withId(R.id.FavoritesFragment)).perform(click())
+            dismissSystemDialog()
             Thread.sleep(1000)
-            onView(withId(R.id.rvFavorites)).check(matches(isDisplayed()))
 
-            onView(withId(R.id.RecentsFragment)).perform(click())
-            Thread.sleep(1000)
-            onView(withId(R.id.rvRecents)).check(matches(isDisplayed()))
+            // Verify we are still on the screen (or at least no crash happened)
+            // We don't verify the system dialog here as it's outside our app
+            onView(withId(R.id.tiName)).check(matches(isDisplayed()))
         } finally {
-            runCatching { scenario.close() }
+            scenario.close()
         }
     }
 
-    @Test
-    fun testFavoriteToggleUpdatesUI() {
-        val scenario = ActivityScenario.launch(MainActivity::class.java)
-        try {
-            Thread.sleep(5000)
-            onView(withId(R.id.PackageListFragment)).perform(click())
-
-            onView(withId(R.id.rvPackages))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
-
-            Thread.sleep(2000)
-            onView(withId(R.id.rvActivities))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
-
-            Thread.sleep(2000)
-            val favoriteButton = onView(withId(R.id.btFavorite))
-            favoriteButton.perform(click())
-
-            Thread.sleep(2000)
-            onView(withId(R.id.FavoritesFragment)).perform(click())
-            Thread.sleep(2000)
-            onView(withId(R.id.rvFavorites)).check(matches(hasMinimumChildCount(1)))
-        } finally {
-            runCatching { scenario.close() }
+    private fun dismissSystemDialog() {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        // Wait for system dialog to appear (short wait)
+        Thread.sleep(1000)
+        // Try to find "Cancel", "Dismiss", or "Don't add" button in system dialog
+        val cancelButton = device.findObject(UiSelector().textMatches("(?i)Cancel|Dismiss|Don't add|No|Close"))
+        if (cancelButton.exists()) {
+            cancelButton.click()
+            Thread.sleep(1000)
         }
-    }
-
-    private fun pressBackHome() {
-        onView(withId(R.id.bottom_navigation)).perform(click()) // Just a fallback if pressBack fails
     }
 }

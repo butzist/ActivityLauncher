@@ -146,7 +146,7 @@ class PackageRepositoryImpl @Inject constructor(
 
         val activityNames = (listOfNotNull(pack.defaultActivityName) + pack.activityNames)
         val activities = activityNames.map { name ->
-            SystemActivity(
+            MyActivityInfo(
                 ComponentName(pack.packageName, name.fullCls),
                 name.name,
                 name.iconResourceName,
@@ -166,13 +166,13 @@ class PackageRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getActivity(componentName: ComponentName): SystemActivity {
+    override fun getActivity(componentName: ComponentName): MyActivityInfo {
         val pack = getPackage(componentName.packageName)
         val activityNames = pack?.let { listOfNotNull(it.defaultActivityName) + it.activityNames }
         val name = activityNames?.find { n -> n.fullCls == componentName.className }
 
         if (name == null) {
-            return SystemActivity(
+            return MyActivityInfo(
                 componentName,
                 createNameFromClass(componentName.className),
                 null,
@@ -180,7 +180,7 @@ class PackageRepositoryImpl @Inject constructor(
             )
         }
 
-        return SystemActivity(
+        return MyActivityInfo(
             componentName,
             name.name,
             name.iconResourceName,

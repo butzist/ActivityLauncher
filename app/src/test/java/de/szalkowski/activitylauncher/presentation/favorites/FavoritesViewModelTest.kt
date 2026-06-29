@@ -2,7 +2,7 @@ package de.szalkowski.activitylauncher.presentation.favorites
 
 import android.content.ComponentName
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,7 +34,7 @@ class FavoritesViewModelTest {
     @Test
     fun `should load favorites`() = runTest {
         val component = ComponentName("com.test", "Activity")
-        val activityInfo = SystemActivity(component, "Activity", null, false)
+        val activityInfo = MyActivityInfo(component, "Activity", null, false)
 
         whenever(favoritesRepository.getFavorites()).thenReturn(setOf(component))
         whenever(packageRepository.getActivity(component)).thenReturn(activityInfo)
@@ -43,7 +43,7 @@ class FavoritesViewModelTest {
         viewModel.setDispatcher(testDispatcher)
 
         // Collect flow to trigger updates
-        val activities = mutableListOf<List<SystemActivity>>()
+        val activities = mutableListOf<List<MyActivityInfo>>()
         val job = launch {
             viewModel.activities.collect { activities.add(it) }
         }

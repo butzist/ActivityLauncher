@@ -1,22 +1,9 @@
 package de.szalkowski.activitylauncher.domain.launcher
 
-import android.content.ComponentName
-import android.os.Bundle
-import androidx.core.graphics.drawable.IconCompat
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 
 interface ShortcutCreator {
-    fun createLauncherIcon(
-        activity: SystemActivity,
-        optionalExtras: Bundle? = null,
-    )
-
-    fun createLauncherIcon(
-        name: String,
-        componentName: ComponentName,
-        icon: IconCompat,
-        optionalExtras: Bundle? = null,
-    )
+    fun createLauncherIcon(request: ShortcutRequest)
 
     companion object {
         const val INTENT_LAUNCH_SHORTCUT = "de.szalkowski.activitylauncher.intent.action.LAUNCH_SHORTCUT"

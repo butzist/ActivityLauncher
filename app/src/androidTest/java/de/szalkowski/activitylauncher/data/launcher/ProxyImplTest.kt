@@ -14,8 +14,7 @@ import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
-import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -36,9 +35,6 @@ class ProxyImplTest {
 
     @BindValue
     val intentSigner: IntentSigner = mock()
-
-    @BindValue
-    val getActivityIconUseCase: GetActivityIconUseCase = mock()
 
     @BindValue
     val packageRepository: de.szalkowski.activitylauncher.domain.packages.PackageRepository = mock()
@@ -85,26 +81,24 @@ class ProxyImplTest {
         // and mock the PackageManager it returns if possible, or just mock the whole context.
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
-        proxy = ShortcutCreatorProxyImpl(mockContext, getActivityIconUseCase, intentSigner)
+        proxy = ShortcutCreatorProxyImpl(mockContext, intentSigner)
     }
 
     @Test
     fun testCreateLauncherIconDelegation() {
         val componentName = ComponentName("com.test", "Activity")
-        val activityInfo = SystemActivity(componentName, "Test", null, false)
         val icon: IconCompat = mock()
-        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
-        whenever(intentSigner.signIntent(any(), anyOrNull())).thenReturn("signature")
+        whenever(intentSigner.signRequest(any())).thenReturn("signature")
 
         // Mock the context and capture it to verify startActivity
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
-        val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext, getActivityIconUseCase, intentSigner)
+        val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext, intentSigner)
 
-        proxyWithMockContext.createLauncherIcon(activityInfo)
+        val request = ShortcutRequest("Test", componentName, icon)
+        proxyWithMockContext.createLauncherIcon(request, null)
 
-        verify(getActivityIconUseCase).invoke(isNull(), eq(componentName))
-        verify(intentSigner).signIntent(any<Intent>(), isNull<String>())
+        verify(intentSigner).signRequest(eq(request))
         verify(mockContext).startActivity(any<Intent>())
     }
 

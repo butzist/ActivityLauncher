@@ -6,8 +6,10 @@ import androidx.lifecycle.SavedStateHandle
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -18,7 +20,6 @@ import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUse
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
@@ -52,7 +53,7 @@ class ActivityDetailsViewModelTest {
         on { className } doReturn cls
     }
 
-    private val activityInfo = SystemActivity(
+    private val activityInfo = MyActivityInfo(
         componentName,
         "Test Activity",
         "res:icon",
@@ -75,7 +76,7 @@ class ActivityDetailsViewModelTest {
         viewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
     }
 
@@ -104,13 +105,19 @@ class ActivityDetailsViewModelTest {
     @Test
     fun `should launch activity`() {
         viewModel.launchActivity()
-        verify(launchActivityUseCase).invoke(argThat { packageName == "com.test" && className == "Activity" }, isNull())
+        val captor = argumentCaptor<LaunchRequest>()
+        verify(launchActivityUseCase).invoke(captor.capture(), isNull())
+        assertEquals("com.test", captor.firstValue.component.packageName)
+        assertEquals("Activity", captor.firstValue.component.className)
     }
 
     @Test
     fun `should create shortcut`() {
         viewModel.createShortcut()
-        verify(createShortcutUseCase).invoke(argThat { componentName.packageName == "com.test" && componentName.className == "Activity" }, any(), isNull(), isNull())
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(createShortcutUseCase).invoke(captor.capture(), isNull())
+        assertEquals("com.test", captor.firstValue.component.packageName)
+        assertEquals("Activity", captor.firstValue.component.className)
     }
 
     @Test
@@ -123,7 +130,7 @@ class ActivityDetailsViewModelTest {
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertTrue(newViewModel.showLaunchChooser.value)
@@ -140,7 +147,7 @@ class ActivityDetailsViewModelTest {
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertFalse(newViewModel.showLaunchChooser.value)
@@ -158,7 +165,7 @@ class ActivityDetailsViewModelTest {
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertEquals(listOf(launchPlugin), newViewModel.launchPlugins.value)
@@ -167,56 +174,69 @@ class ActivityDetailsViewModelTest {
 
     @Test
     fun `should use selected launch plugin when launching`() {
-        val launchPlugin = PluginInfo("Launch Plugin", createMockComponentName("pkg", "cls"), null)
+        val pluginComp = createMockComponentName("pkg", "cls")
+        val launchPlugin = PluginInfo("Launch Plugin", pluginComp, null)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
-        newViewModel.selectLaunchPlugin(launchPlugin.componentName)
+        newViewModel.selectLaunchPlugin(pluginComp)
 
         newViewModel.launchActivity()
 
-        verify(launchActivityUseCase).invoke(argThat { packageName == "com.test" && className == "Activity" }, eq(launchPlugin.componentName))
+        val captor = argumentCaptor<LaunchRequest>()
+        verify(launchActivityUseCase).invoke(captor.capture(), eq(pluginComp))
+        assertEquals("com.test", captor.firstValue.component.packageName)
+        assertEquals("Activity", captor.firstValue.component.className)
     }
 
     @Test
     fun `should use selected shortcut plugin when creating shortcut`() {
-        val shortcutPlugin = PluginInfo("Shortcut Plugin", createMockComponentName("pkg2", "cls2"), null)
+        val pluginComp = createMockComponentName("pkg2", "cls2")
+        val shortcutPlugin = PluginInfo("Shortcut Plugin", pluginComp, null)
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(shortcutPlugin))
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
-        newViewModel.selectShortcutPlugin(shortcutPlugin.componentName)
+        newViewModel.selectShortcutPlugin(pluginComp)
 
         newViewModel.createShortcut()
 
-        verify(createShortcutUseCase).invoke(argThat { componentName.packageName == "com.test" && componentName.className == "Activity" }, any(), eq(shortcutPlugin.componentName), isNull())
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(createShortcutUseCase).invoke(captor.capture(), eq(pluginComp))
+        assertEquals("com.test", captor.firstValue.component.packageName)
+        assertEquals("Activity", captor.firstValue.component.className)
     }
 
     @Test
     fun `should pass launch plugin extra when creating shortcut`() {
-        val launchPlugin = PluginInfo("Launch Plugin", createMockComponentName("pkg", "cls"), null)
+        val pluginComp = createMockComponentName("pkg", "cls")
+        val launchPlugin = PluginInfo("Launch Plugin", pluginComp, null)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
-        newViewModel.selectLaunchPlugin(launchPlugin.componentName)
+        newViewModel.selectLaunchPlugin(pluginComp)
 
         newViewModel.createShortcut()
 
-        verify(createShortcutUseCase).invoke(argThat { componentName.packageName == "com.test" && componentName.className == "Activity" }, any(), isNull(), eq(launchPlugin.componentName))
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(createShortcutUseCase).invoke(captor.capture(), isNull())
+        assertEquals("com.test", captor.firstValue.component.packageName)
+        assertEquals("Activity", captor.firstValue.component.className)
+        assertEquals(pluginComp, captor.firstValue.launcherPlugin)
     }
 
     @Test
@@ -228,11 +248,12 @@ class ActivityDetailsViewModelTest {
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertTrue(newViewModel.showLaunchChooser.value)
-        assertFalse(newViewModel.showShortcutChooser.value)
+        // If multiple launch plugins exist, we also show the shortcut chooser to allow picking the launch plugin for the shortcut
+        assertTrue(newViewModel.showShortcutChooser.value)
     }
 
     @Test
@@ -244,7 +265,7 @@ class ActivityDetailsViewModelTest {
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
             createShortcutUseCase, toggleFavoriteUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, recentsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertFalse(newViewModel.showLaunchChooser.value)

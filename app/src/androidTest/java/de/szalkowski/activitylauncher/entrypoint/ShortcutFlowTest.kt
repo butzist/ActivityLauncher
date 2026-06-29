@@ -15,6 +15,10 @@ import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -80,7 +84,7 @@ class ShortcutFlowTest {
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
             val componentName = invocation.getArgument<ComponentName>(0)
-            de.szalkowski.activitylauncher.domain.model.SystemActivity(
+            de.szalkowski.activitylauncher.domain.model.MyActivityInfo(
                 componentName,
                 "Test Activity",
                 null,
@@ -99,17 +103,41 @@ class ShortcutFlowTest {
         }
 
         // Stub viewIntentParser to handle the URI parsing in ShortcutActivity
-        whenever(viewIntentParser.parseShortcutIntent(any())).thenAnswer { invocation ->
-            val uri = invocation.getArgument<String>(0)
-            try {
-                Intent.parseUri(uri, Intent.URI_INTENT_SCHEME)
+        whenever(viewIntentParser.parseShortcutRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
+            val intent = invocation.getArgument<Intent>(0)
+            val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return@thenAnswer null
+            val launchIntent = try {
+                Intent.parseUri(launchIntentStr, Intent.URI_INTENT_SCHEME)
             } catch (_: Exception) {
-                try {
-                    Intent.parseUri(uri, 0)
-                } catch (_: Exception) {
-                    null
-                }
-            }
+                null
+            } ?: return@thenAnswer null
+
+            val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
+            val launchPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
+            val launchPlugin = launchPluginStr?.let { ComponentName.unflattenFromString(it) }
+
+            ShortcutRequest(
+                name = appName,
+                component = launchIntent.component!!,
+                icon = mock<androidx.core.graphics.drawable.IconCompat>(),
+                extras = launchIntent.extras,
+                launcherPlugin = launchPlugin,
+            )
+        }
+
+        whenever(viewIntentParser.parseLaunchRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
+            val intent = invocation.getArgument<Intent>(0)
+            val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return@thenAnswer null
+            val launchIntent = try {
+                Intent.parseUri(launchIntentStr, Intent.URI_INTENT_SCHEME)
+            } catch (_: Exception) {
+                null
+            } ?: return@thenAnswer null
+
+            LaunchRequest(
+                component = launchIntent.component!!,
+                extras = launchIntent.extras,
+            )
         }
     }
 
@@ -124,7 +152,7 @@ class ShortcutFlowTest {
         }
         val signature = "valid_signature"
 
-        whenever(intentSigner.validateIntentSignature(any<Intent>(), eq(signature), isNull())).thenReturn(true)
+        whenever(intentSigner.validateRequestSignature(any(), eq(signature))).thenReturn(true)
 
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -133,7 +161,11 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher).launchActivity(eq(componentName), argThat { this?.getString("key") == "value" })
+            val captor = argumentCaptor<LaunchRequest>()
+            verify(activityLauncher).launchActivity(captor.capture())
+            assertEquals("com.test", captor.firstValue.component.packageName)
+            assertEquals("com.test.Activity", captor.firstValue.component.className)
+            assertEquals("value", captor.firstValue.extras?.getString("key"))
         }
     }
 
@@ -144,7 +176,7 @@ class ShortcutFlowTest {
         val launchIntent = Intent().apply { component = componentName }
         val signature = "invalid_signature"
 
-        whenever(intentSigner.validateIntentSignature(any<Intent>(), eq(signature), isNull())).thenReturn(false)
+        whenever(intentSigner.validateRequestSignature(any(), eq(signature))).thenReturn(false)
 
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -153,10 +185,7 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher, never()).launchActivity(any(), anyOrNull())
-            // Verification of redirect is tricky without mocking Context.startActivity,
-            // but we can assume it works if we trust ShortcutActivity code.
-            // Or we could use IntentIntents for verification if available.
+            verify(activityLauncher, never()).launchActivity(any())
         }
     }
 
@@ -181,7 +210,7 @@ class ShortcutFlowTest {
             }
             // Success if it doesn't crash and reaches destroyed state (finishes)
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
-            verify(shortcutCreator).createLauncherIcon(any<String>(), any<ComponentName>(), any<androidx.core.graphics.drawable.IconCompat>(), anyOrNull<android.os.Bundle>())
+            verify(shortcutCreator).createLauncherIcon(any())
         }
     }
 
@@ -196,7 +225,9 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher).launchActivity(eq(componentName), anyOrNull<android.os.Bundle>())
+            val captor = argumentCaptor<LaunchRequest>()
+            verify(activityLauncher).launchActivity(captor.capture())
+            assertEquals(componentName, captor.firstValue.component)
         }
     }
 
@@ -207,7 +238,7 @@ class ShortcutFlowTest {
         val signature = "valid_signature"
         val launchPlugin = "com.plugin/.LaunchActivity"
 
-        whenever(intentSigner.validateIntentSignature(any<Intent>(), eq(signature), eq(launchPlugin))).thenReturn(true)
+        whenever(intentSigner.validateRequestSignature(any(), eq(signature))).thenReturn(true)
 
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -217,10 +248,7 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher, never()).launchActivity(any<ComponentName>(), anyOrNull<android.os.Bundle>())
-            // It should start the plugin activity instead.
-            // We can't easily verify startActivity from here without mocking Context,
-            // but ShortcutActivity is using the real Context.
+            verify(activityLauncher, never()).launchActivity(any())
         }
     }
 }

@@ -24,11 +24,11 @@ data class ActivityName(
 data class PackageActivities(
     val packageName: String,
     val name: String,
-    val defaultActivity: SystemActivity?,
-    val activities: List<SystemActivity>,
+    val defaultActivity: MyActivityInfo?,
+    val activities: List<MyActivityInfo>,
 )
 
-data class SystemActivity(
+data class MyActivityInfo(
     val componentName: ComponentName,
     val name: String,
     val iconResourceName: String?,

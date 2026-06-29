@@ -40,11 +40,18 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setFragmentResultListener(PluginChooserDialogFragment.REQUEST_KEY) { _, bundle ->
+        childFragmentManager.setFragmentResultListener(PluginChooserDialogFragment.REQUEST_KEY, this) { _, bundle ->
+            val action = bundle.getSerializable(PluginChooserDialogFragment.RESULT_ACTION) as? PluginChooserDialogFragment.PluginAction
             val launchPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN)
             val shortcutPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN)
             viewModel.selectLaunchPlugin(launchPlugin)
             viewModel.selectShortcutPlugin(shortcutPlugin)
+
+            when (action) {
+                PluginChooserDialogFragment.PluginAction.LAUNCH -> viewModel.launchActivity()
+                PluginChooserDialogFragment.PluginAction.SHORTCUT -> viewModel.createShortcut()
+                null -> {}
+            }
         }
     }
 
@@ -158,7 +165,11 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btCreateShortcutChooser.setOnClickListener {
-            val dialog = PluginChooserDialogFragment.newInstance(viewModel.launchPlugins.value, viewModel.shortcutPlugins.value)
+            val dialog = PluginChooserDialogFragment.newInstance(
+                PluginChooserDialogFragment.PluginAction.SHORTCUT,
+                viewModel.launchPlugins.value,
+                viewModel.shortcutPlugins.value,
+            )
             dialog.show(childFragmentManager, "plugin chooser")
         }
 
@@ -167,7 +178,11 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btLaunchChooser.setOnClickListener {
-            val dialog = PluginChooserDialogFragment.newInstance(viewModel.launchPlugins.value, viewModel.shortcutPlugins.value)
+            val dialog = PluginChooserDialogFragment.newInstance(
+                PluginChooserDialogFragment.PluginAction.LAUNCH,
+                viewModel.launchPlugins.value,
+                viewModel.shortcutPlugins.value,
+            )
             dialog.show(childFragmentManager, "plugin chooser")
         }
 

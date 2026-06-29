@@ -11,10 +11,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
-import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
@@ -35,7 +36,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ActivityDetailsViewModel @Inject constructor(
-    private val packageRepository: PackageRepository,
+    packageRepository: PackageRepository,
     private val favoritesRepository: FavoritesRepository,
     private val launchActivityUseCase: LaunchActivityUseCase,
     private val createShortcutUseCase: CreateShortcutUseCase,
@@ -43,7 +44,6 @@ class ActivityDetailsViewModel @Inject constructor(
     private val shareActivityUseCase: ShareActivityUseCase,
     private val getActivityIconUseCase: GetActivityIconUseCase,
     private val iconLoader: IconLoader,
-    private val recentsRepository: RecentsRepository,
     val settingsRepository: SettingsRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -51,8 +51,8 @@ class ActivityDetailsViewModel @Inject constructor(
     private val componentName: ComponentName = savedStateHandle.get<ComponentName>("activityComponentName")
         ?: throw IllegalArgumentException("activityComponentName is required")
 
-    private val _activityInfo = MutableStateFlow<SystemActivity?>(null)
-    val activityInfo: StateFlow<SystemActivity?> = _activityInfo.asStateFlow()
+    private val _activityInfo = MutableStateFlow<MyActivityInfo?>(null)
+    val activityInfo: StateFlow<MyActivityInfo?> = _activityInfo.asStateFlow()
 
     private val _isFavorite = MutableStateFlow(false)
     val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
@@ -105,7 +105,7 @@ class ActivityDetailsViewModel @Inject constructor(
         _shortcutPlugins.value = shortcutPluginList
 
         _showLaunchChooser.value = launchPluginList.size > 1
-        _showShortcutChooser.value = shortcutPluginList.size > 1
+        _showShortcutChooser.value = shortcutPluginList.size > 1 || launchPluginList.size > 1
 
         val info = packageRepository.getActivity(componentName)
         _activityInfo.value = info
@@ -167,8 +167,15 @@ class ActivityDetailsViewModel @Inject constructor(
 
     fun createShortcut() {
         val info = getEditedActivityInfo()
-        val extras = Bundle()
-        createShortcutUseCase(info, extras, shortcutPlugin = _selectedShortcutPlugin.value?.componentName, launchPlugin = _selectedLaunchPlugin.value?.componentName)
+        val icon = _editedIcon.value ?: getActivityIconUseCase(info.iconResourceName, info.componentName)
+        val request = ShortcutRequest(
+            name = info.name,
+            component = info.componentName,
+            icon = icon,
+            extras = Bundle(),
+            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
+        )
+        createShortcutUseCase(request, _selectedShortcutPlugin.value?.componentName)
     }
 
     fun selectLaunchPlugin(componentName: ComponentName?) {
@@ -181,7 +188,11 @@ class ActivityDetailsViewModel @Inject constructor(
 
     fun launchActivity() {
         val info = getEditedActivityInfo()
-        launchActivityUseCase(info.componentName, launchPlugin = _selectedLaunchPlugin.value?.componentName)
+        val request = LaunchRequest(
+            component = info.componentName,
+            extras = Bundle(),
+        )
+        launchActivityUseCase(request, _selectedLaunchPlugin.value?.componentName)
     }
 
     fun shareActivity() {
@@ -189,7 +200,7 @@ class ActivityDetailsViewModel @Inject constructor(
         shareActivityUseCase(info.componentName)
     }
 
-    private fun getEditedActivityInfo(): SystemActivity {
+    private fun getEditedActivityInfo(): MyActivityInfo {
         val packageName = _editedPackage.value
         val className = _editedClass.value
         val componentName = if (packageName == this.componentName.packageName && className == this.componentName.className) {
@@ -200,7 +211,7 @@ class ActivityDetailsViewModel @Inject constructor(
             this.componentName
         }
 
-        return SystemActivity(
+        return MyActivityInfo(
             componentName,
             _editedName.value,
             _editedIconResourceName.value.ifBlank { null },

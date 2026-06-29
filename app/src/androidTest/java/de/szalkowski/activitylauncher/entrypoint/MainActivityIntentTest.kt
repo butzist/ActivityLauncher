@@ -64,6 +64,9 @@ class MainActivityIntentTest {
     val iconLoader: IconLoader = mock()
 
     @BindValue
+    val getActivityIconUseCase: de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase = mock()
+
+    @BindValue
     val activitySharer: ActivitySharer = mock()
 
     @BindValue
@@ -83,11 +86,17 @@ class MainActivityIntentTest {
 
     // Using real implementation for parser to test logic
     @BindValue
-    val viewIntentParser: ViewIntentParser = ViewIntentParserImpl()
+    val viewIntentParser: ViewIntentParser = mock()
 
     @Before
     fun init() {
         hiltRule.inject()
+        val realParser = ViewIntentParserImpl(getActivityIconUseCase)
+        whenever(viewIntentParser.parseLaunchRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseLaunchRequest(invocation.getArgument(0)) }
+        whenever(viewIntentParser.parseShortcutRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutRequest(invocation.getArgument(0)) }
+        whenever(viewIntentParser.componentNameFromIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.componentNameFromIntent(invocation.getArgument(0)) }
+        whenever(viewIntentParser.packageFromIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.packageFromIntent(invocation.getArgument(0)) }
+        whenever(viewIntentParser.parseShortcutIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutIntent(invocation.getArgument(0)) }
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(supportReminder.shouldDisplayReminder()).thenReturn(false)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
@@ -98,7 +107,7 @@ class MainActivityIntentTest {
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
             val componentName = invocation.getArgument<ComponentName>(0)
-            de.szalkowski.activitylauncher.domain.model.SystemActivity(
+            de.szalkowski.activitylauncher.domain.model.MyActivityInfo(
                 componentName,
                 "Test Activity",
                 null,

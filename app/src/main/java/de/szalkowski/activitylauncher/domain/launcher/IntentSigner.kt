@@ -1,8 +1,8 @@
 package de.szalkowski.activitylauncher.domain.launcher
 
-import android.content.Intent
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 
 interface IntentSigner {
-    fun signIntent(intent: Intent, launchPlugin: String? = null): String
-    fun validateIntentSignature(intent: Intent, signature: String, launchPlugin: String? = null): Boolean
+    fun signRequest(request: ShortcutRequest): String
+    fun validateRequestSignature(request: ShortcutRequest, signature: String): Boolean
 }

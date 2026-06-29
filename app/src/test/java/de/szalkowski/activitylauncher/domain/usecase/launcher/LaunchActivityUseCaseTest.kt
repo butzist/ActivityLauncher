@@ -1,7 +1,9 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
 import android.content.ComponentName
+import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -10,39 +12,42 @@ import org.junit.Test
 import org.mockito.kotlin.*
 
 class LaunchActivityUseCaseTest {
-    private val activityLauncher: ActivityLauncherProxy = mock()
+    private val activityLauncher: ActivityLauncher = mock()
+    private val activityLauncherProxy: ActivityLauncherProxy = mock()
     private val recentsRepository: RecentsRepository = mock()
     private lateinit var useCase: LaunchActivityUseCase
     private val componentName = ComponentName("com.test", "Activity")
 
     @Before
     fun setup() {
-        useCase = LaunchActivityUseCase(activityLauncher, recentsRepository)
+        useCase = LaunchActivityUseCase(activityLauncher, activityLauncherProxy, recentsRepository)
     }
 
     @Test
     fun `should launch activity and add to recents`() {
-        useCase.invoke(componentName)
+        val request = LaunchRequest(componentName)
+        useCase.invoke(request)
 
-        verify(activityLauncher).launchActivity(componentName, plugin = null)
+        verify(activityLauncher).launchActivity(eq(request))
         verify(recentsRepository).addActivity(componentName)
     }
 
     @Test
     fun `should launch activity with plugin and add to recents`() {
         val plugin = ComponentName("com.plugin", "Plugin")
-        useCase.invoke(componentName, launchPlugin = plugin)
+        val request = LaunchRequest(componentName)
+        useCase.invoke(request, launchPlugin = plugin)
 
-        verify(activityLauncher).launchActivity(componentName, plugin = plugin)
+        verify(activityLauncherProxy).launchActivity(eq(request), eq(plugin))
         verify(recentsRepository).addActivity(componentName)
     }
 
     @Test
     fun `should check for multiple handlers`() {
-        whenever(activityLauncher.hasMultipleHandlers()).thenReturn(true)
+        whenever(activityLauncherProxy.hasMultipleHandlers()).thenReturn(true)
         assertTrue(useCase.hasMultipleHandlers())
 
-        whenever(activityLauncher.hasMultipleHandlers()).thenReturn(false)
+        whenever(activityLauncherProxy.hasMultipleHandlers()).thenReturn(false)
         assertFalse(useCase.hasMultipleHandlers())
     }
 }

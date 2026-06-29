@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -28,8 +29,9 @@ class ActivityLauncherImplTest {
         val extras = Bundle().apply {
             putString("test_key", "test_value")
         }
+        val request = LaunchRequest(componentName, extras)
 
-        activityLauncher.launchActivity(componentName, extras)
+        activityLauncher.launchActivity(request)
 
         argumentCaptor<Intent>().apply {
             verify(context).startActivity(capture())

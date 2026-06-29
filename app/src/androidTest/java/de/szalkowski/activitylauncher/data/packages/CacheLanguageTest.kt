@@ -6,7 +6,7 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import de.szalkowski.activitylauncher.FakeSystemPackageRepository
 import de.szalkowski.activitylauncher.data.database.PackageDao
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -40,7 +40,7 @@ class CacheLanguageTest {
         // Setup fake data
         val pkg = SystemPackage("com.test.app", "Test App", "1.0 (1)", null)
         val activities = listOf(
-            SystemActivity(ComponentName("com.test.app", "com.test.app.MainActivity"), "Main", null, false),
+            MyActivityInfo(ComponentName("com.test.app", "com.test.app.MainActivity"), "Main", null, false),
         )
         systemRepository.addPackage(pkg, activities)
     }

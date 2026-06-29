@@ -197,10 +197,10 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             return
         }
 
-        val componentNameFromParser = viewIntentParser.componentNameFromIntent(intent)
+        val launchRequest = viewIntentParser.parseLaunchRequest(intent)
         val componentNameFromExtra =
             intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
-        val componentName = componentNameFromParser ?: componentNameFromExtra
+        val componentName = launchRequest?.component ?: componentNameFromExtra
 
         if (componentName != null) {
             val bundle = Bundle().apply {
@@ -219,20 +219,6 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             navController.navigate(R.id.ActivityListFragment, packageBundle)
 
             navController.navigate(R.id.ActivityDetailsFragment, bundle)
-            return
-        }
-
-        val packageName = viewIntentParser.packageFromIntent(intent)
-        if (packageName != null) {
-            navController.popBackStack(R.id.PackageListFragment, false)
-            if (navController.currentDestination?.id != R.id.PackageListFragment) {
-                navController.navigate(R.id.PackageListFragment)
-            }
-
-            val bundle = Bundle().apply {
-                putString("packageName", packageName)
-            }
-            navController.navigate(R.id.ActivityListFragment, bundle)
             return
         }
 

@@ -4,12 +4,12 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Bundle
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import javax.inject.Inject
 
@@ -18,12 +18,8 @@ class ActivityLauncherProxyImpl @Inject constructor(
 ) : ActivityLauncherProxy {
     private val pm: PackageManager = context.packageManager
 
-    override fun launchActivity(
-        activity: ComponentName,
-        optionalExtras: Bundle?,
-        plugin: ComponentName?,
-    ) {
-        val launchIntent = getActivityIntent(activity, optionalExtras)
+    override fun launchActivity(request: LaunchRequest, plugin: ComponentName?) {
+        val launchIntent = getActivityIntent(request.component, request.extras)
         val intent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
         if (plugin != null) {
             intent.component = plugin

@@ -9,22 +9,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 
 class ActivityInfoAdapter(
-    private val iconProvider: (SystemActivity) -> android.graphics.drawable.Drawable,
-) : ListAdapter<SystemActivity, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
+    private val iconProvider: (MyActivityInfo) -> android.graphics.drawable.Drawable,
+) : ListAdapter<MyActivityInfo, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
 
-    var onItemClick: ((SystemActivity) -> Unit)? = null
-    var onItemLongClick: ((SystemActivity) -> Unit)? = null
+    var onItemClick: ((MyActivityInfo) -> Unit)? = null
+    var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
 
-    public override fun getItem(position: Int): SystemActivity = super.getItem(position)
+    public override fun getItem(position: Int): MyActivityInfo = super.getItem(position)
 
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
         val tvName: TextView = viewItem.findViewById(R.id.tvName)
         val tvPackage: TextView = viewItem.findViewById(R.id.tvClass)
         val ivIcon: ImageView = viewItem.findViewById(R.id.ivIcon)
-        lateinit var item: SystemActivity
+        lateinit var item: MyActivityInfo
 
         init {
             itemView.setOnClickListener {
@@ -52,12 +52,12 @@ class ActivityInfoAdapter(
         holder.ivIcon.setImageDrawable(iconProvider(item))
     }
 
-    private object ActivityDiffCallback : DiffUtil.ItemCallback<SystemActivity>() {
-        override fun areItemsTheSame(oldItem: SystemActivity, newItem: SystemActivity): Boolean {
+    private object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
+        override fun areItemsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
             return oldItem.componentName == newItem.componentName
         }
 
-        override fun areContentsTheSame(oldItem: SystemActivity, newItem: SystemActivity): Boolean {
+        override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
             return oldItem == newItem
         }
     }

@@ -6,7 +6,7 @@ import androidx.navigation.NavDestination
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,7 +34,7 @@ class AnalyticsLoggerImpl @Inject constructor(
         }
     }
 
-    override fun logActivityAction(kind: String, activity: SystemActivity) {
+    override fun logActivityAction(kind: String, activity: MyActivityInfo) {
         runCatching {
             val bundle = Bundle().apply {
                 putString("action_type", kind)

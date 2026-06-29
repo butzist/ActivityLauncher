@@ -21,6 +21,9 @@ class PluginChooserViewModel @Inject constructor(
     private val _shortcutPlugins = MutableStateFlow<List<PluginInfo>>(emptyList())
     val shortcutPlugins: StateFlow<List<PluginInfo>> = _shortcutPlugins.asStateFlow()
 
+    private val _action = MutableStateFlow(PluginChooserDialogFragment.PluginAction.LAUNCH)
+    val action: StateFlow<PluginChooserDialogFragment.PluginAction> = _action.asStateFlow()
+
     private val _selectedLaunchPlugin = MutableStateFlow<PluginInfo?>(null)
     val selectedLaunchPlugin: StateFlow<PluginInfo?> = _selectedLaunchPlugin.asStateFlow()
 
@@ -28,23 +31,33 @@ class PluginChooserViewModel @Inject constructor(
     val selectedShortcutPlugin: StateFlow<PluginInfo?> = _selectedShortcutPlugin.asStateFlow()
 
     val isSelectionComplete = combine(
-        _launchPlugins,
-        _shortcutPlugins,
+        _action,
         _selectedLaunchPlugin,
         _selectedShortcutPlugin,
-    ) { launch, shortcut, selLaunch, selShortcut ->
-        val launchRequired = launch.size > 1
-        val shortcutRequired = shortcut.size > 1
+    ) { action, selLaunch, selShortcut ->
+        val shortcutRequired = action == PluginChooserDialogFragment.PluginAction.SHORTCUT
 
-        val launchDone = !launchRequired || selLaunch != null
+        val launchDone = selLaunch != null
         val shortcutDone = !shortcutRequired || selShortcut != null
 
         launchDone && shortcutDone
     }
 
-    fun setPlugins(launch: List<PluginInfo>, shortcut: List<PluginInfo>) {
+    fun setPlugins(
+        action: PluginChooserDialogFragment.PluginAction,
+        launch: List<PluginInfo>,
+        shortcut: List<PluginInfo>,
+    ) {
+        _action.value = action
         _launchPlugins.value = launch
         _shortcutPlugins.value = shortcut
+
+        if (launch.size == 1) {
+            _selectedLaunchPlugin.value = launch[0]
+        }
+        if (shortcut.size == 1) {
+            _selectedShortcutPlugin.value = shortcut[0]
+        }
     }
 
     fun selectLaunchPlugin(plugin: PluginInfo?) {

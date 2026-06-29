@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PackageActivities
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,14 +25,14 @@ class ActivityListViewModel @Inject constructor(
 
     private val packageName: String = savedStateHandle.get<String>("packageName") ?: ""
 
-    private val _activities = MutableStateFlow<List<SystemActivity>>(emptyList())
-    val activities: StateFlow<List<SystemActivity>> = _activities.asStateFlow()
+    private val _activities = MutableStateFlow<List<MyActivityInfo>>(emptyList())
+    val activities: StateFlow<List<MyActivityInfo>> = _activities.asStateFlow()
 
     private val _isSearching = MutableStateFlow(false)
     val isSearching: StateFlow<Boolean> = _isSearching.asStateFlow()
 
     private var allPackageActivities: PackageActivities? = null
-    private var combinedActivities: List<SystemActivity> = emptyList()
+    private var combinedActivities: List<MyActivityInfo> = emptyList()
     private var currentQuery: String = ""
     private var filterJob: Job? = null
 
@@ -68,14 +68,14 @@ class ActivityListViewModel @Inject constructor(
         }
     }
 
-    private suspend fun performFilter(query: String): List<SystemActivity> {
+    private suspend fun performFilter(query: String): List<MyActivityInfo> {
         val pack = allPackageActivities ?: return emptyList()
         if (query.isEmpty()) return combinedActivities
 
         val packageMatches = pack.packageName.contains(query, ignoreCase = true) ||
             pack.name.contains(query, ignoreCase = true)
 
-        val result = mutableListOf<SystemActivity>()
+        val result = mutableListOf<MyActivityInfo>()
 
         // Check default activity
         pack.defaultActivity?.let { a ->

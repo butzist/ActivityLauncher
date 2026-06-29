@@ -1,11 +1,7 @@
 package de.szalkowski.activitylauncher.domain.launcher
 
-import android.content.ComponentName
-import android.os.Bundle
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 
 interface ActivityLauncher {
-    fun launchActivity(
-        activity: ComponentName,
-        optionalExtras: Bundle? = null,
-    )
+    fun launchActivity(request: LaunchRequest)
 }

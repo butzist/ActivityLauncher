@@ -14,7 +14,7 @@ import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import org.junit.Before
 import org.junit.Rule
@@ -81,14 +81,11 @@ class ShortcutCreatorImplTest {
     @Test
     fun testCreateLauncherIcon() {
         val componentName = ComponentName("com.test", "com.test.Activity")
-        val activityInfo = SystemActivity(componentName, "Test App", null, false)
         val icon = androidx.core.graphics.drawable.IconCompat.createWithBitmap(android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888))
 
-        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
+        val request = ShortcutRequest("Test App", componentName, icon)
+        shortcutCreatorImpl.createLauncherIcon(request)
 
-        shortcutCreatorImpl.createLauncherIcon(activityInfo)
-
-        verify(getActivityIconUseCase).invoke(isNull(), eq(componentName))
         // We can't easily verify the actual pin shortcut request as it's a static call to ShortcutManagerCompat
     }
 }

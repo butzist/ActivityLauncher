@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher.presentation.common
 import android.content.ComponentName
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,12 +13,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 abstract class BaseActivityListViewModel(
-    private val loadItems: suspend () -> List<SystemActivity>,
+    private val loadItems: suspend () -> List<MyActivityInfo>,
     private val onRemoveItem: suspend (ComponentName) -> Unit,
 ) : ViewModel() {
 
-    private val _activities = MutableStateFlow<List<SystemActivity>>(emptyList())
-    val activities: StateFlow<List<SystemActivity>> = _activities.asStateFlow()
+    private val _activities = MutableStateFlow<List<MyActivityInfo>>(emptyList())
+    val activities: StateFlow<List<MyActivityInfo>> = _activities.asStateFlow()
 
     private val _isSearching = MutableStateFlow(false)
     val isSearching: StateFlow<Boolean> = _isSearching.asStateFlow()

@@ -7,7 +7,7 @@ import javax.inject.Inject
 open class GetPackageIconUseCase @Inject constructor(
     private val iconLoader: IconLoader,
 ) {
-    operator fun invoke(iconResourceName: String?, packageName: String): IconCompat {
+    open operator fun invoke(iconResourceName: String?, packageName: String): IconCompat {
         if (iconResourceName != null) {
             val result = iconLoader.tryGetIcon(iconResourceName)
             if (result.isSuccess) {

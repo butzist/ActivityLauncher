@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher.domain.usecase.launcher
 import android.content.ComponentName
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.*
@@ -12,7 +12,8 @@ class CreateShortcutUseCaseTest {
     private val shortcutCreator: ShortcutCreator = mock()
     private val shortcutCreatorProxy: ShortcutCreatorProxy = mock()
     private val componentName = ComponentName("com.test", "Activity")
-    private val activityInfo = SystemActivity(componentName, "Test", null, false)
+    private val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+    private val request = ShortcutRequest("Test", componentName, icon)
     private lateinit var useCase: CreateShortcutUseCase
 
     @Before
@@ -24,28 +25,28 @@ class CreateShortcutUseCaseTest {
     fun `should use shortcutCreator if only one handler exists`() {
         whenever(shortcutCreatorProxy.hasMultipleHandlers()).thenReturn(false)
 
-        useCase(activityInfo)
+        useCase(request)
 
-        verify(shortcutCreator).createLauncherIcon(eq(activityInfo), isNull())
-        verify(shortcutCreatorProxy, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull(), anyOrNull(), anyOrNull())
+        verify(shortcutCreator).createLauncherIcon(eq(request))
+        verify(shortcutCreatorProxy, never()).createLauncherIcon(any(), anyOrNull())
     }
 
     @Test
     fun `should use shortcutCreatorProxy if multiple handlers exist`() {
         whenever(shortcutCreatorProxy.hasMultipleHandlers()).thenReturn(true)
 
-        useCase(activityInfo)
+        useCase(request)
 
-        verify(shortcutCreatorProxy).createLauncherIcon(eq(activityInfo), isNull(), isNull(), isNull())
-        verify(shortcutCreator, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull())
+        verify(shortcutCreatorProxy).createLauncherIcon(eq(request), isNull())
+        verify(shortcutCreator, never()).createLauncherIcon(any())
     }
 
     @Test
     fun `should use shortcutCreatorProxy if plugin is provided`() {
         val plugin = ComponentName("com.plugin", "Plugin")
-        useCase(activityInfo, shortcutPlugin = plugin)
+        useCase(request, shortcutPlugin = plugin)
 
-        verify(shortcutCreatorProxy).createLauncherIcon(eq(activityInfo), isNull(), eq(plugin), isNull())
-        verify(shortcutCreator, never()).createLauncherIcon(any<SystemActivity>(), anyOrNull())
+        verify(shortcutCreatorProxy).createLauncherIcon(eq(request), eq(plugin))
+        verify(shortcutCreator, never()).createLauncherIcon(any())
     }
 }

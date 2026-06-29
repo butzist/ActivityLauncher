@@ -1,6 +1,6 @@
 package de.szalkowski.activitylauncher
 
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.SystemPackageRepository
 import javax.inject.Inject
@@ -9,9 +9,9 @@ import javax.inject.Singleton
 @Singleton
 class FakeSystemPackageRepository @Inject constructor() : SystemPackageRepository {
     private val packages = mutableMapOf<String, SystemPackage>()
-    private val activities = mutableMapOf<String, List<SystemActivity>>()
+    private val activities = mutableMapOf<String, List<MyActivityInfo>>()
 
-    fun addPackage(pkg: SystemPackage, pkgActivities: List<SystemActivity>) {
+    fun addPackage(pkg: SystemPackage, pkgActivities: List<MyActivityInfo>) {
         packages[pkg.packageName] = pkg
         activities[pkg.packageName] = pkgActivities
     }
@@ -29,7 +29,7 @@ class FakeSystemPackageRepository @Inject constructor() : SystemPackageRepositor
         return packages[packageName]
     }
 
-    override fun getActivities(packageName: String): List<SystemActivity> {
+    override fun getActivities(packageName: String): List<MyActivityInfo> {
         return activities[packageName] ?: emptyList()
     }
 }

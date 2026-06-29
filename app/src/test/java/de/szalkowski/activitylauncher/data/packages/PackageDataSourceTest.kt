@@ -4,7 +4,7 @@ import android.content.ComponentName
 import de.szalkowski.activitylauncher.data.database.AppPackageEntity
 import de.szalkowski.activitylauncher.data.database.PackageDao
 import de.szalkowski.activitylauncher.data.database.PackageWithActivities
-import de.szalkowski.activitylauncher.domain.model.SystemActivity
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.SystemPackageRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -124,11 +124,11 @@ class PackageDataSourceTest {
         verify(packageDao).insertActivities(argThat { activities -> activities.size == 1 && activities[0].fullCls == "$packageName.PublicActivity" })
     }
 
-    private fun createSystemActivity(packageName: String, className: String, name: String, icon: String?, isPrivate: Boolean): SystemActivity {
+    private fun createSystemActivity(packageName: String, className: String, name: String, icon: String?, isPrivate: Boolean): MyActivityInfo {
         val componentName = mock<ComponentName>()
         whenever(componentName.packageName).thenReturn(packageName)
         whenever(componentName.className).thenReturn(className)
-        return SystemActivity(componentName, name, icon, isPrivate)
+        return MyActivityInfo(componentName, name, icon, isPrivate)
     }
 
     @Test
