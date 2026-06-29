@@ -3,6 +3,7 @@ package de.szalkowski.activitylauncher.data.launcher
 import android.content.Intent
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
@@ -33,12 +34,27 @@ class ViewIntentParserImplTest {
     }
 
     @Test
+    fun testParseShortcutIntentInComponentName() {
+        val launchIntent = Intent().apply {
+            component = android.content.ComponentName("com.test", "com.test.Activity")
+        }
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+        }
+
+        val component = parser.componentNameFromIntent(intent)
+        assertEquals("com.test", component?.packageName)
+        assertEquals("com.test.Activity", component?.className)
+    }
+
+    @Test
     fun testReturnNullForInvalidAction() {
         val intent = Intent(Intent.ACTION_MAIN).apply {
             data = Uri.parse("https://activitylauncher.net/activity/com.example/.MainActivity")
         }
 
         assertNull(parser.componentNameFromIntent(intent))
+        assertNull(parser.packageFromIntent(intent))
     }
 
     @Test

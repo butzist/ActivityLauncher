@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,9 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentPackageListBinding
-import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,9 +21,6 @@ import javax.inject.Inject
 class PackageListFragment : Fragment() {
     @Inject
     internal lateinit var packageListAdapter: PackageListAdapter
-
-    @Inject
-    internal lateinit var viewIntentParser: ViewIntentParser
 
     private val viewModel: PackageListViewModel by viewModels()
 
@@ -77,20 +71,6 @@ class PackageListFragment : Fragment() {
             }.onFailure { Log.e("Navigation", "Error while navigating from PackageListFragment") }
         }
         binding.rvPackages.adapter = packageListAdapter
-
-        runCatching {
-            val intent = activity?.intent ?: return@runCatching
-            val packageName = viewIntentParser.packageFromIntent(intent) ?: return@runCatching
-            val action = PackageListFragmentDirections.actionSelectPackage(packageName)
-            findNavController().navigate(action)
-        }.onFailure {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.error_invalid_activity_link),
-                Toast.LENGTH_LONG,
-            )
-                .show()
-        }
     }
 
     override fun onDestroyView() {

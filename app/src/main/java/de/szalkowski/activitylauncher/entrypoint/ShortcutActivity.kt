@@ -89,6 +89,13 @@ class ShortcutActivity : AppCompatActivity() {
         return false
     }
 
+    private fun redirectToMain(componentName: ComponentName) {
+        val mainIntent = Intent(this, MainActivity::class.java)
+        mainIntent.putExtra(MainActivity.EXTRA_ACTIVITY_COMPONENT_NAME, componentName)
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(mainIntent)
+    }
+
     private fun handleLaunchShortcut() {
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return
         val launchIntent = viewIntentParser.parseShortcutIntent(launchIntentStr) ?: return
@@ -97,7 +104,7 @@ class ShortcutActivity : AppCompatActivity() {
 
         if (!intentSigner.validateIntentSignature(launchIntent, signature, launchPlugin)) {
             Log.e("ShortcutActivity", "Invalid signature for shortcut")
-            Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
+            launchIntent.component?.let { redirectToMain(it) }
             return
         }
 

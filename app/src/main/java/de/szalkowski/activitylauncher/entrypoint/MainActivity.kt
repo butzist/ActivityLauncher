@@ -1,5 +1,6 @@
 package de.szalkowski.activitylauncher.entrypoint
 
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -123,15 +124,14 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         }
 
         // define top level destinations (no back button)
-        appBarConfiguration =
-            AppBarConfiguration(
-                setOf(
-                    R.id.LoadingFragment,
-                    R.id.PackageListFragment,
-                    R.id.FavoritesFragment,
-                    R.id.RecentsFragment,
-                ),
-            )
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.LoadingFragment,
+                R.id.PackageListFragment,
+                R.id.FavoritesFragment,
+                R.id.RecentsFragment,
+            ),
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         val searchContainer = findViewById<View>(R.id.searchContainer)
@@ -151,14 +151,15 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.GONE
                 }
+
                 R.id.FavoritesFragment, R.id.RecentsFragment -> {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.GONE
-                    params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
-                        AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
-                        AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                    params.scrollFlags =
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
                     toolbar.layoutParams = params
                 }
+
                 R.id.ActivityDetailsFragment -> {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.GONE
@@ -166,12 +167,12 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     toolbar.layoutParams = params
                     appBarLayout.setExpanded(true, true)
                 }
+
                 else -> {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.VISIBLE
-                    params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
-                        AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
-                        AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                    params.scrollFlags =
+                        AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
                     toolbar.layoutParams = params
                 }
             }
@@ -179,18 +180,72 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
         // Handle initial navigation if not already deep-linked
         if (savedInstanceState == null) {
-            val intent = intent
-            val hasIntent = intent != null && viewIntentParser.packageFromIntent(intent) != null
+            handleIntent(intent, navController)
+        }
+    }
 
-            if (hasIntent) {
-                navigateToAll(navController)
-            } else if (favoritesRepository.getFavorites().isNotEmpty()) {
-                navController.navigate(R.id.FavoritesFragment)
-            } else if (recentsRepository.getRecentActivities().isNotEmpty()) {
-                navController.navigate(R.id.RecentsFragment)
-            } else {
-                navigateToAll(navController)
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        handleIntent(intent, navController)
+    }
+
+    private fun handleIntent(intent: Intent?, navController: NavController) {
+        if (intent == null) {
+            navigateDefault(navController)
+            return
+        }
+
+        val componentNameFromParser = viewIntentParser.componentNameFromIntent(intent)
+        val componentNameFromExtra =
+            intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
+        val componentName = componentNameFromParser ?: componentNameFromExtra
+
+        if (componentName != null) {
+            val bundle = Bundle().apply {
+                putParcelable(EXTRA_ACTIVITY_COMPONENT_NAME, componentName)
             }
+
+            // Ensure we start from PackageListFragment
+            navController.popBackStack(R.id.PackageListFragment, false)
+            if (navController.currentDestination?.id != R.id.PackageListFragment) {
+                navController.navigate(R.id.PackageListFragment)
+            }
+
+            val packageBundle = Bundle().apply {
+                putString("packageName", componentName.packageName)
+            }
+            navController.navigate(R.id.ActivityListFragment, packageBundle)
+
+            navController.navigate(R.id.ActivityDetailsFragment, bundle)
+            return
+        }
+
+        val packageName = viewIntentParser.packageFromIntent(intent)
+        if (packageName != null) {
+            navController.popBackStack(R.id.PackageListFragment, false)
+            if (navController.currentDestination?.id != R.id.PackageListFragment) {
+                navController.navigate(R.id.PackageListFragment)
+            }
+
+            val bundle = Bundle().apply {
+                putString("packageName", packageName)
+            }
+            navController.navigate(R.id.ActivityListFragment, bundle)
+            return
+        }
+
+        navigateDefault(navController)
+    }
+
+    private fun navigateDefault(navController: NavController) {
+        if (favoritesRepository.getFavorites().isNotEmpty()) {
+            navController.navigate(R.id.FavoritesFragment)
+        } else if (recentsRepository.getRecentActivities().isNotEmpty()) {
+            navController.navigate(R.id.RecentsFragment)
+        } else {
+            navigateToAll(navController)
         }
     }
 
@@ -242,5 +297,10 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    companion object {
+        const val EXTRA_ACTIVITY_COMPONENT_NAME = "activityComponentName"
+        const val EXTRA_BUILD_BACKSTACK = "buildBackstack"
     }
 }

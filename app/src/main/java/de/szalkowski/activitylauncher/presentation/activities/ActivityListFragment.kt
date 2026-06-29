@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -14,9 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
-import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,9 +27,6 @@ class ActivityListFragment : Fragment() {
     private lateinit var activityListAdapter: ActivityListAdapter
 
     private val viewModel: ActivityListViewModel by viewModels()
-
-    @Inject
-    internal lateinit var viewIntentParser: ViewIntentParser
 
     private var _binding: FragmentActivityListBinding? = null
 
@@ -88,24 +82,6 @@ class ActivityListFragment : Fragment() {
         }
 
         binding.rvActivities.adapter = activityListAdapter
-
-        runCatching {
-            val intent = activity?.intent ?: return@runCatching
-            // clear view intent
-            activity?.intent = null
-
-            val componentName =
-                viewIntentParser.componentNameFromIntent(intent) ?: return@runCatching
-            val action = ActivityListFragmentDirections.actionSelectActivity(componentName)
-            findNavController().navigate(action)
-        }.onFailure {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.error_invalid_activity_link),
-                Toast.LENGTH_LONG,
-            )
-                .show()
-        }
     }
 
     override fun onDestroyView() {
