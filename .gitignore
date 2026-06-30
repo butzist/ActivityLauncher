@@ -13,3 +13,5 @@ local.properties
 local.env
 google-services.json
 keystore*.jks
+/.artifacts
+/.kotlin
