@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher
 
 import android.util.Log
+import androidx.test.espresso.Espresso
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
@@ -10,6 +11,13 @@ object TestUtils {
 
     fun dismissSystemDialogs() {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
+        // Ensure keyboard is hidden
+        try {
+            Espresso.closeSoftKeyboard()
+        } catch (e: Exception) {
+            Log.d(TAG, "Keyboard already closed or not shown")
+        }
 
         // Ensure screen is on
         if (!device.isScreenOn) {

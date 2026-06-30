@@ -4,7 +4,7 @@ import android.content.ComponentName
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -195,7 +195,7 @@ class FavoritesRecentsIntegrationTest {
 
             Thread.sleep(2000)
             val favoriteButton = onView(withId(R.id.btFavorite))
-            favoriteButton.perform(click())
+            favoriteButton.perform(scrollTo(), click())
 
             Thread.sleep(2000)
             onView(withId(R.id.FavoritesFragment)).perform(click())
