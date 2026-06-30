@@ -11,8 +11,6 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiSelector
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -156,7 +154,8 @@ class ActivityDetailsIntegrationTest {
 
     @Test
     fun testActivityDetailsAndFavorites() {
-        dismissSystemDialog() // Ensure no leftover dialogs
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
         val scenario = ActivityScenario.launch<MainActivity>(intent)
         try {
@@ -207,7 +206,7 @@ class ActivityDetailsIntegrationTest {
             onView(withId(R.id.btCreateShortcut)).perform(click())
             Thread.sleep(2000)
             verify(shortcutCreator, atLeastOnce()).createLauncherIcon(any())
-            dismissSystemDialog()
+            TestUtils.dismissSystemDialogs()
             Thread.sleep(1000)
 
             // 4a. Test Create Shortcut Chooser Button
@@ -216,24 +215,12 @@ class ActivityDetailsIntegrationTest {
                 Thread.sleep(2000)
                 // We'd need to select a plugin in the dialog to verify proxy call,
                 // but let's just verify it didn't crash for now as simulating dialog clicks is complex here
-                dismissSystemDialog()
+                TestUtils.dismissSystemDialogs()
                 Thread.sleep(1000)
             }
         } finally {
             // Use runCatching to avoid cleanup errors masking real test failures
             runCatching { scenario.close() }
-        }
-    }
-
-    private fun dismissSystemDialog() {
-        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        // Wait for system dialog to appear (short wait)
-        Thread.sleep(1000)
-        // Try to find "Cancel", "Dismiss", or "Don't add" button in system dialog
-        val cancelButton = device.findObject(UiSelector().textMatches("(?i)Cancel|Dismiss|Don't add|No|Close"))
-        if (cancelButton.exists()) {
-            cancelButton.click()
-            Thread.sleep(1000)
         }
     }
 

@@ -64,4 +64,7 @@ jobs:
           api-level: 29
           arch: x86_64
           disable-animations: true
-          script: ./gradlew connectedOssNoadsDebugAndroidTest --build-cache
+          script: |
+            adb shell wm dismiss-keyguard
+            adb shell input keyevent 82
+            ./gradlew connectedOssNoadsDebugAndroidTest --build-cache

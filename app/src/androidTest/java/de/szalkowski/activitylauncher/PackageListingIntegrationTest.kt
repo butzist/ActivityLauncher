@@ -146,6 +146,8 @@ class PackageListingIntegrationTest {
 
     @Test
     fun testPackageListIsDisplayedAndSearchWorks() {
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         ActivityScenario.launch(MainActivity::class.java).use {
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())
@@ -162,6 +164,8 @@ class PackageListingIntegrationTest {
 
     @Test
     fun testPackageFilteringAppliesToActivities() {
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         ActivityScenario.launch(MainActivity::class.java).use {
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())

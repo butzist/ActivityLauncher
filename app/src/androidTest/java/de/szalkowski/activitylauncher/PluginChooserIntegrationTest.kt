@@ -11,9 +11,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiSelector
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -145,6 +142,8 @@ class PluginChooserIntegrationTest {
 
     @Test
     fun testPluginChooserResultSimulation() {
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
         val scenario = ActivityScenario.launch<MainActivity>(intent)
         try {
@@ -174,7 +173,7 @@ class PluginChooserIntegrationTest {
 
             // Give it some time to process
             Thread.sleep(2000)
-            dismissSystemDialog()
+            TestUtils.dismissSystemDialogs()
             Thread.sleep(1000)
 
             // Verify we are still on the screen (or at least no crash happened)
@@ -182,18 +181,6 @@ class PluginChooserIntegrationTest {
             onView(withId(R.id.tiName)).check(matches(isDisplayed()))
         } finally {
             scenario.close()
-        }
-    }
-
-    private fun dismissSystemDialog() {
-        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        // Wait for system dialog to appear (short wait)
-        Thread.sleep(1000)
-        // Try to find "Cancel", "Dismiss", or "Don't add" button in system dialog
-        val cancelButton = device.findObject(UiSelector().textMatches("(?i)Cancel|Dismiss|Don't add|No|Close"))
-        if (cancelButton.exists()) {
-            cancelButton.click()
-            Thread.sleep(1000)
         }
     }
 }

@@ -157,6 +157,8 @@ class FavoritesRecentsIntegrationTest {
 
     @Test
     fun testFavoritesAndRecentsNavigation() {
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             Thread.sleep(5000)
@@ -177,6 +179,8 @@ class FavoritesRecentsIntegrationTest {
 
     @Test
     fun testFavoriteToggleUpdatesUI() {
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             Thread.sleep(5000)
