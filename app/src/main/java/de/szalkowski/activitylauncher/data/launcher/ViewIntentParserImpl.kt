@@ -31,6 +31,7 @@ class ViewIntentParserImpl @Inject constructor(
 
     override fun parseLaunchRequest(intent: Intent): LaunchRequest? {
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
+            ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
         val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) }
 
         val component = launchIntent?.component
@@ -43,6 +44,7 @@ class ViewIntentParserImpl @Inject constructor(
     override fun parseShortcutRequest(intent: Intent): ShortcutRequest? {
         val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
+            ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
         val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) } ?: return null
         val component = launchIntent.component ?: return null
 
@@ -68,7 +70,9 @@ class ViewIntentParserImpl @Inject constructor(
             }
 
             ShortcutCreator.INTENT_LAUNCH_SHORTCUT -> {
-                val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return null
+                val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
+                    ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
+                    ?: return null
                 parseShortcutIntent(launchIntentStr)?.component
             }
 
