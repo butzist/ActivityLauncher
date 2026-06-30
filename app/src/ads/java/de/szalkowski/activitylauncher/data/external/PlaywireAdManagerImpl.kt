@@ -2,10 +2,13 @@ package de.szalkowski.activitylauncher.data.external
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
+import androidx.core.net.toUri
 import com.intergi.playwiresdk.PWNotifier
 import com.intergi.playwiresdk.PlaywireSDK
 import com.intergi.playwiresdk.ads.view.PWViewAd
@@ -33,6 +36,7 @@ class PlaywireAdManagerImpl @Inject constructor(
         val appId = context.getString(R.string.app_id)
 
         if (publisherId.isEmpty() || appId.isEmpty()) {
+            showFallbackBanner(activity, container)
             return
         }
 
@@ -44,6 +48,8 @@ class PlaywireAdManagerImpl @Inject constructor(
             if (success) {
                 isInitialized = true
                 setupBanner(activity, container)
+            } else {
+                showFallbackBanner(activity, container)
             }
         }
     }
@@ -67,7 +73,7 @@ class PlaywireAdManagerImpl @Inject constructor(
             }
 
             override fun onViewAdFailedToLoad(ad: PWViewAd) {
-                container.visibility = View.GONE
+                showFallbackBanner(context as Activity, container)
             }
 
             override fun onViewAdOpened(ad: PWViewAd) {}
@@ -86,5 +92,27 @@ class PlaywireAdManagerImpl @Inject constructor(
         container.removeAllViews()
         container.addView(banner, layoutParams)
         banner.load()
+    }
+
+    private fun showFallbackBanner(activity: Activity, container: ViewGroup) {
+        val banner = ImageView(activity).apply {
+            setImageResource(R.drawable.getpro_banner)
+            setOnClickListener {
+                runCatching {
+                    val intent = Intent(Intent.ACTION_VIEW, context.getString(R.string.url_pro).toUri())
+                    activity.startActivity(intent)
+                }
+            }
+        }
+
+        val layoutParams = FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            Gravity.CENTER,
+        )
+
+        container.removeAllViews()
+        container.addView(banner, layoutParams)
+        container.visibility = View.VISIBLE
     }
 }
