@@ -2,6 +2,9 @@
 
 ## Features
 
+- Plugin system for launch and shortcut creation plugins
+  - Documentation: https://github.com/ActivityLauncher/ActivityLauncher/blob/feat/package-cache/PLUGIN_ARCHITECTURE.md
+  - Example plugin: https://github.com/ActivityLauncher/ActivityLauncherShizukuPlugin
 - Launch favorites using Quick Settings tile by @khaled-0
 - Favorites and recently used activities
 - Sharing of shortcuts via URL
@@ -11,7 +14,9 @@
 ## Fixes
 
 - App crashes when rotated
+- Incremental loading should fix crashes due to binder buffer exhaustion
 
 ## Other improvements/changes
 
+- Package cache: Further improved startup time by caching package information in SQL database
 - Improved startup time: Loading of all packages skipped when opening favorites or recents
