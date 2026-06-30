@@ -77,7 +77,7 @@ class ShortcutActivity : AppCompatActivity() {
             // Give the system a moment to process the pinning request before finishing
             window.decorView.postDelayed({
                 if (!isFinishing) finish()
-            }, 500)
+            }, 1000)
         }
     }
 

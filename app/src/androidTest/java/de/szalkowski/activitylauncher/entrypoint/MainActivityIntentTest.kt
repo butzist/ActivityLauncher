@@ -104,6 +104,7 @@ class MainActivityIntentTest {
 
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isLoaded).thenReturn(true)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
             val componentName = invocation.getArgument<ComponentName>(0)

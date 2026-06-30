@@ -147,6 +147,7 @@ class ActivityDetailsIntegrationTest {
         )
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(listOf(myPackageInfo)))
         whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isLoaded).thenReturn(true)
 
         whenever(packageRepository.getActivity(eq(componentName))).thenReturn(activities[0])
         whenever(packageRepository.getActivities(eq(pkg.packageName))).thenReturn(de.szalkowski.activitylauncher.domain.model.PackageActivities(pkg.packageName, pkg.name, activities[0], activities))

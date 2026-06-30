@@ -109,7 +109,7 @@ class ShortcutForegroundTest {
             }
 
             // It should eventually finish (after the delay in onResume)
-            Thread.sleep(1000)
+            Thread.sleep(2000)
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
         }
     }
