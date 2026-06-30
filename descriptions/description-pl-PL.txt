@@ -8,11 +8,12 @@ Niezależnie od tego, czy jesteś zaawansowanym użytkownikiem, programistą, cz
 - Czysty i lekki z prostym interfejsem
 
 💡 O projekcie:
-Launcher Aktywności Pro to projekt o otwartym kodzie źródłowym dostępny na stronie https://github.com/butzist/ActivityLauncher.
+Launcher Aktywności Pro to projekt o otwartym kodzie źródłowym dostępny na stronie https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Zaangażuj się:
 Jest to projekt tworzony przez społeczność – możesz wnosić wkład w postaci kodu, tłumaczeń lub pomysłów. Pomóż nam ulepszać i rozwijać się!
 
 Strona internetowa: https://activitylauncher.net
-Kod źródłowy i tłumaczenia: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kod źródłowy i tłumaczenia: https://github.com/orgs/ActivityLauncher/repositories
 Zapisz się do wersji Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

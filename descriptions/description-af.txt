@@ -8,11 +8,12 @@ Of jy nou 'n kraggebruiker, ontwikkelaar of net nuuskierig is, Aktiwiteit Launch
 - Skoon en liggewig met 'n eenvoudige koppelvlak
 
 💡 Oor die Projek:
-Aktiwiteit Launcher Pro is 'n oopbronprojek beskikbaar by https://github.com/butzist/ActivityLauncher.
+Aktiwiteit Launcher Pro is 'n oopbronprojek beskikbaar by https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Raak Betrokke:
 Dit is 'n gemeenskapsgedrewe projek – jy is welkom om kode, vertalings of idees by te dra. Help ons om te verbeter en te groei!
 
 Webwerf: https://activitylauncher.net
-Bronkode en vertalings: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Bronkode en vertalings: https://github.com/orgs/ActivityLauncher/repositories
 Kies in vir Beta-vrystelling: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

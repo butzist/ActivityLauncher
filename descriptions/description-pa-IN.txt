@@ -8,11 +8,12 @@
 - ਇੱਕ ਸਧਾਰਨ ਇੰਟਰਫੇਸ ਨਾਲ ਸਾਫ਼ ਅਤੇ ਹਲਕਾ
 
 💡 ਪ੍ਰੋਜੈਕਟ ਬਾਰੇ:
-ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ ਇੱਕ ਖੁੱਲ੍ਹਾ ਸੋਰਸ ਪ੍ਰੋਜੈਕਟ ਹੈ ਜੋ https://github.com/butzist/ActivityLauncher ‘ਤੇ ਉਪਲਬਧ ਹੈ।.
+ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ ਇੱਕ ਖੁੱਲ੍ਹਾ ਸੋਰਸ ਪ੍ਰੋਜੈਕਟ ਹੈ ਜੋ https://github.com/orgs/ActivityLauncher/repositories ‘ਤੇ ਉਪਲਬਧ ਹੈ।.
 
 🤝 ਸ਼ਾਮਲ ਹੋਵੋ:
 ਇਹ ਇੱਕ ਕਮਿਊਨਿਟੀ-ਅਧਾਰਿਤ ਪ੍ਰੋਜੈਕਟ ਹੈ – ਤੁਹਾਡਾ ਕੋਡ, ਅਨੁਵਾਦਾਂ ਜਾਂ ਵਿਚਾਰਾਂ ਦਾ ਯੋਗਦਾਨ ਕਰਨ ਲਈ ਸੁਆਗਤ ਹੈ। ਸਾਡੀ ਬਿਹਤਰੀ ਅਤੇ ਵਿਕਾਸ ਵਿੱਚ ਮਦਦ ਕਰੋ!
 
 ਵੈੱਬਸਾਈਟ: https://activitylauncher.net
-ਸਰੋਤ ਕੋਡ ਅਤੇ ਅਨੁਵਾਦ: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+ਸਰੋਤ ਕੋਡ ਅਤੇ ਅਨੁਵਾਦ: https://github.com/orgs/ActivityLauncher/repositories
 ਬੀਟਾ ਰੀਲੀਜ਼ ਲਈ ਔਪਟ-ਇਨ ਕਰੋ: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

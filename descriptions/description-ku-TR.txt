@@ -8,11 +8,12 @@
 - پاک و سووکە لەگەڵ ڕووکارێکی سادە
 
 💡 دەربارەی پرۆژەکە:
-Activity Launcher Pro پڕۆژەیەکی سەرچاوە کراوەیە کە لە https://github.com/butzist/ActivityLauncher بەردەستە.
+Activity Launcher Pro پڕۆژەیەکی سەرچاوە کراوەیە کە لە https://github.com/orgs/ActivityLauncher/repositories بەردەستە.
 
 🤝 بەشدار بە:
 ئەمە پڕۆژەیەکی بەڕێوەبردنی کۆمەڵگایە – بەخێربێیت بۆ بەشداریکردن لە کۆد، وەرگێڕان، یان بیرۆکەکان. یارمەتیمان بدە بۆ باشترکردن و گەشەکردن!
 
 ماڵپەڕ: https://activitylauncher.net
-کۆدی سەرچاوە و وەرگێڕانەکان: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+کۆدی سەرچاوە و وەرگێڕانەکان: https://github.com/orgs/ActivityLauncher/repositories
 بۆ بەشداری لە بەرەشێوەی بتا خۆت تۆمار بکە: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

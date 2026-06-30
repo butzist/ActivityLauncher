@@ -10,7 +10,7 @@
 - Մաքուր և թեթև պարզ ինտերֆեյսով
 
 💡 Նախագծի մասին.
-Activity Launcher-ը հիմնված է https://github.com/butzist/ActivityLauncher-ում առկա բաց կոդով նախագծի վրա:
+Activity Launcher-ը հիմնված է https://github.com/orgs/ActivityLauncher/repositories-ում առկա բաց կոդով նախագծի վրա:
 
 🎁 Գնացեք առանց գովազդների և աջակցեք մեզ
 Նախընտրու՞մ եք գովազդազուրկ փորձառություն? Ստացեք Activity Launcher Pro-ը Play Store-ից:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Սա համայնքի կողմից իրականացվող նախագիծ է. դուք կարող եք ներդնել կոդ, թարգմանություններ կամ գաղափարներ: Օգնե՛ք մեզ բարելավել և զարգացնել:
 
 Կայք՝ https://activitylauncher.net
-Ծրագրի կոդը և թարգմանությունները՝ https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Ծրագրի կոդը և թարգմանությունները՝ https://github.com/orgs/ActivityLauncher/repositories
 Միացեք Beta թողարկմանը․ https://play.google.com/apps/testing/de.szalkowski.activitylauncher

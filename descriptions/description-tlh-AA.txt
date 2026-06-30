@@ -8,11 +8,12 @@ Qu' taghmoHwI' ghItlh development pat vIleghDI' Activity Launcher Pro—ad-free,
 - wIleghmey 'ej nItebHa' 'ej tIq qonwI' pagh
 
 💡 De'vam'e' Qu'vam:
-Activity Launcher Pro vItlhutlh vIqIj 'ej De'vam'e' Qu'vam github.com/butzist/ActivityLauncher Dalo'lu'.
+Activity Launcher Pro vItlhutlh vIqIj 'ej De'vam'e' Qu'vam github.com/orgs/ActivityLauncher/repositories Dalo'lu'.
 
 🤝 qatlh wej
 maQa’pu’ ‘ej maHvaD – tlhIngan Hol, QInmey, HIvje’ ghojmoHmey, pagh wIqel! Qapchu' wIleghmeH 'ej wIbuS!
 
 Website: https://activitylauncher.net
-mung De'pu' mughtaHghach: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+mung De'pu' mughtaHghach: https://github.com/orgs/ActivityLauncher/repositories
 waHmeH SarvaD jeS 'e' SapmeH: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

@@ -8,11 +8,12 @@ Olitpa tehokäyttäjä, kehittäjä tai vain utelias, Activity Launcher Pro anta
 - Puhdas ja kevyt yksinkertaisella käyttöliittymällä
 
 💡 Tietoja projektista:
-Activity Launcher Pro on avoimen lähdekoodin projekti, joka on saatavilla osoitteessa https://github.com/butzist/ActivityLauncher.
+Activity Launcher Pro on avoimen lähdekoodin projekti, joka on saatavilla osoitteessa https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Osallistu:
 Tämä on yhteisölähtöinen projekti – olet tervetullut osallistumaan koodilla, käännöksillä tai ideoilla. Auta meitä kehittämään ja kasvamaan!
 
 Verkkosivusto: https://activitylauncher.net
-Lähdekoodi ja käännökset: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Lähdekoodi ja käännökset: https://github.com/orgs/ActivityLauncher/repositories
 Osallistu Beta-julkaisuun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

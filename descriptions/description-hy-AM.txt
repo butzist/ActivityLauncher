@@ -8,11 +8,12 @@
 - Մաքուր և թեթև պարզ ինտերֆեյսով
 
 💡 Նախագծի մասին.
-Activity Launcher Pro-ն բաց կոդով նախագիծ է, որը հասանելի է https://github.com/butzist/ActivityLauncher հասցեով:
+Activity Launcher Pro-ն բաց կոդով նախագիծ է, որը հասանելի է https://github.com/orgs/ActivityLauncher/repositories հասցեով:
 
 🤝 Ներգրավվե՛ք.
 Սա համայնքի կողմից իրականացվող նախագիծ է. դուք կարող եք ներդնել կոդ, թարգմանություններ կամ գաղափարներ: Օգնե՛ք մեզ բարելավել և զարգացնել:
 
 Կայք՝ https://activitylauncher.net
-Ծրագրի կոդը և թարգմանությունները՝ https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Ծրագրի կոդը և թարգմանությունները՝ https://github.com/orgs/ActivityLauncher/repositories
 Միացե՛ք Beta թողարկմանը՝ https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

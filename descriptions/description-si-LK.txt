@@ -8,11 +8,12 @@
 - සරල අතුරු මුහුණතක් සහිත පිරිසිදු හා සැහැල්ලු
 
 💡 ව්‍යාපෘතිය ගැන:
-ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ යනු https://github.com/butzist/ActivityLauncher හි ඇති විවෘත මූලාශ්‍ර ව්‍යාපෘතියකි.
+ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ යනු https://github.com/orgs/ActivityLauncher/repositories හි ඇති විවෘත මූලාශ්‍ර ව්‍යාපෘතියකි.
 
 🤝 සම්බන්ධ වන්න:
 මෙය ප්‍රජාව විසින් මෙහෙයවනු ලබන ව්‍යාපෘතියකි - කේත, පරිවර්තන හෝ අදහස් සඳහා දායක වීමට ඔබට සාදරයෙන් පිළිගනිමු. වැඩිදියුණු කිරීමට සහ වර්ධනය වීමට අපට උදව් කරන්න!
 
 වෙබ් අඩවිය: https://activitylauncher.net
-මූලාශ්‍ර කේතය සහ පරිවර්තන: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+මූලාශ්‍ර කේතය සහ පරිවර්තන: https://github.com/orgs/ActivityLauncher/repositories
 බීටා නිකුතුව සඳහා සහභාගී වන්න: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

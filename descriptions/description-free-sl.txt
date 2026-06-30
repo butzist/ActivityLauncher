@@ -10,7 +10,7 @@ Ne glede na to, ali ste zahteven uporabnik, razvijalec ali samo radovedni, vam Z
 - Čist in lahek s preprostim vmesnikom
 
 💡 O projektu:
-Activity Launcher temelji na odprtokodnem projektu, ki je na voljo na https://github.com/butzist/ActivityLauncher.
+Activity Launcher temelji na odprtokodnem projektu, ki je na voljo na https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Preklopite na različico brez oglasov in nas podprite
 Imate raje izkušnjo brez oglasov? Prenesite Activity Launcher Pro iz Trgovine Play:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 To je projekt, ki ga vodi skupnost – dobrodošli ste, da prispevate kodo, prevode ali ideje. Pomagajte nam izboljšati in rasti!
 
 Spletna stran: https://activitylauncher.net
-Izvorna koda in prevodi: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Izvorna koda in prevodi: https://github.com/orgs/ActivityLauncher/repositories
 Vključitev v beta različico: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

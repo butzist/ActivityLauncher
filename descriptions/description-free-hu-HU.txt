@@ -10,7 +10,7 @@ Akár tapasztalt felhasználó, fejlesztő vagy csak kíváncsi, a Tevékenység
 - Tiszta és könnyű, egyszerű felülettel
 
 💡 A projektről:
-A Tevékenység Launcher a https://github.com/butzist/ActivityLauncher címen elérhető nyílt forráskódú projekten alapul.
+A Tevékenység Launcher a https://github.com/orgs/ActivityLauncher/repositories címen elérhető nyílt forráskódú projekten alapul.
 
 🎁 Váltson hirdetésmentes verzióra és támogasson minket
 Előnyben részesíti a hirdetésmentes élményt? Töltse le az Activity Launcher Pro alkalmazást a Play Áruházból:
@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Ez egy közösség által vezérelt projekt – szívesen fogadunk kódokat, fordításokat vagy ötleteket. Segítsen nekünk fejlődni és növekedni!
 
 Weboldal: https://activitylauncher.net
-Weboldal: https://activitylauncher.net
-Forráskód és fordítások: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Forráskód és fordítások: https://github.com/orgs/ActivityLauncher/repositories
 Feliratkozás a béta verzióra: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

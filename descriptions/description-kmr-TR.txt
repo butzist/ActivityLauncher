@@ -8,11 +8,12 @@ Ka hûn bikarhênerek hêzdar, pêşdebir an tenê meraqdar bin, Aktivit desbeki
 - Paqij û sivik bi navgînek sade
 
 💡 Derbarê Projeyê:
-Aktivit desbekirin Pro projeyek çavkaniya vekirî ye ku li https://github.com/butzist/ActivityLauncher heye.
+Aktivit desbekirin Pro projeyek çavkaniya vekirî ye ku li https://github.com/orgs/ActivityLauncher/repositories heye.
 
 🤝 Tevlî Bibin:
 Ev proje ji hêla civakê ve tê rêvebirin - hûn bi xêr hatin ku hûn kod, werger an ramanan bexşînin. Alîkariya me bikin ku em baştir bibin û mezin bibin!
 
 Malper: https://activitylauncher.net
-کۆدی سەرچاوە و وەرگێڕان: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+کۆدی سەرچاوە و وەرگێڕان: https://github.com/orgs/ActivityLauncher/repositories
 Ji bo serbestberdana Beta hilbijêrin: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

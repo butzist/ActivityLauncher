@@ -10,7 +10,7 @@ Egal, ob du ein Poweruser, Entwickler oder einfach nur neugierig bist, Activity 
 - Sauber und schlank mit einer einfachen Benutzeroberfläche
 
 💡 Über das Projekt:
-Activity Launcher basiert auf dem Open-Source-Projekt, das unter https://github.com/butzist/ActivityLauncher verfügbar ist.
+Activity Launcher basiert auf dem Open-Source-Projekt, das unter https://github.com/orgs/ActivityLauncher/repositories verfügbar ist.
 
 🎁 Gehen Sie werbefrei und unterstützen Sie uns
 Bevorzugen Sie ein werbefreies Erlebnis? Laden Sie Activity Launcher Pro im Play Store herunter:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Dies ist ein Community-gesteuertes Projekt – du kannst gerne Code, Übersetzungen oder Ideen beitragen. Hilf uns, uns zu verbessern und zu wachsen!
 
 Webseite: https://activitylauncher.net
-Quellcode und Übersetzungen: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Quellcode und Übersetzungen: https://github.com/orgs/ActivityLauncher/repositories
 Opt-in für Beta-Version: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -10,7 +10,7 @@
 - Чистый и легкий с простым интерфейсом
 
 💡 О проекте:
-Запуск Activity основан на проекте с открытым исходным кодом, доступном по адресу https://github.com/butzist/ActivityLauncher.
+Запуск Activity основан на проекте с открытым исходным кодом, доступном по адресу https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Перейдите на версию без рекламы и поддержите нас
 Предпочитаете опыт без рекламы?  Скачайте Запуск Activity Pro в магазине Play:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Это проект, управляемый сообществом — вы можете внести свой вклад в код, переводы или идеи. Помогите нам улучшить и развиваться!
 
 Веб-сайт: https://activitylauncher.net
-Исходный код и переводы: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Исходный код и переводы: https://github.com/orgs/ActivityLauncher/repositories
 Примите участие в бета-тестировании: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

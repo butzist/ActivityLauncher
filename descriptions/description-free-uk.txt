@@ -10,7 +10,7 @@
 - Чистий і легкий з простим інтерфейсом
 
 💡 Про проєкт:
-Лаунчер Активіті базується на проєкті з відкритим кодом, доступному за адресою https://github.com/butzist/ActivityLauncher.
+Лаунчер Активіті базується на проєкті з відкритим кодом, доступному за адресою https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Перейдіть на версію без реклами та підтримайте нас
 Віддаєте перевагу використанню без реклами? Завантажте Лаунчер Активіті Pro з Play Маркету:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Це проєкт, керований спільнотою – ви можете долучитися до розробки коду, перекладів або ідей. Допоможіть нам покращити та розвиватись!
 
 Вебсайт: https://activitylauncher.net
-Вихідний код і переклади: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Вихідний код і переклади: https://github.com/orgs/ActivityLauncher/repositories
 Реєстрація для бета-версії: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

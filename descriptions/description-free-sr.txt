@@ -10,7 +10,7 @@ Bez obzira da li ste napredni korisnik, programer, ili ste samo radoznali, Activ
 -Čist i lagan sa jednostavnim interfejsom
 
 💡 О projektu:
-Pokretač aktivnosti je zasnovan na projektu otvorenog koda dostupnom na https://github.com/butzist/ActivityLauncher.
+Pokretač aktivnosti je zasnovan na projektu otvorenog koda dostupnom na https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Pređite na verziju bez reklama & podržite nas
 Više volite iskustvo bez reklama? Preuzmite Activity Launcher Pro na Play prodavnici:
@@ -22,7 +22,7 @@ https://github.com/sponsors/butzist
 🤝 Uključite se:
 Ovo je projekat koji pokreće zajednica – dobrodošli ste da doprinesete kodom, prevodima ili idejama. Pomozite nam da se poboljšamo i da rastemo!
 
-Sajt: https://activitylauncher.net
 Veb sajt: https://activitylauncher.net
-Izvorni kod i prevodi: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Izvorni kod i prevodi: https://github.com/orgs/ActivityLauncher/repositories
 Prijavite se za beta izdanje aplikacije: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -8,11 +8,12 @@ Activity Launcher Pro میں اپ گریڈ کر کے Activity Launcher کی مس
 - ایک سادہ انٹرفیس کے ساتھ صاف اور ہلکا پھلکا
 
 💡 پروجیکٹ کے بارے میں:
-Activity Launcher Pro ایک اوپن سورس پروجیکٹ ہے جو https://github.com/butzist/ActivityLauncher پر دستیاب ہے۔
+Activity Launcher Pro ایک اوپن سورس پروجیکٹ ہے جو https://github.com/orgs/ActivityLauncher/repositories پر دستیاب ہے۔
 
 🤝 شامل ہوں:
 یہ ایک کمیونٹی پر مبنی پروجیکٹ ہے – آپ کوڈ، تراجم یا آئیڈیاز میں حصہ لینے کے لیے خوش آمدید ہیں۔ بہتر بنانے اور بڑھنے میں ہماری مدد کریں!
 
 ویب سائٹ: https://activitylauncher.net
-ذریعہ کوڈ اور ترجمے: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+ذریعہ کوڈ اور ترجمے: https://github.com/orgs/ActivityLauncher/repositories
 بیٹا ریلیز کے لیے آپٹ ان کریں: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

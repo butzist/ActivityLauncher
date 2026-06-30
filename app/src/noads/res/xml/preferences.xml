@@ -35,5 +35,14 @@
                 android:action="android.intent.action.VIEW"
                 android:data="@string/url_github_project" />
         </Preference>
+        <Preference
+            android:key="action_support_discord"
+            android:summary="@string/settings_summary_support_discord"
+            android:title="@string/settings_support_discord"
+            app:singleLineTitle="true">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_discord" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -10,7 +10,7 @@ Activity Launcher ile Android uygulamalarınızın tüm potansiyelini keşfedin 
 - Basit bir arayüze sahip temiz ve hafif
 
 💡 Proje Hakkında:
-Activity Launcher, https://github.com/butzist/ActivityLauncher adresinde bulunan açık kaynaklı projeye dayanmaktadır.
+Activity Launcher, https://github.com/orgs/ActivityLauncher/repositories adresinde bulunan açık kaynaklı projeye dayanmaktadır.
 
 🎁 Reklamsız sürüme geçin ve bizi destekleyin
 Reklamsız bir deneyim mi tercih ediyorsunuz? Activity Launcher Pro uygulamasını Play Store’dan indirin:
@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Bu, topluluk odaklı bir projedir; kod, çeviri veya fikir katkısında bulunabilirsiniz. Gelişmemize ve büyümemize yardım edin!
 
 Web sitesi: https://activitylauncher.net
-Web sitesi: https://activitylauncher.net
-Kaynak kod ve çeviriler: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kaynak kod ve çeviriler: https://github.com/orgs/ActivityLauncher/repositories
 Beta sürümüne kaydolun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

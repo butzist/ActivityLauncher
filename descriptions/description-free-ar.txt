@@ -10,7 +10,7 @@
 - نظيف وخفيف الوزن مع واجهة بسيطة
 
 💡 حول المشروع:
-يعتمد Activity Launcher على مشروع مفتوح المصدر متاح على https://github.com/butzist/ActivityLauncher.
+يعتمد Activity Launcher على مشروع مفتوح المصدر متاح على https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 توقف عن الإعلانات وادعمنا
  تُفضل تجربة خالية من الإعلانات؟  احصل على مشغل النشاط برو من متجر التطبيقات:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 هذا مشروع مجتمعي - نرحب بك للمساهمة بالكود أو الترجمات أو الأفكار. ساعدنا على التحسين والتطور!
 
 الموقع الإلكتروني: https://activitylauncher.net
-الكود المصدري والترجمات: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+الكود المصدري والترجمات: https://github.com/orgs/ActivityLauncher/repositories
 الاشتراك في الإصدار التجريبي: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

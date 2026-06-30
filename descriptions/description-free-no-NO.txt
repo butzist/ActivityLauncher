@@ -10,7 +10,7 @@ Enten du er superbruker, utvikler eller bare nysgjerrig, gir Activity Launcher d
 - Rent og lett med et enkelt grensesnitt
 
 💡 Om prosjektet:
-Activity Launcher er basert på åpen kildekode-prosjektet som er tilgjengelig på https://github.com/butzist/ActivityLauncher.
+Activity Launcher er basert på åpen kildekode-prosjektet som er tilgjengelig på https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Gå over til annonsefri versjon og støtt oss
 Foretrekker du en annonsefri opplevelse? Last ned Activity Launcher Pro fra Play Store:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Dette er et fellesskapsdrevet prosjekt – du er velkommen til å bidra med kode, oversettelser eller ideer. Hjelp oss å forbedre og vokse!
 
 Nettsted: https://activitylauncher.net
-Kildekode og oversettelser: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kildekode og oversettelser: https://github.com/orgs/ActivityLauncher/repositories
 Meld deg på for betaversjonen: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

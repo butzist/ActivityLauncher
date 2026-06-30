@@ -10,7 +10,7 @@ Of u nu een power user, ontwikkelaar of gewoon nieuwsgierig bent, Activity Launc
 - Schoon en lichtgewicht met een eenvoudige interface
 
 💡 Over het project:
-Activity Launcher is gebaseerd op het open-source project dat beschikbaar is op https://github.com/butzist/ActivityLauncher.
+Activity Launcher is gebaseerd op het open-source project dat beschikbaar is op https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Ga voor een advertentievrije versie en steun ons
 Geef je de voorkeur aan een ervaring zonder advertenties? Download Activity Launcher Pro via de Play Store:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Dit is een project dat door de gemeenschap wordt gedreven – je bent welkom om code, vertalingen of ideeën bij te dragen. Help ons verbeteren en groeien!
 
 Website: https://activitylauncher.net
-Broncode en vertalingen: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Broncode en vertalingen: https://github.com/orgs/ActivityLauncher/repositories
 Aanmelden voor bètaversie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

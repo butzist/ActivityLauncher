@@ -1,4 +1,5 @@
 <resources>
     <string name="url_pro" translatable="false">https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher.pro</string>
-    <string name="url_github_project" translatable="false">https://github.com/butzist/ActivityLauncher</string>
+    <string name="url_github_project" translatable="false">https://github.com/orgs/ActivityLauncher/repositories</string>
+    <string name="url_discord" translatable="false">https://discord.gg/a4WSmdHZTa</string>
 </resources>

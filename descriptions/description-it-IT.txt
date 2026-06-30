@@ -8,11 +8,12 @@ Che tu sia un utente esperto, uno sviluppatore o semplicemente curioso, Avvio di
 - Pulito e leggero con un'interfaccia semplice
 
 💡 Informazioni sul progetto:
-Avvio di attività Pro è un progetto open source disponibile all'indirizzo https://github.com/butzist/ActivityLauncher.
+Avvio di attività Pro è un progetto open source disponibile all'indirizzo https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Partecipa:
 Questo è un progetto guidato dalla comunità: sei invitato a contribuire con codice, traduzioni o idee. Aiutaci a migliorare e crescere!
 
 Sito web: https://activitylauncher.net
-Codice sorgente e traduzioni: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Codice sorgente e traduzioni: https://github.com/orgs/ActivityLauncher/repositories
 Opt-in per la versione beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

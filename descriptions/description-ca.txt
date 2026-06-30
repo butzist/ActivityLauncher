@@ -8,11 +8,12 @@ Tant si ets un usuari avançat, un desenvolupador o simplement tens curiositat, 
 - Neteja i lleugera amb una interfície senzilla
 
 💡 Quant al projecte:
-Activity Launcher Pro és un projecte de codi obert disponible a https://github.com/butzist/ActivityLauncher.
+Activity Launcher Pro és un projecte de codi obert disponible a https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Participa:
 Aquest és un projecte impulsat per la comunitat: pots contribuir amb codi, traduccions o idees. Ajuda'ns a millorar i créixer!
 
 Lloc web: https://activitylauncher.net
-Codi font i traduccions: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Codi font i traduccions: https://github.com/orgs/ActivityLauncher/repositories
 Participa a la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

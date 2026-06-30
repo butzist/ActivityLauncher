@@ -8,11 +8,12 @@
 - Чистый и легкий с простым интерфейсом
 
 💡 О проекте:
-Activity Launcher Pro — это проект с открытым исходным кодом, доступный по адресу https://github.com/butzist/ActivityLauncher.
+Activity Launcher Pro — это проект с открытым исходным кодом, доступный по адресу https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Примите участие:
 Это проект, управляемый сообществом — вы можете внести свой вклад в код, переводы или идеи. Помогите нам улучшить и развиваться!
 
 Веб-сайт: https://activitylauncher.net
-Исходный код и переводы: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Исходный код и переводы: https://github.com/orgs/ActivityLauncher/repositories
 Подпишитесь на бета-версию: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

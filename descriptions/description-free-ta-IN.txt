@@ -10,7 +10,7 @@
 - எளிய இடைமுகத்துடன் சுத்தமான மற்றும் இலகுரக
 
 💡 திட்டத்தைப் பற்றி:
-செயல்பாடு துவக்கி https://github.com/butzist/ActivityLauncher இல் கிடைக்கும் திறந்த மூல திட்டத்தை அடிப்படையாகக் கொண்டது.
+செயல்பாடு துவக்கி https://github.com/orgs/ActivityLauncher/repositories இல் கிடைக்கும் திறந்த மூல திட்டத்தை அடிப்படையாகக் கொண்டது.
 
 🎁 விளம்பரமற்ற பதிப்பிற்கு மாற்றி எங்களை ஆதரிக்கவும்
 விளம்பரமில்லா அனுபவத்தை விரும்புகிறீர்களா? செயல்பாடு துவக்கி Pro ஐ Play Store-இல் பதிவிறக்கம் செய்யவும்:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 இது சமூகம் சார்ந்த திட்டம் - குறியீடு, மொழிபெயர்ப்புகள் அல்லது யோசனைகளை வழங்க நீங்கள் வரவேற்கப்படுகிறீர்கள். நாங்கள் மேம்படுத்தவும் வளரவும் உதவுங்கள்!
 
 இணையதளம்: https://activitylauncher.net
-மூலக் குறியீடு மற்றும் மொழிபெயர்ப்புகள்: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+மூலக் குறியீடு மற்றும் மொழிபெயர்ப்புகள்: https://github.com/orgs/ActivityLauncher/repositories
 பீட்டா வெளியீட்டிற்குச் சேரவும்: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

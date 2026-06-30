@@ -10,7 +10,7 @@ Niezależnie od tego, czy jesteś zaawansowanym użytkownikiem, programistą, cz
 - Czysty i lekki z prostym interfejsem
 
 💡 O projekcie:
-Launcher Aktywności jest oparty na projekcie open-source dostępnym na stronie https://github.com/butzist/ActivityLauncher.
+Launcher Aktywności jest oparty na projekcie open-source dostępnym na stronie https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Przejdź na wersję bez reklam i wesprzyj nas
 Wolisz korzystać z aplikacji bez reklam? Pobierz Launcher Aktywności Pro ze Sklepu Play:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Jest to projekt tworzony przez społeczność – możesz wnosić wkład w postaci kodu, tłumaczeń lub pomysłów. Pomóż nam ulepszać i rozwijać się!
 
 Strona internetowa: https://activitylauncher.net
-Kod źródłowy i tłumaczenia: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kod źródłowy i tłumaczenia: https://github.com/orgs/ActivityLauncher/repositories
 Zapisz się do wersji Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

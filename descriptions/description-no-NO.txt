@@ -8,11 +8,12 @@ Enten du er en superbruker, utvikler eller bare nysgjerrig, gir Activity Launche
 - Rent og lett med et enkelt grensesnitt
 
 💡 Om prosjektet:
-Activity Launcher Pro er et åpen kildekode-prosjekt som er tilgjengelig på https://github.com/butzist/ActivityLauncher.
+Activity Launcher Pro er et åpen kildekode-prosjekt som er tilgjengelig på https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Bli involvert:
 Dette er et fellesskapsdrevet prosjekt – du er velkommen til å bidra med kode, oversettelser eller ideer. Hjelp oss å forbedre og vokse!
 
 Nettsted: https://activitylauncher.net
-Kildekode og oversettelser: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kildekode og oversettelser: https://github.com/orgs/ActivityLauncher/repositories
 Meld deg på for Beta-utgivelse: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

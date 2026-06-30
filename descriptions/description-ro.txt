@@ -8,11 +8,12 @@ Fie că ești un utilizator avansat, un dezvoltator sau doar un curios, Lansator
 - Curat și ușor, cu o interfață simplă
 
 💡 Despre proiect:
-Lansatorul de activități Pro este un proiect open-source disponibil la https://github.com/butzist/ActivityLauncher.
+Lansatorul de activități Pro este un proiect open-source disponibil la https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Implică-te:
 Acesta este un proiect bazat pe comunitate – ești binevenit să contribui cu cod, traduceri sau idei. Ajută-ne să ne îmbunătățim și să creștem!
 
 Site web: https://activitylauncher.net
-Cod sursă și traduceri: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Cod sursă și traduceri: https://github.com/orgs/ActivityLauncher/repositories
 Înscrie-te pentru versiunea beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

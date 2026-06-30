@@ -10,7 +10,7 @@
 - ਇੱਕ ਸਧਾਰਨ ਇੰਟਰਫੇਸ ਨਾਲ ਸਾਫ਼ ਅਤੇ ਹਲਕਾ
 
 💡 ਪ੍ਰੋਜੈਕਟ ਬਾਰੇ:
-ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਓਪਨ-ਸੋਰਸ ਪ੍ਰੋਜੈਕਟ 'ਤੇ ਅਧਾਰਤ ਹੈ ਜੋ https://github.com/butzist/ActivityLauncher 'ਤੇ ਉਪਲਬਧ ਹੈ।
+ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਓਪਨ-ਸੋਰਸ ਪ੍ਰੋਜੈਕਟ 'ਤੇ ਅਧਾਰਤ ਹੈ ਜੋ https://github.com/orgs/ActivityLauncher/repositories 'ਤੇ ਉਪਲਬਧ ਹੈ।
 
 🎁 ਵਿਗਿਆਪਨਾਂ ਤੋਂ ਮੁਕਤ ਵਰਜ਼ਨ ਚੁਣੋ ਅਤੇ ਸਾਡੀ ਸਹਾਇਤਾ ਕਰੋ
 ਕੀ ਤੁਸੀਂ ਵਿਗਿਆਪਨਾਂ ਤੋਂ ਮੁਕਤ ਅਨੁਭਵ ਪਸੰਦ ਕਰਦੇ ਹੋ? ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ ਨੂੰ Google Play Store ਤੋਂ ਡਾਊਨਲੋਡ ਕਰੋ:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 ਇਹ ਇੱਕ ਕਮਿਊਨਿਟੀ-ਅਧਾਰਿਤ ਪ੍ਰੋਜੈਕਟ ਹੈ – ਤੁਹਾਡਾ ਕੋਡ, ਅਨੁਵਾਦਾਂ ਜਾਂ ਵਿਚਾਰਾਂ ਦਾ ਯੋਗਦਾਨ ਕਰਨ ਲਈ ਸੁਆਗਤ ਹੈ। ਸਾਡੀ ਬਿਹਤਰੀ ਅਤੇ ਵਿਕਾਸ ਵਿੱਚ ਮਦਦ ਕਰੋ!
 
 ਵੈੱਬਸਾਈਟ: https://activitylauncher.net
-ਸਰੋਤ ਕੋਡ ਅਤੇ ਅਨੁਵਾਦ: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+ਸਰੋਤ ਕੋਡ ਅਤੇ ਅਨੁਵਾਦ: https://github.com/orgs/ActivityLauncher/repositories
 ਬੀਟਾ ਰੀਲੀਜ਼ ਲਈ ਆਪਟ-ਇਨ ਕਰੋ: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

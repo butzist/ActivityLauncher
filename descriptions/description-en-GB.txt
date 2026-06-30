@@ -8,11 +8,12 @@ Whether you're a power user, developer or just curious, Activity Launcher Pro gi
 - Clean and lightweight with a simple interface
 
 💡 About the Project:
-Activity Launcher Pro is an open-source project available at https://github.com/butzist/ActivityLauncher.
+Activity Launcher Pro is an open-source project available at https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Get Involved:
 This is a community-driven project – you're welcome to contribute code, translations, or ideas. Help us improve and grow!
 
 Website: https://activitylauncher.net
-Source code and translations: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Source code and translations: https://github.com/orgs/ActivityLauncher/repositories
 Opt-in for Beta release: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

@@ -10,7 +10,7 @@ Neatkarīgi no tā, vai esat pieredzējis lietotājs, izstrādātājs vai vienk�
 - Tīrs un viegls ar vienkāršu saskarni
 
 💡 Par projektu:
-Darbību palaidējs ir balstīts uz atvērtā pirmkoda projektu, kas pieejams vietnē https://github.com/butzist/ActivityLauncher.
+Darbību palaidējs ir balstīts uz atvērtā pirmkoda projektu, kas pieejams vietnē https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Pārejiet uz versiju bez reklāmām un atbalstiet mūs
 Vēlaties pieredzi bez reklāmām? Lejupielādējiet Activity Launcher Pro no Play veikala:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Šis ir kopienas virzīts projekts — esat laipni aicināti sniegt ieguldījumu kodā, tulkojumos vai idejās. Palīdziet mums uzlabot un augt!
 
 Vietne: https://activitylauncher.net
-Pirmkods un tulkojumi: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Pirmkods un tulkojumi: https://github.com/orgs/ActivityLauncher/repositories
 Pievienojieties Beta versijai: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

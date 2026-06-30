@@ -10,7 +10,7 @@ Olitpa kokenut käyttäjä, kehittäjä tai vain utelias, Activity Launcher anta
 - Puhdas ja kevyt yksinkertaisella käyttöliittymällä
 
 💡 Tietoja projektista:
-Activity Launcher perustuu avoimen lähdekoodin projektiin, joka on saatavilla osoitteessa https://github.com/butzist/ActivityLauncher.
+Activity Launcher perustuu avoimen lähdekoodin projektiin, joka on saatavilla osoitteessa https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Siirry mainoksettomaan versioon ja tue meitä
 Haluatko mainoksettomman käyttökokemuksen? Lataa Activity Launcher Pro Play Storesta:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Tämä on yhteisölähtöinen projekti – olet tervetullut osallistumaan koodilla, käännöksillä tai ideoilla. Auta meitä kehittämään ja kasvamaan!
 
 Verkkosivusto: https://activitylauncher.net
-Lähdekoodi ja käännökset: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Lähdekoodi ja käännökset: https://github.com/orgs/ActivityLauncher/repositories
 Beetaversioon tilaus: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

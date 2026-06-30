@@ -8,11 +8,12 @@
 - 간단한 인터페이스로 깔끔하고 가벼움
 
 💡 프로젝트 정보:
-액티비티 런처 프로는 https://github.com/butzist/ActivityLauncher 에서 확인할 수 있는 오픈 소스 프로젝트입니다.
+액티비티 런처 프로는 https://github.com/orgs/ActivityLauncher/repositories 에서 확인할 수 있는 오픈 소스 프로젝트입니다.
 
 🤝 참여하기:
 이것은 커뮤니티 기반 프로젝트입니다. 코드, 번역 또는 아이디어를 자유롭게 기여해 주세요. 개선하고 성장하도록 도와주세요!
 
 웹사이트: https://activitylauncher.net
-소스 코드 및 번역: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+소스 코드 및 번역: https://github.com/orgs/ActivityLauncher/repositories
 베타 릴리스 옵트인: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

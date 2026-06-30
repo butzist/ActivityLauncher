@@ -8,12 +8,12 @@ Reklamsız, analiz içermeyen, gizli uygulama etkinliklerinin kilidini açan, ö
 - Basit bir arayüze sahip temiz ve hafif
 
 💡 Proje Hakkında:
-Activity Launcher Pro, https://github.com/butzist/ActivityLauncher adresinde bulunan açık kaynaklı bir projedir.
+Activity Launcher Pro, https://github.com/orgs/ActivityLauncher/repositories adresinde bulunan açık kaynaklı bir projedir.
 
 🤝 Katılın:
 Bu, topluluk odaklı bir projedir; kod, çeviri veya fikir katkısında bulunabilirsiniz. Gelişmemize ve büyümemize yardım edin!
 
 Web sitesi: https://activitylauncher.net
-Web sitesi: https://activitylauncher.net
-Kaynak kod ve çeviriler: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kaynak kod ve çeviriler: https://github.com/orgs/ActivityLauncher/repositories
 Beta sürümüne kaydolun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

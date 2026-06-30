@@ -8,11 +8,12 @@ Baik Anda pengguna tingkat lanjut, pengembang, atau hanya ingin tahu, Peluncur A
 - Bersih dan ringan dengan antarmuka yang sederhana
 
 💡 Tentang Proyek:
-Peluncur Aktivitas Pro adalah proyek sumber terbuka yang tersedia di https://github.com/butzist/ActivityLauncher.
+Peluncur Aktivitas Pro adalah proyek sumber terbuka yang tersedia di https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Terlibat:
 Ini adalah proyek yang digerakkan oleh komunitas – Anda dipersilakan untuk menyumbangkan kode, terjemahan, atau ide. Bantu kami meningkatkan dan berkembang!
 
 Situs web: https://activitylauncher.net
-Kode sumber dan terjemahan: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Kode sumber dan terjemahan: https://github.com/orgs/ActivityLauncher/repositories
 Ikut serta untuk rilis Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

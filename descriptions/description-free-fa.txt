@@ -10,7 +10,7 @@
 - تمیز و سبک با یک رابط کاربری ساده
 
 💡 درباره پروژه:
-اکتیویتی لانچر مبتنی بر پروژه متن‌باز موجود در https://github.com/butzist/ActivityLauncher است.
+اکتیویتی لانچر مبتنی بر پروژه متن‌باز موجود در https://github.com/orgs/ActivityLauncher/repositories است.
 
 🎁 به نسخه بدون تبلیغات بروید و از ما حمایت کنید
 آیا تجربه‌ای بدون تبلیغات را ترجیح می‌دهید؟ اکتیویتی لانچر حرفه‌ای را از فروشگاه Play دانلود کنید:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 این یک پروژه مبتنی بر جامعه است - شما می توانید کد، ترجمه یا ایده ها را به اشتراک بگذارید. به ما در بهبود و رشد کمک کنید!
 
 وب سایت: https://activitylauncher.net
-کد منبع و ترجمه‌ها: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+کد منبع و ترجمه‌ها: https://github.com/orgs/ActivityLauncher/repositories
 Opt-in برای نسخه بتا: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

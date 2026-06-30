@@ -10,7 +10,7 @@ Objavte plný potenciál svojich aplikácií pre Android s Activity Launcher –
 - Čistý a ľahký s jednoduchým rozhraním
 
 💡 Informácie o projekte:
-Activity Launcher je založený na open-source projekte dostupnom na https://github.com/butzist/ActivityLauncher.
+Activity Launcher je založený na open-source projekte dostupnom na https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Prejdite na verziu bez reklám a podporte nás
 Uprednostňujete používanie bez reklám? Stiahnite si Activity Launcher Pro z Obchodu Play:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Toto je komunitný projekt – môžete prispievať kódom, prekladmi alebo nápadmi. Pomôžte nám zlepšovať sa a rásť!
 
 Webová stránka: https://activitylauncher.net
-Zdrojový kód a preklady: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Zdrojový kód a preklady: https://github.com/orgs/ActivityLauncher/repositories
 Prihláste sa na odber Beta verzie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

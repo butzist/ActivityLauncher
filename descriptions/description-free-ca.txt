@@ -10,7 +10,7 @@ Tant si sou un usuari avançat, un desenvolupador o simplement teniu curiositat,
 - Neteja i lleugera amb una interfície senzilla
 
 💡 Quant al projecte:
-Activity Launcher es basa en el projecte de codi obert disponible a https://github.com/butzist/ActivityLauncher.
+Activity Launcher es basa en el projecte de codi obert disponible a https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Passa’t a la versió sense anuncis i dona’ns suport
 Prefereixes una experiència sense anuncis? Descarrega Activity Launcher Pro des de la Play Store:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Aquest és un projecte impulsat per la comunitat: pots contribuir amb codi, traduccions o idees. Ajuda'ns a millorar i créixer!
 
 Lloc web: https://activitylauncher.net
-Codi font i traduccions: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Codi font i traduccions: https://github.com/orgs/ActivityLauncher/repositories
 Participa en la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

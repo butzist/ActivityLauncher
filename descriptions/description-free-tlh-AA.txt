@@ -10,7 +10,7 @@ Qu' taghmoHwI'Daq DaHjaj Android app, vaj qIchlIj Home Screen shortcut installed
 - wIleghmey 'ej nItebHa' 'ej tIq qonwI' pagh
 
 💡 De'vam'e' Qu'vam:
-Activity Launcher vItlhutlh vIqIj 'ej De'vam'e' Qu'vam github.com/butzist/ActivityLauncher Dalo'lu'.
+Activity Launcher vItlhutlh vIqIj 'ej De'vam'e' Qu'vam github.com/orgs/ActivityLauncher/repositories Dalo'lu'.
 
 🎁 yIqawbe' tlhutlhmey 'ej maH qo'
 tlhutlhmey 'e' HIvje'chu'? Qu' taghmoHwI' Pro law' chu' Play StoreDaq lo'
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 maQa’pu’ ‘ej maHvaD – tlhIngan Hol, QInmey, HIvje’ ghojmoHmey, pagh wIqel! Qapchu' wIleghmeH 'ej wIbuS!
 
 Website: https://activitylauncher.net
-mung De'pu' mughtaHghach: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+mung De'pu' mughtaHghach: https://github.com/orgs/ActivityLauncher/repositories
 yItIv Beta qelDaq: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -8,11 +8,12 @@
 - Καθαρό και ελαφρύ με απλή διεπαφή
 
 💡 Σχετικά με το έργο:
-Το Εκκινητής Δραστηριότητας είναι ένα έργο ανοιχτού κώδικα διαθέσιμο στη διεύθυνση https://github.com/butzist/ActivityLauncher.
+Το Εκκινητής Δραστηριότητας είναι ένα έργο ανοιχτού κώδικα διαθέσιμο στη διεύθυνση https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 Εμπλακείτε:
 Αυτό είναι ένα έργο που καθοδηγείται από την κοινότητα – μπορείτε να συνεισφέρετε κώδικα, μεταφράσεις ή ιδέες. Βοηθήστε μας να βελτιωθούμε και να αναπτυχθούμε!
 
 Ιστότοπος: https://activitylauncher.net
-Πηγαίος κώδικας και μεταφράσεις: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Πηγαίος κώδικας και μεταφράσεις: https://github.com/orgs/ActivityLauncher/repositories
 Εγγραφείτε για την Beta έκδοση: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

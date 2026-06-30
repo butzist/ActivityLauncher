@@ -10,7 +10,7 @@
 - ایک سادہ انٹرفیس کے ساتھ صاف اور ہلکا پھلکا
 
 💡 پروجیکٹ کے بارے میں:
-Activity Launcher اوپن سورس پروجیکٹ پر مبنی ہے جو https://github.com/butzist/ActivityLauncher پر دستیاب ہے۔
+Activity Launcher اوپن سورس پروجیکٹ پر مبنی ہے جو https://github.com/orgs/ActivityLauncher/repositories پر دستیاب ہے۔
 
 🎁 اشتہارات کے بغیر ورژن پر جائیں اور ہماری مدد کریں
 کیا آپ اشتہارات کے بغیر تجربہ پسند کرتے ہیں؟ Activity Launcher Pro کو Play Store سے ڈاؤن لوڈ کریں:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 یہ ایک کمیونٹی پر مبنی پروجیکٹ ہے – آپ کوڈ، تراجم یا آئیڈیاز میں حصہ لینے کے لیے خوش آمدید ہیں۔ بہتر بنانے اور بڑھنے میں ہماری مدد کریں!
 
 ویب سائٹ: https://activitylauncher.net
-ذریعہ کوڈ اور ترجمے: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+ذریعہ کوڈ اور ترجمے: https://github.com/orgs/ActivityLauncher/repositories
 بیٹا ریلیز کے لئے آپٹ ان کریں: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

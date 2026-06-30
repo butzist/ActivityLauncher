@@ -8,11 +8,12 @@
 - נקי וקל משקל עם ממשק פשוט
 
 💡 על הפרויקט:
-מריץ הפעולות Pro הוא פרויקט קוד פתוח הזמין בכתובת https://github.com/butzist/ActivityLauncher.
+מריץ הפעולות Pro הוא פרויקט קוד פתוח הזמין בכתובת https://github.com/orgs/ActivityLauncher/repositories.
 
 🤝 השתתפו:
 זהו פרויקט מונחה קהילה – אתם מוזמנים לתרום קוד, תרגומים או רעיונות. עזרו לנו להשתפר ולגדול!
 
 אתר אינטרנט: https://activitylauncher.net
-קוד מקור ותרגומים: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+קוד מקור ותרגומים: https://github.com/orgs/ActivityLauncher/repositories
 הצטרפו לגרסת הבטא: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

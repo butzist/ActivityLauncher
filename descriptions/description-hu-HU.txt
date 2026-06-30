@@ -8,12 +8,12 @@ Akár tapasztalt felhasználó, fejlesztő vagy, akár csak kíváncsi, az Activ
 - Tiszta és könnyű, egyszerű felülettel
 
 💡 A projektről:
-Az Activity Launcher Pro egy nyílt forráskódú projekt, amely a https://github.com/butzist/ActivityLauncher címen érhető el.
+Az Activity Launcher Pro egy nyílt forráskódú projekt, amely a https://github.com/orgs/ActivityLauncher/repositories címen érhető el.
 
 🤝 Vegyen részt:
 Ez egy közösség által vezérelt projekt – szívesen fogadunk kódokat, fordításokat vagy ötleteket. Segítsen nekünk fejlődni és növekedni!
 
 Weboldal: https://activitylauncher.net
-Weboldal: https://activitylauncher.net
-Forráskód és fordítások: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Forráskód és fordítások: https://github.com/orgs/ActivityLauncher/repositories
 Iratkozzon fel a béta verzióra: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

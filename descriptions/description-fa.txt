@@ -8,11 +8,12 @@
 - تمیز و سبک با یک رابط کاربری ساده
 
 💡 درباره پروژه:
-اکتیویتی لانچر حرفه ای یک پروژه منبع باز است که در https://github.com/butzist/ActivityLauncher موجود است.
+اکتیویتی لانچر حرفه ای یک پروژه منبع باز است که در https://github.com/orgs/ActivityLauncher/repositories موجود است.
 
 🤝 مشارکت کنید:
 این یک پروژه مبتنی بر جامعه است - شما می توانید کد، ترجمه یا ایده ها را به اشتراک بگذارید. به ما در بهبود و رشد کمک کنید!
 
 وب سایت: https://activitylauncher.net
-کد منبع و ترجمه‌ها: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+کد منبع و ترجمه‌ها: https://github.com/orgs/ActivityLauncher/repositories
 Opt-in برای نسخه بتا: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

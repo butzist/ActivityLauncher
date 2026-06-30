@@ -8,11 +8,12 @@
 - 简洁轻巧，界面简单
 
 💡 关于项目：
-活动启动器专业版 是一个开源项目，可在 https://github.com/butzist/ActivityLauncher 上找到。
+活动启动器专业版 是一个开源项目，可在 https://github.com/orgs/ActivityLauncher/repositories 上找到。
 
 🤝 参与进来：
 这是一个社区驱动的项目——欢迎您贡献代码、翻译或想法。 帮助我们改进和发展！
 
 网站：https://activitylauncher.net
-源代码和翻译：https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+源代码和翻译：https://github.com/orgs/ActivityLauncher/repositories
 选择加入 Beta 版本：https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

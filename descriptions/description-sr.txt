@@ -1,6 +1,6 @@
 Podržite dalji razvoj Activity Launcher-a nadogradnjom na Activity Launcher Pro — alat bez reklama i bez analitike koji otključava skrivene aktivnosti aplikacija, omogućava pravljenje prilagođenih prečica i pomaže u budućim unapređenjima.
 
-Bez obzira da li ste napredni korisnik, programer, ili ste samo radoznali, Activity Launcher Pro vam daje kontrolu i mogućnost prilagođavanja vašeg uređaja. 
+Bez obzira da li ste napredni korisnik, programer, ili ste samo radoznali, Activity Launcher Pro vam daje kontrolu i mogućnost prilagođavanja vašeg uređaja.
 
 🔍 Ključne karakteristike:
 - Pokrenite skrivene ili interne aktivnosti unitar instaliranih aplikacija
@@ -8,12 +8,12 @@ Bez obzira da li ste napredni korisnik, programer, ili ste samo radoznali, Activ
 -Čist i lagan sa jednostavnim interfejsom
 
 💡 О projektu:
-Activity Launcher Pro je open-source projekat, dostupan ovde https://github.com/butzist/ActivityLauncher
+Activity Launcher Pro je open-source projekat, dostupan ovde https://github.com/orgs/ActivityLauncher/repositories
 
 🤝 Uključite se:
 Ovo je projekat koji pokreće zajednica – dobrodošli ste da doprinesete kodom, prevodima ili idejama. Помозите нам да се побољшамо и растемо!
 
-Sajt: https://activitylauncher.net
 Veb sajt: https://activitylauncher.net
-Izvorni kod i prevodi: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Izvorni kod i prevodi: https://github.com/orgs/ActivityLauncher/repositories
 Prijavite se za beta izdanje aplikacije: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

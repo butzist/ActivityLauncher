@@ -10,7 +10,7 @@ Fie că ești un utilizator avansat, dezvoltator sau doar curios, Lansator Activ
 - Curat și ușor, cu o interfață simplă
 
 💡 Despre proiect:
-Lansator Activități are la bază proiectul open-source disponibil la https://github.com/butzist/ActivityLauncher.
+Lansator Activități are la bază proiectul open-source disponibil la https://github.com/orgs/ActivityLauncher/repositories.
 
 🎁 Treceți la versiunea fără reclame și susțineți-ne
 Preferi o experiență fără reclame? Descarcă Lansator Activități Pro din Magazinul Play:
@@ -23,5 +23,6 @@ https://github.com/sponsors/butzist
 Acesta este un proiect bazat pe comunitate – ești binevenit să contribui cu cod, traduceri sau idei. Ajută-ne să ne îmbunătățim și să creștem!
 
 Site web: https://activitylauncher.net
-Cod sursă și traduceri: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+Cod sursă și traduceri: https://github.com/orgs/ActivityLauncher/repositories
 Înscrie-te pentru versiunea Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

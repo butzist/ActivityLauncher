@@ -8,11 +8,12 @@ Activity Launcher Proにアップグレードして、Activity Launcherの継続
 - シンプルなインターフェースを備えたクリーンで軽量
 
 💡 プロジェクトについて:
-Activity Launcher Proは、https://github.com/butzist/ActivityLauncherで入手可能なオープンソースプロジェクトです。
+Activity Launcher Proは、https://github.com/orgs/ActivityLauncher/repositoriesで入手可能なオープンソースプロジェクトです。
 
 🤝 参加する:
 これはコミュニティ主導のプロジェクトです。コード、翻訳、またはアイデアを貢献することを歓迎します。 改善と成長にご協力ください!
 
 ウェブサイト: https://activitylauncher.net
-ソースコードと翻訳: https://github.com/butzist/ActivityLauncher
+Discord: https://discord.gg/a4WSmdHZTa
+ソースコードと翻訳: https://github.com/orgs/ActivityLauncher/repositories
 ベータ版リリースにオプトイン: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro
