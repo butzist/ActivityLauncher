@@ -1,59 +1,59 @@
 <resources>
+    <string name="action_personalized_ads_consent" comment="Settings action for personalized ads consent">Personalized Ads</string>
+    <string name="action_view_github" comment="Settings action to view the GitHub project">GitHub project</string>
+    <string name="action_view_paid" comment="Settings action to view the paid Pro version on Google Play">Activity Launcher Pro</string>
+    <string name="action_view_source" comment="Settings action to view the app's source code on GitHub">View source code</string>
+    <string name="activity_settings" comment="Navigation item label for the settings screen">Settings</string>
     <string name="app_name" comment="App name displayed in the device launcher and app drawer">Activity Launcher</string>
-    <string name="short_description" comment="Short description shown in app store listings (Play Store, F-Droid)">Launches hidden activities and creates shortcuts for installed apps</string>
-    <string name="nav_all" comment="Tab label showing all installed apps">All</string>
-    <string name="nav_favorites" comment="Tab label showing favorited activities">Favorites</string>
-    <string name="nav_recents" comment="Tab label showing recently launched activities">Recents</string>
-    <string name="title_fragment_package_list" comment="Screen title for the list of installed packages/apps">Installed packages</string>
-    <string name="title_fragment_activity_list" comment="Screen title showing activities within a selected package">Activities</string>
-    <string name="title_dialog_disclaimer" comment="Dialog title for the warning dialog shown on first launch">Disclaimer</string>
-    <string name="title_dialog_icon_picker" comment="Dialog title for selecting an icon when creating or editing a shortcut">Pick an icon</string>
-    <string name="dialog_progress_loading" comment="Progress message shown while loading the list of installed apps">Loading…</string>
-    <string name="dialog_disclaimer" comment="Warning text in the disclaimer dialog about accessing hidden/advanced features">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
-    <string name="context_action_launch" comment="Context menu action to launch an activity normally">Launch activity</string>
-    <string name="context_action_shortcut" comment="Context menu action to create a home screen shortcut for an activity">Create shortcut</string>
-    <string name="context_action_edit" comment="Context menu action to edit an existing shortcut\'s properties">Edit shortcut</string>
-    <string name="context_action_share_shortcut" comment="Context menu action to share a created shortcut as a link">Share shortcut</string>
+    <string name="category_title_about" comment="Settings category header for about and info section">About</string>
+    <string name="category_title_ad_free" comment="Settings category header for ad-free version options">Ad-free versions</string>
+    <string name="context_action_edit" comment="Context menu action to edit an existing shortcut's properties">Edit shortcut</string>
     <string name="context_action_favorite_add" comment="Context menu action to add an activity to the favorites list">Add to favorites</string>
     <string name="context_action_favorite_remove" comment="Context menu action to remove an activity from the favorites list">Remove from favorites</string>
+    <string name="context_action_launch" comment="Context menu action to launch an activity normally">Launch activity</string>
     <string name="context_action_share" comment="App bar action to share the current activity or app info">Share</string>
-    <string name="label_name" comment="Form label for the shortcut name field">Name</string>
-    <string name="label_package" comment="Form label for the package name field">Package</string>
-    <string name="label_class" comment="Form label for the activity class name field">Class</string>
-    <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
-    <string name="label_launch_plugins">Launch Plugins</string>
-    <string name="label_shortcut_plugins">Shortcut Plugins</string>
+    <string name="context_action_share_shortcut" comment="Context menu action to share a created shortcut as a link">Share shortcut</string>
+    <string name="context_action_shortcut" comment="Context menu action to create a home screen shortcut for an activity">Create shortcut</string>
+    <string name="dialog_disclaimer" comment="Warning text in the disclaimer dialog about accessing hidden/advanced features">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
+    <string name="dialog_progress_loading" comment="Progress message shown while loading the list of installed apps">Loading…</string>
+    <string name="dialog_support" comment="Dialog message encouraging users to support the app">We\'ve added ads to help fund future development. Prefer no ads? Upgrade to Activity Launcher Pro on Google Play — it\'s fully open-source and supports continued work on the app. You can also get the app for free on GitHub. Support there is optional but helps us a lot.</string>
     <string name="error" comment="Generic error dialog title">Error</string>
     <string name="error_creating_shortcut" comment="Error message displayed when shortcut creation fails">Error creating shortcut</string>
     <string name="error_icons" comment="Error message shown when app icons fail to load">Error loading icons</string>
-    <string name="error_invalid_icon_resource" comment="Error message for invalid or non-existent icon resource">Error: invalid icon resource</string>
-    <string name="error_invalid_icon_format" comment="Error message when the selected icon file format is not supported">Error: invalid icon format</string>
-    <string name="error_verbose_pin_shortcut" comment="Error message when the device launcher does not support pinning shortcuts">Current launcher does not support "PinShortcut". Unable to create shortcut.</string>
     <string name="error_invalid_activity_link" comment="Error message for invalid deep link or activity reference">Invalid activity link provided</string>
+    <string name="error_invalid_icon_format" comment="Error message when the selected icon file format is not supported">Error: invalid icon format</string>
+    <string name="error_invalid_icon_resource" comment="Error message for invalid or non-existent icon resource">Error: invalid icon resource</string>
+    <string name="error_verbose_pin_shortcut" comment="Error message when the device launcher does not support pinning shortcuts">Current launcher does not support "PinShortcut". Unable to create shortcut.</string>
     <string name="exception_invalid_component_name" comment="Error message for dangerous or invalid component names. %s is the problematic component">Invalid or potentially harmful component name: %s</string>
-    <string name="category_title_about" comment="Settings category header for about and info section">About</string>
-    <string name="action_view_source" comment="Settings action to view the app\'s source code on GitHub">View source code</string>
-    <string name="summary_action_view_source" comment="Description for the view source code setting">The source code of this App and related projects like plugins for launching (e.g., Shizuku) and shortcut creation are available on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
     <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
-    <string name="activity_settings" comment="Navigation item label for the settings screen">Settings</string>
+    <string name="label_class" comment="Form label for the activity class name field">Class</string>
+    <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
+    <string name="label_launch_plugins">Launch Plugins</string>
+    <string name="label_name" comment="Form label for the shortcut name field">Name</string>
+    <string name="label_package" comment="Form label for the package name field">Package</string>
+    <string name="label_shortcut_plugins">Shortcut Plugins</string>
+    <string name="nav_all" comment="Tab label showing all installed apps">All</string>
+    <string name="nav_favorites" comment="Tab label showing favorited activities">Favorites</string>
+    <string name="nav_recents" comment="Tab label showing recently launched activities">Recents</string>
+    <string name="settings_github" comment="Settings link to the GitHub project page">GitHub project</string>
     <string name="settings_hide_private" comment="Settings switch to hide private/unexported activities">Hide private activities</string>
-    <string name="settings_summary_hide_private" comment="Description explaining the hide private activities setting">Hide private (unexported and disabled) activities</string>
     <string name="settings_language" comment="Settings option for app language selection">Language</string>
+    <string name="settings_pro_version" comment="Settings link to the Pro/ad-free version of the app">Activity Launcher Pro</string>
+    <string name="settings_summary_github" comment="Description for the GitHub project setting">You can download the pre-built APK from our GitHub organization. Explore the source code of the app and related projects like plugins for launching (e.g., Shizuku) and shortcut creation.</string>
+    <string name="settings_summary_hide_private" comment="Description explaining the hide private activities setting">Hide private (unexported and disabled) activities</string>
+    <string name="settings_summary_pro_version" comment="Description for the Pro version setting">Want to support the app and remove ads? Get Activity Launcher Pro on Google Play — it helps fund development and is fully open-source.</string>
+    <string name="settings_summary_support_discord">Join our Discord server for support, feature requests, and community discussions.</string>
+    <string name="settings_support_discord">Support and Feature Requests</string>
     <string name="settings_theme" comment="Settings option for app theme selection">Theme</string>
+    <string name="short_description" comment="Short description shown in app store listings (Play Store, F-Droid)">Launches hidden activities and creates shortcuts for installed apps</string>
+    <string name="summary_action_view_source" comment="Description for the view source code setting">The source code of this App and related projects like plugins for launching (e.g., Shizuku) and shortcut creation are available on GitHub. Feel free to send us pull requests with improvements and bugfixes.</string>
+    <string name="summary_personalized_ads_consent" comment="Description for the personalized ads consent setting">Customize permissions for personalized advertisements</string>
+    <string name="theme_dark" comment="Theme option for dark color scheme">Dark Theme</string>
     <string name="theme_default" comment="Theme option to follow system theme">System Default</string>
     <string name="theme_light" comment="Theme option for light color scheme">Light Theme</string>
-    <string name="theme_dark" comment="Theme option for dark color scheme">Dark Theme</string>
-    <string name="settings_pro_version" comment="Settings link to the Pro/ad-free version of the app">Activity Launcher Pro</string>
-    <string name="settings_summary_pro_version" comment="Description for the Pro version setting">Want to support the app and remove ads? Get Activity Launcher Pro on Google Play — it helps fund development and is fully open-source.</string>
-    <string name="settings_github" comment="Settings link to the GitHub project page">GitHub project</string>
-    <string name="settings_summary_github" comment="Description for the GitHub project setting">You can download the pre-built APK from our GitHub organization. Explore the source code of the app and related projects like plugins for launching (e.g., Shizuku) and shortcut creation.</string>
-    <string name="settings_support_discord">Support and Feature Requests</string>
-    <string name="settings_summary_support_discord">Join our Discord server for support, feature requests, and community discussions.</string>
-    <string name="category_title_ad_free" comment="Settings category header for ad-free version options">Ad-free versions</string>
+    <string name="title_dialog_disclaimer" comment="Dialog title for the warning dialog shown on first launch">Disclaimer</string>
+    <string name="title_dialog_icon_picker" comment="Dialog title for selecting an icon when creating or editing a shortcut">Pick an icon</string>
     <string name="title_dialog_support" comment="Dialog title for the support/donate dialog">Thanks for using Activity Launcher</string>
-    <string name="dialog_support" comment="Dialog message encouraging users to support the app">We\'ve added ads to help fund future development. Prefer no ads? Upgrade to Activity Launcher Pro on Google Play — it\'s fully open-source and supports continued work on the app. You can also get the app for free on GitHub. Support there is optional but helps us a lot.</string>
-    <string name="action_view_paid" comment="Settings action to view the paid Pro version on Google Play">Activity Launcher Pro</string>
-    <string name="action_view_github" comment="Settings action to view the GitHub project">GitHub project</string>
-    <string name="action_personalized_ads_consent" comment="Settings action for personalized ads consent">Personalized Ads</string>
-    <string name="summary_personalized_ads_consent" comment="Description for the personalized ads consent setting">Customize permissions for personalized advertisements</string>
+    <string name="title_fragment_activity_list" comment="Screen title showing activities within a selected package">Activities</string>
+    <string name="title_fragment_package_list" comment="Screen title for the list of installed packages/apps">Installed packages</string>
 </resources>
