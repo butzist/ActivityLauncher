@@ -44,6 +44,12 @@ class PluginChooserIntegrationTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
+    @get:Rule
+    val screenshotTestRule = ScreenshotTestRule()
+
+    @get:Rule
+    val disableAnimationsRule = DisableAnimationsRule()
+
     @BindValue
     val activityLauncher: ActivityLauncher = mock()
 
@@ -91,6 +97,7 @@ class PluginChooserIntegrationTest {
 
     @Before
     fun setup() {
+        TestUtils.unlockScreen()
         hiltRule.inject()
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
@@ -104,7 +111,7 @@ class PluginChooserIntegrationTest {
 
         val pkg = SystemPackage("de.szalkowski.activitylauncher", "Android Test App", "1.0 (1)", null)
         val activities = listOf(
-            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity"), "Settings Activity", null, false, isDefault = true),
+            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity"), "Settings Activity", null, isPrivate = false, isDefault = true),
         )
         systemRepository.addPackage(pkg, activities)
 
@@ -143,11 +150,10 @@ class PluginChooserIntegrationTest {
 
     @Test
     fun testPluginChooserResultSimulation() {
-        TestUtils.dismissSystemDialogs()
-        TestUtils.waitForWindowFocus()
         val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
-        val scenario = ActivityScenario.launch<MainActivity>(intent)
-        try {
+        ActivityScenario.launch<MainActivity>(intent).use { scenario ->
+            TestUtils.dismissSystemDialogs()
+            TestUtils.waitForWindowFocus()
             // Navigate to ActivityDetails
             Thread.sleep(3000)
             onView(withId(R.id.PackageListFragment)).perform(click())
@@ -180,8 +186,6 @@ class PluginChooserIntegrationTest {
             // Verify we are still on the screen (or at least no crash happened)
             // We don't verify the system dialog here as it's outside our app
             onView(withId(R.id.tiName)).check(matches(isDisplayed()))
-        } finally {
-            scenario.close()
         }
     }
 }

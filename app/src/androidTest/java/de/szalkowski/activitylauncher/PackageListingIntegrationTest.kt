@@ -39,6 +39,12 @@ class PackageListingIntegrationTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
+    @get:Rule
+    val screenshotTestRule = ScreenshotTestRule()
+
+    @get:Rule
+    val disableAnimationsRule = DisableAnimationsRule()
+
     @BindValue
     val activityLauncher: ActivityLauncher = mock()
 
@@ -86,6 +92,7 @@ class PackageListingIntegrationTest {
 
     @Before
     fun setup() {
+        TestUtils.unlockScreen()
         hiltRule.inject()
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
@@ -107,8 +114,8 @@ class PackageListingIntegrationTest {
         // Setup fake data
         val pkg = SystemPackage("de.szalkowski.activitylauncher", "Android Test App", "1.0 (1)", null)
         val activities = listOf(
-            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity"), "Main Activity", null, false, isDefault = true),
-            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity"), "Settings Activity", null, false),
+            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity"), "Main Activity", null, isPrivate = false, isDefault = true),
+            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity"), "Settings Activity", null, isPrivate = false),
         )
         systemRepository.addPackage(pkg, activities)
 
@@ -147,9 +154,9 @@ class PackageListingIntegrationTest {
 
     @Test
     fun testPackageListIsDisplayedAndSearchWorks() {
-        TestUtils.dismissSystemDialogs()
-        TestUtils.waitForWindowFocus()
         ActivityScenario.launch(MainActivity::class.java).use {
+            TestUtils.dismissSystemDialogs()
+            TestUtils.waitForWindowFocus()
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())
             Thread.sleep(2000)
@@ -165,9 +172,9 @@ class PackageListingIntegrationTest {
 
     @Test
     fun testPackageFilteringAppliesToActivities() {
-        TestUtils.dismissSystemDialogs()
-        TestUtils.waitForWindowFocus()
         ActivityScenario.launch(MainActivity::class.java).use {
+            TestUtils.dismissSystemDialogs()
+            TestUtils.waitForWindowFocus()
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())
             Thread.sleep(2000)

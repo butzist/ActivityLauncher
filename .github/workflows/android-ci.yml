@@ -65,6 +65,15 @@ jobs:
           arch: x86_64
           disable-animations: true
           script: |
-            adb shell wm dismiss-keyguard
-            adb shell input keyevent 82
-            ./gradlew connectedOssNoadsDebugAndroidTest --build-cache
+            adb shell mkdir -p /sdcard/screenshots
+            res=0
+            ./gradlew connectedOssNoadsDebugAndroidTest --build-cache || res=$?
+            mkdir -p screenshots
+            adb pull /sdcard/screenshots/. screenshots/ || true
+            exit $res
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/

@@ -10,7 +10,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -42,6 +41,12 @@ class ActivityDetailsIntegrationTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule
+    val screenshotTestRule = ScreenshotTestRule()
+
+    @get:Rule
+    val disableAnimationsRule = DisableAnimationsRule()
 
     @BindValue
     val activityLauncher: ActivityLauncher = mock()
@@ -92,12 +97,13 @@ class ActivityDetailsIntegrationTest {
 
     @Before
     fun setup() {
+        TestUtils.unlockScreen()
         hiltRule.inject()
         favoriteSet.clear()
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(favoriteSet)
         whenever(favoritesRepository.isFavorite(any())).thenAnswer { invocation ->
-            favoriteSet.contains(invocation.getArgument<ComponentName>(0))
+            favoriteSet.contains(invocation.getArgument(0))
         }
         doAnswer { invocation ->
             favoriteSet.add(invocation.getArgument(0))
@@ -122,7 +128,7 @@ class ActivityDetailsIntegrationTest {
         val componentName = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity")
         val pkg = SystemPackage("de.szalkowski.activitylauncher", "Android Test App", "1.0 (1)", null)
         val activities = listOf(
-            MyActivityInfo(componentName, "Settings Activity", null, false, isDefault = true),
+            MyActivityInfo(componentName, "Settings Activity", null, isPrivate = false, isDefault = true),
         )
         systemRepository.addPackage(pkg, activities)
 
@@ -155,10 +161,10 @@ class ActivityDetailsIntegrationTest {
 
     @Test
     fun testActivityDetailsAndFavorites() {
-        TestUtils.dismissSystemDialogs()
-        TestUtils.waitForWindowFocus()
         val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
         val scenario = ActivityScenario.launch<MainActivity>(intent)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
         try {
             // Wait for data to load
             Thread.sleep(5000)
@@ -228,20 +234,18 @@ class ActivityDetailsIntegrationTest {
         return try {
             onView(withId(id)).check(matches(isDisplayed()))
             true
-        } catch (e: Throwable) {
+        } catch (_: Throwable) {
             false
         }
-    }
-
-    private fun pressBack() {
-        InstrumentationRegistry.getInstrumentation().uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK)
     }
 
     private fun getText(matcher: androidx.test.espresso.ViewInteraction): String {
         var text = ""
         matcher.perform(object : androidx.test.espresso.ViewAction {
             override fun getConstraints() = isAssignableFrom(android.widget.TextView::class.java)
+
             override fun getDescription() = "getting text from a TextView"
+
             override fun perform(uiController: androidx.test.espresso.UiController, view: android.view.View) {
                 val tv = view as android.widget.TextView
                 text = tv.text.toString()

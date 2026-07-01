@@ -40,6 +40,12 @@ class FavoritesRecentsIntegrationTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
+    @get:Rule
+    val screenshotTestRule = ScreenshotTestRule()
+
+    @get:Rule
+    val disableAnimationsRule = DisableAnimationsRule()
+
     @BindValue
     val activityLauncher: ActivityLauncher = mock()
 
@@ -89,12 +95,13 @@ class FavoritesRecentsIntegrationTest {
 
     @Before
     fun setup() {
+        TestUtils.unlockScreen()
         hiltRule.inject()
         favoriteSet.clear()
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(favoriteSet)
         whenever(favoritesRepository.isFavorite(any())).thenAnswer { invocation ->
-            favoriteSet.contains(invocation.getArgument<ComponentName>(0))
+            favoriteSet.contains(invocation.getArgument(0))
         }
         doAnswer { invocation ->
             favoriteSet.add(invocation.getArgument(0))
@@ -119,7 +126,7 @@ class FavoritesRecentsIntegrationTest {
         // Setup fake data
         val pkg = SystemPackage("de.szalkowski.activitylauncher", "Android Test App", "1.0 (1)", null)
         val activities = listOf(
-            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity"), "Main Activity", null, false, isDefault = true),
+            MyActivityInfo(ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity"), "Main Activity", null, isPrivate = false, isDefault = true),
         )
         systemRepository.addPackage(pkg, activities)
 
@@ -158,9 +165,9 @@ class FavoritesRecentsIntegrationTest {
 
     @Test
     fun testFavoritesAndRecentsNavigation() {
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         TestUtils.dismissSystemDialogs()
         TestUtils.waitForWindowFocus()
-        val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())
@@ -180,9 +187,9 @@ class FavoritesRecentsIntegrationTest {
 
     @Test
     fun testFavoriteToggleUpdatesUI() {
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         TestUtils.dismissSystemDialogs()
         TestUtils.waitForWindowFocus()
-        val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())
@@ -205,9 +212,5 @@ class FavoritesRecentsIntegrationTest {
         } finally {
             runCatching { scenario.close() }
         }
-    }
-
-    private fun pressBackHome() {
-        onView(withId(R.id.bottom_navigation)).perform(click()) // Just a fallback if pressBack fails
     }
 }
