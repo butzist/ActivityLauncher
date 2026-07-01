@@ -13,7 +13,7 @@ import java.io.File
  */
 class ScreenshotTestRule : TestWatcher() {
     private val tag = "ScreenshotTestRule"
-    private val screenshotDir = "/sdcard/screenshots/"
+    private val screenshotDir = "/storage/emulated/0/screenshots/"
 
     override fun failed(e: Throwable?, description: Description) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

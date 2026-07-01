@@ -65,11 +65,11 @@ jobs:
           arch: x86_64
           disable-animations: true
           script: |
-            adb shell mkdir -p /sdcard/screenshots
+            adb shell mkdir -p /storage/emulated/0/screenshots
             res=0
             ./gradlew connectedOssNoadsDebugAndroidTest --build-cache || res=$?
             mkdir -p screenshots
-            adb pull /sdcard/screenshots/. screenshots/ || true
+            adb pull /storage/emulated/0/screenshots/. screenshots/ || true
             exit $res
       - name: Upload screenshots
         if: always()
