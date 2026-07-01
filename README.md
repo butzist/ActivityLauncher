@@ -5,7 +5,10 @@
 
 Launches hidden activities and creates shortcuts for installed apps.
 
-This organization contains the app's source code and related projects like plugins for launching (e.g., Shizuku) and shortcut creation.
+This organization contains the app's source code and related projects like
+plugins for launching (e.g.,
+[Shizuku Launch Plugin](https://github.com/ActivityLauncher/ActivityLauncherShizukuPlugin))
+and shortcut creation.
 
 <a href="https://f-droid.org/packages/de.szalkowski.activitylauncher/" target="_blank">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
@@ -14,16 +17,10 @@ This organization contains the app's source code and related projects like plugi
 
 ## Support and Feature Requests
 
-Join our [Discord server](https://discord.gg/a4WSmdHZTa) for support, feature requests, and community discussions.
-
-## Shortcuts not created
-
-In case the shortcuts are not created in your home screen, make sure Activity Launcher has the "Home screen shortcuts" permission.
-
-Click on Settings -> Apps -> Manage apps -> Activity Launcher -> Other permissions -> Home screen shortcuts.
-
-See [#267](https://github.com/orgs/ActivityLauncher/repositories).
+Join our [Discord server](https://discord.gg/a4WSmdHZTa) for support, feature
+requests, and community discussions.
 
 ## Translations
 
-Translations can be updated via Pull Requests on GitHub. Feel free to contribute by submitting PRs to improve or add translations.
+Translations can be updated via Pull Requests on GitHub. Feel free to contribute
+by submitting PRs to improve or add translations.
