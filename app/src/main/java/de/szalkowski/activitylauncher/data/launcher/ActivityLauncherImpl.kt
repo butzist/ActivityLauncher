@@ -15,6 +15,7 @@ class ActivityLauncherImpl @Inject constructor(@ApplicationContext private val c
     override fun launchActivity(request: LaunchRequest) {
         val intent = getActivityIntent(request.component, request.extras)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         try {
             context.startActivity(intent)
         } catch (e: Exception) {

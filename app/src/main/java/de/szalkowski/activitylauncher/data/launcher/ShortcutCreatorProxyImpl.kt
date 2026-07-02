@@ -22,13 +22,13 @@ class ShortcutCreatorProxyImpl @Inject constructor(
     private val pm: PackageManager = context.packageManager
 
     override fun createLauncherIcon(request: ShortcutRequest, plugin: ComponentName?) {
-        val launchIntent = getActivityIntent(request.component, request.extras)
-
         val intent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT)
         if (plugin != null) {
             intent.component = plugin
         }
+
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_NAME, request.name)
+        val launchIntent = getActivityIntent(request.component, request.extras)
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_ICON, request.icon.toBundle())
 

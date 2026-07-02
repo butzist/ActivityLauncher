@@ -2,6 +2,7 @@ package de.szalkowski.activitylauncher.data.launcher
 
 import android.content.Context
 import android.util.Base64
+import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
@@ -22,7 +23,7 @@ class IntentSignerImpl @Inject constructor(@ApplicationContext context: Context)
             val bytes = ByteArray(256)
             random.nextBytes(bytes)
             key = Base64.encodeToString(bytes, Base64.NO_WRAP)
-            preferences.edit().putString("key", key).apply()
+            preferences.edit { putString("key", key) }
         } else {
             key = preferences.getString("key", "")!!
         }

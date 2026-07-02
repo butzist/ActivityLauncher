@@ -19,11 +19,12 @@ class ActivityLauncherProxyImpl @Inject constructor(
     private val pm: PackageManager = context.packageManager
 
     override fun launchActivity(request: LaunchRequest, plugin: ComponentName?) {
-        val launchIntent = getActivityIntent(request.component, request.extras)
         val intent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
         if (plugin != null) {
             intent.component = plugin
         }
+
+        val launchIntent = getActivityIntent(request.component, request.extras)
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
