@@ -211,7 +211,11 @@ class ShortcutFlowTest {
             }
             // Success if it doesn't crash and reaches destroyed state (finishes)
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
-            verify(shortcutCreator).createLauncherIcon(any())
+
+            val captor = argumentCaptor<ShortcutRequest>()
+            verify(shortcutCreator).createLauncherIcon(captor.capture())
+            assertEquals("Test App", captor.firstValue.name)
+            assertEquals(componentName, captor.firstValue.component)
         }
     }
 
@@ -250,6 +254,7 @@ class ShortcutFlowTest {
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
             verify(activityLauncher, never()).launchActivity(any())
+            verify(activityLauncherProxy).launchActivity(any(), eq(ComponentName.unflattenFromString(launchPlugin)))
         }
     }
 }

@@ -8,7 +8,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
-import kotlinx.coroutines.yield
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -29,8 +28,7 @@ class PackageListViewModelTest {
         Dispatchers.setMain(testDispatcher)
         whenever(packageRepository.packagesFlow).thenReturn(packagesFlow)
         whenever(packageRepository.isSyncing).thenReturn(isSyncingFlow)
-        viewModel = PackageListViewModel(packageRepository)
-        viewModel.setDispatcher(testDispatcher)
+        viewModel = PackageListViewModel(packageRepository, testDispatcher)
     }
 
     @After
@@ -42,28 +40,41 @@ class PackageListViewModelTest {
     fun `isSearching should be true when filtering`() = runTest {
         val p1 = createPackage("App One", "com.one", activities = listOf(ActivityName("Activity One", "Main", "com.one.Main", false, null)))
         packagesFlow.value = listOf(p1)
+
         advanceUntilIdle()
+        assertEquals(false, viewModel.isSearching.value)
+
+        // Record all emissions of isSearching
+        val searchingStates = mutableListOf<Boolean>()
+        val job = launch(UnconfinedTestDispatcher()) {
+            viewModel.isSearching.collect { searchingStates.add(it) }
+        }
 
         viewModel.filter("One")
+
         advanceUntilIdle()
+        assert(searchingStates.contains(true))
+        assertEquals(false, viewModel.isSearching.value)
         assertEquals(1, viewModel.packages.value.size)
+        job.cancel()
     }
 
     @Test
     fun `isSearching should be true when repository is syncing`() = runTest {
-        isSyncingFlow.value = true
-        // The combined flow might need a bit of time or a collector
-        var lastSearchingValue = false
+        val searchingStates = mutableListOf<Boolean>()
         val job = launch {
-            viewModel.isSearching.collect { lastSearchingValue = it }
+            viewModel.isSearching.collect { searchingStates.add(it) }
         }
-        yield() // Allow collector to pick up initial value
 
-        assertEquals(true, lastSearchingValue)
+        isSyncingFlow.value = true
+        advanceUntilIdle()
+
+        assert(searchingStates.contains(true))
 
         isSyncingFlow.value = false
-        yield()
-        assertEquals(false, lastSearchingValue)
+
+        advanceUntilIdle()
+        assertEquals(false, viewModel.isSearching.value)
         job.cancel()
     }
 

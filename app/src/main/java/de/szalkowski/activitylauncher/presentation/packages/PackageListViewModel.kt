@@ -3,9 +3,10 @@ package de.szalkowski.activitylauncher.presentation.packages
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.szalkowski.activitylauncher.app.di.DefaultDispatcher
 import de.szalkowski.activitylauncher.domain.model.MyPackageInfo
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,13 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PackageListViewModel @Inject constructor(
     private val packageRepository: PackageRepository,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
-    private var defaultDispatcher: kotlinx.coroutines.CoroutineDispatcher = kotlinx.coroutines.Dispatchers.Default
-
-    // Internal for testing
-    internal fun setDispatcher(dispatcher: kotlinx.coroutines.CoroutineDispatcher) {
-        defaultDispatcher = dispatcher
-    }
 
     private val _packages = MutableStateFlow<List<MyPackageInfo>>(emptyList())
     val packages: StateFlow<List<MyPackageInfo>> = _packages.asStateFlow()
@@ -35,7 +31,7 @@ class PackageListViewModel @Inject constructor(
     private val _isFiltering = MutableStateFlow(false)
     val isSearching: StateFlow<Boolean> = combine(_isFiltering, packageRepository.isSyncing) { filtering, syncing ->
         filtering || syncing
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private var allPackages: List<MyPackageInfo> = emptyList()
     private var currentQuery: String = ""
@@ -54,8 +50,8 @@ class PackageListViewModel @Inject constructor(
         currentQuery = query
         filterJob?.cancel()
         filterJob = viewModelScope.launch {
-            _isFiltering.value = true
             try {
+                _isFiltering.value = true
                 val filtered = withContext(defaultDispatcher) {
                     performFilter(query)
                 }

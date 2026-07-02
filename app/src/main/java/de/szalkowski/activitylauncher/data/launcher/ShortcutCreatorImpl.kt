@@ -18,10 +18,8 @@ import javax.inject.Singleton
 @Singleton
 class ShortcutCreatorImpl @Inject constructor(
     @ApplicationContext private val context: Context,
+    private val intentSigner: IntentSigner,
 ) : ShortcutCreator {
-
-    @Inject
-    lateinit var intentSigner: IntentSigner
 
     override fun createLauncherIcon(request: ShortcutRequest) {
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT)
