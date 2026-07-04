@@ -26,12 +26,15 @@ import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseC
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -69,6 +72,24 @@ class ActivityDetailsViewModel @Inject constructor(
 
     private val _editedIconResourceName = MutableStateFlow("")
     val editedIconResourceName: StateFlow<String> = _editedIconResourceName.asStateFlow()
+
+    val canLaunch: StateFlow<Boolean> = combine(_editedPackage, _editedClass) { pkg, cls ->
+        pkg.isNotBlank() && cls.isNotBlank()
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    val canCreateShortcut: StateFlow<Boolean> =
+        combine(_editedName, _editedPackage, _editedClass) { name, pkg, cls ->
+            name.isNotBlank() && pkg.isNotBlank() && cls.isNotBlank()
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    val canShare: StateFlow<Boolean> = combine(_editedPackage, _editedClass) { pkg, cls ->
+        pkg.isNotBlank() && cls.isNotBlank()
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    val canFavorite: StateFlow<Boolean> =
+        combine(_editedName, _editedPackage, _editedClass) { name, pkg, cls ->
+            name.isNotBlank() && pkg.isNotBlank() && cls.isNotBlank()
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     private val _editedIcon = MutableStateFlow<IconCompat?>(null)
     val editedIcon: StateFlow<IconCompat?> = _editedIcon.asStateFlow()

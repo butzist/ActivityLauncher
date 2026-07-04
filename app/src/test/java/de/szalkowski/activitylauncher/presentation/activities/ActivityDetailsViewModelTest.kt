@@ -361,4 +361,89 @@ class ActivityDetailsViewModelTest {
 
         job.cancel()
     }
+
+    @Test
+    fun `should update canLaunch state based on package and class`() = runTest {
+        val values = mutableListOf<Boolean>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            viewModel.canLaunch.collect { values.add(it) }
+        }
+
+        viewModel.updatePackage("")
+        viewModel.updateClass("Class")
+        assertFalse(viewModel.canLaunch.value)
+
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("")
+        assertFalse(viewModel.canLaunch.value)
+
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("Class")
+        assertTrue(viewModel.canLaunch.value)
+
+        job.cancel()
+    }
+
+    @Test
+    fun `should update canCreateShortcut state based on name package and class`() = runTest {
+        val values = mutableListOf<Boolean>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            viewModel.canCreateShortcut.collect { values.add(it) }
+        }
+
+        viewModel.updateName("")
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("Class")
+        assertFalse(viewModel.canCreateShortcut.value)
+
+        viewModel.updateName("Name")
+        viewModel.updatePackage("")
+        viewModel.updateClass("Class")
+        assertFalse(viewModel.canCreateShortcut.value)
+
+        viewModel.updateName("Name")
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("Class")
+        assertTrue(viewModel.canCreateShortcut.value)
+
+        job.cancel()
+    }
+
+    @Test
+    fun `should update canShare state based on package and class`() = runTest {
+        val values = mutableListOf<Boolean>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            viewModel.canShare.collect { values.add(it) }
+        }
+
+        viewModel.updatePackage("")
+        viewModel.updateClass("Class")
+        assertFalse(viewModel.canShare.value)
+
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("Class")
+        assertTrue(viewModel.canShare.value)
+
+        job.cancel()
+    }
+
+    @Test
+    fun `should update canFavorite state based on name package and class`() = runTest {
+        val values = mutableListOf<Boolean>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            viewModel.canFavorite.collect { values.add(it) }
+        }
+
+        viewModel.updateName("")
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("Class")
+        assertFalse(viewModel.canFavorite.value)
+
+        viewModel.updateName("Name")
+        viewModel.updatePackage("pkg")
+        viewModel.updateClass("Class")
+        assertTrue(viewModel.canFavorite.value)
+
+        job.cancel()
+    }
 }

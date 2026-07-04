@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
@@ -39,8 +40,9 @@ class ShortcutCreatorImpl @Inject constructor(
             intent.putExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, it.flattenToString())
         }
 
+        val label = request.name.ifBlank { context.getString(R.string.app_name) }
         val shortcut = ShortcutInfoCompat.Builder(context, UUID.randomUUID().toString())
-            .setShortLabel(request.name)
+            .setShortLabel(label)
             .setIcon(request.icon)
             .setIntent(intent)
             .build()

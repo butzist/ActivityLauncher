@@ -81,6 +81,10 @@ class ActivityDetailsFragment : Fragment() {
                     } else {
                         favoriteItem.setIcon(R.drawable.ic_favorite_border)
                     }
+                    favoriteItem.isEnabled = viewModel.canFavorite.value
+
+                    val shareItem = menu.findItem(R.id.action_share)
+                    shareItem.isEnabled = viewModel.canShare.value
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -133,6 +137,30 @@ class ActivityDetailsFragment : Fragment() {
                 launch {
                     viewModel.showShortcutChooser.collect { isVisible ->
                         binding.btCreateShortcutChooser.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.canLaunch.collect { isEnabled ->
+                        binding.btLaunch.isEnabled = isEnabled
+                        binding.btLaunchChooser.isEnabled = isEnabled
+                    }
+                }
+                launch {
+                    viewModel.canCreateShortcut.collect { isEnabled ->
+                        binding.btCreateShortcut.isEnabled = isEnabled
+                        binding.btCreateShortcutChooser.isEnabled = isEnabled
+                    }
+                }
+                launch {
+                    viewModel.canShare.collect { isEnabled ->
+                        binding.btShareShortcut.isEnabled = isEnabled
+                        activity?.invalidateOptionsMenu()
+                    }
+                }
+                launch {
+                    viewModel.canFavorite.collect { isEnabled ->
+                        binding.btFavorite.isEnabled = isEnabled
+                        activity?.invalidateOptionsMenu()
                     }
                 }
                 launch {
