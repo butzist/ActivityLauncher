@@ -42,10 +42,14 @@ class TileDialogFragment : BottomSheetDialogFragment() {
             )
 
             post {
-                if (childFragmentManager.findFragmentById(navHostId) == null) {
+                if (isAdded && childFragmentManager.findFragmentById(navHostId) == null) {
                     val navHost = NavHostFragment.create(R.navigation.nav_graph)
-                    childFragmentManager.beginTransaction().replace(navHostId, navHost)
-                        .setPrimaryNavigationFragment(navHost).commitNow()
+                    childFragmentManager.beginTransaction()
+                        .replace(navHostId, navHost)
+                        .setPrimaryNavigationFragment(navHost)
+                        .commitAllowingStateLoss()
+
+                    childFragmentManager.executePendingTransactions()
 
                     navHost.navController.apply {
                         graph = navInflater.inflate(R.navigation.nav_graph).apply {
