@@ -11,9 +11,16 @@ import org.mockito.kotlin.*
 class CreateShortcutUseCaseTest {
     private val shortcutCreator: ShortcutCreator = mock()
     private val shortcutCreatorProxy: ShortcutCreatorProxy = mock()
-    private val componentName = ComponentName("com.test", "Activity")
+    private val componentName = mock<ComponentName> {
+        on { packageName } doReturn "com.test"
+        on { className } doReturn "Activity"
+        on { flattenToShortString() } doReturn "com.test/Activity"
+    }
     private val icon = mock<androidx.core.graphics.drawable.IconCompat>()
-    private val request = ShortcutRequest("Test", componentName, icon)
+    private val intent = mock<android.content.Intent> {
+        on { component } doReturn componentName
+    }
+    private val request = ShortcutRequest("Test", intent, icon)
     private lateinit var useCase: CreateShortcutUseCase
 
     @Before

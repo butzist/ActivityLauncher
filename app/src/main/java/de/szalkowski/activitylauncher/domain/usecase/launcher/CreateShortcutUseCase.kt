@@ -13,7 +13,7 @@ class CreateShortcutUseCase @Inject constructor(
     private val shortcutCreatorProxy: ShortcutCreatorProxy,
 ) {
     operator fun invoke(request: ShortcutRequest, shortcutPlugin: ComponentName? = null) {
-        Log.i("CreateShortcutUseCase", "Creating shortcut: ${request.component.flattenToShortString()}")
+        Log.i("CreateShortcutUseCase", "Creating shortcut: ${request.intent.component?.flattenToShortString()}")
         if (shortcutPlugin != null || shortcutCreatorProxy.hasMultipleHandlers()) {
             shortcutCreatorProxy.createLauncherIcon(request, shortcutPlugin)
         } else {

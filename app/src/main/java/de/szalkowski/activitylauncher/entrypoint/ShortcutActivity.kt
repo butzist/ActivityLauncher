@@ -13,7 +13,6 @@ import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
-import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import javax.inject.Inject
 
@@ -98,16 +97,16 @@ class ShortcutActivity : AppCompatActivity() {
     }
 
     private fun handleLaunchShortcut() {
-        val request = viewIntentParser.parseShortcutRequest(intent) ?: return
+        val request = viewIntentParser.parseLaunchRequest(intent) ?: return
         val signature = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE).orEmpty()
 
         if (!intentSigner.validateRequestSignature(request, signature)) {
             Log.e("ShortcutActivity", "Invalid signature for shortcut")
-            redirectToMain(request.component)
+            request.intent.component?.let { redirectToMain(it) }
             return
         }
 
-        launchActivityUseCase.invoke(LaunchRequest(request.component, request.extras), request.launcherPlugin)
+        launchActivityUseCase.invoke(request)
     }
 
     private fun handleLaunchActivity() {

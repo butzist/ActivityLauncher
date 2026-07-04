@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val launchRequest = viewIntentParser.parseLaunchRequest(intent)
         val componentNameFromExtra =
             intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
-        val componentName = launchRequest?.component ?: componentNameFromExtra
+        val componentName = launchRequest?.intent?.component ?: componentNameFromExtra
 
         if (componentName != null) {
             val bundle = Bundle().apply {

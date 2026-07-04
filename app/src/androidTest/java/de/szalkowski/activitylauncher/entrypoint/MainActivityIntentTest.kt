@@ -95,7 +95,6 @@ class MainActivityIntentTest {
         whenever(viewIntentParser.parseLaunchRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseLaunchRequest(invocation.getArgument(0)) }
         whenever(viewIntentParser.parseShortcutRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutRequest(invocation.getArgument(0)) }
         whenever(viewIntentParser.componentNameFromIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.componentNameFromIntent(invocation.getArgument(0)) }
-        whenever(viewIntentParser.packageFromIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.packageFromIntent(invocation.getArgument(0)) }
         whenever(viewIntentParser.parseShortcutIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutIntent(invocation.getArgument(0)) }
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(supportReminder.shouldDisplayReminder()).thenReturn(false)

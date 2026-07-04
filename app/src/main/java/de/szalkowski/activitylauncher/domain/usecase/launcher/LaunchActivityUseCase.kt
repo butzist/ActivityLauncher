@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
-import android.content.ComponentName
 import android.util.Log
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
@@ -14,14 +13,15 @@ class LaunchActivityUseCase @Inject constructor(
     private val activityLauncherProxy: ActivityLauncherProxy,
     private val recentsRepository: RecentsRepository,
 ) {
-    operator fun invoke(request: LaunchRequest, launchPlugin: ComponentName? = null) {
-        Log.i("LaunchActivityUseCase", "Launching activity: ${request.component.flattenToShortString()}")
-        if (launchPlugin != null || activityLauncherProxy.hasMultipleHandlers()) {
-            activityLauncherProxy.launchActivity(request, launchPlugin)
+    operator fun invoke(request: LaunchRequest) {
+        val component = request.intent.component ?: return
+        Log.i("LaunchActivityUseCase", "Launching activity: ${component.flattenToShortString()}")
+        if (request.launcherPlugin != null || activityLauncherProxy.hasMultipleHandlers()) {
+            activityLauncherProxy.launchActivity(request)
         } else {
             activityLauncher.launchActivity(request)
         }
-        recentsRepository.addActivity(request.component)
+        recentsRepository.addActivity(component)
     }
 
     fun hasMultipleHandlers(): Boolean = activityLauncherProxy.hasMultipleHandlers()

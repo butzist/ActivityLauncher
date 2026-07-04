@@ -13,32 +13,24 @@ import javax.inject.Inject
 class ViewIntentParserImpl @Inject constructor(
     private val getActivityIconUseCase: GetActivityIconUseCase,
 ) : ViewIntentParser {
-    override fun packageFromIntent(intent: Intent): String? {
-        if (intent.action != Intent.ACTION_VIEW) {
-            return null
-        }
-
-        return runCatching {
-            val url = intent.dataString.orEmpty()
-            if (url.startsWith("https://activitylauncher.net/activity/")) {
-                val rawComponent = url.removePrefix("https://activitylauncher.net/activity/")
-                ComponentName.unflattenFromString(rawComponent)?.packageName
-            } else {
-                null
-            }
-        }.getOrNull()
-    }
-
     override fun parseLaunchRequest(intent: Intent): LaunchRequest? {
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
             ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
         val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) }
 
-        val component = launchIntent?.component
-            ?: componentNameFromIntent(intent)
-            ?: return null
+        val launcherPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
+        val launcherPlugin = launcherPluginStr?.let { ComponentName.unflattenFromString(it) }
 
-        return LaunchRequest(component, launchIntent?.extras)
+        if (launchIntent != null) {
+            return LaunchRequest(launchIntent, launcherPlugin)
+        }
+
+        val component = componentNameFromIntent(intent) ?: return null
+        val newLaunchIntent = Intent().apply {
+            this.component = component
+        }
+
+        return LaunchRequest(newLaunchIntent, launcherPlugin)
     }
 
     override fun parseShortcutRequest(intent: Intent): ShortcutRequest? {
@@ -55,7 +47,7 @@ class ViewIntentParserImpl @Inject constructor(
         val launcherPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
         val launcherPlugin = launcherPluginStr?.let { ComponentName.unflattenFromString(it) }
 
-        return ShortcutRequest(appName, component, icon, launchIntent.extras, launcherPlugin)
+        return ShortcutRequest(appName, launchIntent, icon, launcherPlugin)
     }
 
     override fun componentNameFromIntent(intent: Intent): ComponentName? {

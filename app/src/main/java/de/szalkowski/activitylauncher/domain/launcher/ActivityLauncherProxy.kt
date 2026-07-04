@@ -1,11 +1,10 @@
 package de.szalkowski.activitylauncher.domain.launcher
 
-import android.content.ComponentName
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
 
 interface ActivityLauncherProxy {
-    fun launchActivity(request: LaunchRequest, plugin: ComponentName? = null)
+    fun launchActivity(request: LaunchRequest)
 
     fun hasMultipleHandlers(): Boolean
     fun getPlugins(): List<PluginInfo>

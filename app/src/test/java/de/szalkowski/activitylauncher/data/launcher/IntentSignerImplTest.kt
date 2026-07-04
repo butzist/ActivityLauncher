@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Assert.*
 import org.junit.Before
@@ -47,69 +47,51 @@ class IntentSignerImplTest {
 
     @Test
     fun testSignAndValidateRequest() = withMockedBase64 {
-        val componentName = mock<ComponentName>()
         val icon = mock<androidx.core.graphics.drawable.IconCompat>()
-        val request = ShortcutRequest("Test", componentName, icon)
         val intent = mock<Intent>()
+        val shortcutRequest = ShortcutRequest("Test", intent, icon)
+        val launchRequest = LaunchRequest(intent)
 
-        val intentUtilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        mockStatic(intentUtilClass).use { mockedIntentUtil ->
-            mockedIntentUtil.`when`<Intent> {
-                getActivityIntent(eq(componentName), anyOrNull())
-            }.thenReturn(intent)
-            whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
+        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-            val signature = signer.signRequest(request)
+        val signature = signer.signRequest(shortcutRequest)
 
-            assertNotNull(signature)
-            assertTrue(signer.validateRequestSignature(request, signature))
-        }
+        assertNotNull(signature)
+        assertTrue(signer.validateRequestSignature(launchRequest, signature))
     }
 
     @Test
     fun testSignatureWithPlugin() = withMockedBase64 {
-        val componentName = mock<ComponentName>()
         val icon = mock<androidx.core.graphics.drawable.IconCompat>()
         val plugin = mock<ComponentName>()
         whenever(plugin.flattenToString()).thenReturn("com.example/.Plugin")
-        val requestWithPlugin = ShortcutRequest("Test", componentName, icon, launcherPlugin = plugin)
-        val requestWithoutPlugin = ShortcutRequest("Test", componentName, icon)
         val intent = mock<Intent>()
+        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        val intentUtilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        mockStatic(intentUtilClass).use { mockedIntentUtil ->
-            mockedIntentUtil.`when`<Intent> {
-                getActivityIntent(eq(componentName), anyOrNull())
-            }.thenReturn(intent)
-            whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
+        val shortcutRequestWithPlugin = ShortcutRequest("Test", intent, icon, launcherPlugin = plugin)
+        val shortcutRequestWithoutPlugin = ShortcutRequest("Test", intent, icon)
+        val launchRequestWithPlugin = LaunchRequest(intent, launcherPlugin = plugin)
+        val launchRequestWithoutPlugin = LaunchRequest(intent)
 
-            val signatureWithPlugin = signer.signRequest(requestWithPlugin)
-            val signatureWithoutPlugin = signer.signRequest(requestWithoutPlugin)
+        val signatureWithPlugin = signer.signRequest(shortcutRequestWithPlugin)
+        val signatureWithoutPlugin = signer.signRequest(shortcutRequestWithoutPlugin)
 
-            assertNotEquals(signatureWithPlugin, signatureWithoutPlugin)
-            assertTrue(signer.validateRequestSignature(requestWithPlugin, signatureWithPlugin))
-            assertFalse(signer.validateRequestSignature(requestWithPlugin, signatureWithoutPlugin))
-            assertFalse(signer.validateRequestSignature(requestWithoutPlugin, signatureWithPlugin))
-        }
+        assertNotEquals(signatureWithPlugin, signatureWithoutPlugin)
+        assertTrue(signer.validateRequestSignature(launchRequestWithPlugin, signatureWithPlugin))
+        assertFalse(signer.validateRequestSignature(launchRequestWithPlugin, signatureWithoutPlugin))
+        assertFalse(signer.validateRequestSignature(launchRequestWithoutPlugin, signatureWithPlugin))
     }
 
     @Test
     fun testKnownSignature() = withMockedBase64 {
-        val componentName = mock<ComponentName>()
         val icon = mock<androidx.core.graphics.drawable.IconCompat>()
-        val request = ShortcutRequest("Test", componentName, icon)
         val intent = mock<Intent>()
+        val request = ShortcutRequest("Test", intent, icon)
 
-        val intentUtilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        mockStatic(intentUtilClass).use { mockedIntentUtil ->
-            mockedIntentUtil.`when`<Intent> {
-                getActivityIntent(eq(componentName), anyOrNull())
-            }.thenReturn(intent)
-            whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
+        whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-            val signature = signer.signRequest(request)
-            // Verified known signature for "intent:#Intent;action=com.test.ACTION;end" with key "test_key"
-            assertEquals("kPThuLUm6BnZkfNuIuRuVZfj8IXOinD+dURnRv1Ytd8=", signature)
-        }
+        val signature = signer.signRequest(request)
+        // Verified known signature for "intent:#Intent;action=com.test.ACTION;end" with key "test_key"
+        assertEquals("kPThuLUm6BnZkfNuIuRuVZfj8IXOinD+dURnRv1Ytd8=", signature)
     }
 }

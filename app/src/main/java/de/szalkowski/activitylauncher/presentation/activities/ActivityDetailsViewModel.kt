@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
@@ -170,9 +171,8 @@ class ActivityDetailsViewModel @Inject constructor(
         val icon = _editedIcon.value ?: getActivityIconUseCase(info.iconResourceName, info.componentName)
         val request = ShortcutRequest(
             name = info.name,
-            component = info.componentName,
+            intent = getActivityIntent(info.componentName, Bundle()),
             icon = icon,
-            extras = Bundle(),
             launcherPlugin = _selectedLaunchPlugin.value?.componentName,
         )
         createShortcutUseCase(request, _selectedShortcutPlugin.value?.componentName)
@@ -189,10 +189,10 @@ class ActivityDetailsViewModel @Inject constructor(
     fun launchActivity() {
         val info = getEditedActivityInfo()
         val request = LaunchRequest(
-            component = info.componentName,
-            extras = Bundle(),
+            intent = getActivityIntent(info.componentName, Bundle()),
+            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
         )
-        launchActivityUseCase(request, _selectedLaunchPlugin.value?.componentName)
+        launchActivityUseCase(request)
     }
 
     fun shareActivity() {

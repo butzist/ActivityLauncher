@@ -6,7 +6,6 @@ import android.content.Intent
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
@@ -28,10 +27,9 @@ class ShortcutCreatorImpl @Inject constructor(
             ShortcutActivity::class.java,
         )
 
-        val launchIntent = getActivityIntent(request.component, request.extras)
         intent.putExtra(
             ShortcutCreator.INTENT_EXTRA_INTENT,
-            launchIntent.toUri(Intent.URI_INTENT_SCHEME),
+            request.intent.toUri(Intent.URI_INTENT_SCHEME),
         )
 
         val signature = intentSigner.signRequest(request)

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.widget.Toast
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import javax.inject.Inject
@@ -13,7 +12,7 @@ import javax.inject.Inject
 class ActivityLauncherImpl @Inject constructor(@ApplicationContext private val context: Context) :
     ActivityLauncher {
     override fun launchActivity(request: LaunchRequest) {
-        val intent = getActivityIntent(request.component, request.extras)
+        val intent = request.intent
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         try {

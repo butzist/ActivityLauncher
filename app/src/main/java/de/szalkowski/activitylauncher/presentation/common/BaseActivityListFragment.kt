@@ -12,6 +12,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
@@ -49,7 +50,7 @@ abstract class BaseActivityListFragment : Fragment() {
             icon.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
         }
         adapter.onItemClick = { info ->
-            launchActivityUseCase(LaunchRequest(info.componentName))
+            launchActivityUseCase(LaunchRequest(getActivityIntent(info.componentName, null)))
         }
         adapter.onItemLongClick = { info ->
             runCatching {

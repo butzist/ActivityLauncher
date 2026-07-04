@@ -88,14 +88,14 @@ class ProxyImplTest {
     fun testCreateLauncherIconDelegation() {
         val componentName = ComponentName("com.test", "Activity")
         val icon: IconCompat = mock()
-        whenever(intentSigner.signRequest(any())).thenReturn("signature")
+        whenever(intentSigner.signRequest(any<ShortcutRequest>())).thenReturn("signature")
 
         // Mock the context and capture it to verify startActivity
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
         val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext, intentSigner)
 
-        val request = ShortcutRequest("Test", componentName, icon)
+        val request = ShortcutRequest("Test", Intent().setComponent(componentName), icon)
         proxyWithMockContext.createLauncherIcon(request, null)
 
         verify(intentSigner).signRequest(eq(request))

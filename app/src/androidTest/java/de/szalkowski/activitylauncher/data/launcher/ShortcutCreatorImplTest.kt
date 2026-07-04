@@ -89,7 +89,7 @@ class ShortcutCreatorImplTest {
             android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888),
         )
         val signature = "test_signature"
-        whenever(intentSigner.signRequest(any())).thenReturn(signature)
+        whenever(intentSigner.signRequest(any<ShortcutRequest>())).thenReturn(signature)
 
         val shortcutManager = mock<ShortcutManager>()
         val mockContext = object : android.content.ContextWrapper(context) {
@@ -105,7 +105,7 @@ class ShortcutCreatorImplTest {
         }
 
         val shortcutCreatorWithMock = ShortcutCreatorImpl(mockContext, intentSigner)
-        val request = ShortcutRequest("Test App", componentName, icon)
+        val request = ShortcutRequest("Test App", Intent().setComponent(componentName), icon)
 
         shortcutCreatorWithMock.createLauncherIcon(request)
 

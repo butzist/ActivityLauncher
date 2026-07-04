@@ -1,11 +1,13 @@
 package de.szalkowski.activitylauncher.data.launcher
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.util.Base64
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import java.security.SecureRandom
 import javax.crypto.Mac
@@ -29,10 +31,12 @@ class IntentSignerImpl @Inject constructor(@ApplicationContext context: Context)
         }
     }
 
-    override fun signRequest(request: ShortcutRequest): String {
-        val launchIntent = getActivityIntent(request.component, request.extras)
-        val uri = launchIntent.toUri(0)
-        val launcherPlugin = request.launcherPlugin?.flattenToString()
+    override fun signRequest(request: ShortcutRequest): String = signIntent(request.intent, request.launcherPlugin)
+    override fun signRequest(request: LaunchRequest): String = signIntent(request.intent, request.launcherPlugin)
+
+    private fun signIntent(intent: Intent, launcherPlugin: ComponentName?): String {
+        val uri = intent.toUri(0)
+        val launcherPlugin = launcherPlugin?.flattenToString()
         val message = if (launcherPlugin == null) {
             uri
         } else {
@@ -41,7 +45,7 @@ class IntentSignerImpl @Inject constructor(@ApplicationContext context: Context)
         return hmac256(key, message)
     }
 
-    override fun validateRequestSignature(request: ShortcutRequest, signature: String): Boolean {
+    override fun validateRequestSignature(request: LaunchRequest, signature: String): Boolean {
         val compSignature = signRequest(request)
         return signature == compSignature
     }

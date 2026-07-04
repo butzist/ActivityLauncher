@@ -4,6 +4,7 @@ import android.content.ComponentName
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.SavedStateHandle
 import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
@@ -104,20 +105,34 @@ class ActivityDetailsViewModelTest {
 
     @Test
     fun `should launch activity`() {
-        viewModel.launchActivity()
-        val captor = argumentCaptor<LaunchRequest>()
-        verify(launchActivityUseCase).invoke(captor.capture(), isNull())
-        assertEquals("com.test", captor.firstValue.component.packageName)
-        assertEquals("Activity", captor.firstValue.component.className)
+        val mockIntent = mock<android.content.Intent>()
+        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
+            mockedUtil.`when`<android.content.Intent> {
+                getActivityIntent(eq(componentName), any())
+            }.thenReturn(mockIntent)
+
+            viewModel.launchActivity()
+            val captor = argumentCaptor<LaunchRequest>()
+            verify(launchActivityUseCase).invoke(captor.capture())
+            assertEquals(mockIntent, captor.firstValue.intent)
+        }
     }
 
     @Test
     fun `should create shortcut`() {
-        viewModel.createShortcut()
-        val captor = argumentCaptor<ShortcutRequest>()
-        verify(createShortcutUseCase).invoke(captor.capture(), isNull())
-        assertEquals("com.test", captor.firstValue.component.packageName)
-        assertEquals("Activity", captor.firstValue.component.className)
+        val mockIntent = mock<android.content.Intent>()
+        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
+            mockedUtil.`when`<android.content.Intent> {
+                getActivityIntent(eq(componentName), any())
+            }.thenReturn(mockIntent)
+
+            viewModel.createShortcut()
+            val captor = argumentCaptor<ShortcutRequest>()
+            verify(createShortcutUseCase).invoke(captor.capture(), isNull())
+            assertEquals(mockIntent, captor.firstValue.intent)
+        }
     }
 
     @Test
@@ -186,12 +201,20 @@ class ActivityDetailsViewModelTest {
 
         newViewModel.selectLaunchPlugin(pluginComp)
 
-        newViewModel.launchActivity()
+        val mockIntent = mock<android.content.Intent>()
+        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
+            mockedUtil.`when`<android.content.Intent> {
+                getActivityIntent(eq(componentName), any())
+            }.thenReturn(mockIntent)
 
-        val captor = argumentCaptor<LaunchRequest>()
-        verify(launchActivityUseCase).invoke(captor.capture(), eq(pluginComp))
-        assertEquals("com.test", captor.firstValue.component.packageName)
-        assertEquals("Activity", captor.firstValue.component.className)
+            newViewModel.launchActivity()
+
+            val captor = argumentCaptor<LaunchRequest>()
+            verify(launchActivityUseCase).invoke(captor.capture())
+            assertEquals(mockIntent, captor.firstValue.intent)
+            assertEquals(pluginComp, captor.firstValue.launcherPlugin)
+        }
     }
 
     @Test
@@ -208,12 +231,19 @@ class ActivityDetailsViewModelTest {
 
         newViewModel.selectShortcutPlugin(pluginComp)
 
-        newViewModel.createShortcut()
+        val mockIntent = mock<android.content.Intent>()
+        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
+            mockedUtil.`when`<android.content.Intent> {
+                getActivityIntent(eq(componentName), any())
+            }.thenReturn(mockIntent)
 
-        val captor = argumentCaptor<ShortcutRequest>()
-        verify(createShortcutUseCase).invoke(captor.capture(), eq(pluginComp))
-        assertEquals("com.test", captor.firstValue.component.packageName)
-        assertEquals("Activity", captor.firstValue.component.className)
+            newViewModel.createShortcut()
+
+            val captor = argumentCaptor<ShortcutRequest>()
+            verify(createShortcutUseCase).invoke(captor.capture(), eq(pluginComp))
+            assertEquals(mockIntent, captor.firstValue.intent)
+        }
     }
 
     @Test
@@ -230,13 +260,20 @@ class ActivityDetailsViewModelTest {
 
         newViewModel.selectLaunchPlugin(pluginComp)
 
-        newViewModel.createShortcut()
+        val mockIntent = mock<android.content.Intent>()
+        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
+            mockedUtil.`when`<android.content.Intent> {
+                getActivityIntent(eq(componentName), any())
+            }.thenReturn(mockIntent)
 
-        val captor = argumentCaptor<ShortcutRequest>()
-        verify(createShortcutUseCase).invoke(captor.capture(), isNull())
-        assertEquals("com.test", captor.firstValue.component.packageName)
-        assertEquals("Activity", captor.firstValue.component.className)
-        assertEquals(pluginComp, captor.firstValue.launcherPlugin)
+            newViewModel.createShortcut()
+
+            val captor = argumentCaptor<ShortcutRequest>()
+            verify(createShortcutUseCase).invoke(captor.capture(), isNull())
+            assertEquals(mockIntent, captor.firstValue.intent)
+            assertEquals(pluginComp, captor.firstValue.launcherPlugin)
+        }
     }
 
     @Test

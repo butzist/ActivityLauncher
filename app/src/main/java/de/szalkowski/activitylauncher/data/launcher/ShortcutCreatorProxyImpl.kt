@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
@@ -28,8 +27,7 @@ class ShortcutCreatorProxyImpl @Inject constructor(
         }
 
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_NAME, request.name)
-        val launchIntent = getActivityIntent(request.component, request.extras)
-        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, request.intent.toUri(Intent.URI_INTENT_SCHEME))
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_ICON, request.icon.toBundle())
 
         val signature = intentSigner.signRequest(request)

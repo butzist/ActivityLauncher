@@ -1,13 +1,12 @@
 package de.szalkowski.activitylauncher.domain.model
 
 import android.content.ComponentName
-import android.os.Bundle
+import android.content.Intent
 import androidx.core.graphics.drawable.IconCompat
 
 data class ShortcutRequest(
     val name: String,
-    val component: ComponentName,
+    val intent: Intent,
     val icon: IconCompat,
-    val extras: Bundle? = null,
     val launcherPlugin: ComponentName? = null,
 )

@@ -1,9 +1,9 @@
 package de.szalkowski.activitylauncher.domain.model
 
 import android.content.ComponentName
-import android.os.Bundle
+import android.content.Intent
 
 data class LaunchRequest(
-    val component: ComponentName,
-    val extras: Bundle? = null,
+    val intent: Intent,
+    val launcherPlugin: ComponentName? = null,
 )

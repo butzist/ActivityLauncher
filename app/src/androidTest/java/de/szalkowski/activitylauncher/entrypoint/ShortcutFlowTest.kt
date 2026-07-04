@@ -119,9 +119,8 @@ class ShortcutFlowTest {
 
             ShortcutRequest(
                 name = appName,
-                component = launchIntent.component!!,
+                intent = launchIntent,
                 icon = mock<androidx.core.graphics.drawable.IconCompat>(),
-                extras = launchIntent.extras,
                 launcherPlugin = launchPlugin,
             )
         }
@@ -135,9 +134,12 @@ class ShortcutFlowTest {
                 null
             } ?: return@thenAnswer null
 
+            val launchPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
+            val launchPlugin = launchPluginStr?.let { ComponentName.unflattenFromString(it) }
+
             LaunchRequest(
-                component = launchIntent.component!!,
-                extras = launchIntent.extras,
+                intent = launchIntent,
+                launcherPlugin = launchPlugin,
             )
         }
     }
@@ -164,9 +166,9 @@ class ShortcutFlowTest {
         ActivityScenario.launch<ShortcutActivity>(intent).use {
             val captor = argumentCaptor<LaunchRequest>()
             verify(activityLauncher).launchActivity(captor.capture())
-            assertEquals("com.test", captor.firstValue.component.packageName)
-            assertEquals("com.test.Activity", captor.firstValue.component.className)
-            assertEquals("value", captor.firstValue.extras?.getString("key"))
+            assertEquals("com.test", captor.firstValue.intent.component?.packageName)
+            assertEquals("com.test.Activity", captor.firstValue.intent.component?.className)
+            assertEquals("value", captor.firstValue.intent.extras?.getString("key"))
         }
     }
 
@@ -215,7 +217,7 @@ class ShortcutFlowTest {
             val captor = argumentCaptor<ShortcutRequest>()
             verify(shortcutCreator).createLauncherIcon(captor.capture())
             assertEquals("Test App", captor.firstValue.name)
-            assertEquals(componentName, captor.firstValue.component)
+            assertEquals(componentName, captor.firstValue.intent.component)
         }
     }
 
@@ -232,7 +234,7 @@ class ShortcutFlowTest {
         ActivityScenario.launch<ShortcutActivity>(intent).use {
             val captor = argumentCaptor<LaunchRequest>()
             verify(activityLauncher).launchActivity(captor.capture())
-            assertEquals(componentName, captor.firstValue.component)
+            assertEquals(componentName, captor.firstValue.intent.component)
         }
     }
 
@@ -254,7 +256,9 @@ class ShortcutFlowTest {
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
             verify(activityLauncher, never()).launchActivity(any())
-            verify(activityLauncherProxy).launchActivity(any(), eq(ComponentName.unflattenFromString(launchPlugin)))
+            val captor = argumentCaptor<LaunchRequest>()
+            verify(activityLauncherProxy).launchActivity(captor.capture())
+            assertEquals(ComponentName.unflattenFromString(launchPlugin), captor.firstValue.launcherPlugin)
         }
     }
 }

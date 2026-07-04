@@ -31,8 +31,8 @@ class ViewIntentParserImplTest {
 
         val request = parser.parseLaunchRequest(intent)
 
-        assertEquals("com.example", request?.component?.packageName)
-        assertEquals("com.example.MainActivity", request?.component?.className)
+        assertEquals("com.example", request?.intent?.component?.packageName)
+        assertEquals("com.example.MainActivity", request?.intent?.component?.className)
     }
 
     @Test
@@ -45,8 +45,8 @@ class ViewIntentParserImplTest {
         }
 
         val request = parser.parseLaunchRequest(intent)
-        assertEquals("com.test", request?.component?.packageName)
-        assertEquals("com.test.Activity", request?.component?.className)
+        assertEquals("com.test", request?.intent?.component?.packageName)
+        assertEquals("com.test.Activity", request?.intent?.component?.className)
     }
 
     @Test
@@ -72,7 +72,7 @@ class ViewIntentParserImplTest {
 
         val request = parser.parseShortcutRequest(intent)
         assertEquals("Test Name", request?.name)
-        assertEquals("com.test", request?.component?.packageName)
-        assertEquals("com.test.Activity", request?.component?.className)
+        assertEquals("com.test", request?.intent?.component?.packageName)
+        assertEquals("com.test.Activity", request?.intent?.component?.className)
     }
 }

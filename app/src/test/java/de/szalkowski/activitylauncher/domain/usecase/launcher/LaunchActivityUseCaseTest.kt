@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher.domain.usecase.launcher
 
 import android.content.ComponentName
+import android.content.Intent
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
@@ -16,7 +17,11 @@ class LaunchActivityUseCaseTest {
     private val activityLauncherProxy: ActivityLauncherProxy = mock()
     private val recentsRepository: RecentsRepository = mock()
     private lateinit var useCase: LaunchActivityUseCase
-    private val componentName = ComponentName("com.test", "Activity")
+    private val componentName = mock<ComponentName> {
+        on { packageName } doReturn "com.test"
+        on { className } doReturn "Activity"
+        on { flattenToShortString() } doReturn "com.test/Activity"
+    }
 
     @Before
     fun setup() {
@@ -25,7 +30,10 @@ class LaunchActivityUseCaseTest {
 
     @Test
     fun `should launch activity and add to recents`() {
-        val request = LaunchRequest(componentName)
+        val intent = mock<Intent> {
+            on { component } doReturn componentName
+        }
+        val request = LaunchRequest(intent)
         useCase.invoke(request)
 
         verify(activityLauncher).launchActivity(eq(request))
@@ -35,10 +43,13 @@ class LaunchActivityUseCaseTest {
     @Test
     fun `should launch activity with plugin and add to recents`() {
         val plugin = ComponentName("com.plugin", "Plugin")
-        val request = LaunchRequest(componentName)
-        useCase.invoke(request, launchPlugin = plugin)
+        val intent = mock<Intent> {
+            on { component } doReturn componentName
+        }
+        val request = LaunchRequest(intent, launcherPlugin = plugin)
+        useCase.invoke(request)
 
-        verify(activityLauncherProxy).launchActivity(eq(request), eq(plugin))
+        verify(activityLauncherProxy).launchActivity(eq(request))
         verify(recentsRepository).addActivity(componentName)
     }
 

@@ -29,16 +29,20 @@ class ActivityLauncherImplTest {
         val extras = Bundle().apply {
             putString("test_key", "test_value")
         }
-        val request = LaunchRequest(componentName, extras)
+        val intent = Intent().apply {
+            component = componentName
+            putExtras(extras)
+        }
+        val request = LaunchRequest(intent)
 
         activityLauncher.launchActivity(request)
 
         argumentCaptor<Intent>().apply {
             verify(context).startActivity(capture())
-            val intent = firstValue
-            assertEquals(componentName, intent.component)
-            assertEquals("test_value", intent.getStringExtra("test_key"))
-            assertEquals(Intent.FLAG_ACTIVITY_NEW_TASK, intent.flags and Intent.FLAG_ACTIVITY_NEW_TASK)
+            val capturedIntent = firstValue
+            assertEquals(componentName, capturedIntent.component)
+            assertEquals("test_value", capturedIntent.getStringExtra("test_key"))
+            assertEquals(Intent.FLAG_ACTIVITY_NEW_TASK, capturedIntent.flags and Intent.FLAG_ACTIVITY_NEW_TASK)
         }
     }
 }

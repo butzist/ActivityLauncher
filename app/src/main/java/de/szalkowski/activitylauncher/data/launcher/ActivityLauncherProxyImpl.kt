@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
 import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
@@ -18,14 +17,13 @@ class ActivityLauncherProxyImpl @Inject constructor(
 ) : ActivityLauncherProxy {
     private val pm: PackageManager = context.packageManager
 
-    override fun launchActivity(request: LaunchRequest, plugin: ComponentName?) {
+    override fun launchActivity(request: LaunchRequest) {
         val intent = Intent(ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY)
-        if (plugin != null) {
-            intent.component = plugin
+        if (request.launcherPlugin != null) {
+            intent.component = request.launcherPlugin
         }
 
-        val launchIntent = getActivityIntent(request.component, request.extras)
-        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, request.intent.toUri(Intent.URI_INTENT_SCHEME))
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         context.startActivity(intent)
