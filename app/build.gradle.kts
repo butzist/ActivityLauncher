@@ -16,7 +16,7 @@ android {
             providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 37
-        versionCode = 20402
+        versionCode = 20403
         versionName = "2.4.0"
 
         vectorDrawables.useSupportLibrary = true
