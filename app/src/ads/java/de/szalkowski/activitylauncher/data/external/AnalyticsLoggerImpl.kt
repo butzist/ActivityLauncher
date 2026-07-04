@@ -14,7 +14,9 @@ import javax.inject.Singleton
 class AnalyticsLoggerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : AnalyticsLogger {
-    private val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
+    private val firebaseAnalytics by lazy {
+        runCatching { FirebaseAnalytics.getInstance(context) }.getOrNull()
+    }
 
     override fun logDestination(destination: NavDestination?) {
         runCatching {
@@ -30,7 +32,7 @@ class AnalyticsLoggerImpl @Inject constructor(
                 putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
                 putString(FirebaseAnalytics.Param.SCREEN_CLASS, "MainActivity")
             }
-            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+            firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
         }
     }
 
@@ -42,7 +44,7 @@ class AnalyticsLoggerImpl @Inject constructor(
                 putString("activity_name", activity.componentName.className)
             }
 
-            firebaseAnalytics.logEvent("activity_action", bundle)
+            firebaseAnalytics?.logEvent("activity_action", bundle)
         }
     }
 
@@ -52,7 +54,7 @@ class AnalyticsLoggerImpl @Inject constructor(
                 putBoolean("accepted", accepted)
             }
 
-            firebaseAnalytics.logEvent("disclaimer_accepted", bundle)
+            firebaseAnalytics?.logEvent("disclaimer_accepted", bundle)
         }
     }
 
@@ -62,7 +64,7 @@ class AnalyticsLoggerImpl @Inject constructor(
                 putString("option", option)
             }
 
-            firebaseAnalytics.logEvent("support_option", bundle)
+            firebaseAnalytics?.logEvent("support_option", bundle)
         }
     }
 
@@ -72,7 +74,7 @@ class AnalyticsLoggerImpl @Inject constructor(
                 putString("action", action)
             }
 
-            firebaseAnalytics.logEvent("qs_tile_action", bundle)
+            firebaseAnalytics?.logEvent("qs_tile_action", bundle)
         }
     }
 }
