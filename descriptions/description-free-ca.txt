@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Aquest és un projecte impulsat per la comunitat: pots contribuir amb codi, traduccions o idees. Ajuda'ns a millorar i créixer!
 
 Lloc web: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Codi font i traduccions: https://github.com/orgs/ActivityLauncher/repositories
 Participa en la versió beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

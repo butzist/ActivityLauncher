@@ -14,6 +14,6 @@ Avvio di attività Pro è un progetto open source disponibile all'indirizzo http
 Questo è un progetto guidato dalla comunità: sei invitato a contribuire con codice, traduzioni o idee. Aiutaci a migliorare e crescere!
 
 Sito web: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Codice sorgente e traduzioni: https://github.com/orgs/ActivityLauncher/repositories
 Opt-in per la versione beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

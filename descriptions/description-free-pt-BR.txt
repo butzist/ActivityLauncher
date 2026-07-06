@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Este é um projeto orientado pela comunidade – você pode contribuir com código, traduções ou ideias. Ajude-nos a melhorar e crescer!
 
 Website: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Código fonte e traduções: https://github.com/orgs/ActivityLauncher/repositories
 Participe da versão Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

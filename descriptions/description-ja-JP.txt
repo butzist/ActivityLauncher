@@ -14,6 +14,6 @@ Activity Launcher Proは、https://github.com/orgs/ActivityLauncher/repositories
 これはコミュニティ主導のプロジェクトです。コード、翻訳、またはアイデアを貢献することを歓迎します。 改善と成長にご協力ください!
 
 ウェブサイト: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 ソースコードと翻訳: https://github.com/orgs/ActivityLauncher/repositories
 ベータ版リリースにオプトイン: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

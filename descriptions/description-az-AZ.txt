@@ -14,6 +14,6 @@ Activity Launcher Pro https://github.com/orgs/ActivityLauncher/repositories ünv
 Bu, icma tərəfindən idarə olunan bir layihədir – siz kodu, tərcümələri və ya ideyaları təqdim edə bilərsiniz. Təkmilləşdirməyə və böyüməyə kömək edin!
 
 Veb sayt: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Mənbə kodu və tərcümələr: https://github.com/orgs/ActivityLauncher/repositories
 Beta buraxılışı üçün abunə olun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

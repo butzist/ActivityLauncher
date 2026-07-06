@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Toto je komunitný projekt – môžete prispievať kódom, prekladmi alebo nápadmi. Pomôžte nám zlepšovať sa a rásť!
 
 Webová stránka: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Zdrojový kód a preklady: https://github.com/orgs/ActivityLauncher/repositories
 Prihláste sa na odber Beta verzie: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

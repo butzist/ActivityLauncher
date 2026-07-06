@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Это проект, управляемый сообществом — вы можете внести свой вклад в код, переводы или идеи. Помогите нам улучшить и развиваться!
 
 Веб-сайт: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Исходный код и переводы: https://github.com/orgs/ActivityLauncher/repositories
 Примите участие в бета-тестировании: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

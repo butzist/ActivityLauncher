@@ -14,6 +14,6 @@ Activity Launcher Pro ir atvērtā pirmkoda projekts, kas pieejams vietnē https
 Šis ir kopienas virzīts projekts — esat laipni aicināti sniegt ieguldījumu kodā, tulkojumos vai idejās. Palīdziet mums uzlabot un augt!
 
 Vietne: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Pirmkods un tulkojumi: https://github.com/orgs/ActivityLauncher/repositories
 Pievienojieties Beta versijai: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Αυτό είναι ένα έργο που καθοδηγείται από την κοινότητα – μπορείτε να συνεισφέρετε κώδικα, μεταφράσεις ή ιδέες. Βοηθήστε μας να βελτιωθούμε και να αναπτυχθούμε!
 
 Ιστότοπος: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Πηγαίος κώδικας και μεταφράσεις: https://github.com/orgs/ActivityLauncher/repositories
 Συμμετοχή στην Beta έκδοση: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

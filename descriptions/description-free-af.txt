@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Dit is 'n gemeenskapsgedrewe projek – jy is welkom om kode, vertalings of idees by te dra. Help ons om te verbeter en te groei!
 
 Webwerf: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Bronkode en vertalings: https://github.com/orgs/ActivityLauncher/repositories
 Kies in vir Beta-vrystelling: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

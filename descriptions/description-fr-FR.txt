@@ -14,6 +14,6 @@ Lanceur d'activités Pro est un projet open source disponible sur https://github
 Il s'agit d'un projet communautaire : vous êtes invités à contribuer du code, des traductions ou des idées. Aidez-nous à nous améliorer et à nous développer !
 
 Site Web : https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Code source et traductions : https://github.com/orgs/ActivityLauncher/repositories
 Inscrivez-vous à la version bêta : https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

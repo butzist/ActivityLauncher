@@ -14,6 +14,6 @@ Activity Launcher Pro es un proyecto de código abierto disponible en https://gi
 Este es un proyecto impulsado por la comunidad: puedes contribuir con código, traducciones o ideas. ¡Ayúdanos a mejorar y crecer!
 
 Sitio web: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Código fuente y traducciones: https://github.com/orgs/ActivityLauncher/repositories
 Participa en la versión Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

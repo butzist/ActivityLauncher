@@ -14,6 +14,6 @@
 இது சமூகம் சார்ந்த திட்டம் - குறியீடு, மொழிபெயர்ப்புகள் அல்லது யோசனைகளை வழங்க நீங்கள் வரவேற்கப்படுகிறீர்கள். நாங்கள் மேம்படுத்தவும் வளரவும் உதவுங்கள்!
 
 இணையதளம்: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 மூலக் குறியீடு மற்றும் மொழிபெயர்ப்புகள்: https://github.com/orgs/ActivityLauncher/repositories
 பீட்டா வெளியீட்டிற்கு பதிவு செய்யவும்: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

@@ -14,6 +14,6 @@
 Це проєкт, керований спільнотою – ви можете долучитися до розробки коду, перекладів або ідей. Допоможіть нам покращити та розвиватись!
 
 Вебсайт: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Вихідний код і переклади: https://github.com/orgs/ActivityLauncher/repositories
 Зареєструйтеся для бета-версії: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

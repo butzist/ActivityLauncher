@@ -14,6 +14,6 @@ Activity Launcher Pro on avoimen lähdekoodin projekti, joka on saatavilla osoit
 Tämä on yhteisölähtöinen projekti – olet tervetullut osallistumaan koodilla, käännöksillä tai ideoilla. Auta meitä kehittämään ja kasvamaan!
 
 Verkkosivusto: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Lähdekoodi ja käännökset: https://github.com/orgs/ActivityLauncher/repositories
 Osallistu Beta-julkaisuun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

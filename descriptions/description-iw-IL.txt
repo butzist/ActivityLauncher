@@ -14,6 +14,6 @@
 זהו פרויקט מונחה קהילה – אתם מוזמנים לתרום קוד, תרגומים או רעיונות. עזרו לנו להשתפר ולגדול!
 
 אתר אינטרנט: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 קוד מקור ותרגומים: https://github.com/orgs/ActivityLauncher/repositories
 הצטרפו לגרסת הבטא: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

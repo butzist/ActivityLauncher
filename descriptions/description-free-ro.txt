@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Acesta este un proiect bazat pe comunitate – ești binevenit să contribui cu cod, traduceri sau idei. Ajută-ne să ne îmbunătățim și să creștem!
 
 Site web: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Cod sursă și traduceri: https://github.com/orgs/ActivityLauncher/repositories
 Înscrie-te pentru versiunea Beta: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

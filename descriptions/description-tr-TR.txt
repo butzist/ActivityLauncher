@@ -14,6 +14,6 @@ Activity Launcher Pro, https://github.com/orgs/ActivityLauncher/repositories adr
 Bu, topluluk odaklı bir projedir; kod, çeviri veya fikir katkısında bulunabilirsiniz. Gelişmemize ve büyümemize yardım edin!
 
 Web sitesi: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Kaynak kod ve çeviriler: https://github.com/orgs/ActivityLauncher/repositories
 Beta sürümüne kaydolun: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

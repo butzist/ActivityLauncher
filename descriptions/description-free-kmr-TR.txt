@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Ev proje ji hêla civakê ve tê rêvebirin - hûn bi xêr hatin ku hûn kod, werger an ramanan bexşînin. Alîkariya me bikin ku em baştir bibin û mezin bibin!
 
 Malper: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 کۆدی سەرچاوە و وەرگێڕان: https://github.com/orgs/ActivityLauncher/repositories
 Ji bo beta release opt-in: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

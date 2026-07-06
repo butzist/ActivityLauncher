@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Ovo je projekat koji pokreće zajednica – dobrodošli ste da doprinesete kodom, prevodima ili idejama. Pomozite nam da se poboljšamo i da rastemo!
 
 Veb sajt: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Izvorni kod i prevodi: https://github.com/orgs/ActivityLauncher/repositories
 Prijavite se za beta izdanje aplikacije: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

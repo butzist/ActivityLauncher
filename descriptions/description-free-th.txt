@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 นี่คือโครงการที่ขับเคลื่อนโดยชุมชน – คุณสามารถมีส่วนร่วมในการเขียนโค้ด แปล หรือเสนอแนวคิดได้ ช่วยเราปรับปรุงและเติบโต!
 
 เว็บไซต์: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 โค้ดต้นฉบับและการแปล: https://github.com/orgs/ActivityLauncher/repositories
 เข้าร่วมรุ่นเบต้า: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

@@ -14,6 +14,6 @@
 这是一个社区驱动的项目——欢迎您贡献代码、翻译或想法。 帮助我们改进和发展！
 
 网站：https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 源代码和翻译：https://github.com/orgs/ActivityLauncher/repositories
 选择加入 Beta 版本：https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

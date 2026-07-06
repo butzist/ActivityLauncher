@@ -14,6 +14,6 @@ Activity Launcher Pro je open-source projekat, dostupan ovde https://github.com/
 Ovo je projekat koji pokreće zajednica – dobrodošli ste da doprinesete kodom, prevodima ili idejama. Помозите нам да се побољшамо и растемо!
 
 Veb sajt: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Izvorni kod i prevodi: https://github.com/orgs/ActivityLauncher/repositories
 Prijavite se za beta izdanje aplikacije: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

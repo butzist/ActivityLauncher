@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Detta är ett gemenskapsdrivet projekt – du är välkommen att bidra med kod, översättningar eller idéer. Hjälp oss att förbättra och växa!
 
 Webbplats: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Källkod och översättningar: https://github.com/orgs/ActivityLauncher/repositories
 Anmäl dig till betaversionen: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

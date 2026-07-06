@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Ez egy közösség által vezérelt projekt – szívesen fogadunk kódokat, fordításokat vagy ötleteket. Segítsen nekünk fejlődni és növekedni!
 
 Weboldal: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Forráskód és fordítások: https://github.com/orgs/ActivityLauncher/repositories
 Feliratkozás a béta verzióra: https://play.google.com/apps/testing/de.szalkowski.activitylauncher

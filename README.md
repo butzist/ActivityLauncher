@@ -1,5 +1,5 @@
 [![Debug Build](https://github.com/ActivityLauncher/ActivityLauncher/actions/workflows/android-master.yml/badge.svg)](https://github.com/orgs/ActivityLauncher/repositories)
-[![Discord](https://img.shields.io/badge/Discord-Join%20our%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/a4WSmdHZTa)
+[![Discord](https://img.shields.io/badge/Discord-Join%20our%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/gzEugJBNMr)
 
 # Activity Launcher
 
@@ -17,7 +17,7 @@ and shortcut creation.
 
 ## Support and Feature Requests
 
-Join our [Discord server](https://discord.gg/a4WSmdHZTa) for support, feature
+Join our [Discord server](https://discord.gg/gzEugJBNMr) for support, feature
 requests, and community discussions.
 
 ## Translations

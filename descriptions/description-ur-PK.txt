@@ -14,6 +14,6 @@ Activity Launcher Pro ایک اوپن سورس پروجیکٹ ہے جو https://
 یہ ایک کمیونٹی پر مبنی پروجیکٹ ہے – آپ کوڈ، تراجم یا آئیڈیاز میں حصہ لینے کے لیے خوش آمدید ہیں۔ بہتر بنانے اور بڑھنے میں ہماری مدد کریں!
 
 ویب سائٹ: https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 ذریعہ کوڈ اور ترجمے: https://github.com/orgs/ActivityLauncher/repositories
 بیٹا ریلیز کے لیے آپٹ ان کریں: https://play.google.com/apps/testing/de.szalkowski.activitylauncher.pro

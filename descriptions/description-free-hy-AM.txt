@@ -23,6 +23,6 @@ https://github.com/sponsors/butzist
 Սա համայնքի կողմից իրականացվող նախագիծ է. դուք կարող եք ներդնել կոդ, թարգմանություններ կամ գաղափարներ: Օգնե՛ք մեզ բարելավել և զարգացնել:
 
 Կայք՝ https://activitylauncher.net
-Discord: https://discord.gg/a4WSmdHZTa
+Discord: https://discord.gg/gzEugJBNMr
 Ծրագրի կոդը և թարգմանությունները՝ https://github.com/orgs/ActivityLauncher/repositories
 Միացեք Beta թողարկմանը․ https://play.google.com/apps/testing/de.szalkowski.activitylauncher
