@@ -8,7 +8,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
@@ -23,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
 import de.szalkowski.activitylauncher.domain.external.ReviewRequester
+import de.szalkowski.activitylauncher.presentation.common.CropIconDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.IconPickerDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.PluginChooserDialogFragment
 import de.szalkowski.activitylauncher.presentation.intent.EditIntentDialogFragment
@@ -35,6 +38,16 @@ class ActivityDetailsFragment : Fragment() {
 
     @Inject
     internal lateinit var reviewRequester: ReviewRequester
+
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let {
+            val dialog = CropIconDialogFragment.newInstance(it)
+            dialog.setCropListener { icon ->
+                viewModel.updateEditedIcon(icon)
+            }
+            dialog.show(childFragmentManager, "crop icon")
+        }
+    }
 
     private var _binding: FragmentActivityDetailsBinding? = null
     private val binding get() = _binding!!
@@ -135,7 +148,6 @@ class ActivityDetailsFragment : Fragment() {
                             binding.tiName.setText(viewModel.editedName.value)
                             binding.tiPackage.setText(viewModel.editedPackage.value)
                             binding.tiClass.setText(viewModel.editedClass.value)
-                            binding.tiIcon.setText(viewModel.editedIconResourceName.value)
                         }
                     }
                 }
@@ -194,14 +206,9 @@ class ActivityDetailsFragment : Fragment() {
         binding.tiName.doAfterTextChanged { viewModel.updateName(it.toString()) }
         binding.tiPackage.doAfterTextChanged { viewModel.updatePackage(it.toString()) }
         binding.tiClass.doAfterTextChanged { viewModel.updateClass(it.toString()) }
-        binding.tiIcon.doAfterTextChanged { viewModel.updateIconResourceName(it.toString()) }
 
         binding.ibIconPicker.setOnClickListener {
-            val dialog = IconPickerDialogFragment()
-            dialog.attachIconPickerListener { icon ->
-                binding.tiIcon.setText(icon)
-            }
-            dialog.show(childFragmentManager, "icon picker")
+            showIconPopupMenu(it)
         }
 
         binding.btCreateShortcut.setOnClickListener {
@@ -250,5 +257,31 @@ class ActivityDetailsFragment : Fragment() {
             binding.btFavorite.setText(R.string.context_action_favorite_add)
             binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border, 0, 0, 0)
         }
+    }
+
+    private fun showIconPopupMenu(view: View) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menu.add(Menu.NONE, 1, 1, R.string.action_pick_icon_library)
+        popup.menu.add(Menu.NONE, 2, 2, R.string.action_pick_icon_file)
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                1 -> {
+                    val dialog = IconPickerDialogFragment()
+                    dialog.attachIconPickerListener { icon ->
+                        viewModel.updateIconResourceName(icon)
+                    }
+                    dialog.show(childFragmentManager, "icon picker")
+                    true
+                }
+
+                2 -> {
+                    pickImageLauncher.launch("image/*")
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popup.show()
     }
 }

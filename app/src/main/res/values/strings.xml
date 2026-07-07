@@ -79,7 +79,11 @@
     <string name="action_add_extra">Add Extra</string>
     <string name="action_advanced_properties">Advanced Properties</string>
     <string name="action_edit_intent">Edit Intent</string>
+    <string name="action_pick_icon_file" translatable="false">Load from file</string>
+    <string name="action_pick_icon_library" translatable="false">Pick from library</string>
+    <string name="title_dialog_crop_icon" translatable="false">Crop Icon</string>
     <string name="title_dialog_edit_intent">Edit Intent</string>
+    <string name="label_icon_from_gallery_or_camera">Icon from gallery</string>
     <string name="title_dialog_support" comment="Dialog title for the support/donate dialog">Thanks for using Activity Launcher</string>
     <string name="title_fragment_activity_list" comment="Screen title showing activities within a selected package">Activities</string>
     <string name="title_fragment_package_list" comment="Screen title for the list of installed packages/apps">Installed packages</string>

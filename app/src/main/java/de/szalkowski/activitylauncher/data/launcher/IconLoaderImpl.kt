@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.core.util.getLauncherLargeIconSize
+import de.szalkowski.activitylauncher.core.util.resize
 import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
@@ -22,6 +24,20 @@ class IconLoaderImpl @Inject constructor(
 ) : IconLoader {
     private val pm: PackageManager = context.packageManager
     private val configuration = settingsRepository.getLocaleConfiguration()
+
+    override fun getIcon(uri: android.net.Uri): Result<IconCompat> {
+        return runCatching {
+            val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                val source = android.graphics.ImageDecoder.createSource(context.contentResolver, uri)
+                android.graphics.ImageDecoder.decodeBitmap(source)
+            } else {
+                @Suppress("DEPRECATION")
+                android.provider.MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
+            }
+            val resized = bitmap.resize(context.getLauncherLargeIconSize())
+            IconCompat.createWithBitmap(resized)
+        }
+    }
 
     override fun getIcon(iconResourceString: String): IconCompat {
         return tryGetIcon(iconResourceString).getOrElse {

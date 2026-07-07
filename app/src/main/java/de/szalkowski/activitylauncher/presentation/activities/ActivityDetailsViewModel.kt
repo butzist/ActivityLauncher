@@ -3,7 +3,10 @@ package de.szalkowski.activitylauncher.presentation.activities
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager.NameNotFoundException
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.scale
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -76,6 +79,9 @@ class ActivityDetailsViewModel @Inject constructor(
 
     private val _editedIconResourceName = MutableStateFlow("")
     val editedIconResourceName: StateFlow<String> = _editedIconResourceName.asStateFlow()
+
+    private val _editedIconUri = MutableStateFlow<Uri?>(null)
+    val editedIconUri: StateFlow<Uri?> = _editedIconUri.asStateFlow()
 
     val canLaunch: StateFlow<Boolean> = combine(_editedPackage, _editedClass) { pkg, cls ->
         pkg.isNotBlank() && cls.isNotBlank()
@@ -188,12 +194,77 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun updateIconResourceName(iconResourceName: String) {
+        _editedIconUri.value = null
         _editedIconResourceName.value = iconResourceName
         val result = iconLoader.tryGetIcon(iconResourceName)
-        _editedIcon.value = result.getOrElse {
-            getActivityIconUseCase(null, componentName)
-        }
+        _editedIcon.value = resizeIconIfNeeded(
+            result.getOrElse {
+                getActivityIconUseCase(null, componentName)
+            },
+        )
         _iconErrorTrigger.value = iconResourceName
+    }
+
+    fun updateIconUri(uri: Uri?) {
+        _editedIconResourceName.value = ""
+        _editedIconUri.value = uri
+        if (uri != null) {
+            val result = iconLoader.getIcon(uri)
+            _editedIcon.value = resizeIconIfNeeded(
+                result.getOrElse {
+                    getActivityIconUseCase(null, componentName)
+                },
+            )
+        } else {
+            _editedIcon.value = resizeIconIfNeeded(getActivityIconUseCase(null, componentName))
+        }
+        _iconErrorTrigger.value = null
+    }
+
+    fun updateEditedIcon(icon: IconCompat?) {
+        _editedIconResourceName.value = ""
+        _editedIconUri.value = null
+        if (icon != null) {
+            _editedIcon.value = resizeIconIfNeeded(icon)
+        } else {
+            _editedIcon.value = resizeIconIfNeeded(getActivityIconUseCase(null, componentName))
+        }
+        _iconErrorTrigger.value = null
+    }
+
+    private fun resizeIconIfNeeded(icon: IconCompat): IconCompat {
+        val bundle = icon.toBundle()
+        val type = bundle.getInt("type")
+        if (type == IconCompat.TYPE_BITMAP || type == IconCompat.TYPE_ADAPTIVE_BITMAP) {
+            val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable("obj", Bitmap::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getParcelable("obj")
+            }
+            if (bitmap != null) {
+                val maxSize = 512
+                if (bitmap.width > maxSize || bitmap.height > maxSize) {
+                    val aspectRatio = bitmap.width.toFloat() / bitmap.height.toFloat()
+                    val newWidth: Int
+                    val newHeight: Int
+                    if (aspectRatio > 1) {
+                        newWidth = maxSize
+                        newHeight = (maxSize / aspectRatio).toInt()
+                    } else {
+                        newHeight = maxSize
+                        newWidth = (maxSize * aspectRatio).toInt()
+                    }
+                    val resized = bitmap.scale(newWidth, newHeight, true)
+                    return if (type == IconCompat.TYPE_ADAPTIVE_BITMAP) {
+                        IconCompat.createWithAdaptiveBitmap(resized)
+                    } else {
+                        IconCompat.createWithBitmap(resized)
+                    }
+                }
+            }
+        }
+        return icon
     }
 
     fun updateIntentDef(intentDef: IntentDef) {

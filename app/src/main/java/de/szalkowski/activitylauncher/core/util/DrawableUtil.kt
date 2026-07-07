@@ -1,12 +1,46 @@
 package de.szalkowski.activitylauncher.core.util
 
+import android.app.ActivityManager
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.scale
+
+fun Context.getLauncherLargeIconSize(): Int {
+    val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    return am.launcherLargeIconSize
+}
+
+fun Bitmap.resize(maxSize: Int): Bitmap {
+    if ((width <= maxSize) && (height <= maxSize)) return this
+    val aspectRatio = width.toFloat() / height.toFloat()
+    val newWidth: Int
+    val newHeight: Int
+    if (aspectRatio > 1) {
+        newWidth = maxSize
+        newHeight = (maxSize / aspectRatio).toInt()
+    } else {
+        newHeight = maxSize
+        newWidth = (maxSize * aspectRatio).toInt()
+    }
+    return scale(newWidth, newHeight, true)
+}
+
+fun Bitmap.crop(rect: Rect): Bitmap {
+    return Bitmap.createBitmap(
+        this,
+        rect.left.coerceIn(0, width),
+        rect.top.coerceIn(0, height),
+        rect.width().coerceAtMost(width - rect.left),
+        rect.height().coerceAtMost(height - rect.top),
+    )
+}
 
 fun Drawable.toBitmap(): Bitmap {
     if (this is BitmapDrawable && this.bitmap != null) {

@@ -13,10 +13,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/label_name"
+            app:layout_constraintEnd_toStartOf="@+id/ibIconPicker"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -26,13 +28,27 @@
                 android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageButton
+            android:id="@+id/ibIconPicker"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_margin="8dp"
+            android:adjustViewBounds="false"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/title_dialog_icon_picker"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="@+id/tilName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tilName" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPackage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/label_package"
-            app:layout_constraintTop_toBottomOf="@+id/tilName">
+            app:layout_constraintTop_toBottomOf="@+id/ibIconPicker">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiPackage"
@@ -56,36 +72,6 @@
                 android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilIcon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/label_icon"
-            app:layout_constraintEnd_toStartOf="@+id/ibIconPicker"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilClass">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiIcon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:importantForAutofill="no" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageButton
-            android:id="@+id/ibIconPicker"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:layout_margin="8dp"
-            android:adjustViewBounds="false"
-            android:contentDescription="@string/title_dialog_icon_picker"
-            android:scaleType="centerInside"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintBottom_toBottomOf="@+id/tilIcon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilIcon" />
-
         <LinearLayout
             android:id="@+id/llLaunch"
             android:layout_width="match_parent"
@@ -93,7 +79,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/tilIcon">
+            app:layout_constraintTop_toBottomOf="@+id/tilClass">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btLaunch"

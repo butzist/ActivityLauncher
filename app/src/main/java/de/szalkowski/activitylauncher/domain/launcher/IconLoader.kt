@@ -7,6 +7,7 @@ import de.szalkowski.activitylauncher.presentation.common.AsyncProvider
 import de.szalkowski.activitylauncher.presentation.common.IconListAdapter
 
 interface IconLoader {
+    fun getIcon(uri: android.net.Uri): Result<IconCompat>
     fun getIcon(iconResourceString: String): IconCompat
     fun getIcon(componentName: ComponentName): IconCompat
     fun getPackageIcon(packageName: String): IconCompat
