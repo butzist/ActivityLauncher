@@ -107,7 +107,6 @@ class ActivityDetailsIntegrationTest {
 
     @Before
     fun setup() {
-        TestUtils.unlockScreen()
         hiltRule.inject()
         favoriteSet.clear()
         favoriteFlow.value = emptyList()

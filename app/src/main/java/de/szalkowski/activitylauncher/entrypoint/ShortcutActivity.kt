@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
@@ -100,7 +102,11 @@ class ShortcutActivity : AppCompatActivity() {
     }
 
     private fun handleLaunchShortcut() {
-        val request = viewIntentParser.parseLaunchRequest(intent) ?: return
+        val request = viewIntentParser.parseLaunchRequest(intent)
+        if (request == null) {
+            Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
+            return
+        }
         val signature = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE).orEmpty()
 
         if (!intentSigner.validateRequestSignature(request, signature)) {
@@ -113,12 +119,20 @@ class ShortcutActivity : AppCompatActivity() {
     }
 
     private fun handleLaunchActivity() {
-        val request = viewIntentParser.parseLaunchRequest(intent) ?: return
+        val request = viewIntentParser.parseLaunchRequest(intent)
+        if (request == null) {
+            Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
+            return
+        }
         launchActivityUseCase.invoke(request)
     }
 
     private fun handleCreateShortcut() {
-        val request = viewIntentParser.parseShortcutRequest(intent) ?: return
+        val request = viewIntentParser.parseShortcutRequest(intent)
+        if (request == null) {
+            Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
+            return
+        }
         shortCutCreator.createLauncherIcon(request)
     }
 }
