@@ -28,10 +28,12 @@ import de.szalkowski.activitylauncher.domain.external.AdManager
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.CalculateSupportReminderUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import de.szalkowski.activitylauncher.presentation.common.DisclaimerDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.PaidDialogFragment
@@ -66,6 +68,9 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     @Inject
     internal lateinit var calculateSupportReminderUseCase: CalculateSupportReminderUseCase
+
+    @Inject
+    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -199,11 +204,26 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
         val launchRequest = viewIntentParser.parseLaunchRequest(intent)
         val componentNameFromExtra =
-            intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(EXTRA_ACTIVITY_COMPONENT_NAME, ComponentName::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
+            }
         val componentName = launchRequest?.intent?.component ?: componentNameFromExtra
 
         if (componentName != null) {
+            val shortcutRequestFromIntent = viewIntentParser.parseShortcutRequest(intent)
+            val shortcutRequest = shortcutRequestFromIntent ?: run {
+                val activityInfo = packageRepository.getActivity(componentName)
+                val launchIntent = Intent().setComponent(componentName)
+                launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
+                ShortcutRequest(activityInfo.name, launchIntent, icon)
+            }
+
             val bundle = Bundle().apply {
+                putParcelable("shortcutRequest", shortcutRequest)
                 putParcelable(EXTRA_ACTIVITY_COMPONENT_NAME, componentName)
             }
 

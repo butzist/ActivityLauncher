@@ -62,7 +62,13 @@
         <argument
             android:name="activityComponentName"
             app:argType="android.content.ComponentName"
-            app:nullable="false" />
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="shortcutRequest"
+            app:argType="de.szalkowski.activitylauncher.domain.model.ShortcutRequest"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
     <fragment

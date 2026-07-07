@@ -52,8 +52,10 @@ class ActivityDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val componentName: ComponentName = savedStateHandle.get<ComponentName>("activityComponentName")
-        ?: throw IllegalArgumentException("activityComponentName is required")
+    private val shortcutRequest: ShortcutRequest? = savedStateHandle.get<ShortcutRequest>("shortcutRequest")
+    private val componentName: ComponentName = shortcutRequest?.intent?.component
+        ?: savedStateHandle.get<ComponentName>("activityComponentName")
+        ?: throw IllegalArgumentException("activityComponentName or shortcutRequest is required")
 
     private val _activityInfo = MutableStateFlow<MyActivityInfo?>(null)
     val activityInfo: StateFlow<MyActivityInfo?> = _activityInfo.asStateFlow()
@@ -133,12 +135,12 @@ class ActivityDetailsViewModel @Inject constructor(
         _activityInfo.value = info
         _isFavorite.value = favoritesRepository.isFavorite(componentName)
 
-        _editedName.value = info.name
+        _editedName.value = shortcutRequest?.name ?: info.name
         _editedPackage.value = info.componentName.packageName
         _editedClass.value = info.componentName.className
         _editedIconResourceName.value = info.iconResourceName ?: ""
 
-        _editedIcon.value = getActivityIconUseCase(info.iconResourceName, componentName)
+        _editedIcon.value = shortcutRequest?.icon ?: getActivityIconUseCase(info.iconResourceName, componentName)
     }
 
     @OptIn(FlowPreview::class)

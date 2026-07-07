@@ -72,11 +72,14 @@ class ShortcutActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (intent.action == ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if ((intent.action == ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT) && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)) {
             // Give the system a moment to process the pinning request before finishing
-            window.decorView.postDelayed({
-                if (!isFinishing) finish()
-            }, 1000)
+            window.decorView.postDelayed(
+                {
+                    if (!isFinishing) finish()
+                },
+                1000,
+            )
         }
     }
 
@@ -111,7 +114,7 @@ class ShortcutActivity : AppCompatActivity() {
 
     private fun handleLaunchActivity() {
         val request = viewIntentParser.parseLaunchRequest(intent) ?: return
-        activityLauncher.launchActivity(request)
+        launchActivityUseCase.invoke(request)
     }
 
     private fun handleCreateShortcut() {

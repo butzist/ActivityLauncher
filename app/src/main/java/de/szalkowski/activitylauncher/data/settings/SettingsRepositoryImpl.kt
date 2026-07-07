@@ -14,7 +14,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 class SettingsRepositoryImpl @Inject constructor(
-    @ApplicationContext val context: Context,
+    @param:ApplicationContext val context: Context,
 ) : SettingsRepository {
     companion object {
         const val THEME_DEFAULT = "0"
@@ -67,7 +67,7 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override fun getLocaleConfiguration(): Configuration {
         val language = if (language == LANGUAGE_DEFAULT) {
-            val systemLocale = ConfigurationCompat.getLocales(Resources.getSystem().configuration).get(0)
+            val systemLocale = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
                 ?: Locale.getDefault()
             systemLocale.toString()
         } else {
@@ -98,7 +98,7 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override fun getCountryName(name: String): String {
         for (locale in Locale.getAvailableLocales()) {
-            if (name == locale.language + '_' + locale.country) {
+            if (name == (locale.language + '_' + locale.country)) {
                 val language = locale.getDisplayName(locale)
                 return language.substring(0, 1).uppercase(Locale.getDefault()) + language.substring(
                     1,

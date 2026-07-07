@@ -1,5 +1,6 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,20 +27,21 @@ class ActivityListFragment : Fragment() {
 
     @Inject
     internal lateinit var activityListAdapterFactory: ActivityListAdapter.ActivityListAdapterFactory
-    private lateinit var activityListAdapter: ActivityListAdapter
+
+    @Inject
+    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
+
+    private val activityListAdapter: ActivityListAdapter by lazy {
+        activityListAdapterFactory.create(args.packageName)
+    }
 
     private val viewModel: ActivityListViewModel by viewModels()
 
     private var _binding: FragmentActivityListBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        activityListAdapter = activityListAdapterFactory.create(args.packageName)
     }
 
     override fun onCreateView(
@@ -76,9 +80,12 @@ class ActivityListFragment : Fragment() {
 
         activityListAdapter.onItemClick = {
             runCatching {
-                val action = ActivityListFragmentDirections.actionSelectActivity(it.componentName)
+                val icon = getActivityIconUseCase(it.iconResourceName, it.componentName)
+                val intent = Intent().setComponent(it.componentName)
+                val request = ShortcutRequest(it.name, intent, icon)
+                val action = ActivityListFragmentDirections.actionSelectActivity(shortcutRequest = request)
                 findNavController().navigate(action)
-            }.onFailure { Log.e("Navigation", "Error while navigating from ActivityListFragment") }
+            }.onFailure { e -> Log.e("Navigation", "Error while navigating from ActivityListFragment", e) }
         }
 
         binding.rvActivities.adapter = activityListAdapter

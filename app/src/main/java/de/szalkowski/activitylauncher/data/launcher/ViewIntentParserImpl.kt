@@ -3,6 +3,7 @@ package de.szalkowski.activitylauncher.data.launcher
 import android.content.ComponentName
 import android.content.Intent
 import androidx.core.graphics.drawable.IconCompat
+import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
@@ -18,11 +19,15 @@ class ViewIntentParserImpl @Inject constructor(
             ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
         val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) }
 
-        val launcherPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
-        val launcherPlugin = launcherPluginStr?.let { ComponentName.unflattenFromString(it) }
+        val launcherPlugin = if (intent.action != ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY) {
+            val launcherPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
+            launcherPluginStr?.let { ComponentName.unflattenFromString(it) }
+        } else {
+            null
+        }
 
         if (launchIntent != null) {
-            return LaunchRequest(launchIntent, launcherPlugin)
+            return LaunchRequest(launchIntent, launcherPlugin = launcherPlugin)
         }
 
         val component = componentNameFromIntent(intent) ?: return null
@@ -30,7 +35,7 @@ class ViewIntentParserImpl @Inject constructor(
             this.component = component
         }
 
-        return LaunchRequest(newLaunchIntent, launcherPlugin)
+        return LaunchRequest(newLaunchIntent, launcherPlugin = launcherPlugin)
     }
 
     override fun parseShortcutRequest(intent: Intent): ShortcutRequest? {
