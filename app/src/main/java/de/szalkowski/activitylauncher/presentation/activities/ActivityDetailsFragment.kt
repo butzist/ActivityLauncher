@@ -25,6 +25,7 @@ import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
 import de.szalkowski.activitylauncher.domain.external.ReviewRequester
 import de.szalkowski.activitylauncher.presentation.common.IconPickerDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.PluginChooserDialogFragment
+import de.szalkowski.activitylauncher.presentation.intent.EditIntentDialogFragment
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,6 +41,13 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        childFragmentManager.setFragmentResultListener(EditIntentDialogFragment.REQUEST_KEY, this) { _, bundle ->
+            val intentDef = bundle.getParcelable<de.szalkowski.activitylauncher.domain.intent.IntentDef>(EditIntentDialogFragment.RESULT_INTENT_DEF)
+            if (intentDef != null) {
+                viewModel.updateIntentDef(intentDef)
+            }
+        }
+
         childFragmentManager.setFragmentResultListener(PluginChooserDialogFragment.REQUEST_KEY, this) { _, bundle ->
             val action = bundle.getSerializable(PluginChooserDialogFragment.RESULT_ACTION) as? PluginChooserDialogFragment.PluginAction
             val launchPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN)
@@ -85,6 +93,9 @@ class ActivityDetailsFragment : Fragment() {
 
                     val shareItem = menu.findItem(R.id.action_share)
                     shareItem.isEnabled = viewModel.canShare.value
+
+                    val advancedItem = menu.findItem(R.id.action_advanced)
+                    advancedItem.isEnabled = viewModel.canLaunch.value
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -95,6 +106,11 @@ class ActivityDetailsFragment : Fragment() {
                         }
                         R.id.action_share -> {
                             viewModel.shareActivity()
+                            true
+                        }
+                        R.id.action_advanced -> {
+                            val dialog = EditIntentDialogFragment.newInstance(viewModel.intentDef.value)
+                            dialog.show(childFragmentManager, "edit intent")
                             true
                         }
                         else -> false

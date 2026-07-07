@@ -1,16 +1,18 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
+import android.content.Intent
 import android.content.pm.PackageManager.NameNotFoundException
-import android.os.Bundle
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.core.util.getActivityIntentFromIntentDef
+import de.szalkowski.activitylauncher.core.util.getIntentDefFromActivityIntent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.intent.IntentDef
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
@@ -114,6 +116,9 @@ class ActivityDetailsViewModel @Inject constructor(
     private val _selectedShortcutPlugin = MutableStateFlow<PluginInfo?>(null)
     val selectedShortcutPlugin: StateFlow<PluginInfo?> = _selectedShortcutPlugin.asStateFlow()
 
+    private val _intentDef = MutableStateFlow(IntentDef())
+    val intentDef: StateFlow<IntentDef> = _intentDef.asStateFlow()
+
     private val _iconErrorTrigger = MutableStateFlow<String?>(null)
 
     private val _errorMessage = MutableSharedFlow<Int>()
@@ -141,6 +146,8 @@ class ActivityDetailsViewModel @Inject constructor(
         _editedIconResourceName.value = info.iconResourceName ?: ""
 
         _editedIcon.value = shortcutRequest?.icon ?: getActivityIconUseCase(info.iconResourceName, componentName)
+
+        _intentDef.value = getIntentDefFromActivityIntent(shortcutRequest?.intent ?: Intent().setComponent(componentName))
     }
 
     @OptIn(FlowPreview::class)
@@ -189,15 +196,12 @@ class ActivityDetailsViewModel @Inject constructor(
         _iconErrorTrigger.value = iconResourceName
     }
 
+    fun updateIntentDef(intentDef: IntentDef) {
+        _intentDef.value = intentDef
+    }
+
     fun createShortcut() {
-        val info = getEditedActivityInfo()
-        val icon = _editedIcon.value ?: getActivityIconUseCase(info.iconResourceName, info.componentName)
-        val request = ShortcutRequest(
-            name = info.name,
-            intent = getActivityIntent(info.componentName, Bundle()),
-            icon = icon,
-            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
-        )
+        val request = getCurrentShortcutRequest()
         createShortcutUseCase(request, _selectedShortcutPlugin.value?.componentName)
     }
 
@@ -210,35 +214,32 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun launchActivity() {
-        val info = getEditedActivityInfo()
-        val request = LaunchRequest(
-            intent = getActivityIntent(info.componentName, Bundle()),
-            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
+        val request = getCurrentShortcutRequest()
+        launchActivityUseCase(
+            LaunchRequest(
+                intent = request.intent,
+                name = request.name,
+                icon = request.icon,
+                launcherPlugin = request.launcherPlugin,
+            ),
         )
-        launchActivityUseCase(request)
     }
 
     fun shareActivity() {
-        val info = getEditedActivityInfo()
-        shareActivityUseCase(info.componentName)
+        shareActivityUseCase(ComponentName(_editedPackage.value, _editedClass.value))
     }
 
-    private fun getEditedActivityInfo(): MyActivityInfo {
+    private fun getCurrentShortcutRequest(): ShortcutRequest {
         val packageName = _editedPackage.value
         val className = _editedClass.value
-        val componentName = if (packageName == this.componentName.packageName && className == this.componentName.className) {
-            this.componentName
-        } else if (packageName.isNotEmpty() && className.isNotEmpty()) {
-            ComponentName(packageName, className)
-        } else {
-            this.componentName
-        }
+        val component = ComponentName(packageName, className)
+        val icon = _editedIcon.value ?: getActivityIconUseCase(_editedIconResourceName.value.ifBlank { null }, component)
 
-        return MyActivityInfo(
-            componentName,
-            _editedName.value,
-            _editedIconResourceName.value.ifBlank { null },
-            false,
+        return ShortcutRequest(
+            name = _editedName.value,
+            intent = getActivityIntentFromIntentDef(component, _intentDef.value),
+            icon = icon,
+            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
         )
     }
 }

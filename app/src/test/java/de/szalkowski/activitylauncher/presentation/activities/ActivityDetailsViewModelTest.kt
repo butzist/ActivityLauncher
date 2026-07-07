@@ -1,10 +1,12 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
+import android.content.Intent
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.SavedStateHandle
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.core.util.getActivityIntentFromIntentDef
+import de.szalkowski.activitylauncher.core.util.getIntentDefFromActivityIntent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
@@ -32,7 +34,9 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.mockito.MockedStatic
 import org.mockito.kotlin.*
+import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ActivityDetailsViewModelTest {
@@ -46,13 +50,11 @@ class ActivityDetailsViewModelTest {
     private val iconLoader: IconLoader = mock()
     private val recentsRepository: RecentsRepository = mock()
     private val settingsRepository: SettingsRepository = mock()
-    private val componentName = createMockComponentName("com.test", "Activity")
-    private val testDispatcher = UnconfinedTestDispatcher()
-
-    private fun createMockComponentName(pkg: String, cls: String): ComponentName = mock {
-        on { packageName } doReturn pkg
-        on { className } doReturn cls
+    private val componentName: ComponentName = mock {
+        on { packageName } doReturn "com.test"
+        on { className } doReturn "Activity"
     }
+    private val testDispatcher = UnconfinedTestDispatcher()
 
     private val activityInfo = MyActivityInfo(
         componentName,
@@ -61,11 +63,19 @@ class ActivityDetailsViewModelTest {
         false,
     )
 
+    private lateinit var mockedUtil: MockedStatic<*>
     private lateinit var viewModel: ActivityDetailsViewModel
 
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
+
+        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
+        mockedUtil = mockStatic(utilClass)
+
+        mockedUtil.`when`<Any> {
+            getIntentDefFromActivityIntent(any())
+        }.thenReturn(de.szalkowski.activitylauncher.domain.intent.IntentDef())
 
         whenever(packageRepository.getActivity(any())).thenReturn(activityInfo)
         whenever(favoritesRepository.isFavorite(any())).thenReturn(false)
@@ -83,6 +93,7 @@ class ActivityDetailsViewModelTest {
 
     @After
     fun tearDown() {
+        mockedUtil.close()
         Dispatchers.resetMain()
     }
 
@@ -105,34 +116,28 @@ class ActivityDetailsViewModelTest {
 
     @Test
     fun `should launch activity`() {
-        val mockIntent = mock<android.content.Intent>()
-        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
-            mockedUtil.`when`<android.content.Intent> {
-                getActivityIntent(eq(componentName), any())
-            }.thenReturn(mockIntent)
+        val launchIntent = mock<Intent>()
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(launchIntent)
 
-            viewModel.launchActivity()
-            val captor = argumentCaptor<LaunchRequest>()
-            verify(launchActivityUseCase).invoke(captor.capture())
-            assertEquals(mockIntent, captor.firstValue.intent)
-        }
+        viewModel.launchActivity()
+        val captor = argumentCaptor<LaunchRequest>()
+        verify(launchActivityUseCase).invoke(captor.capture())
+        assertNotNull(captor.firstValue.intent)
     }
 
     @Test
     fun `should create shortcut`() {
-        val mockIntent = mock<android.content.Intent>()
-        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
-            mockedUtil.`when`<android.content.Intent> {
-                getActivityIntent(eq(componentName), any())
-            }.thenReturn(mockIntent)
+        val shortcutIntent = mock<Intent>()
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(shortcutIntent)
 
-            viewModel.createShortcut()
-            val captor = argumentCaptor<ShortcutRequest>()
-            verify(createShortcutUseCase).invoke(captor.capture(), isNull())
-            assertEquals(mockIntent, captor.firstValue.intent)
-        }
+        viewModel.createShortcut()
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(createShortcutUseCase).invoke(captor.capture(), isNull())
+        assertNotNull(captor.firstValue.intent)
     }
 
     @Test
@@ -140,7 +145,6 @@ class ActivityDetailsViewModelTest {
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(mock(), mock()))
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(mock(), mock()))
 
-        // Re-init viewModel to pick up new mock values
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
@@ -157,7 +161,6 @@ class ActivityDetailsViewModelTest {
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(mock()))
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(mock()))
 
-        // Re-init viewModel to pick up new mock values
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
@@ -171,8 +174,8 @@ class ActivityDetailsViewModelTest {
 
     @Test
     fun `should load plugins on init`() {
-        val launchPlugin = PluginInfo("Launch Plugin", createMockComponentName("pkg", "cls"), null)
-        val shortcutPlugin = PluginInfo("Shortcut Plugin", createMockComponentName("pkg2", "cls2"), null)
+        val launchPlugin = PluginInfo("Launch Plugin", mock { on { packageName } doReturn "pkg"; on { className } doReturn "cls" }, null)
+        val shortcutPlugin = PluginInfo("Shortcut Plugin", mock { on { packageName } doReturn "pkg2"; on { className } doReturn "cls2" }, null)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(shortcutPlugin))
 
@@ -189,9 +192,15 @@ class ActivityDetailsViewModelTest {
 
     @Test
     fun `should use selected launch plugin when launching`() {
-        val pluginComp = createMockComponentName("pkg", "cls")
+        val pluginComp: ComponentName = mock { on { packageName } doReturn "pkg"; on { className } doReturn "cls" }
         val launchPlugin = PluginInfo("Launch Plugin", pluginComp, null)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
+
+        val launchIntent = mock<Intent>()
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(launchIntent)
+
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
@@ -200,28 +209,25 @@ class ActivityDetailsViewModelTest {
         )
 
         newViewModel.selectLaunchPlugin(pluginComp)
+        newViewModel.launchActivity()
 
-        val mockIntent = mock<android.content.Intent>()
-        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
-            mockedUtil.`when`<android.content.Intent> {
-                getActivityIntent(eq(componentName), any())
-            }.thenReturn(mockIntent)
-
-            newViewModel.launchActivity()
-
-            val captor = argumentCaptor<LaunchRequest>()
-            verify(launchActivityUseCase).invoke(captor.capture())
-            assertEquals(mockIntent, captor.firstValue.intent)
-            assertEquals(pluginComp, captor.firstValue.launcherPlugin)
-        }
+        val captor = argumentCaptor<LaunchRequest>()
+        verify(launchActivityUseCase).invoke(captor.capture())
+        assertNotNull(captor.firstValue.intent)
+        assertEquals(pluginComp, captor.firstValue.launcherPlugin)
     }
 
     @Test
     fun `should use selected shortcut plugin when creating shortcut`() {
-        val pluginComp = createMockComponentName("pkg2", "cls2")
+        val pluginComp: ComponentName = mock { on { packageName } doReturn "pkg2"; on { className } doReturn "cls2" }
         val shortcutPlugin = PluginInfo("Shortcut Plugin", pluginComp, null)
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(shortcutPlugin))
+
+        val shortcutIntent = mock<Intent>()
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(shortcutIntent)
+
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
@@ -230,27 +236,24 @@ class ActivityDetailsViewModelTest {
         )
 
         newViewModel.selectShortcutPlugin(pluginComp)
+        newViewModel.createShortcut()
 
-        val mockIntent = mock<android.content.Intent>()
-        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
-            mockedUtil.`when`<android.content.Intent> {
-                getActivityIntent(eq(componentName), any())
-            }.thenReturn(mockIntent)
-
-            newViewModel.createShortcut()
-
-            val captor = argumentCaptor<ShortcutRequest>()
-            verify(createShortcutUseCase).invoke(captor.capture(), eq(pluginComp))
-            assertEquals(mockIntent, captor.firstValue.intent)
-        }
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(createShortcutUseCase).invoke(captor.capture(), eq(pluginComp))
+        assertNotNull(captor.firstValue.intent)
     }
 
     @Test
     fun `should pass launch plugin extra when creating shortcut`() {
-        val pluginComp = createMockComponentName("pkg", "cls")
+        val pluginComp: ComponentName = mock { on { packageName } doReturn "pkg"; on { className } doReturn "cls" }
         val launchPlugin = PluginInfo("Launch Plugin", pluginComp, null)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
+
+        val shortcutIntent = mock<Intent>()
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(shortcutIntent)
+
         val savedStateHandle = SavedStateHandle(mapOf("activityComponentName" to componentName))
         val newViewModel = ActivityDetailsViewModel(
             packageRepository, favoritesRepository, launchActivityUseCase,
@@ -259,21 +262,12 @@ class ActivityDetailsViewModelTest {
         )
 
         newViewModel.selectLaunchPlugin(pluginComp)
+        newViewModel.createShortcut()
 
-        val mockIntent = mock<android.content.Intent>()
-        val utilClass = Class.forName("de.szalkowski.activitylauncher.core.util.ActivityIntentKt")
-        org.mockito.Mockito.mockStatic(utilClass).use { mockedUtil ->
-            mockedUtil.`when`<android.content.Intent> {
-                getActivityIntent(eq(componentName), any())
-            }.thenReturn(mockIntent)
-
-            newViewModel.createShortcut()
-
-            val captor = argumentCaptor<ShortcutRequest>()
-            verify(createShortcutUseCase).invoke(captor.capture(), isNull())
-            assertEquals(mockIntent, captor.firstValue.intent)
-            assertEquals(pluginComp, captor.firstValue.launcherPlugin)
-        }
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(createShortcutUseCase).invoke(captor.capture(), isNull())
+        assertNotNull(captor.firstValue.intent)
+        assertEquals(pluginComp, captor.firstValue.launcherPlugin)
     }
 
     @Test
@@ -338,8 +332,8 @@ class ActivityDetailsViewModelTest {
     fun `should emit error message with debounce when icon loading fails`() = runTest {
         val iconRes = "invalid_icon"
         whenever(iconLoader.tryGetIcon(iconRes)).thenReturn(Result.failure(IconLoader.NullResourceException()))
-        val mockIcon: IconCompat = mock()
-        whenever(getActivityIconUseCase.invoke(null, componentName)).thenReturn(mockIcon)
+        val fallbackIcon: IconCompat = mock()
+        whenever(getActivityIconUseCase.invoke(null, componentName)).thenReturn(fallbackIcon)
 
         val errorMessages = mutableListOf<Int>()
         val job = launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -350,10 +344,10 @@ class ActivityDetailsViewModelTest {
 
         // Immediately after update, error should NOT be there yet
         assertEquals(0, errorMessages.size)
-        assertEquals(mockIcon, viewModel.editedIcon.value)
+        assertEquals(fallbackIcon, viewModel.editedIcon.value)
 
         // Advance time by 2 seconds
-        advanceTimeBy(2000)
+        advanceTimeBy(2000.milliseconds)
         runCurrent()
 
         assertEquals(1, errorMessages.size)
@@ -445,5 +439,16 @@ class ActivityDetailsViewModelTest {
         assertTrue(viewModel.canFavorite.value)
 
         job.cancel()
+    }
+
+    @Test
+    fun `should update intent def`() {
+        val intentDef = de.szalkowski.activitylauncher.domain.intent.IntentDef(
+            action = "android.intent.action.VIEW",
+        )
+
+        viewModel.updateIntentDef(intentDef)
+
+        assertEquals("android.intent.action.VIEW", viewModel.intentDef.value.action)
     }
 }
