@@ -97,7 +97,6 @@ class PluginChooserIntegrationTest {
 
     @Before
     fun setup() {
-        TestUtils.unlockScreen()
         hiltRule.inject()
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())

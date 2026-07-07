@@ -99,7 +99,6 @@ class FavoritesRecentsIntegrationTest {
 
     @Before
     fun setup() {
-        TestUtils.unlockScreen()
         hiltRule.inject()
         favoriteSet.clear()
         favoriteFlow.value = emptyList()

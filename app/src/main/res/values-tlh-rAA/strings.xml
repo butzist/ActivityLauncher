@@ -1,6 +1,10 @@
 <?xml version="1.0" ?>
 <resources>
-    <string name="action_personalized_ads_consent">toHchu’ qonwI’pu’</string>
+    <string name="action_add_category">Segh chel</string>
+    <string name="action_add_extra">Extra chel</string>
+    <string name="action_advanced_properties">chu\' Duj</string>
+    <string name="action_pick_icon_file">\'ochvo\' yIghoS</string>
+    <string name="action_pick_icon_library">nInvo\' yIwiv</string>
     <string name="action_view_github">GitHub pong</string>
     <string name="action_view_paid">Qu\' taghmoHwI\' Pro law\'</string>
     <string name="action_view_source">mung De\' legh</string>
@@ -21,16 +25,27 @@
 Activity Launcher Pro Google PlayDaq yIlo\' — Hoch vItlhutlh, \'ej De\'vamDaq Qapchu\' vItu\' \'e\' Qap.
 qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qapla\' Hoch.</string>
     <string name="error">Qagh</string>
-    <string name="error_creating_shortcut">qIgh Qagh</string>
+    <string name="error_duplicate_category">Segh tIn</string>
+    <string name="error_duplicate_extra_key">tIq tIn</string>
+    <string name="error_field_required">yIvut</string>
     <string name="error_icons">Degh Qagh</string>
     <string name="error_invalid_activity_link">Hochmey pat lungqIj be\'lu\'</string>
+    <string name="error_invalid_boolean">Boolean qatbe\'</string>
+    <string name="error_invalid_double">Double qatbe\'</string>
+    <string name="error_invalid_float">Float qatbe\'</string>
     <string name="error_invalid_icon_format">Qagh: Degh Ho\'DoS waS</string>
     <string name="error_invalid_icon_resource">Qagh: Degh Sup waS</string>
-    <string name="error_verbose_pin_shortcut">‹PinShortcut› leHbe\' taghmoHwI\' Sarvam. qIgh chenmoHlaHbe\'.</string>
-    <string name="exception_invalid_component_name">waSbogh qoj jochbogh \'ay\' pong: %s</string>
+    <string name="error_invalid_int">Integer qatbe\'</string>
+    <string name="error_invalid_long">Long qatbe\'</string>
     <string name="filter_hint">vey/ghIgh</string>
     <string name="label_class">Segh</string>
-    <string name="label_icon">Degh</string>
+    <string name="label_intent_action">Action</string>
+    <string name="label_intent_categories">Categories</string>
+    <string name="label_intent_data">De\' URI</string>
+    <string name="label_intent_extra_key">Key</string>
+    <string name="label_intent_extra_value">Value</string>
+    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_mime_type">MIME Type</string>
     <string name="label_launch_plugins">chu\' plugins</string>
     <string name="label_name">pong</string>
     <string name="label_package">vey</string>
@@ -50,11 +65,12 @@ qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qap
     <string name="settings_theme">tu\'qom</string>
     <string name="short_description">Qu\' So\'lu\'bogh taghmoH \'ej nIqHom lI\'lu\'boghvaD qIgh chenmoH</string>
     <string name="summary_action_view_source">‹GitHub›Daq nIqHomvam mung De\' laDlaH vay\' \'ej choHlaH vay\'. tI\'meH \'ej DubmeH choHmey DaghItlhchugh, ghongeH.</string>
-    <string name="summary_personalized_ads_consent">ToHchu’ qonwI’pu’ je lo’laHghach</string>
     <string name="theme_dark">tu\'qom Hurgh</string>
     <string name="theme_default">pat motlh</string>
     <string name="theme_light">tu\'qom wov</string>
+    <string name="title_dialog_crop_icon">mI\' yIpe\'</string>
     <string name="title_dialog_disclaimer">chut ghuH</string>
+    <string name="title_dialog_edit_intent">Intent choH</string>
     <string name="title_dialog_icon_picker">Degh yIwIv</string>
     <string name="title_dialog_support">Activity Launcher lo’meH Qatlho’!</string>
     <string name="title_fragment_activity_list">Hochmey</string>

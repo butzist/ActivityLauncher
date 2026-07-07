@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="hint_extra_value_boolean" translatable="false">e.g. true or false</string>
+    <string name="hint_extra_value_double" translatable="false">e.g. 1.23456789</string>
+    <string name="hint_extra_value_float" translatable="false">e.g. 1.23</string>
+    <string name="hint_extra_value_int" translatable="false">e.g. 123</string>
+    <string name="hint_extra_value_long" translatable="false">e.g. 123456789</string>
+    <string name="hint_extra_value_string" translatable="false">e.g. some text</string>
+</resources>
