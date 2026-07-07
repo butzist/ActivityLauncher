@@ -4,6 +4,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -25,7 +26,7 @@ class SmokeTest {
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+    lateinit var settingsRepository: SettingsRepository
 
     @Before
     fun setup() {

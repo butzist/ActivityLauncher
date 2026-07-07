@@ -16,8 +16,8 @@ android {
             providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 37
-        versionCode = 20405
-        versionName = "2.4.0"
+        versionCode = 20500
+        versionName = "2.5.0-dev"
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "de.szalkowski.activitylauncher.HiltTestRunner"
@@ -221,6 +221,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.7.0")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.7.0")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
     androidTestImplementation("org.mockito:mockito-android:5.11.0")
     androidTestImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")

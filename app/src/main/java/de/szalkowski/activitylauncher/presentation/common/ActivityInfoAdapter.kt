@@ -1,4 +1,4 @@
-package de.szalkowski.activitylauncher.presentation.activities
+package de.szalkowski.activitylauncher.presentation.common
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +9,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 
-class ActivityInfoAdapter(
-    private val iconProvider: (MyActivityInfo) -> android.graphics.drawable.Drawable,
-) : ListAdapter<MyActivityInfo, ActivityInfoAdapter.ViewHolder>(ActivityDiffCallback) {
-
-    var onItemClick: ((MyActivityInfo) -> Unit)? = null
-    var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
-
-    public override fun getItem(position: Int): MyActivityInfo = super.getItem(position)
+class ActivityInfoAdapter : ListAdapter<ShortcutRequest, ActivityInfoAdapter.ViewHolder>(ShortcutDiffCallback) {
+    var onItemClick: ((ShortcutRequest) -> Unit)? = null
+    var onItemLongClick: ((ShortcutRequest) -> Unit)? = null
 
     inner class ViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
         val tvName: TextView = viewItem.findViewById(R.id.tvName)
         val tvPackage: TextView = viewItem.findViewById(R.id.tvClass)
         val ivIcon: ImageView = viewItem.findViewById(R.id.ivIcon)
-        lateinit var item: MyActivityInfo
+        lateinit var item: ShortcutRequest
 
         init {
             itemView.setOnClickListener {
@@ -47,17 +42,19 @@ class ActivityInfoAdapter(
         val item = getItem(position)
         holder.item = item
         holder.tvName.text = item.name
-        holder.tvPackage.text = item.componentName.shortClassName
+        holder.tvPackage.text = item.intent.component?.shortClassName ?: ""
 
-        holder.ivIcon.setImageDrawable(iconProvider(item))
+        val context = holder.itemView.context
+        val drawable = item.icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon
+        holder.ivIcon.setImageDrawable(drawable)
     }
 
-    private object ActivityDiffCallback : DiffUtil.ItemCallback<MyActivityInfo>() {
-        override fun areItemsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
-            return oldItem.componentName == newItem.componentName
+    object ShortcutDiffCallback : DiffUtil.ItemCallback<ShortcutRequest>() {
+        override fun areItemsTheSame(oldItem: ShortcutRequest, newItem: ShortcutRequest): Boolean {
+            return oldItem.intent.toUri(0) == newItem.intent.toUri(0)
         }
 
-        override fun areContentsTheSame(oldItem: MyActivityInfo, newItem: MyActivityInfo): Boolean {
+        override fun areContentsTheSame(oldItem: ShortcutRequest, newItem: ShortcutRequest): Boolean {
             return oldItem == newItem
         }
     }

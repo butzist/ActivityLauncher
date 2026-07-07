@@ -1,24 +1,25 @@
 package de.szalkowski.activitylauncher.presentation.favorites
 
 import android.content.ComponentName
+import android.content.Intent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.packages.PackageRepository
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class FavoritesViewModelTest {
     private val favoritesRepository: FavoritesRepository = mock()
-    private val packageRepository: PackageRepository = mock()
     private val testDispatcher = UnconfinedTestDispatcher()
 
     @Before
@@ -34,26 +35,29 @@ class FavoritesViewModelTest {
     @Test
     fun `should load favorites`() = runTest {
         val component = ComponentName("com.test", "Activity")
-        val activityInfo = MyActivityInfo(component, "Activity", null, false)
+        val mockIntent: Intent = mock()
+        whenever(mockIntent.component).thenReturn(component)
+        whenever(mockIntent.toUri(any())).thenReturn("intent:#Intent;component=com.test/Activity;end")
 
-        whenever(favoritesRepository.getFavorites()).thenReturn(setOf(component))
-        whenever(packageRepository.getActivity(component)).thenReturn(activityInfo)
+        val request = ShortcutRequest("Activity", mockIntent, mock())
+        val flow = MutableStateFlow(listOf(request))
 
-        val viewModel = FavoritesViewModel(favoritesRepository, packageRepository)
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(flow)
+
+        val viewModel = FavoritesViewModel(favoritesRepository)
         viewModel.setDispatcher(testDispatcher)
 
         // Collect flow to trigger updates
-        val activities = mutableListOf<List<MyActivityInfo>>()
+        val items = mutableListOf<List<ShortcutRequest>>()
         val job = launch {
-            viewModel.activities.collect { activities.add(it) }
+            viewModel.items.collect { items.add(it) }
         }
 
-        viewModel.load()
-        // Wait for withContext(Dispatchers.Default) in BaseActivityListViewModel.load
-        advanceUntilIdle()
+        // Wait for flow collection in BaseShortcutListViewModel init
+        runCurrent()
 
-        assertEquals(1, viewModel.activities.value.size)
-        assertEquals("Activity", viewModel.activities.value[0].name)
+        assertEquals(1, viewModel.items.value.size)
+        assertEquals("Activity", viewModel.items.value[0].name)
 
         job.cancel()
     }

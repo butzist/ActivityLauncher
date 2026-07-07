@@ -9,6 +9,7 @@ import androidx.navigation.NavDirections
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentRecentsBinding
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.presentation.common.BaseActivityListFragment
 
 @AndroidEntryPoint
@@ -16,8 +17,8 @@ class RecentsFragment : BaseActivityListFragment() {
     override val viewModel: RecentsViewModel by viewModels()
     override val recyclerViewId: Int = R.id.rvRecents
     override val logTag: String = "RecentsFragment"
-    override fun navigateToDetailsAction(componentName: android.content.ComponentName): NavDirections =
-        RecentsFragmentDirections.actionSelectActivity(componentName)
+    override fun navigateToDetailsAction(request: ShortcutRequest): NavDirections =
+        RecentsFragmentDirections.actionSelectActivity(request)
 
     private var _binding: FragmentRecentsBinding? = null
     private val binding get() = _binding!!

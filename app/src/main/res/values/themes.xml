@@ -12,15 +12,6 @@
 
     <style name="Theme.ActivityLauncher.NoActionBar" parent="Base.Theme.ActivityLauncher" />
 
-    <style name="Theme.ActivityLauncher.NoDisplay" parent="Theme.ActivityLauncher.NoActionBar">
-        <item name="android:windowBackground">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowNoDisplay">true</item>
-    </style>
-
     <style name="Theme.ActivityLauncher.Translucent" parent="Theme.ActivityLauncher.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

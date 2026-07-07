@@ -28,10 +28,12 @@ import de.szalkowski.activitylauncher.domain.external.AdManager
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.CalculateSupportReminderUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import de.szalkowski.activitylauncher.presentation.common.DisclaimerDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.PaidDialogFragment
@@ -63,6 +65,9 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     @Inject
     internal lateinit var analyticsLogger: AnalyticsLogger
+
+    @Inject
+    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
 
     @Inject
     internal lateinit var calculateSupportReminderUseCase: CalculateSupportReminderUseCase
@@ -111,7 +116,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
         bottomNav.setOnItemSelectedListener { item ->
-            if (item.itemId == R.id.PackageListFragment && !packageRepository.isLoaded) {
+            if ((item.itemId == R.id.PackageListFragment) && !packageRepository.isLoaded) {
                 navController.navigate(R.id.LoadingFragment)
                 true
             } else {
@@ -198,17 +203,32 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         }
 
         val launchRequest = viewIntentParser.parseLaunchRequest(intent)
-        val componentNameFromExtra =
+        val shortcutRequestFromIntent = viewIntentParser.parseShortcutRequest(intent)
+        val componentNameFromExtra = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_ACTIVITY_COMPONENT_NAME, ComponentName::class.java)
+        } else {
+            @Suppress("DEPRECATION")
             intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
-        val componentName = launchRequest?.intent?.component ?: componentNameFromExtra
+        }
+        val componentName = shortcutRequestFromIntent?.intent?.component
+            ?: launchRequest?.intent?.component
+            ?: componentNameFromExtra
 
         if (componentName != null) {
+            val shortcutRequest = shortcutRequestFromIntent ?: run {
+                val activityInfo = packageRepository.getActivity(componentName)
+                val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
+                val launchIntent = launchRequest?.intent ?: Intent().setComponent(componentName)
+                ShortcutRequest(activityInfo.name, launchIntent, icon)
+            }
+
             val bundle = Bundle().apply {
-                putParcelable(EXTRA_ACTIVITY_COMPONENT_NAME, componentName)
+                putParcelable("shortcutRequest", shortcutRequest)
+                putParcelable("activityComponentName", componentName) // backward compat
             }
 
             // Ensure we start from PackageListFragment
-            navController.popBackStack(R.id.PackageListFragment, false)
+            navController.popBackStack(R.id.PackageListFragment, inclusive = false)
             if (navController.currentDestination?.id != R.id.PackageListFragment) {
                 navController.navigate(R.id.PackageListFragment)
             }
@@ -273,7 +293,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         return when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
-                return true
+                true
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -287,6 +307,5 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     companion object {
         const val EXTRA_ACTIVITY_COMPONENT_NAME = "activityComponentName"
-        const val EXTRA_BUILD_BACKSTACK = "buildBackstack"
     }
 }

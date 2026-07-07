@@ -21,6 +21,7 @@ import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
 import de.szalkowski.activitylauncher.domain.external.SupportReminder
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -91,6 +92,9 @@ class MainActivityIntentTest {
     @Before
     fun init() {
         hiltRule.inject()
+        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
+
         val realParser = ViewIntentParserImpl(getActivityIconUseCase)
         whenever(viewIntentParser.parseLaunchRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseLaunchRequest(invocation.getArgument(0)) }
         whenever(viewIntentParser.parseShortcutRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutRequest(invocation.getArgument(0)) }
@@ -100,9 +104,11 @@ class MainActivityIntentTest {
         whenever(supportReminder.shouldDisplayReminder()).thenReturn(false)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
 
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
-        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
@@ -139,9 +145,14 @@ class MainActivityIntentTest {
                 val navController = activity.findNavController(R.id.nav_host_fragment_content_main)
                 assertEquals(R.id.ActivityDetailsFragment, navController.currentDestination?.id)
                 val args = navController.currentBackStackEntry?.arguments
-                val navComponentName = args?.getParcelable<ComponentName>("activityComponentName")
-                assertEquals("com.android.settings", navComponentName?.packageName)
-                assertEquals("com.android.settings.Settings", navComponentName?.className)
+                val shortcutRequest = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                    args?.getParcelable("shortcutRequest", ShortcutRequest::class.java)
+                } else {
+                    @Suppress("DEPRECATION")
+                    args?.getParcelable<ShortcutRequest>("shortcutRequest")
+                }
+                assertEquals("com.android.settings", shortcutRequest?.intent?.component?.packageName)
+                assertEquals("com.android.settings.Settings", shortcutRequest?.intent?.component?.className)
             }
         }
     }

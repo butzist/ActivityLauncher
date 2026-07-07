@@ -94,7 +94,7 @@ class ShortcutCreatorImplTest {
         val shortcutManager = mock<ShortcutManager>()
         val mockContext = object : android.content.ContextWrapper(context) {
             override fun getSystemService(name: String): Any? {
-                if (name == Context.SHORTCUT_SERVICE) return shortcutManager
+                if (name == SHORTCUT_SERVICE) return shortcutManager
                 return super.getSystemService(name)
             }
 

@@ -7,8 +7,7 @@ import android.content.pm.PackageManager
 fun ActivityInfo.isPrivate(packageManager: PackageManager): Boolean {
     if (!this.exported) return true
 
-    val enabledState = packageManager.getComponentEnabledSetting(this.componentName)
-    return when (enabledState) {
+    return when (packageManager.getComponentEnabledSetting(this.componentName)) {
         PackageManager.COMPONENT_ENABLED_STATE_DISABLED -> true
         PackageManager.COMPONENT_ENABLED_STATE_ENABLED -> false
         else -> !this.isEnabled

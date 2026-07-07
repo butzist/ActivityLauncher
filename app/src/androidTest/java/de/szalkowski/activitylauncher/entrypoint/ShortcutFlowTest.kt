@@ -2,6 +2,7 @@ package de.szalkowski.activitylauncher.entrypoint
 
 import android.content.ComponentName
 import android.content.Intent
+import android.os.Build
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +20,7 @@ import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -76,16 +78,22 @@ class ShortcutFlowTest {
     fun init() {
         hiltRule.inject()
 
+        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
+
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
-        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
+        whenever(activityLauncherProxy.hasMultipleHandlers()).thenReturn(true)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
             val componentName = invocation.getArgument<ComponentName>(0)
-            de.szalkowski.activitylauncher.domain.model.MyActivityInfo(
+            MyActivityInfo(
                 componentName,
                 "Test Activity",
                 null,
@@ -193,7 +201,7 @@ class ShortcutFlowTest {
     }
 
     @Test
-    fun testStage2_CreateShortcutFlowDoesNotCrash() {
+    fun testStage2_CreateShortcutFlow() {
         // Stage 2: Receive CREATE intent
         val componentName = ComponentName("com.test", "com.test.Activity")
         val launchIntent = Intent().apply { component = componentName }
@@ -207,11 +215,20 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use { scenario ->
-            // On API 26+, there is a delay before finishing.
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                Thread.sleep(1000)
+            // On API 26+, immediately after launch, the activity should NOT be finished
+            // because we need it in the foreground for requestPinShortcut.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                scenario.onActivity { activity ->
+                    assertFalse("Activity should not be finishing immediately on API 26+", activity.isFinishing)
+                }
             }
-            // Success if it doesn't crash and reaches destroyed state (finishes)
+
+            // On API 26+, there is a delay before finishing.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Thread.sleep(2000)
+            }
+
+            // Success if it reaches destroyed state (finishes)
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
 
             val captor = argumentCaptor<ShortcutRequest>()

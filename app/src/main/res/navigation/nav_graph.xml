@@ -60,8 +60,8 @@
         android:label="@string/context_action_edit"
         tools:layout="@layout/fragment_activity_details">
         <argument
-            android:name="activityComponentName"
-            app:argType="android.content.ComponentName"
+            android:name="shortcutRequest"
+            app:argType="de.szalkowski.activitylauncher.domain.model.ShortcutRequest"
             app:nullable="false" />
     </fragment>
 

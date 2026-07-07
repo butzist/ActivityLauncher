@@ -9,28 +9,6 @@ import androidx.test.uiautomator.UiSelector
 object TestUtils {
     private const val TAG = "TestUtils"
 
-    fun unlockScreen() {
-        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        try {
-            if (!device.isScreenOn) {
-                device.wakeUp()
-            }
-            // Swipe up to dismiss keyguard
-            val width = device.displayWidth
-            val height = device.displayHeight
-            device.swipe(width / 2, (height * 4 / 5), width / 2, height / 5, 20)
-
-            // Sometimes a menu key press helps to dismiss keyguard on older versions
-            device.pressMenu()
-
-            // Press home to clear any lingering foreground apps or dialogs
-            device.pressHome()
-            device.waitForIdle()
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to unlock screen", e)
-        }
-    }
-
     fun dismissSystemDialogs() {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
@@ -44,7 +22,7 @@ object TestUtils {
         // Close system dialogs via intent
         try {
             device.executeShellCommand("am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS")
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Log.d(TAG, "Failed to broadcast CLOSE_SYSTEM_DIALOGS")
         }
 

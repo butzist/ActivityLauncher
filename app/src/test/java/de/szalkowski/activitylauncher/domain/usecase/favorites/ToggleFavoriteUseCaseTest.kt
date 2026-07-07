@@ -1,15 +1,20 @@
 package de.szalkowski.activitylauncher.domain.usecase.favorites
 
 import android.content.ComponentName
+import android.content.Intent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.kotlin.*
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class ToggleFavoriteUseCaseTest {
     private val favoritesRepository: FavoritesRepository = mock()
     private lateinit var useCase: ToggleFavoriteUseCase
-    private val componentName = ComponentName("com.test", "Activity")
 
     @Before
     fun setup() {
@@ -17,20 +22,30 @@ class ToggleFavoriteUseCaseTest {
     }
 
     @Test
-    fun `should add to favorites if not already a favorite`() {
-        whenever(favoritesRepository.isFavorite(componentName)).thenReturn(false)
+    fun `invoke adds favorite when not present`() {
+        val component = ComponentName("pkg", "cls")
+        val intent = mock<Intent>()
+        whenever(intent.component).thenReturn(component)
+        val request = ShortcutRequest("name", intent, mock())
+        whenever(favoritesRepository.isFavorite(component)).thenReturn(false)
 
-        useCase.invoke(componentName)
+        val result = useCase(request)
 
-        verify(favoritesRepository).addFavorite(componentName)
+        assertTrue(result)
+        verify(favoritesRepository).addFavorite(request)
     }
 
     @Test
-    fun `should remove from favorites if already a favorite`() {
-        whenever(favoritesRepository.isFavorite(componentName)).thenReturn(true)
+    fun `invoke removes favorite when present`() {
+        val component = ComponentName("pkg", "cls")
+        val intent = mock<Intent>()
+        whenever(intent.component).thenReturn(component)
+        val request = ShortcutRequest("name", intent, mock())
+        whenever(favoritesRepository.isFavorite(component)).thenReturn(true)
 
-        useCase.invoke(componentName)
+        val result = useCase(request)
 
-        verify(favoritesRepository).removeFavorite(componentName)
+        assertFalse(result)
+        verify(favoritesRepository).removeFavorite(request)
     }
 }

@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher
 
 import android.content.ComponentName
+import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -18,6 +19,7 @@ import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
@@ -89,28 +91,60 @@ class FavoritesRecentsIntegrationTest {
     val getPackageIconUseCase: GetPackageIconUseCase = mock()
 
     private val favoriteSet = mutableSetOf<ComponentName>()
+    private val favoriteFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutRequest>>(emptyList())
+    private val recentsFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutRequest>>(emptyList())
 
     @Inject
     lateinit var systemRepository: FakeSystemPackageRepository
 
     @Before
     fun setup() {
-        TestUtils.unlockScreen()
         hiltRule.inject()
         favoriteSet.clear()
+        favoriteFlow.value = emptyList()
+        recentsFlow.value = emptyList()
+
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(favoriteSet)
-        whenever(favoritesRepository.isFavorite(any())).thenAnswer { invocation ->
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(favoriteFlow)
+        whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        whenever(recentsRepository.getRecentsFlow()).thenReturn(recentsFlow)
+
+        whenever(favoritesRepository.isFavorite(any<ComponentName>())).thenAnswer { invocation ->
             favoriteSet.contains(invocation.getArgument(0))
         }
         doAnswer { invocation ->
-            favoriteSet.add(invocation.getArgument(0))
-        }.whenever(favoritesRepository).addFavorite(any())
-        doAnswer { invocation ->
-            favoriteSet.remove(invocation.getArgument(0))
-        }.whenever(favoritesRepository).removeFavorite(any())
+            val component = invocation.getArgument<ComponentName>(0)
+            if (favoriteSet.add(component)) {
+                val icon = getActivityIconUseCase(null, component)
+                val intent = Intent().setComponent(component)
+                val request = ShortcutRequest("Test Activity", intent, icon)
+                favoriteFlow.value += request
+            }
+        }.whenever(favoritesRepository).addFavorite(any<ComponentName>())
 
-        whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        doAnswer { invocation ->
+            val request = invocation.getArgument<ShortcutRequest>(0)
+            val component = request.intent.component
+            if (component != null && (favoriteSet.add(component))) {
+                favoriteFlow.value += request
+            }
+        }.whenever(favoritesRepository).addFavorite(any<ShortcutRequest>())
+
+        doAnswer { invocation ->
+            val component = invocation.getArgument<ComponentName>(0)
+            if (favoriteSet.remove(component)) {
+                favoriteFlow.value = favoriteFlow.value.filter { it.intent.component != component }
+            }
+        }.whenever(favoritesRepository).removeFavorite(any<ComponentName>())
+
+        doAnswer { invocation ->
+            val request = invocation.getArgument<ShortcutRequest>(0)
+            val component = request.intent.component
+            if (component != null && favoriteSet.remove(component)) {
+                favoriteFlow.value = favoriteFlow.value.filter { it.intent.component != component }
+            }
+        }.whenever(favoritesRepository).removeFavorite(any<ShortcutRequest>())
 
         val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)
@@ -150,7 +184,7 @@ class FavoritesRecentsIntegrationTest {
             iconResourceName = pkg.iconResourceName,
         )
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(listOf(myPackageInfo)))
-        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->

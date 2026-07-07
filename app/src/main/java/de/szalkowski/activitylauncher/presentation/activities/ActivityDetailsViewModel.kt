@@ -2,15 +2,19 @@ package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
 import android.content.pm.PackageManager.NameNotFoundException
-import android.os.Bundle
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.scale
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
+import de.szalkowski.activitylauncher.core.util.getActivityIntentFromIntentDef
+import de.szalkowski.activitylauncher.core.util.getIntentDefFromActivityIntent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.intent.IntentDef
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
@@ -42,9 +46,9 @@ import javax.inject.Inject
 class ActivityDetailsViewModel @Inject constructor(
     packageRepository: PackageRepository,
     private val favoritesRepository: FavoritesRepository,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val launchActivityUseCase: LaunchActivityUseCase,
     private val createShortcutUseCase: CreateShortcutUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val shareActivityUseCase: ShareActivityUseCase,
     private val getActivityIconUseCase: GetActivityIconUseCase,
     private val iconLoader: IconLoader,
@@ -52,8 +56,10 @@ class ActivityDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val componentName: ComponentName = savedStateHandle.get<ComponentName>("activityComponentName")
-        ?: throw IllegalArgumentException("activityComponentName is required")
+    private val shortcutRequest: ShortcutRequest = savedStateHandle.get<ShortcutRequest>("shortcutRequest")
+        ?: throw IllegalArgumentException("shortcutRequest is required")
+
+    private val componentName: ComponentName? = shortcutRequest.intent.component
 
     private val _activityInfo = MutableStateFlow<MyActivityInfo?>(null)
     val activityInfo: StateFlow<MyActivityInfo?> = _activityInfo.asStateFlow()
@@ -61,37 +67,59 @@ class ActivityDetailsViewModel @Inject constructor(
     private val _isFavorite = MutableStateFlow(false)
     val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
 
-    private val _editedName = MutableStateFlow("")
+    private val _editedName = MutableStateFlow(shortcutRequest.name)
     val editedName: StateFlow<String> = _editedName.asStateFlow()
 
-    private val _editedPackage = MutableStateFlow("")
+    private val _editedPackage = MutableStateFlow(shortcutRequest.intent.component?.packageName ?: "")
     val editedPackage: StateFlow<String> = _editedPackage.asStateFlow()
 
-    private val _editedClass = MutableStateFlow("")
+    private val _editedClass = MutableStateFlow(shortcutRequest.intent.component?.className ?: "")
     val editedClass: StateFlow<String> = _editedClass.asStateFlow()
 
     private val _editedIconResourceName = MutableStateFlow("")
     val editedIconResourceName: StateFlow<String> = _editedIconResourceName.asStateFlow()
 
+    private val _editedIconUri = MutableStateFlow<Uri?>(null)
+    val editedIconUri: StateFlow<Uri?> = _editedIconUri.asStateFlow()
+
+    private val _intentDef = MutableStateFlow(getIntentDefFromActivityIntent(shortcutRequest.intent))
+    val intentDef: StateFlow<IntentDef> = _intentDef.asStateFlow()
+
     val canLaunch: StateFlow<Boolean> = combine(_editedPackage, _editedClass) { pkg, cls ->
         pkg.isNotBlank() && cls.isNotBlank()
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        _editedPackage.value.isNotBlank() && _editedClass.value.isNotBlank(),
+    )
 
     val canCreateShortcut: StateFlow<Boolean> =
         combine(_editedName, _editedPackage, _editedClass) { name, pkg, cls ->
             name.isNotBlank() && pkg.isNotBlank() && cls.isNotBlank()
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+        }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            _editedName.value.isNotBlank() && _editedPackage.value.isNotBlank() && _editedClass.value.isNotBlank(),
+        )
 
     val canShare: StateFlow<Boolean> = combine(_editedPackage, _editedClass) { pkg, cls ->
         pkg.isNotBlank() && cls.isNotBlank()
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        _editedPackage.value.isNotBlank() && _editedClass.value.isNotBlank(),
+    )
 
     val canFavorite: StateFlow<Boolean> =
         combine(_editedName, _editedPackage, _editedClass) { name, pkg, cls ->
             name.isNotBlank() && pkg.isNotBlank() && cls.isNotBlank()
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+        }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            _editedName.value.isNotBlank() && _editedPackage.value.isNotBlank() && _editedClass.value.isNotBlank(),
+        )
 
-    private val _editedIcon = MutableStateFlow<IconCompat?>(null)
+    private val _editedIcon = MutableStateFlow<IconCompat?>(shortcutRequest.icon)
     val editedIcon: StateFlow<IconCompat?> = _editedIcon.asStateFlow()
 
     private val _showLaunchChooser = MutableStateFlow(false)
@@ -129,16 +157,16 @@ class ActivityDetailsViewModel @Inject constructor(
         _showLaunchChooser.value = launchPluginList.size > 1
         _showShortcutChooser.value = shortcutPluginList.size > 1 || launchPluginList.size > 1
 
-        val info = packageRepository.getActivity(componentName)
-        _activityInfo.value = info
-        _isFavorite.value = favoritesRepository.isFavorite(componentName)
+        componentName?.let {
+            val info = runCatching { packageRepository.getActivity(it) }.getOrNull()
+            _activityInfo.value = info
+            _isFavorite.value = favoritesRepository.isFavorite(it)
+            _editedIconResourceName.value = info?.iconResourceName ?: ""
+        }
 
-        _editedName.value = info.name
-        _editedPackage.value = info.componentName.packageName
-        _editedClass.value = info.componentName.className
-        _editedIconResourceName.value = info.iconResourceName ?: ""
-
-        _editedIcon.value = getActivityIconUseCase(info.iconResourceName, componentName)
+        _selectedLaunchPlugin.value = shortcutRequest.launcherPlugin?.let { pluginComp ->
+            launchPluginList.find { it.componentName == pluginComp }
+        }
     }
 
     @OptIn(FlowPreview::class)
@@ -162,8 +190,8 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun toggleFavorite() {
-        toggleFavoriteUseCase(componentName)
-        _isFavorite.value = favoritesRepository.isFavorite(componentName)
+        val request = getCurrentShortcutRequest()
+        _isFavorite.value = toggleFavoriteUseCase(request)
     }
 
     fun updateName(name: String) {
@@ -179,23 +207,87 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun updateIconResourceName(iconResourceName: String) {
+        _editedIconUri.value = null
         _editedIconResourceName.value = iconResourceName
         val result = iconLoader.tryGetIcon(iconResourceName)
-        _editedIcon.value = result.getOrElse {
-            getActivityIconUseCase(null, componentName)
-        }
+        _editedIcon.value = resizeIconIfNeeded(
+            result.getOrElse {
+                getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
+            },
+        )
         _iconErrorTrigger.value = iconResourceName
     }
 
+    fun updateIconUri(uri: Uri?) {
+        _editedIconResourceName.value = ""
+        _editedIconUri.value = uri
+        if (uri != null) {
+            val result = iconLoader.getIcon(uri)
+            _editedIcon.value = resizeIconIfNeeded(
+                result.getOrElse {
+                    getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
+                },
+            )
+        } else {
+            _editedIcon.value = resizeIconIfNeeded(getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value)))
+        }
+        _iconErrorTrigger.value = null
+    }
+
+    fun updateEditedIcon(icon: IconCompat?) {
+        _editedIconResourceName.value = ""
+        _editedIconUri.value = null
+        if (icon != null) {
+            _editedIcon.value = resizeIconIfNeeded(icon)
+        } else {
+            _editedIcon.value = resizeIconIfNeeded(getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value)))
+        }
+        _iconErrorTrigger.value = null
+    }
+
+    private fun resizeIconIfNeeded(icon: IconCompat): IconCompat {
+        // IconCompat.toBundle() includes the bitmap if it's a bitmap-based icon.
+        // We ensure it's not too large for Binder/Room.
+        val bundle = icon.toBundle()
+        val type = bundle.getInt("type")
+        if (type == IconCompat.TYPE_BITMAP || type == IconCompat.TYPE_ADAPTIVE_BITMAP) {
+            val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable("obj", Bitmap::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getParcelable("obj")
+            }
+            if (bitmap != null) {
+                val maxSize = 512 // Increased to accommodate high-res adaptive icons
+                if (bitmap.width > maxSize || bitmap.height > maxSize) {
+                    val aspectRatio = bitmap.width.toFloat() / bitmap.height.toFloat()
+                    val newWidth: Int
+                    val newHeight: Int
+                    if (aspectRatio > 1) {
+                        newWidth = maxSize
+                        newHeight = (maxSize / aspectRatio).toInt()
+                    } else {
+                        newHeight = maxSize
+                        newWidth = (maxSize * aspectRatio).toInt()
+                    }
+                    val resized = bitmap.scale(newWidth, newHeight, true)
+                    return if (type == IconCompat.TYPE_ADAPTIVE_BITMAP) {
+                        IconCompat.createWithAdaptiveBitmap(resized)
+                    } else {
+                        IconCompat.createWithBitmap(resized)
+                    }
+                }
+            }
+        }
+        return icon
+    }
+
+    fun updateIntentDef(intentDef: IntentDef) {
+        _intentDef.value = intentDef
+    }
+
     fun createShortcut() {
-        val info = getEditedActivityInfo()
-        val icon = _editedIcon.value ?: getActivityIconUseCase(info.iconResourceName, info.componentName)
-        val request = ShortcutRequest(
-            name = info.name,
-            intent = getActivityIntent(info.componentName, Bundle()),
-            icon = icon,
-            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
-        )
+        val request = getCurrentShortcutRequest()
         createShortcutUseCase(request, _selectedShortcutPlugin.value?.componentName)
     }
 
@@ -208,35 +300,32 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun launchActivity() {
-        val info = getEditedActivityInfo()
-        val request = LaunchRequest(
-            intent = getActivityIntent(info.componentName, Bundle()),
-            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
+        val request = getCurrentShortcutRequest()
+        launchActivityUseCase(
+            LaunchRequest(
+                intent = request.intent,
+                name = request.name,
+                icon = request.icon,
+                launcherPlugin = request.launcherPlugin,
+            ),
         )
-        launchActivityUseCase(request)
     }
 
     fun shareActivity() {
-        val info = getEditedActivityInfo()
-        shareActivityUseCase(info.componentName)
+        shareActivityUseCase(ComponentName(_editedPackage.value, _editedClass.value))
     }
 
-    private fun getEditedActivityInfo(): MyActivityInfo {
+    private fun getCurrentShortcutRequest(): ShortcutRequest {
         val packageName = _editedPackage.value
         val className = _editedClass.value
-        val componentName = if (packageName == this.componentName.packageName && className == this.componentName.className) {
-            this.componentName
-        } else if (packageName.isNotEmpty() && className.isNotEmpty()) {
-            ComponentName(packageName, className)
-        } else {
-            this.componentName
-        }
+        val component = ComponentName(packageName, className)
+        val icon = _editedIcon.value ?: getActivityIconUseCase(_editedIconResourceName.value.ifBlank { null }, component)
 
-        return MyActivityInfo(
-            componentName,
-            _editedName.value,
-            _editedIconResourceName.value.ifBlank { null },
-            false,
+        return ShortcutRequest(
+            name = _editedName.value,
+            intent = getActivityIntentFromIntentDef(component, _intentDef.value),
+            icon = icon,
+            launcherPlugin = _selectedLaunchPlugin.value?.componentName,
         )
     }
 }

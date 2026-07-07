@@ -1,27 +1,24 @@
 package de.szalkowski.activitylauncher.presentation.common
 
-import android.content.ComponentName
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 abstract class BaseActivityListViewModel(
-    private val loadItems: suspend () -> List<MyActivityInfo>,
-    private val onRemoveItem: suspend (ComponentName) -> Unit,
+    private val getFlow: () -> Flow<List<ShortcutRequest>>,
+    private val onRemoveItem: suspend (ShortcutRequest) -> Unit,
 ) : ViewModel() {
 
-    private val _activities = MutableStateFlow<List<MyActivityInfo>>(emptyList())
-    val activities: StateFlow<List<MyActivityInfo>> = _activities.asStateFlow()
-
-    private val _isSearching = MutableStateFlow(false)
-    val isSearching: StateFlow<Boolean> = _isSearching.asStateFlow()
+    private val _items = MutableStateFlow<List<ShortcutRequest>>(emptyList())
+    val items: StateFlow<List<ShortcutRequest>> = _items.asStateFlow()
 
     private var dispatcher: CoroutineDispatcher = Dispatchers.Main
 
@@ -29,21 +26,17 @@ abstract class BaseActivityListViewModel(
         this.dispatcher = dispatcher
     }
 
-    fun load() {
+    init {
         viewModelScope.launch(dispatcher) {
-            _isSearching.value = true
-            val result = withContext(if (dispatcher == Dispatchers.Main) Dispatchers.Default else dispatcher) {
-                loadItems()
+            getFlow().collectLatest {
+                _items.value = it
             }
-            _activities.value = result
-            _isSearching.value = false
         }
     }
 
-    fun removeItem(componentName: ComponentName) {
+    fun removeItem(item: ShortcutRequest) {
         viewModelScope.launch(dispatcher) {
-            onRemoveItem(componentName)
-            _activities.value = _activities.value.filter { it.componentName != componentName }
+            onRemoveItem(item)
         }
     }
 }

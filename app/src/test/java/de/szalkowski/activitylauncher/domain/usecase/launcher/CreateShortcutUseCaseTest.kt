@@ -21,11 +21,18 @@ class CreateShortcutUseCaseTest {
         on { component } doReturn componentName
     }
     private val request = ShortcutRequest("Test", intent, icon)
+    private val recentsRepository: de.szalkowski.activitylauncher.domain.recents.RecentsRepository = mock()
     private lateinit var useCase: CreateShortcutUseCase
 
     @Before
     fun setup() {
-        useCase = CreateShortcutUseCase(shortcutCreator, shortcutCreatorProxy)
+        useCase = CreateShortcutUseCase(shortcutCreator, shortcutCreatorProxy, recentsRepository)
+    }
+
+    @Test
+    fun `should add activity to recents`() {
+        useCase(request)
+        verify(recentsRepository).addActivity(eq(request))
     }
 
     @Test

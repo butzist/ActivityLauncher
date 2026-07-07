@@ -1,8 +1,12 @@
-package de.szalkowski.activitylauncher.data.database
+package de.szalkowski.activitylauncher.database
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import de.szalkowski.activitylauncher.data.database.ActivityEntity
+import de.szalkowski.activitylauncher.data.database.AppDatabase
+import de.szalkowski.activitylauncher.data.database.AppPackageEntity
+import de.szalkowski.activitylauncher.data.database.PackageDao
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
