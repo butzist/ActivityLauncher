@@ -5,6 +5,7 @@ import android.content.Intent
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -29,7 +30,7 @@ class LaunchActivityUseCaseTest {
     }
 
     @Test
-    fun `should launch activity and add to recents`() {
+    fun `should launch activity and NOT add to recents if not primary`() {
         val intent = mock<Intent> {
             on { component } doReturn componentName
         }
@@ -37,11 +38,25 @@ class LaunchActivityUseCaseTest {
         useCase.invoke(request)
 
         verify(activityLauncher).launchActivity(eq(request))
-        verify(recentsRepository).addActivity(componentName)
+        verify(recentsRepository, never()).addActivity(any<ComponentName>())
+        verify(recentsRepository, never()).addActivity(any<ShortcutRequest>())
     }
 
     @Test
-    fun `should launch activity with plugin and add to recents`() {
+    fun `should add to recents if primary request`() {
+        val intent = mock<Intent> {
+            on { component } doReturn componentName
+        }
+        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val request = LaunchRequest(intent, name = "Name", icon = icon)
+
+        useCase.invoke(request)
+
+        verify(recentsRepository).addActivity(any<ShortcutRequest>())
+    }
+
+    @Test
+    fun `should launch activity with plugin and NOT add to recents if not primary`() {
         val plugin = ComponentName("com.plugin", "Plugin")
         val intent = mock<Intent> {
             on { component } doReturn componentName
@@ -50,7 +65,7 @@ class LaunchActivityUseCaseTest {
         useCase.invoke(request)
 
         verify(activityLauncherProxy).launchActivity(eq(request))
-        verify(recentsRepository).addActivity(componentName)
+        verify(recentsRepository, never()).addActivity(any<ComponentName>())
     }
 
     @Test

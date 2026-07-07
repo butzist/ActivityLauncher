@@ -8,7 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import de.szalkowski.activitylauncher.data.database.AppDatabase
+import de.szalkowski.activitylauncher.data.database.FavoriteDao
 import de.szalkowski.activitylauncher.data.database.PackageDao
+import de.szalkowski.activitylauncher.data.database.RecentDao
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +29,15 @@ object DatabaseModule {
     @Provides
     fun providePackageDao(database: AppDatabase): PackageDao {
         return database.packageDao()
+    }
+
+    @Provides
+    fun provideFavoriteDao(database: AppDatabase): FavoriteDao {
+        return database.favoriteDao()
+    }
+
+    @Provides
+    fun provideRecentDao(database: AppDatabase): RecentDao {
+        return database.recentDao()
     }
 }

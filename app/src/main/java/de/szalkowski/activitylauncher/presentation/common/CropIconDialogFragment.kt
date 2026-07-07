@@ -173,11 +173,14 @@ class CropIconDialogFragment : DialogFragment() {
         val viewportHeight = viewport.height.toFloat()
 
         val photo = binding.ivPhoto
+        // Use coordinates relative to the common parent
         val viewportX = viewport.x
         val viewportY = viewport.y
         val photoX = photo.x
         val photoY = photo.y
 
+        // Adaptive icons need a 108dp area where 72dp is the safe zone.
+        // Ratio is 108/72 = 1.5
         val adaptiveSizeFactor = 1.5f
         val adaptiveWidth = viewportWidth * adaptiveSizeFactor
         val adaptiveHeight = viewportHeight * adaptiveSizeFactor

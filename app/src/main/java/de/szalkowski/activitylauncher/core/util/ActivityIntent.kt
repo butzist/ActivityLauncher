@@ -2,8 +2,7 @@ package de.szalkowski.activitylauncher.core.util
 
 import android.content.ComponentName
 import android.content.Intent
-import android.net.Uri
-import androidx.core.os.bundleOf
+import androidx.core.net.toUri
 import de.szalkowski.activitylauncher.domain.intent.ExtraDef
 import de.szalkowski.activitylauncher.domain.intent.ExtraType
 import de.szalkowski.activitylauncher.domain.intent.IntentDef
@@ -14,44 +13,27 @@ fun getActivityIntentFromIntentDef(activity: ComponentName?, intentDef: IntentDe
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
     if (intentDef != null) {
-        if (!intentDef.action.isNullOrBlank()) {
-            intent.action = intentDef.action
+        intent.action = intentDef.action?.ifBlank { null }
+        intent.setDataAndType(
+            intentDef.data?.ifBlank { null }?.toUri(),
+            intentDef.mimeType?.ifBlank { null },
+        )
+        intentDef.categories.forEach {
+            if (it.isNotBlank()) {
+                intent.addCategory(it)
+            }
         }
-
-        if (!intentDef.data.isNullOrBlank()) {
-            intent.data = Uri.parse(intentDef.data)
-        }
-
-        if (!intentDef.mimeType.isNullOrBlank()) {
-            intent.type = intentDef.mimeType
-        }
-
-        if (intentDef.data.isNullOrBlank() && intentDef.mimeType.isNullOrBlank()) {
-            // clear data/type
-        } else if (!intentDef.data.isNullOrBlank() && !intentDef.mimeType.isNullOrBlank()) {
-            intent.data = Uri.parse(intentDef.data)
-            intent.type = intentDef.mimeType
-        }
-
-        intentDef.categories
-            .filter { it.isNotBlank() }
-            .forEach { intent.addCategory(it) }
-
-        val bundle = bundleOf()
         intentDef.extras.forEach { extra ->
             if (extra.key.isNotBlank()) {
                 when (extra.type) {
-                    ExtraType.STRING -> bundle.putString(extra.key, extra.value)
-                    ExtraType.INT -> bundle.putInt(extra.key, extra.value.toIntOrNull() ?: 0)
-                    ExtraType.LONG -> bundle.putLong(extra.key, extra.value.toLongOrNull() ?: 0L)
-                    ExtraType.FLOAT -> bundle.putFloat(extra.key, extra.value.toFloatOrNull() ?: 0f)
-                    ExtraType.DOUBLE -> bundle.putDouble(extra.key, extra.value.toDoubleOrNull() ?: 0.0)
-                    ExtraType.BOOLEAN -> bundle.putBoolean(extra.key, extra.value.toBooleanStrictOrNull() ?: false)
+                    ExtraType.STRING -> intent.putExtra(extra.key, extra.value)
+                    ExtraType.INT -> intent.putExtra(extra.key, extra.value.toIntOrNull() ?: 0)
+                    ExtraType.LONG -> intent.putExtra(extra.key, extra.value.toLongOrNull() ?: 0L)
+                    ExtraType.FLOAT -> intent.putExtra(extra.key, extra.value.toFloatOrNull() ?: 0f)
+                    ExtraType.DOUBLE -> intent.putExtra(extra.key, extra.value.toDoubleOrNull() ?: 0.0)
+                    ExtraType.BOOLEAN -> intent.putExtra(extra.key, extra.value.toBoolean())
                 }
             }
-        }
-        if (!bundle.isEmpty) {
-            intent.putExtras(bundle)
         }
     }
 
@@ -62,27 +44,25 @@ fun getIntentDefFromActivityIntent(intent: Intent): IntentDef {
     val extras = mutableListOf<ExtraDef>()
     intent.extras?.let { bundle ->
         for (key in bundle.keySet()) {
+            @Suppress("DEPRECATION")
             val value = bundle.get(key)
-            val (stringValue, type) = when (value) {
-                is String -> value to ExtraType.STRING
-                is Int -> value.toString() to ExtraType.INT
-                is Long -> value.toString() to ExtraType.LONG
-                is Float -> value.toString() to ExtraType.FLOAT
-                is Double -> value.toString() to ExtraType.DOUBLE
-                is Boolean -> value.toString() to ExtraType.BOOLEAN
-                else -> value?.toString().orEmpty() to ExtraType.STRING
+            val type = when (value) {
+                is Int -> ExtraType.INT
+                is Long -> ExtraType.LONG
+                is Float -> ExtraType.FLOAT
+                is Double -> ExtraType.DOUBLE
+                is Boolean -> ExtraType.BOOLEAN
+                else -> ExtraType.STRING
             }
-            extras.add(ExtraDef(key, stringValue, type))
+            extras.add(ExtraDef(key, value?.toString() ?: "", type))
         }
     }
-
-    val categories = intent.categories?.toList() ?: emptyList()
 
     return IntentDef(
         action = intent.action,
         data = intent.dataString,
         mimeType = intent.type,
-        categories = categories,
+        categories = intent.categories?.toList() ?: emptyList(),
         extras = extras,
     )
 }

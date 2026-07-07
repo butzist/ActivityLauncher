@@ -102,6 +102,8 @@ class PluginChooserIntegrationTest {
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
 
         val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)
@@ -135,7 +137,7 @@ class PluginChooserIntegrationTest {
             iconResourceName = pkg.iconResourceName,
         )
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(listOf(myPackageInfo)))
-        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->

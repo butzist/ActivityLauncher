@@ -67,10 +67,10 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     internal lateinit var analyticsLogger: AnalyticsLogger
 
     @Inject
-    internal lateinit var calculateSupportReminderUseCase: CalculateSupportReminderUseCase
+    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
 
     @Inject
-    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
+    internal lateinit var calculateSupportReminderUseCase: CalculateSupportReminderUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
         bottomNav.setOnItemSelectedListener { item ->
-            if (item.itemId == R.id.PackageListFragment && !packageRepository.isLoaded) {
+            if ((item.itemId == R.id.PackageListFragment) && !packageRepository.isLoaded) {
                 navController.navigate(R.id.LoadingFragment)
                 true
             } else {
@@ -203,32 +203,32 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         }
 
         val launchRequest = viewIntentParser.parseLaunchRequest(intent)
-        val componentNameFromExtra =
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra(EXTRA_ACTIVITY_COMPONENT_NAME, ComponentName::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
-            }
-        val componentName = launchRequest?.intent?.component ?: componentNameFromExtra
+        val shortcutRequestFromIntent = viewIntentParser.parseShortcutRequest(intent)
+        val componentNameFromExtra = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_ACTIVITY_COMPONENT_NAME, ComponentName::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
+        }
+        val componentName = shortcutRequestFromIntent?.intent?.component
+            ?: launchRequest?.intent?.component
+            ?: componentNameFromExtra
 
         if (componentName != null) {
-            val shortcutRequestFromIntent = viewIntentParser.parseShortcutRequest(intent)
             val shortcutRequest = shortcutRequestFromIntent ?: run {
                 val activityInfo = packageRepository.getActivity(componentName)
-                val launchIntent = Intent().setComponent(componentName)
-                launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
+                val launchIntent = launchRequest?.intent ?: Intent().setComponent(componentName)
                 ShortcutRequest(activityInfo.name, launchIntent, icon)
             }
 
             val bundle = Bundle().apply {
                 putParcelable("shortcutRequest", shortcutRequest)
-                putParcelable(EXTRA_ACTIVITY_COMPONENT_NAME, componentName)
+                putParcelable("activityComponentName", componentName) // backward compat
             }
 
             // Ensure we start from PackageListFragment
-            navController.popBackStack(R.id.PackageListFragment, false)
+            navController.popBackStack(R.id.PackageListFragment, inclusive = false)
             if (navController.currentDestination?.id != R.id.PackageListFragment) {
                 navController.navigate(R.id.PackageListFragment)
             }
@@ -293,7 +293,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         return when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
-                return true
+                true
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -307,6 +307,5 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
     companion object {
         const val EXTRA_ACTIVITY_COMPONENT_NAME = "activityComponentName"
-        const val EXTRA_BUILD_BACKSTACK = "buildBackstack"
     }
 }

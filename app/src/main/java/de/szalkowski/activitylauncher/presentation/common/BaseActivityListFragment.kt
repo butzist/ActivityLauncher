@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.presentation.common
 
-import android.content.ComponentName
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,13 +11,9 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import de.szalkowski.activitylauncher.core.util.getActivityIntent
-import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
-import de.szalkowski.activitylauncher.domain.packages.PackageRepository
-import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
-import de.szalkowski.activitylauncher.presentation.activities.ActivityInfoAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,35 +21,30 @@ abstract class BaseActivityListFragment : Fragment() {
     @Inject
     internal lateinit var launchActivityUseCase: LaunchActivityUseCase
 
-    @Inject
-    internal lateinit var packageRepository: PackageRepository
-
-    @Inject
-    internal lateinit var iconLoader: IconLoader
-
-    @Inject
-    internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
-
     protected abstract val viewModel: BaseActivityListViewModel
     protected abstract val recyclerViewId: Int
     protected abstract val logTag: String
-    protected abstract fun navigateToDetailsAction(componentName: ComponentName): NavDirections
+    protected abstract fun navigateToDetailsAction(request: ShortcutRequest): NavDirections
 
     private lateinit var adapter: ActivityInfoAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ActivityInfoAdapter { info ->
-            val icon = getActivityIconUseCase(info.iconResourceName, info.componentName)
-            icon.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
+        adapter = ActivityInfoAdapter()
+        adapter.onItemClick = { request ->
+            launchActivityUseCase(
+                LaunchRequest(
+                    intent = request.intent,
+                    name = request.name,
+                    icon = request.icon,
+                    launcherPlugin = request.launcherPlugin,
+                ),
+            )
         }
-        adapter.onItemClick = { info ->
-            launchActivityUseCase(LaunchRequest(getActivityIntent(info.componentName, null)))
-        }
-        adapter.onItemLongClick = { info ->
+        adapter.onItemLongClick = { request ->
             runCatching {
-                val action = navigateToDetailsAction(info.componentName)
+                val action = navigateToDetailsAction(request)
                 findNavController().navigate(action)
             }.onFailure { Log.e("Navigation", "Error while navigating from $logTag") }
         }
@@ -66,8 +56,8 @@ abstract class BaseActivityListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val item = adapter.getItem(position)
-                    viewModel.removeItem(item.componentName)
+                    val item = adapter.currentList[position]
+                    viewModel.removeItem(item)
                 }
             }
         }
@@ -76,15 +66,10 @@ abstract class BaseActivityListFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.activities.collect { activities ->
-                    adapter.submitList(activities)
+                viewModel.items.collect { items ->
+                    adapter.submitList(items)
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.load()
     }
 }

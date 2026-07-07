@@ -18,7 +18,7 @@ object TestUtils {
             // Swipe up to dismiss keyguard
             val width = device.displayWidth
             val height = device.displayHeight
-            device.swipe(width / 2, (height * 4 / 5), width / 2, height / 5, 20)
+            device.swipe(width / 2, (height * 4) / 5, width / 2, height / 5, 20)
 
             // Sometimes a menu key press helps to dismiss keyguard on older versions
             device.pressMenu()
@@ -44,7 +44,7 @@ object TestUtils {
         // Close system dialogs via intent
         try {
             device.executeShellCommand("am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS")
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Log.d(TAG, "Failed to broadcast CLOSE_SYSTEM_DIALOGS")
         }
 

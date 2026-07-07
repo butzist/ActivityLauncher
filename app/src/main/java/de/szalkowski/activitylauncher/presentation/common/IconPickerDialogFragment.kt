@@ -67,7 +67,7 @@ class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconLi
             binding.gvIcons.adapter = value
             binding.progressCircular.visibility = View.GONE
             binding.gvIcons.visibility = View.VISIBLE
-        } catch (ignored: Exception) {
+        } catch (_: Exception) {
             Toast.makeText(this.activity, R.string.error_icons, Toast.LENGTH_SHORT).show()
         }
     }

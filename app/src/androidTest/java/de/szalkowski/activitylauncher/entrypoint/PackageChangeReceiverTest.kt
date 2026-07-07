@@ -5,6 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.BindValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -13,52 +17,52 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.*
 
-@dagger.hilt.android.testing.HiltAndroidTest
-@dagger.hilt.android.testing.UninstallModules(de.szalkowski.activitylauncher.app.di.CoreServicesModule::class)
+@HiltAndroidTest
+@UninstallModules(de.szalkowski.activitylauncher.app.di.CoreServicesModule::class)
 @RunWith(AndroidJUnit4::class)
 class PackageChangeReceiverTest {
     @get:Rule
-    val hiltRule = dagger.hilt.android.testing.HiltAndroidRule(this)
+    val hiltRule = HiltAndroidRule(this)
 
     private lateinit var receiver: PackageChangeReceiver
 
-    @dagger.hilt.android.testing.BindValue
-    val packageRepository: de.szalkowski.activitylauncher.domain.packages.PackageRepository = mock()
+    @BindValue
+    val packageRepository: PackageRepository = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val activityLauncher: de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val intentSigner: de.szalkowski.activitylauncher.domain.launcher.IntentSigner = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val getActivityIconUseCase: de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val shortcutCreator: de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val activityLauncherProxy: de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val shortcutCreatorProxy: de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val iconLoader: de.szalkowski.activitylauncher.domain.launcher.IconLoader = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val activitySharer: de.szalkowski.activitylauncher.domain.external.ActivitySharer = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val viewIntentParser: de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()
 
-    @dagger.hilt.android.testing.BindValue
+    @BindValue
     val recentsRepository: de.szalkowski.activitylauncher.domain.recents.RecentsRepository = mock()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -78,18 +82,15 @@ class PackageChangeReceiverTest {
 
         receiver.onReceive(context, intent)
 
-        // Give some time for the coroutine in receiver to run
-        var verified = false
-        for (i in 1..10) {
+        repeat(10) {
             try {
                 verify(packageRepository).loadDetails(packageName)
-                verified = true
-                break
-            } catch (e: Throwable) {
+                return@runBlocking
+            } catch (_: Throwable) {
                 Thread.sleep(50)
             }
         }
-        if (!verified) verify(packageRepository).loadDetails(packageName)
+        verify(packageRepository).loadDetails(packageName)
     }
 
     @Test
@@ -102,18 +103,15 @@ class PackageChangeReceiverTest {
 
         receiver.onReceive(context, intent)
 
-        // Give some time for the coroutine in receiver to run
-        var verified = false
-        for (i in 1..10) {
+        repeat(10) {
             try {
                 verify(packageRepository).removePackage(packageName)
-                verified = true
-                break
-            } catch (e: Throwable) {
+                return@runBlocking
+            } catch (_: Throwable) {
                 Thread.sleep(50)
             }
         }
-        if (!verified) verify(packageRepository).removePackage(packageName)
+        verify(packageRepository).removePackage(packageName)
     }
 
     @Test

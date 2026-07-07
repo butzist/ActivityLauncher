@@ -57,7 +57,48 @@ data class PackageWithActivities(
     val activities: List<ActivityEntity>,
 )
 
-@Database(entities = [AppPackageEntity::class, ActivityEntity::class], version = 2, exportSchema = false)
+@Dao
+interface FavoriteDao {
+    @Query("SELECT * FROM favorites ORDER BY timestamp DESC")
+    fun getAllFlow(): Flow<List<FavoriteEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(favorite: FavoriteEntity): Long
+
+    @Query("DELETE FROM favorites WHERE packageName = :packageName AND className = :className")
+    suspend fun deleteByComponent(packageName: String, className: String): Int
+
+    @Query("SELECT EXISTS(SELECT 1 FROM favorites WHERE packageName = :packageName AND className = :className)")
+    suspend fun isFavorite(packageName: String, className: String): Boolean
+}
+
+@Dao
+interface RecentDao {
+    @Query("SELECT * FROM recents ORDER BY timestamp DESC")
+    fun getAllFlow(): Flow<List<RecentEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(recent: RecentEntity): Long
+
+    @Query("DELETE FROM recents WHERE packageName = :packageName AND className = :className")
+    suspend fun deleteByComponent(packageName: String, className: String): Int
+
+    @Query("DELETE FROM recents WHERE (packageName, className) NOT IN (SELECT packageName, className FROM recents ORDER BY timestamp DESC LIMIT :limit)")
+    suspend fun trim(limit: Int): Int
+}
+
+@Database(
+    entities = [
+        AppPackageEntity::class,
+        ActivityEntity::class,
+        FavoriteEntity::class,
+        RecentEntity::class,
+    ],
+    version = 4,
+    exportSchema = false,
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun packageDao(): PackageDao
+    abstract fun favoriteDao(): FavoriteDao
+    abstract fun recentDao(): RecentDao
 }

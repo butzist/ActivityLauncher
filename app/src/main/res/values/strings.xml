@@ -1,5 +1,11 @@
 <resources>
+    <string name="action_add_category">Add Category</string>
+    <string name="action_add_extra">Add Extra</string>
+    <string name="action_advanced_properties">Advanced Properties</string>
+    <string name="action_edit_intent">Edit Intent</string>
     <string name="action_personalized_ads_consent" comment="Settings action for personalized ads consent">Personalized Ads</string>
+    <string name="action_pick_icon_file" translatable="false">Load from file</string>
+    <string name="action_pick_icon_library" translatable="false">Pick from library</string>
     <string name="action_view_github" comment="Settings action to view the GitHub project">GitHub project</string>
     <string name="action_view_paid" comment="Settings action to view the paid Pro version on Google Play">Activity Launcher Pro</string>
     <string name="action_view_source" comment="Settings action to view the app's source code on GitHub">View source code</string>
@@ -34,13 +40,13 @@
     <string name="error_verbose_pin_shortcut" comment="Error message when the device launcher does not support pinning shortcuts">Current launcher does not support "PinShortcut". Unable to create shortcut.</string>
     <string name="exception_invalid_component_name" comment="Error message for dangerous or invalid component names. %s is the problematic component">Invalid or potentially harmful component name: %s</string>
     <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
-    <string name="label_class" comment="Form label for the activity class name field">Class</string>
     <string name="hint_extra_value_boolean">e.g. true or false</string>
     <string name="hint_extra_value_double">e.g. 1.23456789</string>
     <string name="hint_extra_value_float">e.g. 1.23</string>
     <string name="hint_extra_value_int">e.g. 123</string>
     <string name="hint_extra_value_long">e.g. 123456789</string>
     <string name="hint_extra_value_string">e.g. some text</string>
+    <string name="label_class" comment="Form label for the activity class name field">Class</string>
     <string name="label_icon" comment="Form label for the shortcut icon selection">Icon</string>
     <string name="label_intent_action">Action</string>
     <string name="label_intent_categories">Categories</string>
@@ -73,17 +79,10 @@
     <string name="theme_dark" comment="Theme option for dark color scheme">Dark Theme</string>
     <string name="theme_default" comment="Theme option to follow system theme">System Default</string>
     <string name="theme_light" comment="Theme option for light color scheme">Light Theme</string>
-    <string name="title_dialog_disclaimer" comment="Dialog title for the warning dialog shown on first launch">Disclaimer</string>
-    <string name="title_dialog_icon_picker" comment="Dialog title for selecting an icon when creating or editing a shortcut">Pick an icon</string>
-    <string name="action_add_category">Add Category</string>
-    <string name="action_add_extra">Add Extra</string>
-    <string name="action_advanced_properties">Advanced Properties</string>
-    <string name="action_edit_intent">Edit Intent</string>
-    <string name="action_pick_icon_file" translatable="false">Load from file</string>
-    <string name="action_pick_icon_library" translatable="false">Pick from library</string>
     <string name="title_dialog_crop_icon" translatable="false">Crop Icon</string>
+    <string name="title_dialog_disclaimer" comment="Dialog title for the warning dialog shown on first launch">Disclaimer</string>
     <string name="title_dialog_edit_intent">Edit Intent</string>
-    <string name="label_icon_from_gallery_or_camera">Icon from gallery</string>
+    <string name="title_dialog_icon_picker" comment="Dialog title for selecting an icon when creating or editing a shortcut">Pick an icon</string>
     <string name="title_dialog_support" comment="Dialog title for the support/donate dialog">Thanks for using Activity Launcher</string>
     <string name="title_fragment_activity_list" comment="Screen title showing activities within a selected package">Activities</string>
     <string name="title_fragment_package_list" comment="Screen title for the list of installed packages/apps">Installed packages</string>

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
@@ -25,10 +26,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
 import de.szalkowski.activitylauncher.domain.external.ReviewRequester
+import de.szalkowski.activitylauncher.domain.intent.IntentDef
 import de.szalkowski.activitylauncher.presentation.common.CropIconDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.IconPickerDialogFragment
 import de.szalkowski.activitylauncher.presentation.common.PluginChooserDialogFragment
 import de.szalkowski.activitylauncher.presentation.intent.EditIntentDialogFragment
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -54,17 +57,25 @@ class ActivityDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        childFragmentManager.setFragmentResultListener(EditIntentDialogFragment.REQUEST_KEY, this) { _, bundle ->
-            val intentDef = bundle.getParcelable<de.szalkowski.activitylauncher.domain.intent.IntentDef>(EditIntentDialogFragment.RESULT_INTENT_DEF)
-            if (intentDef != null) {
-                viewModel.updateIntentDef(intentDef)
-            }
-        }
-
         childFragmentManager.setFragmentResultListener(PluginChooserDialogFragment.REQUEST_KEY, this) { _, bundle ->
-            val action = bundle.getSerializable(PluginChooserDialogFragment.RESULT_ACTION) as? PluginChooserDialogFragment.PluginAction
-            val launchPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN)
-            val shortcutPlugin = bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN)
+            val action = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getSerializable(PluginChooserDialogFragment.RESULT_ACTION, PluginChooserDialogFragment.PluginAction::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getSerializable(PluginChooserDialogFragment.RESULT_ACTION) as? PluginChooserDialogFragment.PluginAction
+            }
+            val launchPlugin = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN, ComponentName::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_LAUNCH_PLUGIN)
+            }
+            val shortcutPlugin = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN, ComponentName::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN)
+            }
             viewModel.selectLaunchPlugin(launchPlugin)
             viewModel.selectShortcutPlugin(shortcutPlugin)
 
@@ -74,6 +85,21 @@ class ActivityDetailsFragment : Fragment() {
                 null -> {}
             }
         }
+
+        childFragmentManager.setFragmentResultListener(EditIntentDialogFragment.REQUEST_KEY, this) { _, bundle ->
+            val intentDef = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable(EditIntentDialogFragment.RESULT_INTENT_DEF, IntentDef::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getParcelable<IntentDef>(EditIntentDialogFragment.RESULT_INTENT_DEF)
+            }
+            intentDef?.let { viewModel.updateIntentDef(it) }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        activity?.invalidateOptionsMenu()
     }
 
     override fun onCreateView(
@@ -96,6 +122,9 @@ class ActivityDetailsFragment : Fragment() {
                 }
 
                 override fun onPrepareMenu(menu: Menu) {
+                    val advancedItem = menu.findItem(R.id.action_advanced)
+                    advancedItem.isEnabled = viewModel.canLaunch.value
+
                     val favoriteItem = menu.findItem(R.id.action_favorite)
                     if (viewModel.isFavorite.value) {
                         favoriteItem.setIcon(R.drawable.ic_favorite)
@@ -106,24 +135,21 @@ class ActivityDetailsFragment : Fragment() {
 
                     val shareItem = menu.findItem(R.id.action_share)
                     shareItem.isEnabled = viewModel.canShare.value
-
-                    val advancedItem = menu.findItem(R.id.action_advanced)
-                    advancedItem.isEnabled = viewModel.canLaunch.value
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
+                        R.id.action_advanced -> {
+                            val dialog = EditIntentDialogFragment.newInstance(viewModel.intentDef.value)
+                            dialog.show(childFragmentManager, "edit intent")
+                            true
+                        }
                         R.id.action_favorite -> {
                             viewModel.toggleFavorite()
                             true
                         }
                         R.id.action_share -> {
                             viewModel.shareActivity()
-                            true
-                        }
-                        R.id.action_advanced -> {
-                            val dialog = EditIntentDialogFragment.newInstance(viewModel.intentDef.value)
-                            dialog.show(childFragmentManager, "edit intent")
                             true
                         }
                         else -> false
@@ -143,16 +169,8 @@ class ActivityDetailsFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.activityInfo.collect { info ->
-                        if (info != null) {
-                            binding.tiName.setText(viewModel.editedName.value)
-                            binding.tiPackage.setText(viewModel.editedPackage.value)
-                            binding.tiClass.setText(viewModel.editedClass.value)
-                        }
-                    }
-                }
-                launch {
                     viewModel.editedIcon.collect { icon ->
+                        android.util.Log.d("ActivityDetails", "New icon emitted: $icon (type=${icon?.type})")
                         val drawable = icon?.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
                         binding.ibIconPicker.setImageDrawable(drawable)
                     }
@@ -168,9 +186,18 @@ class ActivityDetailsFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.canLaunch.collect { isEnabled ->
-                        binding.btLaunch.isEnabled = isEnabled
-                        binding.btLaunchChooser.isEnabled = isEnabled
+                    combine(
+                        viewModel.canLaunch,
+                        viewModel.canFavorite,
+                        viewModel.canShare,
+                    ) { canLaunch, canFavorite, canShare ->
+                        Triple(canLaunch, canFavorite, canShare)
+                    }.collect { states ->
+                        binding.btLaunch.isEnabled = states.first
+                        binding.btLaunchChooser.isEnabled = states.first
+                        binding.btFavorite.isEnabled = states.second
+                        binding.btShareShortcut.isEnabled = states.third
+                        activity?.invalidateOptionsMenu()
                     }
                 }
                 launch {
@@ -180,24 +207,18 @@ class ActivityDetailsFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.canShare.collect { isEnabled ->
-                        binding.btShareShortcut.isEnabled = isEnabled
-                        activity?.invalidateOptionsMenu()
-                    }
-                }
-                launch {
-                    viewModel.canFavorite.collect { isEnabled ->
-                        binding.btFavorite.isEnabled = isEnabled
-                        activity?.invalidateOptionsMenu()
-                    }
-                }
-                launch {
                     viewModel.errorMessage.collect { resId ->
                         Toast.makeText(requireContext(), resId, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
+
+        // Initialize fields with current values from ViewModel
+        binding.tiName.setText(viewModel.editedName.value)
+        binding.tiPackage.setText(viewModel.editedPackage.value)
+        binding.tiClass.setText(viewModel.editedClass.value)
+        updateFavoriteUI(viewModel.isFavorite.value)
 
         binding.btFavorite.setOnClickListener {
             viewModel.toggleFavorite()
@@ -252,10 +273,10 @@ class ActivityDetailsFragment : Fragment() {
     private fun updateFavoriteUI(isFavorite: Boolean) {
         if (isFavorite) {
             binding.btFavorite.setText(R.string.context_action_favorite_remove)
-            binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite, 0, 0, 0)
+            binding.btFavorite.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
         } else {
             binding.btFavorite.setText(R.string.context_action_favorite_add)
-            binding.btFavorite.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border, 0, 0, 0)
+            binding.btFavorite.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_border)
         }
     }
 

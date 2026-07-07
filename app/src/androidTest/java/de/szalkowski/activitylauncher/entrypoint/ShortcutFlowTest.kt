@@ -76,16 +76,22 @@ class ShortcutFlowTest {
     fun init() {
         hiltRule.inject()
 
+        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
+
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(emptySet())
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
-        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(false))
+        whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
+        whenever(activityLauncherProxy.hasMultipleHandlers()).thenReturn(true)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
             val componentName = invocation.getArgument<ComponentName>(0)
-            de.szalkowski.activitylauncher.domain.model.MyActivityInfo(
+            MyActivityInfo(
                 componentName,
                 "Test Activity",
                 null,

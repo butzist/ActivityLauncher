@@ -24,7 +24,13 @@
         system,
         ...
       }: let
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            android_sdk.accept_license = true;
+            allowUnfree = true;
+          };
+        };
 
         jlib = jailed-agents.lib.${system};
         combinators = jlib.internals.jail.combinators;
@@ -35,9 +41,19 @@
           ps.google-auth-oauthlib
         ]);
 
+        androidSdk = pkgs.androidenv.composeAndroidPackages {
+          platformVersions = ["37"];
+          buildToolsVersions = ["37.0.0"];
+          cmakeVersions = [];
+          includeEmulator = false;
+          includeSystemImages = false;
+          includeSources = false;
+        };
+
         androidPkgs = [
           pkgs.openjdk21_headless
           pkgs.android-tools
+          androidSdk.androidsdk
         ];
 
         agentPkgs = androidPkgs ++ [python];
@@ -58,9 +74,12 @@
                   ];
               })
             ];
-          inputsFrom = [config.flake-root.devShell]; # Provides $FLAKE_ROOT in dev shell
+          inputsFrom = [config.flake-root.devShell];
           shellHook = ''
+            export ANDROID_SDK_ROOT="${androidSdk.androidsdk}/libexec/android-sdk"
+            export ANDROID_HOME="$ANDROID_SDK_ROOT"
             echo "Activity Launcher dev shell"
+            echo "Run: ./gradlew app:assembleOssNoadsDebug"
             echo "Run: python scripts/update-listing.py --help"
           '';
         };

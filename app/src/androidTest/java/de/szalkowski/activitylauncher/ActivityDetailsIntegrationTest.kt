@@ -2,12 +2,16 @@ package de.szalkowski.activitylauncher
 
 import android.content.ComponentName
 import android.content.Intent
+import android.net.Uri
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.intent.Intents.intending
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.BindValue
@@ -19,6 +23,7 @@ import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
@@ -47,6 +52,9 @@ class ActivityDetailsIntegrationTest {
 
     @get:Rule
     val disableAnimationsRule = DisableAnimationsRule()
+
+    @get:Rule
+    val intentsRule = androidx.test.espresso.intent.rule.IntentsRule()
 
     @BindValue
     val activityLauncher: ActivityLauncher = mock()
@@ -91,6 +99,8 @@ class ActivityDetailsIntegrationTest {
     val getPackageIconUseCase: GetPackageIconUseCase = mock()
 
     private val favoriteSet = mutableSetOf<ComponentName>()
+    private val favoriteFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutRequest>>(emptyList())
+    private val recentsFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutRequest>>(emptyList())
 
     @Inject
     lateinit var systemRepository: FakeSystemPackageRepository
@@ -100,19 +110,50 @@ class ActivityDetailsIntegrationTest {
         TestUtils.unlockScreen()
         hiltRule.inject()
         favoriteSet.clear()
+        favoriteFlow.value = emptyList()
+        recentsFlow.value = emptyList()
+
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(favoriteSet)
-        whenever(favoritesRepository.isFavorite(any())).thenAnswer { invocation ->
-            favoriteSet.contains(invocation.getArgument(0))
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(favoriteFlow)
+        whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        whenever(recentsRepository.getRecentsFlow()).thenReturn(recentsFlow)
+
+        whenever(favoritesRepository.isFavorite(any<ComponentName>())).thenAnswer { invocation ->
+            favoriteSet.contains(invocation.getArgument<ComponentName>(0))
         }
         doAnswer { invocation ->
-            favoriteSet.add(invocation.getArgument(0))
-        }.whenever(favoritesRepository).addFavorite(any())
-        doAnswer { invocation ->
-            favoriteSet.remove(invocation.getArgument(0))
-        }.whenever(favoritesRepository).removeFavorite(any())
+            val component = invocation.getArgument<ComponentName>(0)
+            if (favoriteSet.add(component)) {
+                val icon = getActivityIconUseCase(null, component)
+                val intent = android.content.Intent().setComponent(component)
+                val request = ShortcutRequest("Test Activity", intent, icon)
+                favoriteFlow.value = favoriteFlow.value + request
+            }
+        }.whenever(favoritesRepository).addFavorite(any<ComponentName>())
 
-        whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
+        doAnswer { invocation ->
+            val request = invocation.getArgument<ShortcutRequest>(0)
+            val component = request.intent.component
+            if (component != null && favoriteSet.add(component)) {
+                favoriteFlow.value = favoriteFlow.value + request
+            }
+        }.whenever(favoritesRepository).addFavorite(any<ShortcutRequest>())
+
+        doAnswer { invocation ->
+            val component = invocation.getArgument<ComponentName>(0)
+            if (favoriteSet.remove(component)) {
+                favoriteFlow.value = favoriteFlow.value.filter { it.intent.component != component }
+            }
+        }.whenever(favoritesRepository).removeFavorite(any<ComponentName>())
+
+        doAnswer { invocation ->
+            val request = invocation.getArgument<ShortcutRequest>(0)
+            val component = request.intent.component
+            if (component != null && favoriteSet.remove(component)) {
+                favoriteFlow.value = favoriteFlow.value.filter { it.intent.component != component }
+            }
+        }.whenever(favoritesRepository).removeFavorite(any<ShortcutRequest>())
 
         val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)
@@ -157,6 +198,12 @@ class ActivityDetailsIntegrationTest {
 
         whenever(packageRepository.getActivity(eq(componentName))).thenReturn(activities[0])
         whenever(packageRepository.getActivities(eq(pkg.packageName))).thenReturn(de.szalkowski.activitylauncher.domain.model.PackageActivities(pkg.packageName, pkg.name, activities[0], activities))
+
+        // Stub the file picker intent
+        val resultData = Intent()
+        resultData.data = Uri.parse("content://test/image.png")
+        val result = android.app.Instrumentation.ActivityResult(android.app.Activity.RESULT_OK, resultData)
+        intending(hasAction(Intent.ACTION_GET_CONTENT)).respondWith(result)
     }
 
     @Test
@@ -184,7 +231,17 @@ class ActivityDetailsIntegrationTest {
 
             Thread.sleep(2000)
 
-            // 2. Test Favorite Toggle
+            // 2. Test Icon Picker Popup
+            onView(withId(R.id.ibIconPicker)).perform(scrollTo(), click())
+            Thread.sleep(1000)
+            onView(withText(R.string.action_pick_icon_library)).perform(click())
+            Thread.sleep(1000)
+            // Verify dialog is shown
+            onView(withText(R.string.title_dialog_icon_picker)).check(matches(isDisplayed()))
+            onView(withText(android.R.string.cancel)).perform(click())
+            Thread.sleep(1000)
+
+            // 3. Test Favorite Toggle
             val favoriteButton = onView(withId(R.id.btFavorite))
             val initialText = getText(favoriteButton)
 
@@ -224,8 +281,125 @@ class ActivityDetailsIntegrationTest {
                 TestUtils.dismissSystemDialogs()
                 Thread.sleep(1000)
             }
+
+            // 5. Test Edit Intent Navigation
+            onView(withContentDescription(R.string.action_advanced_properties)).perform(click())
+            Thread.sleep(1000)
+            onView(withText(R.string.title_dialog_edit_intent)).check(matches(isDisplayed()))
+            onView(withText(android.R.string.cancel)).perform(click())
+            Thread.sleep(1000)
+
+            // 6. Test Load from File Popup
+            onView(withId(R.id.ibIconPicker)).perform(scrollTo(), click())
+            Thread.sleep(1000)
+            onView(withText(R.string.action_pick_icon_file)).perform(click())
+            Thread.sleep(2000)
+
+            // Verify crop dialog is shown (it should be triggered by viewModel.updateIconUri which is called after picker returns)
+            // Wait, in fragment: pickImageLauncher.launch("image/*") -> then uri -> CropIconDialogFragment
+            onView(withText(R.string.title_dialog_crop_icon)).check(matches(isDisplayed()))
+            onView(withText(android.R.string.ok)).perform(click())
+            Thread.sleep(1000)
+
+            // Verify dialog is gone
+            onView(withText(R.string.title_dialog_crop_icon)).check(doesNotExist())
         } finally {
             // Use runCatching to avoid cleanup errors masking real test failures
+            runCatching { scenario.close() }
+        }
+    }
+
+    @Test
+    fun testToolbarMenuStates() {
+        val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
+        val scenario = ActivityScenario.launch<MainActivity>(intent)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            // Navigate to ActivityDetails
+            Thread.sleep(5000)
+            onView(withId(R.id.PackageListFragment)).perform(click())
+            Thread.sleep(2000)
+            onView(withId(R.id.rvPackages))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(2000)
+            onView(withId(R.id.rvActivities))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(2000)
+
+            // 1. Verify initial state (Enabled)
+            val favoriteMatcher = withContentDescription(R.string.context_action_favorite_add)
+            val shareMatcher = withContentDescription(R.string.context_action_share)
+            val advancedMatcher = withContentDescription(R.string.action_advanced_properties)
+
+            // Wait for buttons to become enabled
+            var enabled = false
+            for (i in 1..20) {
+                try {
+                    onView(favoriteMatcher).check(matches(isEnabled()))
+                    enabled = true
+                    break
+                } catch (e: Throwable) {
+                    Thread.sleep(500)
+                }
+            }
+            if (!enabled) throw AssertionError("Toolbar buttons not enabled in time")
+
+            onView(shareMatcher).check(matches(isEnabled()))
+            onView(advancedMatcher).check(matches(isEnabled()))
+
+            // 2. Clear name - Favorite should disable, Share/Advanced remain enabled
+            onView(withId(R.id.tiName)).perform(replaceText(""))
+            Thread.sleep(1000)
+            onView(favoriteMatcher).check(matches(not(isEnabled())))
+            onView(shareMatcher).check(matches(isEnabled()))
+            onView(advancedMatcher).check(matches(isEnabled()))
+
+            // 3. Clear package - All should disable
+            onView(withId(R.id.tiPackage)).perform(replaceText(""))
+            Thread.sleep(1000)
+            onView(favoriteMatcher).check(matches(not(isEnabled())))
+            onView(shareMatcher).check(matches(not(isEnabled())))
+            onView(advancedMatcher).check(matches(not(isEnabled())))
+        } finally {
+            runCatching { scenario.close() }
+        }
+    }
+
+    @Test
+    fun testEditAndFavoriteWorkflow() {
+        val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
+        val scenario = ActivityScenario.launch<MainActivity>(intent)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            // 1. Navigate to ActivityDetails
+            Thread.sleep(5000)
+            onView(withId(R.id.PackageListFragment)).perform(click())
+            Thread.sleep(2000)
+            onView(withId(R.id.rvPackages))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(2000)
+            onView(withId(R.id.rvActivities))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(2000)
+
+            // 2. Edit Name
+            val newName = "Custom Activity Name"
+            onView(withId(R.id.tiName)).perform(replaceText(newName))
+            Thread.sleep(1000)
+
+            // 3. Click Favorite (Toolbar item)
+            onView(withContentDescription(R.string.context_action_favorite_add)).perform(click())
+            Thread.sleep(1000)
+
+            // 4. Navigate back to Favorites
+            onView(withId(R.id.FavoritesFragment)).perform(click())
+            Thread.sleep(2000)
+
+            // 5. Verify the custom name exists in the favorites list
+            onView(withText(newName)).check(matches(isDisplayed()))
+        } finally {
             runCatching { scenario.close() }
         }
     }

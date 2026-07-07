@@ -38,6 +38,11 @@ data class ShortcutRequest(
 
     override fun describeContents(): Int = 0
 
+    companion object CREATOR : Parcelable.Creator<ShortcutRequest> {
+        override fun createFromParcel(parcel: Parcel): ShortcutRequest = ShortcutRequest(parcel)
+        override fun newArray(size: Int): Array<ShortcutRequest?> = arrayOfNulls(size)
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ShortcutRequest) return false
@@ -52,10 +57,5 @@ data class ShortcutRequest(
         result = 31 * result + (intent.toUri(0).hashCode())
         result = 31 * result + (launcherPlugin?.hashCode() ?: 0)
         return result
-    }
-
-    companion object CREATOR : Parcelable.Creator<ShortcutRequest> {
-        override fun createFromParcel(parcel: Parcel): ShortcutRequest = ShortcutRequest(parcel)
-        override fun newArray(size: Int): Array<ShortcutRequest?> = arrayOfNulls(size)
     }
 }

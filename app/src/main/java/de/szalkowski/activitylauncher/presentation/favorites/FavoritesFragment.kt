@@ -9,6 +9,7 @@ import androidx.navigation.NavDirections
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentFavoritesBinding
+import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.presentation.common.BaseActivityListFragment
 
 @AndroidEntryPoint
@@ -16,8 +17,8 @@ class FavoritesFragment : BaseActivityListFragment() {
     override val viewModel: FavoritesViewModel by viewModels()
     override val recyclerViewId: Int = R.id.rvFavorites
     override val logTag: String = "FavoritesFragment"
-    override fun navigateToDetailsAction(componentName: android.content.ComponentName): NavDirections =
-        FavoritesFragmentDirections.actionSelectActivity(componentName)
+    override fun navigateToDetailsAction(request: ShortcutRequest): NavDirections =
+        FavoritesFragmentDirections.actionSelectActivity(request)
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!

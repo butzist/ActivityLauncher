@@ -40,10 +40,6 @@ class ActivityListFragment : Fragment() {
     private var _binding: FragmentActivityListBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,7 +79,7 @@ class ActivityListFragment : Fragment() {
                 val icon = getActivityIconUseCase(it.iconResourceName, it.componentName)
                 val intent = Intent().setComponent(it.componentName)
                 val request = ShortcutRequest(it.name, intent, icon)
-                val action = ActivityListFragmentDirections.actionSelectActivity(shortcutRequest = request)
+                val action = ActivityListFragmentDirections.actionSelectActivity(request)
                 findNavController().navigate(action)
             }.onFailure { e -> Log.e("Navigation", "Error while navigating from ActivityListFragment", e) }
         }
