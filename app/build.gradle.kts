@@ -16,8 +16,8 @@ android {
             providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 37
-        versionCode = 20405
-        versionName = "2.4.0"
+        versionCode = 20406
+        versionName = "2.4.1"
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "de.szalkowski.activitylauncher.HiltTestRunner"
