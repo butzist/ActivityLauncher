@@ -10,7 +10,6 @@ import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
-import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
 import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,8 +23,8 @@ class ShortcutCreatorImpl @Inject constructor(
     override fun createLauncherIcon(request: ShortcutRequest) {
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT)
         intent.component = ComponentName(
-            context,
-            ShortcutActivity::class.java,
+            context.packageName,
+            "de.szalkowski.activitylauncher.ShortcutActivity",
         )
 
         intent.putExtra(
