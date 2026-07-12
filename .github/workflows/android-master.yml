@@ -20,12 +20,21 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
     - name: Prepare Android keystore
-      run: echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
+      run: |
+        echo ${{ secrets.ENCODEDKEYSTORE }} | base64 --decode > app/keystore.jks
+        # Verify keystore was created successfully
+        if [ -f app/keystore.jks ]; then
+          echo "✓ Keystore file created successfully"
+          ls -lh app/keystore.jks
+        else
+          echo "✗ Failed to create keystore file"
+          exit 1
+        fi
     - name: Build release APK
       run: ./gradlew assembleOssNoadsRelease --build-cache
       env:
         APPID: de.szalkowski.activitylauncher.oss
-        KEYSTORE: keystore.jks
+        KEYSTORE: app/keystore.jks
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
         KEY_ALIAS: de.szalkowski.activitylauncher.oss
         KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
