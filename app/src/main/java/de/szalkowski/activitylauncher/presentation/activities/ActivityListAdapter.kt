@@ -30,6 +30,7 @@ class ActivityListAdapter @AssistedInject constructor(
     private val allActivities = packageRepository.getActivities(packageName)
     private val combinedActivities = allActivities.activities
     var onItemClick: ((MyActivityInfo) -> Unit)? = null
+    var onItemLongClick: ((MyActivityInfo) -> Unit)? = null
 
     init {
         submitList(combinedActivities)
@@ -44,6 +45,10 @@ class ActivityListAdapter @AssistedInject constructor(
         init {
             itemView.setOnClickListener {
                 onItemClick?.invoke(item)
+            }
+            itemView.setOnLongClickListener {
+                onItemLongClick?.invoke(item)
+                true
             }
         }
     }

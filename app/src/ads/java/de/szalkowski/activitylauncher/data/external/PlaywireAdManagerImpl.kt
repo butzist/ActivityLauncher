@@ -26,7 +26,14 @@ class PlaywireAdManagerImpl @Inject constructor(
 ) : AdManager {
     private var isInitialized = false
 
+    companion object {
+        private const val FALLBACK_BANNER_TAG = "fallback_banner"
+    }
+
     override fun loadBanner(activity: Activity, container: ViewGroup) {
+        // Show fallback immediately
+        showFallbackBanner(activity, container)
+
         if (isInitialized) {
             setupBanner(activity, container)
             return
@@ -36,7 +43,6 @@ class PlaywireAdManagerImpl @Inject constructor(
         val appId = context.getString(R.string.app_id)
 
         if (publisherId.isEmpty() || appId.isEmpty()) {
-            showFallbackBanner(activity, container)
             return
         }
 
@@ -48,8 +54,6 @@ class PlaywireAdManagerImpl @Inject constructor(
             if (success) {
                 isInitialized = true
                 setupBanner(activity, container)
-            } else {
-                showFallbackBanner(activity, container)
             }
         }
     }
@@ -67,13 +71,22 @@ class PlaywireAdManagerImpl @Inject constructor(
     }
 
     private fun setupBanner(context: Context, container: ViewGroup) {
+        var banner: PWBannerView? = null
         val listener = object : PWViewAd.Listener {
             override fun onViewAdLoaded(ad: PWViewAd) {
-                container.visibility = View.VISIBLE
+                // Remove fallback and show ad
+                container.findViewWithTag<View>(FALLBACK_BANNER_TAG)?.let {
+                    container.removeView(it)
+                }
+                banner?.visibility = View.VISIBLE
             }
 
             override fun onViewAdFailedToLoad(ad: PWViewAd) {
-                showFallbackBanner(context as Activity, container)
+                // Remove the failed ad view, fallback stays
+                banner?.let {
+                    container.removeView(it)
+                    it.destroy()
+                }
             }
 
             override fun onViewAdOpened(ad: PWViewAd) {}
@@ -88,14 +101,26 @@ class PlaywireAdManagerImpl @Inject constructor(
             Gravity.CENTER,
         )
 
-        val banner = PWBannerView(context, "banner-320x50", listener)
-        container.removeAllViews()
+        banner = PWBannerView(context, "banner-320x50", listener)
+        banner.visibility = View.GONE
         container.addView(banner, layoutParams)
         banner.load()
     }
 
     private fun showFallbackBanner(activity: Activity, container: ViewGroup) {
+        val existing = container.findViewWithTag<View>(FALLBACK_BANNER_TAG)
+        if (existing != null) {
+            existing.setOnClickListener {
+                runCatching {
+                    val intent = Intent(Intent.ACTION_VIEW, context.getString(R.string.url_pro).toUri())
+                    activity.startActivity(intent)
+                }
+            }
+            return
+        }
+
         val banner = ImageView(activity).apply {
+            tag = FALLBACK_BANNER_TAG
             setImageResource(R.drawable.getpro_banner)
             setOnClickListener {
                 runCatching {
@@ -111,7 +136,6 @@ class PlaywireAdManagerImpl @Inject constructor(
             Gravity.CENTER,
         )
 
-        container.removeAllViews()
         container.addView(banner, layoutParams)
         container.visibility = View.VISIBLE
     }
