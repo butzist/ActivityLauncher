@@ -51,9 +51,11 @@
         };
 
         androidSdkPath = "${androidSdk.androidsdk}/libexec/android-sdk";
+        jdk = pkgs.openjdk21_headless;
+        javaHome = "${jdk}";
 
         androidPkgs = [
-          pkgs.openjdk21_headless
+          jdk
           pkgs.android-tools
           androidSdk.androidsdk
           pkgs.coreutils
@@ -82,6 +84,9 @@
                   jlib.commonJailOptions
                   ++ [
                     (readwrite (noescape "\"$FLAKE_ROOT\""))
+                    (set-env "ANDROID_HOME" androidSdkPath)
+                    (set-env "ANDROID_SDK_ROOT" androidSdkPath)
+                    (set-env "JAVA_HOME" javaHome)
                   ];
               })
             ];
@@ -90,9 +95,21 @@
             export ANDROID_SDK_ROOT="${androidSdkPath}"
             export ANDROID_HOME="$ANDROID_SDK_ROOT"
             export ANDROID_AVD_HOME="$HOME/.android/avd"
-            export GRADLE_OPTS="-Dorg.gradle.daemon=false"
+            export JAVA_HOME="${javaHome}"
+            export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4g"
+            export ANDROID_AAPT2="${androidSdkPath}/build-tools/37.0.0/aapt2"
 
             gradlew() {
+              # On NixOS, the AGP-bundled aapt2 is a prebuilt binary that won't run.
+              # Replace cached aapt2 with the Nix SDK one if the bundled one is broken.
+              local aapt2_path
+              aapt2_path=$(find ~/.gradle/caches -name "aapt2" -path "*/aapt2-*-linux/aapt2" -type f 2>/dev/null | head -1)
+              if [ -n "$aapt2_path" ]; then
+                if ! "$aapt2_path" version >/dev/null 2>&1; then
+                  cp -f "$ANDROID_AAPT2" "$aapt2_path" 2>/dev/null || true
+                fi
+              fi
+              export ANDROID_AAPT2="${androidSdkPath}/build-tools/37.0.0/aapt2"
               ${pkgs.coreutils}/bin/env sh "$FLAKE_ROOT/gradlew" "$@"
             }
 

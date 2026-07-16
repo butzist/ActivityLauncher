@@ -10,6 +10,7 @@ plugins {
 android {
     namespace = "de.szalkowski.activitylauncher"
     compileSdk = 37
+    buildToolsVersion = "37.0.0"
 
     defaultConfig {
         applicationId =
