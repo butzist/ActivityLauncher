@@ -114,6 +114,11 @@
             android:exported="false"
             android:theme="@style/Theme.ActivityLauncher.Translucent" />
 
+        <activity
+            android:name=".entrypoint.ShortcutUpdateActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ActivityLauncher.Translucent" />
+
         <service
             android:name=".entrypoint.QSTileService"
             android:exported="true"

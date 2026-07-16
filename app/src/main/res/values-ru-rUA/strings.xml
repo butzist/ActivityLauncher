@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Добавить категорию</string>
     <string name="action_add_extra">Добавить Extra</string>
+    <string name="action_add_new">Добавить новый</string>
     <string name="action_advanced_properties">Расширенные свойства</string>
     <string name="action_clear">Очистить</string>
     <string name="action_pick_icon_file">Загрузить из файла</string>
     <string name="action_pick_icon_library">Выбрать из библиотеки</string>
     <string name="action_save">Сохранить</string>
     <string name="action_save_as_new">Сохранить как новый</string>
+    <string name="action_update">Обновить</string>
     <string name="action_view_github">Проект GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Просмотреть исходный код</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Это приложение предоставляет доступ к функциям, которые обычно не видны пользователям. Некоторые опции могут работать не так, как ожидалось, или могут быть небезопасными для использования. Вы понимаете и всё ещё хотите продолжить?</string>
     <string name="dialog_progress_loading">Загрузка…</string>
     <string name="dialog_support">Мы добавили рекламу, чтобы финансировать дальнейшую разработку. Предпочитаете без рекламы? Обновитесь до Activity Launcher Pro в Google Play — он полностью с открытым исходным кодом и поддерживает дальнейшую работу над приложением. Вы также можете получить приложение бесплатно на GitHub. Поддержка там необязательна, но очень помогает нам.</string>
+    <string name="dialog_update_shortcut">Ярлык с таким ID уже существует на главном экране. Вы хотите обновить существующий ярлык или добавить новый?</string>
     <string name="error">Ошибка</string>
     <string name="error_duplicate_category">Дубликат категории</string>
     <string name="error_duplicate_extra_key">Дубликат ключа</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Изменить Intent</string>
     <string name="title_dialog_icon_picker">Выберите иконку</string>
     <string name="title_dialog_support">Спасибо за использование Запуск Activity</string>
+    <string name="title_dialog_update_shortcut">Обновить ярлык?</string>
     <string name="title_fragment_activity_list">Действия</string>
     <string name="title_fragment_package_list">Установленные пакеты</string>
 </resources>

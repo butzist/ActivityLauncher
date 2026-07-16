@@ -6,15 +6,15 @@ import androidx.core.graphics.drawable.IconCompat
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
-import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import de.szalkowski.activitylauncher.domain.model.ShortcutProxyRequest
+import de.szalkowski.activitylauncher.domain.model.ShortcutSource
 import javax.inject.Inject
 
-class ViewIntentParserImpl @Inject constructor(
-    private val getActivityIconUseCase: GetActivityIconUseCase,
-) : ViewIntentParser {
-    override fun parseLaunchRequest(intent: Intent): LaunchRequest? {
+class ViewIntentParserImpl @Inject constructor() : ViewIntentParser {
+    override fun parseLaunchRequest(intent: Intent, source: LaunchSource?): LaunchRequest? {
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
             ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
         val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) }
@@ -28,10 +28,22 @@ class ViewIntentParserImpl @Inject constructor(
 
         val name = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME)
         val iconBundle = intent.getBundleExtra(ShortcutCreator.INTENT_EXTRA_ICON)
-        val icon = iconBundle?.let { IconCompat.createFromBundle(it) }
+        val icon = iconBundle?.let { IconCompat.createFromBundle(it) }?.let { ActivityIcon.from(it) }
+
+        val resolvedSource = source ?: when (intent.action) {
+            ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY -> LaunchSource.PROXY
+            Intent.ACTION_VIEW -> LaunchSource.DEEPLINK
+            else -> LaunchSource.PRIMARY
+        }
 
         if (launchIntent != null) {
-            return LaunchRequest(launchIntent, name = name, icon = icon, launcherPlugin = launcherPlugin)
+            return LaunchRequest(
+                launchIntent,
+                name = name,
+                icon = icon,
+                launcherPlugin = launcherPlugin,
+                source = resolvedSource,
+            )
         }
 
         val component = componentNameFromIntent(intent) ?: return null
@@ -39,34 +51,48 @@ class ViewIntentParserImpl @Inject constructor(
             this.component = component
         }
 
-        return LaunchRequest(newLaunchIntent, launcherPlugin = launcherPlugin)
+        return LaunchRequest(newLaunchIntent, launcherPlugin = launcherPlugin, source = resolvedSource)
     }
 
-    override fun parseShortcutRequest(intent: Intent): ShortcutRequest? {
-        val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
+    override fun parseShortcutRequest(intent: Intent): ShortcutProxyRequest? {
+        val name = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
             ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
-        var launchIntent = launchIntentStr?.let { parseShortcutIntent(it) } ?: return null
-        var component = launchIntent.component ?: return null
-
-        // Unwrap LAUNCH_SHORTCUT if it points back to ShortcutActivity
-        if (launchIntent.action == ShortcutCreator.INTENT_LAUNCH_SHORTCUT) {
-            val unwrappedIntentStr = launchIntent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
-            val unwrappedIntent = unwrappedIntentStr?.let { parseShortcutIntent(it) }
-            if (unwrappedIntent?.component != null) {
-                launchIntent = unwrappedIntent
-                component = unwrappedIntent.component!!
-            }
-        }
+            ?: return null
+        val launchIntent = parseShortcutIntent(launchIntentStr) ?: return null
 
         val iconBundle = intent.getBundleExtra(ShortcutCreator.INTENT_EXTRA_ICON)
-        val icon = iconBundle?.let { IconCompat.createFromBundle(it) }
-            ?: getActivityIconUseCase(null, component)
+        val icon = iconBundle?.let { IconCompat.createFromBundle(it) }?.let { ActivityIcon.from(it) } ?: return null
 
+        val source = when (intent.action) {
+            ShortcutCreator.INTENT_LAUNCH_SHORTCUT -> LaunchSource.SHORTCUT
+            ActivityLauncherProxy.INTENT_LAUNCH_ACTIVITY -> LaunchSource.PROXY
+            Intent.ACTION_VIEW -> LaunchSource.DEEPLINK
+            else -> LaunchSource.PRIMARY
+        }
+
+        return ShortcutProxyRequest(name, icon, launchIntent, source = source)
+    }
+
+    override fun parseLaunchSource(intent: Intent): ShortcutSource? {
+        val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
+            ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
+        val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) }
+        val signature = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE)
         val launcherPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
         val launcherPlugin = launcherPluginStr?.let { ComponentName.unflattenFromString(it) }
+        val shortcutId = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID)
 
-        return ShortcutRequest(appName, launchIntent, icon, launcherPlugin)
+        if ((shortcutId == null) && (launchIntent == null) && (signature == null)) {
+            return null
+        }
+
+        return ShortcutSource(
+            id = shortcutId,
+            intent = launchIntent,
+            signature = signature,
+            launcherPlugin = launcherPlugin,
+        )
     }
 
     override fun componentNameFromIntent(intent: Intent): ComponentName? {

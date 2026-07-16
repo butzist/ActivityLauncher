@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Pievienot kategoriju</string>
     <string name="action_add_extra">Pievienot Extra</string>
+    <string name="action_add_new">Pievienot jaunu</string>
     <string name="action_advanced_properties">Papildu rekvizīti</string>
     <string name="action_clear">Notīrīt</string>
     <string name="action_pick_icon_file">Ielādēt no faila</string>
     <string name="action_pick_icon_library">Izvēlēties no bibliotēkas</string>
     <string name="action_save">Saglabāt</string>
     <string name="action_save_as_new">Saglabāt kā jaunu</string>
+    <string name="action_update">Atjaunināt</string>
     <string name="action_view_github">GitHub projekts</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Skatīt pirmkodu</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Šī lietotne nodrošina piekļuvi funkcijām, kas parasti nav redzamas lietotājiem. Dažas opcijas var nedarboties, kā paredzēts, vai tās var būt nedrošas lietošanā. Vai jūs saprotat un joprojām vēlaties turpināt?</string>
     <string name="dialog_progress_loading">Notiek ielāde…</string>
     <string name="dialog_support">Esam pievienojuši reklāmas, lai palīdzētu finansēt turpmāko izstrādi. Vai vēlaties bez reklāmām? Atjauniniet uz Activity Launcher Pro pakotni Google Play veikalā — tā ir pilnībā atvērtā koda un atbalsta turpmāku darbu pie lietotnes. Jūs varat arī iegūt lietotni bez maksas GitHub vietnē. Atbalsts tur ir neobligāts, bet ļoti mums palīdz.</string>
+    <string name="dialog_update_shortcut">Saīsne ar šo ID jau eksistē jūsu sākuma ekrānā. Vai vēlaties atjaunināt esošo saīsni vai pievienot jaunu?</string>
     <string name="error">Kļūda</string>
     <string name="error_duplicate_category">Dublēta kategorija</string>
     <string name="error_duplicate_extra_key">Dublēta atslēga</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Rediģēt Intent</string>
     <string name="title_dialog_icon_picker">Atlasiet ikonu</string>
     <string name="title_dialog_support">Paldies, ka izmantojat Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Atjaunināt saīsni?</string>
     <string name="title_fragment_activity_list">Darbības</string>
     <string name="title_fragment_package_list">Uzstādītās lietotnes</string>
 </resources>

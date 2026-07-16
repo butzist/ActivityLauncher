@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Aggiungi categoria</string>
     <string name="action_add_extra">Aggiungi extra</string>
+    <string name="action_add_new">Aggiungi nuova</string>
     <string name="action_advanced_properties">Proprietà avanzate</string>
     <string name="action_clear">Cancella</string>
     <string name="action_pick_icon_file">Carica da file</string>
     <string name="action_pick_icon_library">Scegli dalla libreria</string>
     <string name="action_save">Salva</string>
     <string name="action_save_as_new">Salva come nuovo</string>
+    <string name="action_update">Aggiorna</string>
     <string name="action_view_github">Progetto GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Visualizza il codice sorgente</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Questa app dà accesso a funzionalità normalmente non visibili agli utenti. Alcune opzioni potrebbero non funzionare come previsto o potrebbero non essere sicuri da usare. Si capisce e si desidera procedere?</string>
     <string name="dialog_progress_loading">Caricamento…</string>
     <string name="dialog_support">Abbiamo aggiunto annunci pubblicitari per finanziare lo sviluppo futuro. Preferisci senza pubblicità? Passa ad Activity Launcher Pro su Google Play: è completamente open source e supporta il lavoro continuo sull\'app. Puoi anche ottenere l\'app gratuitamente su GitHub. Il supporto lì è facoltativo, ma ci aiuta molto.</string>
+    <string name="dialog_update_shortcut">Una scorciatoia con questo ID esiste già sulla schermata iniziale. Vuoi aggiornare la scorciatoia esistente o aggiungerne una nuova?</string>
     <string name="error">Errore</string>
     <string name="error_duplicate_category">Categoria duplicata</string>
     <string name="error_duplicate_extra_key">Chiave duplicata</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Modifica Intent</string>
     <string name="title_dialog_icon_picker">Scegli un\'icona</string>
     <string name="title_dialog_support">Grazie per aver utilizzato Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Aggiornare la scorciatoia?</string>
     <string name="title_fragment_activity_list">Attività</string>
     <string name="title_fragment_package_list">Pacchetti installati</string>
 </resources>

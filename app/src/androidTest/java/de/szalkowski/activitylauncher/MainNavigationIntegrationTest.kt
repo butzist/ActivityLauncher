@@ -11,6 +11,7 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.app.di.CoreServicesModule
+import de.szalkowski.activitylauncher.app.di.FeatureServicesModule
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.external.AdManager
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
@@ -33,7 +34,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 @HiltAndroidTest
-@UninstallModules(CoreServicesModule::class, de.szalkowski.activitylauncher.app.di.NoadsModule::class)
+@UninstallModules(CoreServicesModule::class, FeatureServicesModule::class)
 @RunWith(AndroidJUnit4::class)
 class MainNavigationIntegrationTest {
 

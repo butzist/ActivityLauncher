@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Додај категорију</string>
     <string name="action_add_extra">Додај Extra</string>
+    <string name="action_add_new">Додај нову</string>
     <string name="action_advanced_properties">Напредна својства</string>
     <string name="action_clear">Обриши</string>
     <string name="action_pick_icon_file">Учитај из датотеке</string>
     <string name="action_pick_icon_library">Изабери из библиотеке</string>
     <string name="action_save">Сачувај</string>
     <string name="action_save_as_new">Сачувај као ново</string>
+    <string name="action_update">Ажурирај</string>
     <string name="action_view_github">GitHub пројекат</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Прикажи изворни код</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Ова апликација омогућава приступ функцијама које обично нису видљиве корисницима. Неке опције можда неће радити како се очекује или можда неће бити безбедне за употребу. Да ли разумете и даље желите да наставите?</string>
     <string name="dialog_progress_loading">Учитавање…</string>
     <string name="dialog_support">Додали смо рекламе како бисмо финансирали будући развој апликације. Не желите рекламе? Пређите на Activity Launcher Pro на Google Play-у — апликација је потпуно отвореног кода и подржава даљи рад на развоју. Апликацију можете бесплатно преузети и са GitHub-а. Подршка тамо није обавезна, али нам много значи.</string>
+    <string name="dialog_update_shortcut">Пречица са овим ИД-ом већ постоји на вашем почетном екрану. Желите ли да ажурирате постојећу пречицу или додате нову?</string>
     <string name="error">Грешка</string>
     <string name="error_duplicate_category">Дупликат категорије</string>
     <string name="error_duplicate_extra_key">Дупликат кључа</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Уреди Intent</string>
     <string name="title_dialog_icon_picker">Изаберите иконицу</string>
     <string name="title_dialog_support">Хвала вам што користите Покретач Активности</string>
+    <string name="title_dialog_update_shortcut">Ажурирати пречицу?</string>
     <string name="title_fragment_activity_list">Активности</string>
     <string name="title_fragment_package_list">Инсталирани пакети</string>
 </resources>

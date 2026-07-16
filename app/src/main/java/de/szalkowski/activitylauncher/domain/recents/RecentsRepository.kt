@@ -13,7 +13,7 @@ interface RecentsRepository {
     fun getRecentActivities(): List<RecentActivity>
     fun getRecentsFlow(): Flow<List<ShortcutRequest>>
     fun addActivity(componentName: ComponentName)
-    fun addActivity(request: ShortcutRequest)
+    fun addActivity(request: ShortcutRequest, updateMetadata: Boolean = true)
     fun removeActivity(componentName: ComponentName)
     fun removeActivity(request: ShortcutRequest)
 }

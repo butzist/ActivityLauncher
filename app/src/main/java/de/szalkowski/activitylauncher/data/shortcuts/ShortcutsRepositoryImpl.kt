@@ -4,6 +4,7 @@ import android.content.ComponentName
 import de.szalkowski.activitylauncher.data.database.AppDatabase
 import de.szalkowski.activitylauncher.data.database.SerializationUtils
 import de.szalkowski.activitylauncher.data.database.ShortcutEntity
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import kotlinx.coroutines.flow.Flow
@@ -22,22 +23,27 @@ class ShortcutsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun recordShortcut(request: ShortcutRequest): Long {
+    override suspend fun getShortcut(id: String): ShortcutsRepository.ManagedShortcut? {
+        return database.shortcutDao().getById(id)?.toManagedShortcut()
+    }
+
+    override suspend fun recordShortcut(request: ShortcutRequest, id: String?): String {
         val component = request.intent.component
         val packageName = component?.packageName ?: ""
         val className = component?.className ?: ""
         val intentUri = SerializationUtils.intentToUri(request.intent)
 
         val existing = database.shortcutDao().findExisting(packageName, className, request.name, intentUri)
-        val id = existing?.id ?: 0L
-        return database.shortcutDao().insert(request.toEntity(id))
+        val resolvedId = id ?: existing?.id ?: java.util.UUID.randomUUID().toString()
+        database.shortcutDao().insert(request.toEntity(resolvedId))
+        return resolvedId
     }
 
-    override suspend fun updateShortcut(id: Long, request: ShortcutRequest) {
+    override suspend fun updateShortcut(id: String, request: ShortcutRequest) {
         database.shortcutDao().insert(request.toEntity(id))
     }
 
-    override suspend fun deleteShortcut(id: Long) {
+    override suspend fun deleteShortcut(id: String) {
         database.shortcutDao().deleteById(id)
     }
 
@@ -48,12 +54,12 @@ class ShortcutsRepositoryImpl @Inject constructor(
 
         return ShortcutsRepository.ManagedShortcut(
             id = id,
-            request = ShortcutRequest(name, intent, icon, launcherPlugin),
+            request = ShortcutRequest(name, intent, icon, launcherPlugin, source = LaunchSource.SAVED),
             timestamp = timestamp,
         )
     }
 
-    private fun ShortcutRequest.toEntity(id: Long = 0): ShortcutEntity {
+    private fun ShortcutRequest.toEntity(id: String): ShortcutEntity {
         val component = intent.component
         return ShortcutEntity(
             id = id,

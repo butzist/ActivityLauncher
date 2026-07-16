@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Pridať kategóriu</string>
     <string name="action_add_extra">Pridať Extra</string>
+    <string name="action_add_new">Pridať nového</string>
     <string name="action_advanced_properties">Rozšírené vlastnosti</string>
     <string name="action_clear">Vymazať</string>
     <string name="action_pick_icon_file">Načítať zo súboru</string>
     <string name="action_pick_icon_library">Vybrať z knižnice</string>
     <string name="action_save">Uložiť</string>
     <string name="action_save_as_new">Uložiť ako nové</string>
+    <string name="action_update">Aktualizovať</string>
     <string name="action_view_github">Projekt GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Zobraziť zdrojový kód</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Táto aplikácia umožňuje prístup k funkciám, ktoré bežne nie sú používateľom dostupné. Niektoré možnosti nemusia fungovať podľa očakávania alebo nemusia byť bezpečné. Rozumiete a chcete pokračovať?</string>
     <string name="dialog_progress_loading">Načítavanie…</string>
     <string name="dialog_support">Pridali sme reklamy, aby sme mohli financovať budúci vývoj. Nepáčia sa vám reklamy? Upgradujte na Activity Launcher Pro v Obchode Google Play — je úplne open-source a podporuje ďalší vývoj aplikácie. Aplikáciu si môžete zadarmo stiahnuť aj z GitHubu. Podpora tam je dobrovoľná, ale veľmi nám pomáha.</string>
+    <string name="dialog_update_shortcut">Zástupca s tímto ID už na domovskej obrazovke existuje. Chcete aktualizovať existujúceho zástupcu, alebo pridať nového?</string>
     <string name="error">Chyba</string>
     <string name="error_duplicate_category">Duplicitná kategória</string>
     <string name="error_duplicate_extra_key">Duplicitný kľúč</string>
@@ -65,11 +68,11 @@
     <string name="settings_backup_import">Importovať zálohu</string>
     <string name="settings_backup_import_summary">Obnoviť obľúbené položky, nedávno spustené a nastavenia zo súboru</string>
     <string name="settings_github">Projekt GitHub</string>
-    <string name="settings_hide_private">Skryť súkromné ​​aktivity</string>
+    <string name="settings_hide_private">Skryť súkromné aktivity</string>
     <string name="settings_language">Jazyk</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
     <string name="settings_summary_github">Predkompilovaný APK si môžete stiahnuť z open-source projektu Activity Launcher na GitHub. Pokročilí používatelia môžu tiež preskúmať zdrojový kód, podporiť vývojárov a prispieť prekladmi alebo žiadosťami o prijatie zmien.</string>
-    <string name="settings_summary_hide_private">Skryte súkromné ​​(neexportované a deaktivované) aktivity, ktoré nie je možné spustiť bez prístupu root</string>
+    <string name="settings_summary_hide_private">Skryte súkromné (neexportované a deaktivované) aktivity, ktoré nie je možné spustiť bez prístupu root</string>
     <string name="settings_summary_pro_version">Chcete podporiť aplikáciu a odstrániť reklamy? Získajte Activity Launcher Pro v službe Google Play – pomáha to financovať vývoj a je plne open-source.</string>
     <string name="settings_summary_support_discord">Pripojte sa k nášmu serveru Discord a požiadajte o podporu, požiadavky na funkcie a diskusie v komunite.</string>
     <string name="settings_support_discord">Podpora a požiadavky na funkcie</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Upraviť Intent</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
     <string name="title_dialog_support">Ďakujeme, že používate Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Aktualizovať zástupcu?</string>
     <string name="title_fragment_activity_list">Aktivity</string>
     <string name="title_fragment_package_list">Nainštalované balíčky</string>
 </resources>

@@ -1,11 +1,10 @@
 package de.szalkowski.activitylauncher.data.launcher
 
-import android.content.ComponentName
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -14,10 +13,13 @@ import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import de.szalkowski.activitylauncher.domain.model.ShortcutProxyRequest
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -88,28 +90,46 @@ class ProxyImplTest {
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
         whenever(mockContext.packageName).thenReturn("de.szalkowski.activitylauncher")
-        proxy = ShortcutCreatorProxyImpl(mockContext, intentSigner, shortcutsRepository)
+        proxy = ShortcutCreatorProxyImpl(mockContext)
     }
 
     @Test
     fun testCreateLauncherIconDelegation() {
-        val componentName = ComponentName("com.test", "Activity")
-        val icon: IconCompat = mock()
-        whenever(intentSigner.signRequest(any<ShortcutRequest>())).thenReturn("signature")
-        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
+        val icon = ActivityIcon.Resource("de.szalkowski.activitylauncher", 123)
 
         // Mock the context and capture it to verify startActivity
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
         whenever(mockContext.packageName).thenReturn("de.szalkowski.activitylauncher")
-        val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext, intentSigner, shortcutsRepository)
+        val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext)
 
-        val request = ShortcutRequest("Test", Intent().setComponent(componentName), icon)
-        runBlocking { proxyWithMockContext.createLauncherIcon(request, null, 1L) }
+        val request = ShortcutProxyRequest("Test", icon, Intent("action.TEST"), source = LaunchSource.PRIMARY)
+        runBlocking { proxyWithMockContext.createLauncherIcon(request, null) }
 
-        verify(intentSigner).signRequest(eq(request))
-        verify(mockContext).startActivity(any<Intent>())
-        runBlocking { verify(shortcutsRepository, never()).recordShortcut(any()) }
+        argumentCaptor<Intent>().apply {
+            verify(mockContext).startActivity(capture())
+            val capturedIntent = firstValue
+            assertEquals(Intent.FLAG_ACTIVITY_NEW_TASK, capturedIntent.flags and Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+    }
+
+    @Test
+    fun testCreateLauncherIconWithActivityContextDoesNotAddFlag() {
+        val icon = ActivityIcon.Resource("de.szalkowski.activitylauncher", 123)
+
+        val activityContext: Activity = mock()
+        whenever(activityContext.packageManager).thenReturn(packageManager)
+        whenever(activityContext.packageName).thenReturn("de.szalkowski.activitylauncher")
+        val proxyWithActivityContext = ShortcutCreatorProxyImpl(activityContext)
+
+        val request = ShortcutProxyRequest("Test", icon, Intent("action.TEST"), source = LaunchSource.PRIMARY)
+        runBlocking { proxyWithActivityContext.createLauncherIcon(request, null, activityContext) }
+
+        argumentCaptor<Intent>().apply {
+            verify(activityContext).startActivity(capture())
+            val capturedIntent = firstValue
+            assertEquals(0, capturedIntent.flags and Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
     }
 
     @Test

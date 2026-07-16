@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Kategória hozzáadása</string>
     <string name="action_add_extra">Extra hozzáadása</string>
+    <string name="action_add_new">Új hozzáadása</string>
     <string name="action_advanced_properties">Haladó tulajdonságok</string>
     <string name="action_clear">Törlés</string>
     <string name="action_pick_icon_file">Betöltés fájlból</string>
     <string name="action_pick_icon_library">Választás könyvtárból</string>
     <string name="action_save">Mentés</string>
     <string name="action_save_as_new">Mentés újként</string>
+    <string name="action_update">Frissítés</string>
     <string name="action_view_github">GitHub projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Forráskód megtekintése</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Ez az alkalmazás hozzáférést biztosít a felhasználók számára általában nem látható funkciókhoz. Néhány beállítás nem a várt módon működhet, vagy használata nem biztonságos. Érti és továbbra is folytatni szeretné?</string>
     <string name="dialog_progress_loading">Betöltés...</string>
     <string name="dialog_support">Hirdetéseket helyeztünk el a jövőbeni fejlesztések finanszírozása érdekében. Nem szeretnél hirdetéseket? Frissíts Activity Launcher Pro-ra a Google Playen – teljesen nyílt forráskódú, és támogatja az alkalmazás további fejlesztését. Ingyenesen is letöltheted az alkalmazást a GitHubon. Az ottani támogatás nem kötelező, de sokat segít nekünk.</string>
+    <string name="dialog_update_shortcut">Ezzel az azonosítóval rendelkező parancsikon már létezik a kezdőképernyőn. Szeretné frissíteni a meglévő parancsikont, vagy újat hozzáadni?</string>
     <string name="error">Hiba</string>
     <string name="error_duplicate_category">Duplikált kategória</string>
     <string name="error_duplicate_extra_key">Duplikált kulcs</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent szerkesztése</string>
     <string name="title_dialog_icon_picker">Válasszon egy ikont a</string>
     <string name="title_dialog_support">Köszönjük, hogy az Activity Launchert használod</string>
+    <string name="title_dialog_update_shortcut">Parancsikon frissítése?</string>
     <string name="title_fragment_activity_list">Tevékenységek</string>
     <string name="title_fragment_package_list">Telepített csomagok</string>
 </resources>

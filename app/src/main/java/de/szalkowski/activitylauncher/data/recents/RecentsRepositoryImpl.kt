@@ -6,13 +6,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.app.di.IoDispatcher
 import de.szalkowski.activitylauncher.data.database.RecentDao
 import de.szalkowski.activitylauncher.data.database.RecentEntity
 import de.szalkowski.activitylauncher.data.database.SerializationUtils
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -28,12 +31,13 @@ class RecentsRepositoryImpl @Inject constructor(
     private val recentDao: RecentDao,
     private val packageRepository: PackageRepository,
     private val getActivityIconUseCase: GetActivityIconUseCase,
+    @param:IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : RecentsRepository {
     private val prefs: SharedPreferences = context.getSharedPreferences("al_recent_activities", Context.MODE_PRIVATE)
     private val recentsKey = "recents"
     private val migrationKey = "room_migration_done"
     private val maxRecents = 20
-    private val repositoryScope = CoroutineScope(Dispatchers.IO)
+    private val repositoryScope = CoroutineScope(dispatcher)
 
     init {
         migrateIfNeeded()
@@ -42,20 +46,26 @@ class RecentsRepositoryImpl @Inject constructor(
     private fun migrateIfNeeded() {
         if (!prefs.getBoolean(migrationKey, false)) {
             val legacyRecents = getLegacyRecents()
-            if (legacyRecents.isNotEmpty()) {
-                repositoryScope.launch {
+            repositoryScope.launch {
+                if (legacyRecents.isNotEmpty()) {
                     legacyRecents.sortedBy { it.timestamp }.forEach { recent ->
                         try {
                             val activityInfo = packageRepository.getActivity(recent.componentName)
                             val icon = getActivityIconUseCase(activityInfo.iconResourceName, recent.componentName)
                             val intent = Intent().setComponent(recent.componentName)
-                            val request = ShortcutRequest(activityInfo.name, intent, icon)
-                            addActivityInternal(request, recent.timestamp)
+                            val entity = RecentEntity(
+                                packageName = recent.componentName.packageName,
+                                className = recent.componentName.className,
+                                name = activityInfo.name,
+                                intentUri = SerializationUtils.intentToUri(intent),
+                                iconBundle = SerializationUtils.iconToByteArray(icon),
+                                launcherPlugin = null,
+                                timestamp = recent.timestamp,
+                            )
+                            recentDao.insert(entity)
                         } catch (_: Exception) {}
                     }
-                    prefs.edit { putBoolean(migrationKey, true) }
                 }
-            } else {
                 prefs.edit { putBoolean(migrationKey, true) }
             }
         }
@@ -80,6 +90,7 @@ class RecentsRepositoryImpl @Inject constructor(
                     intent = SerializationUtils.uriToIntent(entity.intentUri),
                     icon = SerializationUtils.byteArrayToIcon(entity.iconBundle)!!,
                     launcherPlugin = entity.launcherPlugin?.let { ComponentName.unflattenFromString(it) },
+                    source = LaunchSource.SAVED,
                 )
             }
         }
@@ -91,37 +102,58 @@ class RecentsRepositoryImpl @Inject constructor(
                 val activityInfo = packageRepository.getActivity(componentName)
                 val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
                 val intent = Intent().setComponent(componentName)
-                addActivity(ShortcutRequest(activityInfo.name, intent, icon))
+                addActivity(ShortcutRequest(activityInfo.name, intent, icon, source = LaunchSource.SAVED), updateMetadata = false)
             } catch (_: Exception) {}
         }
     }
 
-    override fun addActivity(request: ShortcutRequest) {
-        addActivityInternal(request, System.currentTimeMillis())
+    override fun addActivity(request: ShortcutRequest, updateMetadata: Boolean) {
+        addActivityInternal(request, System.currentTimeMillis(), updateMetadata)
     }
 
-    private fun addActivityInternal(request: ShortcutRequest, timestamp: Long) {
+    private fun addActivityInternal(request: ShortcutRequest, timestamp: Long, updateMetadata: Boolean) {
         repositoryScope.launch {
             val component = request.intent.component ?: return@launch
+            val intentUri = SerializationUtils.intentToUri(request.intent)
+            val launcherPluginStr = request.launcherPlugin?.flattenToString()
+
+            if (!updateMetadata) {
+                val updated = recentDao.updateUsage(
+                    packageName = component.packageName,
+                    className = component.className,
+                    timestamp = timestamp,
+                    launcherPlugin = launcherPluginStr,
+                    intentUri = intentUri,
+                )
+                if (updated > 0) {
+                    syncLegacy(component, timestamp)
+                    return@launch
+                }
+            }
+
             val entity = RecentEntity(
                 packageName = component.packageName,
                 className = component.className,
                 name = request.name,
-                intentUri = SerializationUtils.intentToUri(request.intent),
+                intentUri = intentUri,
                 iconBundle = SerializationUtils.iconToByteArray(request.icon),
-                launcherPlugin = request.launcherPlugin?.flattenToString(),
+                launcherPlugin = launcherPluginStr,
                 timestamp = timestamp,
             )
             recentDao.insert(entity)
             recentDao.trim(maxRecents)
 
-            // Sync legacy
-            val legacy = getLegacyRecents().toMutableList()
-            legacy.removeAll { it.componentName == component }
-            legacy.add(0, RecentsRepository.RecentActivity(component, timestamp))
-            val newStringSet = legacy.asSequence().take(maxRecents).map { toString(it) }.toSet()
-            prefs.edit { putStringSet(recentsKey, newStringSet) }
+            syncLegacy(component, timestamp)
         }
+    }
+
+    private fun syncLegacy(component: ComponentName, timestamp: Long) {
+        // Sync legacy
+        val legacy = getLegacyRecents().toMutableList()
+        legacy.removeAll { it.componentName == component }
+        legacy.add(0, RecentsRepository.RecentActivity(component, timestamp))
+        val newStringSet = legacy.asSequence().take(maxRecents).map { toString(it) }.toSet()
+        prefs.edit { putStringSet(recentsKey, newStringSet) }
     }
 
     override fun removeActivity(componentName: ComponentName) {

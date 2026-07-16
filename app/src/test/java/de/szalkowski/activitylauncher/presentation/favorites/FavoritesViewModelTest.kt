@@ -3,7 +3,10 @@ package de.szalkowski.activitylauncher.presentation.favorites
 import android.content.ComponentName
 import android.content.Intent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.presentation.activities.DetailsResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +18,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -25,6 +29,7 @@ class FavoritesViewModelTest {
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
+        whenever(favoritesRepository.getFavoritesFlow()).thenReturn(MutableStateFlow(emptyList()))
     }
 
     @After
@@ -39,7 +44,7 @@ class FavoritesViewModelTest {
         whenever(mockIntent.component).thenReturn(component)
         whenever(mockIntent.toUri(any())).thenReturn("intent:#Intent;component=com.test/Activity;end")
 
-        val request = ShortcutRequest("Activity", mockIntent, mock())
+        val request = ShortcutRequest("Activity", mockIntent, ActivityIcon.Resource("pkg", 1), source = LaunchSource.SAVED)
         val flow = MutableStateFlow(listOf(request))
 
         whenever(favoritesRepository.getFavoritesFlow()).thenReturn(flow)
@@ -60,5 +65,16 @@ class FavoritesViewModelTest {
         assertEquals("Activity", viewModel.items.value[0].name)
 
         job.cancel()
+    }
+
+    @Test
+    fun `handleSaveResult should add favorite`() = runTest {
+        val viewModel = FavoritesViewModel(favoritesRepository)
+        val request: ShortcutRequest = mock()
+        val result = DetailsResult.Save(request, null)
+
+        viewModel.handleSaveResult(result)
+
+        verify(favoritesRepository).addFavorite(request)
     }
 }

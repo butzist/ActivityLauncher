@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Legg til kategori</string>
     <string name="action_add_extra">Legg til Extra</string>
+    <string name="action_add_new">Legg til ny</string>
     <string name="action_advanced_properties">Avanserte egenskaper</string>
     <string name="action_clear">Tøm</string>
     <string name="action_pick_icon_file">Last fra fil</string>
     <string name="action_pick_icon_library">Velg fra bibliotek</string>
     <string name="action_save">Lagre</string>
     <string name="action_save_as_new">Lagre som ny</string>
+    <string name="action_update">Oppdater</string>
     <string name="action_view_github">GitHub-prosjekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Vis kildekode</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Denne appen gir tilgang til funksjoner som normalt ikke er synlige for brukere. Noen alternativer fungerer kanskje ikke som forventet, eller er kanskje ikke trygge å bruke. Forstår du dette og ønsker likevel å fortsette?</string>
     <string name="dialog_progress_loading">Laster…</string>
     <string name="dialog_support">Vi har lagt til annonser for å finansiere fremtidig utvikling. Vil du helst slippe annonser? Oppgrader til Activity Launcher Pro på Google Play – den er fullstendig åpen kildekode og støtter videre arbeid med appen. Du kan også få appen gratis på GitHub. Støtte der er valgfritt, men hjelper oss mye.</string>
+    <string name="dialog_update_shortcut">Det finnes allerede en snarvei med denne ID-en på startskjermen din. Vil du oppdatere den eksisterende snarveien eller legge til en ny?</string>
     <string name="error">Feil</string>
     <string name="error_duplicate_category">Duplikat kategori</string>
     <string name="error_duplicate_extra_key">Duplikat nøkkel</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Rediger Intent</string>
     <string name="title_dialog_icon_picker">Velg et ikon</string>
     <string name="title_dialog_support">Takk for at du bruker Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Oppdater snarvei?</string>
     <string name="title_fragment_activity_list">Aktiviteter</string>
     <string name="title_fragment_package_list">Installerte pakker</string>
 </resources>

@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Lisää kategoria</string>
     <string name="action_add_extra">Lisää extra</string>
+    <string name="action_add_new">Lisää uusi</string>
     <string name="action_advanced_properties">Lisäominaisuudet</string>
     <string name="action_clear">Tyhjennä</string>
     <string name="action_pick_icon_file">Lataa tiedostosta</string>
     <string name="action_pick_icon_library">Valitse kirjastosta</string>
     <string name="action_save">Tallenna</string>
     <string name="action_save_as_new">Tallenna uutena</string>
+    <string name="action_update">Päivitä</string>
     <string name="action_view_github">GitHub-projekti</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Näytä lähdekoodi</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Tämä sovellus antaa pääsyn ominaisuuksiin, jotka eivät yleensä ole käyttäjien nähtävissä. Jotkin vaihtoehdot eivät välttämättä toimi odotetulla tavalla tai eivät välttämättä ole turvallisia käyttää. Ymmärrätkö ja haluatko silti jatkaa?</string>
     <string name="dialog_progress_loading">Ladataan...</string>
     <string name="dialog_support">Olemme lisänneet mainoksia rahoittamaan tulevaa kehitystä. Haluatko mieluummin ilman mainoksia? Päivitä Activity Launcher Pro -versioon Google Playssa – se on täysin avoimen lähdekoodin ja tukee sovelluksen jatkuvaa kehitystä. Voit myös hankkia sovelluksen ilmaiseksi GitHubista. Tuki siellä on vapaaehtoista, mutta auttaa meitä paljon.</string>
+    <string name="dialog_update_shortcut">Tällä tunnuksella varustettu pikakuvake on jo olemassa aloitusnäytössäsi. Haluatko päivittää nykyisen pikakuvakkeen vai lisätä uuden?</string>
     <string name="error">Virhe</string>
     <string name="error_duplicate_category">Kaksinkertainen kategoria</string>
     <string name="error_duplicate_extra_key">Kaksinkertainen avain</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Muokkaa Intenttiä</string>
     <string name="title_dialog_icon_picker">Valitse ikoni</string>
     <string name="title_dialog_support">Kiitos, kun käytät Activity Launcheria</string>
+    <string name="title_dialog_update_shortcut">Päivitä pikakuvake?</string>
     <string name="title_fragment_activity_list">Toiminnot</string>
     <string name="title_fragment_package_list">Asennetut paketit</string>
 </resources>

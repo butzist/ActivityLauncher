@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">カテゴリを追加</string>
     <string name="action_add_extra">Extraを追加</string>
+    <string name="action_add_new">新規追加</string>
     <string name="action_advanced_properties">詳細プロパティ</string>
     <string name="action_clear">クリア</string>
     <string name="action_pick_icon_file">ファイルから読み込む</string>
     <string name="action_pick_icon_library">ライブラリから選択</string>
     <string name="action_save">保存</string>
     <string name="action_save_as_new">新規保存</string>
+    <string name="action_update">更新</string>
     <string name="action_view_github">GitHubプロジェクト</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">ソースコードを表示</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">このアプリには、通常ユーザーは見れない機能へのアクセスが含まれています。一部のオプションは予想通りに動作しないか、使用しても安全ではない可能性があります。理解した上で、まだ続行しますか？</string>
     <string name="dialog_progress_loading">読み込み中…</string>
     <string name="dialog_support">今後の開発資金を援助するため、広告を追加しました。広告なしをご希望ですか？ Google PlayでActivity Launcher Proにアップグレードしてください。完全にオープンソースで、アプリの継続的な作業をサポートします。 GitHubでアプリを無料で入手することもできます。そちらでのサポートは任意ですが、私たちにとって非常に役立ちます。</string>
+    <string name="dialog_update_shortcut">このIDのショートカットは既にホーム画面に存在します。既存のショートカットを更新しますか、それとも新しいショートカットを追加しますか？</string>
     <string name="error">エラー</string>
     <string name="error_duplicate_category">カテゴリが重複しています</string>
     <string name="error_duplicate_extra_key">キーが重複しています</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent を編集</string>
     <string name="title_dialog_icon_picker">アイコンを選ぶ</string>
     <string name="title_dialog_support">Activity Launcherをご利用いただきありがとうございます</string>
+    <string name="title_dialog_update_shortcut">ショートカットを更新しますか？</string>
     <string name="title_fragment_activity_list">アクティビティ</string>
     <string name="title_fragment_package_list">インストール済みパッケージ</string>
 </resources>

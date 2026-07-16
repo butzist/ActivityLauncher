@@ -2,6 +2,7 @@ package de.szalkowski.activitylauncher.presentation.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import de.szalkowski.activitylauncher.presentation.activities.DetailsResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -37,5 +38,8 @@ abstract class BaseActivityListViewModel<T : Any>(
         viewModelScope.launch(dispatcher) {
             onRemoveItem(item)
         }
+    }
+
+    open fun handleSaveResult(result: DetailsResult) {
     }
 }

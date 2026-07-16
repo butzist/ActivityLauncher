@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Ավելացնել կատեգորիա</string>
     <string name="action_add_extra">Ավելացնել extra</string>
+    <string name="action_add_new">Ավելացնել նորը</string>
     <string name="action_advanced_properties">Ընդլայնված հատկություններ</string>
     <string name="action_clear">Մաքրել</string>
     <string name="action_pick_icon_file">Բեռնել ֆայլից</string>
     <string name="action_pick_icon_library">Ընտրել գրադարանից</string>
     <string name="action_save">Պահպանել</string>
     <string name="action_save_as_new">Պահպանել որպես նոր</string>
+    <string name="action_update">Թարմացնել</string>
     <string name="action_view_github">GitHub նախագիծ</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Դիտել սկզբնական կոդը</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Այս հավելվածը հնարավորություն է տալիս օգտվել այն գործառույթներից, որոնք սովորաբար տեսանելի չեն օգտատերերին: Որոշ ընտրանքներ կարող են չաշխատել այնպես, ինչպես սպասվում է, կամ կարող են անվտանգ չլինել օգտագործելու համար: Դուք հասկանո՞ւմ եք և դեռ ցանկանո՞ւմ եք շարունակել:</string>
     <string name="dialog_progress_loading">Բեռնում…</string>
     <string name="dialog_support">Մենք գովազդներ ենք ավելացրել հետագա զարգացումը ֆինանսավորելու համար: Նախընտրում եք առանց գովազդի: Թարմացրեք Activity Launcher Pro-ն Google Play-ում. այն լիովին բաց կոդով է և աջակցում է հավելվածի շարունակական աշխատանքին: Դուք կարող եք նաև անվճար ձեռք բերել հավելվածը GitHub-ում: Այնտեղ աջակցությունն ընտրովի է, բայց շատ է օգնում մեզ:</string>
+    <string name="dialog_update_shortcut">Այս նույնացուցիչով պիտակն արդեն գոյություն ունի ձեր հիմնական էկրանին: Ցանկանո՞ւմ եք թարմացնել գոյություն ունեցող պիտակը, թե՞ ավելացնել նորը:</string>
     <string name="error">Սխալ</string>
     <string name="error_duplicate_category">Կրկնվող կատեգորիա</string>
     <string name="error_duplicate_extra_key">Կրկնվող բանալի</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Խմբագրել Intent</string>
     <string name="title_dialog_icon_picker">Ընտրեք պատկեր</string>
     <string name="title_dialog_support">Շնորհակալություն Activity Launcher-ն օգտագործելու համար</string>
+    <string name="title_dialog_update_shortcut">Թարմացնե՞լ պիտակը:</string>
     <string name="title_fragment_activity_list">Գործողություններ</string>
     <string name="title_fragment_package_list">Տեղադրված փաթեթներ</string>
 </resources>

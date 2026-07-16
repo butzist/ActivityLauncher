@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Ajouter une catégorie</string>
     <string name="action_add_extra">Ajouter un extra</string>
+    <string name="action_add_new">Ajouter un nouveau</string>
     <string name="action_advanced_properties">Propriétés avancées</string>
     <string name="action_clear">Effacer</string>
     <string name="action_pick_icon_file">Charger depuis un fichier</string>
     <string name="action_pick_icon_library">Choisir dans la bibliothèque</string>
     <string name="action_save">Enregistrer</string>
     <string name="action_save_as_new">Enregistrer comme nouveau</string>
+    <string name="action_update">Mettre à jour</string>
     <string name="action_view_github">Projet GitHub</string>
     <string name="action_view_paid">Lanceur d\'activités Pro</string>
     <string name="action_view_source">Afficher le code source</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Cette application donne accès à des fonctionnalités normalement invisibles pour les utilisateurs. Certaines options peuvent ne pas fonctionner comme prévu ou peuvent ne pas être sûres à utiliser. Voulez-vous continuer ?</string>
     <string name="dialog_progress_loading">Chargement…</string>
     <string name="dialog_support">Nous avons ajouté des publicités pour aider à financer le développement futur. Vous préférez sans publicité, mettez à niveau Lanceur d\'activités Pro sur Google Play – c\'est entièrement open source et prend en charge le travail continu sur l\'application. Vous pouvez également obtenir l\'application gratuitement sur GitHub. Le support là-bas est facultatif mais nous aide beaucoup.</string>
+    <string name="dialog_update_shortcut">Un raccourci avec cet identifiant existe déjà sur votre écran d\'accueil. Souhaitez-vous mettre à jour le raccourci existant ou en ajouter un nouveau ?</string>
     <string name="error">Erreur</string>
     <string name="error_duplicate_category">Catégorie en double</string>
     <string name="error_duplicate_extra_key">Clé en double</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Modifier l\'Intent</string>
     <string name="title_dialog_icon_picker">Choisissez une icône</string>
     <string name="title_dialog_support">Merci d\'utiliser Lanceur d\'activités</string>
+    <string name="title_dialog_update_shortcut">Mettre à jour le raccourci ?</string>
     <string name="title_fragment_activity_list">Activités</string>
     <string name="title_fragment_package_list">Paquets installés</string>
 </resources>

@@ -111,6 +111,7 @@ class BackupRepositoryTest {
             whenever(settingsRepository.theme).thenReturn("2") // Dark
             whenever(settingsRepository.language).thenReturn("de")
             whenever(settingsRepository.hidePrivate).thenReturn(true)
+            whenever(settingsRepository.allowTapLaunch).thenReturn(true)
 
             val signerPrefs = context.getSharedPreferences("signer", Context.MODE_PRIVATE)
             val testSignatureKey = "test_key_123"
@@ -139,6 +140,7 @@ class BackupRepositoryTest {
             database.recentDao().insert(recent)
 
             val shortcut = ShortcutEntity(
+                id = "uuid-shortcut-1",
                 packageName = "com.shortcut",
                 className = "com.shortcut.Activity",
                 name = "Managed Shortcut",
@@ -188,6 +190,7 @@ class BackupRepositoryTest {
             assertEquals("2", prefs.getString("theme", null))
             assertEquals("de", prefs.getString("language", null))
             assertTrue(prefs.getBoolean("hide_hide_private", false))
+            assertTrue(prefs.getBoolean("allow_tap_launch", false))
 
             val restoredSignerPrefs = context.getSharedPreferences("signer", Context.MODE_PRIVATE)
             assertEquals(testSignatureKey, restoredSignerPrefs.getString("key", null))

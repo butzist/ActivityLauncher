@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Kategori Ekle</string>
     <string name="action_add_extra">Extra Ekle</string>
+    <string name="action_add_new">Yeni ekle</string>
     <string name="action_advanced_properties">Gelişmiş Özellikler</string>
     <string name="action_clear">Temizle</string>
     <string name="action_pick_icon_file">Dosyadan yükle</string>
     <string name="action_pick_icon_library">Kitaplıktan seç</string>
     <string name="action_save">Kaydet</string>
     <string name="action_save_as_new">Yeni Olarak Kaydet</string>
+    <string name="action_update">Güncelle</string>
     <string name="action_view_github">GitHub projesi</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Kaynak Kodunu Göster</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Bu uygulama, kullanıcılara genellikle görünmeyen özelliklere erişim sağlar. Bazı seçenekler beklendiği gibi çalışmayabilir veya kullanmak güvenli olmayabilir. Anladınız mı ve yine de devam etmek istiyor musunuz?</string>
     <string name="dialog_progress_loading">Yükleniyor…</string>
     <string name="dialog_support">Gelecekteki geliştirmeleri finanse etmeye yardımcı olmak için reklamlar ekledik. Reklamsız kullanmayı mı tercih edersiniz? Google Play\'de Activity Launcher Pro\'ya yükseltin. Tamamen açık kaynaklıdır ve uygulamanın geliştirilmesine destek olur. Uygulamayı GitHub\'dan da ücretsiz olarak edinebilirsiniz. Oradaki destek isteğe bağlıdır, ancak bize çok yardımcı olur.</string>
+    <string name="dialog_update_shortcut">Bu kimliğe sahip bir kısayol ana ekranınızda zaten var. Mevcut kısayolu güncellemek mi yoksa yeni bir tane eklemek mi istersiniz?</string>
     <string name="error">Hata</string>
     <string name="error_duplicate_category">Yinelenen kategori</string>
     <string name="error_duplicate_extra_key">Yinelenen anahtar</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent\'i Düzenle</string>
     <string name="title_dialog_icon_picker">Bir simge seçin</string>
     <string name="title_dialog_support">Activity Launcher kullandığınız için teşekkürler</string>
+    <string name="title_dialog_update_shortcut">Kısayol güncellensin mi?</string>
     <string name="title_fragment_activity_list">Faaliyetler</string>
     <string name="title_fragment_package_list">Yüklü paketler</string>
 </resources>

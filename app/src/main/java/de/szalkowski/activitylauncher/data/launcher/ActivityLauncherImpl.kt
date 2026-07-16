@@ -1,5 +1,6 @@
 package de.szalkowski.activitylauncher.data.launcher
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
@@ -11,17 +12,20 @@ import javax.inject.Inject
 
 class ActivityLauncherImpl @Inject constructor(@ApplicationContext private val context: Context) :
     ActivityLauncher {
-    override fun launchActivity(request: LaunchRequest) {
+    override fun launchActivity(request: LaunchRequest, context: Context?) {
+        val launchContext = context ?: this.context
         val intent = request.intent
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (launchContext !is Activity) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
 
         try {
-            context.startActivity(intent)
+            launchContext.startActivity(intent)
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(
-                context,
-                context.getText(R.string.error).toString() + ": " + e,
+                launchContext,
+                launchContext.getText(R.string.error).toString() + ": " + e,
                 Toast.LENGTH_LONG,
             ).show()
         }

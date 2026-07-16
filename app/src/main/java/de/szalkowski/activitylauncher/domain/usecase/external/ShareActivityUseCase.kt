@@ -11,8 +11,6 @@ class ShareActivityUseCase @Inject constructor(
 ) {
     operator fun invoke(componentName: ComponentName) {
         activitySharer.shareActivity(componentName)
-        // Sharing also adds to recents? Maybe. Let's assume yes for consistent testing if desired,
-        // or just keep it simple if we only want to proxy it.
-        // For now, let's just proxy it to match current behavior but in a use case.
+        recentsRepository.addActivity(componentName)
     }
 }

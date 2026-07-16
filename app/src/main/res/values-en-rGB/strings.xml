@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Add Category</string>
     <string name="action_add_extra">Add Extra</string>
+    <string name="action_add_new">Add new</string>
     <string name="action_advanced_properties">Advanced Properties</string>
     <string name="action_clear">Clear</string>
     <string name="action_pick_icon_file">Load from file</string>
     <string name="action_pick_icon_library">Pick from library</string>
     <string name="action_save">Save</string>
     <string name="action_save_as_new">Save as New</string>
+    <string name="action_update">Update</string>
     <string name="action_view_github">GitHub project</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">View source code</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
     <string name="dialog_progress_loading">Loading…</string>
     <string name="dialog_support">We\'ve added adverts to help fund future development. Prefer no adverts? Upgrade to Activity Launcher Pro on Google Play — it\'s fully open-source and supports continued work on the app. You can also get the app for free on GitHub. Support there is optional but helps us a lot.</string>
+    <string name="dialog_update_shortcut">A shortcut with this ID already exists on your home screen. Would you like to update the existing shortcut or add a new one?</string>
     <string name="error">Error</string>
     <string name="error_duplicate_category">Duplicate category</string>
     <string name="error_duplicate_extra_key">Duplicate key</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Edit Intent</string>
     <string name="title_dialog_icon_picker">Pick an icon</string>
     <string name="title_dialog_support">Thanks for using Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Update shortcut?</string>
     <string name="title_fragment_activity_list">Activities</string>
     <string name="title_fragment_package_list">Installed packages</string>
 </resources>

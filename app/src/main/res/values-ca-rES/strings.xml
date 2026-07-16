@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Afegeix una categoria</string>
     <string name="action_add_extra">Afegeix un extra</string>
+    <string name="action_add_new">Afegir nova</string>
     <string name="action_advanced_properties">Propietats avançades</string>
     <string name="action_clear">Neteja</string>
     <string name="action_pick_icon_file">Carrega des d\'un fitxer</string>
     <string name="action_pick_icon_library">Tria de la biblioteca</string>
     <string name="action_save">Desa</string>
     <string name="action_save_as_new">Desa com a nou</string>
+    <string name="action_update">Actualitzar</string>
     <string name="action_view_github">Projecte GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Visualitza el codi font</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Aquesta aplicació permet accedir a funcions que normalment no són visibles per als usuaris. Algunes opcions pot ser que no funcionin com s\'espera o que no siguen segures. Ho enteneu i voleu continuar igualment?</string>
     <string name="dialog_progress_loading">S\'està carregant…</string>
     <string name="dialog_support">Hem afegit anuncis per ajudar a finançar el desenvolupament futur. Preferiu no tenir anuncis? Actualitzeu a Activity Launcher Pro a Google Play: és completament de codi obert i permet continuar treballant en l\'aplicació. També podeu obtenir l\'aplicació de forma gratuïta a GitHub. El suport allà és opcional, potser ens ajuda molt.</string>
+    <string name="dialog_update_shortcut">Ja existeix una drecera met aquest ID a la pantalla d\'inici. Voleu actualitzar la drecera existent o afegir-ne una de nova?</string>
     <string name="error">Error</string>
     <string name="error_duplicate_category">Categoria duplicada</string>
     <string name="error_duplicate_extra_key">Clau duplicada</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Edita l\'Intent</string>
     <string name="title_dialog_icon_picker">Trieu una icona</string>
     <string name="title_dialog_support">Gràcies per utilitzar l\'Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Actualitzar drecera?</string>
     <string name="title_fragment_activity_list">Activitats</string>
     <string name="title_fragment_package_list">Paquets instal·lats</string>
 </resources>

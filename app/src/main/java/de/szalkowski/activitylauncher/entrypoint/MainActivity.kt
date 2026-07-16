@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.entrypoint
 
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,12 +22,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
+import de.szalkowski.activitylauncher.core.util.getParcelableExtraCompat
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.domain.external.AdManager
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             PaidDialogFragment().show(supportFragmentManager, "PaidDialogFragment")
         }
 
-        adManager.loadBanner(this, binding.adContainer)
+        adManager.loadBanner(this, binding.adContainer.root)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
@@ -203,31 +204,24 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             return
         }
 
-        val launchRequest = viewIntentParser.parseLaunchRequest(intent)
-        val shortcutRequestFromIntent = viewIntentParser.parseShortcutRequest(intent)
-        val componentNameFromExtra = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(EXTRA_ACTIVITY_COMPONENT_NAME, ComponentName::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            intent.getParcelableExtra<ComponentName>(EXTRA_ACTIVITY_COMPONENT_NAME)
-        }
-        val componentName = shortcutRequestFromIntent?.intent?.component
-            ?: launchRequest?.intent?.component
-            ?: componentNameFromExtra
+        val launchRedirect = intent.getParcelableExtraCompat(EXTRA_SHORTCUT_LAUNCH_REDIRECT, LaunchRequest::class.java)
+        val launchRequestFromIntent = launchRedirect ?: viewIntentParser.parseLaunchRequest(intent)
 
-        if (componentName != null) {
-            val shortcutRequest = shortcutRequestFromIntent ?: run {
-                val launchReq = launchRequest ?: LaunchRequest(Intent().setComponent(componentName))
-                launchReq.toShortcutRequest(packageRepository, getActivityIconUseCase)
-            }
+        val shortcutRequest = launchRequestFromIntent?.toShortcutRequest(packageRepository, getActivityIconUseCase)
+        val componentName = shortcutRequest?.intent?.component
 
-            val bundle = Bundle().apply {
-                putParcelable("shortcutRequest", shortcutRequest)
-                putParcelable("activityComponentName", componentName) // backward compat
-            }
+        if (shortcutRequest != null && componentName != null) {
+            // Add deep links and redirects to recents
+            // Only update metadata if it was a primary launch request from intent
+            recentsRepository.addActivity(
+                shortcutRequest,
+                updateMetadata = launchRequestFromIntent.source == LaunchSource.PRIMARY,
+            )
 
-            // Ensure we start from PackageListFragment
-            navController.popBackStack(R.id.PackageListFragment, inclusive = false)
+            // Establish the home destination (Favorites or Recents) as the root
+            navigateDefault(navController)
+
+            // Ensure we start from PackageListFragment to build the correct backstack
             if (navController.currentDestination?.id != R.id.PackageListFragment) {
                 navController.navigate(R.id.PackageListFragment)
             }
@@ -237,6 +231,9 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             }
             navController.navigate(R.id.ActivityListFragment, packageBundle)
 
+            val bundle = Bundle().apply {
+                putParcelable("shortcutRequest", shortcutRequest)
+            }
             navController.navigate(R.id.ActivityDetailsFragment, bundle)
             return
         }
@@ -255,7 +252,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     }
 
     override fun onDestroy() {
-        adManager.removeBanner(binding.adContainer)
+        adManager.removeBanner(binding.adContainer.root)
         super.onDestroy()
     }
 
@@ -305,6 +302,6 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     }
 
     companion object {
-        const val EXTRA_ACTIVITY_COMPONENT_NAME = "activityComponentName"
+        const val EXTRA_SHORTCUT_LAUNCH_REDIRECT = "shortcutLaunchRedirect"
     }
 }

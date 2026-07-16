@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">زمرہ شامل کریں</string>
     <string name="action_add_extra">اضافی شامل کریں</string>
+    <string name="action_add_new">نیا شامل کریں</string>
     <string name="action_advanced_properties">اعلی درجے की خصوصیات</string>
     <string name="action_clear">صاف کریں</string>
     <string name="action_pick_icon_file">فائل سے لوڈ کریں</string>
     <string name="action_pick_icon_library">لائبریری سے منتخب کریں</string>
     <string name="action_save">محفوظ کریں</string>
     <string name="action_save_as_new">نئے طور پر محفوظ کریں</string>
+    <string name="action_update">اپ ڈیٹ کریں</string>
     <string name="action_view_github">GitHub پروجیکٹ</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">سورس کوڈ دیکھیں</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">یہ ایپ صارفین کو ایسی خصوصیات تک رسائی دیتی ہے جو عام طور پر نظر نہیں آتیں۔ کچھ آپشنز درست کام نہیں کر سکتے یا غیر محفوظ ہو سکتے ہیں۔ کیا آپ سمجھتے ہیں اور پھر بھی آگے بڑھنا چاہتے ہیں؟</string>
     <string name="dialog_progress_loading">لوڈ ہو رہا ہے…</string>
     <string name="dialog_support">ہم نے مستقبل کی ترقی کے لئے فنڈ دینے میں مدد کے لئے اشتہارات شامل کیے ہیں۔ کوئی اشتہار نہیں چاہتے؟ گوگل پلے پر ایکٹیویٹی لانچر پرو میں اپ گریڈ کریں - یہ مکمل طور پر اوپن سورس ہے اور ایپ پر جاری کام کی حمایت کرتا ہے۔ آپ گٹ ہب پر مفت میں ایپ بھی حاصل کرسکتے ہیں۔ وہاں سپورٹ اختیاری ہے لیکن اس سے ہمیں بہت مدد ملتی ہے۔</string>
+    <string name="dialog_update_shortcut">اس ID کے ساتھ ایک شارٹ کٹ آپ کی ہوم اسکرین پر پہلے سے موجود ہے۔ کیا آپ موجودہ شارٹ کٹ کو اپ ڈیٹ کرنا چاہیں گے یا نیا شامل کرنا چاہیں گے؟</string>
     <string name="error">خرابی</string>
     <string name="error_duplicate_category">ڈپلیکیٹ زمرہ</string>
     <string name="error_duplicate_extra_key">ڈپلیکیٹ کلید</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent میں ترمیم کریں</string>
     <string name="title_dialog_icon_picker">آئیکن منتخب کریں</string>
     <string name="title_dialog_support">ایکٹیویٹی لانچر استعمال کرنے کے لئے آپ کا شکریہ</string>
+    <string name="title_dialog_update_shortcut">شارٹ کٹ اپ ڈیٹ کریں؟</string>
     <string name="title_fragment_activity_list">سرگرمیاں</string>
     <string name="title_fragment_package_list">انسٹال شدہ پیکجز</string>
 </resources>

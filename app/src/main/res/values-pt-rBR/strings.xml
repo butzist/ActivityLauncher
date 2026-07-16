@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Adicionar categoria</string>
     <string name="action_add_extra">Adicionar Extra</string>
+    <string name="action_add_new">Adicionar novo</string>
     <string name="action_advanced_properties">Propriedades avançadas</string>
     <string name="action_clear">Limpar</string>
     <string name="action_pick_icon_file">Carregar de arquivo</string>
     <string name="action_pick_icon_library">Escolher da biblioteca</string>
     <string name="action_save">Salvar</string>
     <string name="action_save_as_new">Salvar como novo</string>
+    <string name="action_update">Atualizar</string>
     <string name="action_view_github">Projeto GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Exibir código fonte</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Este app dá acesso a recursos que não são normalmente visíveis para os usuários. Algumas opções podem não funcionar como esperado ou podem não ser seguras para uso. Você entende e ainda quer continuar?</string>
     <string name="dialog_progress_loading">Carregando…</string>
     <string name="dialog_support">Adicionamos anúncios para ajudar a financiar o desenvolvimento futuro. Prefere sem anúncios? Faça upgrade para o Activity Launcher Pro no Google Play — é totalmente de código aberto e oferece suporte ao trabalho contínuo no aplicativo. Você também pode obter o aplicativo gratuitamente no GitHub. O suporte lá é opcional, mas nos ajuda muito.</string>
+    <string name="dialog_update_shortcut">Um atalho com este ID já existe na sua tela inicial. Você gostaria de atualizar o atalho existente ou adicionar um novo?</string>
     <string name="error">Erro</string>
     <string name="error_duplicate_category">Categoria duplicada</string>
     <string name="error_duplicate_extra_key">Chave duplicada</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Editar Intent</string>
     <string name="title_dialog_icon_picker">Escolha um ícone</string>
     <string name="title_dialog_support">Obrigado por usar o Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Atualizar atalho?</string>
     <string name="title_fragment_activity_list">Atividades</string>
     <string name="title_fragment_package_list">Pacotes instalados</string>
 </resources>

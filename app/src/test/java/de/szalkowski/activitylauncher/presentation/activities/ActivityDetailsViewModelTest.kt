@@ -1,23 +1,19 @@
 package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
-import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.SavedStateHandle
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.core.util.getActivityIntentFromIntentDef
 import de.szalkowski.activitylauncher.core.util.getIntentDefFromActivityIntent
-import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.intent.IntentDef
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
-import de.szalkowski.activitylauncher.domain.model.LaunchRequest
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.model.PluginInfo
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
-import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
-import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
+import de.szalkowski.activitylauncher.domain.usecase.favorites.GetIsFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
@@ -25,12 +21,7 @@ import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseC
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceTimeBy
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runCurrent
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -44,16 +35,14 @@ import kotlin.time.Duration.Companion.seconds
 @OptIn(ExperimentalCoroutinesApi::class)
 class ActivityDetailsViewModelTest {
     private val packageRepository: PackageRepository = mock()
-    private val favoritesRepository: FavoritesRepository = mock()
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase = mock()
+    private val getIsFavoriteUseCase: GetIsFavoriteUseCase = mock()
     private val launchActivityUseCase: LaunchActivityUseCase = mock()
     private val createShortcutUseCase: CreateShortcutUseCase = mock()
     private val shareActivityUseCase: ShareActivityUseCase = mock()
     private val getActivityIconUseCase: GetActivityIconUseCase = mock()
     private val iconLoader: IconLoader = mock()
-    private val shortcutsRepository: ShortcutsRepository = mock()
     private val settingsRepository: SettingsRepository = mock()
-    private val recentsRepository: RecentsRepository = mock()
     private val testDispatcher = UnconfinedTestDispatcher()
 
     private lateinit var componentName: ComponentName
@@ -66,7 +55,7 @@ class ActivityDetailsViewModelTest {
         )
     }
 
-    private val mockIcon: IconCompat = mockIcon()
+    private val mockIcon: ActivityIcon = mockIcon()
     private lateinit var shortcutRequest: ShortcutRequest
     private lateinit var mockIntent: Intent
     private lateinit var mockedUtil: MockedStatic<*>
@@ -84,11 +73,8 @@ class ActivityDetailsViewModelTest {
         on { toString() } doReturn "$pkg/$cls"
     }
 
-    private fun mockIcon(): IconCompat {
-        val icon = mock<IconCompat>()
-        val bundle = android.os.Bundle().apply { putInt("type", IconCompat.TYPE_RESOURCE) }
-        doReturn(bundle).whenever(icon).toBundle()
-        return icon
+    private fun mockIcon(): ActivityIcon {
+        return ActivityIcon.Resource("com.test", 1)
     }
 
     @Before
@@ -104,13 +90,13 @@ class ActivityDetailsViewModelTest {
 
         mockedUtil.`when`<Any> {
             getIntentDefFromActivityIntent(any())
-        }.thenReturn(de.szalkowski.activitylauncher.domain.intent.IntentDef())
+        }.thenReturn(IntentDef())
 
-        shortcutRequest = ShortcutRequest("Test Activity", mockIntent, mockIcon)
+        shortcutRequest = ShortcutRequest("Test Activity", mockIntent, mockIcon, source = LaunchSource.PRIMARY)
 
         val defaultIcon = mockIcon()
         whenever(packageRepository.getActivity(any())).thenReturn(activityInfo)
-        whenever(favoritesRepository.isFavorite(any())).thenReturn(false)
+        whenever(getIsFavoriteUseCase.invoke(any())).thenReturn(false)
         whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(defaultIcon)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(emptyList())
         whenever(createShortcutUseCase.getPlugins()).thenReturn(emptyList())
@@ -122,9 +108,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         viewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
     }
 
@@ -151,7 +137,11 @@ class ActivityDetailsViewModelTest {
 
         viewModel.toggleFavorite()
 
-        verify(toggleFavoriteUseCase).invoke(any())
+        val captor = argumentCaptor<ShortcutRequest>()
+        verify(toggleFavoriteUseCase).invoke(captor.capture())
+        val request = captor.firstValue
+        assertEquals("Test Activity", request.name)
+        assertEquals(mockIntent, request.intent)
         assertTrue(viewModel.isFavorite.value)
 
         whenever(toggleFavoriteUseCase(any())).thenReturn(false)
@@ -166,10 +156,14 @@ class ActivityDetailsViewModelTest {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(launchIntent)
 
-        viewModel.launchActivity()
+        val context: Context = mock()
+        viewModel.launchActivity(context)
         val captor = argumentCaptor<LaunchRequest>()
-        verify(launchActivityUseCase).invoke(captor.capture())
-        assertNotNull(captor.firstValue.intent)
+        verify(launchActivityUseCase).invoke(captor.capture(), eq(context))
+        val request = captor.firstValue
+        assertEquals("Test Activity", request.name)
+        assertEquals(launchIntent, request.intent)
+        assertEquals(mockIcon, request.icon)
     }
 
     @Test
@@ -179,11 +173,16 @@ class ActivityDetailsViewModelTest {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(shortcutIntent)
 
-        viewModel.createShortcut()
+        val context: Context = mock()
+        viewModel.createShortcut(context)
         runCurrent()
+
         val captor = argumentCaptor<ShortcutRequest>()
-        verify(createShortcutUseCase).invoke(captor.capture(), anyOrNull())
-        assertNotNull(captor.firstValue.intent)
+        verify(createShortcutUseCase).invoke(captor.capture(), isNull(), anyOrNull(), eq(context))
+        val request = captor.firstValue
+        assertEquals("Test Activity", request.name)
+        assertEquals(shortcutIntent, request.intent)
+        assertEquals(mockIcon, request.icon)
     }
 
     @Test
@@ -199,9 +198,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertTrue(newViewModel.showLaunchChooser.value)
@@ -221,9 +220,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertFalse(newViewModel.showLaunchChooser.value)
@@ -231,88 +230,40 @@ class ActivityDetailsViewModelTest {
     }
 
     @Test
-    fun `should route save to favorites repository when configuration is FAVORITES`() = runTest {
+    fun `should emit save result`() = runTest {
+        val shortcutId = "uuid-123"
         val savedStateHandle = SavedStateHandle(
             mapOf(
                 "shortcutRequest" to shortcutRequest,
-                "configuration" to DetailsConfiguration.FAVORITES,
-            ),
-        )
-        val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
-            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
-        )
-
-        mockedUtil.`when`<Intent> {
-            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
-        }.thenReturn(mockIntent)
-
-        val saveCompleteResults = mutableListOf<ShortcutRequest>()
-        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
-            newViewModel.onSaveComplete.collect { saveCompleteResults.add(it) }
-        }
-
-        newViewModel.saveShortcut()
-        runCurrent()
-
-        verify(favoritesRepository).addFavorite(any<ShortcutRequest>())
-        verify(shortcutsRepository, never()).recordShortcut(any())
-        verify(recentsRepository, never()).addActivity(any<ShortcutRequest>())
-        assertEquals(1, saveCompleteResults.size)
-        job.cancel()
-    }
-
-    @Test
-    fun `should route save to shortcuts repository when configuration is SHORTCUTS`() = runTest {
-        val savedStateHandle = SavedStateHandle(
-            mapOf(
-                "shortcutRequest" to shortcutRequest,
+                "shortcutId" to shortcutId,
                 "configuration" to DetailsConfiguration.SHORTCUTS,
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         mockedUtil.`when`<Intent> {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(mockIntent)
 
+        val results = mutableListOf<DetailsResult>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            newViewModel.onResult.collect { results.add(it) }
+        }
+
+        val newName = "Modified Name"
+        newViewModel.updateName(newName)
         newViewModel.saveShortcut()
         runCurrent()
 
-        verify(shortcutsRepository).recordShortcut(any())
-        verify(favoritesRepository, never()).addFavorite(any<ShortcutRequest>())
-        verify(recentsRepository, never()).addActivity(any<ShortcutRequest>())
-    }
-
-    @Test
-    fun `should route save to recents repository when configuration is RECENTS`() = runTest {
-        val savedStateHandle = SavedStateHandle(
-            mapOf(
-                "shortcutRequest" to shortcutRequest,
-                "configuration" to DetailsConfiguration.RECENTS,
-            ),
-        )
-        val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
-            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
-        )
-
-        mockedUtil.`when`<Intent> {
-            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
-        }.thenReturn(mockIntent)
-
-        newViewModel.saveShortcut()
-        runCurrent()
-
-        verify(recentsRepository).addActivity(any<ShortcutRequest>())
-        verify(favoritesRepository, never()).addFavorite(any<ShortcutRequest>())
-        verify(shortcutsRepository, never()).recordShortcut(any())
+        assertEquals(1, results.size)
+        val result = results[0] as DetailsResult.Save
+        assertEquals(shortcutId, result.id)
+        assertEquals(newName, result.request.name)
+        job.cancel()
     }
 
     @Test
@@ -331,9 +282,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertEquals(listOf(launchPlugin), newViewModel.launchPlugins.value)
@@ -358,16 +309,16 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         newViewModel.selectLaunchPlugin(pluginComp)
         newViewModel.launchActivity()
 
         val captor = argumentCaptor<LaunchRequest>()
-        verify(launchActivityUseCase).invoke(captor.capture())
+        verify(launchActivityUseCase).invoke(captor.capture(), anyOrNull())
         assertNotNull(captor.firstValue.intent)
         assertEquals(pluginComp, captor.firstValue.launcherPlugin)
     }
@@ -390,9 +341,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         newViewModel.selectShortcutPlugin(pluginComp)
@@ -400,7 +351,12 @@ class ActivityDetailsViewModelTest {
         runCurrent()
 
         val captor = argumentCaptor<ShortcutRequest>()
-        verify(createShortcutUseCase).invoke(captor.capture(), anyOrNull())
+        verify(createShortcutUseCase).invoke(
+            request = captor.capture(),
+            shortcutId = isNull(),
+            shortcutPlugin = eq(pluginComp),
+            context = anyOrNull(),
+        )
         assertNotNull(captor.firstValue.intent)
     }
 
@@ -422,9 +378,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         newViewModel.selectLaunchPlugin(pluginComp)
@@ -432,7 +388,7 @@ class ActivityDetailsViewModelTest {
         runCurrent()
 
         val captor = argumentCaptor<ShortcutRequest>()
-        verify(createShortcutUseCase).invoke(captor.capture(), anyOrNull())
+        verify(createShortcutUseCase).invoke(captor.capture(), isNull(), anyOrNull(), anyOrNull())
         assertNotNull(captor.firstValue.intent)
         assertEquals(pluginComp, captor.firstValue.launcherPlugin)
     }
@@ -449,9 +405,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertTrue(newViewModel.showLaunchChooser.value)
@@ -471,9 +427,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertFalse(newViewModel.showLaunchChooser.value)
@@ -494,9 +450,9 @@ class ActivityDetailsViewModelTest {
             ),
         )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            packageRepository, toggleFavoriteUseCase, getIsFavoriteUseCase,
             launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
         )
 
         assertEquals(launchPlugin, newViewModel.selectedLaunchPlugin.value)
@@ -517,7 +473,7 @@ class ActivityDetailsViewModelTest {
     @Test
     fun `should update icon resource name and load icon`() = runTest {
         val iconRes = "com.test:drawable/icon"
-        val testIcon: IconCompat = mockIcon()
+        val testIcon: ActivityIcon = mockIcon()
         whenever(iconLoader.tryGetIcon(iconRes)).thenReturn(Result.success(testIcon))
 
         viewModel.updateIconResourceName(iconRes)
@@ -531,7 +487,7 @@ class ActivityDetailsViewModelTest {
     @Test
     fun `should update icon uri and load icon`() = runTest {
         val uri = mock<android.net.Uri>()
-        val testIcon: IconCompat = mockIcon()
+        val testIcon: ActivityIcon = mockIcon()
         whenever(iconLoader.getIcon(any<android.net.Uri>())).thenReturn(Result.success(testIcon))
 
         viewModel.updateIconUri(uri)
@@ -580,7 +536,7 @@ class ActivityDetailsViewModelTest {
     fun `should emit error message with debounce when icon loading fails`() = runTest {
         val iconRes = "invalid_icon"
         whenever(iconLoader.tryGetIcon(iconRes)).thenReturn(Result.failure(IconLoader.NullResourceException()))
-        val testIcon: IconCompat = mockIcon()
+        val testIcon: ActivityIcon = mockIcon()
         whenever(getActivityIconUseCase.invoke(null, componentName)).thenReturn(testIcon)
 
         val errorMessages = mutableListOf<Int>()

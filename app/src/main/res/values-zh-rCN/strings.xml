@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">添加类别</string>
     <string name="action_add_extra">添加 Extra</string>
+    <string name="action_add_new">添加新项目</string>
     <string name="action_advanced_properties">高级属性</string>
     <string name="action_clear">清除</string>
     <string name="action_pick_icon_file">从文件加载</string>
     <string name="action_pick_icon_library">从库中选取</string>
     <string name="action_save">保存</string>
     <string name="action_save_as_new">保存为新</string>
+    <string name="action_update">更新</string>
     <string name="action_view_github">GitHub 项目</string>
     <string name="action_view_paid">活动启动器专业版</string>
     <string name="action_view_source">查看源代码</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">此应用给予用户通常不可见的功能访问权限。某些选项可能无法正常使用，或者可能无法安全使用。您是否理解并且仍然想要继续？</string>
     <string name="dialog_progress_loading">加载中…</string>
     <string name="dialog_support">我们添加了广告来帮助资助未来的开发。不喜欢广告？请在 Google Play 上升级到 活动启动器专业版——它是完全开源的，并支持该应用程序的持续开发。您也可以在 GitHub 上免费获取该应用程序。那里的支持是可选的，但对我们有很大帮助。</string>
+    <string name="dialog_update_shortcut">您的主屏幕上已存在具有此 ID 的快捷方式。您想更新现有快捷方式还是添加新快捷方式？</string>
     <string name="error">错误</string>
     <string name="error_duplicate_category">类别重复</string>
     <string name="error_duplicate_extra_key">键名重复</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">编辑 Intent</string>
     <string name="title_dialog_icon_picker">选取图标</string>
     <string name="title_dialog_support">感谢您使用 Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">更新快捷方式？</string>
     <string name="title_fragment_activity_list">活动</string>
     <string name="title_fragment_package_list">已安装的包</string>
 </resources>

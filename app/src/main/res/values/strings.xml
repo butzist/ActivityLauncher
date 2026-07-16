@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category" comment="Button label to add a new intent category. 'Category' is a technical Android Intent term and should usually remain untranslated or be translated according to Android developer terminology.">Add Category</string>
     <string name="action_add_extra" comment="Button label to add a new intent extra. 'Extra' is a technical Android Intent term and should usually remain untranslated or be translated according to Android developer terminology.">Add Extra</string>
+    <string name="action_add_new" comment="Button label in the shortcut conflict dialog to create a new shortcut instead of updating an existing one.">Add new</string>
     <string name="action_advanced_properties" comment="Button label to show advanced intent properties.">Advanced Properties</string>
     <string name="action_clear" comment="Button label to clear all fields in the intent editor.">Clear</string>
     <string name="action_pick_icon_file" comment="Button label to load an icon from a file.">Load from file</string>
     <string name="action_pick_icon_library" comment="Button label to pick an icon from the built-in library.">Pick from library</string>
     <string name="action_save" comment="Button label to save shortcut changes">Save</string>
     <string name="action_save_as_new" comment="Menu label to save shortcut as a new entry">Save as New</string>
+    <string name="action_update" comment="Button label in the shortcut conflict dialog to update an existing home screen shortcut with new metadata.">Update</string>
     <string name="action_view_github" comment="Settings action to view the GitHub project">GitHub project</string>
     <string name="action_view_paid" comment="Settings action to view the paid Pro version on Google Play">Activity Launcher Pro</string>
     <string name="action_view_source" comment="Settings action to view the app's source code on GitHub">View source code</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer" comment="Warning text in the disclaimer dialog about accessing hidden/advanced features">This app gives access to features not normally visible to users. Some options may not work as expected or may not be safe to use. Do you understand and still want to proceed?</string>
     <string name="dialog_progress_loading" comment="Progress message shown while loading the list of installed apps">Loading…</string>
     <string name="dialog_support" comment="Dialog message encouraging users to support the app">We\'ve added ads to help fund future development. Prefer no ads? Upgrade to Activity Launcher Pro on Google Play — it\'s fully open-source and supports continued work on the app. You can also get the app for free on GitHub. Support there is optional but helps us a lot.</string>
+    <string name="dialog_update_shortcut" comment="Message in a confirmation dialog shown when a user tries to pin a shortcut that already exists on the home screen.">A shortcut with this ID already exists on your home screen. Would you like to update the existing shortcut or add a new one?</string>
     <string name="error" comment="Generic error dialog title">Error</string>
     <string name="error_duplicate_category" comment="Error message when a duplicate category is added. 'Category' is a technical Android Intent term.">Duplicate category</string>
     <string name="error_duplicate_extra_key" comment="Error message when a duplicate extra key is added. 'Key' refers to the unique identifier in an Intent Extra.">Duplicate key</string>
@@ -43,6 +46,8 @@
     <string name="error_invalid_icon_resource" comment="Error message for invalid or non-existent icon resource.">Error: invalid icon resource</string>
     <string name="error_invalid_int" comment="Error message for invalid integer value. 'Integer' is a technical programming term and should usually remain untranslated.">Invalid Integer</string>
     <string name="error_invalid_long" comment="Error message for invalid long value. 'Long' is a technical programming term for a 64-bit integer and should usually remain untranslated.">Invalid Long</string>
+    <string name="error_invalid_signature" comment="Error message shown when a shortcut's signature does not match.">Invalid shortcut signature</string>
+    <string name="error_shortcut_not_found" comment="Error message shown when a shortcut with the given ID is not found in the database.">Shortcut not found in database</string>
     <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
     <string name="label_class" comment="Form label for the activity class name field. 'Class' refers to the Java/Kotlin class name.">Class</string>
     <string name="label_intent_action" comment="Label for the intent action field. 'Action' is a technical Android Intent term and should usually remain untranslated.">Action</string>
@@ -84,6 +89,7 @@
     <string name="title_dialog_edit_intent" comment="Dialog title for editing an intent. 'Intent' is a technical Android term.">Edit Intent</string>
     <string name="title_dialog_icon_picker" comment="Dialog title for selecting an icon when creating or editing a shortcut">Pick an icon</string>
     <string name="title_dialog_support" comment="Dialog title for the support/donate dialog">Thanks for using Activity Launcher</string>
+    <string name="title_dialog_update_shortcut" comment="Title of the confirmation dialog shown when a shortcut ID conflict is detected during pinning.">Update shortcut?</string>
     <string name="title_fragment_activity_list" comment="Screen title showing activities within a selected package">Activities</string>
     <string name="title_fragment_package_list" comment="Screen title for the list of installed packages/apps">Installed packages</string>
 </resources>

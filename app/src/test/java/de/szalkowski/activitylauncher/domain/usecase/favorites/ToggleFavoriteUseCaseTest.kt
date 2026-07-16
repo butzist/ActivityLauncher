@@ -3,6 +3,8 @@ package de.szalkowski.activitylauncher.domain.usecase.favorites
 import android.content.ComponentName
 import android.content.Intent
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -26,7 +28,7 @@ class ToggleFavoriteUseCaseTest {
         val component = ComponentName("pkg", "cls")
         val intent = mock<Intent>()
         whenever(intent.component).thenReturn(component)
-        val request = ShortcutRequest("name", intent, mock())
+        val request = ShortcutRequest("name", intent, ActivityIcon.Resource("pkg", 1), source = LaunchSource.PRIMARY)
         whenever(favoritesRepository.isFavorite(component)).thenReturn(false)
 
         val result = useCase(request)
@@ -40,7 +42,7 @@ class ToggleFavoriteUseCaseTest {
         val component = ComponentName("pkg", "cls")
         val intent = mock<Intent>()
         whenever(intent.component).thenReturn(component)
-        val request = ShortcutRequest("name", intent, mock())
+        val request = ShortcutRequest("name", intent, ActivityIcon.Resource("pkg", 1), source = LaunchSource.PRIMARY)
         whenever(favoritesRepository.isFavorite(component)).thenReturn(true)
 
         val result = useCase(request)

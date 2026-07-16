@@ -86,6 +86,9 @@ interface RecentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recent: RecentEntity): Long
 
+    @Query("UPDATE recents SET timestamp = :timestamp, launcherPlugin = :launcherPlugin, intentUri = :intentUri WHERE packageName = :packageName AND className = :className")
+    suspend fun updateUsage(packageName: String, className: String, timestamp: Long, launcherPlugin: String?, intentUri: String): Int
+
     @Query("DELETE FROM recents WHERE packageName = :packageName AND className = :className")
     suspend fun deleteByComponent(packageName: String, className: String): Int
 
@@ -108,7 +111,10 @@ interface ShortcutDao {
     suspend fun delete(shortcut: ShortcutEntity): Int
 
     @Query("DELETE FROM shortcuts WHERE id = :id")
-    suspend fun deleteById(id: Long): Int
+    suspend fun deleteById(id: String): Int
+
+    @Query("SELECT * FROM shortcuts WHERE id = :id")
+    suspend fun getById(id: String): ShortcutEntity?
 
     @Query("SELECT * FROM shortcuts WHERE packageName = :packageName AND className = :className AND name = :name AND intentUri = :intentUri LIMIT 1")
     suspend fun findExisting(packageName: String, className: String, name: String, intentUri: String): ShortcutEntity?
@@ -122,7 +128,7 @@ interface ShortcutDao {
         RecentEntity::class,
         ShortcutEntity::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {

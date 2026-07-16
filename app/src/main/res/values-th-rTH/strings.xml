@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">เพิ่มหมวดหมู่</string>
     <string name="action_add_extra">เพิ่ม Extra</string>
+    <string name="action_add_new">เพิ่มใหม่</string>
     <string name="action_advanced_properties">คุณสมบัติขั้นสูง</string>
     <string name="action_clear">ล้าง</string>
     <string name="action_pick_icon_file">โหลดจากไฟล์</string>
     <string name="action_pick_icon_library">เลือกจากคลัง</string>
     <string name="action_save">บันทึก</string>
     <string name="action_save_as_new">บันทึกเป็นรายการใหม่</string>
+    <string name="action_update">อัปเดต</string>
     <string name="action_view_github">โปรเจ็กต์ GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">ดูซอร์สโค้ด</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">แอปนี้ให้การเข้าถึงฟีเจอร์ที่โดยปกติจะมองไม่เห็นสำหรับผู้ใช้ บางตัวเลือกอาจทำงานไม่ตรงตามที่คาดหวังหรืออาจไม่ปลอดภัยในการใช้งาน คุณเข้าใจและยังต้องการดำเนินการต่อหรือไม่?</string>
     <string name="dialog_progress_loading">กำลังโหลด...</string>
     <string name="dialog_support">เราได้เพิ่มโฆษณาเพื่อช่วยสนับสนุนการพัฒนาในอนาคต หากไม่ต้องการโฆษณา สามารถอัปเกรดเป็น Activity Launcher Pro ได้บน Google Play ซึ่งเป็นโอเพนซอร์สอย่างสมบูรณ์และสนับสนุนการทำงานต่อเนื่องของแอป คุณยังสามารถรับแอปได้ฟรีบน GitHub การสนับสนุนที่นั่นเป็นทางเลือก แต่ช่วยเราได้มาก</string>
+    <string name="dialog_update_shortcut">มีทางลัดที่มี ID นี้อยู่แล้วบนหน้าจอหลักของคุณ คุณต้องการอัปเดตทางลัดที่มีอยู่หรือเพิ่มทางลัดใหม่?</string>
     <string name="error">เกิดข้อผิดพลาด</string>
     <string name="error_duplicate_category">หมวดหมู่ซ้ำ</string>
     <string name="error_duplicate_extra_key">คีย์ซ้ำ</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">แก้ไข Intent</string>
     <string name="title_dialog_icon_picker">เลือกไอคอน</string>
     <string name="title_dialog_support">ขอบคุณที่ใช้ Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">อัปเดตทางลัดหรือไม่?</string>
     <string name="title_fragment_activity_list">activities ทั้งหมด</string>
     <string name="title_fragment_package_list">แอปที่ติดตั้งแล้ว</string>
 </resources>

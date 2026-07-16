@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Adăugare categorie</string>
     <string name="action_add_extra">Adăugare Extra</string>
+    <string name="action_add_new">Adăugare nouă</string>
     <string name="action_advanced_properties">Proprietăți avansate</string>
     <string name="action_clear">Șterge</string>
     <string name="action_pick_icon_file">Încărcare din fișier</string>
     <string name="action_pick_icon_library">Alegere din bibliotecă</string>
     <string name="action_save">Salvează</string>
     <string name="action_save_as_new">Salvează ca nou</string>
+    <string name="action_update">Actualizare</string>
     <string name="action_view_github">Proiect GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Vezi codul sursă</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Această aplicație oferă acces la funcții care nu sunt vizibile în mod normal utilizatorilor. Este posibil ca unele opțiuni să nu funcționeze conform așteptărilor sau să nu fie sigure pentru utilizare. Înțelegi și totuși dorești să continui?</string>
     <string name="dialog_progress_loading">Se încarcă...</string>
     <string name="dialog_support">Am adăugat reclame pentru a ajuta la finanțarea dezvoltării viitoare. Preferi fără reclame? Fă upgrade la Lansator Activități Pro pe Google Play – este complet open-source și sprijină continuarea lucrărilor la aplicație. Poți obține, de asemenea, aplicația gratuit pe GitHub. Sprijinul acolo este opțional, dar ne ajută foarte mult.</string>
+    <string name="dialog_update_shortcut">O comandă rapidă cu acest ID există deja pe ecranul principal. Doriți să actualizați comanda rapidă existentă sau să adăugați una nouă?</string>
     <string name="error">Eroare</string>
     <string name="error_duplicate_category">Categorie duplicată</string>
     <string name="error_duplicate_extra_key">Cheie duplicată</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Editează Intent-ul</string>
     <string name="title_dialog_icon_picker">Alege o iconița</string>
     <string name="title_dialog_support">Mulțumim că folosești Lansator Activități</string>
+    <string name="title_dialog_update_shortcut">Actualizați comanda rapidă?</string>
     <string name="title_fragment_activity_list">Activități</string>
     <string name="title_fragment_package_list">Pachete instalate</string>
 </resources>

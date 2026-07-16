@@ -65,8 +65,9 @@
             app:nullable="false" />
         <argument
             android:name="shortcutId"
-            android:defaultValue="0L"
-            app:argType="long" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="configuration"
             app:argType="de.szalkowski.activitylauncher.presentation.activities.DetailsConfiguration"

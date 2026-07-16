@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">إضافة فئة</string>
     <string name="action_add_extra">إضافة إضافي</string>
+    <string name="action_add_new">إضافة جديد</string>
     <string name="action_advanced_properties">الخصائص المتقدمة</string>
     <string name="action_clear">مسح</string>
     <string name="action_pick_icon_file">تحميل من ملف</string>
     <string name="action_pick_icon_library">اختيار من المكتبة</string>
     <string name="action_save">حفظ</string>
     <string name="action_save_as_new">حفظ كجديد</string>
+    <string name="action_update">تحديث</string>
     <string name="action_view_github">مشروع GitHub</string>
     <string name="action_view_paid">مشغل النشاط برو</string>
     <string name="action_view_source">عرض الرمز البرمجي الأساس</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">يتيح هذا التطبيق الوصول إلى الميزات غير المرئية عادة للمستخدمين. قد لا تعمل بعض الخيارات كما هو متوقع أو قد لا تكون آمنة للاستخدام. هل تفهم ولا تزال تريد المتابعة؟</string>
     <string name="dialog_progress_loading">جار التحميل…</string>
     <string name="dialog_support">لقد أضفنا إعلانات للمساعدة في تمويل التطوير المستقبلي. هل تفضل عدم وجود إعلانات؟ قم بالترقية إلى مشغل النشاط برو على Google Play - إنه مفتوح المصدر بالكامل ويدعم استمرار العمل على التطبيق. يمكنك أيضا الحصول على التطبيق مجانا على GitHub. الدعم هناك اختياري ولكنه يساعدنا كثيرا.</string>
+    <string name="dialog_update_shortcut">يوجد اختصار بهذا المعرف بالفعل على شاشتك الرئيسية. هل تريد تحديث الاختصار الحالي أم إضافة اختصار جديد؟</string>
     <string name="error">خطأ</string>
     <string name="error_duplicate_category">فئة مكررة</string>
     <string name="error_duplicate_extra_key">مفتاح مكرر</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">تعديل Intent</string>
     <string name="title_dialog_icon_picker">اختر رمزا</string>
     <string name="title_dialog_support">شكرا لاستخدام مشغل النشاط</string>
+    <string name="title_dialog_update_shortcut">تحديث الاختصار؟</string>
     <string name="title_fragment_activity_list">الأنشطة</string>
     <string name="title_fragment_package_list">الحزم المثبتة</string>
 </resources>

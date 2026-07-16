@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">श्रेणी जोड़ें</string>
     <string name="action_add_extra">एक्स्ट्रा जोड़ें</string>
+    <string name="action_add_new">नया जोड़ें</string>
     <string name="action_advanced_properties">उन्नत गुण</string>
     <string name="action_clear">साफ़ करें</string>
     <string name="action_pick_icon_file">फ़ाइल से लोड करें</string>
     <string name="action_pick_icon_library">लाइब्रेरी से चुनें</string>
     <string name="action_save">सहेजें</string>
     <string name="action_save_as_new">नए के रूप में सहेजें</string>
+    <string name="action_update">अपडेट करें</string>
     <string name="action_view_github">GitHub प्रोजेक्ट</string>
     <string name="action_view_paid">एक्टिविटी लॉन्चर प्रो</string>
     <string name="action_view_source">सोर्स कोड देखें</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">यह ऐप उन फीचर्स तक पहुँच प्रदान करता है जो सामान्यतः उपयोगकर्ताओं को दिखाई नहीं देते। कुछ विकल्प उम्मीद के अनुसार काम नहीं कर सकते हैं या उपयोग के लिए सुरक्षित नहीं हो सकते हैं। क्या आप समझते हैं और फिर भी आगे बढ़ना चाहते हैं?</string>
     <string name="dialog_progress_loading">लोडिंग…</string>
     <string name="dialog_support">हमने भविष्य के विकास के लिए फंड देने में मदद करने के लिए विज्ञापन जोड़े हैं। कोई विज्ञापन नहीं चाहिए? Google Play पर एक्टिविटी लॉन्चर प्रो में अपग्रेड करें - यह पूरी तरह से ओपन-सोर्स है और ऐप पर लगातार काम करने में मदद करता है। आप GitHub पर ऐप मुफ्त में भी प्राप्त कर सकते हैं। वहाँ समर्थन वैकल्पिक है लेकिन इससे हमें बहुत मदद मिलती है।</string>
+    <string name="dialog_update_shortcut">इस ID वाला शॉर्टकट आपकी होम स्क्रीन पर पहले से मौजूद है। क्या आप मौजूदा शॉर्टकट को अपडेट करना चाहते हैं या नया जोड़ना चाहते हैं?</string>
     <string name="error">त्रुटि</string>
     <string name="error_duplicate_category">डुप्लिकेट श्रेणी</string>
     <string name="error_duplicate_extra_key">डुप्लिकेट कुंजी</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent संपादित करें</string>
     <string name="title_dialog_icon_picker">आइकॉन चयन</string>
     <string name="title_dialog_support">एक्टिविटी लॉन्चर का उपयोग करने के लिए धन्यवाद</string>
+    <string name="title_dialog_update_shortcut">शॉर्टकट अपडेट करें?</string>
     <string name="title_fragment_activity_list">गतिविधियाँ</string>
     <string name="title_fragment_package_list">इंस्टॉल किए गए पैकेज</string>
 </resources>

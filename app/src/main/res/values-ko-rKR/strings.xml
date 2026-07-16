@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">카테고리 추가</string>
     <string name="action_add_extra">Extra 추가</string>
+    <string name="action_add_new">새로 추가</string>
     <string name="action_advanced_properties">고급 속성</string>
     <string name="action_clear">지우기</string>
     <string name="action_pick_icon_file">파일에서 불러오기</string>
     <string name="action_pick_icon_library">라이브러리에서 선택</string>
     <string name="action_save">저장</string>
     <string name="action_save_as_new">새로 저장</string>
+    <string name="action_update">업데이트</string>
     <string name="action_view_github">GitHub 프로젝트</string>
     <string name="action_view_paid">액티비티 런처 프로</string>
     <string name="action_view_source">소스 코드 보기</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">이 앱은 일반적으로 사용자에게 보이지 않는 기능에 접근할 수 있게 해줍니다. 일부 옵션은 예상대로 작동하지 않거나 사용하기에 안전하지 않을 수 있습니다. 이해하셨나요? 계속 진행하시겠습니까?</string>
     <string name="dialog_progress_loading">불러오는 중...</string>
     <string name="dialog_support">향후 개발 자금 마련을 위해 광고를 추가했습니다. 광고를 원하지 않으신가요? Google Play에서 액티비티 런처 프로로 업그레이드하세요. 완전한 오픈 소스이며 지속적으로 앱을 유지보수 할 예정입니다. GitHub에서 무료로 앱을 다운로드할 수도 있습니다. 지원은 필수가 아니지만 저희에게 많은 도움이 됩니다.</string>
+    <string name="dialog_update_shortcut">이 ID의 바로가기가 이미 홈 화면에 존재합니다. 기존 바로가기를 업데이트하시겠습니까, 아니면 새 바로가기를 추가하시겠습니까？</string>
     <string name="error">오류</string>
     <string name="error_duplicate_category">중복된 카테고리</string>
     <string name="error_duplicate_extra_key">중복된 키</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent 편집</string>
     <string name="title_dialog_icon_picker">아이콘 선택</string>
     <string name="title_dialog_support">액티비티 런처를 이용해 주셔서 감사합니다</string>
+    <string name="title_dialog_update_shortcut">바로가기를 업데이트할까요？</string>
     <string name="title_fragment_activity_list">액티비티</string>
     <string name="title_fragment_package_list">설치한 패키지</string>
 </resources>

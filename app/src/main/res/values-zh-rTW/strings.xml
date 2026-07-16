@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">新增類別</string>
     <string name="action_add_extra">新增 Extra</string>
+    <string name="action_add_new">新增</string>
     <string name="action_advanced_properties">進階屬性</string>
     <string name="action_clear">清除</string>
     <string name="action_pick_icon_file">從檔案載入</string>
     <string name="action_pick_icon_library">從收藏庫選取</string>
     <string name="action_save">儲存</string>
     <string name="action_save_as_new">儲存為新</string>
+    <string name="action_update">更新</string>
     <string name="action_view_github">GitHub 專案</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">檢視原始碼</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">這個應用程式提供使用者平常無法看到的功能。某些選項可能無法如預期運作，或可能存在安全風險。您是否了解並仍然希望繼續？</string>
     <string name="dialog_progress_loading">正在載入…</string>
     <string name="dialog_support">我們新增了廣告以資助未來的開發。不想看到廣告嗎？請在 Google Play 上升級至專業版的 Activity Launcher，它是完全開放原始碼的，並支援應用程式的持續開發。您也可以在 GitHub 上免費取得該應用程式。那裡的贊助是可選的，但對我們有很大的幫助。</string>
+    <string name="dialog_update_shortcut">您的主螢幕上已存在具有此 ID 的捷徑。您想更新現有捷徑還是新增捷徑？</string>
     <string name="error">錯誤</string>
     <string name="error_duplicate_category">類別重複</string>
     <string name="error_duplicate_extra_key">鍵名重複</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">編輯 Intent</string>
     <string name="title_dialog_icon_picker">選擇圖示</string>
     <string name="title_dialog_support">感謝您使用 Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">更新捷徑？</string>
     <string name="title_fragment_activity_list">活動</string>
     <string name="title_fragment_package_list">已安裝的套件</string>
 </resources>

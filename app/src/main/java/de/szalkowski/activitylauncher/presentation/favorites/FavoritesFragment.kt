@@ -9,7 +9,6 @@ import androidx.navigation.NavDirections
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentFavoritesBinding
-import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import de.szalkowski.activitylauncher.presentation.activities.DetailsConfiguration
@@ -24,7 +23,7 @@ class FavoritesFragment : BaseActivityListFragment<ShortcutRequest>() {
     @Inject
     internal lateinit var launchActivityUseCase: LaunchActivityUseCase
 
-    val viewModel: FavoritesViewModel by viewModels()
+    override val viewModel: FavoritesViewModel by viewModels()
     override val items get() = viewModel.items
     override val recyclerViewId: Int = R.id.rvFavorites
     override val logTag: String = "FavoritesFragment"
@@ -33,14 +32,7 @@ class FavoritesFragment : BaseActivityListFragment<ShortcutRequest>() {
     override val adapter: ActivityInfoAdapter<ShortcutRequest> by lazy {
         ActivityInfoAdapter(ShortcutRequestDiffCallback, ::bindShortcutRequest).also {
             it.onItemClick = { request ->
-                launchActivityUseCase(
-                    LaunchRequest(
-                        intent = request.intent,
-                        name = request.name,
-                        icon = request.icon,
-                        launcherPlugin = request.launcherPlugin,
-                    ),
-                )
+                launchActivityUseCase(request.toLaunchRequest())
             }
             it.onItemSwiped = { request -> viewModel.removeItem(request) }
         }

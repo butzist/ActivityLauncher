@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Categorie toevoegen</string>
     <string name="action_add_extra">Extra toevoegen</string>
+    <string name="action_add_new">Nieuwe toevoegen</string>
     <string name="action_advanced_properties">Geavanceerde eigenschappen</string>
     <string name="action_clear">Wissen</string>
     <string name="action_pick_icon_file">Laden uit bestand</string>
     <string name="action_pick_icon_library">Kiezen uit bibliotheek</string>
     <string name="action_save">Opslaan</string>
     <string name="action_save_as_new">Opslaan als nieuw</string>
+    <string name="action_update">Bijwerken</string>
     <string name="action_view_github">GitHub-project</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Bekijk broncode</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Deze app geeft toegang tot functies die normaal niet zichtbaar zijn voor gebruikers. Sommige opties werken mogelijk niet zoals verwacht of zijn mogelijk niet veilig te gebruiken. Begrijpt u dit en wilt u toch doorgaan?</string>
     <string name="dialog_progress_loading">Laden…</string>
     <string name="dialog_support">We hebben advertenties toegevoegd om toekomstige ontwikkeling te financieren. Liever geen advertenties? Upgrade naar Activity Launcher Pro op Google Play - het is volledig open-source en ondersteunt de voortzetting van het werk aan de app. Je kunt de app ook gratis krijgen op GitHub. Ondersteuning daar is optioneel, maar helpt ons enorm.</string>
+    <string name="dialog_update_shortcut">Er bestaat al een snelkoppeling met deze ID op je startscherm. Wil je de bestaande snelkoppeling bijwerken of een nieuwe toevoegen?</string>
     <string name="error">Fout</string>
     <string name="error_duplicate_category">Dubbele categorie</string>
     <string name="error_duplicate_extra_key">Dubbele sleutel</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent bewerken</string>
     <string name="title_dialog_icon_picker">Kies een icoon</string>
     <string name="title_dialog_support">Bedankt voor het gebruiken van Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Snelkoppeling bijwerken?</string>
     <string name="title_fragment_activity_list">Activiteiten</string>
     <string name="title_fragment_package_list">Geïnstalleerde pakketten</string>
 </resources>

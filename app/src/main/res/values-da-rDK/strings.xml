@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Tilføj kategori</string>
     <string name="action_add_extra">Tilføj Extra</string>
+    <string name="action_add_new">Tilføj ny</string>
     <string name="action_advanced_properties">Avancerede egenskaber</string>
     <string name="action_clear">Ryd</string>
     <string name="action_pick_icon_file">Indlæs fra fil</string>
     <string name="action_pick_icon_library">Vælg fra bibliotek</string>
     <string name="action_save">Gem</string>
     <string name="action_save_as_new">Gem som ny</string>
+    <string name="action_update">Opdater</string>
     <string name="action_view_github">GitHub-projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Vis kildekode</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Denne app giver adgang til funktioner, som normalt ikke er synlige for brugerne. Nogle muligheder fungerer måske ikke som forventet eller er måske ikke sikre at bruge. Forstår man dette og ønsker stadig at fortsætte?</string>
     <string name="dialog_progress_loading">Indlæser…</string>
     <string name="dialog_support">Vi har tilføjet annoncer mhp. at finansiere fremtidig udvikling. Foretrækker man nul annoncer? Opgradér til Activity Launcher Pro på Google Play – den er fuldt open-source og støtter fortsat udvikling af appen. Man kan også få appen gratis på GitHub. Support dér er valgfrit, men hjælper os meget.</string>
+    <string name="dialog_update_shortcut">Der findes allerede en genvej med dette id på din startskærm. Vil du opdatere den eksisterende genvej eller tilføje en ny?</string>
     <string name="error">Fejl</string>
     <string name="error_duplicate_category">Duplikeret kategori</string>
     <string name="error_duplicate_extra_key">Duplikeret nøgle</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Rediger Intent</string>
     <string name="title_dialog_icon_picker">Vælg et ikon</string>
     <string name="title_dialog_support">Tak fordi brugen af Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Opdater genvej?</string>
     <string name="title_fragment_activity_list">Aktiviteter</string>
     <string name="title_fragment_package_list">Installerede pakker</string>
 </resources>

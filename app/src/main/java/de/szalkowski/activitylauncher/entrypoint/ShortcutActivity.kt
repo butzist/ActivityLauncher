@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.entrypoint
 
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -12,20 +11,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
-import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import de.szalkowski.activitylauncher.domain.model.ShortcutResolutionResult
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.ResolveShortcutSourceUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ShortcutActivity : AppCompatActivity() {
-    @Inject
-    internal lateinit var intentSigner: IntentSigner
-
     @Inject
     internal lateinit var viewIntentParser: ViewIntentParser
 
@@ -41,13 +40,18 @@ class ShortcutActivity : AppCompatActivity() {
     @Inject
     internal lateinit var createShortcutUseCase: CreateShortcutUseCase
 
+    @Inject
+    internal lateinit var resolveShortcutSourceUseCase: ResolveShortcutSourceUseCase
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
             when (intent.action) {
                 ShortcutCreator.INTENT_LAUNCH_SHORTCUT -> {
-                    handleLaunchShortcut()
-                    finish()
+                    lifecycleScope.launch {
+                        handleLaunchShortcut()
+                        finish()
+                    }
                 }
 
                 ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT -> {
@@ -100,28 +104,49 @@ class ShortcutActivity : AppCompatActivity() {
         return false
     }
 
-    private fun redirectToMain(componentName: ComponentName) {
+    private fun redirectToMain(launchRequest: LaunchRequest) {
         val mainIntent = Intent(this, MainActivity::class.java)
-        mainIntent.putExtra(MainActivity.EXTRA_ACTIVITY_COMPONENT_NAME, componentName)
+        mainIntent.putExtra(MainActivity.EXTRA_SHORTCUT_LAUNCH_REDIRECT, launchRequest)
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(mainIntent)
     }
 
-    private fun handleLaunchShortcut() {
-        val request = viewIntentParser.parseLaunchRequest(intent)
-        if (request == null) {
+    private suspend fun handleLaunchShortcut() {
+        val source = viewIntentParser.parseLaunchSource(intent)
+        if (source == null) {
             Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
             return
         }
-        val signature = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE).orEmpty()
 
-        if (!intentSigner.validateRequestSignature(request, signature)) {
-            Log.e("ShortcutActivity", "Invalid signature for shortcut")
-            request.intent.component?.let { redirectToMain(it) }
-            return
+        when (val result = resolveShortcutSourceUseCase(source)) {
+            is ShortcutResolutionResult.Success -> {
+                launchActivityUseCase.invoke(result.request, this)
+            }
+
+            ShortcutResolutionResult.InvalidSignature -> {
+                Toast.makeText(this, R.string.error_invalid_signature, Toast.LENGTH_SHORT).show()
+                source.intent?.let {
+                    val launchRequest = LaunchRequest(
+                        intent = it,
+                        launcherPlugin = source.launcherPlugin,
+                        source = LaunchSource.SHORTCUT,
+                    )
+                    redirectToMain(launchRequest)
+                }
+            }
+
+            ShortcutResolutionResult.NotFound -> {
+                Toast.makeText(this, R.string.error_shortcut_not_found, Toast.LENGTH_SHORT).show()
+                source.intent?.let {
+                    val launchRequest = LaunchRequest(
+                        intent = it,
+                        launcherPlugin = source.launcherPlugin,
+                        source = LaunchSource.SHORTCUT,
+                    )
+                    redirectToMain(launchRequest)
+                }
+            }
         }
-
-        launchActivityUseCase.invoke(request)
     }
 
     private fun handleLaunchActivity() {
@@ -130,17 +155,27 @@ class ShortcutActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
             return
         }
-        launchActivityUseCase.invoke(request)
+        launchActivityUseCase.invoke(request, this)
     }
 
     private fun handleCreateShortcut() {
-        val request = viewIntentParser.parseShortcutRequest(intent)
-        if (request == null) {
+        val shortcutProxyRequest = viewIntentParser.parseShortcutRequest(intent)
+        if (shortcutProxyRequest == null) {
             Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
             return
         }
+
         lifecycleScope.launch {
-            createShortcutUseCase(request)
+            val shortcutId = shortcutProxyRequest.intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID)
+
+            if (shortcutId != null) {
+                shortCutCreator.createLauncherIcon(shortcutProxyRequest, shortcutId)
+            } else {
+                // Fallback for intents that don't have the full AL metadata (unlikely with new protocol)
+                // but we don't have ShortcutRequest here anymore in ShortcutActivity if it comes from a plugin.
+                // However, plugins SHOULD send the full intent they received.
+                Toast.makeText(this@ShortcutActivity, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

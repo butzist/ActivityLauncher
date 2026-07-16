@@ -18,9 +18,7 @@ import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
-import de.szalkowski.activitylauncher.domain.model.SystemPackage
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
@@ -127,7 +125,7 @@ class FavoritesRecentsIntegrationTest {
             if (favoriteSet.add(component)) {
                 val icon = getActivityIconUseCase(null, component)
                 val intent = Intent().setComponent(component)
-                val request = ShortcutRequest("Test Activity", intent, icon)
+                val request = ShortcutRequest("Test Activity", intent, icon, source = LaunchSource.SAVED)
                 favoriteFlow.value += request
             }
         }.whenever(favoritesRepository).addFavorite(any<ComponentName>())
@@ -155,7 +153,7 @@ class FavoritesRecentsIntegrationTest {
             }
         }.whenever(favoritesRepository).removeFavorite(any<ShortcutRequest>())
 
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)
         whenever(getActivityIconUseCase(anyOrNull(), any())).thenReturn(icon)
 
@@ -276,7 +274,7 @@ class FavoritesRecentsIntegrationTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
 
             Thread.sleep(2000)
-            verify(activityLauncher).launchActivity(any())
+            verify(activityLauncher).launchActivity(any(), anyOrNull())
         } finally {
             runCatching { scenario.close() }
         }
@@ -291,7 +289,7 @@ class FavoritesRecentsIntegrationTest {
             // Mock a recent activity
             val componentName = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity")
             val icon = getActivityIconUseCase(null, componentName)
-            val request = ShortcutRequest("Test Recent", Intent().setComponent(componentName), icon)
+            val request = ShortcutRequest("Test Recent", Intent().setComponent(componentName), icon, source = LaunchSource.SAVED)
             recentsFlow.value = listOf(request)
             Thread.sleep(2000)
 
@@ -303,7 +301,7 @@ class FavoritesRecentsIntegrationTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
 
             Thread.sleep(2000)
-            verify(activityLauncher).launchActivity(any())
+            verify(activityLauncher).launchActivity(any(), anyOrNull())
         } finally {
             runCatching { scenario.close() }
         }

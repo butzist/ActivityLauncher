@@ -118,7 +118,7 @@ data class RecentEntity(
 
 @Entity(tableName = "shortcuts")
 data class ShortcutEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey val id: String,
     val packageName: String,
     val className: String,
     val name: String,

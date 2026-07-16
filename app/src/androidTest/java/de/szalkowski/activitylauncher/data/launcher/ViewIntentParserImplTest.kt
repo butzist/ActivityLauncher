@@ -5,9 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,11 +15,10 @@ import org.mockito.kotlin.*
 @RunWith(AndroidJUnit4::class)
 class ViewIntentParserImplTest {
     private lateinit var parser: ViewIntentParserImpl
-    private val getActivityIconUseCase: GetActivityIconUseCase = mock()
 
     @Before
     fun setup() {
-        parser = ViewIntentParserImpl(getActivityIconUseCase)
+        parser = ViewIntentParserImpl()
     }
 
     @Test
@@ -33,12 +31,13 @@ class ViewIntentParserImplTest {
 
         assertEquals("com.example", request?.intent?.component?.packageName)
         assertEquals("com.example.MainActivity", request?.intent?.component?.className)
+        assertEquals(LaunchSource.DEEPLINK, request?.source)
     }
 
     @Test
     fun testParseShortcutIntentInComponentName() {
         val launchIntent = Intent().apply {
-            component = android.content.ComponentName("com.test", "com.test.Activity")
+            component = ComponentName("com.test", "com.test.Activity")
         }
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
@@ -47,6 +46,7 @@ class ViewIntentParserImplTest {
         val request = parser.parseLaunchRequest(intent)
         assertEquals("com.test", request?.intent?.component?.packageName)
         assertEquals("com.test.Activity", request?.intent?.component?.className)
+        assertEquals(LaunchSource.PRIMARY, request?.source)
     }
 
     @Test
@@ -60,40 +60,65 @@ class ViewIntentParserImplTest {
 
     @Test
     fun testParseShortcutRequest() {
-        val launchIntent = Intent().apply {
-            component = android.content.ComponentName("com.test", "com.test.Activity")
-        }
-        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+        val launchIntentUri = "intent://#Intent;component=com.test/.Activity;end"
+        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(
+            androidx.test.core.app.ApplicationProvider.getApplicationContext(),
+            android.R.drawable.ic_menu_add,
+        )
+        val intent = Intent().apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test Name")
-            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntentUri)
+            putExtra(ShortcutCreator.INTENT_EXTRA_ICON, icon.toBundle())
         }
-
-        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(mock())
 
         val request = parser.parseShortcutRequest(intent)
         assertEquals("Test Name", request?.name)
         assertEquals("com.test", request?.intent?.component?.packageName)
         assertEquals("com.test.Activity", request?.intent?.component?.className)
+        assertEquals(LaunchSource.PRIMARY, request?.source)
     }
 
     @Test
-    fun testParseShortcutRequest_UnwrapsShortcutActivity() {
-        val targetComponent = ComponentName("com.test", "com.test.Activity")
-        val targetIntent = Intent().apply { component = targetComponent }
-
-        val wrappedIntent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
-            component = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.ShortcutActivity")
-            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, targetIntent.toUri(Intent.URI_INTENT_SCHEME))
+    fun testParseLaunchSource_SavedShortcut() {
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, "uuid-123")
         }
 
-        val intent = Intent().apply {
-            putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test Name")
-            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, wrappedIntent.toUri(Intent.URI_INTENT_SCHEME))
+        val source = parser.parseLaunchSource(intent)
+        assertNotNull(source)
+        assertEquals("uuid-123", source?.id)
+    }
+
+    @Test
+    fun testParseLaunchSource_SignedShortcut() {
+        val launchIntent = Intent().apply {
+            component = ComponentName("com.test", "com.test.Activity")
+        }
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+            putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, "valid_sign")
         }
 
-        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(mock())
+        val source = parser.parseLaunchSource(intent)
+        assertNotNull(source)
+        assertEquals("com.test", source?.intent?.component?.packageName)
+        assertEquals("valid_sign", source?.signature)
+    }
 
-        val request = parser.parseShortcutRequest(intent)
-        assertEquals(targetComponent, request?.intent?.component)
+    @Test
+    fun testParseLaunchSource_Priority() {
+        val launchIntent = Intent().apply {
+            component = ComponentName("com.test", "com.test.Activity")
+        }
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, "uuid-123")
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+            putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, "valid_sign")
+        }
+
+        val source = parser.parseLaunchSource(intent)
+        assertNotNull(source)
+        assertEquals("uuid-123", source?.id)
+        assertEquals("valid_sign", source?.signature)
     }
 }

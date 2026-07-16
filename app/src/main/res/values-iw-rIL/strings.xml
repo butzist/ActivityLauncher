@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">הוסף קטגוריה</string>
     <string name="action_add_extra">הוסף Extra</string>
+    <string name="action_add_new">הוסף חדש</string>
     <string name="action_advanced_properties">מאפיינים מתקדמים</string>
     <string name="action_clear">ניקוי</string>
     <string name="action_pick_icon_file">טען מקובץ</string>
     <string name="action_pick_icon_library">בחר מהספרייה</string>
     <string name="action_save">שמירה</string>
     <string name="action_save_as_new">שמירה כחדש</string>
+    <string name="action_update">עדכן</string>
     <string name="action_view_github">פרויקט GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">צפה בקוד המקור</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">אפליקציה זו מעניקה גישה לתכונות שבדרך כלל אינן גלויות למשתמשים. ייתכן שאפשרויות מסוימות לא יפעלו כצפוי או שלא יהיו בטוחות לשימוש. האם אתה מבין ובכל זאת רוצה להמשיך?</string>
     <string name="dialog_progress_loading">טוען...</string>
     <string name="dialog_support">הוספנו פרסומות כדי לעזור לממן פיתוח עתידי. מעדיפים בלי פרסומות? שדרגו ל-"Activity Launcher Pro" ב-Google Play – הוא בקוד פתוח לחלוטין ותומך בהמשך העבודה על האפליקציה. תוכלו גם לקבל את האפליקציה בחינם ב-GitHub. תמיכה שם היא אופציונלית אבל עוזרת לנו מאוד.</string>
+    <string name="dialog_update_shortcut">קיצור דרך עם מזהה זה כבר קיים במסך הבית שלך. האם ברצונך לעדכן את קיצור הדרך הקיים או להוסיף אחד חדש?</string>
     <string name="error">שגיאה</string>
     <string name="error_duplicate_category">קטגוריה כפולה</string>
     <string name="error_duplicate_extra_key">מפתח כפול</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">ערוך Intent</string>
     <string name="title_dialog_icon_picker">בחר סמל</string>
     <string name="title_dialog_support">תודה על השימוש ב-"Activity Launcher"</string>
+    <string name="title_dialog_update_shortcut">לעדכן את קיצור הדרך?</string>
     <string name="title_fragment_activity_list">פעילויות</string>
     <string name="title_fragment_package_list">חבילות מותקנות</string>
 </resources>

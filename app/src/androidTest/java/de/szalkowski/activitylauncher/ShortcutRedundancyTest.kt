@@ -15,7 +15,9 @@ import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import de.szalkowski.activitylauncher.domain.model.ShortcutProxyRequest
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
 import kotlinx.coroutines.runBlocking
@@ -91,13 +93,14 @@ class ShortcutRedundancyTest {
     fun testShortcutCreation_UnwrapsAndRecordsCorrectComponent() = runBlocking {
         val targetComponent = ComponentName("com.test", "com.test.Activity")
         val targetIntent = Intent().apply { component = targetComponent }
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
 
         // wrapped intent as if created by Proxy
         val wrappedIntent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             component = ComponentName(ApplicationProvider.getApplicationContext<Context>(), ShortcutActivity::class.java)
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, targetIntent.toUri(Intent.URI_INTENT_SCHEME))
             putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test App")
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, "uuid-456")
         }
 
         val createIntent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT).apply {
@@ -106,23 +109,18 @@ class ShortcutRedundancyTest {
             setClassName(ApplicationProvider.getApplicationContext(), ShortcutActivity::class.java.name)
         }
 
-        // Mock ViewIntentParser to UNWRAP the intent (simulating the fix in ViewIntentParserImpl)
+        // Mock ViewIntentParser to return ShortcutProxyRequest
         whenever(viewIntentParser.parseShortcutRequest(any())).thenReturn(
-            ShortcutRequest("Test App", targetIntent, icon),
+            ShortcutProxyRequest("Test App", icon, wrappedIntent, source = LaunchSource.SHORTCUT),
         )
-        whenever(shortcutsRepository.recordShortcut(any())).thenReturn(456L)
 
         ActivityScenario.launch<ShortcutActivity>(createIntent).use {
             Thread.sleep(1000)
 
-            // Verify that ShortcutsRepository was called with the TARGET component, not ShortcutActivity
-            val recordCaptor = argumentCaptor<ShortcutRequest>()
-            verify(shortcutsRepository).recordShortcut(recordCaptor.capture())
-            assertEquals(targetComponent, recordCaptor.firstValue.intent.component)
-
-            // Verify that ShortcutCreator was called with the ID from recording
-            val creatorCaptor = argumentCaptor<ShortcutRequest>()
-            verify(shortcutCreator).createLauncherIcon(creatorCaptor.capture(), eq(456L))
+            // Verify that ShortcutCreator was called with the ID from intent
+            val creatorCaptor = argumentCaptor<ShortcutProxyRequest>()
+            verify(shortcutCreator).createLauncherIcon(creatorCaptor.capture(), eq("uuid-456"), anyOrNull())
+            assertEquals("Test App", creatorCaptor.firstValue.name)
         }
     }
 }

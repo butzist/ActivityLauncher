@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Voeg kategorie by</string>
     <string name="action_add_extra">Voeg ekstra by</string>
+    <string name="action_add_new">Voeg nuwe by</string>
     <string name="action_advanced_properties">Gevorderde eienskappe</string>
     <string name="action_clear">Vee uit</string>
     <string name="action_pick_icon_file">Laai vanaf lêer</string>
     <string name="action_pick_icon_library">Kies uit biblioteek</string>
     <string name="action_save">Stoor</string>
     <string name="action_save_as_new">Stoor as nuut</string>
+    <string name="action_update">Opdateer</string>
     <string name="action_view_github">GitHub-projek</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Bekyk bronkode</string>
@@ -27,9 +29,10 @@
     <string name="context_action_share">Deel</string>
     <string name="context_action_share_shortcut">Deel kortpad</string>
     <string name="context_action_shortcut">Skep kortpad</string>
-    <string name="dialog_disclaimer">Hierdie toepassing gee toegang tot funksies wat nie normaalweg vir gebruikers sigbaar is nie. Sommige opsies werk dalk nie soos verwag nie of is dalk nie veilig om te gebruik nie. Verstaan ​​jy en wil jy steeds voortgaan?</string>
+    <string name="dialog_disclaimer">Hierdie toepassing gee toegang tot funksies wat nie normaalweg vir gebruikers sigbaar is nie. Sommige opsies werk dalk nie soos verwag nie of is dalk nie veilig om te gebruik nie. Verstaan jy en wil jy steeds voortgaan?</string>
     <string name="dialog_progress_loading">Laai tans…</string>
     <string name="dialog_support">Ons het advertensies bygevoeg om toekomstige ontwikkeling te help finansier. Verkies jy geen advertensies nie? Gradeer op na Activity Launcher Pro op Google Play — dit is ten volle oopbron en ondersteun voortgesette werk aan die toepassing. Jy kan ook die toepassing gratis op GitHub kry. Ondersteuning daar is opsioneel, maar help ons baie.</string>
+    <string name="dialog_update_shortcut">\'n Kortpad met hierdie ID bestaan reeds op jou tuisskerm. Wil jy die bestaande kortpad opdateer of \'n nuwe een byvoeg?</string>
     <string name="error">Fout</string>
     <string name="error_duplicate_category">Duplikaat kategorie</string>
     <string name="error_duplicate_extra_key">Duplikaat sleutel</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Wysig Intent</string>
     <string name="title_dialog_icon_picker">Kies \'n ikoon</string>
     <string name="title_dialog_support">Dankie dat jy Activity Launcher gebruik</string>
+    <string name="title_dialog_update_shortcut">Opdateer kortpad?</string>
     <string name="title_fragment_activity_list">Aktiwiteite</string>
     <string name="title_fragment_package_list">Geïnstalleerde pakkette</string>
 </resources>

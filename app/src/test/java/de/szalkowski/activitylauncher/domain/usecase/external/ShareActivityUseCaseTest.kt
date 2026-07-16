@@ -19,9 +19,10 @@ class ShareActivityUseCaseTest {
     }
 
     @Test
-    fun `should share activity`() {
+    fun `should share activity and add to recents`() {
         useCase.invoke(componentName)
 
         verify(activitySharer).shareActivity(componentName)
+        verify(recentsRepository).addActivity(componentName)
     }
 }

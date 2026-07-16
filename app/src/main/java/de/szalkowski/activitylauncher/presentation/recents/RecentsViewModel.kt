@@ -3,6 +3,7 @@ package de.szalkowski.activitylauncher.presentation.recents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
+import de.szalkowski.activitylauncher.presentation.activities.DetailsResult
 import de.szalkowski.activitylauncher.presentation.common.BaseActivityListViewModel
 import javax.inject.Inject
 
@@ -12,4 +13,12 @@ class RecentsViewModel @Inject constructor(
 ) : BaseActivityListViewModel<ShortcutRequest>(
     getFlow = { recentsRepository.getRecentsFlow() },
     onRemoveItem = { request -> recentsRepository.removeActivity(request) },
-)
+) {
+    override fun handleSaveResult(result: DetailsResult) {
+        when (result) {
+            is DetailsResult.Save -> {
+                recentsRepository.addActivity(result.request)
+            }
+        }
+    }
+}

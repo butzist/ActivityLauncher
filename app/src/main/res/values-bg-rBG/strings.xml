@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Добавяне на категория</string>
     <string name="action_add_extra">Добавяне на допълнение (Extra)</string>
+    <string name="action_add_new">Добавяне на нов</string>
     <string name="action_advanced_properties">Разширени свойства</string>
     <string name="action_clear">Изчистване</string>
     <string name="action_pick_icon_file">Зареждане от файл</string>
     <string name="action_pick_icon_library">Избор от библиотека</string>
     <string name="action_save">Запазване</string>
     <string name="action_save_as_new">Запазване като ново</string>
+    <string name="action_update">Актуализиране</string>
     <string name="action_view_github">GitHub проект</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Преглед на изходния код</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Това приложение дава достъп до функции, които обикновено не са видими за потребителите. Някои опции може да не работят според очакванията или може да не са безопасни за използване. Разбирате ли и все още искате да продължите?</string>
     <string name="dialog_progress_loading">Зареждане…</string>
     <string name="dialog_support">Добавихме реклами, за да подпомогнем финансирането на бъдещото развитие. Предпочитате без реклами? Надстройте до Activity Launcher Pro в Google Play – той е с отворен код и поддържа продължаваща работа по приложението. Можете също да получите приложението безплатно в GitHub. Подкрепата там е незадължителна, но ни помага много.</string>
+    <string name="dialog_update_shortcut">Пряк път с този идентификатор вече съществува на началния ви екран. Искате ли да актуализирате съществуващия пряк път или да добавите нов?</string>
     <string name="error">Грешка</string>
     <string name="error_duplicate_category">Дублирана категория</string>
     <string name="error_duplicate_extra_key">Дублиран ключ</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Редактиране на Intent</string>
     <string name="title_dialog_icon_picker">Избор на икона</string>
     <string name="title_dialog_support">Благодарим ви, че използвате Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Актуализиране на прекия път?</string>
     <string name="title_fragment_activity_list">Активности</string>
     <string name="title_fragment_package_list">Инсталирани пакети</string>
 </resources>

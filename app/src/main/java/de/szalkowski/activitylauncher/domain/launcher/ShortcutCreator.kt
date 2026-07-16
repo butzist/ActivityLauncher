@@ -1,9 +1,10 @@
 package de.szalkowski.activitylauncher.domain.launcher
 
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import android.content.Context
+import de.szalkowski.activitylauncher.domain.model.ShortcutProxyRequest
 
 interface ShortcutCreator {
-    suspend fun createLauncherIcon(request: ShortcutRequest, shortcutId: Long? = null)
+    suspend fun createLauncherIcon(request: ShortcutProxyRequest, shortcutId: String, context: Context? = null)
 
     companion object {
         const val INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT"

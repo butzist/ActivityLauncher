@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">வகைப்பாட்டைச் சேர்</string>
     <string name="action_add_extra">கூடுதல் (Extra) சேர்</string>
+    <string name="action_add_new">புதியதைச் சேர்</string>
     <string name="action_advanced_properties">மேம்பட்ட பண்புகள்</string>
     <string name="action_clear">அழி</string>
     <string name="action_pick_icon_file">கோப்பிலிருந்து ஏற்றவும்</string>
     <string name="action_pick_icon_library">நூலகத்திலிருந்து தேர்ந்தெடுக்கவும்</string>
     <string name="action_save">சேமி</string>
     <string name="action_save_as_new">புதியதாகச் சேமி</string>
+    <string name="action_update">புதுப்பி</string>
     <string name="action_view_github">கிட்ஹப் திட்டம்</string>
     <string name="action_view_paid">செயல்பாடு துவக்கி Pro</string>
     <string name="action_view_source">மூலக் குறியீட்டைக் காண்க</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">இந்த செயலி பயனர்களுக்கு பொதுவாக தெரியாத அம்சங்களை அணுக உதவுகிறது. சில விருப்பங்கள் எதிர்பார்த்தபடி வேலை செய்யாமல் போகலாம அல்லது பயன்படுத்த பாதுகாப்பற்றதாக இருக்கலாம. நீங்கள் புரிந்து கொண்டு இன்னும் தொடர விரும்புகிறீர்களா?</string>
     <string name="dialog_progress_loading">ஏற்றுகிறது…</string>
     <string name="dialog_support">எதிர்கால மேம்பாட்டுக்கு நிதியளிக்க விளம்பரங்களைச் சேர்த்துள்ளோம். விளம்பரங்கள் வேண்டாம் என விரும்புகிறீர்களா? Google Play இல் செயல்பாடு துவக்கி Pro க்கு மேம்படுத்தவும் - இது முற்றிலும் திறந்த-மூலமானது மற்றும் பயன்பாட்டில் தொடர்ந்து பணியாற்ற உதவுகிறது. GitHub இல் பயன்பாட்டை இலவசமாகவும் பெறலாம். அங்கு ஆதரவு விருப்பமானது ஆனால் எங்களுக்கு நிறைய உதவுகிறது.</string>
+    <string name="dialog_update_shortcut">இந்த ID கொண்ட குறுக்குவழி ஏற்கனவே உங்கள் முகப்புத் திரையில் உள்ளது. ஏற்கனவே உள்ள குறுக்குவழியைப் புதுப்பிக்க விரும்புகிறீர்களா அல்லது புதிய ஒன்றைச் சேர்க்க விரும்புகிறீர்களா?</string>
     <string name="error">பிழை</string>
     <string name="error_duplicate_category">நகல் வகைப்பாடு</string>
     <string name="error_duplicate_extra_key">நகல் விசை (Key)</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent-ஐத் தொகு</string>
     <string name="title_dialog_icon_picker">ஓர் ஐகானைத் தேர்ந்தெடுக்கவும்</string>
     <string name="title_dialog_support">செயல்பாடு துவக்கியைப் பயன்படுத்தியதற்கு நன்றி</string>
+    <string name="title_dialog_update_shortcut">குறுக்குவழியைப் புதுப்பிக்கவா?</string>
     <string name="title_fragment_activity_list">நடவடிக்கைகள்</string>
     <string name="title_fragment_package_list">நிறுவப்பட்ட தொகுப்புகள்</string>
 </resources>

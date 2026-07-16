@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">زیادکردنی پۆل</string>
     <string name="action_add_extra">زیادکردنی زیادە</string>
+    <string name="action_add_new">زیادکردنی نوێ</string>
     <string name="action_advanced_properties">تایبەتمەندییە پێشکەوتووەکان</string>
     <string name="action_clear">پاککردنەوە</string>
     <string name="action_pick_icon_file">بارکردن لە پەڕگەوە</string>
     <string name="action_pick_icon_library">هەڵبژاردن لە کتێبخانەوە</string>
     <string name="action_save">پاشکەوتکردن</string>
     <string name="action_save_as_new">پاشکەوتکردن وەک نوێ</string>
+    <string name="action_update">نوێکردنەوە</string>
     <string name="action_view_github">پڕۆژەی GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">بینینی سەرچاوەی کۆد</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">ئەم ئەپە ڕێگە بە چالاکییە شاراوەکان دەدات کە ئاساییانە لە بەرهەمهێنەرانەوە شیناکرێنەوە. لەوانەیە هەندێکیان بەو شێوەیەی کە پێدەچێت کارنەکەن یان بەکارهێنانیان ناپارێزرێت. تۆ دەتوانیت و هێشتا دەتەوێت بەردەوام بیت؟</string>
     <string name="dialog_progress_loading">چاوەڕێبە…</string>
     <string name="dialog_support">ئێمە ڕیکلاممان زیاد کردووە بۆ یارمەتیدانی دابینکردنی بودجەی گەشەپێدانی داهاتوو. حەزت لە بێ ڕیکلامە؟ نوێی بکەرەوە بۆ Activity Launcher Pro لە Google Play — بەتەواوی سەرچاوە کراوەیە و پشتیوانی لە بەردەوامبوونی کارکردن لەسەر ئەپەکە دەکات. هەروەها دەتوانیت ئەپەکە بەخۆڕایی لە GitHub بەدەستبهێنیت. پشتیوانی لەوێ ئارەزوومەندانەیە بەڵام زۆر یارمەتیمان دەدات.</string>
+    <string name="dialog_update_shortcut">کورتکراوەیەک بەم ناسنامەیە پێشتر لەسەر شاشەی سەرەکیت بوونی هەیە. ئایا دەتەوێت کورتکراوەکەی ئێستا نوێ بکەیتەوە یان دانەیەکی نوێ زیاد بکەیت؟</string>
     <string name="error">هەڵە</string>
     <string name="error_duplicate_category">پۆلی دووبارە</string>
     <string name="error_duplicate_extra_key">کلیلی دووبارە</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">دەستکاریکردنی ئینتێنت</string>
     <string name="title_dialog_icon_picker">هەڵبژێرەری ئایکۆن</string>
     <string name="title_dialog_support">سوپاس بۆ بەکارهێنانی Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">کورتکراوە نوێ دەکرێتەوە؟</string>
     <string name="title_fragment_activity_list">چالاکییەکان</string>
     <string name="title_fragment_package_list">پاکێجە دامەزراوەکان</string>
 </resources>

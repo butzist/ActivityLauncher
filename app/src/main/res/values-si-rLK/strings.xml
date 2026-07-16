@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">වර්ගීකරණය එක් කරන්න</string>
     <string name="action_add_extra">Extra එක් කරන්න</string>
+    <string name="action_add_new">අලුත් එකක් එක් කරන්න</string>
     <string name="action_advanced_properties">උසස් ගුණාංග</string>
     <string name="action_clear">මකන්න</string>
     <string name="action_pick_icon_file">ගොනුවකින් පූරණය කරන්න</string>
     <string name="action_pick_icon_library">පුස්තකාලයෙන් තෝරන්න</string>
     <string name="action_save">සුරකින්න</string>
     <string name="action_save_as_new">අලුත් එකක් ලෙස සුරකින්න</string>
+    <string name="action_update">යාවත්කාලීන කරන්න</string>
     <string name="action_view_github">GitHub ව්‍යාපෘතිය</string>
     <string name="action_view_paid">ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ</string>
     <string name="action_view_source">මූලාශ්‍ර කේතය බලන්න</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">මෙම යෙදුම සාමාන්‍යයෙන් පරිශීලකයින්ට නොපෙනෙන විශේෂාංග වෙත ප්‍රවේශය ලබා දෙයි. සමහර විකල්ප අපේක්ෂිත පරිදි ක්‍රියා නොකරනු ඇත, නැතහොත් භාවිතා කිරීමට ආරක්ෂිත නොවනු ඇත. ඔබට තේරෙනවාද, තවමත් ඉදිරියට යාමට අවශ්‍යද?</string>
     <string name="dialog_progress_loading">පූරණය වෙමින්...</string>
     <string name="dialog_support">අනාගත සංවර්ධනය සඳහා අරමුදල් සැපයීමට දැන්වීම් එකතු කර ඇත. දැන්වීම් අවශ්‍ය නැද්ද? Google Play හි ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ වෙත උත්ශ්‍රේණි කරන්න - එය සම්පූර්ණයෙන්ම විවෘත මූලාශ්‍ර වන අතර යෙදුම පිළිබඳ අඛණ්ඩ වැඩ සඳහා සහාය වේ. ඔබට GitHub වෙතින් යෙදුම නොමිලේ ලබා ගත හැකිය. එහිදී සහාය විකල්පයක් වුවද අපට බොහෝ උපකාර කරයි.</string>
+    <string name="dialog_update_shortcut">මෙම ID සහිත කෙටිමඟක් දැනටමත් ඔබගේ මුල් තිරයේ පවතී. ඔබට පවතින කෙටිමඟ යාවත්කාලීන කිරීමට හෝ අලුත් එකක් එක් කිරීමට අවශ්‍යද?</string>
     <string name="error">දෝෂයකි</string>
     <string name="error_duplicate_category">අනුපිටපත් වර්ගීකරණය</string>
     <string name="error_duplicate_extra_key">අනුපිටපත් යතුර</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent සංස්කරණය</string>
     <string name="title_dialog_icon_picker">අයිකනයක් අරගන්න</string>
     <string name="title_dialog_support">ක්‍රියාකාරකම් දියත්කාරකය භාවිතා කිරීම ගැන ඔබට ස්තූතියි</string>
+    <string name="title_dialog_update_shortcut">කෙටිමඟ යාවත්කාලීන කරන්නද?</string>
     <string name="title_fragment_activity_list">ක්‍රියාකාරකම්</string>
     <string name="title_fragment_package_list">ස්ථාපිත පැකේජ</string>
 </resources>

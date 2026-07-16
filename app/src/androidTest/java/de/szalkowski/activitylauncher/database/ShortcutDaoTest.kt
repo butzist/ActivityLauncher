@@ -41,6 +41,7 @@ class ShortcutDaoTest {
     @Test
     fun insertAndGetShortcut() = runBlocking {
         val shortcut = ShortcutEntity(
+            id = "uuid-1",
             packageName = "com.test.app",
             className = "MainActivity",
             name = "Test Activity",
@@ -50,16 +51,17 @@ class ShortcutDaoTest {
             shortcutPlugin = null,
             timestamp = 1000L,
         )
-        val id = shortcutDao.insert(shortcut)
+        shortcutDao.insert(shortcut)
         val loaded = shortcutDao.getAll()
         assertEquals(1, loaded.size)
         assertEquals(shortcut.name, loaded[0].name)
-        assertEquals(id, loaded[0].id)
+        assertEquals("uuid-1", loaded[0].id)
     }
 
     @Test
     fun deleteById() = runBlocking {
         val shortcut = ShortcutEntity(
+            id = "uuid-2",
             packageName = "com.test.app",
             className = "MainActivity",
             name = "Test Activity",
@@ -69,16 +71,17 @@ class ShortcutDaoTest {
             shortcutPlugin = null,
             timestamp = 1000L,
         )
-        val id = shortcutDao.insert(shortcut)
+        shortcutDao.insert(shortcut)
         assertEquals(1, shortcutDao.getAll().size)
 
-        shortcutDao.deleteById(id)
+        shortcutDao.deleteById("uuid-2")
         assertEquals(0, shortcutDao.getAll().size)
     }
 
     @Test
     fun updateShortcut() = runBlocking {
         val shortcut = ShortcutEntity(
+            id = "uuid-3",
             packageName = "com.test.app",
             className = "MainActivity",
             name = "Original Name",
@@ -88,9 +91,9 @@ class ShortcutDaoTest {
             shortcutPlugin = null,
             timestamp = 1000L,
         )
-        val id = shortcutDao.insert(shortcut)
+        shortcutDao.insert(shortcut)
 
-        val updatedShortcut = shortcut.copy(id = id, name = "Updated Name")
+        val updatedShortcut = shortcut.copy(id = "uuid-3", name = "Updated Name")
         shortcutDao.insert(updatedShortcut)
 
         val loaded = shortcutDao.getAll()

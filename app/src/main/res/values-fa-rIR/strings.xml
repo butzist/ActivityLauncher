@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">افزودن دسته</string>
     <string name="action_add_extra">افزودن اکسترا</string>
+    <string name="action_add_new">افزودن جدید</string>
     <string name="action_advanced_properties">ویژگی‌های پیشرفته</string>
     <string name="action_clear">پاک‌سازی</string>
     <string name="action_pick_icon_file">بارگذاری از فایل</string>
     <string name="action_pick_icon_library">انتخاب از کتابخانه</string>
     <string name="action_save">ذخیره</string>
     <string name="action_save_as_new">ذخیره به عنوان جدید</string>
+    <string name="action_update">به‌روزرسانی</string>
     <string name="action_view_github">پروژه گیت هاب</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">مشاهده کد منبع</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">این برنامه امکان دسترسی به ویژگی‌هایی را می‌دهد که معمولاً برای کاربران قابل مشاهده نیستند. ممکن است برخی از گزینه‌ها آن‌طور که انتظار می‌رود کار نکنند یا استفاده از آن‌ها ایمن نباشد. آیا متوجه شده‌اید و همچنان می‌خواهید ادامه دهید؟</string>
     <string name="dialog_progress_loading">بارگیری…</string>
     <string name="dialog_support">ما برای کمک به تأمین بودجه توسعه آینده، تبلیغاتی را اضافه کرده‌ایم. ترجیح می‌دهید بدون تبلیغات باشد؟ به Activity Launcher Pro در Google Play ارتقا دهید - این برنامه کاملاً متن باز است و از ادامه کار بر روی برنامه پشتیبانی می‌کند. همچنین می‌توانید این برنامه را به صورت رایگان در GitHub دریافت کنید. پشتیبانی در آنجا اختیاری است اما کمک زیادی به ما می‌کند.</string>
+    <string name="dialog_update_shortcut">میانبری با این شناسه در حال حاضر در صفحه اصلی شما وجود دارد. آیا می‌خواهید میانبر موجود را به‌روزرسانی کنید یا میانبر جدیدی اضافه کنید؟</string>
     <string name="error">خطا</string>
     <string name="error_duplicate_category">دسته تکراری</string>
     <string name="error_duplicate_extra_key">کلید تکراری</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">ویرایش Intent</string>
     <string name="title_dialog_icon_picker">یک آیکون انتخاب کن</string>
     <string name="title_dialog_support">با تشکر از استفاده شما از Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">به‌روزرسانی میانبر؟</string>
     <string name="title_fragment_activity_list">فعالیت‌ها</string>
     <string name="title_fragment_package_list">بسته‌های نصب‌شده</string>
 </resources>

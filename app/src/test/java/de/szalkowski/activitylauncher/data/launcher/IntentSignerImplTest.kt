@@ -4,7 +4,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import org.junit.Assert.*
 import org.junit.Before
@@ -47,10 +49,10 @@ class IntentSignerImplTest {
 
     @Test
     fun testSignAndValidateRequest() = withMockedBase64 {
-        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val icon = ActivityIcon.Resource("pkg", 1)
         val intent = mock<Intent>()
-        val shortcutRequest = ShortcutRequest("Test", intent, icon)
-        val launchRequest = LaunchRequest(intent)
+        val shortcutRequest = ShortcutRequest("Test", intent, icon, source = LaunchSource.SHORTCUT)
+        val launchRequest = LaunchRequest(intent, source = LaunchSource.SHORTCUT)
 
         whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
@@ -62,16 +64,16 @@ class IntentSignerImplTest {
 
     @Test
     fun testSignatureWithPlugin() = withMockedBase64 {
-        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val icon = ActivityIcon.Resource("pkg", 1)
         val plugin = mock<ComponentName>()
         whenever(plugin.flattenToString()).thenReturn("com.example/.Plugin")
         val intent = mock<Intent>()
         whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 
-        val shortcutRequestWithPlugin = ShortcutRequest("Test", intent, icon, launcherPlugin = plugin)
-        val shortcutRequestWithoutPlugin = ShortcutRequest("Test", intent, icon)
-        val launchRequestWithPlugin = LaunchRequest(intent, launcherPlugin = plugin)
-        val launchRequestWithoutPlugin = LaunchRequest(intent)
+        val shortcutRequestWithPlugin = ShortcutRequest("Test", intent, icon, launcherPlugin = plugin, source = LaunchSource.SHORTCUT)
+        val shortcutRequestWithoutPlugin = ShortcutRequest("Test", intent, icon, source = LaunchSource.SHORTCUT)
+        val launchRequestWithPlugin = LaunchRequest(intent, launcherPlugin = plugin, source = LaunchSource.SHORTCUT)
+        val launchRequestWithoutPlugin = LaunchRequest(intent, source = LaunchSource.SHORTCUT)
 
         val signatureWithPlugin = signer.signRequest(shortcutRequestWithPlugin)
         val signatureWithoutPlugin = signer.signRequest(shortcutRequestWithoutPlugin)
@@ -84,9 +86,9 @@ class IntentSignerImplTest {
 
     @Test
     fun testKnownSignature() = withMockedBase64 {
-        val icon = mock<androidx.core.graphics.drawable.IconCompat>()
+        val icon = ActivityIcon.Resource("pkg", 1)
         val intent = mock<Intent>()
-        val request = ShortcutRequest("Test", intent, icon)
+        val request = ShortcutRequest("Test", intent, icon, source = LaunchSource.SHORTCUT)
 
         whenever(intent.toUri(anyInt())).thenReturn("intent:#Intent;action=com.test.ACTION;end")
 

@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Προσθήκη κατηγορίας</string>
     <string name="action_add_extra">Προσθήκη Extra</string>
+    <string name="action_add_new">Προσθήκη νέας</string>
     <string name="action_advanced_properties">Προηγμένες ιδιότητες</string>
     <string name="action_clear">Εκκαθάριση</string>
     <string name="action_pick_icon_file">Φόρτωση από αρχείο</string>
     <string name="action_pick_icon_library">Επιλογή από βιβλιοθήκη</string>
     <string name="action_save">Αποθήκευση</string>
     <string name="action_save_as_new">Αποθήκευση ως νέο</string>
+    <string name="action_update">Ενημέρωση</string>
     <string name="action_view_github">Έργο GitHub</string>
     <string name="action_view_paid">Εκκινητής Δραστηριότητας Pro</string>
     <string name="action_view_source">Προβολή πηγαίου κώδικα</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Αυτή η εφαρμογή παρέχει πρόσβαση σε χαρακτηριστικά που δεν είναι κανονικά ορατά στους χρήστες. Ορισμένες επιλογές μπορεί να μη λειτουργούν όπως αναμένεται ή μπορεί να μην είναι ασφαλές να τα χρησιμοποιήσετε. Κατανοείτε και θέλετε να προχωρήσετε;</string>
     <string name="dialog_progress_loading">Φόρτωση…</string>
     <string name="dialog_support">Προσθέσαμε διαφημίσεις για να χρηματοδοτήσουμε τη μελλοντική ανάπτυξη. Προτιμάτε χωρίς διαφημίσεις; Αναβαθμίστε σε Activity Launcher Pro στο Google Play — είναι πλήρως ανοιχτού κώδικα και υποστηρίζει τη συνεχή εργασία στην εφαρμογή. Μπορείτε επίσης να αποκτήσετε την εφαρμογή δωρεάν στο GitHub. Η υποστήριξη εκεί είναι προαιρετική, αλλά μας βοηθάει πολύ.</string>
+    <string name="dialog_update_shortcut">Μια συντόμευση με αυτό το ID υπάρχει ήδη στην αρχική σας οθόνη. Θέλετε να ενημερώσετε την υπάρχουσα συντόμευση ή να προσθέσετε μια νέα;</string>
     <string name="error">Σφάλμα</string>
     <string name="error_duplicate_category">Διπλότυπη κατηγορία</string>
     <string name="error_duplicate_extra_key">Διπλότυπο κλειδί</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Επεξεργασία Intent</string>
     <string name="title_dialog_icon_picker">Επιλέξετε ένα εικονίδιο</string>
     <string name="title_dialog_support">Ευχαριστούμε που χρησιμοποιείτε το Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Ενημέρωση συντόμευσης;</string>
     <string name="title_fragment_activity_list">Δραστηριότητες</string>
     <string name="title_fragment_package_list">Εγκατεστημένα πακέτα</string>
 </resources>

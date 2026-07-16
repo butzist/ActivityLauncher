@@ -1,6 +1,7 @@
 package de.szalkowski.activitylauncher.entrypoint
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.test.core.app.ActivityScenario
@@ -16,12 +17,12 @@ import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncherProxy
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
-import de.szalkowski.activitylauncher.domain.model.LaunchRequest
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
+import de.szalkowski.activitylauncher.domain.usecase.launcher.ResolveShortcutSourceUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -67,7 +68,10 @@ class ShortcutFlowTest {
     val activitySharer: de.szalkowski.activitylauncher.domain.external.ActivitySharer = mock()
 
     @BindValue
-    val viewIntentParser: de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser = mock()
+    val viewIntentParser: ViewIntentParser = mock()
+
+    @BindValue
+    val resolveShortcutSourceUseCase: ResolveShortcutSourceUseCase = mock()
 
     @BindValue
     val settingsRepository: SettingsRepository = mock()
@@ -88,7 +92,7 @@ class ShortcutFlowTest {
     fun init() {
         hiltRule.inject()
 
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
         whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
 
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
@@ -98,7 +102,7 @@ class ShortcutFlowTest {
         whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
-        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any(), anyOrNull())).thenReturn("uuid-1") }
         whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
         whenever(activityLauncherProxy.hasMultipleHandlers()).thenReturn(true)
@@ -126,26 +130,25 @@ class ShortcutFlowTest {
         // Stub viewIntentParser to handle the URI parsing in ShortcutActivity
         whenever(viewIntentParser.parseShortcutRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
             val intent = invocation.getArgument<Intent>(0)
-            val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return@thenAnswer null
+            val launchIntentUri = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return@thenAnswer null
+            val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
+            val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
+
             val launchIntent = try {
-                Intent.parseUri(launchIntentStr, Intent.URI_INTENT_SCHEME)
+                Intent.parseUri(launchIntentUri, Intent.URI_INTENT_SCHEME)
             } catch (_: Exception) {
                 null
             } ?: return@thenAnswer null
 
-            val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
-            val launchPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
-            val launchPlugin = launchPluginStr?.let { ComponentName.unflattenFromString(it) }
-
-            ShortcutRequest(
+            ShortcutProxyRequest(
                 name = appName,
+                icon = icon,
                 intent = launchIntent,
-                icon = mock<androidx.core.graphics.drawable.IconCompat>(),
-                launcherPlugin = launchPlugin,
+                source = LaunchSource.SHORTCUT,
             )
         }
 
-        whenever(viewIntentParser.parseLaunchRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
+        whenever(viewIntentParser.parseLaunchRequest(any(), anyOrNull())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
             val intent = invocation.getArgument<Intent>(0)
             val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT) ?: return@thenAnswer null
             val launchIntent = try {
@@ -160,7 +163,67 @@ class ShortcutFlowTest {
             LaunchRequest(
                 intent = launchIntent,
                 launcherPlugin = launchPlugin,
+                source = LaunchSource.PROXY,
             )
+        }
+
+        whenever(viewIntentParser.parseLaunchSource(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
+            val intent = invocation.getArgument<Intent>(0)
+            val shortcutId = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID)
+
+            val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
+            val launchIntent = launchIntentStr?.let {
+                try {
+                    Intent.parseUri(it, Intent.URI_INTENT_SCHEME)
+                } catch (_: Exception) {
+                    null
+                }
+            }
+
+            val signature = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE)
+            val launchPluginStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN)
+            val launchPlugin = launchPluginStr?.let { ComponentName.unflattenFromString(it) }
+
+            if ((shortcutId == null) && (launchIntent == null) && (signature == null)) {
+                return@thenAnswer null
+            }
+
+            ShortcutSource(
+                id = shortcutId,
+                intent = launchIntent,
+                signature = signature,
+                launcherPlugin = launchPlugin,
+            )
+        }
+
+        runBlocking {
+            whenever(resolveShortcutSourceUseCase.invoke(any())).thenAnswer { invocation ->
+                val source = invocation.getArgument<ShortcutSource>(0)
+                if (source.id == "uuid-1") {
+                    return@thenAnswer ShortcutResolutionResult.Success(
+                        LaunchRequest(
+                            Intent().setComponent(ComponentName("com.test", "com.test.Activity")),
+                            source = LaunchSource.SAVED,
+                        ),
+                    )
+                }
+
+                if (source.intent != null && source.signature != null) {
+                    if (source.signature == "valid_signature") {
+                        return@thenAnswer ShortcutResolutionResult.Success(
+                            LaunchRequest(
+                                source.intent,
+                                launcherPlugin = source.launcherPlugin,
+                                source = LaunchSource.SHORTCUT,
+                            ),
+                        )
+                    } else {
+                        return@thenAnswer ShortcutResolutionResult.InvalidSignature
+                    }
+                }
+
+                ShortcutResolutionResult.NotFound
+            }
         }
     }
 
@@ -175,8 +238,6 @@ class ShortcutFlowTest {
         }
         val signature = "valid_signature"
 
-        whenever(intentSigner.validateRequestSignature(any(), eq(signature))).thenReturn(true)
-
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
             putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
@@ -185,7 +246,7 @@ class ShortcutFlowTest {
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
             val captor = argumentCaptor<LaunchRequest>()
-            verify(activityLauncher).launchActivity(captor.capture())
+            verify(activityLauncher).launchActivity(captor.capture(), anyOrNull())
             assertEquals("com.test", captor.firstValue.intent.component?.packageName)
             assertEquals("com.test.Activity", captor.firstValue.intent.component?.className)
             assertEquals("value", captor.firstValue.intent.extras?.getString("key"))
@@ -199,8 +260,6 @@ class ShortcutFlowTest {
         val launchIntent = Intent().apply { component = componentName }
         val signature = "invalid_signature"
 
-        whenever(intentSigner.validateRequestSignature(any(), eq(signature))).thenReturn(false)
-
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
             putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
@@ -208,7 +267,7 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher, never()).launchActivity(any())
+            verify(activityLauncher, never()).launchActivity(any(), anyOrNull())
         }
     }
 
@@ -216,13 +275,16 @@ class ShortcutFlowTest {
     fun testStage2_CreateShortcutFlow() {
         // Stage 2: Receive CREATE intent
         val componentName = ComponentName("com.test", "com.test.Activity")
-        val launchIntent = Intent().apply { component = componentName }
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithBitmap(android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888))
+        val launchIntent = Intent().apply {
+            component = componentName
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, "uuid-1")
+        }
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
 
         val intent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test App")
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
-            putExtra(ShortcutCreator.INTENT_EXTRA_ICON, icon.toBundle())
+            putExtra(ShortcutCreator.INTENT_EXTRA_ICON, icon.toIconCompat(ApplicationProvider.getApplicationContext<Context>()).toBundle())
             setClassName(ApplicationProvider.getApplicationContext(), ShortcutActivity::class.java.name)
         }
 
@@ -243,10 +305,10 @@ class ShortcutFlowTest {
             // Success if it reaches destroyed state (finishes)
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
 
-            val captor = argumentCaptor<ShortcutRequest>()
-            runBlocking { verify(shortcutCreator).createLauncherIcon(captor.capture(), anyOrNull()) }
+            val captor = argumentCaptor<ShortcutProxyRequest>()
+            runBlocking { verify(shortcutCreator).createLauncherIcon(captor.capture(), eq("uuid-1"), anyOrNull()) }
             assertEquals("Test App", captor.firstValue.name)
-            assertEquals(componentName, captor.firstValue.intent.component)
+            assertEquals(launchIntent.toUri(Intent.URI_INTENT_SCHEME), captor.firstValue.intent.toUri(Intent.URI_INTENT_SCHEME))
         }
     }
 
@@ -262,7 +324,7 @@ class ShortcutFlowTest {
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
             val captor = argumentCaptor<LaunchRequest>()
-            verify(activityLauncher).launchActivity(captor.capture())
+            verify(activityLauncher).launchActivity(captor.capture(), anyOrNull())
             assertEquals(componentName, captor.firstValue.intent.component)
         }
     }
@@ -274,8 +336,6 @@ class ShortcutFlowTest {
         val signature = "valid_signature"
         val launchPlugin = "com.plugin/.LaunchActivity"
 
-        whenever(intentSigner.validateRequestSignature(any(), eq(signature))).thenReturn(true)
-
         val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
             putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
             putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
@@ -284,10 +344,37 @@ class ShortcutFlowTest {
         }
 
         ActivityScenario.launch<ShortcutActivity>(intent).use {
-            verify(activityLauncher, never()).launchActivity(any())
+            verify(activityLauncher, never()).launchActivity(any(), anyOrNull())
             val captor = argumentCaptor<LaunchRequest>()
-            verify(activityLauncherProxy).launchActivity(captor.capture())
+            verify(activityLauncherProxy).launchActivity(captor.capture(), anyOrNull())
             assertEquals(ComponentName.unflattenFromString(launchPlugin), captor.firstValue.launcherPlugin)
+        }
+    }
+
+    @Test
+    fun testStage3_LaunchSavedShortcutFlow() {
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, "uuid-1")
+            setClassName(ApplicationProvider.getApplicationContext(), ShortcutActivity::class.java.name)
+        }
+
+        ActivityScenario.launch<ShortcutActivity>(intent).use {
+            val captor = argumentCaptor<LaunchRequest>()
+            verify(activityLauncher).launchActivity(captor.capture(), anyOrNull())
+            assertEquals("com.test", captor.firstValue.intent.component?.packageName)
+            assertEquals("com.test.Activity", captor.firstValue.intent.component?.className)
+        }
+    }
+
+    @Test
+    fun testStage3_LaunchSavedShortcutFlowNotFound() {
+        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, "uuid-not-found")
+            setClassName(ApplicationProvider.getApplicationContext(), ShortcutActivity::class.java.name)
+        }
+
+        ActivityScenario.launch<ShortcutActivity>(intent).use {
+            verify(activityLauncher, never()).launchActivity(any(), anyOrNull())
         }
     }
 }

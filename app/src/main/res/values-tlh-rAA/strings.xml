@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Segh chel</string>
     <string name="action_add_extra">Extra chel</string>
+    <string name="action_add_new">chu\' yIchel</string>
     <string name="action_advanced_properties">chu\' Duj</string>
     <string name="action_clear">yIteq</string>
     <string name="action_pick_icon_file">\'ochvo\' yIghoS</string>
     <string name="action_pick_icon_library">nInvo\' yIwiv</string>
     <string name="action_save">yIpol</string>
     <string name="action_save_as_new">chu\' pol</string>
+    <string name="action_update">yIchoH</string>
     <string name="action_view_github">GitHub pong</string>
     <string name="action_view_paid">Qu\' taghmoHwI\' Pro law\'</string>
     <string name="action_view_source">mung De\' legh</string>
@@ -32,6 +34,7 @@
     <string name="dialog_support">maH qeylIS Dalo\' \'e\' ghu\'vam rur \'ej ghu\'vam vIqel. tlhutlhmey vIchegh\'a\'?
 Activity Launcher Pro Google PlayDaq yIlo\' — Hoch vItlhutlh, \'ej De\'vamDaq Qapchu\' vItu\' \'e\' Qap.
 qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qapla\' Hoch.</string>
+    <string name="dialog_update_shortcut">juH SeHlawDaq qIghvam pong Dapon\'a\'? qIgh yIchoH DaneH\'a\' pagh chu\' yIchel DaneH\'a\'?</string>
     <string name="error">Qagh</string>
     <string name="error_duplicate_category">Segh tIn</string>
     <string name="error_duplicate_extra_key">tIq tIn</string>
@@ -86,6 +89,7 @@ qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qap
     <string name="title_dialog_edit_intent">Intent choH</string>
     <string name="title_dialog_icon_picker">Degh yIwIv</string>
     <string name="title_dialog_support">Activity Launcher lo’meH Qatlho’!</string>
+    <string name="title_dialog_update_shortcut">qIgh yIchoH?</string>
     <string name="title_fragment_activity_list">Hochmey</string>
     <string name="title_fragment_package_list">qelI\'Daq paq lulo\'</string>
 </resources>

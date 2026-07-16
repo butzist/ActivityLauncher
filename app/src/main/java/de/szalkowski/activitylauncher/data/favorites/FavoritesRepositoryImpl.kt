@@ -6,13 +6,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
+import de.szalkowski.activitylauncher.app.di.IoDispatcher
 import de.szalkowski.activitylauncher.data.database.FavoriteDao
 import de.szalkowski.activitylauncher.data.database.FavoriteEntity
 import de.szalkowski.activitylauncher.data.database.SerializationUtils
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -28,11 +31,12 @@ class FavoritesRepositoryImpl @Inject constructor(
     private val favoriteDao: FavoriteDao,
     private val packageRepository: PackageRepository,
     private val getActivityIconUseCase: GetActivityIconUseCase,
+    @param:IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : FavoritesRepository {
     private val prefs: SharedPreferences = context.getSharedPreferences("al_favorites", Context.MODE_PRIVATE)
     private val favoritesKey = "favorites"
     private val migrationKey = "room_migration_done"
-    private val repositoryScope = CoroutineScope(Dispatchers.IO)
+    private val repositoryScope = CoroutineScope(dispatcher)
 
     init {
         migrateIfNeeded()
@@ -41,22 +45,28 @@ class FavoritesRepositoryImpl @Inject constructor(
     private fun migrateIfNeeded() {
         if (!prefs.getBoolean(migrationKey, false)) {
             val legacyFavorites = getLegacyFavorites()
-            if (legacyFavorites.isNotEmpty()) {
-                repositoryScope.launch {
+            repositoryScope.launch {
+                if (legacyFavorites.isNotEmpty()) {
                     legacyFavorites.forEach { componentName ->
                         try {
                             val activityInfo = packageRepository.getActivity(componentName)
                             val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
                             val intent = Intent().setComponent(componentName)
-                            val request = ShortcutRequest(activityInfo.name, intent, icon)
-                            addFavorite(request)
+                            val entity = FavoriteEntity(
+                                packageName = componentName.packageName,
+                                className = componentName.className,
+                                name = activityInfo.name,
+                                intentUri = SerializationUtils.intentToUri(intent),
+                                iconBundle = SerializationUtils.iconToByteArray(icon),
+                                launcherPlugin = null,
+                                timestamp = System.currentTimeMillis(),
+                            )
+                            favoriteDao.insert(entity)
                         } catch (_: Exception) {
                             // Skip if activity not found or other error
                         }
                     }
-                    prefs.edit { putBoolean(migrationKey, true) }
                 }
-            } else {
                 prefs.edit { putBoolean(migrationKey, true) }
             }
         }
@@ -80,6 +90,7 @@ class FavoritesRepositoryImpl @Inject constructor(
                     intent = SerializationUtils.uriToIntent(entity.intentUri),
                     icon = SerializationUtils.byteArrayToIcon(entity.iconBundle)!!,
                     launcherPlugin = entity.launcherPlugin?.let { ComponentName.unflattenFromString(it) },
+                    source = LaunchSource.SAVED,
                 )
             }
         }
@@ -91,7 +102,7 @@ class FavoritesRepositoryImpl @Inject constructor(
                 val activityInfo = packageRepository.getActivity(componentName)
                 val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
                 val intent = Intent().setComponent(componentName)
-                addFavorite(ShortcutRequest(activityInfo.name, intent, icon))
+                addFavorite(ShortcutRequest(activityInfo.name, intent, icon, source = LaunchSource.SAVED))
             } catch (_: Exception) {}
         }
     }

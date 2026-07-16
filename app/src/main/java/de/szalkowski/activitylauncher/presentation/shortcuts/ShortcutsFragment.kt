@@ -25,7 +25,7 @@ class ShortcutsFragment : BaseActivityListFragment<ShortcutsRepository.ManagedSh
     @Inject
     internal lateinit var createShortcutUseCase: de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
 
-    val viewModel: ShortcutsViewModel by viewModels()
+    override val viewModel: ShortcutsViewModel by viewModels()
     override val items get() = viewModel.items
     override val recyclerViewId: Int = R.id.rvShortcuts
     override val logTag: String = "ShortcutsFragment"
@@ -35,7 +35,7 @@ class ShortcutsFragment : BaseActivityListFragment<ShortcutsRepository.ManagedSh
         ActivityInfoAdapter(ManagedShortcutDiffCallback, ::bindManagedShortcut).also {
             it.onItemClick = { managed ->
                 viewLifecycleOwner.lifecycleScope.launch {
-                    createShortcutUseCase(managed.request)
+                    createShortcutUseCase(managed.request, shortcutId = managed.id)
                 }
             }
             it.onItemSwiped = { managed -> viewModel.removeItem(managed) }
@@ -92,7 +92,7 @@ class ShortcutsFragment : BaseActivityListFragment<ShortcutsRepository.ManagedSh
             tvName.text = request.name
             tvClass.text = request.intent.component?.flattenToShortString() ?: request.intent.toUri(0)
             val context = ivIcon.context
-            ivIcon.setImageDrawable(request.icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon)
+            ivIcon.setImageDrawable(request.icon.loadInternalDrawable(context) ?: context.packageManager.defaultActivityIcon)
         }
     }
 }

@@ -5,13 +5,14 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShortcutsRepository {
     data class ManagedShortcut(
-        val id: Long,
+        val id: String,
         val request: ShortcutRequest,
         val timestamp: Long,
     )
 
     fun getShortcutsFlow(): Flow<List<ManagedShortcut>>
-    suspend fun recordShortcut(request: ShortcutRequest): Long
-    suspend fun updateShortcut(id: Long, request: ShortcutRequest)
-    suspend fun deleteShortcut(id: Long)
+    suspend fun getShortcut(id: String): ManagedShortcut?
+    suspend fun recordShortcut(request: ShortcutRequest, id: String? = null): String
+    suspend fun updateShortcut(id: String, request: ShortcutRequest)
+    suspend fun deleteShortcut(id: String)
 }

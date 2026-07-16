@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Додати категорію</string>
     <string name="action_add_extra">Додати Extra</string>
+    <string name="action_add_new">Додати новий</string>
     <string name="action_advanced_properties">Розширені властивості</string>
     <string name="action_clear">Очистити</string>
     <string name="action_pick_icon_file">Завантажити з файлу</string>
     <string name="action_pick_icon_library">Вибрати з бібліотеки</string>
     <string name="action_save">Зберегти</string>
     <string name="action_save_as_new">Зберегти як новий</string>
+    <string name="action_update">Оновити</string>
     <string name="action_view_github">Проєкт GitHub</string>
     <string name="action_view_paid">Лаунчер Активіті Pro</string>
     <string name="action_view_source">Перегляд вихідного коду</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Цей додаток надає доступ до функцій, які зазвичай недоступні для користувачів. Деякі опції можуть не працювати належним чином як очікувалося або бути небезпечними. Ви дійсно все зрозуміли й добре зважили та все ж таки хочете продовжити?</string>
     <string name="dialog_progress_loading">Завантаження...</string>
     <string name="dialog_support">Ми додали рекламу, щоб фінансувати подальшу розробку. Не бажаєте бачити рекламу? Перейдіть на Лаунчер Активіті Pro в Google Play — це повністю відкритий вихідний код, який підтримує продовження роботи над програмою. Ви також можете отримати додаток безкоштовно на GitHub. Підтримка там є необов\'язковою, але дуже нам допомагає.</string>
+    <string name="dialog_update_shortcut">Ярлик з таким ID вже існує на вашому головному екрані. Бажаєте оновити існуючий ярлик чи додати новий?</string>
     <string name="error">Помилка</string>
     <string name="error_duplicate_category">Дубльована категорія</string>
     <string name="error_duplicate_extra_key">Дубльований ключ</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Редагувати Intent</string>
     <string name="title_dialog_icon_picker">Обрати іконку</string>
     <string name="title_dialog_support">Дякуємо за використання Лаунчер Активіті</string>
+    <string name="title_dialog_update_shortcut">Оновити ярлик?</string>
     <string name="title_fragment_activity_list">Активіті</string>
     <string name="title_fragment_package_list">Встановлені пакети</string>
 </resources>

@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Dodaj kategorię</string>
     <string name="action_add_extra">Dodaj Extra</string>
+    <string name="action_add_new">Dodaj nowy</string>
     <string name="action_advanced_properties">Zaawansowane właściwości</string>
     <string name="action_clear">Wyczyść</string>
     <string name="action_pick_icon_file">Wczytaj z pliku</string>
     <string name="action_pick_icon_library">Wybierz z biblioteki</string>
     <string name="action_save">Zapisz</string>
     <string name="action_save_as_new">Zapisz jako nowy</string>
+    <string name="action_update">Aktualizuj</string>
     <string name="action_view_github">Projekt GitHub</string>
     <string name="action_view_paid">Launcher Aktywności Pro</string>
     <string name="action_view_source">Pokaż kod źródłowy</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Ta aplikacja daje dostęp do funkcji, które nie są zwykle widoczne dla użytkowników. Niektóre opcje mogą nie działać zgodnie z oczekiwaniami lub mogą nie być bezpieczne. Czy rozumiesz i nadal chcesz kontynuować?</string>
     <string name="dialog_progress_loading">Wczytywanie …</string>
     <string name="dialog_support">Dodaliśmy reklamy, aby pomóc w finansowaniu dalszego rozwoju. Wolisz bez reklam? Uaktualnij do Launcher Aktywności Pro w Google Play — jest w pełni open-source i wspiera dalsze prace nad aplikacją. Możesz także pobrać aplikację za darmo na GitHubie. Wsparcie tam jest opcjonalne, ale bardzo nam pomaga.</string>
+    <string name="dialog_update_shortcut">Skrót o tym identyfikatorze już istnieje na ekranie głównym. Czy chcesz zaktualizować istniejący skrót, czy dodać nowy?</string>
     <string name="error">Błąd</string>
     <string name="error_duplicate_category">Zdublowana kategoria</string>
     <string name="error_duplicate_extra_key">Zdublowany klucz</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Edytuj Intent</string>
     <string name="title_dialog_icon_picker">Wybierz ikonę</string>
     <string name="title_dialog_support">Dziękujemy za korzystanie z Launcher Aktywności</string>
+    <string name="title_dialog_update_shortcut">Zaktualizować skrót?</string>
     <string name="title_fragment_activity_list">Aktywności</string>
     <string name="title_fragment_package_list">Zainstalowane pakiety</string>
 </resources>

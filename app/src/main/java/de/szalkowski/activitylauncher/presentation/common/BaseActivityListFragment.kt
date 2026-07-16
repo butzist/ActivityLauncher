@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -11,11 +12,14 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import de.szalkowski.activitylauncher.presentation.activities.ActivityDetailsFragment
 import de.szalkowski.activitylauncher.presentation.activities.DetailsConfiguration
+import de.szalkowski.activitylauncher.presentation.activities.DetailsResult
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 abstract class BaseActivityListFragment<T : Any> : Fragment() {
+    protected abstract val viewModel: BaseActivityListViewModel<T>
     protected abstract val adapter: ActivityInfoAdapter<T>
     protected abstract val recyclerViewId: Int
     protected abstract val items: StateFlow<List<T>>
@@ -26,6 +30,16 @@ abstract class BaseActivityListFragment<T : Any> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setFragmentResultListener(ActivityDetailsFragment.RESULT_SAVED) { _, bundle ->
+            val result = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable(ActivityDetailsFragment.EXTRA_SAVED_SHORTCUT, DetailsResult::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getParcelable(ActivityDetailsFragment.EXTRA_SAVED_SHORTCUT)
+            }
+            result?.let { viewModel.handleSaveResult(it) }
+        }
 
         adapter.onItemLongClick = { item ->
             runCatching {

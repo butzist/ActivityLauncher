@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Dodaj kategorijo</string>
     <string name="action_add_extra">Dodaj Extra</string>
+    <string name="action_add_new">Dodaj novo</string>
     <string name="action_advanced_properties">Napredne lastnosti</string>
     <string name="action_clear">Počisti</string>
     <string name="action_pick_icon_file">Naloži iz datoteke</string>
     <string name="action_pick_icon_library">Izberi iz knjižnice</string>
     <string name="action_save">Shrani</string>
     <string name="action_save_as_new">Shrani kot novo</string>
+    <string name="action_update">Posodobi</string>
     <string name="action_view_github">Projekt GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Poglej izvorno kodo</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Ta aplikacija omogoča dostop do funkcij, ki uporabnikom običajno niso vidne. Nekatere možnosti morda ne bodo delovale, kot je pričakovano, ali pa jih ne bo varno uporabljati. Ali razumete in želite še vedno nadaljevati?</string>
     <string name="dialog_progress_loading">Nalaganje…</string>
     <string name="dialog_support">Dodali smo oglase, da bi financirali prihodnji razvoj. Ne želite oglasov? Nadgradite na Activity Launcher Pro v Googlu Play – je popolnoma odprtokoden in podpira nadaljnje delo na aplikaciji. Aplikacijo lahko dobite tudi brezplačno na GitHubu. Podpora tam je neobvezna, vendar nam zelo pomaga.</string>
+    <string name="dialog_update_shortcut">Bližnjica s tem ID-jem že obstaja na domačem zaslonu. Ali želite posodobiti obstoječo bližnjico ali dodati novo?</string>
     <string name="error">Napaka</string>
     <string name="error_duplicate_category">Podvojena kategorija</string>
     <string name="error_duplicate_extra_key">Podvojen ključ</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Uredi Intent</string>
     <string name="title_dialog_icon_picker">Izberite ikono</string>
     <string name="title_dialog_support">Hvala, ker uporabljate Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Posodobi bližnjico?</string>
     <string name="title_fragment_activity_list">Dejavnosti</string>
     <string name="title_fragment_package_list">Nameščeni paketi</string>
 </resources>

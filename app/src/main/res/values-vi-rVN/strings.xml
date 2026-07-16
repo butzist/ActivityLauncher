@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Thêm danh mục</string>
     <string name="action_add_extra">Thêm Extra</string>
+    <string name="action_add_new">Thêm mới</string>
     <string name="action_advanced_properties">Thuộc tính nâng cao</string>
     <string name="action_clear">Xóa</string>
     <string name="action_pick_icon_file">Tải từ tệp</string>
     <string name="action_pick_icon_library">Chọn từ thư viện</string>
     <string name="action_save">Lưu</string>
     <string name="action_save_as_new">Lưu mới</string>
+    <string name="action_update">Cập nhật</string>
     <string name="action_view_github">Dự án GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Xem mã nguồn</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Ứng dụng này cho phép truy cập vào các tính năng mà người dùng thường không thấy được. Một số tùy chọn có thể không hoạt động như mong đợi hoặc có thể không an toàn khi sử dụng. Bạn có hiểu và vẫn muốn tiếp tục không?</string>
     <string name="dialog_progress_loading">Đang tải dữ liệu…</string>
     <string name="dialog_support">Chúng tôi đã thêm quảng cáo để giúp tài trợ cho việc phát triển trong tương lai. Bạn không thích quảng cáo? Hãy nâng cấp lên Activity Launcher Pro trên Google Play — ứng dụng hoàn toàn mã nguồn mở và hỗ trợ công việc tiếp tục phát triển ứng dụng. Bạn cũng có thể tải ứng dụng miễn phí trên GitHub. Sự hỗ trợ tại đó là tùy chọn nhưng giúp ích cho chúng tôi rất nhiều.</string>
+    <string name="dialog_update_shortcut">Một phím tắt với ID này đã tồn tại trên màn hình chính của bạn. Bạn muốn cập nhật phím tắt hiện có hay thêm phím tắt mới?</string>
     <string name="error">Lỗi</string>
     <string name="error_duplicate_category">Danh mục bị trùng</string>
     <string name="error_duplicate_extra_key">Khóa bị trùng</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Chỉnh sửa Intent</string>
     <string name="title_dialog_icon_picker">Chọn biểu tượng</string>
     <string name="title_dialog_support">Cảm ơn bạn đã sử dụng Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Cập nhật phím tắt?</string>
     <string name="title_fragment_activity_list">Hoạt động</string>
     <string name="title_fragment_package_list">Các gói đã cài đặt</string>
 </resources>

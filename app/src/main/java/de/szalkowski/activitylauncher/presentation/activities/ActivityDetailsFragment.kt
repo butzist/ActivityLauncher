@@ -84,9 +84,9 @@ class ActivityDetailsFragment : Fragment() {
             viewModel.selectShortcutPlugin(shortcutPlugin)
 
             if (action == PluginChooserDialogFragment.PluginAction.LAUNCH) {
-                viewModel.launchActivity()
+                viewModel.launchActivity(requireContext())
             } else if (action == PluginChooserDialogFragment.PluginAction.SHORTCUT) {
-                viewModel.createShortcut()
+                viewModel.createShortcut(requireContext())
             }
         }
 
@@ -139,9 +139,6 @@ class ActivityDetailsFragment : Fragment() {
 
                     val shareItem = menu.findItem(R.id.action_share)
                     shareItem.isEnabled = viewModel.canShare.value
-
-                    val saveAsNewItem = menu.findItem(R.id.action_save_as_new)
-                    saveAsNewItem.isVisible = viewModel.isEditMode.value
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -157,11 +154,6 @@ class ActivityDetailsFragment : Fragment() {
                         }
                         R.id.action_share -> {
                             viewModel.shareActivity()
-                            true
-                        }
-                        R.id.action_save_as_new -> {
-                            viewModel.saveAsNewShortcut()
-                            findNavController().popBackStack()
                             true
                         }
                         else -> false
@@ -182,8 +174,7 @@ class ActivityDetailsFragment : Fragment() {
                 }
                 launch {
                     viewModel.editedIcon.collect { icon ->
-                        android.util.Log.d("ActivityDetails", "New icon emitted: $icon (type=${icon?.type})")
-                        val drawable = icon?.loadDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
+                        val drawable = icon?.loadInternalDrawable(requireContext()) ?: requireContext().packageManager.defaultActivityIcon
                         binding.ibIconPicker.setImageDrawable(drawable)
                     }
                 }
@@ -242,12 +233,15 @@ class ActivityDetailsFragment : Fragment() {
                                 binding.atvLaunchPlugin.setText(plugin?.name ?: "")
                             }
                         }
-                        binding.tilLaunchPlugin.startIconDrawable = plugin?.icon?.loadDrawable(requireContext())
+                        val iconSize = (24 * resources.displayMetrics.density).toInt()
+                        val drawable = plugin?.icon?.loadInternalDrawable(requireContext(), size = iconSize, masked = true)
+                        binding.tilLaunchPlugin.startIconDrawable = drawable
+                        binding.tilLaunchPlugin.setStartIconTintList(null)
                     }
                 }
                 launch {
-                    viewModel.onSaveComplete.collect { request ->
-                        setFragmentResult(RESULT_SAVED, bundleOf(EXTRA_SAVED_SHORTCUT to request))
+                    viewModel.onResult.collect { result ->
+                        setFragmentResult(RESULT_SAVED, bundleOf(EXTRA_SAVED_SHORTCUT to result))
                         findNavController().popBackStack()
                     }
                 }
@@ -304,7 +298,7 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btCreateShortcut.setOnClickListener {
-            viewModel.createShortcut()
+            viewModel.createShortcut(requireContext())
         }
 
         binding.btCreateShortcutChooser.setOnClickListener {
@@ -322,7 +316,7 @@ class ActivityDetailsFragment : Fragment() {
         }
 
         binding.btLaunch.setOnClickListener {
-            viewModel.launchActivity()
+            viewModel.launchActivity(requireContext())
         }
 
         binding.btLaunchChooser.setOnClickListener {

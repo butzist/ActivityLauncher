@@ -16,13 +16,13 @@ import de.szalkowski.activitylauncher.data.recents.RecentsRepositoryImpl
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -106,7 +106,7 @@ class StorageMigrationTest {
             database.clearAllTables()
         }
 
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(context, android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(context.packageName, android.R.drawable.sym_def_app_icon)
         whenever(getActivityIconUseCase(anyOrNull(), any())).thenReturn(icon)
 
         whenever(packageRepository.getActivity(any())).thenAnswer { invocation ->
@@ -128,13 +128,35 @@ class StorageMigrationTest {
         favoritesPrefs.edit().putStringSet("favorites", setOf(component.flattenToString())).commit()
 
         // 2. Initialize repository (triggers migration)
-        val repo = FavoritesRepositoryImpl(context, database.favoriteDao(), packageRepository, getActivityIconUseCase)
+        val repo = FavoritesRepositoryImpl(context, database.favoriteDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
 
         // 3. Verify data migrated to Room
         val favorites = repo.getFavoritesFlow().waitForNotEmpty()
         assertEquals(1, favorites.size)
         assertEquals(component, favorites[0].intent.component)
         assertTrue(favoritesPrefs.getBoolean("room_migration_done", false))
+    }
+
+    @Test
+    fun testFavoritesMigrationIsOneTime() = runBlocking {
+        // 1. Setup legacy data
+        val component = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity")
+        favoritesPrefs.edit().putStringSet("favorites", setOf(component.flattenToString())).commit()
+
+        // 2. Initialize repository (triggers migration)
+        val repo = FavoritesRepositoryImpl(context, database.favoriteDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
+        repo.getFavoritesFlow().waitForNotEmpty()
+        assertTrue(favoritesPrefs.getBoolean("room_migration_done", false))
+
+        // 3. Clear database (but leave migration flag in prefs)
+        database.clearAllTables()
+
+        // 4. Initialize repository again
+        val repo2 = FavoritesRepositoryImpl(context, database.favoriteDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
+
+        // 5. Verify no data migrated (because flag was already set)
+        val favorites = repo2.getFavoritesFlow().first()
+        assertTrue(favorites.isEmpty())
     }
 
     @Test
@@ -145,7 +167,7 @@ class StorageMigrationTest {
         recentsPrefs.edit().putStringSet("recents", setOf("${component.flattenToString()};$timestamp")).commit()
 
         // 2. Initialize repository (triggers migration)
-        val repo = RecentsRepositoryImpl(context, database.recentDao(), packageRepository, getActivityIconUseCase)
+        val repo = RecentsRepositoryImpl(context, database.recentDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
 
         // 3. Verify data migrated to Room
         val recents = repo.getRecentsFlow().waitForNotEmpty()
@@ -156,11 +178,11 @@ class StorageMigrationTest {
 
     @Test
     fun testNewShortcutStorage() = runBlocking {
-        val repo = FavoritesRepositoryImpl(context, database.favoriteDao(), packageRepository, getActivityIconUseCase)
+        val repo = FavoritesRepositoryImpl(context, database.favoriteDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
         val component = ComponentName("com.test", "com.test.Activity")
         val icon = getActivityIconUseCase(null, component)
         val intent = Intent("com.test.ACTION").setComponent(component).putExtra("test_extra", "value")
-        val request = ShortcutRequest("Custom Name", intent, icon)
+        val request = ShortcutRequest("Custom Name", intent, icon, source = LaunchSource.PRIMARY)
 
         repo.addFavorite(request)
 
@@ -173,12 +195,12 @@ class StorageMigrationTest {
 
     @Test
     fun testRecentsDuplicateAndIconPersistence() = runBlocking {
-        val repo = RecentsRepositoryImpl(context, database.recentDao(), packageRepository, getActivityIconUseCase)
+        val repo = RecentsRepositoryImpl(context, database.recentDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
         val component = ComponentName("com.test", "com.test.Activity")
 
         // 1. Add first time (system icon)
-        val systemIcon = androidx.core.graphics.drawable.IconCompat.createWithResource(context, android.R.drawable.sym_def_app_icon)
-        val request1 = ShortcutRequest("System Name", Intent().setComponent(component), systemIcon)
+        val systemIcon = ActivityIcon.Resource(context.packageName, android.R.drawable.sym_def_app_icon)
+        val request1 = ShortcutRequest("System Name", Intent().setComponent(component), systemIcon, source = LaunchSource.PRIMARY)
         repo.addActivity(request1)
 
         val recents = repo.getRecentsFlow().waitForNotEmpty()
@@ -187,8 +209,8 @@ class StorageMigrationTest {
 
         // 2. Add second time with custom icon and name (edited on details page)
         val customBitmap = android.graphics.Bitmap.createBitmap(10, 10, android.graphics.Bitmap.Config.ARGB_8888)
-        val customIcon = androidx.core.graphics.drawable.IconCompat.createWithBitmap(customBitmap)
-        val request2 = ShortcutRequest("Custom Name", Intent().setComponent(component), customIcon)
+        val customIcon = ActivityIcon.BitmapIcon(customBitmap, false)
+        val request2 = ShortcutRequest("Custom Name", Intent().setComponent(component), customIcon, source = LaunchSource.PRIMARY)
         repo.addActivity(request2)
 
         // Give it a moment to process the async insert
@@ -198,6 +220,29 @@ class StorageMigrationTest {
         val updatedRecents = repo.getRecentsFlow().first()
         assertEquals(1, updatedRecents.size)
         assertEquals("Custom Name", updatedRecents[0].name)
-        assertEquals(androidx.core.graphics.drawable.IconCompat.TYPE_BITMAP, updatedRecents[0].icon.type)
+        assertTrue(updatedRecents[0].icon is ActivityIcon.BitmapIcon)
+    }
+
+    @Test
+    fun testRecentsMigrationIsOneTime() = runBlocking {
+        // 1. Setup legacy data
+        val component = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity")
+        val timestamp = System.currentTimeMillis()
+        recentsPrefs.edit().putStringSet("recents", setOf("${component.flattenToString()};$timestamp")).commit()
+
+        // 2. Initialize repository (triggers migration)
+        val repo = RecentsRepositoryImpl(context, database.recentDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
+        repo.getRecentsFlow().waitForNotEmpty()
+        assertTrue(recentsPrefs.getBoolean("room_migration_done", false))
+
+        // 3. Clear database (but leave migration flag in prefs)
+        database.clearAllTables()
+
+        // 4. Initialize repository again
+        val repo2 = RecentsRepositoryImpl(context, database.recentDao(), packageRepository, getActivityIconUseCase, Dispatchers.IO)
+
+        // 5. Verify no data migrated (because flag was already set)
+        val recents = repo2.getRecentsFlow().first()
+        assertTrue(recents.isEmpty())
     }
 }

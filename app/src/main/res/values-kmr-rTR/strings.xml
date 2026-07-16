@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Kategorî lê zêde bike</string>
     <string name="action_add_extra">Extra lê zêde bike</string>
+    <string name="action_add_new">Nû lê zêde bike</string>
     <string name="action_advanced_properties">Taybetmendiyên pêşkeftî</string>
     <string name="action_clear">Paqij bike</string>
     <string name="action_pick_icon_file">Ji pelê bar bike</string>
     <string name="action_pick_icon_library">Ji pirtûkxaneyê hilbijêre</string>
     <string name="action_save">Tomar bike</string>
     <string name="action_save_as_new">Wekî nû tomar bike</string>
+    <string name="action_update">Nû bike</string>
     <string name="action_view_github">Projeya GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Koda çavkaniyê bibîne</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Ev sepan destûrê dide çalakiyên veşartî yên ku bi gelemperî ji hêla pêşdebirên amûrê ve nayên dîtin. Dibe ku hin vebijark wekî ku tê hêvîkirin nexebitin an jî karanîna wan ne ewle be. Ma tu fêm dikî û dixwazî berdewam bikî?</string>
     <string name="dialog_progress_loading">Tê barkirin…</string>
     <string name="dialog_support">Me reklaman zêde kirin da ku alîkariya fînansekirina pêşkeftina pêşerojê bikin. Ma tu reklaman naxwazî? Derbasî Activity Launcher Pro li ser Google Play bibe — ev bi tevahî çavkanî vekirî ye û piştgiriya xebata berdewam a li ser sepanê dike. Her weha tu dikarî sepanê li ser GitHub belaş bi dest bixî. Piştgiriya li wir bijartî ye lê gelek alîkariya me dike.</string>
+    <string name="dialog_update_shortcut">Kurtenivîseke bi vê nasnameyê jixwe li ser ekrana te ya malê heye. Tu dixwazî kurtenivîsa heyî nû bikî an yekî nû lê zêde bikî?</string>
     <string name="error">Xeletî</string>
     <string name="error_duplicate_category">Kategoriya dubare</string>
     <string name="error_duplicate_extra_key">Kilîta dubare</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent biguherîne</string>
     <string name="title_dialog_icon_picker">Îkonekê hilbijêre</string>
     <string name="title_dialog_support">Spas ji bo karanîna Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Kurtenivîsê nû bike?</string>
     <string name="title_fragment_activity_list">Çalakî</string>
     <string name="title_fragment_package_list">Paketên sazkirî</string>
 </resources>

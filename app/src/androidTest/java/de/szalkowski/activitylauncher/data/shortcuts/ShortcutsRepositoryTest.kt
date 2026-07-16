@@ -7,6 +7,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import de.szalkowski.activitylauncher.data.database.AppDatabase
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import kotlinx.coroutines.flow.first
@@ -29,7 +31,7 @@ class ShortcutsRepositoryTest {
     lateinit var database: AppDatabase
 
     private lateinit var shortcutsRepository: ShortcutsRepository
-    private lateinit var icon: androidx.core.graphics.drawable.IconCompat
+    private lateinit var icon: ActivityIcon
 
     @Before
     fun init() {
@@ -39,13 +41,13 @@ class ShortcutsRepositoryTest {
             database.clearAllTables()
         }
         val context = ApplicationProvider.getApplicationContext<android.content.Context>()
-        icon = androidx.core.graphics.drawable.IconCompat.createWithResource(context, android.R.mipmap.sym_def_app_icon)
+        icon = ActivityIcon.Resource(context.packageName, android.R.mipmap.sym_def_app_icon)
     }
 
     @Test
     fun testRecordShortcut_PreventsDuplicates() = runBlocking {
         val componentName = ComponentName("com.test", "com.test.Activity")
-        val request = ShortcutRequest("Test App", Intent().setComponent(componentName), icon)
+        val request = ShortcutRequest("Test App", Intent().setComponent(componentName), icon, source = LaunchSource.PRIMARY)
 
         // Record first time
         shortcutsRepository.recordShortcut(request)
@@ -63,12 +65,26 @@ class ShortcutsRepositoryTest {
     @Test
     fun testRecordShortcut_DifferentNames_Allowed() = runBlocking {
         val componentName = ComponentName("com.test", "com.test.Activity")
-        val request1 = ShortcutRequest("Name 1", Intent().setComponent(componentName), icon)
-        val request2 = ShortcutRequest("Name 2", Intent().setComponent(componentName), icon)
+        val request1 = ShortcutRequest("Name 1", Intent().setComponent(componentName), icon, source = LaunchSource.PRIMARY)
+        val request2 = ShortcutRequest("Name 2", Intent().setComponent(componentName), icon, source = LaunchSource.PRIMARY)
 
         shortcutsRepository.recordShortcut(request1)
         shortcutsRepository.recordShortcut(request2)
 
         assertEquals(2, shortcutsRepository.getShortcutsFlow().first().size)
+    }
+
+    @Test
+    fun testRecordShortcut_WithExplicitId() = runBlocking {
+        val componentName = ComponentName("com.test", "com.test.Activity")
+        val request = ShortcutRequest("Test App", Intent().setComponent(componentName), icon, source = LaunchSource.PRIMARY)
+        val explicitId = "explicit-id"
+
+        val id = shortcutsRepository.recordShortcut(request, explicitId)
+
+        assertEquals(explicitId, id)
+        val shortcuts = shortcutsRepository.getShortcutsFlow().first()
+        assertEquals(1, shortcuts.size)
+        assertEquals(explicitId, shortcuts[0].id)
     }
 }

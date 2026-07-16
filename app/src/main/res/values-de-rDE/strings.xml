@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Kategorie hinzufügen</string>
     <string name="action_add_extra">Extra hinzufügen</string>
+    <string name="action_add_new">Neue hinzufügen</string>
     <string name="action_advanced_properties">Erweiterte Eigenschaften</string>
     <string name="action_clear">Leeren</string>
     <string name="action_pick_icon_file">Aus Datei laden</string>
     <string name="action_pick_icon_library">Aus Bibliothek wählen</string>
     <string name="action_save">Speichern</string>
     <string name="action_save_as_new">Als neu speichern</string>
+    <string name="action_update">Aktualisieren</string>
     <string name="action_view_github">GitHub-Projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Quellcode anzeigen</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Diese App gibt Zugriff auf Funktionen, die normalerweise nicht für Benutzer sichtbar sind. Einige Optionen funktionieren möglicherweise nicht wie erwartet oder sind nicht sicher. Haben Sie verstanden und möchten trotzdem fortfahren?</string>
     <string name="dialog_progress_loading">Lade…</string>
     <string name="dialog_support">Wir haben Anzeigen hinzugefügt, um die zukünftige Entwicklung zu finanzieren. Bevorzugen Sie keine Anzeigen? Führen Sie ein Upgrade auf Activity Launcher Pro bei Google Play durch – es ist vollständig Open-Source und unterstützt die Weiterentwicklung der App. Sie können die App auch kostenlos auf GitHub erhalten. Unterstützung dort ist optional, hilft uns aber sehr.</string>
+    <string name="dialog_update_shortcut">Eine Verknüpfung mit dieser ID existiert bereits auf Ihrem Startbildschirm. Möchten Sie die vorhandene Verknüpfung aktualisieren oder eine neue hinzufügen?</string>
     <string name="error">Fehler</string>
     <string name="error_duplicate_category">Doppelte Kategorie</string>
     <string name="error_duplicate_extra_key">Doppelter Schlüssel</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent bearbeiten</string>
     <string name="title_dialog_icon_picker">Icon auswählen</string>
     <string name="title_dialog_support">Vielen Dank, dass Sie Activity Launcher verwenden</string>
+    <string name="title_dialog_update_shortcut">Verknüpfung aktualisieren?</string>
     <string name="title_fragment_activity_list">Aktivitäten</string>
     <string name="title_fragment_package_list">Installierte Pakete</string>
 </resources>

@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Tambah Kategori</string>
     <string name="action_add_extra">Tambah Extra</string>
+    <string name="action_add_new">Tambah baru</string>
     <string name="action_advanced_properties">Properti Lanjutan</string>
     <string name="action_clear">Bersihkan</string>
     <string name="action_pick_icon_file">Muat dari berkas</string>
     <string name="action_pick_icon_library">Pilih dari pustaka</string>
     <string name="action_save">Simpan</string>
     <string name="action_save_as_new">Simpan sebagai Baru</string>
+    <string name="action_update">Perbarui</string>
     <string name="action_view_github">Proyek GitHub</string>
     <string name="action_view_paid">Peluncur Aktivitas Pro</string>
     <string name="action_view_source">Lihat kode sumber</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Aplikasi ini memberikan akses ke fitur yang biasanya tidak terlihat oleh pengguna. Beberapa opsi mungkin tidak berfungsi seperti yang diharapkan atau mungkin tidak aman untuk digunakan. Apakah Anda mengerti dan tetap ingin melanjutkan?</string>
     <string name="dialog_progress_loading">Memuat…</string>
     <string name="dialog_support">Kami telah menambahkan iklan untuk membantu mendanai pengembangan di masa mendatang. Lebih suka tanpa iklan? Tingkatkan ke Peluncur Aktivitas Pro di Google Play — sepenuhnya sumber terbuka dan mendukung kelanjutan pekerjaan pada aplikasi. Anda juga bisa mendapatkan aplikasi ini secara gratis di GitHub. Dukungan di sana bersifat opsional tetapi sangat membantu kami.</string>
+    <string name="dialog_update_shortcut">Pintasan dengan ID ini sudah ada di layar beranda Anda. Apakah Anda ingin memperbarui pintasan yang ada atau menambahkan yang baru?</string>
     <string name="error">Kesalahan</string>
     <string name="error_duplicate_category">Kategori duplikat</string>
     <string name="error_duplicate_extra_key">Kunci duplikat</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Ubah Intent</string>
     <string name="title_dialog_icon_picker">Pilih ikon</string>
     <string name="title_dialog_support">Terima kasih telah menggunakan Peluncur Aktivitas</string>
+    <string name="title_dialog_update_shortcut">Perbarui pintasan?</string>
     <string name="title_fragment_activity_list">Aktivitas</string>
     <string name="title_fragment_package_list">Paket terpasang</string>
 </resources>

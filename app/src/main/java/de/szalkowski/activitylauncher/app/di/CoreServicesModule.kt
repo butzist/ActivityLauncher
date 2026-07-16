@@ -20,6 +20,7 @@ import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
+import de.szalkowski.activitylauncher.entrypoint.ShortcutUpdateConfirmationImpl
 import javax.inject.Singleton
 
 @Module
@@ -108,4 +109,10 @@ abstract class CoreServicesModule {
     abstract fun bindShortcutsRepository(
         shortcutsRepositoryImpl: ShortcutsRepositoryImpl,
     ): ShortcutsRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindShortcutUpdateConfirmation(
+        shortcutUpdateConfirmationImpl: ShortcutUpdateConfirmationImpl,
+    ): ShortcutUpdateConfirmation
 }

@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Lägg till kategori</string>
     <string name="action_add_extra">Lägg till Extra</string>
+    <string name="action_add_new">Lägg till ny</string>
     <string name="action_advanced_properties">Avancerade egenskaper</string>
     <string name="action_clear">Rensa</string>
     <string name="action_pick_icon_file">Ladda från fil</string>
     <string name="action_pick_icon_library">Välj från bibliotek</string>
     <string name="action_save">Spara</string>
     <string name="action_save_as_new">Spara som ny</string>
+    <string name="action_update">Uppdatera</string>
     <string name="action_view_github">GitHub-projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Visa källkod</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Appen ger åtkomst till funktioner som normalt inte är synliga för användare. Vissa alternativ kanske inte fungerar som förväntat eller kanske inte är säkra att använda. Förstår du detta och vill ändå fortsätta?</string>
     <string name="dialog_progress_loading">Laddar…</string>
     <string name="dialog_support">Vi har lagt till annonser för att finansiera framtida utveckling. Vill du slippa annonser? Uppgradera till Activity Launcher Pro på Google Play — det är helt öppen källkod och stöder fortsatt arbete på appen. Du kan också få appen gratis på GitHub. Att stöda är valfritt, men hjälper oss mycket.</string>
+    <string name="dialog_update_shortcut">En genväg med detta ID finns redan på din startskärm. Vill du uppdatera den befintliga genvägen eller lägga till en ny?</string>
     <string name="error">Fel</string>
     <string name="error_duplicate_category">Duplicerad kategori</string>
     <string name="error_duplicate_extra_key">Duplicerad nyckel</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Redigera Intent</string>
     <string name="title_dialog_icon_picker">Välj en ikon</string>
     <string name="title_dialog_support">Tack för att du använder Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Uppdatera genväg?</string>
     <string name="title_fragment_activity_list">Aktiviteter</string>
     <string name="title_fragment_package_list">Installerade paket</string>
 </resources>

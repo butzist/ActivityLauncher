@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">ਸ਼੍ਰੇਣੀ ਜੋੜੋ</string>
     <string name="action_add_extra">Extra ਜੋੜੋ</string>
+    <string name="action_add_new">ਨਵਾਂ ਜੋੜੋ</string>
     <string name="action_advanced_properties"> ਉੱਨਤ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ</string>
     <string name="action_clear">ਸਾਫ਼ ਕਰੋ</string>
     <string name="action_pick_icon_file">ਫਾਈਲ ਤੋਂ ਲੋਡ ਕਰੋ</string>
     <string name="action_pick_icon_library">ਲਾਇਬ੍ਰੇਰੀ ਤੋਂ ਚੁਣੋ</string>
     <string name="action_save">ਸੰਭਾਲੋ</string>
     <string name="action_save_as_new">ਨਵੇਂ ਵਜੋਂ ਸੰਭਾਲੋ</string>
+    <string name="action_update">ਅੱਪਡੇਟ ਕਰੋ</string>
     <string name="action_view_github">GitHub ਪ੍ਰੋਜੈਕਟ</string>
     <string name="action_view_paid">ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ</string>
     <string name="action_view_source">ਸਰੋਤ ਕੋਡ ਵੇਖੋ</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">ਇਹ ਐਪ ਉਪਭੋਗਤਾਵਾਂ ਨੂੰ ਉਹਨਾਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਦਿੰਦੀ ਹੈ ਜੋ ਆਮ ਤੌਰ \'ਤੇ ਦਿਖਾਈ ਨਹੀਂ ਦਿੰਦੀਆਂ। ਕੁਝ ਵਿਕਲਪ ਉਮੀਦ ਅਨੁਸਾਰ ਕੰਮ ਨਹੀਂ ਕਰ ਸਕਦੇ ਜਾਂ ਵਰਤਣ ਲਈ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਹੋ ਸਕਦੇ। ਕੀ ਤੁਸੀਂ ਸਮਝਦੇ ਹੋ ਅਤੇ ਅਜੇ ਵੀ ਅੱਗੇ ਵਧਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
     <string name="dialog_progress_loading">ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
     <string name="dialog_support">ਅਸੀਂ ਭਵਿੱਖ ਵਿੱਚ ਵਿਕਾਸ ਨੂੰ ਚਲਾਏ ਰੱਖਣ ਲਈ ਇਸ਼ਤਿਹਾਰ ਜੋੜੇ ਹਨ। ਇਸ਼ਤਿਹਾਰਾਂ ਤੋਂ ਪਰੇ ਰਹਿਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਤਾਂ ਗੂਗਲ ਪਲੇ ‘ਤੇ ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ ਵਿੱਚ ਅੱਪਗਰੇਡ ਕਰੋ — ਇਹ ਪੂਰੀ ਤਰ੍ਹਾਂ ਖੁੱਲ੍ਹਾ ਸੋਰਸ ਹੈ ਅਤੇ ਐਪ ਉੱਤੇ ਹੋ ਰਹੇ ਕੰਮ ਨੂੰ ਸਹਾਇਤਾ ਦਿੰਦਾ ਹੈ। ਤੁਸੀਂ ਇਹ ਐਪ GitHub ‘ਤੇ ਵੀ ਮੁਫ਼ਤ ਲੈ ਸਕਦੇ ਹੋ। ਉਥੇ ਸਹਾਇਤਾ ਦੇਣਾ ਵਿਕਲਪਿਕ ਹੈ, ਪਰ ਸਾਡੀ ਬਹੁਤ ਮਦਦ ਕਰਦਾ ਹੈ।</string>
+    <string name="dialog_update_shortcut">ਇਸ ID ਵਾਲਾ ਸ਼ਾਰਟਕੱਟ ਪਹਿਲਾਂ ਹੀ ਤੁਹਾਡੀ ਹੋਮ ਸਕ੍ਰੀਨ \'ਤੇ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਮੌਜੂਦਾ ਸ਼ਾਰਟਕੱਟ ਨੂੰ ਅੱਪਡੇਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਨਵਾਂ ਜੋੜਨਾ ਚਾਹੁੰਦੇ ਹੋ؟</string>
     <string name="error">ਗਲਤੀ</string>
     <string name="error_duplicate_category">ਡੁਪਲੀਕੇਟ ਸ਼੍ਰੇਣੀ</string>
     <string name="error_duplicate_extra_key">ਡੁਪਲੀਕੇਟ ਕੁੰਜੀ</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Intent ਸੋਧੋ</string>
     <string name="title_dialog_icon_picker">ਇੱਕ ਆਈਕਨ ਚੁਣੋ</string>
     <string name="title_dialog_support">ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਵਰਤਣ ਲਈ ਧੰਨਵਾਦ।</string>
+    <string name="title_dialog_update_shortcut">ਸ਼ਾਰਟਕੱਟ ਅੱਪਡੇਟ ਕਰੀਏ؟</string>
     <string name="title_fragment_activity_list">ਗਤੀਵਿਧੀਆਂ</string>
     <string name="title_fragment_package_list">ਸਥਾਪਤ ਪੈਕੇਜ</string>
 </resources>

@@ -2,12 +2,14 @@
 <resources>
     <string name="action_add_category">Přidat kategorii</string>
     <string name="action_add_extra">Přidat Extra</string>
+    <string name="action_add_new">Přidat nového</string>
     <string name="action_advanced_properties">Pokročilé vlastnosti</string>
     <string name="action_clear">Vymazat</string>
     <string name="action_pick_icon_file">Načíst ze souboru</string>
     <string name="action_pick_icon_library">Vybrat z knihovny</string>
     <string name="action_save">Uložit</string>
     <string name="action_save_as_new">Uložit jako nový</string>
+    <string name="action_update">Aktualizovat</string>
     <string name="action_view_github">Projekt na GitHubu</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Zobrazit zdrojový kód</string>
@@ -30,6 +32,7 @@
     <string name="dialog_disclaimer">Tato aplikace umožňuje přístup k funkcím, které běžně nejsou uživatelům k dispozici. Některé možnosti nemusí fungovat podle očekávání, nebo nemusí být bezpečné je používat. Rozumíte tomuto upozornění a přesto chcete pokračovat?</string>
     <string name="dialog_progress_loading">Načítaní…</string>
     <string name="dialog_support">Přidali jsme reklamy, abychom mohli financovat budoucí vývoj. Nechcete reklamy? Upgradujte na Activity Launcher Pro na Google Play – je plně open-source a podporuje pokračující práci na aplikaci. Aplikaci můžete získat zdarma také na GitHubu. Podpora je zde dobrovolná, ale hodně nám pomáhá.</string>
+    <string name="dialog_update_shortcut">Zástupce s tímto ID již na domovské obrazovce existuje. Chcete aktualizovat stávajícího zástupce, nebo přidat nového?</string>
     <string name="error">Chyba</string>
     <string name="error_duplicate_category">Duplicitní kategorie</string>
     <string name="error_duplicate_extra_key">Duplicitní klíč</string>
@@ -84,6 +87,7 @@
     <string name="title_dialog_edit_intent">Upravit Intent</string>
     <string name="title_dialog_icon_picker">Vyberte ikonu</string>
     <string name="title_dialog_support">Děkujeme, že používáte Activity Launcher</string>
+    <string name="title_dialog_update_shortcut">Aktualizovat zástupce?</string>
     <string name="title_fragment_activity_list">Aktivity</string>
     <string name="title_fragment_package_list">Instalované balíčky</string>
 </resources>

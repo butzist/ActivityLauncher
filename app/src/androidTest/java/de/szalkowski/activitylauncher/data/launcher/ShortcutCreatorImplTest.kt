@@ -1,6 +1,5 @@
 package de.szalkowski.activitylauncher.data.launcher
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ShortcutManager
@@ -13,10 +12,11 @@ import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import de.szalkowski.activitylauncher.domain.model.ShortcutProxyRequest
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
-import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assume.assumeTrue
@@ -77,6 +77,9 @@ class ShortcutCreatorImplTest {
     val shortcutsRepository: ShortcutsRepository = mock()
 
     @BindValue
+    val shortcutUpdateConfirmation: de.szalkowski.activitylauncher.domain.launcher.ShortcutUpdateConfirmation = mock()
+
+    @BindValue
     lateinit var shortcutCreator: ShortcutCreator
 
     private lateinit var shortcutCreatorImpl: ShortcutCreatorImpl
@@ -84,7 +87,7 @@ class ShortcutCreatorImplTest {
 
     @Before
     fun init() {
-        shortcutCreatorImpl = ShortcutCreatorImpl(context, intentSigner, shortcutsRepository)
+        shortcutCreatorImpl = ShortcutCreatorImpl(context, shortcutUpdateConfirmation)
         shortcutCreator = shortcutCreatorImpl
         hiltRule.inject()
     }
@@ -93,13 +96,8 @@ class ShortcutCreatorImplTest {
     fun testCreateLauncherIcon() {
         assumeTrue(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
 
-        val componentName = ComponentName("com.test", "com.test.Activity")
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithBitmap(
-            android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888),
-        )
-        val signature = "test_signature"
-        whenever(intentSigner.signRequest(any<ShortcutRequest>())).thenReturn(signature)
-        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
+        val icon = ActivityIcon.Resource(context.packageName, android.R.drawable.sym_def_app_icon)
+        val testIntent = Intent("action.TEST")
 
         val shortcutManager = mock<ShortcutManager>()
         val mockContext = object : android.content.ContextWrapper(context) {
@@ -114,26 +112,19 @@ class ShortcutCreatorImplTest {
             }
         }
 
-        val shortcutCreatorWithMock = ShortcutCreatorImpl(mockContext, intentSigner, shortcutsRepository)
-        val request = ShortcutRequest("Test App", Intent().setComponent(componentName), icon)
+        val shortcutCreatorWithMock = ShortcutCreatorImpl(mockContext, shortcutUpdateConfirmation)
+        val request = ShortcutProxyRequest("Test App", icon, testIntent, source = LaunchSource.PRIMARY)
 
-        runBlocking { shortcutCreatorWithMock.createLauncherIcon(request, 1L) }
+        runBlocking { shortcutCreatorWithMock.createLauncherIcon(request, "uuid-123", mockContext) }
 
         val shortcutCaptor = argumentCaptor<android.content.pm.ShortcutInfo>()
         verify(shortcutManager).requestPinShortcut(shortcutCaptor.capture(), isNull())
 
-        runBlocking { verify(shortcutsRepository, never()).recordShortcut(any()) }
-
         val capturedShortcut = shortcutCaptor.firstValue
         assertEquals("Test App", capturedShortcut.shortLabel)
+        assertEquals("uuid-123", capturedShortcut.id)
         val intent = capturedShortcut.intent
         org.junit.Assert.assertNotNull(intent)
-        assertEquals(ShortcutCreator.INTENT_LAUNCH_SHORTCUT, intent?.action)
-        assertEquals(ShortcutActivity::class.java.name, intent?.component?.className)
-        assertEquals(signature, intent?.getStringExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE))
-
-        val launchIntentUri = intent?.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
-        val launchIntent = Intent.parseUri(launchIntentUri, Intent.URI_INTENT_SCHEME)
-        assertEquals(componentName, launchIntent.component)
+        assertEquals("action.TEST", intent?.action)
     }
 }
