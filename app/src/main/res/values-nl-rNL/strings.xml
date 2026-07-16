@@ -63,6 +63,7 @@
     <string name="nav_favorites">Favorieten</string>
     <string name="nav_recents">Onlangs gestart</string>
     <string name="nav_shortcuts">Snelkoppelingen</string>
+    <string name="settings_allow_tap_launch">Tikken toestaan om te starten</string>
     <string name="settings_backup_export">Back-up exporteren</string>
     <string name="settings_backup_export_summary">Sla uw favorieten, onlangs gestart en instellingen op in een bestand</string>
     <string name="settings_backup_import">Back-up importeren</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Verberg privé activiteiten</string>
     <string name="settings_language">Taal</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Activiteiten starten met één tik, lang tikken voor details</string>
     <string name="settings_summary_github">Je kunt de vooraf gebouwde APK downloaden van het Activity Launcher open-source project op GitHub. Geavanceerde gebruikers kunnen ook de broncode verkennen, de ontwikkelaars steunen en bijdragen met vertalingen of pull-requests.</string>
     <string name="settings_summary_hide_private">Verberg privé (niet geëxporteerde en uitgeschakelde) activiteiten, die niet gestart kunnen worden zonder root-toegang</string>
     <string name="settings_summary_pro_version">Wil je de app steunen en advertenties verwijderen? Download Activity Launcher Pro in Google Play. Het helpt de ontwikkeling te financieren en is volledig open source.</string>

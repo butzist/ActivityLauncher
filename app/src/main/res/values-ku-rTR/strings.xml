@@ -63,6 +63,7 @@
     <string name="nav_favorites">خۆشەویستەکان</string>
     <string name="nav_recents">دوایین دەستپێکردنەکان</string>
     <string name="nav_shortcuts">کورتەڕێگاکان</string>
+    <string name="settings_allow_tap_launch">ڕێگەدان بە لێدان بۆ دەستپێکردن</string>
     <string name="settings_backup_export">هەناردەکردنی پاڵپشت</string>
     <string name="settings_backup_export_summary">پاشکەوتکردنی خۆشەویستەکان، ئەوانەی دوایی دەستپێکراون، و ڕێکخستنەکان لە پەڕگەیەکدا</string>
     <string name="settings_backup_import">هاوردەکردنی پاڵپشت</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">شاردنەوەی چالاکییە تایبەتەکان</string>
     <string name="settings_language">زمان</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">دەستپێکردنی چالاکییەکان بە یەک لێدان، لێدانی درێژ بۆ وردەکارییەکان</string>
     <string name="settings_summary_github">تۆ دەتوانیت APK ئامادەکراو لە پڕۆژەی سەرچاوە کراوەی Activity Launcher لەسەر GitHub دابگریت. بەکارهێنەرە پێشکەوتووەکان دەتوانن سەیری سەرچاوە کۆدەکە بکەن، پشتیوانی لە گەشەپێدەران بکەن، و بەشدار بن لە وەرگێڕان یان داواکاری ڕاکێشان.</string>
     <string name="settings_summary_hide_private">چالاکییە تایبەتەکان (نەهێنراوەکان و ناچالاکەکان) بشارەوە، کە بەبێ گەیشتن بە ڕووت دەست پێ ناکەن</string>
     <string name="settings_summary_pro_version">دەتەوێت پشتیوانی لە ئەپەکە بکەیت و ڕیکلامەکان لابەریت؟ Activity Launcher Pro لە Google Play بەدەستبهێنە — یارمەتی دابینکردنی بودجەی گەشەپێدان دەدات و بەتەواوی سەرچاوە کراوەیە.</string>

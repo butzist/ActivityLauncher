@@ -25,6 +25,7 @@ class SettingsRepositoryImpl @Inject constructor(
 
         const val PREF_THEME = "theme"
         const val PREF_HIDE_HIDE_PRIVATE = "hide_hide_private"
+        const val PREF_ALLOW_TAP_LAUNCH = "allow_tap_launch"
         const val PREF_LANGUAGE = "language"
         const val PREF_DISCLAIMER_ACCEPTED = "disclaimer_accepted"
     }
@@ -36,6 +37,10 @@ class SettingsRepositoryImpl @Inject constructor(
 
         if (!prefs.contains(PREF_HIDE_HIDE_PRIVATE)) {
             prefs.edit { putBoolean(PREF_HIDE_HIDE_PRIVATE, false) }
+        }
+
+        if (!prefs.contains(PREF_ALLOW_TAP_LAUNCH)) {
+            prefs.edit { putBoolean(PREF_ALLOW_TAP_LAUNCH, false) }
         }
 
         if (!prefs.contains(PREF_LANGUAGE)) {
@@ -55,6 +60,9 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override val hidePrivate: Boolean
         get() = prefs.getBoolean(PREF_HIDE_HIDE_PRIVATE, false)
+
+    override val allowTapLaunch: Boolean
+        get() = prefs.getBoolean(PREF_ALLOW_TAP_LAUNCH, false)
 
     override fun applyLocaleConfiguration(context: Context) {
         val appLocale = if (language == LANGUAGE_DEFAULT) {

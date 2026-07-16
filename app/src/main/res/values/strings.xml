@@ -65,6 +65,7 @@
     <string name="nav_favorites" comment="Tab label showing favorited activities">Favorites</string>
     <string name="nav_recents" comment="Tab label showing recently launched activities">Recently Launched</string>
     <string name="nav_shortcuts" comment="Tab label showing managed shortcuts">Shortcuts</string>
+    <string name="settings_allow_tap_launch" comment="Settings switch to allow launching activities with a single tap instead of opening details">Allow tap to launch</string>
     <string name="settings_backup_export" comment="Settings option to export app data to a backup file">Export Backup</string>
     <string name="settings_backup_export_summary" comment="Description for the export backup setting">Save your favorites, recently launched, and settings to a file</string>
     <string name="settings_backup_import" comment="Settings option to import app data from a backup file">Import Backup</string>
@@ -73,6 +74,7 @@
     <string name="settings_hide_private" comment="Settings switch to hide private/unexported activities">Hide private activities</string>
     <string name="settings_language" comment="Settings option for app language selection">Language</string>
     <string name="settings_pro_version" comment="Settings link to the Pro/ad-free version of the app">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch" comment="Description for the allow tap to launch setting">Launch activities with a single tap, long tap for details</string>
     <string name="settings_summary_github" comment="Description for the GitHub project setting">You can download the pre-built APK from our GitHub organization. Explore the source code of the app and related projects like plugins for launching (e.g., Shizuku) and shortcut creation.</string>
     <string name="settings_summary_hide_private" comment="Description explaining the hide private activities setting">Hide private (unexported and disabled) activities</string>
     <string name="settings_summary_pro_version" comment="Description for the Pro version setting">Want to support the app and remove ads? Get Activity Launcher Pro on Google Play — it helps fund development and is fully open-source.</string>

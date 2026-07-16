@@ -15,8 +15,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.FragmentActivityListBinding
+import de.szalkowski.activitylauncher.domain.model.LaunchSource
+import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
+import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
 import de.szalkowski.activitylauncher.presentation.common.ActionBarSearch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,6 +34,12 @@ class ActivityListFragment : Fragment() {
 
     @Inject
     internal lateinit var getActivityIconUseCase: GetActivityIconUseCase
+
+    @Inject
+    internal lateinit var settingsRepository: SettingsRepository
+
+    @Inject
+    internal lateinit var launchActivityUseCase: LaunchActivityUseCase
 
     private val activityListAdapter: ActivityListAdapter by lazy {
         activityListAdapterFactory.create(args.packageName)
@@ -75,19 +85,41 @@ class ActivityListFragment : Fragment() {
         }
 
         activityListAdapter.onItemClick = {
-            runCatching {
-                val icon = getActivityIconUseCase(it.iconResourceName, it.componentName)
-                val intent = Intent().setComponent(it.componentName)
-                val request = ShortcutRequest(it.name, intent, icon)
-                val action = ActivityListFragmentDirections.actionSelectActivity(
-                    shortcutRequest = request,
-                    configuration = DetailsConfiguration.ALL,
-                )
-                findNavController().navigate(action)
-            }.onFailure { e -> Log.e("Navigation", "Error while navigating from ActivityListFragment", e) }
+            if (settingsRepository.allowTapLaunch) {
+                launchActivity(it)
+            } else {
+                showDetails(it)
+            }
+        }
+
+        activityListAdapter.onItemLongClick = {
+            if (settingsRepository.allowTapLaunch) {
+                showDetails(it)
+            }
         }
 
         binding.rvActivities.adapter = activityListAdapter
+    }
+
+    private fun launchActivity(info: MyActivityInfo) {
+        runCatching {
+            val intent = Intent().setComponent(info.componentName)
+            val launchRequest = de.szalkowski.activitylauncher.domain.model.LaunchRequest(intent, source = LaunchSource.PRIMARY)
+            launchActivityUseCase(launchRequest, requireContext())
+        }.onFailure { e -> Log.e("Navigation", "Error while launching activity from ActivityListFragment", e) }
+    }
+
+    private fun showDetails(info: MyActivityInfo) {
+        runCatching {
+            val icon = getActivityIconUseCase(info.iconResourceName, info.componentName)
+            val intent = Intent().setComponent(info.componentName)
+            val request = ShortcutRequest(info.name, intent, icon, source = LaunchSource.PRIMARY)
+            val action = ActivityListFragmentDirections.actionSelectActivity(
+                shortcutRequest = request,
+                configuration = DetailsConfiguration.ALL,
+            )
+            findNavController().navigate(action)
+        }.onFailure { e -> Log.e("Navigation", "Error while navigating from ActivityListFragment", e) }
     }
 
     override fun onDestroyView() {

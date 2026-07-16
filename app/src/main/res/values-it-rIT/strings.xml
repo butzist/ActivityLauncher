@@ -63,6 +63,7 @@
     <string name="nav_favorites">Preferiti</string>
     <string name="nav_recents">Lanciati di recente</string>
     <string name="nav_shortcuts">Scorciatoie</string>
+    <string name="settings_allow_tap_launch">Consenti il tocco per avviare</string>
     <string name="settings_backup_export">Esporta backup</string>
     <string name="settings_backup_export_summary">Salva i tuoi preferiti, lanciati di recente e impostazioni in un file</string>
     <string name="settings_backup_import">Importa backup</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Nascondi attività private</string>
     <string name="settings_language">Lingua</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Avvia le attività con un solo tocco, tocco lungo per i dettagli</string>
     <string name="settings_summary_github">Puoi scaricare l\'APK precompilato dal progetto open source Activity Launcher su GitHub. Gli utenti esperti possono anche esplorare il codice sorgente, supportare gli sviluppatori e contribuire con traduzioni o richieste di pull.</string>
     <string name="settings_summary_hide_private">Nascondi le attività private (non esportate e disabilitate), che non possono essere avviate senza accesso root</string>
     <string name="settings_summary_pro_version">Vuoi supportare l\'app e rimuovere gli annunci pubblicitari? Scarica Activity Launcher Pro su Google Play: aiuta a finanziare lo sviluppo ed è completamente open source.</string>

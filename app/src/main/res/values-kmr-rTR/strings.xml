@@ -63,6 +63,7 @@
     <string name="nav_favorites">Bijare</string>
     <string name="nav_recents">Dawî hatine destpêkirin</string>
     <string name="nav_shortcuts">Kurtebir</string>
+    <string name="settings_allow_tap_launch">Destûr bide kirtandina ji bo destpêkirinê</string>
     <string name="settings_backup_export">Yedekê bişîne</string>
     <string name="settings_backup_export_summary">Bijareyên xwe, yên dawî hatine destpêkirin û mîhengan di pelekî de tomar bike</string>
     <string name="settings_backup_import">Yedekê bîne</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Çalakiyên taybet veşêre</string>
     <string name="settings_language">Ziman</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Çalakiyan bi kirtandinekê dest pê bike, ji bo hûraguliyan kirtandina dirêj</string>
     <string name="settings_summary_github">Tu dikarî APK-ya amade ji projeya çavkanî vekirî ya Activity Launcher li ser GitHub daxînî. Bikarhênerên pêşkeftî dikarin li koda çavkaniyê binerin, piştgiriya pêşdebirên bikin, û beşdarî wergêran an daxwazên kişandinê bibin.</string>
     <string name="settings_summary_hide_private">Çalakiyên taybet (yên neşandî û neçalak) veşêre, yên ku bêyî gihîştina root dest pê nakin</string>
     <string name="settings_summary_pro_version">Ma tu dixwazî piştgiriya sepanê bikî û reklaman jê bibî? Activity Launcher Pro li ser Google Play bi dest bixe — alîkariya fînansekirina pêşkeftinê dike û bi tevahî çavkanî vekirî ye.</string>

@@ -63,6 +63,7 @@
     <string name="nav_favorites">Yêu thích</string>
     <string name="nav_recents">Khởi chạy gần đây</string>
     <string name="nav_shortcuts">Phím tắt</string>
+    <string name="settings_allow_tap_launch">Cho phép nhấn để bắt đầu</string>
     <string name="settings_backup_export">Xuất bản sao lưu</string>
     <string name="settings_backup_export_summary">Lưu các mục yêu thích, ứng dụng đã mở gần đây và cài đặt vào một tệp</string>
     <string name="settings_backup_import">Nhập bản sao lưu</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Ẩn các hoạt động riêng tư</string>
     <string name="settings_language">Ngôn ngữ</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Khởi chạy các hoạt động bằng một lần nhấn, nhấn giữ để xem chi tiết</string>
     <string name="settings_summary_github">Bạn có thể tải xuống APK được biên dịch sẵn từ dự án mã nguồn mở Activity Launcher trên GitHub. Người dùng nâng cao cũng có thể khám phá mã nguồn, hỗ trợ các nhà phát triển và đóng góp bằng các bản dịch hoặc yêu cầu pull.</string>
     <string name="settings_summary_hide_private">Ẩn các hoạt động riêng tư (không được xuất và bị tắt), những hoạt động này không thể khởi chạy nếu không có quyền root</string>
     <string name="settings_summary_pro_version">Bạn muốn hỗ trợ ứng dụng và gỡ bỏ quảng cáo? Hãy tải Activity Launcher Pro trên Google Play — ứng dụng giúp tài trợ phát triển và hoàn toàn là mã nguồn mở.</string>

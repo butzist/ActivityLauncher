@@ -63,6 +63,7 @@
     <string name="nav_favorites">Favorīti</string>
     <string name="nav_recents">Nesen palaistie</string>
     <string name="nav_shortcuts">Saīsnes</string>
+    <string name="settings_allow_tap_launch">Atļaut pieskārienu palaišanai</string>
     <string name="settings_backup_export">Eksportēt dublējumu</string>
     <string name="settings_backup_export_summary">Saglabājiet savus izlases vienumus, nesen palaistos un iestatījumus failā</string>
     <string name="settings_backup_import">Importēt dublējumu</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Slēpt privātās darbības</string>
     <string name="settings_language">Valoda</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Palaist darbības ar vienu pieskārienu, garš pieskāriens detaļām</string>
     <string name="settings_summary_github">Varat lejupielādēt iepriekš izveidoto APK no Activity Launcher atvērtā pirmkoda projekta vietnē GitHub. Pieredzējuši lietotāji var arī izpētīt pirmkodu, atbalstīt izstrādātājus un sniegt ieguldījumu ar tulkojumiem vai vilkšanas pieprasījumiem.</string>
     <string name="settings_summary_hide_private">Slēpt privātās (neizgūtās un atspējotās) darbības, kuras nevar palaist bez root piekļuves tiesībām</string>
     <string name="settings_summary_pro_version">Vai vēlaties atbalstīt lietotni un noņemt reklāmas? Iegūstiet Activity Launcher Pro pakalpojumā Google Play — tas palīdz finansēt izstrādi un ir pilnībā atvērtā pirmkoda.</string>

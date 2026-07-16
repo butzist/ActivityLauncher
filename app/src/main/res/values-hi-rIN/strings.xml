@@ -63,6 +63,7 @@
     <string name="nav_favorites">पसंदीदा</string>
     <string name="nav_recents">हाल ही में लॉन्च किया गया</string>
     <string name="nav_shortcuts">शॉर्टकट</string>
+    <string name="settings_allow_tap_launch">लॉन्च करने के लिए टैप की अनुमति दें</string>
     <string name="settings_backup_export">बैकअप निर्यात करें</string>
     <string name="settings_backup_export_summary">अपने पसंदीदा, हाल ही में लॉन्च किए गए और सेटिंग्स को एक फ़ाइल में सहेजें</string>
     <string name="settings_backup_import">बैकअप आयात करें</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">निजी गतिविधियों को छुपाएं</string>
     <string name="settings_language">भाषा</string>
     <string name="settings_pro_version">एक्टिविटी लॉन्चर प्रो</string>
+    <string name="settings_summary_allow_tap_launch">एक टैप से गतिविधियां लॉन्च करें, विवरण के लिए देर तक दबाएं</string>
     <string name="settings_summary_github">आप GitHub पर एक्टिविटी लॉन्चर ओपन-सोर्स प्रोजेक्ट से पहले से निर्मित APK डाउनलोड कर सकते हैं. उन्नत उपयोगकर्ता स्रोत कोड का भी पता लगा सकते हैं, डेवलपर्स का समर्थन कर सकते हैं, और अनुवाद या पुल अनुरोधों के साथ योगदान कर सकते हैं.</string>
     <string name="settings_summary_hide_private">निजी (निर्यातित और अक्षम) गतिविधियों को छिपाएं, जिन्हें रूट एक्सेस के बिना शुरू नहीं किया जा सकता</string>
     <string name="settings_summary_pro_version">ऐप को सपोर्ट करना चाहते हैं और विज्ञापन हटाना चाहते हैं? Google Play पर एक्टिविटी लॉन्चर प्रो प्राप्त करें - यह विकास को निधि देने में मदद करता है और पूरी तरह से ओपन-सोर्स है।</string>

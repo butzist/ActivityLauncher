@@ -65,6 +65,7 @@ qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qap
     <string name="nav_favorites">yIchenmoH</string>
     <string name="nav_recents">potlh</string>
     <string name="nav_shortcuts">qIghmey</string>
+    <string name="settings_allow_tap_launch">chovnatlh chu\'meH chap</string>
     <string name="settings_backup_export">Backup yIlan</string>
     <string name="settings_backup_export_summary">De\' lI\' pol</string>
     <string name="settings_backup_import">Backup yIlaw\'</string>
@@ -73,6 +74,7 @@ qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qap
     <string name="settings_hide_private">\'em Qu\' So\'</string>
     <string name="settings_language">Hol</string>
     <string name="settings_pro_version">Qu\' taghmoHwI\' Pro law\'</string>
+    <string name="settings_summary_allow_tap_launch">wa\' chaptaHvIS yIn chu\', tIn chaptaHvIS chovnatlh</string>
     <string name="settings_summary_github">Activity Launcher GitHub pongDaq APK luQatlh download law\'. ngoDvam vIleghpu\' \'ej developers ủng, Hol yIlo\'law\' \'ej pull requests yIlo\'law\'.</string>
     <string name="settings_summary_hide_private">\'em (labbe\'lu\'bogh \'ej chu\'Ha\'lu\'bogh) Qu\'mey So\'. Qu\'meyvam taghmoHlaH loHwI\' neH.</string>
     <string name="settings_summary_pro_version">Qu\' taghmoHwI\' Pro Google PlayDaq bIqu\'meH \'ej Daq ủng SIQpu\'bI\' je DIl? Qu\' taghmoHwI\' Pro Google PlayDaq bIqu\'meH \'ej Daq ủng SIQpu\'bI\' je DIl?</string>

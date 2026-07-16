@@ -63,6 +63,7 @@
     <string name="nav_favorites">ਪਸੰਦੀਦਾ</string>
     <string name="nav_recents">ਹਾਲ ਹੀ ਵਿੱਚ ਸ਼ੁਰੂ ਕੀਤੇ</string>
     <string name="nav_shortcuts">ਸ਼ਾਰਟਕੱਟ</string>
+    <string name="settings_allow_tap_launch">ਲਾਂਚ ਕਰਨ ਲਈ ਟੈਪ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ</string>
     <string name="settings_backup_export">ਬੈਕਅੱਪ ਐਕਸਪੋਰਟ ਕਰੋ</string>
     <string name="settings_backup_export_summary">ਆਪਣੇ ਪਸੰਦੀਦਾ, ਹਾਲ ਹੀ ਵਿੱਚ ਲਾਂਚ ਕੀਤੇ ਗਏ ਅਤੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੱਕ ਫਾਈਲ ਵਿੱਚ ਸੰਭਾਲੋ</string>
     <string name="settings_backup_import">ਬੈਕਅੱਪ ਇੰਪੋਰਟ ਕਰੋ</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">ਨਿੱਜੀ ਗਤੀਵਿਧੀਆਂ ਛੁਪਾਓ</string>
     <string name="settings_language">ਭਾਸ਼ਾ</string>
     <string name="settings_pro_version">ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ</string>
+    <string name="settings_summary_allow_tap_launch">ਇੱਕ ਟੈਪ ਨਾਲ ਗਤੀਵਿਧੀਆਂ ਲਾਂਚ ਕਰੋ, ਵੇਰਵਿਆਂ ਲਈ ਦੇਰ ਤੱਕ ਦਬਾਓ</string>
     <string name="settings_summary_github">ਤੁਸੀਂ GitHub \'ਤੇ ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਓਪਨ-ਸੋਰਸ ਪ੍ਰੋਜੈਕਟ ਤੋਂ ਪਹਿਲਾਂ ਤੋਂ ਬਣਿਆ APK ਡਾਊਨਲੋਡ ਕਰ ਸਕਦੇ ਹੋ। ਤਕਨੀਕੀ ਉਪਭੋਗਤਾ ਸੋਰਸ ਕੋਡ ਦੀ ਪੜਚੋਲ ਵੀ ਕਰ ਸਕਦੇ ਹਨ, ਡਿਵੈਲਪਰਾਂ ਦਾ ਸਮਰਥਨ ਕਰ ਸਕਦੇ ਹਨ, ਅਤੇ ਅਨੁਵਾਦਾਂ ਜਾਂ ਪੁੱਲ ਬੇਨਤੀਆਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਸਕਦੇ ਹਨ।</string>
     <string name="settings_summary_hide_private">ਨਿੱਜੀ (ਅਨ-ਐਕਸਪੋਰਟਡ ਅਤੇ ਅਸਮਰੱਥ) ਗਤੀਵਿਧੀਆਂ ਛੁਪਾਓ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਰੂਟ ਐਕਸੈਸ ਤੋਂ ਬਿਨਾਂ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ</string>
     <string name="settings_summary_pro_version">ਐਪ ਨੂੰ ਸਪੋਰਟ ਕਰਨਾ ਅਤੇ ਇਸ਼ਤਿਹਾਰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਗੂਗਲ ਪਲੇ \'ਤੇ ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ ਪ੍ਰਾਪਤ ਕਰੋ — ਇਹ ਵਿਕਾਸ ਲਈ ਫੰਡ ਦੇਣ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰਦਾ ਹੈ ਅਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਓਪਨ-ਸੋਰਸ ਹੈ।</string>

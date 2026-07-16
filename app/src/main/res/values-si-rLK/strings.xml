@@ -63,6 +63,7 @@
     <string name="nav_favorites">ප්‍රියතම</string>
     <string name="nav_recents">මෑතකදී දියත් කරන ලද</string>
     <string name="nav_shortcuts">කෙටිමං</string>
+    <string name="settings_allow_tap_launch">දියත් කිරීමට තට්ටු කිරීමට ඉඩ දෙන්න</string>
     <string name="settings_backup_export">උපස්ථය අපනයනය කරන්න</string>
     <string name="settings_backup_export_summary">ඔබේ ප්‍රියතමයන්, මෑතකදී දියත් කළ සහ සැකසුම් ගොනුවකට සුරකින්න</string>
     <string name="settings_backup_import">උපස්ථය ආනයනය කරන්න</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">පුද්ගලික ක්‍රියාකාරකම් සඟවන්න</string>
     <string name="settings_language">භාෂාව</string>
     <string name="settings_pro_version">ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ</string>
+    <string name="settings_summary_allow_tap_launch">තනි තට්ටු කිරීමකින් ක්‍රියාකාරකම් දියත් කරන්න, විස්තර සඳහා දිගු තට්ටු කරන්න</string>
     <string name="settings_summary_github">GitHub හි Activity Launcher විවෘත මූලාශ්‍ර ව්‍යාපෘතියෙන් ඔබට පෙර-සාදන ලද APK බාගත හැකිය. උසස් පරිශීලකයින්ට මූලාශ්‍ර කේතය ගවේෂණය කිරීමට, සංවර්ධකයින්ට සහාය වීමට සහ පරිවර්තන හෝ ඉල්ලීම් සමඟ දායක වීමටද හැකිය.</string>
     <string name="settings_summary_hide_private">මුල් ප්‍රවේශයකින් තොරව ආරම්භ කළ නොහැකි පුද්ගලික (අපනයනය නොකළ සහ අක්‍රීය) ක්‍රියාකාරකම් සඟවන්න</string>
     <string name="settings_summary_pro_version">යෙදුමට සහය වී දැන්වීම් ඉවත් කිරීමට අවශ්‍යද? Google Play වෙතින් ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ ලබා ගන්න - එය සංවර්ධනය සඳහා අරමුදල් සපයන අතර සම්පූර්ණයෙන්ම විවෘත මූලාශ්‍ර වේ.</string>

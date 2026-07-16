@@ -37,6 +37,7 @@ class BackupRepositoryImpl @Inject constructor(
             settings.put("theme", settingsRepository.theme)
             settings.put("language", settingsRepository.language)
             settings.put("hide_private", settingsRepository.hidePrivate)
+            settings.put("allow_tap_launch", settingsRepository.allowTapLaunch)
 
             // Signature Key
             val signerPrefs = context.getSharedPreferences("signer", Context.MODE_PRIVATE)
@@ -101,6 +102,7 @@ class BackupRepositoryImpl @Inject constructor(
                     if (settings.has("language")) putString("language", settings.getString("language"))
                     // Note: PREF_HIDE_HIDE_PRIVATE is "hide_hide_private" in SettingsRepositoryImpl
                     if (settings.has("hide_private")) putBoolean("hide_hide_private", settings.getBoolean("hide_private"))
+                    if (settings.has("allow_tap_launch")) putBoolean("allow_tap_launch", settings.getBoolean("allow_tap_launch"))
                 }
 
                 // Import Signature Key
@@ -195,6 +197,7 @@ class BackupRepositoryImpl @Inject constructor(
 
     private fun shortcutToJson(shortcut: ShortcutEntity): JSONObject {
         return JSONObject().apply {
+            put("id", shortcut.id)
             put("packageName", shortcut.packageName)
             put("className", shortcut.className)
             put("name", shortcut.name)
@@ -208,6 +211,7 @@ class BackupRepositoryImpl @Inject constructor(
 
     private fun jsonToShortcut(json: JSONObject): ShortcutEntity {
         return ShortcutEntity(
+            id = if (json.isNull("id")) java.util.UUID.randomUUID().toString() else json.getString("id"),
             packageName = json.getString("packageName"),
             className = json.getString("className"),
             name = json.getString("name"),

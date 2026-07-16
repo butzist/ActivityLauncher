@@ -63,6 +63,7 @@
     <string name="nav_favorites">מועדפים</string>
     <string name="nav_recents">הופעלו לאחרונה</string>
     <string name="nav_shortcuts">קיצורי דרך</string>
+    <string name="settings_allow_tap_launch">אפשר הקשה להפעלה</string>
     <string name="settings_backup_export">ייצוא גיבוי</string>
     <string name="settings_backup_export_summary">שמור את המועדפים, הופעלו לאחרונה וההגדרות לקובץ</string>
     <string name="settings_backup_import">ייבוא גיבוי</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">הסתר פעילויות פרטיות</string>
     <string name="settings_language">שפה</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">הפעל פעילויות בהקשה אחת, הקשה ארוכה לפרטים</string>
     <string name="settings_summary_github">אתה יכול להוריד את ה-APK הבנוי מראש מפרויקט הקוד הפתוח Activity Launcher ב-GitHub. משתמשים מתקדמים יכולים גם לחקור את קוד המקור, לתמוך במפתחים ולתרום בתרגומים או בקשות משיכה.</string>
     <string name="settings_summary_hide_private">הסתר פעילויות פרטיות (לא מיוצאות ומושבתות), שלא ניתן להתחיל ללא גישת שורש</string>
     <string name="settings_summary_pro_version">רוצה לתמוך באפליקציה ולהסיר פרסומות? קבל את Activity Launcher Pro ב-Google Play - זה עוזר לממן את הפיתוח והוא בקוד פתוח מלא.</string>

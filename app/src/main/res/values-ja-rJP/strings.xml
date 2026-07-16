@@ -63,6 +63,7 @@
     <string name="nav_favorites">お気に入り</string>
     <string name="nav_recents">最近起動</string>
     <string name="nav_shortcuts">ショートカット</string>
+    <string name="settings_allow_tap_launch">タップして起動を許可する</string>
     <string name="settings_backup_export">バックアップのエクスポート</string>
     <string name="settings_backup_export_summary">お気に入り、最近起動したアプリ、設定をファイルに保存します</string>
     <string name="settings_backup_import">バックアップのインポート</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">プライベートアクティビティを表示しない</string>
     <string name="settings_language">言語</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">シングルタップでアクティビティを起動、ロングタップで詳細を表示</string>
     <string name="settings_summary_github">Activity Launcherのオープンソースプロジェクトから、ビルド済みのAPKをダウンロードできます。上級ユーザーは、ソースコードを調べたり、開発者を支援したり、翻訳やプルリクエストで貢献することもできます。</string>
     <string name="settings_summary_hide_private">ルートアクセスなしで起動できない（エクスポートされておらず、無効になっている）プライベートアクティビティを非表示にする</string>
     <string name="settings_summary_pro_version">アプリを支援して広告を削除したいですか？Google PlayでActivity Launcher Proを入手してください。開発資金の援助になり、完全にオープンソースです。</string>

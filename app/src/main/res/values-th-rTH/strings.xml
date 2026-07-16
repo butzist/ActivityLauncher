@@ -63,6 +63,7 @@
     <string name="nav_favorites">รายการโปรด</string>
     <string name="nav_recents">เปิดตัวล่าสุด</string>
     <string name="nav_shortcuts">ทางลัด</string>
+    <string name="settings_allow_tap_launch">อนุญาตให้แตะเพื่อเริ่ม</string>
     <string name="settings_backup_export">ส่งออกข้อมูลสำรอง</string>
     <string name="settings_backup_export_summary">บันทึกรายการโปรด ประวัติการใช้งาน และการตั้งค่าลงในไฟล์</string>
     <string name="settings_backup_import">นำเข้าข้อมูลสำรอง</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">ซ่อน activities ส่วนตัว</string>
     <string name="settings_language">ภาษา</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">เปิดกิจกรรมด้วยการแตะเพียงครั้งเดียว แตะค้างไว้เพื่อดูรายละเอียด</string>
     <string name="settings_summary_github">คุณสามารถดาวน์โหลด APK ที่สร้างไว้ล่วงหน้าได้จากโปรเจ็กต์โอเพนซอร์ส Activity Launcher บน GitHub ผู้ใช้ขั้นสูงยังสามารถสำรวจซอร์สโค้ด สนับสนุนนักพัฒนา และมีส่วนร่วมในการแปลหรือคำขอพูลได้</string>
     <string name="settings_summary_hide_private">ซ่อน activities ส่วนตัว (ที่ไม่ได้ส่งออก และปิดใช้งาน) และไม่สามารถเริ่มได้หากไม่มีสิทธิ์รูท</string>
     <string name="settings_summary_pro_version">ต้องการสนับสนุนแอปและนำโฆษณาออกไหม รับ Activity Launcher Pro ใน Google Play ซึ่งช่วยสนับสนุนการพัฒนาและเป็นโอเพนซอร์สอย่างสมบูรณ์</string>

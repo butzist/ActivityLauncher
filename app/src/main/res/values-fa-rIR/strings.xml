@@ -63,6 +63,7 @@
     <string name="nav_favorites">مورد علاقه</string>
     <string name="nav_recents">اخيراً اجرا شده</string>
     <string name="nav_shortcuts">میان‌برها</string>
+    <string name="settings_allow_tap_launch">اجازه دادن به ضربه برای راه اندازی</string>
     <string name="settings_backup_export">صادر کردن پشتیبان</string>
     <string name="settings_backup_export_summary">ذخیره علاقه‌مندی‌ها، موارد اخیر و تنظیمات در یک فایل</string>
     <string name="settings_backup_import">وارد کردن پشتیبان</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">پنهان‌سازی اکتیویتی‌های خصوصی</string>
     <string name="settings_language">زبان</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">راه اندازی فعالیت ها با یک ضربه، ضربه طولانی برای جزئیات</string>
     <string name="settings_summary_github">می توانید APK از پیش ساخته شده را از پروژه متن باز اکتیویتی لانچر در GitHub دانلود کنید. کاربران حرفه ای همچنین می توانند کد منبع را بررسی کنند، از توسعه دهندگان پشتیبانی کنند و با ترجمه ها یا درخواست های pull مشارکت کنند.</string>
     <string name="settings_summary_hide_private">پنهان‌سازی اکتیویتی‌های خصوصی (صادر نشده یا غیر‌فعال شده)، که نمی‌توانند بدون دسترسی روت اجرا شوند</string>
     <string name="settings_summary_pro_version">آیا می خواهید از برنامه حمایت کنید و تبلیغات را حذف کنید؟ اکتیویتی لانچر حرفه ای را در گوگل پلی دریافت کنید — این به تأمین مالی توسعه کمک می کند و کاملاً متن باز است.</string>

@@ -63,6 +63,7 @@
     <string name="nav_favorites">Любими</string>
     <string name="nav_recents">Наскоро стартирани</string>
     <string name="nav_shortcuts">Преки пътища</string>
+    <string name="settings_allow_tap_launch">Разрешаване на докосване за стартиране</string>
     <string name="settings_backup_export">Експортиране на резервно копие</string>
     <string name="settings_backup_export_summary">Запазете вашите любими, наскоро стартирани и настройки във файл</string>
     <string name="settings_backup_import">Импортиране на резервно копие</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Скриване на поверителни активности</string>
     <string name="settings_language">Език</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Стартиране на дейности с едно докосване, продължително докосване за подробности</string>
     <string name="settings_summary_github">Можете да изтеглите предварително създадения APK от проекта с отворен код Activity Launcher в GitHub. Напредналите потребители могат също да разгледат изходния код, да подкрепят разработчиците и да допринесат с преводи или заявки за изтегляне.</string>
     <string name="settings_summary_hide_private">Скриване на поверителни (неекспортирани или деактивирани) активности, които не могат да бъдат стартирани без root привилегии</string>
     <string name="settings_summary_pro_version">Искате да подкрепите приложението и да премахнете рекламите? Вземете Activity Launcher Pro в Google Play — това помага за финансиране на разработката и е с отворен код.</string>

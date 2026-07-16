@@ -63,6 +63,7 @@
     <string name="nav_favorites">Preferate</string>
     <string name="nav_recents">Lansate recent</string>
     <string name="nav_shortcuts">Comenzi rapide</string>
+    <string name="settings_allow_tap_launch">Permiteți atingerea pentru lansare</string>
     <string name="settings_backup_export">Exportă copia de rezervă</string>
     <string name="settings_backup_export_summary">Salvați favoritele, lansările recente și setările într-un fișier</string>
     <string name="settings_backup_import">Importă copia de rezervă</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Ascunde activitățile private</string>
     <string name="settings_language">Limbă</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Lansați activități cu o singură atingere, atingere lungă pentru detalii</string>
     <string name="settings_summary_github">Puteți descărca APK-ul pre-construit din proiectul open-source Activity Launcher de pe GitHub. Utilizatorii avansați pot explora, de asemenea, codul sursă, pot sprijini dezvoltatorii și pot contribui cu traduceri sau cereri de pull.</string>
     <string name="settings_summary_hide_private">Ascunde activitățile private (neexportate și dezactivate), care nu pot fi pornite fără acces root</string>
     <string name="settings_summary_pro_version">Doriți să susțineți aplicația și să eliminați reclamele? Obțineți Activity Launcher Pro pe Google Play — ajută la finanțarea dezvoltării și este complet open-source.</string>

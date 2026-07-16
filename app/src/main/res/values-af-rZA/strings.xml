@@ -63,6 +63,7 @@
     <string name="nav_favorites">Gunstelinge</string>
     <string name="nav_recents">Onlangs Kävve</string>
     <string name="nav_shortcuts">Kortpaaaie</string>
+    <string name="settings_allow_tap_launch">Laat tik toe om te begin</string>
     <string name="settings_backup_export">Voer rugsteun uit</string>
     <string name="settings_backup_export_summary">Stoor jou gunstelinge, onlangs geloods, en instellings na \'n lêer</string>
     <string name="settings_backup_import">Voer rugsteun in</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Versteek privaat aktiwiteite</string>
     <string name="settings_language">Taal</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Begin aktiwiteite met \'n enkele tik, tik lank vir besonderhede</string>
     <string name="settings_summary_github">Jy kan die voorafgeboude APK van die Activity Launcher-oopbronprojek op GitHub aflaai. Gevorderde gebruikers kan ook die bronkode verken, die ontwikkelaars ondersteun en bydra met vertalings of trekversoeke.</string>
     <string name="settings_summary_hide_private">Versteek privaat (nie-uitgevoerde en gedeaktiveerde) aktiwiteite</string>
     <string name="settings_summary_pro_version">Wil jy die toepassing ondersteun en advertensies verwyder? Kry Activity Launcher Pro op Google Play — dit help om ontwikkeling te finansier en is ten volle oopbron.</string>

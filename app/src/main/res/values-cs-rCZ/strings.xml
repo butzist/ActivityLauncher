@@ -63,6 +63,7 @@
     <string name="nav_favorites">Oblíbené</string>
     <string name="nav_recents">Nedávno spuštěné</string>
     <string name="nav_shortcuts">Zkratky</string>
+    <string name="settings_allow_tap_launch">Povolit spuštění klepnutím</string>
     <string name="settings_backup_export">Exportovat zálohu</string>
     <string name="settings_backup_export_summary">Uložte své oblíbené, nedávno spuštěné a nastavení do souboru</string>
     <string name="settings_backup_import">Importovat zálohu</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Skrýt soukromé aktivity</string>
     <string name="settings_language">Jazyk</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Spouštějte aktivity jedním klepnutím, dlouhým klepnutím zobrazíte podrobnosti</string>
     <string name="settings_summary_github">Předem sestavený APK si můžete stáhnout z open-source projektu Activity Launcher na GitHubu. Pokročilí uživatelé mohou také prozkoumat zdrojový kód, podpořit vývojáře a přispět překlady nebo žádostmi o začlenění.</string>
     <string name="settings_summary_hide_private">Skrýt soukromé (neexportované a zakázané) aktivity, které nelze spustit bez root přístupu</string>
     <string name="settings_summary_pro_version">Chcete podpořit aplikaci a zbavit se reklam? Získejte Activity Launcher Pro na Google Play – pomáhá financovat vývoj a je plně open-source.</string>

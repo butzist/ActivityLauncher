@@ -63,6 +63,7 @@
     <string name="nav_favorites">Սիրելի</string>
     <string name="nav_recents">Վերջերս բացված</string>
     <string name="nav_shortcuts">Դյուրանցումներ</string>
+    <string name="settings_allow_tap_launch">թույլատրել հպումը գործարկելու համար</string>
     <string name="settings_backup_export">Արտահանել պահուստային պատճենը</string>
     <string name="settings_backup_export_summary">Պահպանեք ձեր սիրելիները, վերջերս բացվածները և կարգավորումները ֆայլում</string>
     <string name="settings_backup_import">Ներմուծել պահուստային պատճենը</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Թաքցնել անձնական գործողությունները</string>
     <string name="settings_language">Լեզու</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Գործարկել գործողությունները մեկ հպումով, երկար հպում մանրամասների համար</string>
     <string name="settings_summary_github">Դուք կարող եք ներբեռնել նախապես կառուցված APK-ն Activity Launcher-ի բաց կոդով նախագծից GitHub-ում: Փորձառու օգտատերերը կարող են նաև ուսումնասիրել սկզբնական կոդը, աջակցել մշակողներին և ներդրումներ կատարել թարգմանություններով կամ քաշման հարցումներով:</string>
     <string name="settings_summary_hide_private">Թաքցնել անձնական (չարտահանված և անջատված) գործողությունները, որոնք հնարավոր չէ մեկնարկել առանց արմատային մուտքի</string>
     <string name="settings_summary_pro_version">Ցանկանո՞ւմ եք աջակցել հավելվածին և հեռացնել գովազդները: Ձեռք բերեք Activity Launcher Pro-ն Google Play-ում, այն օգնում է ֆինանսավորել մշակումը և լիովին բաց կոդով է:</string>

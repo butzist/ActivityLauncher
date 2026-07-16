@@ -63,6 +63,7 @@
     <string name="nav_favorites">Preferits</string>
     <string name="nav_recents">Llançats recentment</string>
     <string name="nav_shortcuts">Dreceres</string>
+    <string name="settings_allow_tap_launch">Permetre el toc per iniciar</string>
     <string name="settings_backup_export">Exporta la còpia de seguretat</string>
     <string name="settings_backup_export_summary">Desa els teus favorits, els llançats recentment i la configuració en un fitxer</string>
     <string name="settings_backup_import">Importa la còpia de seguretat</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Amaga les activitats privades</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Inicia les activitats amb un sol toc, toc llarg per als detalls</string>
     <string name="settings_summary_github">Podeu descarregar l\'APK precompilat del projecte de codi obert Activity Launcher a GitHub. Els usuaris avançats també poden explorar el codi font, donar suport als desenvolupadors i col·laborar amb traduccions o sol·licituds d\'extracció.</string>
     <string name="settings_summary_hide_private">Amaga les activitats privades (no exportades i desactivades) que no es poden iniciar sense accés root</string>
     <string name="settings_summary_pro_version">Voleu donar suport a l\'aplicació i eliminar els anuncis? Obteniu Activity Launcher Pro a Google Play; ajuda a finançar el desenvolupament i és totalment de codi obert.</string>

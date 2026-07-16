@@ -63,6 +63,7 @@
     <string name="nav_favorites">Favoritter</string>
     <string name="nav_recents">Senest startede</string>
     <string name="nav_shortcuts">Genveje</string>
+    <string name="settings_allow_tap_launch">Tillad tryk for at starte</string>
     <string name="settings_backup_export">Eksporter sikkerhedskopi</string>
     <string name="settings_backup_export_summary">Gem dine favoritter, nyligt startede og indstillinger til en fil</string>
     <string name="settings_backup_import">Importer sikkerhedskopi</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Skjul private aktiviteter</string>
     <string name="settings_language">Sprog</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Start aktiviteter med et enkelt tryk, langt tryk for detaljer</string>
     <string name="settings_summary_github">Man kan downloade den præ-build APK fra Activity Launchers open-source projekt på GitHub. Avancerede brugere kan også studere kildekoden, støtte udviklerne og bidrage med oversættelser eller pull requests.</string>
     <string name="settings_summary_hide_private">Skjul private (ikke-eksporterede og deaktiverede) aktiviteter, som ikke kan startes uden root-adgang</string>
     <string name="settings_summary_pro_version">Ønsker at støtte appen og fjerne annoncer? Få Activity Launcher Pro fra Google Play – det hjælper med at finansiere udviklingen og er fuldt open-source.</string>

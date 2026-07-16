@@ -63,6 +63,7 @@
     <string name="nav_favorites">收藏</string>
     <string name="nav_recents">最近啟動</string>
     <string name="nav_shortcuts">捷徑</string>
+    <string name="settings_allow_tap_launch">允許點擊啟動</string>
     <string name="settings_backup_export">匯出備份</string>
     <string name="settings_backup_export_summary">將您的收藏、最近啟動和設定保存到檔案</string>
     <string name="settings_backup_import">匯入備份</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">隱藏私人活動</string>
     <string name="settings_language">語言</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">單擊啟動活動，長按查看詳情</string>
     <string name="settings_summary_github">您可以從 GitHub 上的 Activity Launcher 開放原始碼專案下載預先建立的 APK。進階使用者也可以探索原始碼、支持開發人員，並透過翻譯或提取要求做出貢獻。</string>
     <string name="settings_summary_hide_private">隱藏私人 (未匯出/已停用) 活動，需要 Root 存取權</string>
     <string name="settings_summary_pro_version">想要支持此應用程式並移除廣告嗎？請在 Google Play 取得 Activity Launcher Pro — 這有助於資助開發，並且完全開放原始碼。</string>

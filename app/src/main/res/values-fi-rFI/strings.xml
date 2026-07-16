@@ -63,6 +63,7 @@
     <string name="nav_favorites">Suosikit</string>
     <string name="nav_recents">Viimeksi käynnistetyt</string>
     <string name="nav_shortcuts">Pikakuvakkeet</string>
+    <string name="settings_allow_tap_launch">Salli käynnistys napauttamalla</string>
     <string name="settings_backup_export">Vie varmuuskopio</string>
     <string name="settings_backup_export_summary">Tallenna suosikkisi, viimeksi lánçatut ja asetukset tiedostoon</string>
     <string name="settings_backup_import">Tuo varmuuskopio</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Piilota yksityiset toiminnot</string>
     <string name="settings_language">Kieli</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Käynnistä toiminnot yhdellä napautuksella, pitkä painallus nähdäksesi tiedot</string>
     <string name="settings_summary_github">Voit ladata valmiin APK-tiedoston Activity Launcherin avoimen lähdekoodin projektista GitHubista. Edistyneet käyttäjät voivat myös tutkia lähdekoodia, tukea kehittäjiä ja osallistua käännöksiin tai pull-pyyntöihin.</string>
     <string name="settings_summary_hide_private">Piilota yksityiset (viemättömät ja poistetut käytöstä) toiminnot, joita ei voi käynnistää ilman pääkäyttäjän oikeuksia</string>
     <string name="settings_summary_pro_version">Haluatko tukea sovelluksen kehitystä ja poistaa mainokset? Hanki Activity Launcher Pro Google Playsta – se auttaa rahoittamaan kehitystä ja on täysin avoimen lähdekoodin sovellus.</string>

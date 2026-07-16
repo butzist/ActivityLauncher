@@ -63,6 +63,7 @@
     <string name="nav_favorites">المفضلة</string>
     <string name="nav_recents">التي تم إطلاقها مؤخرًا</string>
     <string name="nav_shortcuts">الاختصارات</string>
+    <string name="settings_allow_tap_launch">السماح بالنقر للتشغيل</string>
     <string name="settings_backup_export">تصدير نسخة احتياطية</string>
     <string name="settings_backup_export_summary">حفظ المفضلات، المشغلة حديثاً، والإعدادات في ملف</string>
     <string name="settings_backup_import">استيراد نسخة احتياطية</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">إخفاء الأنشطة الخاصة</string>
     <string name="settings_language">اللغة</string>
     <string name="settings_pro_version">مشغل النشاط برو</string>
+    <string name="settings_summary_allow_tap_launch">تشغيل الأنشطة بنقرة واحدة، نقرة طويلة للتفاصيل</string>
     <string name="settings_summary_github">يمكنك تنزيل APK مسبق الإنشاء من مشروع مشغل النشاط مفتوح المصدر على GitHub. يمكن للمستخدمين المتقدمين أيضًا استكشاف التعليمات البرمجية المصدر ودعم المطورين والمساهمة في الترجمات أو طلبات السحب.</string>
     <string name="settings_summary_hide_private">إخفاء الأنشطة الخاصة (غير المصدرة والمعطلة)</string>
     <string name="settings_summary_pro_version">هل تريد دعم التطبيق وإزالة الإعلانات؟ احصل على Activity Launcher Pro على Google Play - فهو يساعد في تمويل التطوير وهو مفتوح المصدر بالكامل.</string>

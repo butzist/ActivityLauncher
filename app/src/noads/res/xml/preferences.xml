@@ -10,6 +10,11 @@
             android:key="hide_private"
             android:summary="@string/settings_summary_hide_private"
             android:title="@string/settings_hide_private" />
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="allow_tap_launch"
+            android:summary="@string/settings_summary_allow_tap_launch"
+            android:title="@string/settings_allow_tap_launch" />
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/theme_settings"

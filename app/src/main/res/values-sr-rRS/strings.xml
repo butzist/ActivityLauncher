@@ -63,6 +63,7 @@
     <string name="nav_favorites">Омиљено</string>
     <string name="nav_recents">Недавно покренуто</string>
     <string name="nav_shortcuts">Пречице</string>
+    <string name="settings_allow_tap_launch">Дозволи покретање додиром</string>
     <string name="settings_backup_export">Извези резервну копију</string>
     <string name="settings_backup_export_summary">Сачувајте омиљене, недавно покренуте и подешавања у датотеку</string>
     <string name="settings_backup_import">Увези резервну копију</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Сакриј приватне активности</string>
     <string name="settings_language">Језик</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Покретање активности једним додиром, дуги додир за детаље</string>
     <string name="settings_summary_github">Можете преузети унапред изграђени APK са пројекта отвореног кода Activity Launcher на GitHub-у. Напредни корисници такође могу истражити изворни код, подржати програмере и допринети преводима или слањем pull request-ова.</string>
     <string name="settings_summary_hide_private">Сакриј приватне (неизвезене и онемогућене) активности које не могу бити покренуте без root приступа</string>
     <string name="settings_summary_pro_version">Желите да подржите апликацију и уклоните рекламе? Набавите Activity Launcher Pro у Google Play продавници – то помаже финансирање развоја и у потпуности је отвореног кода.</string>

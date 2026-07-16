@@ -63,6 +63,7 @@
     <string name="nav_favorites">پسندیدہ</string>
     <string name="nav_recents">حال ہی میں شروع کیا گیا</string>
     <string name="nav_shortcuts">شارٹ کٹس</string>
+    <string name="settings_allow_tap_launch">شروع کرنے کے لیے تھپتھپانے کی اجازت دیں۔</string>
     <string name="settings_backup_export">بیک اپ ایکسپورٹ کریں</string>
     <string name="settings_backup_export_summary">اپنے پسندیدہ، حال ہی میں شروع کیے گئے اور ترتیبات کو فائل میں محفوظ کریں</string>
     <string name="settings_backup_import">بیک اپ امپورٹ کریں</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">نجی سرگرمیاں چھپائیں</string>
     <string name="settings_language">زبان</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">ایک بار تھپتھپانے سے سرگرمیاں شروع کریں، تفصیلات کے لیے دیر تک تھپتھپائیں۔</string>
     <string name="settings_summary_github">آپ GitHub پر Activity Launcher اوپن سورس پروجیکٹ سے پہلے سے تیار کردہ APK ڈاؤن لوڈ کرسکتے ہیں۔ ایڈوانسڈ صارفین سورس کوڈ بھی دیکھ سکتے ہیں، ڈویلپرز کی مدد کرسکتے ہیں، اور ترجمے یا پل کی درخواستوں میں حصہ لے سکتے ہیں۔</string>
     <string name="settings_summary_hide_private">نجی (غیر برآمد شدہ اور غیر فعال) سرگرمیاں چھپائیں، جنہیں روٹ کے بغیر شروع نہیں کیا جا سکتا</string>
     <string name="settings_summary_pro_version">ایپ کو سپورٹ کرنا چاہتے ہیں اور اشتہارات کو ہٹانا چاہتے ہیں؟ گوگل پلے پر Activity Launcher Pro حاصل کریں — یہ ترقی کے لیے مالی اعانت فراہم کرنے میں مدد کرتا ہے اور مکمل طور پر اوپن سورس ہے۔</string>

@@ -63,6 +63,7 @@
     <string name="nav_favorites">Kedvencek</string>
     <string name="nav_recents">Legutóbb elindított</string>
     <string name="nav_shortcuts">Parancsikonok</string>
+    <string name="settings_allow_tap_launch">Indítás koppintással engedélyezése</string>
     <string name="settings_backup_export">Biztonsági mentés exportálása</string>
     <string name="settings_backup_export_summary">Kedvencek, legutóbb indítottak és beállítások mentése fájlba</string>
     <string name="settings_backup_import">Biztonsági mentés importálása</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Privát tevékenységek elrejtése</string>
     <string name="settings_language">Nyelv</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Tevékenységek indítása egyetlen koppintással, hosszú koppintás a részletekért</string>
     <string name="settings_summary_github">A kész APK-t letöltheted az Activity Launcher nyílt forráskódú projektből a GitHubon. A haladó felhasználók megvizsgálhatják a forráskódot, támogathatják a fejlesztőket, és fordításokkal vagy pull requestekkel járulhatnak hozzá.</string>
     <string name="settings_summary_hide_private">Rejtse el a privát (nem exportált és letiltott) tevékenységeket, amiket nem lehet root engedélyek nélkül elindítani</string>
     <string name="settings_summary_pro_version">Szeretnéd támogatni az alkalmazást és eltávolítani a hirdetéseket? Szerezd be az Activity Launcher Pro verziót a Google Playen – ez segít finanszírozni a fejlesztést, és teljesen nyílt forráskódú.</string>

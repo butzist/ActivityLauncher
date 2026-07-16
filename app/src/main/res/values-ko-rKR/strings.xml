@@ -63,6 +63,7 @@
     <string name="nav_favorites">즐겨찾기</string>
     <string name="nav_recents">최근 실행</string>
     <string name="nav_shortcuts">바로가기</string>
+    <string name="settings_allow_tap_launch">탭하여 실행 허용</string>
     <string name="settings_backup_export">백업 내보내기</string>
     <string name="settings_backup_export_summary">즐겨찾기, 최근 실행 항목 및 설정을 파일로 저장합니다</string>
     <string name="settings_backup_import">백업 가져오기</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">비활성 액티비티 숨김</string>
     <string name="settings_language">언어</string>
     <string name="settings_pro_version">액티비티 런처 프로</string>
+    <string name="settings_summary_allow_tap_launch">한 번의 탭으로 활동 실행, 길게 눌러 세부 정보 보기</string>
     <string name="settings_summary_github">GitHub의 액티비티 런처 오픈 소스 프로젝트에서 미리 빌드된 APK를 다운로드할 수 있습니다. 고급 사용자는 소스 코드를 탐색하거나 번역 또는 Pull Requests로 개발자에게 기여할 수 있습니다.</string>
     <string name="settings_summary_hide_private">루트 권한 없이는 실행할 수 없는, 비활성(출시되지 않은, 숨은) 액티비티를 숨김</string>
     <string name="settings_summary_pro_version">앱을 지원하고 광고를 제거하고 싶으신가요? Google Play에서 액티비티 런처 프로를 다운로드하세요. 개발을 지원할 수 있으며, 완전한 오픈 소스입니다.</string>

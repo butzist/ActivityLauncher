@@ -63,6 +63,7 @@
     <string name="nav_favorites">Favourites</string>
     <string name="nav_recents">Recently Launched</string>
     <string name="nav_shortcuts">Shortcuts</string>
+    <string name="settings_allow_tap_launch">Allow tap to launch</string>
     <string name="settings_backup_export">Export Backup</string>
     <string name="settings_backup_export_summary">Save your favorites, recently launched, and settings to a file</string>
     <string name="settings_backup_import">Import Backup</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Hide private activities</string>
     <string name="settings_language">Language</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Launch activities with a single tap, long tap for details</string>
     <string name="settings_summary_github">You can download the pre-built APK from our GitHub organization. Explore the source code of the app and related projects like plugins for launching (e.g., Shizuku) and shortcut creation.</string>
     <string name="settings_summary_hide_private">Hide private (unexported and disabled) activities</string>
     <string name="settings_summary_pro_version">Want to support the app and remove ads? Get Activity Launcher Pro on Google Play — it helps fund development and is fully open-source.</string>

@@ -63,6 +63,7 @@
     <string name="nav_favorites">Избранное</string>
     <string name="nav_recents">Недавно запущенные</string>
     <string name="nav_shortcuts">Ярлыки</string>
+    <string name="settings_allow_tap_launch">Дозволити запуск по дотику</string>
     <string name="settings_backup_export">Экспорт резервной копии</string>
     <string name="settings_backup_export_summary">Сохранение избранного, недавно запущенных и настроек в файл</string>
     <string name="settings_backup_import">Импорт резервной копии</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Скрыть приватные действия</string>
     <string name="settings_language">Язык</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Запуск дій одним дотиком, довгий дотик для подробиць</string>
     <string name="settings_summary_github">Вы можете скачать предварительно собранный APK из проекта Activity Launcher с открытым исходным кодом на GitHub. Продвинутые пользователи могут также изучить исходный код, поддержать разработчиков и внести свой вклад с помощью переводов или запросов на включение изменений.</string>
     <string name="settings_summary_hide_private">Скрыть приватные и отключённые действия, которые невозможно запустить без root-доступа</string>
     <string name="settings_summary_pro_version">Хотите поддержать приложение и убрать рекламу? Приобретите Activity Launcher Pro в Google Play — это поможет финансировать разработку, и приложение имеет полностью открытый исходный код.</string>

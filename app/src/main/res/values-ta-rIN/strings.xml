@@ -63,6 +63,7 @@
     <string name="nav_favorites">விரும்பியவை</string>
     <string name="nav_recents">සමීපති දියත් කරන ලද</string>
     <string name="nav_shortcuts">குறுக்குவழிகள்</string>
+    <string name="settings_allow_tap_launch">தொடங்குவதற்கு தட்டலை அனுமதிக்கவும்</string>
     <string name="settings_backup_export">காப்புப்பிரதியை ஏற்றுமதி செய்</string>
     <string name="settings_backup_export_summary">உங்களுக்குப் பிடித்தவை, சமீபத்தில் தொடங்கப்பட்டவை மற்றும் அமைப்புகளை ஒரு கோப்பில் சேமிக்கவும்</string>
     <string name="settings_backup_import">காப்புப்பிரதியை இறக்குமதி செய்</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">தனிப்பட்ட செயல்பாடுகளை மறை</string>
     <string name="settings_language">மொழி</string>
     <string name="settings_pro_version">செயல்பாடு துவக்கி Pro</string>
+    <string name="settings_summary_allow_tap_launch">ஒற்றைத் தட்டலில் செயல்பாடுகளைத் தொடங்கவும், விவரங்களுக்கு நீண்ட நேரம் அழுத்தவும்</string>
     <string name="settings_summary_github">GitHub இல் உள்ள செயல்பாடு துவக்கி திறந்த மூல திட்டத்திலிருந்து முன் கட்டமைக்கப்பட்ட APK ஐப் பதிவிறக்கலாம். மேம்பட்ட பயனர்கள் மூலக் குறியீட்டை ஆராய்ந்து, டெவலப்பர்களை ஆதரிக்கலாம் மற்றும் மொழிபெயர்ப்புகள் அல்லது புல் கோரிக்கைகளுடன் பங்களிக்கலாம்.</string>
     <string name="settings_summary_hide_private">ரூட் அணுகல் இல்லாமல் தொடங்க முடியாத தனிப்பட்ட (ஏற்றுமதி செய்யப்படாத மற்றும் முடக்கப்பட்ட) செயல்பாடுகளை மறை</string>
     <string name="settings_summary_pro_version">பயன்பாட்டை ஆதரித்து விளம்பரங்களை அகற்ற விரும்புகிறீர்களா? Google Play இல் செயல்பாடு துவக்கி Pro ஐப் பெறுங்கள் - இது மேம்பாட்டுக்கு நிதியளிக்கிறது மற்றும் முற்றிலும் திறந்த மூலமாகும்.</string>

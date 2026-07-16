@@ -63,6 +63,7 @@
     <string name="nav_favorites">Favoriler</string>
     <string name="nav_recents">Son başlatılanlar</string>
     <string name="nav_shortcuts">Kısayollar</string>
+    <string name="settings_allow_tap_launch">Başlatmak için dokunmaya izin ver</string>
     <string name="settings_backup_export">Yedeği Dışa Aktar</string>
     <string name="settings_backup_export_summary">Favorilerinizi, son başlatılanları ve ayarları bir dosyaya kaydedin</string>
     <string name="settings_backup_import">Yedeği İçe Aktar</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Gizli etkinlikleri gizle</string>
     <string name="settings_language">Dil</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Etkinlikleri tek dokunuşla başlatın, ayrıntılar için uzun dokunun</string>
     <string name="settings_summary_github">Önceden oluşturulmuş APK\'yı GitHub\'daki Activity Launcher açık kaynak projesinden indirebilirsiniz. İleri düzey kullanıcılar ayrıca kaynak kodunu keşfedebilir, geliştiricileri destekleyebilir ve çeviriler veya çekme istekleriyle katkıda bulunabilir.</string>
     <string name="settings_summary_hide_private">Kök erişimi olmadan başlatılamayan özel (dışa aktarılmamış ve devre dışı bırakılmış) etkinlikleri gizleyin</string>
     <string name="settings_summary_pro_version">Uygulamayı desteklemek ve reklamlardan kurtulmak mı istiyorsunuz? Google Play\'den Activity Launcher Pro\'yu edinin; bu, geliştirmeyi finanse etmeye yardımcı olur ve tamamen açık kaynaklıdır.</string>

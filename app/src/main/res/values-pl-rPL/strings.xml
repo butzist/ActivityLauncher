@@ -63,6 +63,7 @@
     <string name="nav_favorites">Ulubione</string>
     <string name="nav_recents">Ostatnio uruchomione</string>
     <string name="nav_shortcuts">Skróty</string>
+    <string name="settings_allow_tap_launch">Zezwól na dotknięcie, aby uruchomić</string>
     <string name="settings_backup_export">Eksportuj kopię zapasową</string>
     <string name="settings_backup_export_summary">Zapisz swoje ulubione, ostatnio uruchamiane i ustawienia do pliku</string>
     <string name="settings_backup_import">Importuj kopię zapasową</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Ukryj aktywności prywatne</string>
     <string name="settings_language">Język</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Uruchamiaj aktywności jednym dotknięciem, przytrzymaj, aby zobaczyć szczegóły</string>
     <string name="settings_summary_github">Możesz pobrać gotowy plik APK z projektu Activity Launcher o otwartym kodzie źródłowym w serwisie GitHub. Zaawansowani użytkownicy mogą również zapoznać się z kodem źródłowym, wesprzeć programistów i współtworzyć tłumaczenia lub żądania pull.</string>
     <string name="settings_summary_hide_private">Ukryj aktywności prywatne (niespodziewane i wyłączone), których nie można uruchomić bez dostępu do roota</string>
     <string name="settings_summary_pro_version">Chcesz wesprzeć aplikację i pozbyć się reklam? Pobierz Launcher Aktywności Pro w Google Play — to pomaga finansować rozwój i jest w pełni open source.</string>

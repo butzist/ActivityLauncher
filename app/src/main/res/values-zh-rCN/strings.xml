@@ -63,6 +63,7 @@
     <string name="nav_favorites">收藏</string>
     <string name="nav_recents">最近启动</string>
     <string name="nav_shortcuts">快捷方式</string>
+    <string name="settings_allow_tap_launch">允许点击启动</string>
     <string name="settings_backup_export">导出备份</string>
     <string name="settings_backup_export_summary">将您的收藏、最近启动和设置保存到文件</string>
     <string name="settings_backup_import">导入备份</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">隐藏私有活动</string>
     <string name="settings_language">语言</string>
     <string name="settings_pro_version">活动启动器专业版</string>
+    <string name="settings_summary_allow_tap_launch">单击启动活动，长按查看详情</string>
     <string name="settings_summary_github">您可以从 GitHub 上的活动启动器开源项目下载预构建的 APK。高级用户还可以探索源代码、支持开发者，并通过翻译或拉取请求做出贡献。</string>
     <string name="settings_summary_hide_private">隐藏私有（未导出和已禁用）的活动，这些活动没有Root权限无法启动</string>
     <string name="settings_summary_pro_version">想要支持此应用并移除广告吗？请在 Google Play 上获取活动启动器专业版——它有助于资助开发，并且完全是开源的。</string>

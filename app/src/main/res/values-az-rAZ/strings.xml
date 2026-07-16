@@ -63,6 +63,7 @@
     <string name="nav_favorites">Sevimlilər</string>
     <string name="nav_recents">Sonuncu Başladılan</string>
     <string name="nav_shortcuts">Qısayollar</string>
+    <string name="settings_allow_tap_launch">Başlamaq üçün toxunmağa icazə verin</string>
     <string name="settings_backup_export">Ehtiyat Nüsxəni İxrac Et</string>
     <string name="settings_backup_export_summary">Seçilmişləri, sonuncu başladılanları və tənzimləmələri fayla saxlayın</string>
     <string name="settings_backup_import">Ehtiyat Nüsxəni İdxal Et</string>
@@ -71,6 +72,7 @@
     <string name="settings_hide_private">Şəxsi fəaliyyətləri gizlət</string>
     <string name="settings_language">Dil</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
+    <string name="settings_summary_allow_tap_launch">Fəaliyyətləri bir toxunuşla başladın, təfərrüatlar üçün uzun toxunun</string>
     <string name="settings_summary_github">Əvvəlcədən qurulmuş APK-ı GitHub-dakı Activity Launcher açıq mənbə layihəsindən yükləyə bilərsiniz. Təcrübəli istifadəçilər həmçinin mənbə kodunu araşdıra, tərtibatçıları dəstəkləyə və tərcümələr və ya çəkmə sorğuları ilə töhfə verə bilərlər.</string>
     <string name="settings_summary_hide_private">Root müraciəti olmadan başladıla bilməyən şəxsi (xaricə köçürülməmiş və ya sıradan çıxarılmış) fəaliyyətləri gizlət</string>
     <string name="settings_summary_pro_version">Proqramı dəstəkləmək və reklamlardan qurtulmaq istəyirsiniz? Google Play-də Activity Launcher Pro-nu əldə edin — bu, inkişafa kömək edir və tamamilə açıq mənbəlidir.</string>

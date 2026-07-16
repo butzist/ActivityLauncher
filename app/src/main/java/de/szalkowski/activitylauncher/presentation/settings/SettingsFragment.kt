@@ -106,6 +106,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity().baseContext)
 
         val hidePrivate: SwitchPreferenceCompat = findPreference("hide_private")!!
+        val allowTapLaunch: SwitchPreferenceCompat = findPreference("allow_tap_launch")!!
         val theme: ListPreference = findPreference("theme")!!
         val languages: ListPreference = findPreference("language")!!
 
@@ -141,6 +142,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             )
         }
 
+        allowTapLaunch.setOnPreferenceChangeListener { _, newValue ->
+            onAllowTapLaunchUpdated(
+                newValue as Boolean,
+            )
+        }
+
         theme.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance())
         theme.setOnPreferenceChangeListener { _, newValue -> onThemeUpdated(newValue as String) }
     }
@@ -161,6 +168,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         prefs.edit().putBoolean("hide_hide_private", newValue).apply()
         packageRepository.invalidate()
         needsRestart = true
+        return true
+    }
+
+    private fun onAllowTapLaunchUpdated(newValue: Boolean): Boolean {
+        prefs.edit().putBoolean("allow_tap_launch", newValue).apply()
         return true
     }
 
