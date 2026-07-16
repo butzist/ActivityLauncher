@@ -19,8 +19,7 @@ import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.model.SystemPackage
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
@@ -113,11 +112,9 @@ class PluginChooserIntegrationTest {
         whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
-        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
-        whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
-        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any(), anyOrNull())).thenReturn("uuid-1") }
 
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)
         whenever(getActivityIconUseCase(anyOrNull(), any())).thenReturn(icon)
 

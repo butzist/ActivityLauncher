@@ -91,7 +91,7 @@ class PackageListAdapter @Inject constructor(
 
         val icon = getPackageIconUseCase(item.iconResourceName, item.packageName)
         val context = holder.itemView.context
-        val drawable = icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon
+        val drawable = icon.loadInternalDrawable(context) ?: context.packageManager.defaultActivityIcon
         holder.ivIcon.setImageDrawable(drawable)
 
         if (item.isFullyLoaded) {

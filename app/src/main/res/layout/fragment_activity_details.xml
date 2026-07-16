@@ -27,7 +27,7 @@
                 android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ibIconPicker"
             android:layout_width="64dp"
             android:layout_height="64dp"
@@ -36,10 +36,11 @@
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/title_dialog_icon_picker"
             android:scaleType="centerInside"
-            android:src="@mipmap/ic_launcher"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.ActivityLauncher.Icon"
             app:layout_constraintBottom_toBottomOf="@+id/tilName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilName" />
+            app:layout_constraintTop_toTopOf="@+id/tilName"
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPackage"
@@ -78,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/label_launch_plugins"
+            app:startIconTint="@null"
             app:layout_constraintTop_toBottomOf="@+id/tilClass">
 
             <AutoCompleteTextView

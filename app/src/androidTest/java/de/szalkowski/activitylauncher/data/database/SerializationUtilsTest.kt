@@ -2,12 +2,13 @@ package de.szalkowski.activitylauncher.data.database
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.core.graphics.drawable.IconCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -17,45 +18,66 @@ class SerializationUtilsTest {
     @Test
     fun testIconSerializationResource() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val icon = IconCompat.createWithResource(context, android.R.drawable.ic_menu_save)
+        val icon = ActivityIcon.Resource(context.packageName, android.R.drawable.ic_menu_save, "android:drawable/ic_menu_save")
 
         val bytes = SerializationUtils.iconToByteArray(icon)
         val restored = SerializationUtils.byteArrayToIcon(bytes)
         assertNotNull(restored)
-        assertEquals(IconCompat.TYPE_RESOURCE, restored?.type)
-        assertEquals(context.packageName, restored?.resPackage)
-        assertEquals(android.R.drawable.ic_menu_save, restored?.resId)
+        assertTrue(restored is ActivityIcon.Resource)
+        val res = restored as ActivityIcon.Resource
+        assertEquals(context.packageName, res.packageName)
+        assertEquals(android.R.drawable.ic_menu_save, res.resId)
+        assertEquals("android:drawable/ic_menu_save", res.resourceName)
+    }
+
+    @Test
+    fun testIconSerializationResourceNoId() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val icon = ActivityIcon.Resource(context.packageName, 0, "android:drawable/ic_menu_save")
+
+        val bytes = SerializationUtils.iconToByteArray(icon)
+        val restored = SerializationUtils.byteArrayToIcon(bytes)
+        assertNotNull(restored)
+        assertTrue(restored is ActivityIcon.Resource)
+        val res = restored as ActivityIcon.Resource
+        assertEquals(context.packageName, res.packageName)
+        assertEquals(0, res.resId)
+        assertEquals("android:drawable/ic_menu_save", res.resourceName)
     }
 
     @Test
     fun testIconSerializationBitmap() {
-        val bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
-        val icon = IconCompat.createWithBitmap(bitmap)
+        val bitmap = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)
+        val icon = ActivityIcon.BitmapIcon(bitmap, false)
         val bytes = SerializationUtils.iconToByteArray(icon)
         val restored = SerializationUtils.byteArrayToIcon(bytes)
         assertNotNull(restored)
-        assertEquals(IconCompat.TYPE_BITMAP, restored?.type)
+        assertTrue(restored is ActivityIcon.BitmapIcon)
+        val bmpIcon = restored as ActivityIcon.BitmapIcon
+        assertEquals(false, bmpIcon.isAdaptive)
+        assertEquals(10, bmpIcon.bitmap.width)
     }
 
     @Test
     fun testIconSerializationAdaptiveBitmap() {
-        val bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
-        val icon = IconCompat.createWithAdaptiveBitmap(bitmap)
+        val bitmap = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888)
+        val icon = ActivityIcon.BitmapIcon(bitmap, true)
         val bytes = SerializationUtils.iconToByteArray(icon)
         val restored = SerializationUtils.byteArrayToIcon(bytes)
         assertNotNull(restored)
-        assertEquals(IconCompat.TYPE_ADAPTIVE_BITMAP, restored?.type)
+        assertTrue(restored is ActivityIcon.BitmapIcon)
+        val bmpIcon = restored as ActivityIcon.BitmapIcon
+        assertEquals(true, bmpIcon.isAdaptive)
     }
 
     @Test
-    fun testIconSerializationUri() {
-        val uri = Uri.parse("content://test/image.png")
-        val icon = IconCompat.createWithContentUri(uri)
-        val bytes = SerializationUtils.iconToByteArray(icon)
+    fun testIconSerializationLegacy() {
+        val icon = IconCompat.createWithResource(InstrumentationRegistry.getInstrumentation().targetContext, android.R.drawable.ic_menu_add)
+        val legacy = ActivityIcon.Legacy(icon.toBundle())
+        val bytes = SerializationUtils.iconToByteArray(legacy)
         val restored = SerializationUtils.byteArrayToIcon(bytes)
         assertNotNull(restored)
-        assertEquals(IconCompat.TYPE_URI, restored?.type)
-        assertEquals(uri.toString(), restored?.uri.toString())
+        assertTrue(restored is ActivityIcon.Legacy)
     }
 
     @Test

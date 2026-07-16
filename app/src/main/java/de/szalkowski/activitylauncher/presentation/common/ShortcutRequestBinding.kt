@@ -19,5 +19,5 @@ fun bindShortcutRequest(item: ShortcutRequest, tvName: TextView, tvClass: TextVi
     tvName.text = item.name
     tvClass.text = item.intent.component?.shortClassName ?: ""
     val context = ivIcon.context
-    ivIcon.setImageDrawable(item.icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon)
+    ivIcon.setImageDrawable(item.icon.loadInternalDrawable(context) ?: context.packageManager.defaultActivityIcon)
 }

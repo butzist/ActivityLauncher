@@ -2,10 +2,7 @@ package de.szalkowski.activitylauncher.presentation.activities
 
 import android.content.ComponentName
 import android.content.pm.PackageManager.NameNotFoundException
-import android.graphics.Bitmap
 import android.net.Uri
-import androidx.core.graphics.drawable.IconCompat
-import androidx.core.graphics.scale
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +14,7 @@ import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.intent.IntentDef
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
@@ -138,8 +136,8 @@ class ActivityDetailsViewModel @Inject constructor(
             _editedName.value.isNotBlank() && _editedPackage.value.isNotBlank() && _editedClass.value.isNotBlank(),
         )
 
-    private val _editedIcon = MutableStateFlow<IconCompat?>(shortcutRequest.icon)
-    val editedIcon: StateFlow<IconCompat?> = _editedIcon.asStateFlow()
+    private val _editedIcon = MutableStateFlow<ActivityIcon?>(shortcutRequest.icon)
+    val editedIcon: StateFlow<ActivityIcon?> = _editedIcon.asStateFlow()
 
     private val _showLaunchChooser = MutableStateFlow(false)
     val showLaunchChooser: StateFlow<Boolean> = _showLaunchChooser.asStateFlow()
@@ -232,11 +230,9 @@ class ActivityDetailsViewModel @Inject constructor(
         _editedIconUri.value = null
         _editedIconResourceName.value = iconResourceName
         val result = iconLoader.tryGetIcon(iconResourceName)
-        _editedIcon.value = resizeIconIfNeeded(
-            result.getOrElse {
-                getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
-            },
-        )
+        _editedIcon.value = result.getOrElse {
+            getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
+        }
         _iconErrorTrigger.value = iconResourceName
     }
 
@@ -245,63 +241,24 @@ class ActivityDetailsViewModel @Inject constructor(
         _editedIconUri.value = uri
         if (uri != null) {
             val result = iconLoader.getIcon(uri)
-            _editedIcon.value = resizeIconIfNeeded(
-                result.getOrElse {
-                    getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
-                },
-            )
+            _editedIcon.value = result.getOrElse {
+                getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
+            }
         } else {
-            _editedIcon.value = resizeIconIfNeeded(getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value)))
+            _editedIcon.value = getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
         }
         _iconErrorTrigger.value = null
     }
 
-    fun updateEditedIcon(icon: IconCompat?) {
+    fun updateEditedIcon(icon: ActivityIcon?) {
         _editedIconResourceName.value = ""
         _editedIconUri.value = null
         if (icon != null) {
-            _editedIcon.value = resizeIconIfNeeded(icon)
+            _editedIcon.value = icon
         } else {
-            _editedIcon.value = resizeIconIfNeeded(getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value)))
+            _editedIcon.value = getActivityIconUseCase(null, componentName ?: ComponentName(_editedPackage.value, _editedClass.value))
         }
         _iconErrorTrigger.value = null
-    }
-
-    private fun resizeIconIfNeeded(icon: IconCompat): IconCompat {
-        // IconCompat.toBundle() includes the bitmap if it's a bitmap-based icon.
-        // We ensure it's not too large for Binder/Room.
-        val bundle = icon.toBundle()
-        val type = bundle.getInt("type")
-        if (type == IconCompat.TYPE_BITMAP || type == IconCompat.TYPE_ADAPTIVE_BITMAP) {
-            val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                bundle.getParcelable("obj", Bitmap::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                bundle.getParcelable("obj")
-            }
-            if (bitmap != null) {
-                val maxSize = 512 // Increased to accommodate high-res adaptive icons
-                if (bitmap.width > maxSize || bitmap.height > maxSize) {
-                    val aspectRatio = bitmap.width.toFloat() / bitmap.height.toFloat()
-                    val newWidth: Int
-                    val newHeight: Int
-                    if (aspectRatio > 1) {
-                        newWidth = maxSize
-                        newHeight = (maxSize / aspectRatio).toInt()
-                    } else {
-                        newHeight = maxSize
-                        newWidth = (maxSize * aspectRatio).toInt()
-                    }
-                    val resized = bitmap.scale(newWidth, newHeight, true)
-                    return if (type == IconCompat.TYPE_ADAPTIVE_BITMAP) {
-                        IconCompat.createWithAdaptiveBitmap(resized)
-                    } else {
-                        IconCompat.createWithBitmap(resized)
-                    }
-                }
-            }
-        }
-        return icon
     }
 
     fun updateIntentDef(intentDef: IntentDef) {

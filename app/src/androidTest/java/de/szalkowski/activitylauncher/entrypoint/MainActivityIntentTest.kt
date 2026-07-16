@@ -13,7 +13,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.app.di.CoreServicesModule
-import de.szalkowski.activitylauncher.app.di.NoadsModule
+import de.szalkowski.activitylauncher.app.di.FeatureServicesModule
 import de.szalkowski.activitylauncher.data.launcher.ViewIntentParserImpl
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.external.AdManager
@@ -21,7 +21,7 @@ import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
 import de.szalkowski.activitylauncher.domain.external.SupportReminder
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
@@ -35,7 +35,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.*
 
 @HiltAndroidTest
-@UninstallModules(CoreServicesModule::class, NoadsModule::class)
+@UninstallModules(CoreServicesModule::class, FeatureServicesModule::class)
 @RunWith(AndroidJUnit4::class)
 class MainActivityIntentTest {
 
@@ -99,11 +99,13 @@ class MainActivityIntentTest {
     @Before
     fun init() {
         hiltRule.inject()
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
         whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(icon)
 
-        val realParser = ViewIntentParserImpl(getActivityIconUseCase)
-        whenever(viewIntentParser.parseLaunchRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseLaunchRequest(invocation.getArgument(0)) }
+        val realParser = ViewIntentParserImpl()
+        whenever(viewIntentParser.parseLaunchRequest(any(), anyOrNull())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock ->
+            realParser.parseLaunchRequest(invocation.getArgument(0), invocation.getArgument(1))
+        }
         whenever(viewIntentParser.parseShortcutRequest(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutRequest(invocation.getArgument(0)) }
         whenever(viewIntentParser.componentNameFromIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.componentNameFromIntent(invocation.getArgument(0)) }
         whenever(viewIntentParser.parseShortcutIntent(any())).thenAnswer { invocation: org.mockito.invocation.InvocationOnMock -> realParser.parseShortcutIntent(invocation.getArgument(0)) }
@@ -160,6 +162,8 @@ class MainActivityIntentTest {
                 }
                 assertEquals("com.android.settings", shortcutRequest?.intent?.component?.packageName)
                 assertEquals("com.android.settings.Settings", shortcutRequest?.intent?.component?.className)
+
+                verify(recentsRepository).addActivity(eq(shortcutRequest!!), any())
             }
         }
     }
@@ -168,6 +172,11 @@ class MainActivityIntentTest {
     fun testDeepLinkBackstack() {
         val packageName = "com.android.settings"
         val className = ".Settings"
+        val componentName = ComponentName(packageName, "com.android.settings$className")
+
+        // Mock a favorite to change the default start destination
+        whenever(favoritesRepository.getFavorites()).thenReturn(setOf(componentName))
+
         val intent = Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse("https://activitylauncher.net/activity/$packageName/$className")
             setClassName(ApplicationProvider.getApplicationContext(), MainActivity::class.java.name)
@@ -180,36 +189,63 @@ class MainActivityIntentTest {
                 // Should be at Details
                 assertEquals(R.id.ActivityDetailsFragment, navController.currentDestination?.id)
 
-                // Navigate back - this is where we expect it to go to ActivityListFragment if correctly implemented
-                activity.onBackPressedDispatcher.onBackPressed()
+                verify(recentsRepository).addActivity(any(), any())
 
-                // Verify it went to ActivityListFragment
+                // Navigate back to ActivityListFragment
+                activity.onBackPressedDispatcher.onBackPressed()
                 assertEquals(R.id.ActivityListFragment, navController.currentDestination?.id)
                 assertEquals(packageName, navController.currentBackStackEntry?.arguments?.getString("packageName"))
 
-                // Navigate back again
+                // Navigate back to PackageListFragment
                 activity.onBackPressedDispatcher.onBackPressed()
-
-                // Should be at Package List
                 assertEquals(R.id.PackageListFragment, navController.currentDestination?.id)
+
+                // Navigate back to FavoritesFragment (root)
+                activity.onBackPressedDispatcher.onBackPressed()
+                assertEquals(R.id.FavoritesFragment, navController.currentDestination?.id)
             }
         }
     }
 
     @Test
-    fun testShortcutIntentNavigationToDetails() {
+    fun testShortcutRedirectBackstack() {
+        val packageName = "com.test"
+        val className = "com.test.Activity"
+        val componentName = ComponentName(packageName, className)
+
+        // Mock a favorite to change the default start destination
+        whenever(favoritesRepository.getFavorites()).thenReturn(setOf(componentName))
+
         val launchIntent = Intent().apply {
-            component = ComponentName("com.test", "com.test.Activity")
+            component = componentName
         }
-        val intent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
-            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchIntent.toUri(Intent.URI_INTENT_SCHEME))
+        val launchRequest = LaunchRequest(launchIntent, source = LaunchSource.SHORTCUT)
+        val intent = Intent().apply {
+            putExtra(MainActivity.EXTRA_SHORTCUT_LAUNCH_REDIRECT, launchRequest)
             setClassName(ApplicationProvider.getApplicationContext(), MainActivity::class.java.name)
         }
 
         ActivityScenario.launch<MainActivity>(intent).use { scenario ->
             scenario.onActivity { activity ->
                 val navController = activity.findNavController(R.id.nav_host_fragment_content_main)
+
+                // Should be at Details
                 assertEquals(R.id.ActivityDetailsFragment, navController.currentDestination?.id)
+
+                verify(recentsRepository).addActivity(any(), any())
+
+                // Navigate back to ActivityListFragment
+                activity.onBackPressedDispatcher.onBackPressed()
+                assertEquals(R.id.ActivityListFragment, navController.currentDestination?.id)
+                assertEquals(packageName, navController.currentBackStackEntry?.arguments?.getString("packageName"))
+
+                // Navigate back to PackageListFragment
+                activity.onBackPressedDispatcher.onBackPressed()
+                assertEquals(R.id.PackageListFragment, navController.currentDestination?.id)
+
+                // Navigate back to FavoritesFragment (root)
+                activity.onBackPressedDispatcher.onBackPressed()
+                assertEquals(R.id.FavoritesFragment, navController.currentDestination?.id)
             }
         }
     }

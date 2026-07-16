@@ -1,26 +1,25 @@
 package de.szalkowski.activitylauncher.domain.model
 
 import android.content.ComponentName
-import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.core.graphics.drawable.IconCompat
+import de.szalkowski.activitylauncher.core.util.readParcelableCompat
 
 data class PluginInfo(
     val name: String,
     val componentName: ComponentName,
-    val icon: IconCompat? = null,
+    val icon: ActivityIcon? = null,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
-        parcel.readParcelable(ComponentName::class.java.classLoader)!!,
-        parcel.readBundle(Bundle::class.java.classLoader)?.let { IconCompat.createFromBundle(it) },
+        parcel.readParcelableCompat(ComponentName::class.java)!!,
+        parcel.readParcelableCompat(ActivityIcon::class.java),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeParcelable(componentName, flags)
-        parcel.writeBundle(icon?.toBundle())
+        parcel.writeParcelable(icon, flags)
     }
 
     override fun describeContents(): Int {

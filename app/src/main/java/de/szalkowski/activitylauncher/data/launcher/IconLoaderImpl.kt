@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.core.graphics.drawable.IconCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import de.szalkowski.activitylauncher.core.util.getLauncherLargeIconSize
 import de.szalkowski.activitylauncher.core.util.resize
-import de.szalkowski.activitylauncher.core.util.toIconCompat
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
 import de.szalkowski.activitylauncher.domain.model.IconInfo
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -25,62 +24,62 @@ class IconLoaderImpl @Inject constructor(
     private val pm: PackageManager = context.packageManager
     private val configuration = settingsRepository.getLocaleConfiguration()
 
-    override fun getIcon(uri: android.net.Uri): Result<IconCompat> {
+    override fun getIcon(uri: android.net.Uri): Result<ActivityIcon> {
         return runCatching {
             val bitmap = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
                 val source = android.graphics.ImageDecoder.createSource(context.contentResolver, uri)
-                android.graphics.ImageDecoder.decodeBitmap(source)
+                android.graphics.ImageDecoder.decodeBitmap(source) { decoder, _, _ ->
+                    decoder.allocator = android.graphics.ImageDecoder.ALLOCATOR_SOFTWARE
+                }
             } else {
                 @Suppress("DEPRECATION")
                 android.provider.MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
             }
             val resized = bitmap.resize(context.getLauncherLargeIconSize())
-            IconCompat.createWithBitmap(resized)
+            ActivityIcon.BitmapIcon(resized, false)
         }
     }
 
-    override fun getIcon(iconResourceString: String): IconCompat {
+    override fun getIcon(iconResourceString: String): ActivityIcon {
         return tryGetIcon(iconResourceString).getOrElse {
-            pm.defaultActivityIcon.toIconCompat()
+            ActivityIcon.from(pm.defaultActivityIcon, context.getLauncherLargeIconSize())
         }
     }
 
-    override fun getIcon(componentName: ComponentName): IconCompat {
+    override fun getIcon(componentName: ComponentName): ActivityIcon {
         return try {
             val activityInfo = pm.getActivityInfo(componentName, 0)
             if (activityInfo.iconResource != 0) {
-                if (componentName.packageName == context.packageName) {
-                    val packageContext = context.createPackageContext(componentName.packageName, 0)
-                    IconCompat.createWithResource(packageContext, activityInfo.iconResource)
-                } else {
-                    val drawable = activityInfo.loadIcon(pm)
-                    drawable.toIconCompat()
-                }
+                val res = pm.getResourcesForApplication(componentName.packageName)
+                val resourceName = runCatching { res.getResourceName(activityInfo.iconResource) }.getOrNull()
+                ActivityIcon.Resource(componentName.packageName, activityInfo.iconResource, resourceName)
             } else {
-                getPackageIcon(componentName.packageName)
+                val drawable = activityInfo.loadIcon(pm)
+                ActivityIcon.from(drawable, context.getLauncherLargeIconSize())
             }
         } catch (e: Exception) {
-            pm.defaultActivityIcon.toIconCompat()
+            ActivityIcon.from(pm.defaultActivityIcon, context.getLauncherLargeIconSize())
         }
     }
 
-    override fun getPackageIcon(packageName: String): IconCompat {
+    override fun getPackageIcon(packageName: String): ActivityIcon {
         return try {
             val appInfo = pm.getApplicationInfo(packageName, 0)
-            if (packageName == context.packageName) {
-                val packageContext = context.createPackageContext(packageName, 0)
-                IconCompat.createWithResource(packageContext, appInfo.icon)
+            if (appInfo.icon != 0) {
+                val res = pm.getResourcesForApplication(packageName)
+                val resourceName = runCatching { res.getResourceName(appInfo.icon) }.getOrNull()
+                ActivityIcon.Resource(packageName, appInfo.icon, resourceName)
             } else {
                 val drawable = appInfo.loadIcon(pm)
-                drawable.toIconCompat()
+                ActivityIcon.from(drawable, context.getLauncherLargeIconSize())
             }
         } catch (e: Exception) {
-            pm.defaultActivityIcon.toIconCompat()
+            ActivityIcon.from(pm.defaultActivityIcon, context.getLauncherLargeIconSize())
         }
     }
 
     @SuppressLint("DiscouragedApi")
-    override fun tryGetIcon(iconResourceString: String): Result<IconCompat> {
+    override fun tryGetIcon(iconResourceString: String): Result<ActivityIcon> {
         return runCatching {
             val pack = iconResourceString.substringBefore(":")
             val typeAndName = iconResourceString.substringAfter(":")
@@ -94,13 +93,7 @@ class IconLoaderImpl @Inject constructor(
 
             if (id == 0) throw IconLoader.NullResourceException()
 
-            if (pack == context.packageName) {
-                val packageContext = context.createPackageContext(pack, 0)
-                IconCompat.createWithResource(packageContext, id)
-            } else {
-                val drawable = pm.getDrawable(pack, id, null)!!
-                drawable.toIconCompat()
-            }
+            ActivityIcon.Resource(pack, id, iconResourceString)
         }
     }
 

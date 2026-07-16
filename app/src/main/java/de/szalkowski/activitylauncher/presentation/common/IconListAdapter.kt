@@ -7,6 +7,8 @@ import android.widget.Filterable
 import android.widget.ImageView
 import androidx.appcompat.widget.TooltipCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.ShapeAppearanceModel
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
@@ -34,12 +36,17 @@ class IconListAdapter @Inject constructor(private val iconLoader: IconLoader) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
-        val view = ImageView(context).apply {
+        val view = ShapeableImageView(context).apply {
             val size = context.resources.getDimensionPixelSize(R.dimen.icon_size)
             layoutParams = ViewGroup.LayoutParams(size, size)
-            scaleType = ImageView.ScaleType.FIT_CENTER
+            scaleType = ImageView.ScaleType.CENTER_INSIDE
             val padding = context.resources.getDimensionPixelSize(R.dimen.icon_padding)
             setPadding(padding, padding, padding, padding)
+            shapeAppearanceModel = ShapeAppearanceModel.builder(
+                context,
+                R.style.ShapeAppearance_ActivityLauncher_Icon,
+                0,
+            ).build()
         }
         return ViewHolder(view)
     }
@@ -48,9 +55,9 @@ class IconListAdapter @Inject constructor(private val iconLoader: IconLoader) :
         val context = holder.itemView.context
         val iconInfo = filteredIcons[position]
         val icon = iconLoader.getIcon(iconInfo.iconResourceName)
-        (holder.itemView as ImageView).setImageDrawable(
-            icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon,
-        )
+        val drawable = icon.loadInternalDrawable(context) ?: context.packageManager.defaultActivityIcon
+
+        (holder.itemView as ShapeableImageView).setImageDrawable(drawable)
         TooltipCompat.setTooltipText(holder.itemView, iconInfo.iconResourceName)
         holder.itemView.setOnClickListener {
             onItemClickListener?.onItemClick(iconInfo)

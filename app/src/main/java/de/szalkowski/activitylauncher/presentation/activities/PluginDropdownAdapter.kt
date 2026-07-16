@@ -30,7 +30,7 @@ class PluginDropdownAdapter(context: Context, plugins: List<PluginInfo>) :
 
         tvName.text = plugin?.name
         plugin?.icon?.let {
-            ivIcon.setImageDrawable(it.loadDrawable(context))
+            ivIcon.setImageDrawable(it.loadInternalDrawable(context))
         } ?: run {
             ivIcon.setImageResource(android.R.drawable.sym_def_app_icon)
         }

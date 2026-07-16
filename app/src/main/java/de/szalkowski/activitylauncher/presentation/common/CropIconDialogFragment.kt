@@ -11,14 +11,14 @@ import android.os.Bundle
 import android.view.ScaleGestureDetector
 import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.createBitmap
-import androidx.core.graphics.drawable.IconCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.DialogFragment
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.core.util.getLauncherLargeIconSize
+import de.szalkowski.activitylauncher.core.util.toBitmap
 import de.szalkowski.activitylauncher.databinding.DialogCropIconBinding
+import de.szalkowski.activitylauncher.domain.model.ActivityIcon
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
@@ -164,8 +164,8 @@ class CropIconDialogFragment : DialogFragment() {
         point.set(x / 2, y / 2)
     }
 
-    private fun cropImage(): IconCompat {
-        val drawable = binding.ivPhoto.drawable ?: return IconCompat.createWithBitmap(createBitmap(1, 1, Bitmap.Config.ARGB_8888))
+    private fun cropImage(): ActivityIcon {
+        val drawable = binding.ivPhoto.drawable ?: return ActivityIcon.BitmapIcon(createBitmap(1, 1, Bitmap.Config.ARGB_8888), false)
         val fullBitmap = drawable.toBitmap()
 
         val viewport = binding.vViewport
@@ -219,7 +219,7 @@ class CropIconDialogFragment : DialogFragment() {
 
         val targetSize = (requireContext().getLauncherLargeIconSize() * adaptiveSizeFactor).toInt()
         val scaled = cropped.scale(targetSize, targetSize, true)
-        return IconCompat.createWithAdaptiveBitmap(scaled)
+        return ActivityIcon.BitmapIcon(scaled, true)
     }
 
     override fun onDestroyView() {
@@ -228,6 +228,6 @@ class CropIconDialogFragment : DialogFragment() {
     }
 
     fun interface CropListener {
-        fun onCropped(icon: IconCompat)
+        fun onCropped(icon: ActivityIcon)
     }
 }

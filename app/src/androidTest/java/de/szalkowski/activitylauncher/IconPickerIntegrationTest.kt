@@ -18,9 +18,7 @@ import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
-import de.szalkowski.activitylauncher.domain.model.IconInfo
-import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
-import de.szalkowski.activitylauncher.domain.model.SystemPackage
+import de.szalkowski.activitylauncher.domain.model.*
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.BackupRepository
@@ -116,7 +114,7 @@ class IconPickerIntegrationTest {
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
         whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
 
-        val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
+        val icon = ActivityIcon.Resource(ApplicationProvider.getApplicationContext<android.content.Context>().packageName, android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)
         whenever(getActivityIconUseCase(anyOrNull(), any())).thenReturn(icon)
         whenever(iconLoader.getIcon(any<String>())).thenReturn(icon)
@@ -169,6 +167,7 @@ class IconPickerIntegrationTest {
             Thread.sleep(5000)
             onView(withId(R.id.PackageListFragment)).perform(click())
             Thread.sleep(2000)
+            onView(withId(R.id.rvPackages)).check(matches(isDisplayed()))
             onView(withId(R.id.rvPackages))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
             Thread.sleep(2000)

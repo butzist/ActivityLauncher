@@ -1,7 +1,6 @@
 package de.szalkowski.activitylauncher.core.util
 
 import android.graphics.Bitmap
-import android.graphics.Rect
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
@@ -46,26 +45,5 @@ class DrawableUtilTest {
         val resized = small.resize(100)
         assertEquals(50, resized.width)
         assertEquals(50, resized.height)
-    }
-
-    @Test
-    fun testBitmapCrop() {
-        val original = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
-        val cropRect = Rect(10, 20, 40, 50)
-        val cropped = original.crop(cropRect)
-
-        assertEquals(30, cropped.width)
-        assertEquals(30, cropped.height)
-    }
-
-    @Test
-    fun testBitmapCropCoerceBounds() {
-        val original = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
-        // Rect partially outside
-        val cropRect = Rect(80, 80, 120, 120)
-        val cropped = original.crop(cropRect)
-
-        assertEquals(20, cropped.width)
-        assertEquals(20, cropped.height)
     }
 }

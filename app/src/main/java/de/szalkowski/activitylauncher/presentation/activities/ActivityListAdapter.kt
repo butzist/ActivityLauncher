@@ -94,7 +94,7 @@ class ActivityListAdapter @AssistedInject constructor(
 
         val icon = getActivityIconUseCase(item.iconResourceName, item.componentName)
         val context = holder.itemView.context
-        val drawable = icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon
+        val drawable = icon.loadInternalDrawable(context) ?: context.packageManager.defaultActivityIcon
         holder.ivIcon.setImageDrawable(drawable)
     }
 

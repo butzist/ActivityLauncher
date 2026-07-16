@@ -42,7 +42,7 @@ class PluginListAdapter(
         private val tvName: TextView = view.findViewById(R.id.tvName)
 
         fun bind(plugin: PluginInfo, isSelected: Boolean) {
-            ivIcon.setImageDrawable(plugin.icon?.loadDrawable(itemView.context))
+            ivIcon.setImageDrawable(plugin.icon?.loadInternalDrawable(itemView.context))
             tvName.text = plugin.name
             if (isSelected) {
                 itemView.setBackgroundResource(R.color.color_selection)
