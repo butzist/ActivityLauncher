@@ -84,29 +84,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    bundle {
-        language {
-            enableSplit = false
-        }
-    }
+    bundle { language { enableSplit = false } }
     buildFeatures {
         viewBinding = true
         buildConfig = true
         resValues = true
     }
-    testOptions {
-        unitTests.isReturnDefaultValues = true
-    }
+    testOptions { unitTests.isReturnDefaultValues = true }
 }
 
-ksp {
-    arg("room.generateKotlin", "true")
-}
+ksp { arg("room.generateKotlin", "true") }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
-    }
+    compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21) }
 }
 
 androidComponents {
@@ -150,14 +140,15 @@ spotless {
     kotlin {
         target("**/*.kt")
         targetExclude("**/build/**/*.kt")
-        ktlint("1.2.1").editorConfigOverride(
-            mapOf(
-                "android" to "true",
-                "ktlint_standard_no-wildcard-imports" to "disabled",
-                "ktlint_standard_chain-rule-first" to "disabled",
-                "ktlint_standard_backing-property-naming" to "disabled",
-            ),
-        )
+        ktlint("1.2.1")
+            .editorConfigOverride(
+                mapOf(
+                    "android" to "true",
+                    "ktlint_standard_no-wildcard-imports" to "disabled",
+                    "ktlint_standard_chain-rule-first" to "disabled",
+                    "ktlint_standard_backing-property-naming" to "disabled",
+                ),
+            )
     }
 
     kotlinGradle {
