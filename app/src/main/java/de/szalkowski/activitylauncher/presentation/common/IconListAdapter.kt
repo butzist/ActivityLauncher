@@ -2,41 +2,93 @@ package de.szalkowski.activitylauncher.presentation.common
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
-import android.widget.BaseAdapter
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
+import androidx.appcompat.widget.TooltipCompat
+import androidx.recyclerview.widget.RecyclerView
+import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.IconLoader
 import de.szalkowski.activitylauncher.domain.model.IconInfo
+import java.util.Locale
 import javax.inject.Inject
 
 class IconListAdapter @Inject constructor(private val iconLoader: IconLoader) :
-    BaseAdapter() {
-    private lateinit var icons: List<IconInfo>
+    RecyclerView.Adapter<IconListAdapter.ViewHolder>(), Filterable {
+    private var allIcons: List<IconInfo> = emptyList()
+    private var filteredIcons: List<IconInfo> = emptyList()
+    var onFilterListener: OnFilterListener? = null
+    var onItemClickListener: OnItemClickListener? = null
+
+    val totalCount: Int get() = allIcons.size
+    val filteredCount: Int get() = filteredIcons.size
 
     fun resolve(updater: AsyncProvider<IconListAdapter>.Updater?) {
-        this.icons = iconLoader.loadIcons(updater)
+        this.allIcons = iconLoader.loadIcons(updater)
+        this.filteredIcons = allIcons
     }
 
-    override fun getCount(): Int {
-        return icons.size
+    override fun getItemCount(): Int {
+        return filteredIcons.size
     }
 
-    override fun getItem(position: Int): Any {
-        return icons[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val context = parent.context
+        val view = ImageView(context).apply {
+            val size = context.resources.getDimensionPixelSize(R.dimen.icon_size)
+            layoutParams = ViewGroup.LayoutParams(size, size)
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            val padding = context.resources.getDimensionPixelSize(R.dimen.icon_padding)
+            setPadding(padding, padding, padding, padding)
+        }
+        return ViewHolder(view)
     }
 
-    override fun getItemId(position: Int): Long {
-        return 0
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = ImageView(parent.context)
-        val layout = AbsListView.LayoutParams(50, 50)
-        view.layoutParams = layout
-        val iconInfo = icons[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val context = holder.itemView.context
+        val iconInfo = filteredIcons[position]
         val icon = iconLoader.getIcon(iconInfo.iconResourceName)
-        val context = view.context
-        view.setImageDrawable(icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon)
-        return view
+        (holder.itemView as ImageView).setImageDrawable(
+            icon.loadDrawable(context) ?: context.packageManager.defaultActivityIcon,
+        )
+        TooltipCompat.setTooltipText(holder.itemView, iconInfo.iconResourceName)
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(iconInfo)
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val query = constraint?.toString()?.lowercase(Locale.getDefault()) ?: ""
+                val filtered = if (query.isEmpty()) {
+                    allIcons
+                } else {
+                    allIcons.filter { it.iconResourceName.lowercase(Locale.getDefault()).contains(query) }
+                }
+
+                return FilterResults().apply {
+                    values = filtered
+                    count = filtered.size
+                }
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredIcons = results?.values as? List<IconInfo> ?: allIcons
+                notifyDataSetChanged()
+                onFilterListener?.onFilterFinished()
+            }
+        }
+    }
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    fun interface OnFilterListener {
+        fun onFilterFinished()
+    }
+
+    fun interface OnItemClickListener {
+        fun onItemClick(icon: IconInfo)
     }
 }

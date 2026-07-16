@@ -34,6 +34,7 @@ import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUse
 import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.Before
 import org.junit.Rule
@@ -250,8 +251,15 @@ class ActivityDetailsIntegrationTest {
             Thread.sleep(1000)
             // Verify dialog is shown
             onView(withText(R.string.title_dialog_icon_picker)).check(matches(isDisplayed()))
-            onView(withText(android.R.string.cancel)).perform(click())
-            Thread.sleep(1000)
+            // Correctly dismiss IconPickerDialogFragment using navigation icon
+            onView(
+                allOf(
+                    withParent(withId(R.id.toolbar)),
+                    isDescendantOfA(withId(R.id.appBarLayout)),
+                    isAssignableFrom(android.widget.ImageButton::class.java),
+                ),
+            ).perform(click())
+            waitForViewToDisappear(R.string.title_dialog_icon_picker)
 
             // 3. Test Favorite Toggle
             val favoriteButton = onView(withId(R.id.btFavorite))
@@ -311,10 +319,7 @@ class ActivityDetailsIntegrationTest {
             // Wait, in fragment: pickImageLauncher.launch("image/*") -> then uri -> CropIconDialogFragment
             onView(withText(R.string.title_dialog_crop_icon)).check(matches(isDisplayed()))
             onView(withText(android.R.string.ok)).perform(click())
-            Thread.sleep(1000)
-
-            // Verify dialog is gone
-            onView(withText(R.string.title_dialog_crop_icon)).check(doesNotExist())
+            waitForViewToDisappear(R.string.title_dialog_crop_icon)
         } finally {
             // Use runCatching to avoid cleanup errors masking real test failures
             runCatching { scenario.close() }

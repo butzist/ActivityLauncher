@@ -41,6 +41,7 @@
     <string name="error_invalid_icon_resource" comment="Error message for invalid or non-existent icon resource.">Error: invalid icon resource</string>
     <string name="error_invalid_int" comment="Error message for invalid integer value. 'Integer' is a technical programming term and should usually remain untranslated.">Invalid Integer</string>
     <string name="error_invalid_long" comment="Error message for invalid long value. 'Long' is a technical programming term for a 64-bit integer and should usually remain untranslated.">Invalid Long</string>
+    <string name="filter_count_format" comment="Format for showing current filtered count vs total count">%1$d/%2$d</string>
     <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
     <string name="label_class" comment="Form label for the activity class name field. 'Class' refers to the Java/Kotlin class name.">Class</string>
     <string name="label_intent_action" comment="Label for the intent action field. 'Action' is a technical Android Intent term and should usually remain untranslated.">Action</string>
