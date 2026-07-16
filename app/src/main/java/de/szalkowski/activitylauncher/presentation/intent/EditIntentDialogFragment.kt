@@ -48,17 +48,26 @@ class EditIntentDialogFragment : DialogFragment() {
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.title_dialog_edit_intent)
             .setView(binding.root)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                setFragmentResult(REQUEST_KEY, bundleOf(RESULT_INTENT_DEF to viewModel.intentDef.value))
-            }
-            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(android.R.string.ok, null)
+            .setNeutralButton(R.string.action_clear, null)
             .create()
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        setFragmentResult(REQUEST_KEY, bundleOf(RESULT_INTENT_DEF to viewModel.intentDef.value))
     }
 
     override fun onStart() {
         super.onStart()
         val dialog = dialog as? AlertDialog
         val okButton = dialog?.getButton(DialogInterface.BUTTON_POSITIVE)
+        val clearButton = dialog?.getButton(DialogInterface.BUTTON_NEUTRAL)
+
+        clearButton?.setOnClickListener {
+            binding.root.clearFocus()
+            viewModel.clear()
+        }
 
         lifecycleScope.launch {
             viewModel.isIntentValid.collect { isValid ->

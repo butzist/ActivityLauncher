@@ -1,4 +1,5 @@
 <resources>
+    <string name="action_clear" comment="Button label to clear all fields in the intent editor.">Clear</string>
     <string name="action_add_category" comment="Button label to add a new intent category. 'Category' is a technical Android Intent term and should usually remain untranslated or be translated according to Android developer terminology.">Add Category</string>
     <string name="action_add_extra" comment="Button label to add a new intent extra. 'Extra' is a technical Android Intent term and should usually remain untranslated or be translated according to Android developer terminology.">Add Extra</string>
     <string name="action_advanced_properties" comment="Button label to show advanced intent properties.">Advanced Properties</string>

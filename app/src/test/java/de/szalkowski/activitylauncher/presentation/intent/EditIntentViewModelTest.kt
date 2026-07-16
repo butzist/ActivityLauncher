@@ -41,6 +41,13 @@ class EditIntentViewModelTest {
     }
 
     @Test
+    fun `clear resets intentDef`() {
+        viewModel.init(IntentDef(action = "something", categories = listOf("cat")))
+        viewModel.clear()
+        assertEquals(IntentDef(), viewModel.intentDef.value)
+    }
+
+    @Test
     fun `addExtra adds a new extra`() {
         viewModel.addExtra()
         assertEquals(1, viewModel.intentDef.value.extras.size)

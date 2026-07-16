@@ -34,6 +34,10 @@ class EditIntentViewModel @Inject constructor() : ViewModel() {
         _intentDef.value = initialIntentDef
     }
 
+    fun clear() {
+        _intentDef.value = IntentDef()
+    }
+
     fun updateAction(action: String) {
         _intentDef.value = _intentDef.value.copy(action = action)
     }
