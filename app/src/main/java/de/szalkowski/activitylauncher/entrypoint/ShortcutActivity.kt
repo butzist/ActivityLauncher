@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher
@@ -15,7 +16,9 @@ import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
+import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,6 +37,9 @@ class ShortcutActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var shortCutCreator: ShortcutCreator
+
+    @Inject
+    internal lateinit var createShortcutUseCase: CreateShortcutUseCase
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,6 +139,8 @@ class ShortcutActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.error_invalid_activity_link, Toast.LENGTH_SHORT).show()
             return
         }
-        shortCutCreator.createLauncherIcon(request)
+        lifecycleScope.launch {
+            createShortcutUseCase(request)
+        }
     }
 }

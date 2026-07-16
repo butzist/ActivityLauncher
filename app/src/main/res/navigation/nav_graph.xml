@@ -63,6 +63,14 @@
             android:name="shortcutRequest"
             app:argType="de.szalkowski.activitylauncher.domain.model.ShortcutRequest"
             app:nullable="false" />
+        <argument
+            android:name="shortcutId"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="configuration"
+            app:argType="de.szalkowski.activitylauncher.presentation.activities.DetailsConfiguration"
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -72,6 +80,20 @@
         tools:layout="@layout/fragment_favorites" >
         <action
             android:id="@+id/actionSelectActivity"
+            app:destination="@id/ActivityDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ShortcutsFragment"
+        android:name="de.szalkowski.activitylauncher.presentation.shortcuts.ShortcutsFragment"
+        android:label="@string/nav_shortcuts"
+        tools:layout="@layout/fragment_shortcuts">
+        <action
+            android:id="@+id/actionSelectShortcut"
             app:destination="@id/ActivityDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

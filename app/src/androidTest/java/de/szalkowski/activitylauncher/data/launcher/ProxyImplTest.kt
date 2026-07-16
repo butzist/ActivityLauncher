@@ -15,6 +15,8 @@ import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -61,10 +63,16 @@ class ProxyImplTest {
     val settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository = mock()
 
     @BindValue
+    val backupRepository: BackupRepository = mock()
+
+    @BindValue
     val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()
 
     @BindValue
     val recentsRepository: de.szalkowski.activitylauncher.domain.recents.RecentsRepository = mock()
+
+    @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
 
     @Inject
     @ApplicationContext
@@ -76,12 +84,10 @@ class ProxyImplTest {
     @Before
     fun init() {
         hiltRule.inject()
-        // We can't easily mock the context provided by Hilt, but we can wrap it or use it.
-        // Actually, ShortcutCreatorProxyImpl uses @ApplicationContext Context, so we'll use a real one
-        // and mock the PackageManager it returns if possible, or just mock the whole context.
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
-        proxy = ShortcutCreatorProxyImpl(mockContext, intentSigner)
+        whenever(mockContext.packageName).thenReturn("de.szalkowski.activitylauncher")
+        proxy = ShortcutCreatorProxyImpl(mockContext, intentSigner, shortcutsRepository)
     }
 
     @Test
@@ -89,17 +95,20 @@ class ProxyImplTest {
         val componentName = ComponentName("com.test", "Activity")
         val icon: IconCompat = mock()
         whenever(intentSigner.signRequest(any<ShortcutRequest>())).thenReturn("signature")
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
 
         // Mock the context and capture it to verify startActivity
         val mockContext: Context = mock()
         whenever(mockContext.packageManager).thenReturn(packageManager)
-        val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext, intentSigner)
+        whenever(mockContext.packageName).thenReturn("de.szalkowski.activitylauncher")
+        val proxyWithMockContext = ShortcutCreatorProxyImpl(mockContext, intentSigner, shortcutsRepository)
 
         val request = ShortcutRequest("Test", Intent().setComponent(componentName), icon)
-        proxyWithMockContext.createLauncherIcon(request, null)
+        runBlocking { proxyWithMockContext.createLauncherIcon(request, null, 1L) }
 
         verify(intentSigner).signRequest(eq(request))
         verify(mockContext).startActivity(any<Intent>())
+        runBlocking { verify(shortcutsRepository, never()).recordShortcut(any()) }
     }
 
     @Test

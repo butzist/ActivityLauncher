@@ -9,16 +9,48 @@ import androidx.navigation.NavDirections
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentFavoritesBinding
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.usecase.launcher.LaunchActivityUseCase
+import de.szalkowski.activitylauncher.presentation.activities.DetailsConfiguration
+import de.szalkowski.activitylauncher.presentation.common.ActivityInfoAdapter
 import de.szalkowski.activitylauncher.presentation.common.BaseActivityListFragment
+import de.szalkowski.activitylauncher.presentation.common.ShortcutRequestDiffCallback
+import de.szalkowski.activitylauncher.presentation.common.bindShortcutRequest
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesFragment : BaseActivityListFragment() {
-    override val viewModel: FavoritesViewModel by viewModels()
+class FavoritesFragment : BaseActivityListFragment<ShortcutRequest>() {
+    @Inject
+    internal lateinit var launchActivityUseCase: LaunchActivityUseCase
+
+    val viewModel: FavoritesViewModel by viewModels()
+    override val items get() = viewModel.items
     override val recyclerViewId: Int = R.id.rvFavorites
     override val logTag: String = "FavoritesFragment"
-    override fun navigateToDetailsAction(request: ShortcutRequest): NavDirections =
-        FavoritesFragmentDirections.actionSelectActivity(request)
+    override val detailsConfiguration: DetailsConfiguration = DetailsConfiguration.FAVORITES
+
+    override val adapter: ActivityInfoAdapter<ShortcutRequest> by lazy {
+        ActivityInfoAdapter(ShortcutRequestDiffCallback, ::bindShortcutRequest).also {
+            it.onItemClick = { request ->
+                launchActivityUseCase(
+                    LaunchRequest(
+                        intent = request.intent,
+                        name = request.name,
+                        icon = request.icon,
+                        launcherPlugin = request.launcherPlugin,
+                    ),
+                )
+            }
+            it.onItemSwiped = { request -> viewModel.removeItem(request) }
+        }
+    }
+
+    override fun navigateToDetailsAction(item: ShortcutRequest, configuration: DetailsConfiguration): NavDirections =
+        FavoritesFragmentDirections.actionSelectActivity(
+            shortcutRequest = item,
+            configuration = configuration,
+        )
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!

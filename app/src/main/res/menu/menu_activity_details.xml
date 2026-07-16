@@ -16,4 +16,8 @@
         android:title="@string/context_action_share"
         android:icon="@drawable/ic_share"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_save_as_new"
+        android:title="@string/action_save_as_new"
+        app:showAsAction="never" />
 </menu>

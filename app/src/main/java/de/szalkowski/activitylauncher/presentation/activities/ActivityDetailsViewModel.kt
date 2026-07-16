@@ -21,7 +21,9 @@ import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
+import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
@@ -46,18 +48,35 @@ import javax.inject.Inject
 class ActivityDetailsViewModel @Inject constructor(
     packageRepository: PackageRepository,
     private val favoritesRepository: FavoritesRepository,
+    private val recentsRepository: RecentsRepository,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val launchActivityUseCase: LaunchActivityUseCase,
     private val createShortcutUseCase: CreateShortcutUseCase,
     private val shareActivityUseCase: ShareActivityUseCase,
     private val getActivityIconUseCase: GetActivityIconUseCase,
     private val iconLoader: IconLoader,
+    private val shortcutsRepository: ShortcutsRepository,
     val settingsRepository: SettingsRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val shortcutRequest: ShortcutRequest = savedStateHandle.get<ShortcutRequest>("shortcutRequest")
         ?: throw IllegalArgumentException("shortcutRequest is required")
+
+    private val shortcutId: Long = savedStateHandle.get<Long>("shortcutId") ?: 0L
+
+    private val configuration: DetailsConfiguration = savedStateHandle.get<DetailsConfiguration>("configuration")
+        ?: DetailsConfiguration.ALL
+
+    val showCreateShortcut: StateFlow<Boolean> = MutableStateFlow(configuration.showCreateShortcut).asStateFlow()
+    val showLaunch: StateFlow<Boolean> = MutableStateFlow(configuration.showLaunch).asStateFlow()
+    val showShare: StateFlow<Boolean> = MutableStateFlow(configuration.showShare).asStateFlow()
+    val showFavorite: StateFlow<Boolean> = MutableStateFlow(configuration.showFavorite).asStateFlow()
+    val showSave: StateFlow<Boolean> = MutableStateFlow(configuration.showSave).asStateFlow()
+    val showLaunchPluginSelection: StateFlow<Boolean> = MutableStateFlow(configuration.showLaunchPluginSelection).asStateFlow()
+
+    private val _onSaveComplete = MutableSharedFlow<ShortcutRequest>()
+    val onSaveComplete = _onSaveComplete.asSharedFlow()
 
     private val componentName: ComponentName? = shortcutRequest.intent.component
 
@@ -144,6 +163,9 @@ class ActivityDetailsViewModel @Inject constructor(
 
     private val _errorMessage = MutableSharedFlow<Int>()
     val errorMessage = _errorMessage.asSharedFlow()
+
+    private val _isEditMode = MutableStateFlow(shortcutId != 0L)
+    val isEditMode: StateFlow<Boolean> = _isEditMode.asStateFlow()
 
     init {
         setupIconErrorDebounce()
@@ -287,8 +309,47 @@ class ActivityDetailsViewModel @Inject constructor(
     }
 
     fun createShortcut() {
-        val request = getCurrentShortcutRequest()
-        createShortcutUseCase(request, _selectedShortcutPlugin.value?.componentName)
+        viewModelScope.launch {
+            val request = getCurrentShortcutRequest()
+            createShortcutUseCase(request, _selectedShortcutPlugin.value?.componentName)
+        }
+    }
+
+    fun saveShortcut() {
+        viewModelScope.launch {
+            val request = getCurrentShortcutRequest()
+            when (configuration) {
+                DetailsConfiguration.FAVORITES -> {
+                    favoritesRepository.addFavorite(request)
+                }
+
+                DetailsConfiguration.SHORTCUTS -> {
+                    if (shortcutId != 0L) {
+                        shortcutsRepository.updateShortcut(shortcutId, request)
+                    } else {
+                        shortcutsRepository.recordShortcut(request)
+                    }
+                }
+
+                DetailsConfiguration.RECENTS -> {
+                    recentsRepository.addActivity(request)
+                }
+
+                else -> {
+                    // Default to shortcuts if not specified, or do nothing?
+                    // "All" tab doesn't have showSave = true, so this is safe.
+                    shortcutsRepository.recordShortcut(request)
+                }
+            }
+            _onSaveComplete.emit(request)
+        }
+    }
+
+    fun saveAsNewShortcut() {
+        viewModelScope.launch {
+            val request = getCurrentShortcutRequest()
+            shortcutsRepository.recordShortcut(request)
+        }
     }
 
     fun selectLaunchPlugin(componentName: ComponentName?) {

@@ -3,7 +3,7 @@ package de.szalkowski.activitylauncher.domain.launcher
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 
 interface ShortcutCreator {
-    fun createLauncherIcon(request: ShortcutRequest)
+    suspend fun createLauncherIcon(request: ShortcutRequest, shortcutId: Long? = null)
 
     companion object {
         const val INTENT_LAUNCH_SHORTCUT = "activitylauncher.intent.action.LAUNCH_SHORTCUT"
@@ -14,5 +14,6 @@ interface ShortcutCreator {
         const val INTENT_EXTRA_SIGNATURE = "sign"
         const val INTENT_EXTRA_LAUNCH_PLUGIN = "launch_plugin"
         const val INTENT_EXTRA_SHORTCUT_ACTIVITY = "shortcut_activity"
+        const val INTENT_EXTRA_SHORTCUT_ID = "shortcut_id"
     }
 }

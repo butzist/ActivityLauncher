@@ -11,31 +11,43 @@ import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class ShortcutCreatorProxyImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val intentSigner: IntentSigner,
+    private val shortcutsRepository: ShortcutsRepository,
 ) : ShortcutCreatorProxy {
     private val pm: PackageManager = context.packageManager
+    private val scope = CoroutineScope(Dispatchers.IO)
 
-    override fun createLauncherIcon(request: ShortcutRequest, plugin: ComponentName?) {
+    override suspend fun createLauncherIcon(request: ShortcutRequest, plugin: ComponentName?, shortcutId: Long?) {
+        val id = shortcutId ?: shortcutsRepository.recordShortcut(request)
+
+        val launchShortcutIntent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            component = ComponentName(context, ShortcutActivity::class.java)
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, request.intent.toUri(Intent.URI_INTENT_SCHEME))
+            putExtra(ShortcutCreator.INTENT_EXTRA_NAME, request.name)
+            putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ID, id)
+            val signature = intentSigner.signRequest(request)
+            putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
+            request.launcherPlugin?.let {
+                putExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, it.flattenToString())
+            }
+        }
+
         val intent = Intent(ShortcutCreatorProxy.INTENT_CREATE_SHORTCUT)
         if (plugin != null) {
             intent.component = plugin
         }
 
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_NAME, request.name)
-        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, request.intent.toUri(Intent.URI_INTENT_SCHEME))
-        intent.putExtra(ShortcutCreator.INTENT_EXTRA_ICON, request.icon.toBundle())
-
-        val signature = intentSigner.signRequest(request)
-        intent.putExtra(ShortcutCreator.INTENT_EXTRA_SIGNATURE, signature)
+        intent.putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, launchShortcutIntent.toUri(Intent.URI_INTENT_SCHEME))
         intent.putExtra(ShortcutCreator.INTENT_EXTRA_SHORTCUT_ACTIVITY, ComponentName(context, ShortcutActivity::class.java).flattenToString())
-        request.launcherPlugin?.let {
-            intent.putExtra(ShortcutCreator.INTENT_EXTRA_LAUNCH_PLUGIN, it.flattenToString())
-        }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)

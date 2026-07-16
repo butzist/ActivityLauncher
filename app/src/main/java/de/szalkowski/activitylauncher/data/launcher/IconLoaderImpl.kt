@@ -105,7 +105,7 @@ class IconLoaderImpl @Inject constructor(
     }
 
     override fun loadIcons(updater: AsyncProvider<IconListAdapter>.Updater?): List<IconInfo> {
-        val icons: java.util.TreeSet<String> = java.util.TreeSet()
+        val icons: java.util.HashSet<String> = java.util.HashSet()
 
         val packages = packageRepository.packages
         updater?.updateMax(packages.size)
@@ -122,6 +122,12 @@ class IconLoaderImpl @Inject constructor(
             }
         }
 
-        return icons.map { IconInfo(it) }.toList()
+        return icons.map { IconInfo(it) }
+            .sortedWith(
+                compareBy(
+                    { it.iconResourceName.substringAfterLast('/') },
+                    { it.iconResourceName.substringBefore(':') },
+                ),
+            )
     }
 }

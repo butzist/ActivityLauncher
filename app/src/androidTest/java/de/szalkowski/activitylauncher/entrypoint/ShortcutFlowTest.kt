@@ -19,6 +19,9 @@ import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Before
@@ -66,13 +69,16 @@ class ShortcutFlowTest {
     val viewIntentParser: de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser = mock()
 
     @BindValue
-    val settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository = mock()
+    val settingsRepository: SettingsRepository = mock()
 
     @BindValue
     val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()
 
     @BindValue
     val recentsRepository: de.szalkowski.activitylauncher.domain.recents.RecentsRepository = mock()
+
+    @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
 
     @Before
     fun init() {
@@ -87,6 +93,8 @@ class ShortcutFlowTest {
         whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(packageRepository.packagesFlow).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
         whenever(packageRepository.isSyncing).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(value = false))
         whenever(packageRepository.isLoaded).thenReturn(true)
         whenever(activityLauncherProxy.hasMultipleHandlers()).thenReturn(true)
@@ -232,7 +240,7 @@ class ShortcutFlowTest {
             assert(scenario.state == androidx.lifecycle.Lifecycle.State.DESTROYED)
 
             val captor = argumentCaptor<ShortcutRequest>()
-            verify(shortcutCreator).createLauncherIcon(captor.capture())
+            runBlocking { verify(shortcutCreator).createLauncherIcon(captor.capture(), anyOrNull()) }
             assertEquals("Test App", captor.firstValue.name)
             assertEquals(componentName, captor.firstValue.intent.component)
         }

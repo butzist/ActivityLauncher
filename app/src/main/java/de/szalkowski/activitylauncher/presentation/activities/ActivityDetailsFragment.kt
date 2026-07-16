@@ -12,16 +12,19 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.R
 import de.szalkowski.activitylauncher.databinding.FragmentActivityDetailsBinding
@@ -76,13 +79,14 @@ class ActivityDetailsFragment : Fragment() {
                 @Suppress("DEPRECATION")
                 bundle.getParcelable<ComponentName>(PluginChooserDialogFragment.RESULT_SHORTCUT_PLUGIN)
             }
+
             viewModel.selectLaunchPlugin(launchPlugin)
             viewModel.selectShortcutPlugin(shortcutPlugin)
 
-            when (action) {
-                PluginChooserDialogFragment.PluginAction.LAUNCH -> viewModel.launchActivity()
-                PluginChooserDialogFragment.PluginAction.SHORTCUT -> viewModel.createShortcut()
-                null -> {}
+            if (action == PluginChooserDialogFragment.PluginAction.LAUNCH) {
+                viewModel.launchActivity()
+            } else if (action == PluginChooserDialogFragment.PluginAction.SHORTCUT) {
+                viewModel.createShortcut()
             }
         }
 
@@ -135,6 +139,9 @@ class ActivityDetailsFragment : Fragment() {
 
                     val shareItem = menu.findItem(R.id.action_share)
                     shareItem.isEnabled = viewModel.canShare.value
+
+                    val saveAsNewItem = menu.findItem(R.id.action_save_as_new)
+                    saveAsNewItem.isVisible = viewModel.isEditMode.value
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -150,6 +157,11 @@ class ActivityDetailsFragment : Fragment() {
                         }
                         R.id.action_share -> {
                             viewModel.shareActivity()
+                            true
+                        }
+                        R.id.action_save_as_new -> {
+                            viewModel.saveAsNewShortcut()
+                            findNavController().popBackStack()
                             true
                         }
                         else -> false
@@ -186,6 +198,60 @@ class ActivityDetailsFragment : Fragment() {
                     }
                 }
                 launch {
+                    viewModel.showCreateShortcut.collect { isVisible ->
+                        binding.llCreateShortcut.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.showLaunch.collect { isVisible ->
+                        binding.llLaunch.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.showShare.collect { isVisible ->
+                        binding.btShareShortcut.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.showFavorite.collect { isVisible ->
+                        binding.btFavorite.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.showSave.collect { isVisible ->
+                        binding.btSave.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.showLaunchPluginSelection.collect { isVisible ->
+                        binding.tilLaunchPlugin.isVisible = isVisible
+                    }
+                }
+                launch {
+                    viewModel.launchPlugins.collect { plugins ->
+                        val adapter = PluginDropdownAdapter(requireContext(), plugins)
+                        binding.atvLaunchPlugin.setAdapter(adapter)
+                    }
+                }
+                launch {
+                    viewModel.selectedLaunchPlugin.collect { plugin ->
+                        if (!binding.atvLaunchPlugin.isFocused) {
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                                binding.atvLaunchPlugin.setText(plugin?.name ?: "", false)
+                            } else {
+                                binding.atvLaunchPlugin.setText(plugin?.name ?: "")
+                            }
+                        }
+                        binding.tilLaunchPlugin.startIconDrawable = plugin?.icon?.loadDrawable(requireContext())
+                    }
+                }
+                launch {
+                    viewModel.onSaveComplete.collect { request ->
+                        setFragmentResult(RESULT_SAVED, bundleOf(EXTRA_SAVED_SHORTCUT to request))
+                        findNavController().popBackStack()
+                    }
+                }
+                launch {
                     combine(
                         viewModel.canLaunch,
                         viewModel.canFavorite,
@@ -202,6 +268,7 @@ class ActivityDetailsFragment : Fragment() {
                 }
                 launch {
                     viewModel.canCreateShortcut.collect { isEnabled ->
+                        binding.btSave.isEnabled = isEnabled
                         binding.btCreateShortcut.isEnabled = isEnabled
                         binding.btCreateShortcutChooser.isEnabled = isEnabled
                     }
@@ -232,6 +299,10 @@ class ActivityDetailsFragment : Fragment() {
             showIconPopupMenu(it)
         }
 
+        binding.btSave.setOnClickListener {
+            viewModel.saveShortcut()
+        }
+
         binding.btCreateShortcut.setOnClickListener {
             viewModel.createShortcut()
         }
@@ -243,6 +314,11 @@ class ActivityDetailsFragment : Fragment() {
                 viewModel.shortcutPlugins.value,
             )
             dialog.show(childFragmentManager, "plugin chooser")
+        }
+
+        binding.atvLaunchPlugin.setOnItemClickListener { _, _, position, _ ->
+            val plugin = viewModel.launchPlugins.value[position]
+            viewModel.selectLaunchPlugin(plugin.componentName)
         }
 
         binding.btLaunch.setOnClickListener {
@@ -304,5 +380,10 @@ class ActivityDetailsFragment : Fragment() {
             }
         }
         popup.show()
+    }
+
+    companion object {
+        const val RESULT_SAVED = "activity_details_saved"
+        const val EXTRA_SAVED_SHORTCUT = "saved_shortcut"
     }
 }

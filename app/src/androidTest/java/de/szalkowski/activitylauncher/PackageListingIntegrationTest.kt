@@ -21,6 +21,7 @@ import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
@@ -80,6 +81,9 @@ class PackageListingIntegrationTest {
 
     @BindValue
     val recentsRepository: RecentsRepository = mock()
+
+    @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
 
     @BindValue
     val getActivityIconUseCase: GetActivityIconUseCase = mock()

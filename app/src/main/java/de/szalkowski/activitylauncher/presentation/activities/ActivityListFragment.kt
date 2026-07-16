@@ -79,7 +79,10 @@ class ActivityListFragment : Fragment() {
                 val icon = getActivityIconUseCase(it.iconResourceName, it.componentName)
                 val intent = Intent().setComponent(it.componentName)
                 val request = ShortcutRequest(it.name, intent, icon)
-                val action = ActivityListFragmentDirections.actionSelectActivity(request)
+                val action = ActivityListFragmentDirections.actionSelectActivity(
+                    shortcutRequest = request,
+                    configuration = DetailsConfiguration.ALL,
+                )
                 findNavController().navigate(action)
             }.onFailure { e -> Log.e("Navigation", "Error while navigating from ActivityListFragment", e) }
         }

@@ -24,11 +24,13 @@ import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
 import de.szalkowski.activitylauncher.presentation.activities.ActivityDetailsFragment
 import de.szalkowski.activitylauncher.presentation.common.PluginChooserDialogFragment
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -87,6 +89,9 @@ class PluginChooserIntegrationTest {
     val recentsRepository: RecentsRepository = mock()
 
     @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
+
+    @BindValue
     val getActivityIconUseCase: GetActivityIconUseCase = mock()
 
     @BindValue
@@ -103,6 +108,10 @@ class PluginChooserIntegrationTest {
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
         whenever(favoritesRepository.getFavoritesFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
         whenever(recentsRepository.getRecentsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
+        whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
 
         val icon = androidx.core.graphics.drawable.IconCompat.createWithResource(ApplicationProvider.getApplicationContext(), android.R.drawable.sym_def_app_icon)
         whenever(getPackageIconUseCase(anyOrNull(), any())).thenReturn(icon)

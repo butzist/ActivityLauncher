@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_favorite"
         android:title="@string/nav_favorites" />
     <item
+        android:id="@+id/ShortcutsFragment"
+        android:icon="@drawable/ic_add_home_work"
+        android:title="@string/nav_shortcuts" />
+    <item
         android:id="@+id/RecentsFragment"
         android:icon="@drawable/ic_rocket_launch"
         android:title="@string/nav_recents" />

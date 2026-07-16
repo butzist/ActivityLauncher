@@ -10,6 +10,8 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
+import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -60,10 +62,16 @@ class PackageChangeReceiverTest {
     val settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository = mock()
 
     @BindValue
+    val backupRepository: BackupRepository = mock()
+
+    @BindValue
     val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()
 
     @BindValue
     val recentsRepository: de.szalkowski.activitylauncher.domain.recents.RecentsRepository = mock()
+
+    @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 

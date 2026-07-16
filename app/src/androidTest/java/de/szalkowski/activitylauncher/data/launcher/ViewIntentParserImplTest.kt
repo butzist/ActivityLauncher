@@ -75,4 +75,25 @@ class ViewIntentParserImplTest {
         assertEquals("com.test", request?.intent?.component?.packageName)
         assertEquals("com.test.Activity", request?.intent?.component?.className)
     }
+
+    @Test
+    fun testParseShortcutRequest_UnwrapsShortcutActivity() {
+        val targetComponent = ComponentName("com.test", "com.test.Activity")
+        val targetIntent = Intent().apply { component = targetComponent }
+
+        val wrappedIntent = Intent(ShortcutCreator.INTENT_LAUNCH_SHORTCUT).apply {
+            component = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.ShortcutActivity")
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, targetIntent.toUri(Intent.URI_INTENT_SCHEME))
+        }
+
+        val intent = Intent().apply {
+            putExtra(ShortcutCreator.INTENT_EXTRA_NAME, "Test Name")
+            putExtra(ShortcutCreator.INTENT_EXTRA_INTENT, wrappedIntent.toUri(Intent.URI_INTENT_SCHEME))
+        }
+
+        whenever(getActivityIconUseCase.invoke(anyOrNull(), any())).thenReturn(mock())
+
+        val request = parser.parseShortcutRequest(intent)
+        assertEquals(targetComponent, request?.intent?.component)
+    }
 }

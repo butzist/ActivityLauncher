@@ -62,6 +62,9 @@ interface FavoriteDao {
     @Query("SELECT * FROM favorites ORDER BY timestamp DESC")
     fun getAllFlow(): Flow<List<FavoriteEntity>>
 
+    @Query("SELECT * FROM favorites ORDER BY timestamp DESC")
+    suspend fun getAll(): List<FavoriteEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favorite: FavoriteEntity): Long
 
@@ -77,6 +80,9 @@ interface RecentDao {
     @Query("SELECT * FROM recents ORDER BY timestamp DESC")
     fun getAllFlow(): Flow<List<RecentEntity>>
 
+    @Query("SELECT * FROM recents ORDER BY timestamp DESC")
+    suspend fun getAll(): List<RecentEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recent: RecentEntity): Long
 
@@ -87,18 +93,41 @@ interface RecentDao {
     suspend fun trim(limit: Int): Int
 }
 
+@Dao
+interface ShortcutDao {
+    @Query("SELECT * FROM shortcuts ORDER BY timestamp DESC")
+    fun getAllFlow(): Flow<List<ShortcutEntity>>
+
+    @Query("SELECT * FROM shortcuts ORDER BY timestamp DESC")
+    suspend fun getAll(): List<ShortcutEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(shortcut: ShortcutEntity): Long
+
+    @Delete
+    suspend fun delete(shortcut: ShortcutEntity): Int
+
+    @Query("DELETE FROM shortcuts WHERE id = :id")
+    suspend fun deleteById(id: Long): Int
+
+    @Query("SELECT * FROM shortcuts WHERE packageName = :packageName AND className = :className AND name = :name AND intentUri = :intentUri LIMIT 1")
+    suspend fun findExisting(packageName: String, className: String, name: String, intentUri: String): ShortcutEntity?
+}
+
 @Database(
     entities = [
         AppPackageEntity::class,
         ActivityEntity::class,
         FavoriteEntity::class,
         RecentEntity::class,
+        ShortcutEntity::class,
     ],
-    version = 4,
+    version = 5,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun packageDao(): PackageDao
     abstract fun favoriteDao(): FavoriteDao
     abstract fun recentDao(): RecentDao
+    abstract fun shortcutDao(): ShortcutDao
 }

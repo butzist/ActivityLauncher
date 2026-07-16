@@ -14,7 +14,9 @@ import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
+import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.external.ShareActivityUseCase
 import de.szalkowski.activitylauncher.domain.usecase.favorites.ToggleFavoriteUseCase
 import de.szalkowski.activitylauncher.domain.usecase.launcher.CreateShortcutUseCase
@@ -49,7 +51,9 @@ class ActivityDetailsViewModelTest {
     private val shareActivityUseCase: ShareActivityUseCase = mock()
     private val getActivityIconUseCase: GetActivityIconUseCase = mock()
     private val iconLoader: IconLoader = mock()
+    private val shortcutsRepository: ShortcutsRepository = mock()
     private val settingsRepository: SettingsRepository = mock()
+    private val recentsRepository: RecentsRepository = mock()
     private val testDispatcher = UnconfinedTestDispatcher()
 
     private lateinit var componentName: ComponentName
@@ -111,11 +115,16 @@ class ActivityDetailsViewModelTest {
         whenever(launchActivityUseCase.getPlugins()).thenReturn(emptyList())
         whenever(createShortcutUseCase.getPlugins()).thenReturn(emptyList())
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         viewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
     }
 
@@ -164,13 +173,14 @@ class ActivityDetailsViewModelTest {
     }
 
     @Test
-    fun `should create shortcut`() {
+    fun `should create shortcut`() = runTest {
         val shortcutIntent = mockIntent("shortcutIntent")
         mockedUtil.`when`<Intent> {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(shortcutIntent)
 
         viewModel.createShortcut()
+        runCurrent()
         val captor = argumentCaptor<ShortcutRequest>()
         verify(createShortcutUseCase).invoke(captor.capture(), anyOrNull())
         assertNotNull(captor.firstValue.intent)
@@ -182,11 +192,16 @@ class ActivityDetailsViewModelTest {
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(mock(), mock()))
 
         // Re-init viewModel to pick up new mock values
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         assertTrue(newViewModel.showLaunchChooser.value)
@@ -199,15 +214,105 @@ class ActivityDetailsViewModelTest {
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(mock()))
 
         // Re-init viewModel to pick up new mock values
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         assertFalse(newViewModel.showLaunchChooser.value)
         assertFalse(newViewModel.showShortcutChooser.value)
+    }
+
+    @Test
+    fun `should route save to favorites repository when configuration is FAVORITES`() = runTest {
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.FAVORITES,
+            ),
+        )
+        val newViewModel = ActivityDetailsViewModel(
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+        )
+
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(mockIntent)
+
+        val saveCompleteResults = mutableListOf<ShortcutRequest>()
+        val job = launch(UnconfinedTestDispatcher(testScheduler)) {
+            newViewModel.onSaveComplete.collect { saveCompleteResults.add(it) }
+        }
+
+        newViewModel.saveShortcut()
+        runCurrent()
+
+        verify(favoritesRepository).addFavorite(any<ShortcutRequest>())
+        verify(shortcutsRepository, never()).recordShortcut(any())
+        verify(recentsRepository, never()).addActivity(any<ShortcutRequest>())
+        assertEquals(1, saveCompleteResults.size)
+        job.cancel()
+    }
+
+    @Test
+    fun `should route save to shortcuts repository when configuration is SHORTCUTS`() = runTest {
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.SHORTCUTS,
+            ),
+        )
+        val newViewModel = ActivityDetailsViewModel(
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+        )
+
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(mockIntent)
+
+        newViewModel.saveShortcut()
+        runCurrent()
+
+        verify(shortcutsRepository).recordShortcut(any())
+        verify(favoritesRepository, never()).addFavorite(any<ShortcutRequest>())
+        verify(recentsRepository, never()).addActivity(any<ShortcutRequest>())
+    }
+
+    @Test
+    fun `should route save to recents repository when configuration is RECENTS`() = runTest {
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.RECENTS,
+            ),
+        )
+        val newViewModel = ActivityDetailsViewModel(
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+        )
+
+        mockedUtil.`when`<Intent> {
+            getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
+        }.thenReturn(mockIntent)
+
+        newViewModel.saveShortcut()
+        runCurrent()
+
+        verify(recentsRepository).addActivity(any<ShortcutRequest>())
+        verify(favoritesRepository, never()).addFavorite(any<ShortcutRequest>())
+        verify(shortcutsRepository, never()).recordShortcut(any())
     }
 
     @Test
@@ -219,11 +324,16 @@ class ActivityDetailsViewModelTest {
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(shortcutPlugin))
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         assertEquals(listOf(launchPlugin), newViewModel.launchPlugins.value)
@@ -241,11 +351,16 @@ class ActivityDetailsViewModelTest {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(launchIntent)
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         newViewModel.selectLaunchPlugin(pluginComp)
@@ -258,7 +373,7 @@ class ActivityDetailsViewModelTest {
     }
 
     @Test
-    fun `should use selected shortcut plugin when creating shortcut`() {
+    fun `should use selected shortcut plugin when creating shortcut`() = runTest {
         val pluginComp = mockComponentName("pkg2", "cls2")
         val shortcutPlugin = PluginInfo("Shortcut Plugin", pluginComp, null)
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(shortcutPlugin))
@@ -268,15 +383,21 @@ class ActivityDetailsViewModelTest {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(shortcutIntent)
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         newViewModel.selectShortcutPlugin(pluginComp)
         newViewModel.createShortcut()
+        runCurrent()
 
         val captor = argumentCaptor<ShortcutRequest>()
         verify(createShortcutUseCase).invoke(captor.capture(), anyOrNull())
@@ -284,7 +405,7 @@ class ActivityDetailsViewModelTest {
     }
 
     @Test
-    fun `should pass launch plugin extra when creating shortcut`() {
+    fun `should pass launch plugin extra when creating shortcut`() = runTest {
         val pluginComp = mockComponentName("pkg", "cls")
         val launchPlugin = PluginInfo("Launch Plugin", pluginComp, null)
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
@@ -294,15 +415,21 @@ class ActivityDetailsViewModelTest {
             getActivityIntentFromIntentDef(anyOrNull(), anyOrNull())
         }.thenReturn(shortcutIntent)
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         newViewModel.selectLaunchPlugin(pluginComp)
         newViewModel.createShortcut()
+        runCurrent()
 
         val captor = argumentCaptor<ShortcutRequest>()
         verify(createShortcutUseCase).invoke(captor.capture(), anyOrNull())
@@ -315,11 +442,16 @@ class ActivityDetailsViewModelTest {
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(mock(), mock()))
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(mock()))
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         assertTrue(newViewModel.showLaunchChooser.value)
@@ -332,15 +464,42 @@ class ActivityDetailsViewModelTest {
         whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(mock()))
         whenever(createShortcutUseCase.getPlugins()).thenReturn(listOf(mock(), mock()))
 
-        val savedStateHandle = SavedStateHandle(mapOf("shortcutRequest" to shortcutRequest))
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutRequest,
+                "configuration" to DetailsConfiguration.ALL,
+            ),
+        )
         val newViewModel = ActivityDetailsViewModel(
-            packageRepository, favoritesRepository, toggleFavoriteUseCase, launchActivityUseCase,
-            createShortcutUseCase, shareActivityUseCase,
-            getActivityIconUseCase, iconLoader, settingsRepository, savedStateHandle,
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
         )
 
         assertFalse(newViewModel.showLaunchChooser.value)
         assertTrue(newViewModel.showShortcutChooser.value)
+    }
+
+    @Test
+    fun `should pre-select plugin when editing shortcut`() {
+        val pluginComp = mockComponentName("pkg", "cls")
+        val launchPlugin = PluginInfo("Launch Plugin", pluginComp, mockIcon())
+        whenever(launchActivityUseCase.getPlugins()).thenReturn(listOf(launchPlugin))
+
+        val shortcutWithPlugin = shortcutRequest.copy(launcherPlugin = pluginComp)
+        val savedStateHandle = SavedStateHandle(
+            mapOf(
+                "shortcutRequest" to shortcutWithPlugin,
+                "configuration" to DetailsConfiguration.SHORTCUTS,
+            ),
+        )
+        val newViewModel = ActivityDetailsViewModel(
+            packageRepository, favoritesRepository, recentsRepository, toggleFavoriteUseCase,
+            launchActivityUseCase, createShortcutUseCase, shareActivityUseCase,
+            getActivityIconUseCase, iconLoader, shortcutsRepository, settingsRepository, savedStateHandle,
+        )
+
+        assertEquals(launchPlugin, newViewModel.selectedLaunchPlugin.value)
     }
 
     @Test

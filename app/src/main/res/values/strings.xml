@@ -4,6 +4,8 @@
     <string name="action_advanced_properties" comment="Button label to show advanced intent properties.">Advanced Properties</string>
     <string name="action_pick_icon_file" comment="Button label to load an icon from a file.">Load from file</string>
     <string name="action_pick_icon_library" comment="Button label to pick an icon from the built-in library.">Pick from library</string>
+    <string name="action_save" comment="Button label to save shortcut changes">Save</string>
+    <string name="action_save_as_new" comment="Menu label to save shortcut as a new entry">Save as New</string>
     <string name="action_view_github" comment="Settings action to view the GitHub project">GitHub project</string>
     <string name="action_view_paid" comment="Settings action to view the paid Pro version on Google Play">Activity Launcher Pro</string>
     <string name="action_view_source" comment="Settings action to view the app's source code on GitHub">View source code</string>
@@ -49,7 +51,8 @@
     <string name="label_shortcut_plugins" comment="Label for the list of available shortcut plugins">Shortcut Plugins</string>
     <string name="nav_all" comment="Tab label showing all installed apps">All</string>
     <string name="nav_favorites" comment="Tab label showing favorited activities">Favorites</string>
-    <string name="nav_recents" comment="Tab label showing recently launched activities">Recents</string>
+    <string name="nav_recents" comment="Tab label showing recently launched activities">Recently Launched</string>
+    <string name="nav_shortcuts" comment="Tab label showing managed shortcuts">Shortcuts</string>
     <string name="settings_github" comment="Settings link to the GitHub project page">GitHub project</string>
     <string name="settings_hide_private" comment="Settings switch to hide private/unexported activities">Hide private activities</string>
     <string name="settings_language" comment="Settings option for app language selection">Language</string>

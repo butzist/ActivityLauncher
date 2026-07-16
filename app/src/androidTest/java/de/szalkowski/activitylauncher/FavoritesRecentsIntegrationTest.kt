@@ -24,6 +24,7 @@ import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
@@ -85,6 +86,9 @@ class FavoritesRecentsIntegrationTest {
     val recentsRepository: RecentsRepository = mock()
 
     @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
+
+    @BindValue
     val getActivityIconUseCase: GetActivityIconUseCase = mock()
 
     @BindValue
@@ -109,6 +113,7 @@ class FavoritesRecentsIntegrationTest {
         whenever(favoritesRepository.getFavoritesFlow()).thenReturn(favoriteFlow)
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
         whenever(recentsRepository.getRecentsFlow()).thenReturn(recentsFlow)
+        whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(kotlinx.coroutines.flow.MutableStateFlow(emptyList()))
 
         whenever(favoritesRepository.isFavorite(any<ComponentName>())).thenAnswer { invocation ->
             favoriteSet.contains(invocation.getArgument(0))
@@ -243,6 +248,58 @@ class FavoritesRecentsIntegrationTest {
             onView(withId(R.id.FavoritesFragment)).perform(click())
             Thread.sleep(2000)
             onView(withId(R.id.rvFavorites)).check(matches(hasMinimumChildCount(1)))
+        } finally {
+            runCatching { scenario.close() }
+        }
+    }
+
+    @Test
+    fun testFavoritesShortClickLaunches() {
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            Thread.sleep(5000)
+            onView(withId(R.id.FavoritesFragment)).perform(click())
+
+            // Add a favorite to click on
+            val componentName = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity")
+            favoritesRepository.addFavorite(componentName)
+            Thread.sleep(2000)
+
+            // Short click
+            onView(withId(R.id.rvFavorites))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+
+            Thread.sleep(2000)
+            verify(activityLauncher).launchActivity(any())
+        } finally {
+            runCatching { scenario.close() }
+        }
+    }
+
+    @Test
+    fun testRecentsShortClickLaunches() {
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            // Mock a recent activity
+            val componentName = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.MainActivity")
+            val icon = getActivityIconUseCase(null, componentName)
+            val request = ShortcutRequest("Test Recent", Intent().setComponent(componentName), icon)
+            recentsFlow.value = listOf(request)
+            Thread.sleep(2000)
+
+            onView(withId(R.id.RecentsFragment)).perform(click())
+            Thread.sleep(2000)
+
+            // Short click
+            onView(withId(R.id.rvRecents))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+
+            Thread.sleep(2000)
+            verify(activityLauncher).launchActivity(any())
         } finally {
             runCatching { scenario.close() }
         }

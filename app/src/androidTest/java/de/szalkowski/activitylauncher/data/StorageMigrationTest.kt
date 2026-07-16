@@ -21,6 +21,7 @@ import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -85,6 +86,9 @@ class StorageMigrationTest {
 
     @BindValue
     val recentsRepository: RecentsRepository = mock()
+
+    @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
 
     private val favoritesPrefs = context.getSharedPreferences("al_favorites", Context.MODE_PRIVATE)
     private val recentsPrefs = context.getSharedPreferences("al_recent_activities", Context.MODE_PRIVATE)

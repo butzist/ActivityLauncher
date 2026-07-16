@@ -28,9 +28,11 @@ import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
 import de.szalkowski.activitylauncher.domain.usecase.packages.GetPackageIconUseCase
 import de.szalkowski.activitylauncher.entrypoint.MainActivity
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.not
 import org.junit.Before
 import org.junit.Rule
@@ -93,6 +95,9 @@ class ActivityDetailsIntegrationTest {
     val recentsRepository: RecentsRepository = mock()
 
     @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
+
+    @BindValue
     val getActivityIconUseCase: GetActivityIconUseCase = mock()
 
     @BindValue
@@ -101,6 +106,7 @@ class ActivityDetailsIntegrationTest {
     private val favoriteSet = mutableSetOf<ComponentName>()
     private val favoriteFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutRequest>>(emptyList())
     private val recentsFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutRequest>>(emptyList())
+    private val shortcutsFlow = kotlinx.coroutines.flow.MutableStateFlow<List<ShortcutsRepository.ManagedShortcut>>(emptyList())
 
     @Inject
     lateinit var systemRepository: FakeSystemPackageRepository
@@ -111,12 +117,15 @@ class ActivityDetailsIntegrationTest {
         favoriteSet.clear()
         favoriteFlow.value = emptyList()
         recentsFlow.value = emptyList()
+        shortcutsFlow.value = emptyList()
 
         whenever(settingsRepository.disclaimerAccepted).thenReturn(true)
         whenever(favoritesRepository.getFavorites()).thenReturn(favoriteSet)
         whenever(favoritesRepository.getFavoritesFlow()).thenReturn(favoriteFlow)
         whenever(recentsRepository.getRecentActivities()).thenReturn(emptyList())
         whenever(recentsRepository.getRecentsFlow()).thenReturn(recentsFlow)
+        whenever(shortcutsRepository.getShortcutsFlow()).thenReturn(shortcutsFlow)
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
 
         whenever(favoritesRepository.isFavorite(any<ComponentName>())).thenAnswer { invocation ->
             favoriteSet.contains(invocation.getArgument<ComponentName>(0))
@@ -267,7 +276,7 @@ class ActivityDetailsIntegrationTest {
             // 4. Test Create Shortcut
             onView(withId(R.id.btCreateShortcut)).perform(scrollTo(), click())
             Thread.sleep(2000)
-            verify(shortcutCreator, atLeastOnce()).createLauncherIcon(any())
+            runBlocking { verify(shortcutCreator, atLeastOnce()).createLauncherIcon(any(), anyOrNull()) }
             TestUtils.dismissSystemDialogs()
             Thread.sleep(1000)
 
@@ -285,8 +294,8 @@ class ActivityDetailsIntegrationTest {
             onView(withContentDescription(R.string.action_advanced_properties)).perform(click())
             Thread.sleep(1000)
             onView(withText(R.string.title_dialog_edit_intent)).check(matches(isDisplayed()))
-            onView(withText(android.R.string.cancel)).perform(click())
-            Thread.sleep(1000)
+            onView(withText(android.R.string.ok)).perform(click())
+            waitForViewToDisappear(R.string.title_dialog_edit_intent)
 
             // 6. Test Load from File Popup
             onView(withId(R.id.ibIconPicker)).perform(scrollTo(), click())
@@ -304,6 +313,36 @@ class ActivityDetailsIntegrationTest {
             onView(withText(R.string.title_dialog_crop_icon)).check(doesNotExist())
         } finally {
             // Use runCatching to avoid cleanup errors masking real test failures
+            runCatching { scenario.close() }
+        }
+    }
+
+    @Test
+    fun testIntentEditorDefaultAction() {
+        val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
+        val scenario = ActivityScenario.launch<MainActivity>(intent)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            // Navigate to ActivityDetails
+            Thread.sleep(5000)
+            onView(withId(R.id.PackageListFragment)).perform(click())
+            Thread.sleep(2000)
+            onView(withId(R.id.rvPackages))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(2000)
+            onView(withId(R.id.rvActivities))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, click()))
+            Thread.sleep(2000)
+
+            // Open Advanced Properties
+            onView(withContentDescription(R.string.action_advanced_properties)).perform(click())
+            Thread.sleep(1000)
+
+            // Check if action is empty or "view"
+            // If the user is correct, it might be "android.intent.action.VIEW" or just "VIEW"
+            onView(withId(R.id.atvAction)).check(matches(withText("")))
+        } finally {
             runCatching { scenario.close() }
         }
     }
@@ -403,6 +442,73 @@ class ActivityDetailsIntegrationTest {
         }
     }
 
+    @Test
+    fun testActivityDetailsVisibility_Favorites() {
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            Thread.sleep(5000)
+            onView(withId(R.id.FavoritesFragment)).perform(click())
+
+            // Add a favorite to click on
+            val componentName = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity")
+            favoritesRepository.addFavorite(componentName)
+            Thread.sleep(2000)
+
+            // Long click to open details
+            onView(withId(R.id.rvFavorites))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, longClick()))
+
+            Thread.sleep(2000)
+
+            // Verify buttons based on FAVORITES configuration
+            onView(withId(R.id.btSave)).check(matches(isDisplayed()))
+            onView(withId(R.id.llCreateShortcut)).check(matches(isDisplayed()))
+            onView(withId(R.id.llLaunch)).check(matches(not(isDisplayed())))
+            onView(withId(R.id.btShareShortcut)).check(matches(isDisplayed()))
+            onView(withId(R.id.btFavorite)).check(matches(isDisplayed()))
+            onView(withId(R.id.tilLaunchPlugin)).check(matches(isDisplayed()))
+        } finally {
+            runCatching { scenario.close() }
+        }
+    }
+
+    @Test
+    fun testActivityDetailsVisibility_Shortcuts() {
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        TestUtils.dismissSystemDialogs()
+        TestUtils.waitForWindowFocus()
+        try {
+            Thread.sleep(5000)
+            onView(withId(R.id.ShortcutsFragment)).perform(click())
+
+            // Mock a shortcut
+            val componentName = ComponentName("de.szalkowski.activitylauncher", "de.szalkowski.activitylauncher.entrypoint.SettingsActivity")
+            val icon = getActivityIconUseCase(null, componentName)
+            val request = ShortcutRequest("Test Shortcut", Intent().setComponent(componentName), icon)
+            val managed = ShortcutsRepository.ManagedShortcut(1L, request, System.currentTimeMillis())
+            shortcutsFlow.value = listOf(managed)
+            Thread.sleep(2000)
+
+            // Long click to edit
+            onView(withId(R.id.rvShortcuts))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<androidx.recyclerview.widget.RecyclerView.ViewHolder>(0, longClick()))
+
+            Thread.sleep(2000)
+
+            // Verify buttons based on SHORTCUTS configuration
+            onView(withId(R.id.btSave)).check(matches(isDisplayed()))
+            onView(withId(R.id.llCreateShortcut)).check(matches(not(isDisplayed())))
+            onView(withId(R.id.llLaunch)).check(matches(isDisplayed()))
+            onView(withId(R.id.btShareShortcut)).check(matches(isDisplayed()))
+            onView(withId(R.id.btFavorite)).check(matches(isDisplayed()))
+            onView(withId(R.id.tilLaunchPlugin)).check(matches(isDisplayed()))
+        } finally {
+            runCatching { scenario.close() }
+        }
+    }
+
     private fun checkIsDisplayed(id: Int): Boolean {
         return try {
             onView(withId(id)).check(matches(isDisplayed()))
@@ -425,5 +531,19 @@ class ActivityDetailsIntegrationTest {
             }
         })
         return text
+    }
+
+    private fun waitForViewToDisappear(textResId: Int, timeoutMs: Long = 10000) {
+        val startTime = System.currentTimeMillis()
+        while (System.currentTimeMillis() - startTime < timeoutMs) {
+            try {
+                onView(withText(textResId)).check(doesNotExist())
+                Thread.sleep(500) // Extra safety to let UI settle
+                return
+            } catch (e: Throwable) {
+                Thread.sleep(500)
+            }
+        }
+        throw AssertionError("View with text resource $textResId still exists after $timeoutMs ms")
     }
 }

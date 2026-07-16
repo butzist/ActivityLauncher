@@ -14,7 +14,9 @@ import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assume.assumeTrue
 import org.junit.Before
@@ -59,6 +61,9 @@ class ShortcutCreatorImplTest {
     val settingsRepository: de.szalkowski.activitylauncher.domain.settings.SettingsRepository = mock()
 
     @BindValue
+    val backupRepository: BackupRepository = mock()
+
+    @BindValue
     val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()
 
     @BindValue
@@ -68,6 +73,9 @@ class ShortcutCreatorImplTest {
     val activityLauncher: de.szalkowski.activitylauncher.domain.launcher.ActivityLauncher = mock()
 
     @BindValue
+    val shortcutsRepository: ShortcutsRepository = mock()
+
+    @BindValue
     lateinit var shortcutCreator: ShortcutCreator
 
     private lateinit var shortcutCreatorImpl: ShortcutCreatorImpl
@@ -75,7 +83,7 @@ class ShortcutCreatorImplTest {
 
     @Before
     fun init() {
-        shortcutCreatorImpl = ShortcutCreatorImpl(context, intentSigner)
+        shortcutCreatorImpl = ShortcutCreatorImpl(context, intentSigner, shortcutsRepository)
         shortcutCreator = shortcutCreatorImpl
         hiltRule.inject()
     }
@@ -90,6 +98,7 @@ class ShortcutCreatorImplTest {
         )
         val signature = "test_signature"
         whenever(intentSigner.signRequest(any<ShortcutRequest>())).thenReturn(signature)
+        runBlocking { whenever(shortcutsRepository.recordShortcut(any())).thenReturn(1L) }
 
         val shortcutManager = mock<ShortcutManager>()
         val mockContext = object : android.content.ContextWrapper(context) {
@@ -104,13 +113,15 @@ class ShortcutCreatorImplTest {
             }
         }
 
-        val shortcutCreatorWithMock = ShortcutCreatorImpl(mockContext, intentSigner)
+        val shortcutCreatorWithMock = ShortcutCreatorImpl(mockContext, intentSigner, shortcutsRepository)
         val request = ShortcutRequest("Test App", Intent().setComponent(componentName), icon)
 
-        shortcutCreatorWithMock.createLauncherIcon(request)
+        runBlocking { shortcutCreatorWithMock.createLauncherIcon(request, 1L) }
 
         val shortcutCaptor = argumentCaptor<android.content.pm.ShortcutInfo>()
         verify(shortcutManager).requestPinShortcut(shortcutCaptor.capture(), isNull())
+
+        runBlocking { verify(shortcutsRepository, never()).recordShortcut(any()) }
 
         val capturedShortcut = shortcutCaptor.firstValue
         assertEquals("Test App", capturedShortcut.shortLabel)

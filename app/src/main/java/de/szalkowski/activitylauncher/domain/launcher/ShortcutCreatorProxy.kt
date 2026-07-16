@@ -5,7 +5,7 @@ import de.szalkowski.activitylauncher.domain.model.PluginInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 
 interface ShortcutCreatorProxy {
-    fun createLauncherIcon(request: ShortcutRequest, plugin: ComponentName? = null)
+    suspend fun createLauncherIcon(request: ShortcutRequest, plugin: ComponentName? = null, shortcutId: Long? = null)
 
     fun hasMultipleHandlers(): Boolean
     fun getPlugins(): List<PluginInfo>

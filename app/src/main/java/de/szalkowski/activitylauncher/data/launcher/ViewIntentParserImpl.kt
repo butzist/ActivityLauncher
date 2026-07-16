@@ -26,8 +26,12 @@ class ViewIntentParserImpl @Inject constructor(
             null
         }
 
+        val name = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME)
+        val iconBundle = intent.getBundleExtra(ShortcutCreator.INTENT_EXTRA_ICON)
+        val icon = iconBundle?.let { IconCompat.createFromBundle(it) }
+
         if (launchIntent != null) {
-            return LaunchRequest(launchIntent, launcherPlugin = launcherPlugin)
+            return LaunchRequest(launchIntent, name = name, icon = icon, launcherPlugin = launcherPlugin)
         }
 
         val component = componentNameFromIntent(intent) ?: return null
@@ -42,8 +46,18 @@ class ViewIntentParserImpl @Inject constructor(
         val appName = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_NAME) ?: ""
         val launchIntentStr = intent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
             ?: intent.getStringExtra(ShortcutCreator.LEGACY_INTENT_EXTRA_INTENT)
-        val launchIntent = launchIntentStr?.let { parseShortcutIntent(it) } ?: return null
-        val component = launchIntent.component ?: return null
+        var launchIntent = launchIntentStr?.let { parseShortcutIntent(it) } ?: return null
+        var component = launchIntent.component ?: return null
+
+        // Unwrap LAUNCH_SHORTCUT if it points back to ShortcutActivity
+        if (launchIntent.action == ShortcutCreator.INTENT_LAUNCH_SHORTCUT) {
+            val unwrappedIntentStr = launchIntent.getStringExtra(ShortcutCreator.INTENT_EXTRA_INTENT)
+            val unwrappedIntent = unwrappedIntentStr?.let { parseShortcutIntent(it) }
+            if (unwrappedIntent?.component != null) {
+                launchIntent = unwrappedIntent
+                component = unwrappedIntent.component!!
+            }
+        }
 
         val iconBundle = intent.getBundleExtra(ShortcutCreator.INTENT_EXTRA_ICON)
         val icon = iconBundle?.let { IconCompat.createFromBundle(it) }

@@ -28,7 +28,7 @@ import de.szalkowski.activitylauncher.domain.external.AdManager
 import de.szalkowski.activitylauncher.domain.external.AnalyticsLogger
 import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.ViewIntentParser
-import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
@@ -135,6 +135,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                 R.id.PackageListFragment,
                 R.id.FavoritesFragment,
                 R.id.RecentsFragment,
+                R.id.ShortcutsFragment,
             ),
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -157,7 +158,7 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     searchContainer?.visibility = View.GONE
                 }
 
-                R.id.FavoritesFragment, R.id.RecentsFragment -> {
+                R.id.FavoritesFragment, R.id.RecentsFragment, R.id.ShortcutsFragment -> {
                     appBarLayout.visibility = View.VISIBLE
                     searchContainer?.visibility = View.GONE
                     params.scrollFlags =
@@ -216,10 +217,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
         if (componentName != null) {
             val shortcutRequest = shortcutRequestFromIntent ?: run {
-                val activityInfo = packageRepository.getActivity(componentName)
-                val icon = getActivityIconUseCase(activityInfo.iconResourceName, componentName)
-                val launchIntent = launchRequest?.intent ?: Intent().setComponent(componentName)
-                ShortcutRequest(activityInfo.name, launchIntent, icon)
+                val launchReq = launchRequest ?: LaunchRequest(Intent().setComponent(componentName))
+                launchReq.toShortcutRequest(packageRepository, getActivityIconUseCase)
             }
 
             val bundle = Bundle().apply {
