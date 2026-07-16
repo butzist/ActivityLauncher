@@ -22,7 +22,6 @@ The project follows a Domain-Driven Design (DDD) structure.
 - `app/`: Main application module
 - `descriptions/`: Store listing descriptions
 - `whatsnew/`: Changelogs/Release notes
-- `update-listing.py` & `update-translations.sh`: Maintenance scripts
 
 ## App Module (`app/src/main/java/de/szalkowski/activitylauncher/`)
 - `domain/`: Domain models and repository/infrastructure interfaces.
@@ -51,6 +50,21 @@ Ads:
     - Specific action performers are named by their role (e.g., `ShortcutCreator`, `ActivitySharer`).
     - Interfaces are defined in `domain`, implementations in `data`.
 - **Use Cases**: Complex business logic should be extracted from Repositories and ViewModels into standalone Use Cases (Interactors) in the `domain` layer.
+- **Translations**:
+    - All `strings.xml` files MUST be kept in sync with the base `values/strings.xml`.
+    - Strings in all resource files MUST be ordered alphabetically by their `name` attribute.
+    - Technical strings and those that should not be translated MUST be placed in `untranslatable.xml` with `translatable="false"`.
+    - Do not translate `whatsnew` files.
+    - **Language-Specific Rules**:
+        - **Serbian (sr-rRS)**: ALWAYS use Cyrillic script.
+        - **Kurdish (ku-rTR)**: ALWAYS use Kurdish Arabic script (Sorani).
+        - **Kurmanji (kmr-rTR)**: ALWAYS use Kurdish Latin script (Hawar).
+
+# Maintenance Scripts
+Located in the `scripts/` directory:
+- `sort-strings.py`: Run this after adding new strings to the base `strings.xml` to synchronize all translation files and maintain alphabetical ordering.
+- `check-strings.py`: Run this to verify that all translations are in sync, have correct placeholders, and do not contain untranslated English strings.
+- `update-listing.py`: Used to update the Play Store listing from resource strings and description files.
 
 # Handling non-FOSS features
 Features that are not free and open-source (like Google Play Services APIs) are abstracted into interfaces in the `domain` layer.
@@ -61,9 +75,10 @@ Always check if the project builds after applying changes.
 When adding new features or modifying existing ones, you **MUST** add or update relevant unit tests and Android (instrumented) tests where possible to ensure correctness and prevent regressions.
 
 ## Relevant Commands
-- **Build Debug APK**: `./gradlew app:assembleDebug`
+- **Build Debug APK**: `./gradlew app:assembleOssNoadsDebug`
 - **Check Lint**: `./gradlew app:lintDebug`
-- **Run Unit Tests**: `./gradlew app:testDebugUnitTest`
+- **Run Unit Tests**: `./gradlew app:testOssNoadsDebugUnitTest`
+- **Run Integration Tests**: `./gradlew app:connectedOssNoadsDebugAndroidTest`
 
 # Code Style and Formatting
 This project uses Spotless for automatic code formatting.
