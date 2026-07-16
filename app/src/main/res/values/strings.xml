@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_clear" comment="Button label to clear all fields in the intent editor.">Clear</string>
     <string name="action_add_category" comment="Button label to add a new intent category. 'Category' is a technical Android Intent term and should usually remain untranslated or be translated according to Android developer terminology.">Add Category</string>
     <string name="action_add_extra" comment="Button label to add a new intent extra. 'Extra' is a technical Android Intent term and should usually remain untranslated or be translated according to Android developer terminology.">Add Extra</string>
     <string name="action_advanced_properties" comment="Button label to show advanced intent properties.">Advanced Properties</string>
+    <string name="action_clear" comment="Button label to clear all fields in the intent editor.">Clear</string>
     <string name="action_pick_icon_file" comment="Button label to load an icon from a file.">Load from file</string>
     <string name="action_pick_icon_library" comment="Button label to pick an icon from the built-in library.">Pick from library</string>
     <string name="action_save" comment="Button label to save shortcut changes">Save</string>
@@ -42,7 +43,6 @@
     <string name="error_invalid_icon_resource" comment="Error message for invalid or non-existent icon resource.">Error: invalid icon resource</string>
     <string name="error_invalid_int" comment="Error message for invalid integer value. 'Integer' is a technical programming term and should usually remain untranslated.">Invalid Integer</string>
     <string name="error_invalid_long" comment="Error message for invalid long value. 'Long' is a technical programming term for a 64-bit integer and should usually remain untranslated.">Invalid Long</string>
-    <string name="filter_count_format" comment="Format for showing current filtered count vs total count">%1$d/%2$d</string>
     <string name="filter_hint" comment="Hint text in the filter search input field">package/action</string>
     <string name="label_class" comment="Form label for the activity class name field. 'Class' refers to the Java/Kotlin class name.">Class</string>
     <string name="label_intent_action" comment="Label for the intent action field. 'Action' is a technical Android Intent term and should usually remain untranslated.">Action</string>

@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">카테고리 추가</string>
     <string name="action_add_extra">Extra 추가</string>
     <string name="action_advanced_properties">고급 속성</string>
+    <string name="action_clear">지우기</string>
     <string name="action_pick_icon_file">파일에서 불러오기</string>
     <string name="action_pick_icon_library">라이브러리에서 선택</string>
+    <string name="action_save">저장</string>
+    <string name="action_save_as_new">새로 저장</string>
     <string name="action_view_github">GitHub 프로젝트</string>
     <string name="action_view_paid">액티비티 런처 프로</string>
     <string name="action_view_source">소스 코드 보기</string>
     <string name="activity_settings">설정</string>
     <string name="app_name">액티비티 런처</string>
+    <string name="backup_export_error">백업 내보내기 실패: %1$s</string>
+    <string name="backup_export_success">백업을 성공적으로 내보냈습니다</string>
+    <string name="backup_import_error">백업 가져오기 실패: %1$s</string>
+    <string name="backup_import_success">백업을 성공적으로 가져왔습니다. 일부 설정은 앱을 다시 시작해야 적용될 수 있습니다.</string>
     <string name="category_title_about">정보</string>
     <string name="category_title_ad_free">광고 없는 버전</string>
+    <string name="category_title_data_management">데이터 관리</string>
     <string name="context_action_edit">바로가기 편집</string>
     <string name="context_action_favorite_add">즐겨찾기에 추가</string>
     <string name="context_action_favorite_remove">즐겨찾기에서 제거</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">유효하지 않은 Long</string>
     <string name="filter_hint">패키지/동작</string>
     <string name="label_class">종류</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">액션</string>
     <string name="label_intent_categories">카테고리</string>
     <string name="label_intent_data">데이터 URI</string>
     <string name="label_intent_extra_key">키</string>
     <string name="label_intent_extra_value">값</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">엑스트라</string>
     <string name="label_intent_mime_type">MIME 유형</string>
     <string name="label_launch_plugins">실행 플러그인</string>
     <string name="label_name">이름</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">바로가기 플러그인</string>
     <string name="nav_all">전체</string>
     <string name="nav_favorites">즐겨찾기</string>
-    <string name="nav_recents">최근</string>
+    <string name="nav_recents">최근 실행</string>
+    <string name="nav_shortcuts">바로가기</string>
+    <string name="settings_backup_export">백업 내보내기</string>
+    <string name="settings_backup_export_summary">즐겨찾기, 최근 실행 항목 및 설정을 파일로 저장합니다</string>
+    <string name="settings_backup_import">백업 가져오기</string>
+    <string name="settings_backup_import_summary">파일에서 즐겨찾기, 최근 실행 항목 및 설정을 복원합니다</string>
     <string name="settings_github">GitHub 프로젝트</string>
     <string name="settings_hide_private">비활성 액티비티 숨김</string>
     <string name="settings_language">언어</string>

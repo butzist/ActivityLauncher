@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">إضافة فئة</string>
     <string name="action_add_extra">إضافة إضافي</string>
     <string name="action_advanced_properties">الخصائص المتقدمة</string>
+    <string name="action_clear">مسح</string>
     <string name="action_pick_icon_file">تحميل من ملف</string>
     <string name="action_pick_icon_library">اختيار من المكتبة</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_save_as_new">حفظ كجديد</string>
     <string name="action_view_github">مشروع GitHub</string>
     <string name="action_view_paid">مشغل النشاط برو</string>
     <string name="action_view_source">عرض الرمز البرمجي الأساس</string>
     <string name="activity_settings">الإعدادات</string>
     <string name="app_name">مشغل النشاط</string>
+    <string name="backup_export_error">فشل تصدير النسخة الاحتياطية: %1$s</string>
+    <string name="backup_export_success">تم تصدير النسخة الاحتياطية بنجاح</string>
+    <string name="backup_import_error">فشل استيراد النسخة الاحتياطية: %1$s</string>
+    <string name="backup_import_success">تم استيراد النسخة الاحتياطية بنجاح. قد تتطلب بعض الإعدادات إعادة تشغيل التطبيق.</string>
     <string name="category_title_about">حول التطبيق</string>
     <string name="category_title_ad_free">إصدارات خالية من الإعلانات</string>
+    <string name="category_title_data_management">إدارة البيانات</string>
     <string name="context_action_edit">تحرير الاختصار</string>
     <string name="context_action_favorite_add">أضف إلى المفضلة</string>
     <string name="context_action_favorite_remove">إزالة من المفضلة</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">إضافات الاختصارات</string>
     <string name="nav_all">الكل</string>
     <string name="nav_favorites">المفضلة</string>
-    <string name="nav_recents">الأخيرة</string>
+    <string name="nav_recents">التي تم إطلاقها مؤخرًا</string>
+    <string name="nav_shortcuts">الاختصارات</string>
+    <string name="settings_backup_export">تصدير نسخة احتياطية</string>
+    <string name="settings_backup_export_summary">حفظ المفضلات، المشغلة حديثاً، والإعدادات في ملف</string>
+    <string name="settings_backup_import">استيراد نسخة احتياطية</string>
+    <string name="settings_backup_import_summary">استعادة المفضلات، المشغلة حديثاً، والإعدادات من ملف</string>
     <string name="settings_github">مشروع GitHub</string>
     <string name="settings_hide_private">إخفاء الأنشطة الخاصة</string>
     <string name="settings_language">اللغة</string>

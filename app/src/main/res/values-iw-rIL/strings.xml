@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">הוסף קטגוריה</string>
     <string name="action_add_extra">הוסף Extra</string>
     <string name="action_advanced_properties">מאפיינים מתקדמים</string>
+    <string name="action_clear">ניקוי</string>
     <string name="action_pick_icon_file">טען מקובץ</string>
     <string name="action_pick_icon_library">בחר מהספרייה</string>
+    <string name="action_save">שמירה</string>
+    <string name="action_save_as_new">שמירה כחדש</string>
     <string name="action_view_github">פרויקט GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">צפה בקוד המקור</string>
     <string name="activity_settings">הגדרות</string>
     <string name="app_name">משגר פעילויות</string>
+    <string name="backup_export_error">ייצוא הגיבוי נכשל: %1$s</string>
+    <string name="backup_export_success">הגיבוי יוצא בהצלחה</string>
+    <string name="backup_import_error">ייבוא הגיבוי נכשל: %1$s</string>
+    <string name="backup_import_success">הגיבוי יובא בהצלחה. חלק מההגדרות עשויות לדרוش הפעלה מחדش של האפליקציה.</string>
     <string name="category_title_about">אודות</string>
     <string name="category_title_ad_free">גרסאות ללא פרסומות</string>
+    <string name="category_title_data_management">ניהול נתונים</string>
     <string name="context_action_edit">ערוך קיצור דרך</string>
     <string name="context_action_favorite_add">הוסף למועדפים</string>
     <string name="context_action_favorite_remove">הסר ממועדפים</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Long לא תקין</string>
     <string name="filter_hint">חבילה/פעולה</string>
     <string name="label_class">מחלקה</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">פעולה</string>
     <string name="label_intent_categories">קטגוריות</string>
     <string name="label_intent_data">URI של הנתונים</string>
     <string name="label_intent_extra_key">מפתח</string>
     <string name="label_intent_extra_value">ערך</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">תוספות</string>
     <string name="label_intent_mime_type">סוג MIME</string>
     <string name="label_launch_plugins">תוספי הפעלה</string>
     <string name="label_name">שם</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">תוספי קיצורי דרך</string>
     <string name="nav_all">הכל</string>
     <string name="nav_favorites">מועדפים</string>
-    <string name="nav_recents">אחרונים</string>
+    <string name="nav_recents">הופעלו לאחרונה</string>
+    <string name="nav_shortcuts">קיצורי דרך</string>
+    <string name="settings_backup_export">ייצוא גיבוי</string>
+    <string name="settings_backup_export_summary">שמור את המועדפים, הופעלו לאחרונה וההגדרות לקובץ</string>
+    <string name="settings_backup_import">ייבוא גיבוי</string>
+    <string name="settings_backup_import_summary">שחזר את המועדפים, הופעלו לאחרונה וההגדרות מקובץ</string>
     <string name="settings_github">פרויקט GitHub</string>
     <string name="settings_hide_private">הסתר פעילויות פרטיות</string>
     <string name="settings_language">שפה</string>

@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Přidat kategorii</string>
     <string name="action_add_extra">Přidat Extra</string>
     <string name="action_advanced_properties">Pokročilé vlastnosti</string>
+    <string name="action_clear">Vymazat</string>
     <string name="action_pick_icon_file">Načíst ze souboru</string>
     <string name="action_pick_icon_library">Vybrat z knihovny</string>
+    <string name="action_save">Uložit</string>
+    <string name="action_save_as_new">Uložit jako nový</string>
     <string name="action_view_github">Projekt na GitHubu</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Zobrazit zdrojový kód</string>
     <string name="activity_settings">Nastavení</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Export zálohy selhal: %1$s</string>
+    <string name="backup_export_success">Záloha byla úspěšně exportována</string>
+    <string name="backup_import_error">Import zálohy selhal: %1$s</string>
+    <string name="backup_import_success">Záloha byla úspěšně importována. Některá nastavení mohou vyžadovat restart aplikace.</string>
     <string name="category_title_about">O aplikaci</string>
     <string name="category_title_ad_free">Verze bez reklam</string>
+    <string name="category_title_data_management">Správa dat</string>
     <string name="context_action_edit">Upravit zástupce</string>
     <string name="context_action_favorite_add">Přidat do oblíbených</string>
     <string name="context_action_favorite_remove">Odebrat z oblíbených</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Pluginy pro zástupce</string>
     <string name="nav_all">Vše</string>
     <string name="nav_favorites">Oblíbené</string>
-    <string name="nav_recents">Nedávné</string>
+    <string name="nav_recents">Nedávno spuštěné</string>
+    <string name="nav_shortcuts">Zkratky</string>
+    <string name="settings_backup_export">Exportovat zálohu</string>
+    <string name="settings_backup_export_summary">Uložte své oblíbené, nedávno spuštěné a nastavení do souboru</string>
+    <string name="settings_backup_import">Importovat zálohu</string>
+    <string name="settings_backup_import_summary">Obnovte své oblíbené, nedávno spuštěné a nastavení ze souboru</string>
     <string name="settings_github">Projekt na GitHubu</string>
     <string name="settings_hide_private">Skrýt soukromé aktivity</string>
     <string name="settings_language">Jazyk</string>

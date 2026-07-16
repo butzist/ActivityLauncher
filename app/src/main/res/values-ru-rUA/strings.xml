@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Добавить категорию</string>
     <string name="action_add_extra">Добавить Extra</string>
     <string name="action_advanced_properties">Расширенные свойства</string>
+    <string name="action_clear">Очистить</string>
     <string name="action_pick_icon_file">Загрузить из файла</string>
     <string name="action_pick_icon_library">Выбрать из библиотеки</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_save_as_new">Сохранить как новый</string>
     <string name="action_view_github">Проект GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Просмотреть исходный код</string>
     <string name="activity_settings">Настройки</string>
     <string name="app_name">Запуск Activity</string>
+    <string name="backup_export_error">Ошибка экспорта резервной копии: %1$s</string>
+    <string name="backup_export_success">Резервная копия успешно экспортирована</string>
+    <string name="backup_import_error">Ошибка импорта резервной копии: %1$s</string>
+    <string name="backup_import_success">Резервная копия успешно импортирована. Некоторые настройки могут потребовать перезапуска приложения.</string>
     <string name="category_title_about">О программе</string>
     <string name="category_title_ad_free">Версии без рекламы</string>
+    <string name="category_title_data_management">Управление данными</string>
     <string name="context_action_edit">Изменить ярлык</string>
     <string name="context_action_favorite_add">Добавить в избранное</string>
     <string name="context_action_favorite_remove">Удалить из избранного</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Неверный Long</string>
     <string name="filter_hint">пакет/действие</string>
     <string name="label_class">Класс</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Действие</string>
     <string name="label_intent_categories">Категории</string>
     <string name="label_intent_data">Data URI</string>
     <string name="label_intent_extra_key">Ключ</string>
     <string name="label_intent_extra_value">Значение</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Дополнительные параметры</string>
     <string name="label_intent_mime_type">MIME Type</string>
     <string name="label_launch_plugins">Плагіни запуску</string>
     <string name="label_name">Имя</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Плагіни ярликів</string>
     <string name="nav_all">Все</string>
     <string name="nav_favorites">Избранное</string>
-    <string name="nav_recents">Недавние</string>
+    <string name="nav_recents">Недавно запущенные</string>
+    <string name="nav_shortcuts">Ярлыки</string>
+    <string name="settings_backup_export">Экспорт резервной копии</string>
+    <string name="settings_backup_export_summary">Сохранение избранного, недавно запущенных и настроек в файл</string>
+    <string name="settings_backup_import">Импорт резервной копии</string>
+    <string name="settings_backup_import_summary">Восстановление избранного, недавно запущенных и настроек из файла</string>
     <string name="settings_github">Проект GitHub</string>
     <string name="settings_hide_private">Скрыть приватные действия</string>
     <string name="settings_language">Язык</string>

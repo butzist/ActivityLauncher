@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Voeg kategorie by</string>
     <string name="action_add_extra">Voeg ekstra by</string>
     <string name="action_advanced_properties">Gevorderde eienskappe</string>
+    <string name="action_clear">Vee uit</string>
     <string name="action_pick_icon_file">Laai vanaf lêer</string>
     <string name="action_pick_icon_library">Kies uit biblioteek</string>
+    <string name="action_save">Stoor</string>
+    <string name="action_save_as_new">Stoor as nuut</string>
     <string name="action_view_github">GitHub-projek</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Bekyk bronkode</string>
     <string name="activity_settings">Instellings</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Kon nie rugsteun uitvoer nie: %1$s</string>
+    <string name="backup_export_success">Rugsteun suksesvol uitgevoer</string>
+    <string name="backup_import_error">Kon nie rugsteun invoer nie: %1$s</string>
+    <string name="backup_import_success">Rugsteun suksesvol ingevoer. Sommige instellings mag \'n programherbegin vereis.</string>
     <string name="category_title_about">Inligting</string>
     <string name="category_title_ad_free">Advertensievrye weergawes</string>
+    <string name="category_title_data_management">Databestuur</string>
     <string name="context_action_edit">Redigeer kortpad</string>
     <string name="context_action_favorite_add">Voeg by gunstelinge</string>
     <string name="context_action_favorite_remove">Verwyder uit gunstelinge</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Kortpad Inproppe</string>
     <string name="nav_all">Almal</string>
     <string name="nav_favorites">Gunstelinge</string>
-    <string name="nav_recents">Onlangs</string>
+    <string name="nav_recents">Onlangs Kävve</string>
+    <string name="nav_shortcuts">Kortpaaaie</string>
+    <string name="settings_backup_export">Voer rugsteun uit</string>
+    <string name="settings_backup_export_summary">Stoor jou gunstelinge, onlangs geloods, en instellings na \'n lêer</string>
+    <string name="settings_backup_import">Voer rugsteun in</string>
+    <string name="settings_backup_import_summary">Herstel jou gunstelinge, onlangs geloods, en instellings vanaf \'n lêer</string>
     <string name="settings_github">GitHub-projek</string>
     <string name="settings_hide_private">Versteek privaat aktiwiteite</string>
     <string name="settings_language">Taal</string>

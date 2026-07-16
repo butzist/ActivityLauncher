@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Añadir categoría</string>
     <string name="action_add_extra">Añadir extra</string>
     <string name="action_advanced_properties">Propiedades avanzadas</string>
+    <string name="action_clear">Borrar</string>
     <string name="action_pick_icon_file">Cargar desde archivo</string>
     <string name="action_pick_icon_library">Elegir de la biblioteca</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_save_as_new">Guardar como nuevo</string>
     <string name="action_view_github">Proyecto de GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Ver código fuente</string>
     <string name="activity_settings">Configuración</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Error al exportar la copia de seguridad: %1$s</string>
+    <string name="backup_export_success">Copia de seguridad exportada con éxito</string>
+    <string name="backup_import_error">Error al importar la copia de seguridad: %1$s</string>
+    <string name="backup_import_success">Copia de seguridad importada con éxito. Algunos ajustes pueden requerir un reinicio de la aplicación.</string>
     <string name="category_title_about">Acerca de</string>
     <string name="category_title_ad_free">Versiones sin anuncios</string>
+    <string name="category_title_data_management">Gestión de datos</string>
     <string name="context_action_edit">Editar acceso directo</string>
     <string name="context_action_favorite_add">Añadir a favoritos</string>
     <string name="context_action_favorite_remove">Eliminar de favoritos</string>
@@ -50,12 +58,17 @@
     <string name="label_shortcut_plugins">Plugins de accesos directos</string>
     <string name="nav_all">Todo</string>
     <string name="nav_favorites">Favoritos</string>
-    <string name="nav_recents">Recientes</string>
+    <string name="nav_recents">Lanzados recientemente</string>
+    <string name="nav_shortcuts">Accesos directos</string>
+    <string name="settings_backup_export">Exportar copia de seguridad</string>
+    <string name="settings_backup_export_summary">Guarda tus favoritos, lanzados recientemente y ajustes en un archivo</string>
+    <string name="settings_backup_import">Importar copia de seguridad</string>
+    <string name="settings_backup_import_summary">Restaura tus favoritos, lanzados recientemente y ajustes desde un archivo</string>
     <string name="settings_github">Proyecto de GitHub</string>
     <string name="settings_hide_private">Ocultar actividades privadas</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
-    <string name="settings_summary_github">Puedes descargar el APK precompilado del proyecto de código abierto Activity Launcher en GitHub. Los usuarios avanzados también pueden explorar el código fuente, apoyar a los desarrolladores y contribuir con traducciones o "pull requests".</string>
+    <string name="settings_summary_github">Puedes descargar el APK precompilado del proyecto de código abierto Activity Launcher en GitHub. Los usuarios avanzados también pueden explorar el código fuente, apoyar los desarrolladores y contribuir con traducciones o \"pull requests\".</string>
     <string name="settings_summary_hide_private">Ocultar actividades privadas (no exportadas o desactivadas) que no pueden iniciarse sin acceso root</string>
     <string name="settings_summary_pro_version">¿Quieres apoyar la app y eliminar los anuncios? Obtén Activity Launcher Pro en Google Play: ayuda a financiar el desarrollo y es completamente de código abierto.</string>
     <string name="settings_summary_support_discord">Únete a nuestro servidor de Discord para soporte, solicitudes de funciones y discusiones comunitarias.</string>

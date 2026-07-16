@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Ajouter une catégorie</string>
     <string name="action_add_extra">Ajouter un extra</string>
     <string name="action_advanced_properties">Propriétés avancées</string>
+    <string name="action_clear">Effacer</string>
     <string name="action_pick_icon_file">Charger depuis un fichier</string>
     <string name="action_pick_icon_library">Choisir dans la bibliothèque</string>
+    <string name="action_save">Enregistrer</string>
+    <string name="action_save_as_new">Enregistrer comme nouveau</string>
     <string name="action_view_github">Projet GitHub</string>
     <string name="action_view_paid">Lanceur d\'activités Pro</string>
     <string name="action_view_source">Afficher le code source</string>
     <string name="activity_settings">Paramètres</string>
     <string name="app_name">Lanceur d\'activité</string>
+    <string name="backup_export_error">Échec de l\'exportation de la sauvegarde : %1$s</string>
+    <string name="backup_export_success">Sauvegarde exportée avec succès</string>
+    <string name="backup_import_error">Échec de l\'importation de la sauvegarde : %1$s</string>
+    <string name="backup_import_success">Sauvegarde importée avec succès. Certains paramètres peuvent nécessiter un redémarrage de l\'application.</string>
     <string name="category_title_about">À propos</string>
     <string name="category_title_ad_free">Versions sans publicité</string>
+    <string name="category_title_data_management">Gestion des données</string>
     <string name="context_action_edit">Modifier le raccourci</string>
     <string name="context_action_favorite_add">Ajouter aux favoris</string>
     <string name="context_action_favorite_remove">Retirer des favoris</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Greffons de raccourci</string>
     <string name="nav_all">Tout</string>
     <string name="nav_favorites">Favoris</string>
-    <string name="nav_recents">Récents</string>
+    <string name="nav_recents">Lancés récemment</string>
+    <string name="nav_shortcuts">Raccourcis</string>
+    <string name="settings_backup_export">Exporter la sauvegarde</string>
+    <string name="settings_backup_export_summary">Enregistrez vos favoris, les lancements récents et les paramètres dans un fichier</string>
+    <string name="settings_backup_import">Importer la sauvegarde</string>
+    <string name="settings_backup_import_summary">Restaurez vos favoris, les lancements récents et les paramètres à partir d\'un fichier</string>
     <string name="settings_github">Projet GitHub</string>
     <string name="settings_hide_private">Masquer les activités privées</string>
     <string name="settings_language">Langue</string>

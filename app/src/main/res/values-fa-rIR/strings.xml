@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">افزودن دسته</string>
     <string name="action_add_extra">افزودن اکسترا</string>
     <string name="action_advanced_properties">ویژگی‌های پیشرفته</string>
+    <string name="action_clear">پاک‌سازی</string>
     <string name="action_pick_icon_file">بارگذاری از فایل</string>
     <string name="action_pick_icon_library">انتخاب از کتابخانه</string>
+    <string name="action_save">ذخیره</string>
+    <string name="action_save_as_new">ذخیره به عنوان جدید</string>
     <string name="action_view_github">پروژه گیت هاب</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">مشاهده کد منبع</string>
     <string name="activity_settings">تنظيمات</string>
     <string name="app_name">اکتیویتی لانچر</string>
+    <string name="backup_export_error">صادر کردن پشتیبان ناموفق بود: %1$s</string>
+    <string name="backup_export_success">پشتیبان با موفقیت صادر شد</string>
+    <string name="backup_import_error">وارد کردن پشتیبان ناموفق بود: %1$s</string>
+    <string name="backup_import_success">پشتیبان با موفقیت وارد شد. برخی از تنظیمات ممکن است نیاز به راه‌اندازی مجدد برنامه داشته باشند.</string>
     <string name="category_title_about">درباره</string>
     <string name="category_title_ad_free">نسخه های بدون تبلیغات</string>
+    <string name="category_title_data_management">مدیریت داده‌ها</string>
     <string name="context_action_edit">ویرایش میان‌بر</string>
     <string name="context_action_favorite_add">افزودن به علاقه‌مندی‌ها</string>
     <string name="context_action_favorite_remove">حذف از علاقه‌مندی‌ها</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">پلاگین‌های میانبر</string>
     <string name="nav_all">همه</string>
     <string name="nav_favorites">مورد علاقه</string>
-    <string name="nav_recents">اخیر</string>
+    <string name="nav_recents">اخيراً اجرا شده</string>
+    <string name="nav_shortcuts">میان‌برها</string>
+    <string name="settings_backup_export">صادر کردن پشتیبان</string>
+    <string name="settings_backup_export_summary">ذخیره علاقه‌مندی‌ها، موارد اخیر و تنظیمات در یک فایل</string>
+    <string name="settings_backup_import">وارد کردن پشتیبان</string>
+    <string name="settings_backup_import_summary">بازیابی علاقه‌مندی‌ها، موارد اخیر و تنظیمات از یک فایل</string>
     <string name="settings_github">پروژه گیت هاب</string>
     <string name="settings_hide_private">پنهان‌سازی اکتیویتی‌های خصوصی</string>
     <string name="settings_language">زبان</string>

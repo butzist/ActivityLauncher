@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Додај категорију</string>
     <string name="action_add_extra">Додај Extra</string>
     <string name="action_advanced_properties">Напредна својства</string>
+    <string name="action_clear">Обриши</string>
     <string name="action_pick_icon_file">Учитај из датотеке</string>
     <string name="action_pick_icon_library">Изабери из библиотеке</string>
+    <string name="action_save">Сачувај</string>
+    <string name="action_save_as_new">Сачувај као ново</string>
     <string name="action_view_github">GitHub пројекат</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Прикажи изворни код</string>
     <string name="activity_settings">Подешавања</string>
     <string name="app_name">Покретач Активности</string>
+    <string name="backup_export_error">Неуспео извоз резервне копије: %1$s</string>
+    <string name="backup_export_success">Резервна копија је успешно извезена</string>
+    <string name="backup_import_error">Неуспео увоз резервне копије: %1$s</string>
+    <string name="backup_import_success">Резервна копија је успешно увезена. Нека подешавања могу захтевати поновно покретање апликације.</string>
     <string name="category_title_about">О апликацији</string>
     <string name="category_title_ad_free">Верзије без реклама</string>
+    <string name="category_title_data_management">Управљање подацима</string>
     <string name="context_action_edit">Уреди пречицу</string>
     <string name="context_action_favorite_add">Додај у омиљене</string>
     <string name="context_action_favorite_remove">Уклони из омиљених</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Неважећи Long</string>
     <string name="filter_hint">пакет/акција</string>
     <string name="label_class">Класа</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Дејство</string>
     <string name="label_intent_categories">Категорије</string>
-    <string name="label_intent_data">Data URI</string>
+    <string name="label_intent_data">URI података</string>
     <string name="label_intent_extra_key">Кључ</string>
     <string name="label_intent_extra_value">Вредност</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Екстри</string>
     <string name="label_intent_mime_type">MIME Type</string>
     <string name="label_launch_plugins">Додаци за покретање</string>
     <string name="label_name">Име</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Додаци за пречице</string>
     <string name="nav_all">Све</string>
     <string name="nav_favorites">Омиљено</string>
-    <string name="nav_recents">Недавне</string>
+    <string name="nav_recents">Недавно покренуто</string>
+    <string name="nav_shortcuts">Пречице</string>
+    <string name="settings_backup_export">Извези резервну копију</string>
+    <string name="settings_backup_export_summary">Сачувајте омиљене, недавно покренуте и подешавања у датотеку</string>
+    <string name="settings_backup_import">Увези резервну копију</string>
+    <string name="settings_backup_import_summary">Повратите омиљене, недавно покренуте и подешавања из датотеке</string>
     <string name="settings_github">GitHub пројекат</string>
     <string name="settings_hide_private">Сакриј приватне активности</string>
     <string name="settings_language">Језик</string>

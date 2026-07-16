@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">添加类别</string>
     <string name="action_add_extra">添加 Extra</string>
     <string name="action_advanced_properties">高级属性</string>
+    <string name="action_clear">清除</string>
     <string name="action_pick_icon_file">从文件加载</string>
     <string name="action_pick_icon_library">从库中选取</string>
+    <string name="action_save">保存</string>
+    <string name="action_save_as_new">保存为新</string>
     <string name="action_view_github">GitHub 项目</string>
     <string name="action_view_paid">活动启动器专业版</string>
     <string name="action_view_source">查看源代码</string>
     <string name="activity_settings">设置</string>
     <string name="app_name">活动启动器</string>
+    <string name="backup_export_error">备份导出失败：%1$s</string>
+    <string name="backup_export_success">备份导出成功</string>
+    <string name="backup_import_error">备份导入失败：%1$s</string>
+    <string name="backup_import_success">备份导入成功。某些设置可能需要重新启动应用。</string>
     <string name="category_title_about">关于</string>
     <string name="category_title_ad_free">无广告版本</string>
+    <string name="category_title_data_management">数据管理</string>
     <string name="context_action_edit">编辑快捷方式</string>
     <string name="context_action_favorite_add">添加到收藏</string>
     <string name="context_action_favorite_remove">从收藏中移除</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">无效的 Long</string>
     <string name="filter_hint">包/操作</string>
     <string name="label_class">类</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">动作</string>
     <string name="label_intent_categories">类别 (Categories)</string>
     <string name="label_intent_data">数据 URI</string>
     <string name="label_intent_extra_key">键 (Key)</string>
     <string name="label_intent_extra_value">值 (Value)</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">附加参数</string>
     <string name="label_intent_mime_type">MIME 类型</string>
     <string name="label_launch_plugins">启动插件</string>
     <string name="label_name">名称</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">快捷方式插件</string>
     <string name="nav_all">全部</string>
     <string name="nav_favorites">收藏</string>
-    <string name="nav_recents">最近</string>
+    <string name="nav_recents">最近启动</string>
+    <string name="nav_shortcuts">快捷方式</string>
+    <string name="settings_backup_export">导出备份</string>
+    <string name="settings_backup_export_summary">将您的收藏、最近启动和设置保存到文件</string>
+    <string name="settings_backup_import">导入备份</string>
+    <string name="settings_backup_import_summary">从文件恢复您的收藏、最近启动和设置</string>
     <string name="settings_github">GitHub 项目</string>
     <string name="settings_hide_private">隐藏私有活动</string>
     <string name="settings_language">语言</string>

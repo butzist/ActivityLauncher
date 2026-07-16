@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">เพิ่มหมวดหมู่</string>
     <string name="action_add_extra">เพิ่ม Extra</string>
     <string name="action_advanced_properties">คุณสมบัติขั้นสูง</string>
+    <string name="action_clear">ล้าง</string>
     <string name="action_pick_icon_file">โหลดจากไฟล์</string>
     <string name="action_pick_icon_library">เลือกจากคลัง</string>
+    <string name="action_save">บันทึก</string>
+    <string name="action_save_as_new">บันทึกเป็นรายการใหม่</string>
     <string name="action_view_github">โปรเจ็กต์ GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">ดูซอร์สโค้ด</string>
     <string name="activity_settings">การตั้งค่า</string>
     <string name="app_name">ตัวเรียกใช้งาน Activity</string>
+    <string name="backup_export_error">ไม่สามารถส่งออกข้อมูลสำรอง: %1$s</string>
+    <string name="backup_export_success">ส่งออกข้อมูลสำรองสำเร็จแล้ว</string>
+    <string name="backup_import_error">ไม่สามารถนำเข้าข้อมูลสำรอง: %1$s</string>
+    <string name="backup_import_success">นำเข้าข้อมูลสำรองสำเร็จแล้ว การตั้งค่าบางอย่างอาจต้องรีสตาร์ทแอป</string>
     <string name="category_title_about">เกี่ยวกับ</string>
     <string name="category_title_ad_free">เวอร์ชันไม่มีโฆษณา</string>
+    <string name="category_title_data_management">การจัดการข้อมูล</string>
     <string name="context_action_edit">แก้ไขทางลัด</string>
     <string name="context_action_favorite_add">เพิ่มในรายการโปรด</string>
     <string name="context_action_favorite_remove">ลบออกจากรายการโปรด</string>
@@ -37,7 +45,7 @@
     <string name="error_invalid_long">Long ไม่ถูกต้อง</string>
     <string name="filter_hint">แพ็คเกจ/การดำเนินการ</string>
     <string name="label_class">ระดับ</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">การดำเนินการ</string>
     <string name="label_intent_categories">หมวดหมู่ (Categories)</string>
     <string name="label_intent_data">ข้อมูล URI</string>
     <string name="label_intent_extra_key">คีย์ (Key)</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">ปลั๊กอินทางลัด</string>
     <string name="nav_all">ทั้งหมด</string>
     <string name="nav_favorites">รายการโปรด</string>
-    <string name="nav_recents">ล่าสุด</string>
+    <string name="nav_recents">เปิดตัวล่าสุด</string>
+    <string name="nav_shortcuts">ทางลัด</string>
+    <string name="settings_backup_export">ส่งออกข้อมูลสำรอง</string>
+    <string name="settings_backup_export_summary">บันทึกรายการโปรด ประวัติการใช้งาน และการตั้งค่าลงในไฟล์</string>
+    <string name="settings_backup_import">นำเข้าข้อมูลสำรอง</string>
+    <string name="settings_backup_import_summary">คืนค่ารายการโปรด ประวัติการใช้งาน และการตั้งค่าจากไฟล์</string>
     <string name="settings_github">โปรเจ็กต์ GitHub</string>
     <string name="settings_hide_private">ซ่อน activities ส่วนตัว</string>
     <string name="settings_language">ภาษา</string>

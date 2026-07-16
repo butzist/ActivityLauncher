@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Lisää kategoria</string>
     <string name="action_add_extra">Lisää extra</string>
     <string name="action_advanced_properties">Lisäominaisuudet</string>
+    <string name="action_clear">Tyhjennä</string>
     <string name="action_pick_icon_file">Lataa tiedostosta</string>
     <string name="action_pick_icon_library">Valitse kirjastosta</string>
+    <string name="action_save">Tallenna</string>
+    <string name="action_save_as_new">Tallenna uutena</string>
     <string name="action_view_github">GitHub-projekti</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Näytä lähdekoodi</string>
     <string name="activity_settings">Asetukset</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Varmuuskopion vienti epäonnistui: %1$s</string>
+    <string name="backup_export_success">Varmuuskopio viety onnistuneesti</string>
+    <string name="backup_import_error">Varmuuskopion tuonti epäonnistui: %1$s</string>
+    <string name="backup_import_success">Varmuuskopio tuotu onnistuneesti. Jotkin asetukset saattavat vaatia sovelluksen uudelleenkäynnistyksen.</string>
     <string name="category_title_about">Tietoja</string>
     <string name="category_title_ad_free">Mainoksettomat versiot</string>
+    <string name="category_title_data_management">Tiedonhallinta</string>
     <string name="context_action_edit">Muokkaa pikakuvaketta</string>
     <string name="context_action_favorite_add">Lisää suosikkeihin</string>
     <string name="context_action_favorite_remove">Poista suosikeista</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Pikakuvakeliitännäiset</string>
     <string name="nav_all">Kaikki</string>
     <string name="nav_favorites">Suosikit</string>
-    <string name="nav_recents">Viimeisimmät</string>
+    <string name="nav_recents">Viimeksi käynnistetyt</string>
+    <string name="nav_shortcuts">Pikakuvakkeet</string>
+    <string name="settings_backup_export">Vie varmuuskopio</string>
+    <string name="settings_backup_export_summary">Tallenna suosikkisi, viimeksi lánçatut ja asetukset tiedostoon</string>
+    <string name="settings_backup_import">Tuo varmuuskopio</string>
+    <string name="settings_backup_import_summary">Palauta suosikkisi, viimeksi lánçatut ja asetukset tiedostosta</string>
     <string name="settings_github">GitHub-projekti</string>
     <string name="settings_hide_private">Piilota yksityiset toiminnot</string>
     <string name="settings_language">Kieli</string>

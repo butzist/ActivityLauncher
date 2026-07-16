@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Adicionar categoria</string>
     <string name="action_add_extra">Adicionar Extra</string>
     <string name="action_advanced_properties">Propriedades avançadas</string>
+    <string name="action_clear">Limpar</string>
     <string name="action_pick_icon_file">Carregar de ficheiro</string>
     <string name="action_pick_icon_library">Escolher da biblioteca</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_save_as_new">Guardar como novo</string>
     <string name="action_view_github">Projeto no GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Ver código fonte</string>
     <string name="activity_settings">Definições</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Falha ao exportar cópia de segurança: %1$s</string>
+    <string name="backup_export_success">Cópia de segurança exportada com sucesso</string>
+    <string name="backup_import_error">Falha ao importar cópia de segurança: %1$s</string>
+    <string name="backup_import_success">Cópia de segurança importada com sucesso. Algumas definições podem exigir o reinício da aplicação.</string>
     <string name="category_title_about">Sobre</string>
     <string name="category_title_ad_free">Versões sem anúncios</string>
+    <string name="category_title_data_management">Gestão de dados</string>
     <string name="context_action_edit">Editar atalho</string>
     <string name="context_action_favorite_add">Adicionar aos favoritos</string>
     <string name="context_action_favorite_remove">Remover dos favoritos</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Plugins de atalho</string>
     <string name="nav_all">Todas</string>
     <string name="nav_favorites">Favoritos</string>
-    <string name="nav_recents">Recentes</string>
+    <string name="nav_recents">Lançados recentemente</string>
+    <string name="nav_shortcuts">Atalhos</string>
+    <string name="settings_backup_export">Exportar cópia de segurança</string>
+    <string name="settings_backup_export_summary">Guarde os seus favoritos, lançados recentemente e definições num ficheiro</string>
+    <string name="settings_backup_import">Importar cópia de segurança</string>
+    <string name="settings_backup_import_summary">Restaure os seus favoritos, lançados recentemente e definições a partir de um ficheiro</string>
     <string name="settings_github">Projeto no GitHub</string>
     <string name="settings_hide_private">Ocultar atividades privadas</string>
     <string name="settings_language">Idioma</string>

@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Pridať kategóriu</string>
     <string name="action_add_extra">Pridať Extra</string>
     <string name="action_advanced_properties">Rozšírené vlastnosti</string>
+    <string name="action_clear">Vymazať</string>
     <string name="action_pick_icon_file">Načítať zo súboru</string>
     <string name="action_pick_icon_library">Vybrať z knižnice</string>
+    <string name="action_save">Uložiť</string>
+    <string name="action_save_as_new">Uložiť ako nové</string>
     <string name="action_view_github">Projekt GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Zobraziť zdrojový kód</string>
     <string name="activity_settings">Nastavenie</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Export zálohy zlyhal: %1$s</string>
+    <string name="backup_export_success">Záloha bola úspešne exportovaná</string>
+    <string name="backup_import_error">Import zálohy zlyhal: %1$s</string>
+    <string name="backup_import_success">Záloha bola úspešne importovaná. Niektoré nastavenia môžu vyžadovať reštart aplikácie.</string>
     <string name="category_title_about">O aplikácii</string>
     <string name="category_title_ad_free">Verzie bez reklám</string>
+    <string name="category_title_data_management">Správa údajov</string>
     <string name="context_action_edit">Upraviť skratku</string>
     <string name="context_action_favorite_add">Pridať do obľúbených</string>
     <string name="context_action_favorite_remove">Odstrániť z obľúbených</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Pluginy na skratky</string>
     <string name="nav_all">Všetky</string>
     <string name="nav_favorites">Obľúbené</string>
-    <string name="nav_recents">Nedávne</string>
+    <string name="nav_recents">Nedávno spustené</string>
+    <string name="nav_shortcuts">Skratky</string>
+    <string name="settings_backup_export">Exportovať zálohu</string>
+    <string name="settings_backup_export_summary">Uložiť obľúbené položky, nedávno spustené a nastavenia do súboru</string>
+    <string name="settings_backup_import">Importovať zálohu</string>
+    <string name="settings_backup_import_summary">Obnoviť obľúbené položky, nedávno spustené a nastavenia zo súboru</string>
     <string name="settings_github">Projekt GitHub</string>
     <string name="settings_hide_private">Skryť súkromné ​​aktivity</string>
     <string name="settings_language">Jazyk</string>

@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Ավելացնել կատեգորիա</string>
     <string name="action_add_extra">Ավելացնել extra</string>
     <string name="action_advanced_properties">Ընդլայնված հատկություններ</string>
+    <string name="action_clear">Մաքրել</string>
     <string name="action_pick_icon_file">Բեռնել ֆայլից</string>
     <string name="action_pick_icon_library">Ընտրել գրադարանից</string>
+    <string name="action_save">Պահպանել</string>
+    <string name="action_save_as_new">Պահպանել որպես նոր</string>
     <string name="action_view_github">GitHub նախագիծ</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Դիտել սկզբնական կոդը</string>
     <string name="activity_settings">Կարգավորումներ</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Պահուստային պատճենի արտահանումը ձախողվեց՝ %1$s</string>
+    <string name="backup_export_success">Պահուստային պատճենը հաջողությամբ արտահանվեց</string>
+    <string name="backup_import_error">Պահուստային պատճենի ներմուծումը ձախողվեց՝ %1$s</string>
+    <string name="backup_import_success">Պահուստային պատճենը հաջողությամբ ներմուծվեց: Որոշ կարգավորումներ կարող են պահանջել հավելվածի վերագործարկում:</string>
     <string name="category_title_about">Մասին</string>
     <string name="category_title_ad_free">Առանց գովազդի տարբերակներ</string>
+    <string name="category_title_data_management">Տվյալների կառավարում</string>
     <string name="context_action_edit">Խմբագրել դյուրանցումը</string>
     <string name="context_action_favorite_add">Ավելացնել սիրելիներին</string>
     <string name="context_action_favorite_remove">Հեռացնել սիրելիներից</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Պիտակի պլագիններ</string>
     <string name="nav_all">Բոլոր</string>
     <string name="nav_favorites">Սիրելի</string>
-    <string name="nav_recents">Վերջին</string>
+    <string name="nav_recents">Վերջերս բացված</string>
+    <string name="nav_shortcuts">Դյուրանցումներ</string>
+    <string name="settings_backup_export">Արտահանել պահուստային պատճենը</string>
+    <string name="settings_backup_export_summary">Պահպանեք ձեր սիրելիները, վերջերս բացվածները և կարգավորումները ֆայլում</string>
+    <string name="settings_backup_import">Ներմուծել պահուստային պատճենը</string>
+    <string name="settings_backup_import_summary">Վերականգնեք ձեր սիրելիները, վերջերս բացվածները և կարգավորումները ֆայլից</string>
     <string name="settings_github">GitHub նախագիծ</string>
     <string name="settings_hide_private">Թաքցնել անձնական գործողությունները</string>
     <string name="settings_language">Լեզու</string>

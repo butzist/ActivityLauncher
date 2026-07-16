@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Afegeix una categoria</string>
     <string name="action_add_extra">Afegeix un extra</string>
     <string name="action_advanced_properties">Propietats avançades</string>
+    <string name="action_clear">Neteja</string>
     <string name="action_pick_icon_file">Carrega des d\'un fitxer</string>
     <string name="action_pick_icon_library">Tria de la biblioteca</string>
+    <string name="action_save">Desa</string>
+    <string name="action_save_as_new">Desa com a nou</string>
     <string name="action_view_github">Projecte GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Visualitza el codi font</string>
     <string name="activity_settings">Configuració</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">No s\'ha pogut exportar la còpia de seguretat: %1$s</string>
+    <string name="backup_export_success">La còpia de seguretat s\'ha exportat correctament</string>
+    <string name="backup_import_error">No s\'ha pogut importar la còpia de seguretat: %1$s</string>
+    <string name="backup_import_success">La còpia de seguretat s\'ha importat correctament. Alguns paràmetres poden requerir reiniciar l\'aplicació.</string>
     <string name="category_title_about">Quant a</string>
     <string name="category_title_ad_free">Versions sense anuncis</string>
+    <string name="category_title_data_management">Gestió de dades</string>
     <string name="context_action_edit">Edita la drecera</string>
     <string name="context_action_favorite_add">Afegeix als favorits</string>
     <string name="context_action_favorite_remove">Elimina dels favorits</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Connectors de drecera</string>
     <string name="nav_all">Totes</string>
     <string name="nav_favorites">Preferits</string>
-    <string name="nav_recents">Recents</string>
+    <string name="nav_recents">Llançats recentment</string>
+    <string name="nav_shortcuts">Dreceres</string>
+    <string name="settings_backup_export">Exporta la còpia de seguretat</string>
+    <string name="settings_backup_export_summary">Desa els teus favorits, els llançats recentment i la configuració en un fitxer</string>
+    <string name="settings_backup_import">Importa la còpia de seguretat</string>
+    <string name="settings_backup_import_summary">Restaura els teus favorits, els llançats recentment i la configuració des d\'un fitxer</string>
     <string name="settings_github">Projecte GitHub</string>
     <string name="settings_hide_private">Amaga les activitats privades</string>
     <string name="settings_language">Idioma</string>

@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Segh chel</string>
     <string name="action_add_extra">Extra chel</string>
     <string name="action_advanced_properties">chu\' Duj</string>
+    <string name="action_clear">yIteq</string>
     <string name="action_pick_icon_file">\'ochvo\' yIghoS</string>
     <string name="action_pick_icon_library">nInvo\' yIwiv</string>
+    <string name="action_save">yIpol</string>
+    <string name="action_save_as_new">chu\' pol</string>
     <string name="action_view_github">GitHub pong</string>
     <string name="action_view_paid">Qu\' taghmoHwI\' Pro law\'</string>
     <string name="action_view_source">mung De\' legh</string>
     <string name="activity_settings">SeHlaw</string>
     <string name="app_name">Qu\' taghmoHwI\'</string>
+    <string name="backup_export_error">Backup pollaHbe\': %1$s</string>
+    <string name="backup_export_success">Backup pollu\'pu\'</string>
+    <string name="backup_import_error">Backup pollaHbe\': %1$s</string>
+    <string name="backup_import_success">Backup pollu\'pu\'. choHmeyvaD nIqHom chu\'qa\'nIS.</string>
     <string name="category_title_about">De\' ghItlh</string>
     <string name="category_title_ad_free">meywI\'pu\' Hoch</string>
+    <string name="category_title_data_management">De\' SeH</string>
     <string name="context_action_edit">qIgh DI\'</string>
     <string name="context_action_favorite_add">yIchenmoH</string>
     <string name="context_action_favorite_remove">yIchenmoH</string>
@@ -53,6 +61,11 @@ qaSpu\' GitHubDaq Do\'Ha\' \'ej Heghbe\' law\' lo\'. De\'vamDaq mIw ghu\'vam Qap
     <string name="nav_all">Hoch</string>
     <string name="nav_favorites">yIchenmoH</string>
     <string name="nav_recents">potlh</string>
+    <string name="nav_shortcuts">qIghmey</string>
+    <string name="settings_backup_export">Backup yIlan</string>
+    <string name="settings_backup_export_summary">De\' lI\' pol</string>
+    <string name="settings_backup_import">Backup yIlaw\'</string>
+    <string name="settings_backup_import_summary">De\' lI\' choHqa\'</string>
     <string name="settings_github">GitHub pong</string>
     <string name="settings_hide_private">\'em Qu\' So\'</string>
     <string name="settings_language">Hol</string>

@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Thêm danh mục</string>
     <string name="action_add_extra">Thêm Extra</string>
     <string name="action_advanced_properties">Thuộc tính nâng cao</string>
+    <string name="action_clear">Xóa</string>
     <string name="action_pick_icon_file">Tải từ tệp</string>
     <string name="action_pick_icon_library">Chọn từ thư viện</string>
+    <string name="action_save">Lưu</string>
+    <string name="action_save_as_new">Lưu mới</string>
     <string name="action_view_github">Dự án GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Xem mã nguồn</string>
     <string name="activity_settings">Cài đặt</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Xuất bản sao lưu thất bại: %1$s</string>
+    <string name="backup_export_success">Xuất bản sao lưu thành công</string>
+    <string name="backup_import_error">Nhập bản sao lưu thất bại: %1$s</string>
+    <string name="backup_import_success">Nhập bản sao lưu thành công. Một số cài đặt có thể yêu cầu khởi động lại ứng dụng.</string>
     <string name="category_title_about">Giới thiệu</string>
     <string name="category_title_ad_free">Phiên bản không quảng cáo</string>
+    <string name="category_title_data_management">Quản lý dữ liệu</string>
     <string name="context_action_edit">Chỉnh sửa lối tắt</string>
     <string name="context_action_favorite_add">Thêm vào yêu thích</string>
     <string name="context_action_favorite_remove">Xóa khỏi yêu thích</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Long không hợp lệ</string>
     <string name="filter_hint">gói/hành động</string>
     <string name="label_class">Cấp</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Hành động</string>
     <string name="label_intent_categories">Danh mục (Categories)</string>
     <string name="label_intent_data">URI dữ liệu</string>
     <string name="label_intent_extra_key">Khóa (Key)</string>
     <string name="label_intent_extra_value">Giá trị (Value)</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Thông tin bổ sung</string>
     <string name="label_intent_mime_type">Loại MIME</string>
     <string name="label_launch_plugins">Plugin khởi chạy</string>
     <string name="label_name">Tên</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Plugin phím tắt</string>
     <string name="nav_all">Tất cả</string>
     <string name="nav_favorites">Yêu thích</string>
-    <string name="nav_recents">Gần đây</string>
+    <string name="nav_recents">Khởi chạy gần đây</string>
+    <string name="nav_shortcuts">Phím tắt</string>
+    <string name="settings_backup_export">Xuất bản sao lưu</string>
+    <string name="settings_backup_export_summary">Lưu các mục yêu thích, ứng dụng đã mở gần đây và cài đặt vào một tệp</string>
+    <string name="settings_backup_import">Nhập bản sao lưu</string>
+    <string name="settings_backup_import_summary">Khôi phục các mục yêu thích, ứng dụng đã mở gần đây và cài đặt từ một tệp</string>
     <string name="settings_github">Dự án GitHub</string>
     <string name="settings_hide_private">Ẩn các hoạt động riêng tư</string>
     <string name="settings_language">Ngôn ngữ</string>

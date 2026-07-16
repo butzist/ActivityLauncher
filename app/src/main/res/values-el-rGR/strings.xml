@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Προσθήκη κατηγορίας</string>
     <string name="action_add_extra">Προσθήκη Extra</string>
     <string name="action_advanced_properties">Προηγμένες ιδιότητες</string>
+    <string name="action_clear">Εκκαθάριση</string>
     <string name="action_pick_icon_file">Φόρτωση από αρχείο</string>
     <string name="action_pick_icon_library">Επιλογή από βιβλιοθήκη</string>
+    <string name="action_save">Αποθήκευση</string>
+    <string name="action_save_as_new">Αποθήκευση ως νέο</string>
     <string name="action_view_github">Έργο GitHub</string>
     <string name="action_view_paid">Εκκινητής Δραστηριότητας Pro</string>
     <string name="action_view_source">Προβολή πηγαίου κώδικα</string>
     <string name="activity_settings">Ρυθμίσεις</string>
     <string name="app_name">Εκκινητής Δραστηριοτήτων</string>
+    <string name="backup_export_error">Αποτυχία εξαγωγής αντιγράφου ασφαλείας: %1$s</string>
+    <string name="backup_export_success">Το αντίγραφο ασφαλείας εξήχθη με επιτυχία</string>
+    <string name="backup_import_error">Αποτυχία εισαγωγής αντιγράφου ασφαλείας: %1$s</string>
+    <string name="backup_import_success">Το αντίγραφο ασφαλείας εισήχθη με επιτυχία. Ορισμένες ρυθμίσεις ενδέχεται να απαιτούν επανεκκίνηση της εφαρμογής.</string>
     <string name="category_title_about">Σχετικά</string>
     <string name="category_title_ad_free">Εκδόσεις χωρίς διαφημίσεις</string>
+    <string name="category_title_data_management">Διαχείριση δεδομένων</string>
     <string name="context_action_edit">Επεξεργασία συντόμευσης</string>
     <string name="context_action_favorite_add">Προσθήκη στα αγαπημένα</string>
     <string name="context_action_favorite_remove">Αφαίρεση από τα αγαπημένα</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Πρόσθετα συντομεύσεων</string>
     <string name="nav_all">Όλα</string>
     <string name="nav_favorites">Αγαπημένα</string>
-    <string name="nav_recents">Πρόσφατα</string>
+    <string name="nav_recents">Πρόσφατα εκτελεσμένα</string>
+    <string name="nav_shortcuts">Συντομεύσεις</string>
+    <string name="settings_backup_export">Εξαγωγή αντιγράφου ασφαλείας</string>
+    <string name="settings_backup_export_summary">Αποθηκεύστε τα αγαπημένα σας, τα πρόσφατα και τις ρυθμίσεις σε ένα αρχείο</string>
+    <string name="settings_backup_import">Εισαγωγή αντιγράφου ασφαλείας</string>
+    <string name="settings_backup_import_summary">Επαναφέρετε τα αγαπημένα σας, τα πρόσφατα και τις ρυθμίσεις από ένα αρχείο</string>
     <string name="settings_github">Έργο GitHub</string>
     <string name="settings_hide_private">Απόκρυψη ιδιωτικών δραστηριοτήτων</string>
     <string name="settings_language">Γλώσσα</string>

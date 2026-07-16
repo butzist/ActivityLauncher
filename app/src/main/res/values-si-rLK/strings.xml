@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">වර්ගීකරණය එක් කරන්න</string>
     <string name="action_add_extra">Extra එක් කරන්න</string>
     <string name="action_advanced_properties">උසස් ගුණාංග</string>
+    <string name="action_clear">මකන්න</string>
     <string name="action_pick_icon_file">ගොනුවකින් පූරණය කරන්න</string>
     <string name="action_pick_icon_library">පුස්තකාලයෙන් තෝරන්න</string>
+    <string name="action_save">සුරකින්න</string>
+    <string name="action_save_as_new">අලුත් එකක් ලෙස සුරකින්න</string>
     <string name="action_view_github">GitHub ව්‍යාපෘතිය</string>
     <string name="action_view_paid">ක්‍රියාකාරකම් දියත්කරණය ප්‍රෝ</string>
     <string name="action_view_source">මූලාශ්‍ර කේතය බලන්න</string>
     <string name="activity_settings">සැකසුම්</string>
     <string name="app_name">ක්‍රියාකාරකම් දියත්කරණය</string>
+    <string name="backup_export_error">උපස්ථය අපනයනය කිරීමට නොහැකි විය: %1$s</string>
+    <string name="backup_export_success">උපස්ථය සාර්ථකව අපනයනය කරන ලදී</string>
+    <string name="backup_import_error">උපස්ථය ආනයනය කිරීමට නොහැකි විය: %1$s</string>
+    <string name="backup_import_success">උපස්ථය සාර්ථකව ආනයනය කරන ලදී. සමහර සැකසුම් සඳහා යෙදුම නැවත ආරම්භ කිරීම අවශ්‍ය විය හැකිය.</string>
     <string name="category_title_about">ගැන</string>
     <string name="category_title_ad_free">දැන්වීම් රහිත අනුවාද</string>
+    <string name="category_title_data_management">දත්ත කළමනාකරණය</string>
     <string name="context_action_edit">කෙටිමඟ සංස්කරණය කරන්න</string>
     <string name="context_action_favorite_add">ප්‍රියතමයන් වෙත එක් කරන්න</string>
     <string name="context_action_favorite_remove">ප්‍රියතමයන්ගෙන් ඉවත් කරන්න</string>
@@ -37,8 +45,8 @@
     <string name="error_invalid_long">වලංගු නොවන Long</string>
     <string name="filter_hint">පැකේජය/ක්‍රියාව</string>
     <string name="label_class">පන්තිය</string>
-    <string name="label_intent_action">Action</string>
-    <string name="label_intent_categories">Categories</string>
+    <string name="label_intent_action">ක්‍රියාව</string>
+    <string name="label_intent_categories">ප්‍රවර්ග</string>
     <string name="label_intent_data">Data URI</string>
     <string name="label_intent_extra_key">යතුර</string>
     <string name="label_intent_extra_value">අගය</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">කෙටිමං ප්ලගීන</string>
     <string name="nav_all">සියල්ල</string>
     <string name="nav_favorites">ප්‍රියතම</string>
-    <string name="nav_recents">මෑත</string>
+    <string name="nav_recents">මෑතකදී දියත් කරන ලද</string>
+    <string name="nav_shortcuts">කෙටිමං</string>
+    <string name="settings_backup_export">උපස්ථය අපනයනය කරන්න</string>
+    <string name="settings_backup_export_summary">ඔබේ ප්‍රියතමයන්, මෑතකදී දියත් කළ සහ සැකසුම් ගොනුවකට සුරකින්න</string>
+    <string name="settings_backup_import">උපස්ථය ආනයනය කරන්න</string>
+    <string name="settings_backup_import_summary">ගොනුවකින් ඔබේ ප්‍රියතමයන්, මෑතකදී දියත් කළ සහ සැකසුම් ප්‍රතිසාධනය කරන්න</string>
     <string name="settings_github">GitHub ව්‍යාපෘතිය</string>
     <string name="settings_hide_private">පුද්ගලික ක්‍රියාකාරකම් සඟවන්න</string>
     <string name="settings_language">භාෂාව</string>

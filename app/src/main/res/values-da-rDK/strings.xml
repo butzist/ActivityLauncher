@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Tilføj kategori</string>
     <string name="action_add_extra">Tilføj Extra</string>
     <string name="action_advanced_properties">Avancerede egenskaber</string>
+    <string name="action_clear">Ryd</string>
     <string name="action_pick_icon_file">Indlæs fra fil</string>
     <string name="action_pick_icon_library">Vælg fra bibliotek</string>
+    <string name="action_save">Gem</string>
+    <string name="action_save_as_new">Gem som ny</string>
     <string name="action_view_github">GitHub-projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Vis kildekode</string>
     <string name="activity_settings">Indstillinger</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Eksport af sikkerhedskopi mislykkedes: %1$s</string>
+    <string name="backup_export_success">Sikkerhedskopi eksporteret med succes</string>
+    <string name="backup_import_error">Import af sikkerhedskopi mislykkedes: %1$s</string>
+    <string name="backup_import_success">Sikkerhedskopi importeret med succes. Nogle indstillinger kræver muligvis en genstart af appen.</string>
     <string name="category_title_about">Om</string>
     <string name="category_title_ad_free">Annoncefrie versioner</string>
+    <string name="category_title_data_management">Datastyring</string>
     <string name="context_action_edit">Redigér genvej</string>
     <string name="context_action_favorite_add">Tilføj til favoritter</string>
     <string name="context_action_favorite_remove">Fjern fra favoritter</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Genvej-plugins</string>
     <string name="nav_all">Alle</string>
     <string name="nav_favorites">Favoritter</string>
-    <string name="nav_recents">Seneste</string>
+    <string name="nav_recents">Senest startede</string>
+    <string name="nav_shortcuts">Genveje</string>
+    <string name="settings_backup_export">Eksporter sikkerhedskopi</string>
+    <string name="settings_backup_export_summary">Gem dine favoritter, nyligt startede og indstillinger til en fil</string>
+    <string name="settings_backup_import">Importer sikkerhedskopi</string>
+    <string name="settings_backup_import_summary">Gendan dine favoritter, nyligt startede og indstillinger fra en fil</string>
     <string name="settings_github">GitHub-projekt</string>
     <string name="settings_hide_private">Skjul private aktiviteter</string>
     <string name="settings_language">Sprog</string>

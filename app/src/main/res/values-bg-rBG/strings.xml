@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Добавяне на категория</string>
     <string name="action_add_extra">Добавяне на допълнение (Extra)</string>
     <string name="action_advanced_properties">Разширени свойства</string>
+    <string name="action_clear">Изчистване</string>
     <string name="action_pick_icon_file">Зареждане от файл</string>
     <string name="action_pick_icon_library">Избор от библиотека</string>
+    <string name="action_save">Запазване</string>
+    <string name="action_save_as_new">Запазване като ново</string>
     <string name="action_view_github">GitHub проект</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Преглед на изходния код</string>
     <string name="activity_settings">Настройки</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Неуспешно експортиране на резервно копие: %1$s</string>
+    <string name="backup_export_success">Резервното копие е експортирано успешно</string>
+    <string name="backup_import_error">Неуспешно импортиране на резервно копие: %1$s</string>
+    <string name="backup_import_success">Резервното копие е импортирано успешно. Някои настройки може да изискват рестартиране на приложението.</string>
     <string name="category_title_about">Описание</string>
     <string name="category_title_ad_free">Версии без реклами</string>
+    <string name="category_title_data_management">Управление на данни</string>
     <string name="context_action_edit">Редактиране на пряк път</string>
     <string name="context_action_favorite_add">Добавяне в любими</string>
     <string name="context_action_favorite_remove">Премахване от любими</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Плъгини за преки пътища</string>
     <string name="nav_all">Всички</string>
     <string name="nav_favorites">Любими</string>
-    <string name="nav_recents">Скорошни</string>
+    <string name="nav_recents">Наскоро стартирани</string>
+    <string name="nav_shortcuts">Преки пътища</string>
+    <string name="settings_backup_export">Експортиране на резервно копие</string>
+    <string name="settings_backup_export_summary">Запазете вашите любими, наскоро стартирани и настройки във файл</string>
+    <string name="settings_backup_import">Импортиране на резервно копие</string>
+    <string name="settings_backup_import_summary">Възстановете вашите любими, наскоро стартирани и настройки от файл</string>
     <string name="settings_github">GitHub проект</string>
     <string name="settings_hide_private">Скриване на поверителни активности</string>
     <string name="settings_language">Език</string>

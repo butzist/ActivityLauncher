@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">カテゴリを追加</string>
     <string name="action_add_extra">Extraを追加</string>
     <string name="action_advanced_properties">詳細プロパティ</string>
+    <string name="action_clear">クリア</string>
     <string name="action_pick_icon_file">ファイルから読み込む</string>
     <string name="action_pick_icon_library">ライブラリから選択</string>
+    <string name="action_save">保存</string>
+    <string name="action_save_as_new">新規保存</string>
     <string name="action_view_github">GitHubプロジェクト</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">ソースコードを表示</string>
     <string name="activity_settings">設定</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">バックアップのエクスポートに失敗しました: %1$s</string>
+    <string name="backup_export_success">バックアップが正常にエクスポートされました</string>
+    <string name="backup_import_error">バックアップのインポートに失敗しました: %1$s</string>
+    <string name="backup_import_success">バックアップが正常にインポートされました。一部の設定を適用するにはアプリの再起動が必要な場合があります。</string>
     <string name="category_title_about">について</string>
     <string name="category_title_ad_free">広告なしバージョン</string>
+    <string name="category_title_data_management">データ管理</string>
     <string name="context_action_edit">ショートカットを編集</string>
     <string name="context_action_favorite_add">お気に入りに追加</string>
     <string name="context_action_favorite_remove">お気に入りから削除</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">無効なLongです</string>
     <string name="filter_hint">パッケージ/アクション</string>
     <string name="label_class">クラス</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">アクション</string>
     <string name="label_intent_categories">カテゴリ</string>
     <string name="label_intent_data">データURI</string>
     <string name="label_intent_extra_key">キー</string>
     <string name="label_intent_extra_value">値</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">エクストラ</string>
     <string name="label_intent_mime_type">MIMEタイプ</string>
     <string name="label_launch_plugins">起動プラグイン</string>
     <string name="label_name">名前</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">ショートカットプラグイン</string>
     <string name="nav_all">すべて</string>
     <string name="nav_favorites">お気に入り</string>
-    <string name="nav_recents">最近</string>
+    <string name="nav_recents">最近起動</string>
+    <string name="nav_shortcuts">ショートカット</string>
+    <string name="settings_backup_export">バックアップのエクスポート</string>
+    <string name="settings_backup_export_summary">お気に入り、最近起動したアプリ、設定をファイルに保存します</string>
+    <string name="settings_backup_import">バックアップのインポート</string>
+    <string name="settings_backup_import_summary">お気に入り、最近起動したアプリ、設定をファイルから復元します</string>
     <string name="settings_github">GitHubプロジェクト</string>
     <string name="settings_hide_private">プライベートアクティビティを表示しない</string>
     <string name="settings_language">言語</string>

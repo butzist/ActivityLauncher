@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Categorie toevoegen</string>
     <string name="action_add_extra">Extra toevoegen</string>
     <string name="action_advanced_properties">Geavanceerde eigenschappen</string>
+    <string name="action_clear">Wissen</string>
     <string name="action_pick_icon_file">Laden uit bestand</string>
     <string name="action_pick_icon_library">Kiezen uit bibliotheek</string>
+    <string name="action_save">Opslaan</string>
+    <string name="action_save_as_new">Opslaan als nieuw</string>
     <string name="action_view_github">GitHub-project</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Bekijk broncode</string>
     <string name="activity_settings">Instellingen</string>
     <string name="app_name">Activiteit Launcher</string>
+    <string name="backup_export_error">Exporteren back-up mislukt: %1$s</string>
+    <string name="backup_export_success">Back-up succesvol geëxporteerd</string>
+    <string name="backup_import_error">Importeren back-up mislukt: %1$s</string>
+    <string name="backup_import_success">Back-up succesvol geïmporteerd. Sommige instellingen vereisen mogelijk een herstart van de app.</string>
     <string name="category_title_about">Over</string>
     <string name="category_title_ad_free">Advertentievrije versies</string>
+    <string name="category_title_data_management">Gegevensbeheer</string>
     <string name="context_action_edit">Bewerk snelkoppeling</string>
     <string name="context_action_favorite_add">Toevoegen aan favorieten</string>
     <string name="context_action_favorite_remove">Verwijderen uit favorieten</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Ongeldige Long</string>
     <string name="filter_hint">pakket/actie</string>
     <string name="label_class">Class</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Actie</string>
     <string name="label_intent_categories">Categorieën</string>
     <string name="label_intent_data">Gegevens-URI</string>
     <string name="label_intent_extra_key">Sleutel</string>
     <string name="label_intent_extra_value">Waarde</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Extra\'s</string>
     <string name="label_intent_mime_type">MIME-type</string>
     <string name="label_launch_plugins">Start-plug-ins</string>
     <string name="label_name">Naam</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Snelkoppeling-plug-ins</string>
     <string name="nav_all">Alle</string>
     <string name="nav_favorites">Favorieten</string>
-    <string name="nav_recents">Recent</string>
+    <string name="nav_recents">Onlangs gestart</string>
+    <string name="nav_shortcuts">Snelkoppelingen</string>
+    <string name="settings_backup_export">Back-up exporteren</string>
+    <string name="settings_backup_export_summary">Sla uw favorieten, onlangs gestart en instellingen op in een bestand</string>
+    <string name="settings_backup_import">Back-up importeren</string>
+    <string name="settings_backup_import_summary">Herstel uw favorieten, onlangs gestart en instellingen uit een bestand</string>
     <string name="settings_github">GitHub-project</string>
     <string name="settings_hide_private">Verberg privé activiteiten</string>
     <string name="settings_language">Taal</string>
@@ -67,7 +80,7 @@
     <string name="theme_default">Systeem standaard</string>
     <string name="theme_light">Licht Thema</string>
     <string name="title_dialog_crop_icon">Icoon bijsnijden</string>
-    <string name="title_dialog_disclaimer">Disclaimer</string>
+    <string name="title_dialog_disclaimer">Vrijwaringsclausule</string>
     <string name="title_dialog_edit_intent">Intent bewerken</string>
     <string name="title_dialog_icon_picker">Kies een icoon</string>
     <string name="title_dialog_support">Bedankt voor het gebruiken van Activity Launcher</string>

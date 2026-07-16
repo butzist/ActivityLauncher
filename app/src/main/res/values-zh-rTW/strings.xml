@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">新增類別</string>
     <string name="action_add_extra">新增 Extra</string>
     <string name="action_advanced_properties">進階屬性</string>
+    <string name="action_clear">清除</string>
     <string name="action_pick_icon_file">從檔案載入</string>
     <string name="action_pick_icon_library">從收藏庫選取</string>
+    <string name="action_save">儲存</string>
+    <string name="action_save_as_new">儲存為新</string>
     <string name="action_view_github">GitHub 專案</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">檢視原始碼</string>
     <string name="activity_settings">設定</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">備份匯出失敗：%1$s</string>
+    <string name="backup_export_success">備份匯出成功</string>
+    <string name="backup_import_error">備份匯入失敗：%1$s</string>
+    <string name="backup_import_success">備份匯入成功。某些設定可能需要重新啟動應用程式。</string>
     <string name="category_title_about">關於</string>
     <string name="category_title_ad_free">無廣告版本</string>
+    <string name="category_title_data_management">資料管理</string>
     <string name="context_action_edit">編輯捷徑</string>
     <string name="context_action_favorite_add">新增至收藏</string>
     <string name="context_action_favorite_remove">從收藏移除</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">無效的 Long</string>
     <string name="filter_hint">套件/動作</string>
     <string name="label_class">類別</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">動作</string>
     <string name="label_intent_categories">類別 (Categories)</string>
     <string name="label_intent_data">資料 URI</string>
     <string name="label_intent_extra_key">鍵 (Key)</string>
     <string name="label_intent_extra_value">值 (Value)</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">附加參數</string>
     <string name="label_intent_mime_type">MIME 類型</string>
     <string name="label_launch_plugins">啟動外掛</string>
     <string name="label_name">名稱</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">快捷方式外掛</string>
     <string name="nav_all">全部</string>
     <string name="nav_favorites">收藏</string>
-    <string name="nav_recents">最近</string>
+    <string name="nav_recents">最近啟動</string>
+    <string name="nav_shortcuts">捷徑</string>
+    <string name="settings_backup_export">匯出備份</string>
+    <string name="settings_backup_export_summary">將您的收藏、最近啟動和設定保存到檔案</string>
+    <string name="settings_backup_import">匯入備份</string>
+    <string name="settings_backup_import_summary">從檔案還原您的收藏、最近啟動和設定</string>
     <string name="settings_github">GitHub 專案</string>
     <string name="settings_hide_private">隱藏私人活動</string>
     <string name="settings_language">語言</string>

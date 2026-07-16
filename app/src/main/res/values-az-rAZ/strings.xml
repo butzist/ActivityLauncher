@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Kateqoriya əlavə et</string>
     <string name="action_add_extra">Əlavə (Extra) əlavə et</string>
     <string name="action_advanced_properties">Qabaqcıl xüsusiyyətlər</string>
+    <string name="action_clear">Təmizlə</string>
     <string name="action_pick_icon_file">Fayldan yüklə</string>
     <string name="action_pick_icon_library">Kitabxanadan seç</string>
+    <string name="action_save">Saxla</string>
+    <string name="action_save_as_new">Yeni kimi saxla</string>
     <string name="action_view_github">GitHub layihəsi</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Mənbə koduna bax</string>
     <string name="activity_settings">Ayarlar</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Ehtiyat nüsxə ixrac edilə bilmədi: %1$s</string>
+    <string name="backup_export_success">Ehtiyat nüsxə uğurla ixrac edildi</string>
+    <string name="backup_import_error">Ehtiyat nüsxə idxal edilə bilmədi: %1$s</string>
+    <string name="backup_import_success">Ehtiyat nüsxə uğurla idxal edildi. Bəzi tənzimləmələr tətbiqin yenidən başladılmasını tələb edə bilər.</string>
     <string name="category_title_about">Haqqında</string>
     <string name="category_title_ad_free">Reklamsız versiyalar</string>
+    <string name="category_title_data_management">Məlumatların İdarə Edilməsi</string>
     <string name="context_action_edit">Qısayola düzəliş et</string>
     <string name="context_action_favorite_add">Sevimlilərə əlavə et</string>
     <string name="context_action_favorite_remove">Sevimlilərdən sil</string>
@@ -50,12 +58,17 @@
     <string name="label_shortcut_plugins">Qısayol Pluginləri</string>
     <string name="nav_all">Hamısı</string>
     <string name="nav_favorites">Sevimlilər</string>
-    <string name="nav_recents">Sonuncu</string>
+    <string name="nav_recents">Sonuncu Başladılan</string>
+    <string name="nav_shortcuts">Qısayollar</string>
+    <string name="settings_backup_export">Ehtiyat Nüsxəni İxrac Et</string>
+    <string name="settings_backup_export_summary">Seçilmişləri, sonuncu başladılanları və tənzimləmələri fayla saxlayın</string>
+    <string name="settings_backup_import">Ehtiyat Nüsxəni İdxal Et</string>
+    <string name="settings_backup_import_summary">Seçilmişləри, sonuncu başladılanları və tənzimləmələri fayldan bərpa edin</string>
     <string name="settings_github">GitHub layihəsi</string>
     <string name="settings_hide_private">Şəxsi fəaliyyətləri gizlət</string>
     <string name="settings_language">Dil</string>
     <string name="settings_pro_version">Activity Launcher Pro</string>
-    <string name="settings_summary_github">Əvvəlcədən qurulmuş APK-nı GitHub-dakı Activity Launcher açıq mənbə layihəsindən yükləyə bilərsiniz. Təcrübəli istifadəçilər həmçinin mənbə kodunu araşdıra, tərtibatçıları dəstəkləyə və tərcümələr və ya çəkmə sorğuları ilə töhfə verə bilərlər.</string>
+    <string name="settings_summary_github">Əvvəlcədən qurulmuş APK-ı GitHub-dakı Activity Launcher açıq mənbə layihəsindən yükləyə bilərsiniz. Təcrübəli istifadəçilər həmçinin mənbə kodunu araşdıra, tərtibatçıları dəstəkləyə və tərcümələr və ya çəkmə sorğuları ilə töhfə verə bilərlər.</string>
     <string name="settings_summary_hide_private">Root müraciəti olmadan başladıla bilməyən şəxsi (xaricə köçürülməmiş və ya sıradan çıxarılmış) fəaliyyətləri gizlət</string>
     <string name="settings_summary_pro_version">Proqramı dəstəkləmək və reklamlardan qurtulmaq istəyirsiniz? Google Play-də Activity Launcher Pro-nu əldə edin — bu, inkişafa kömək edir və tamamilə açıq mənbəlidir.</string>
     <string name="settings_summary_support_discord">Dəstək, xüsusiyyət sorğuları və icma müzakirələri üçün Discord serverimizə qoşulun.</string>

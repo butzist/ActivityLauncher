@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Legg til kategori</string>
     <string name="action_add_extra">Legg til Extra</string>
     <string name="action_advanced_properties">Avanserte egenskaper</string>
+    <string name="action_clear">Tøm</string>
     <string name="action_pick_icon_file">Last fra fil</string>
     <string name="action_pick_icon_library">Velg fra bibliotek</string>
+    <string name="action_save">Lagre</string>
+    <string name="action_save_as_new">Lagre som ny</string>
     <string name="action_view_github">GitHub-prosjekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Vis kildekode</string>
     <string name="activity_settings">Innstillinger</string>
     <string name="app_name">Aktivitetsåpner</string>
+    <string name="backup_export_error">Kunne ikke eksportere sikkerhetskopi: %1$s</string>
+    <string name="backup_export_success">Sikkerhetskopi eksportert</string>
+    <string name="backup_import_error">Kunne ikke importere sikkerhetskopi: %1$s</string>
+    <string name="backup_import_success">Sikkerhetskopi importert. Noen innstillinger kan kreve omstart av appen.</string>
     <string name="category_title_about">Om</string>
     <string name="category_title_ad_free">Annonsefrie versjoner</string>
+    <string name="category_title_data_management">Databehandling</string>
     <string name="context_action_edit">Rediger snarvei</string>
     <string name="context_action_favorite_add">Legg til i favoritter</string>
     <string name="context_action_favorite_remove">Fjern fra favoritter</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Snarvei-pluginner</string>
     <string name="nav_all">Alle</string>
     <string name="nav_favorites">Favoritter</string>
-    <string name="nav_recents">Nylige</string>
+    <string name="nav_recents">Nylig startet</string>
+    <string name="nav_shortcuts">Snarveier</string>
+    <string name="settings_backup_export">Eksporter sikkerhetskopi</string>
+    <string name="settings_backup_export_summary">Lagre dine favoritter, nylig lánçate og innstillinger til en fil</string>
+    <string name="settings_backup_import">Importer sikkerhetskopi</string>
+    <string name="settings_backup_import_summary">Gjenopprett dine favoritter, nylig lánçate og innstillinger fra en fil</string>
     <string name="settings_github">GitHub-prosjekt</string>
     <string name="settings_hide_private">Skjul private aktiviteter</string>
     <string name="settings_language">Språk</string>

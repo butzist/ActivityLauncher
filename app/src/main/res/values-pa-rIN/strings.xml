@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">ਸ਼੍ਰੇਣੀ ਜੋੜੋ</string>
     <string name="action_add_extra">Extra ਜੋੜੋ</string>
     <string name="action_advanced_properties"> ਉੱਨਤ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ</string>
+    <string name="action_clear">ਸਾਫ਼ ਕਰੋ</string>
     <string name="action_pick_icon_file">ਫਾਈਲ ਤੋਂ ਲੋਡ ਕਰੋ</string>
     <string name="action_pick_icon_library">ਲਾਇਬ੍ਰੇਰੀ ਤੋਂ ਚੁਣੋ</string>
+    <string name="action_save">ਸੰਭਾਲੋ</string>
+    <string name="action_save_as_new">ਨਵੇਂ ਵਜੋਂ ਸੰਭਾਲੋ</string>
     <string name="action_view_github">GitHub ਪ੍ਰੋਜੈਕਟ</string>
     <string name="action_view_paid">ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ ਪ੍ਰੋ</string>
     <string name="action_view_source">ਸਰੋਤ ਕੋਡ ਵੇਖੋ</string>
     <string name="activity_settings">ਸੈਟਿੰਗਾਂ</string>
     <string name="app_name">ਐਕਟੀਵਿਟੀ ਲਾਂਚਰ</string>
+    <string name="backup_export_error">ਬੈਕਅੱਪ ਐਕਸਪੋਰਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: %1$s</string>
+    <string name="backup_export_success">ਬੈਕਅੱਪ ਸਫਲਤਾਪੂਰਵਕ ਐਕਸਪੋਰਟ ਕੀਤਾ ਗਿਆ</string>
+    <string name="backup_import_error">ਬੈਕਅੱਪ ਇੰਪੋਰਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: %1$s</string>
+    <string name="backup_import_success">ਬੈਕਅੱਪ ਸਫਲਤਾਪੂਰਵਕ ਇੰਪੋਰਟ ਕੀਤਾ ਗਿਆ। ਕੁਝ ਸੈਟਿੰਗਾਂ ਲਈ ਐਪ ਰੀਸਟਾਰਟ ਦੀ ਲੋੜ ਹੋ ਸਕਦੀ ਹੈ।</string>
     <string name="category_title_about">ਇਸ ਬਾਰੇ</string>
     <string name="category_title_ad_free">ਵਿਗਿਆਪਨ-ਮੁਕਤ ਸੰਸਕਰਣ</string>
+    <string name="category_title_data_management">ਡਾਟਾ ਪ੍ਰਬੰਧਨ</string>
     <string name="context_action_edit">ਸ਼ਾਰਟਕੱਟ ਸੋਧੋ</string>
     <string name="context_action_favorite_add">ਪਸੰਦੀਦਾ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ</string>
     <string name="context_action_favorite_remove">ਪਸੰਦੀਦਾ ਵਿੱਚੋਂ ਹਟਾਓ</string>
@@ -37,7 +45,7 @@
     <string name="error_invalid_long">ਅਵੈਧ ਲੌਂਗ</string>
     <string name="filter_hint">ਪੈਕੇਜ/ਕਾਰਵਾਈ</string>
     <string name="label_class">ਕਲਾਸ</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">ਕਾਰਵਾਈ</string>
     <string name="label_intent_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
     <string name="label_intent_data">ਡਾਟਾ URI</string>
     <string name="label_intent_extra_key">ਕੁੰਜੀ</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">ਸ਼ਾਰਟਕੱਟ ਪਲੱਗਇਨ</string>
     <string name="nav_all">ਸਭ</string>
     <string name="nav_favorites">ਪਸੰਦੀਦਾ</string>
-    <string name="nav_recents">ਹਾਲ ਦੇ</string>
+    <string name="nav_recents">ਹਾਲ ਹੀ ਵਿੱਚ ਸ਼ੁਰੂ ਕੀਤੇ</string>
+    <string name="nav_shortcuts">ਸ਼ਾਰਟਕੱਟ</string>
+    <string name="settings_backup_export">ਬੈਕਅੱਪ ਐਕਸਪੋਰਟ ਕਰੋ</string>
+    <string name="settings_backup_export_summary">ਆਪਣੇ ਪਸੰਦੀਦਾ, ਹਾਲ ਹੀ ਵਿੱਚ ਲਾਂਚ ਕੀਤੇ ਗਏ ਅਤੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੱਕ ਫਾਈਲ ਵਿੱਚ ਸੰਭਾਲੋ</string>
+    <string name="settings_backup_import">ਬੈਕਅੱਪ ਇੰਪੋਰਟ ਕਰੋ</string>
+    <string name="settings_backup_import_summary">ਆਪਣੇ ਪਸੰਦੀਦਾ, ਹਾਲ ਹੀ ਵਿੱਚ ਲਾਂਚ ਕੀਤੇ ਗਏ ਅਤੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਇੱਕ ਫਾਈਲ ਤੋਂ ਰੀਸਟੋਰ ਕਰੋ</string>
     <string name="settings_github">GitHub ਪ੍ਰੋਜੈਕਟ</string>
     <string name="settings_hide_private">ਨਿੱਜੀ ਗਤੀਵਿਧੀਆਂ ਛੁਪਾਓ</string>
     <string name="settings_language">ਭਾਸ਼ਾ</string>

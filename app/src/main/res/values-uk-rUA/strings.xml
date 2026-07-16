@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Додати категорію</string>
     <string name="action_add_extra">Додати Extra</string>
     <string name="action_advanced_properties">Розширені властивості</string>
+    <string name="action_clear">Очистити</string>
     <string name="action_pick_icon_file">Завантажити з файлу</string>
     <string name="action_pick_icon_library">Вибрати з бібліотеки</string>
+    <string name="action_save">Зберегти</string>
+    <string name="action_save_as_new">Зберегти як новий</string>
     <string name="action_view_github">Проєкт GitHub</string>
     <string name="action_view_paid">Лаунчер Активіті Pro</string>
     <string name="action_view_source">Перегляд вихідного коду</string>
     <string name="activity_settings">Налаштування</string>
     <string name="app_name">Лаунчер Активіті</string>
+    <string name="backup_export_error">Помилка експорту резервної копії: %1$s</string>
+    <string name="backup_export_success">Резервна копія успішно експортована</string>
+    <string name="backup_import_error">Помилка імпорту резервної копії: %1$s</string>
+    <string name="backup_import_success">Резервну копію успішно імпортовано. Деякі налаштування можуть вимагати перезапуску програми.</string>
     <string name="category_title_about">Про додаток</string>
     <string name="category_title_ad_free">Версії без реклами</string>
+    <string name="category_title_data_management">Керування даними</string>
     <string name="context_action_edit">Змінити ярлик</string>
     <string name="context_action_favorite_add">Додати до улюбленого</string>
     <string name="context_action_favorite_remove">Видалити з улюбленого</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Неправильний Long</string>
     <string name="filter_hint">пакет/дія</string>
     <string name="label_class">Клас</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Дія</string>
     <string name="label_intent_categories">Категорії (Categories)</string>
     <string name="label_intent_data">URI даних</string>
     <string name="label_intent_extra_key">Ключ (Key)</string>
     <string name="label_intent_extra_value">Значення (Value)</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Додаткові параметри</string>
     <string name="label_intent_mime_type">MIME-тип</string>
     <string name="label_launch_plugins">Плагіни запуску</string>
     <string name="label_name">Назва</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Плагіни ярликів</string>
     <string name="nav_all">Всі</string>
     <string name="nav_favorites">Обране</string>
-    <string name="nav_recents">Нещодавні</string>
+    <string name="nav_recents">Нещодавно запущені</string>
+    <string name="nav_shortcuts">Ярлики</string>
+    <string name="settings_backup_export">Експорт резервної копії</string>
+    <string name="settings_backup_export_summary">Збережіть ваші обрані, нещодавно запущені програми та налаштування у файл</string>
+    <string name="settings_backup_import">Імпорт резервної копії</string>
+    <string name="settings_backup_import_summary">Відновіть ваші обрані, нещодавно запущені програми та налаштування з файлу</string>
     <string name="settings_github">Проєкт GitHub</string>
     <string name="settings_hide_private">Приховати приватні активіті</string>
     <string name="settings_language">Мова</string>
@@ -61,7 +74,7 @@
     <string name="settings_summary_support_discord">Приєднуйтесь до нашого сервера Discord для підтримки, запитів на функції та обговорень у спільноті.</string>
     <string name="settings_support_discord">Підтримка та запити на функції</string>
     <string name="settings_theme">Тема</string>
-    <string name="short_description">Запускає приховані активіті та створює ярлики для встановлених додатків</string>
+    <string name="short_description">Запускає приховані активіті та створює ярлик для встановлених додатків</string>
     <string name="summary_action_view_source">Код цього додатку доступний для читання та зміни на GitHub. Не вагайтесь відправляти нам запити на внесення змін з покращеннями та виправленням помилок.</string>
     <string name="theme_dark">Темна тема</string>
     <string name="theme_default">Системна (за замовчуванням)</string>

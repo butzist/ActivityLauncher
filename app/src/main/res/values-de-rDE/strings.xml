@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Kategorie hinzufügen</string>
     <string name="action_add_extra">Extra hinzufügen</string>
     <string name="action_advanced_properties">Erweiterte Eigenschaften</string>
+    <string name="action_clear">Leeren</string>
     <string name="action_pick_icon_file">Aus Datei laden</string>
     <string name="action_pick_icon_library">Aus Bibliothek wählen</string>
+    <string name="action_save">Speichern</string>
+    <string name="action_save_as_new">Als neu speichern</string>
     <string name="action_view_github">GitHub-Projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Quellcode anzeigen</string>
     <string name="activity_settings">Einstellungen</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Backup-Export fehlgeschlagen: %1$s</string>
+    <string name="backup_export_success">Backup erfolgreich exportiert</string>
+    <string name="backup_import_error">Backup-Import fehlgeschlagen: %1$s</string>
+    <string name="backup_import_success">Backup erfolgreich importiert. Einige Einstellungen erfordern möglicherweise einen Neustart der App.</string>
     <string name="category_title_about">Info</string>
     <string name="category_title_ad_free">Werbefreie Versionen</string>
+    <string name="category_title_data_management">Datenverwaltung</string>
     <string name="context_action_edit">Verknüpfung bearbeiten</string>
     <string name="context_action_favorite_add">Zu Favoriten hinzufügen</string>
     <string name="context_action_favorite_remove">Aus Favoriten entfernen</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Verknüpfungs-Plugins</string>
     <string name="nav_all">Alle</string>
     <string name="nav_favorites">Favoriten</string>
-    <string name="nav_recents">Zuletzt</string>
+    <string name="nav_recents">Zuletzt gestartet</string>
+    <string name="nav_shortcuts">Verknüpfungen</string>
+    <string name="settings_backup_export">Backup exportieren</string>
+    <string name="settings_backup_export_summary">Speichere Favoriten, zuletzt gestartete Apps und Einstellungen in einer Datei</string>
+    <string name="settings_backup_import">Backup importieren</string>
+    <string name="settings_backup_import_summary">Stelle Favoriten, zuletzt gestartete Apps und Einstellungen aus einer Datei wieder her</string>
     <string name="settings_github">GitHub-Projekt</string>
     <string name="settings_hide_private">Private Aktivitäten ausblenden</string>
     <string name="settings_language">Sprache</string>

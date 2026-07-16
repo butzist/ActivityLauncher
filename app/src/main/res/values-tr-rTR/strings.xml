@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Kategori Ekle</string>
     <string name="action_add_extra">Extra Ekle</string>
     <string name="action_advanced_properties">Gelişmiş Özellikler</string>
+    <string name="action_clear">Temizle</string>
     <string name="action_pick_icon_file">Dosyadan yükle</string>
     <string name="action_pick_icon_library">Kitaplıktan seç</string>
+    <string name="action_save">Kaydet</string>
+    <string name="action_save_as_new">Yeni Olarak Kaydet</string>
     <string name="action_view_github">GitHub projesi</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Kaynak Kodunu Göster</string>
     <string name="activity_settings">Ayarlar</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Yedek dışa aktarılamadı: %1$s</string>
+    <string name="backup_export_success">Yedek başarıyla dışa aktarıldı</string>
+    <string name="backup_import_error">Yedek içe aktarılamadı: %1$s</string>
+    <string name="backup_import_success">Yedek başarıyla içه aktarıldı. Bazı ayarlar uygulamanın yeniden başlatılmasını gerektirebilir.</string>
     <string name="category_title_about">Hakkında</string>
     <string name="category_title_ad_free">Reklamsız sürümler</string>
+    <string name="category_title_data_management">Veri Yönetimi</string>
     <string name="context_action_edit">Kısayolu düzenle</string>
     <string name="context_action_favorite_add">Favorilere ekle</string>
     <string name="context_action_favorite_remove">Favorilerden kaldır</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Geçersiz Long</string>
     <string name="filter_hint">paket/eylem</string>
     <string name="label_class">Sınıf</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Eylem</string>
     <string name="label_intent_categories">Kategoriler (Categories)</string>
     <string name="label_intent_data">Veri URI\'si</string>
     <string name="label_intent_extra_key">Anahtar (Key)</string>
     <string name="label_intent_extra_value">Değer (Value)</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Ekstralar</string>
     <string name="label_intent_mime_type">MIME Türü</string>
     <string name="label_launch_plugins">Başlatma Eklentileri</string>
     <string name="label_name">İsim</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Kısayol Eklentileri</string>
     <string name="nav_all">Tümü</string>
     <string name="nav_favorites">Favoriler</string>
-    <string name="nav_recents">Son</string>
+    <string name="nav_recents">Son başlatılanlar</string>
+    <string name="nav_shortcuts">Kısayollar</string>
+    <string name="settings_backup_export">Yedeği Dışa Aktar</string>
+    <string name="settings_backup_export_summary">Favorilerinizi, son başlatılanları ve ayarları bir dosyaya kaydedin</string>
+    <string name="settings_backup_import">Yedeği İçe Aktar</string>
+    <string name="settings_backup_import_summary">Favorilerinizi, son başlatılanları ve ayarları bir dosyadan geri yükleyin</string>
     <string name="settings_github">GitHub projesi</string>
     <string name="settings_hide_private">Gizli etkinlikleri gizle</string>
     <string name="settings_language">Dil</string>

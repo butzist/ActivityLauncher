@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Dodaj kategorię</string>
     <string name="action_add_extra">Dodaj Extra</string>
     <string name="action_advanced_properties">Zaawansowane właściwości</string>
+    <string name="action_clear">Wyczyść</string>
     <string name="action_pick_icon_file">Wczytaj z pliku</string>
     <string name="action_pick_icon_library">Wybierz z biblioteki</string>
+    <string name="action_save">Zapisz</string>
+    <string name="action_save_as_new">Zapisz jako nowy</string>
     <string name="action_view_github">Projekt GitHub</string>
     <string name="action_view_paid">Launcher Aktywności Pro</string>
     <string name="action_view_source">Pokaż kod źródłowy</string>
     <string name="activity_settings">Ustawienia</string>
     <string name="app_name">Launcher Aktywności</string>
+    <string name="backup_export_error">Nie udało się wyeksportować kopii zapasowej: %1$s</string>
+    <string name="backup_export_success">Kopia zapasowa została pomyślnie wyeksportowana</string>
+    <string name="backup_import_error">Nie udało się zaimportować kopii zapasowej: %1$s</string>
+    <string name="backup_import_success">Kopia zapasowa została pomyślnie zaimportowana. Niektóre ustawienia mogą wymagać ponownego uruchomienia aplikacji.</string>
     <string name="category_title_about">O aplikacji</string>
     <string name="category_title_ad_free">Wersje bez reklam</string>
+    <string name="category_title_data_management">Zarządzanie danymi</string>
     <string name="context_action_edit">Edytuj skrót</string>
     <string name="context_action_favorite_add">Dodaj do ulubionych</string>
     <string name="context_action_favorite_remove">Usuń z ulubionych</string>
@@ -37,12 +45,12 @@
     <string name="error_invalid_long">Nieprawidłowy Long</string>
     <string name="filter_hint">pakiet/akcja</string>
     <string name="label_class">Klasa</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Akcja</string>
     <string name="label_intent_categories">Kategorie</string>
     <string name="label_intent_data">URI danych</string>
     <string name="label_intent_extra_key">Klucz</string>
     <string name="label_intent_extra_value">Wartość</string>
-    <string name="label_intent_extras">Extras</string>
+    <string name="label_intent_extras">Dodatki</string>
     <string name="label_intent_mime_type">Typ MIME</string>
     <string name="label_launch_plugins">Wtyczki uruchamiania</string>
     <string name="label_name">Nazwa</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Wtyczki skrótów</string>
     <string name="nav_all">Wszystkie</string>
     <string name="nav_favorites">Ulubione</string>
-    <string name="nav_recents">Ostatnie</string>
+    <string name="nav_recents">Ostatnio uruchomione</string>
+    <string name="nav_shortcuts">Skróty</string>
+    <string name="settings_backup_export">Eksportuj kopię zapasową</string>
+    <string name="settings_backup_export_summary">Zapisz swoje ulubione, ostatnio uruchamiane i ustawienia do pliku</string>
+    <string name="settings_backup_import">Importuj kopię zapasową</string>
+    <string name="settings_backup_import_summary">Przywróć swoje ulubione, ostatnio uruchamiane i ustawienia z pliku</string>
     <string name="settings_github">Projekt GitHub</string>
     <string name="settings_hide_private">Ukryj aktywności prywatne</string>
     <string name="settings_language">Język</string>
@@ -58,7 +71,7 @@
     <string name="settings_summary_github">Możesz pobrać gotowy plik APK z projektu Activity Launcher o otwartym kodzie źródłowym w serwisie GitHub. Zaawansowani użytkownicy mogą również zapoznać się z kodem źródłowym, wesprzeć programistów i współtworzyć tłumaczenia lub żądania pull.</string>
     <string name="settings_summary_hide_private">Ukryj aktywności prywatne (niespodziewane i wyłączone), których nie można uruchomić bez dostępu do roota</string>
     <string name="settings_summary_pro_version">Chcesz wesprzeć aplikację i pozbyć się reklam? Pobierz Launcher Aktywności Pro w Google Play — to pomaga finansować rozwój i jest w pełni open source.</string>
-    <string name="settings_summary_support_discord">Dołącz do naszego serwera Discord, aby uzyskać wsparcie, prosić o funkcje i brać udział w dyskusjach społeczności.</string>
+    <string name="settings_summary_support_discord">Dołącz do naszego serwera Discord dla wsparcia, prosić o funkcje i brać udział w dyskusjach społeczności.</string>
     <string name="settings_support_discord">Wsparcie i prośby o funkcje</string>
     <string name="settings_theme">Motyw</string>
     <string name="short_description">Startuje ukryte działalności i tworzy skróty na ekranie głównym</string>

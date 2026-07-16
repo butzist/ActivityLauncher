@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Pievienot kategoriju</string>
     <string name="action_add_extra">Pievienot Extra</string>
     <string name="action_advanced_properties">Papildu rekvizīti</string>
+    <string name="action_clear">Notīrīt</string>
     <string name="action_pick_icon_file">Ielādēt no faila</string>
     <string name="action_pick_icon_library">Izvēlēties no bibliotēkas</string>
+    <string name="action_save">Saglabāt</string>
+    <string name="action_save_as_new">Saglabāt kā jaunu</string>
     <string name="action_view_github">GitHub projekts</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Skatīt pirmkodu</string>
     <string name="activity_settings">Iestatījumi</string>
     <string name="app_name">Darbības Palaidējs</string>
+    <string name="backup_export_error">Neizdevās eksportēt dublējumu: %1$s</string>
+    <string name="backup_export_success">Dublējums veiksmīgi eksportēts</string>
+    <string name="backup_import_error">Neizdevās importēt dublējumu: %1$s</string>
+    <string name="backup_import_success">Dublējums veiksmīgi importēts. Dažiem iestatījumiem var būt nepieciešama lietotnes restartēšana.</string>
     <string name="category_title_about">Par lietotni</string>
     <string name="category_title_ad_free">Versijas bez reklāmām</string>
+    <string name="category_title_data_management">Datu pārvaldība</string>
     <string name="context_action_edit">Rediģēt saīsni</string>
     <string name="context_action_favorite_add">Pievienot favorītiem</string>
     <string name="context_action_favorite_remove">Noņemt no favorītiem</string>
@@ -37,7 +45,7 @@
     <string name="error_invalid_long">Nederīgs Long</string>
     <string name="filter_hint">lietotne/darbība</string>
     <string name="label_class">Klase</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">Darbība</string>
     <string name="label_intent_categories">Kategorijas</string>
     <string name="label_intent_data">Datu URI</string>
     <string name="label_intent_extra_key">Atslēga</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Īsceļu spraudņi</string>
     <string name="nav_all">Visas</string>
     <string name="nav_favorites">Favorīti</string>
-    <string name="nav_recents">Nesenie</string>
+    <string name="nav_recents">Nesen palaistie</string>
+    <string name="nav_shortcuts">Saīsnes</string>
+    <string name="settings_backup_export">Eksportēt dublējumu</string>
+    <string name="settings_backup_export_summary">Saglabājiet savus izlases vienumus, nesen palaistos un iestatījumus failā</string>
+    <string name="settings_backup_import">Importēt dublējumu</string>
+    <string name="settings_backup_import_summary">Atjaunojiet savus izlases vienumus, nesen palaistos un iestatījumus no faila</string>
     <string name="settings_github">GitHub projekts</string>
     <string name="settings_hide_private">Slēpt privātās darbības</string>
     <string name="settings_language">Valoda</string>

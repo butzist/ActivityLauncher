@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Tambah Kategori</string>
     <string name="action_add_extra">Tambah Extra</string>
     <string name="action_advanced_properties">Properti Lanjutan</string>
+    <string name="action_clear">Bersihkan</string>
     <string name="action_pick_icon_file">Muat dari berkas</string>
     <string name="action_pick_icon_library">Pilih dari pustaka</string>
+    <string name="action_save">Simpan</string>
+    <string name="action_save_as_new">Simpan sebagai Baru</string>
     <string name="action_view_github">Proyek GitHub</string>
     <string name="action_view_paid">Peluncur Aktivitas Pro</string>
     <string name="action_view_source">Lihat kode sumber</string>
     <string name="activity_settings">Pengaturan</string>
     <string name="app_name">Peluncur Aktivitas</string>
+    <string name="backup_export_error">Gagal mengekspor cadangan: %1$s</string>
+    <string name="backup_export_success">Cadangan berhasil diekspor</string>
+    <string name="backup_import_error">Gagal mengimpor cadangan: %1$s</string>
+    <string name="backup_import_success">Cadangan berhasil diimpor. Beberapa pengaturan mungkin memerlukan mulai ulang aplikasi.</string>
     <string name="category_title_about">Tentang</string>
     <string name="category_title_ad_free">Versi bebas iklan</string>
+    <string name="category_title_data_management">Manajemen Data</string>
     <string name="context_action_edit">Edit pintasan</string>
     <string name="context_action_favorite_add">Tambah ke favorit</string>
     <string name="context_action_favorite_remove">Hapus dari favorit</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Plugin Pintasan</string>
     <string name="nav_all">Semua</string>
     <string name="nav_favorites">Favorit</string>
-    <string name="nav_recents">Terbaru</string>
+    <string name="nav_recents">Baru diluncurkan</string>
+    <string name="nav_shortcuts">Pintasan</string>
+    <string name="settings_backup_export">Ekspor Cadangan</string>
+    <string name="settings_backup_export_summary">Simpan favorit, yang baru saja diluncurkan, dan pengaturan Anda ke file</string>
+    <string name="settings_backup_import">Impor Cadangan</string>
+    <string name="settings_backup_import_summary">Pulihkan favorit, yang baru saja diluncurkan, and pengaturan Anda dari file</string>
     <string name="settings_github">Proyek GitHub</string>
     <string name="settings_hide_private">Sembunyikan aktifitas privat</string>
     <string name="settings_language">Bahasa</string>

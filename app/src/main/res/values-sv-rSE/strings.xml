@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Lägg till kategori</string>
     <string name="action_add_extra">Lägg till Extra</string>
     <string name="action_advanced_properties">Avancerade egenskaper</string>
+    <string name="action_clear">Rensa</string>
     <string name="action_pick_icon_file">Ladda från fil</string>
     <string name="action_pick_icon_library">Välj från bibliotek</string>
+    <string name="action_save">Spara</string>
+    <string name="action_save_as_new">Spara som ny</string>
     <string name="action_view_github">GitHub-projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Visa källkod</string>
     <string name="activity_settings">Inställningar</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">Misslyckades med att exportera säkerhetskopia: %1$s</string>
+    <string name="backup_export_success">Säkerhetskopia exporterad</string>
+    <string name="backup_import_error">Misslyckades med att importera säkerhetskopia: %1$s</string>
+    <string name="backup_import_success">Säkerhetskopia importerad. Vissa inställningar kan kräva omstart av appen.</string>
     <string name="category_title_about">Om</string>
     <string name="category_title_ad_free">Annonsfria versioner</string>
+    <string name="category_title_data_management">Datahantering</string>
     <string name="context_action_edit">Redigera genväg</string>
     <string name="context_action_favorite_add">Lägg till i favoriter</string>
     <string name="context_action_favorite_remove">Ta bort från favoriter</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Genvägs-insticksprogram</string>
     <string name="nav_all">Alla</string>
     <string name="nav_favorites">Favoriter</string>
-    <string name="nav_recents">Senaste</string>
+    <string name="nav_recents">Nyligen startade</string>
+    <string name="nav_shortcuts">Genvägar</string>
+    <string name="settings_backup_export">Exportera säkerhetskopia</string>
+    <string name="settings_backup_export_summary">Spara dina favoriter, senast startade och inställningar till en fil</string>
+    <string name="settings_backup_import">Importera säkerhetskopia</string>
+    <string name="settings_backup_import_summary">Återställ dina favoriter, senast startade och inställningar från en fil</string>
     <string name="settings_github">GitHub-projekt</string>
     <string name="settings_hide_private">Dölj privata aktiviteter</string>
     <string name="settings_language">Språk</string>

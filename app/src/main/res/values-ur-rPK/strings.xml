@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">زمرہ شامل کریں</string>
     <string name="action_add_extra">اضافی شامل کریں</string>
-    <string name="action_advanced_properties">اعلی درجے کی خصوصیات</string>
+    <string name="action_advanced_properties">اعلی درجے की خصوصیات</string>
+    <string name="action_clear">صاف کریں</string>
     <string name="action_pick_icon_file">فائل سے لوڈ کریں</string>
     <string name="action_pick_icon_library">لائبریری سے منتخب کریں</string>
+    <string name="action_save">محفوظ کریں</string>
+    <string name="action_save_as_new">نئے طور پر محفوظ کریں</string>
     <string name="action_view_github">GitHub پروجیکٹ</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">سورس کوڈ دیکھیں</string>
     <string name="activity_settings">ترتیبات</string>
     <string name="app_name">Activity Launcher</string>
+    <string name="backup_export_error">بیک اپ ایکسپورٹ کرنے میں ناکامی: %1$s</string>
+    <string name="backup_export_success">بیک اپ کامیابی کے ساتھ ایکسپورٹ ہو گیا</string>
+    <string name="backup_import_error">بیک اپ امپورٹ کرنے میں ناکامی: %1$s</string>
+    <string name="backup_import_success">بیک اپ کامیابی کے ساتھ امپورٹ ہو گیا۔ کچھ ترتیبات کے لیے ایپ کو ری اسٹارٹ کرنے کی ضرورت پڑ سکتی ہے۔</string>
     <string name="category_title_about">کے بارے میں</string>
     <string name="category_title_ad_free">اشتہار سے پاک ورژن</string>
+    <string name="category_title_data_management">ڈیٹا مینجمنٹ</string>
     <string name="context_action_edit">شارٹ کٹ میں ترمیم کریں</string>
     <string name="context_action_favorite_add">پسندیدہ میں شامل کریں</string>
     <string name="context_action_favorite_remove">پسندیدہ سے ہٹائیں</string>
@@ -37,7 +45,7 @@
     <string name="error_invalid_long">غلط Long</string>
     <string name="filter_hint">پیکیج/سرگرمی</string>
     <string name="label_class">کلاس</string>
-    <string name="label_intent_action">Action</string>
+    <string name="label_intent_action">کارروائی</string>
     <string name="label_intent_categories">زمرے (Categories)</string>
     <string name="label_intent_data">ڈیٹا URI</string>
     <string name="label_intent_extra_key">کلید (Key)</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">شارٹ کٹ پلگ انز</string>
     <string name="nav_all">سب</string>
     <string name="nav_favorites">پسندیدہ</string>
-    <string name="nav_recents">حالیہ</string>
+    <string name="nav_recents">حال ہی میں شروع کیا گیا</string>
+    <string name="nav_shortcuts">شارٹ کٹس</string>
+    <string name="settings_backup_export">بیک اپ ایکسپورٹ کریں</string>
+    <string name="settings_backup_export_summary">اپنے پسندیدہ، حال ہی میں شروع کیے گئے اور ترتیبات کو فائل میں محفوظ کریں</string>
+    <string name="settings_backup_import">بیک اپ امپورٹ کریں</string>
+    <string name="settings_backup_import_summary">اپنے پسندیدہ، حال ہی میں شروع کیے گئے اور ترتیبات کو فائل سے بحال کریں</string>
     <string name="settings_github">GitHub پروجیکٹ</string>
     <string name="settings_hide_private">نجی سرگرمیاں چھپائیں</string>
     <string name="settings_language">زبان</string>

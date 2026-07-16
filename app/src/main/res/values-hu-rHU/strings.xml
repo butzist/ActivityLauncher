@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Kategória hozzáadása</string>
     <string name="action_add_extra">Extra hozzáadása</string>
     <string name="action_advanced_properties">Haladó tulajdonságok</string>
+    <string name="action_clear">Törlés</string>
     <string name="action_pick_icon_file">Betöltés fájlból</string>
     <string name="action_pick_icon_library">Választás könyvtárból</string>
+    <string name="action_save">Mentés</string>
+    <string name="action_save_as_new">Mentés újként</string>
     <string name="action_view_github">GitHub projekt</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Forráskód megtekintése</string>
     <string name="activity_settings">Beállítások</string>
     <string name="app_name">Tevékenység Launcher</string>
+    <string name="backup_export_error">Nem sikerült a biztonsági mentés exportálása: %1$s</string>
+    <string name="backup_export_success">Biztonsági mentés sikeresen exportálva</string>
+    <string name="backup_import_error">Nem sikerült a biztonsági mentés importálása: %1$s</string>
+    <string name="backup_import_success">Biztonsági mentés sikeresen importálva. Egyes beállításokhoz az alkalmazás újraindítása szükséges lehet.</string>
     <string name="category_title_about">Névjegy</string>
     <string name="category_title_ad_free">Hirdetésmentes verziók</string>
+    <string name="category_title_data_management">Adatkezelés</string>
     <string name="context_action_edit">Parancsikon szerkesztése</string>
     <string name="context_action_favorite_add">Hozzáadás a kedvencekhez</string>
     <string name="context_action_favorite_remove">Eltávolítás a kedvencekből</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Parancsikon bővítmények</string>
     <string name="nav_all">Mind</string>
     <string name="nav_favorites">Kedvencek</string>
-    <string name="nav_recents">Legutóbbi</string>
+    <string name="nav_recents">Legutóbb elindított</string>
+    <string name="nav_shortcuts">Parancsikonok</string>
+    <string name="settings_backup_export">Biztonsági mentés exportálása</string>
+    <string name="settings_backup_export_summary">Kedvencek, legutóbb indítottak és beállítások mentése fájlba</string>
+    <string name="settings_backup_import">Biztonsági mentés importálása</string>
+    <string name="settings_backup_import_summary">Kedvencek, legutóbb indítottak és beállítások visszaállítása fájlból</string>
     <string name="settings_github">GitHub projekt</string>
     <string name="settings_hide_private">Privát tevékenységek elrejtése</string>
     <string name="settings_language">Nyelv</string>

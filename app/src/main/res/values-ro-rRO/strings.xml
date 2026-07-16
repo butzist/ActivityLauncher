@@ -1,17 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_add_category">Adăugare categorie</string>
     <string name="action_add_extra">Adăugare Extra</string>
     <string name="action_advanced_properties">Proprietăți avansate</string>
+    <string name="action_clear">Șterge</string>
     <string name="action_pick_icon_file">Încărcare din fișier</string>
     <string name="action_pick_icon_library">Alegere din bibliotecă</string>
+    <string name="action_save">Salvează</string>
+    <string name="action_save_as_new">Salvează ca nou</string>
     <string name="action_view_github">Proiect GitHub</string>
     <string name="action_view_paid">Activity Launcher Pro</string>
     <string name="action_view_source">Vezi codul sursă</string>
     <string name="activity_settings">Setări</string>
     <string name="app_name">Lansator Activități</string>
+    <string name="backup_export_error">Exportul copiei de rezervă a eșuat: %1$s</string>
+    <string name="backup_export_success">Copia de rezervă a fost exportată cu succes</string>
+    <string name="backup_import_error">Importul copiei de rezervă a eșuat: %1$s</string>
+    <string name="backup_import_success">Copia de rezervă a fost importată cu succes. Unele setări pot necesita repornirea aplicației.</string>
     <string name="category_title_about">Despre</string>
     <string name="category_title_ad_free">Versiuni fără reclame</string>
+    <string name="category_title_data_management">Gestionarea datelor</string>
     <string name="context_action_edit">Editează Scurtătura</string>
     <string name="context_action_favorite_add">Adaugă la favorite</string>
     <string name="context_action_favorite_remove">Șterge din favorite</string>
@@ -50,7 +58,12 @@
     <string name="label_shortcut_plugins">Plugin-uri pentru comenzi rapide</string>
     <string name="nav_all">Toate</string>
     <string name="nav_favorites">Preferate</string>
-    <string name="nav_recents">Recente</string>
+    <string name="nav_recents">Lansate recent</string>
+    <string name="nav_shortcuts">Comenzi rapide</string>
+    <string name="settings_backup_export">Exportă copia de rezervă</string>
+    <string name="settings_backup_export_summary">Salvați favoritele, lansările recente și setările într-un fișier</string>
+    <string name="settings_backup_import">Importă copia de rezervă</string>
+    <string name="settings_backup_import_summary">Restaurați favoritele, lansările recente și setările dintr-un fișier</string>
     <string name="settings_github">Proiect GitHub</string>
     <string name="settings_hide_private">Ascunde activitățile private</string>
     <string name="settings_language">Limbă</string>
