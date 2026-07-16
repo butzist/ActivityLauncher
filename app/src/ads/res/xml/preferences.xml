@@ -54,4 +54,17 @@
             android:key="language"
             android:title="@string/settings_language" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_data_management"
+        android:title="@string/category_title_data_management">
+        <Preference
+            android:key="backup_export"
+            android:summary="@string/settings_backup_export_summary"
+            android:title="@string/settings_backup_export" />
+        <Preference
+            android:key="backup_import"
+            android:summary="@string/settings_backup_import_summary"
+            android:title="@string/settings_backup_import" />
+    </PreferenceCategory>
 </PreferenceScreen>

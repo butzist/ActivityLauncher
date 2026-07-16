@@ -9,6 +9,7 @@ import de.szalkowski.activitylauncher.data.favorites.FavoritesRepositoryImpl
 import de.szalkowski.activitylauncher.data.launcher.*
 import de.szalkowski.activitylauncher.data.packages.*
 import de.szalkowski.activitylauncher.data.recents.RecentsRepositoryImpl
+import de.szalkowski.activitylauncher.data.settings.BackupRepositoryImpl
 import de.szalkowski.activitylauncher.data.settings.SettingsRepositoryImpl
 import de.szalkowski.activitylauncher.data.shortcuts.ShortcutsRepositoryImpl
 import de.szalkowski.activitylauncher.domain.external.ActivitySharer
@@ -16,6 +17,7 @@ import de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository
 import de.szalkowski.activitylauncher.domain.launcher.*
 import de.szalkowski.activitylauncher.domain.packages.*
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
+import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import javax.inject.Singleton
@@ -94,6 +96,12 @@ abstract class CoreServicesModule {
     abstract fun bindRecentsRepository(
         recentsRepositoryImpl: RecentsRepositoryImpl,
     ): RecentsRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindBackupRepository(
+        backupRepositoryImpl: BackupRepositoryImpl,
+    ): BackupRepository
 
     @Singleton
     @Binds

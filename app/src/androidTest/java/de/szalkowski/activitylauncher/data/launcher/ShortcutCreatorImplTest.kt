@@ -14,6 +14,7 @@ import de.szalkowski.activitylauncher.app.di.CoreServicesModule
 import de.szalkowski.activitylauncher.domain.launcher.IntentSigner
 import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreator
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.entrypoint.ShortcutActivity
 import kotlinx.coroutines.runBlocking

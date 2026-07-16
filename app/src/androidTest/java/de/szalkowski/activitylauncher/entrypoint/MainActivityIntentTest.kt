@@ -24,6 +24,7 @@ import de.szalkowski.activitylauncher.domain.launcher.*
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
+import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import org.junit.Assert.assertEquals
@@ -88,6 +89,9 @@ class MainActivityIntentTest {
 
     @BindValue
     val settingsRepository: SettingsRepository = mock()
+
+    @BindValue
+    val backupRepository: BackupRepository = mock()
 
     @BindValue
     val viewIntentParser: ViewIntentParser = mock()

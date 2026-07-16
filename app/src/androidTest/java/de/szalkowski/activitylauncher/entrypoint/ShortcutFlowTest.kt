@@ -19,6 +19,7 @@ import de.szalkowski.activitylauncher.domain.launcher.ShortcutCreatorProxy
 import de.szalkowski.activitylauncher.domain.model.LaunchRequest
 import de.szalkowski.activitylauncher.domain.model.MyActivityInfo
 import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
+import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import kotlinx.coroutines.runBlocking
@@ -70,6 +71,9 @@ class ShortcutFlowTest {
 
     @BindValue
     val settingsRepository: SettingsRepository = mock()
+
+    @BindValue
+    val backupRepository: BackupRepository = mock()
 
     @BindValue
     val favoritesRepository: de.szalkowski.activitylauncher.domain.favorites.FavoritesRepository = mock()

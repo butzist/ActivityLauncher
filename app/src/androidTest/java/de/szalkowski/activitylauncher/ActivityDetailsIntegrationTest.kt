@@ -27,6 +27,7 @@ import de.szalkowski.activitylauncher.domain.model.ShortcutRequest
 import de.szalkowski.activitylauncher.domain.model.SystemPackage
 import de.szalkowski.activitylauncher.domain.packages.PackageRepository
 import de.szalkowski.activitylauncher.domain.recents.RecentsRepository
+import de.szalkowski.activitylauncher.domain.settings.BackupRepository
 import de.szalkowski.activitylauncher.domain.settings.SettingsRepository
 import de.szalkowski.activitylauncher.domain.shortcuts.ShortcutsRepository
 import de.szalkowski.activitylauncher.domain.usecase.launcher.GetActivityIconUseCase
@@ -87,6 +88,9 @@ class ActivityDetailsIntegrationTest {
 
     @BindValue
     val settingsRepository: SettingsRepository = mock()
+
+    @BindValue
+    val backupRepository: BackupRepository = mock()
 
     @BindValue
     val favoritesRepository: FavoritesRepository = mock()
