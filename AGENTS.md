@@ -80,6 +80,17 @@ When adding new features or modifying existing ones, you **MUST** add or update 
 - **Run Unit Tests**: `./gradlew app:testOssNoadsDebugUnitTest`
 - **Run Integration Tests**: `./gradlew app:connectedOssNoadsDebugAndroidTest`
 
+## Running from the Jailed OpenCode Agent
+The opencode agent runs inside a NixOS jail sandbox. The jail sets `GRADLE_OPTS` with `-Dandroid.aapt2FromMavenOverride` to point AGP at the NixOS-compatible AAPT2 binary. Use `./gradlew` (not the `gradlew` shell function, which is only available in the outer dev shell).
+
+**Note**: Integration tests (`connectedOssNoadsDebugAndroidTest`) require a running emulator. The emulator runs outside the jail, so it must be started manually before running the test command. Also restart the adb daemon so the jailed agent can discover the device:
+```
+emulator -avd Resizable_Experimental -no-window -no-audio &
+adb kill-server && adb start-server
+adb wait-for-device
+./gradlew :app:connectedOssNoadsDebugAndroidTest
+```
+
 # Code Style and Formatting
 This project uses Spotless for automatic code formatting.
 - `spotlessApply` on save or before commit.

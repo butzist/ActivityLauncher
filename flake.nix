@@ -60,7 +60,6 @@
           androidSdk.androidsdk
           pkgs.coreutils
           pkgs.bash
-          pkgs.gradle
           pkgs.findutils
           pkgs.which
         ];
@@ -76,17 +75,19 @@
                 name = "opencode";
                 extraPkgs = agentPkgs;
                 extraReadwriteDirs = [
-                  "~/.android"
-                  "~/.gradle"
                   "~/.emulator_console_auth_token"
                 ];
                 baseJailOptions = with combinators;
                   jlib.commonJailOptions
                   ++ [
                     (readwrite (noescape "\"$FLAKE_ROOT\""))
-                    (set-env "ANDROID_HOME" androidSdkPath)
+                    (ro-bind "${pkgs.coreutils}/bin/env" "/usr/bin/env")
+                    (ro-bind "${pkgs.bash}/bin/bash" "/usr/bin/bash")
                     (set-env "ANDROID_SDK_ROOT" androidSdkPath)
+                    (set-env "ANDROID_HOME" androidSdkPath)
+                    (set-env "ANDROID_AAPT2" "${androidSdkPath}/build-tools/37.0.0/aapt2")
                     (set-env "JAVA_HOME" javaHome)
+                    (set-env "GRADLE_OPTS" "-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4g -Dandroid.aapt2FromMavenOverride=${androidSdkPath}/build-tools/37.0.0/aapt2")
                   ];
               })
             ];
@@ -96,22 +97,8 @@
             export ANDROID_HOME="$ANDROID_SDK_ROOT"
             export ANDROID_AVD_HOME="$HOME/.android/avd"
             export JAVA_HOME="${javaHome}"
-            export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4g"
             export ANDROID_AAPT2="${androidSdkPath}/build-tools/37.0.0/aapt2"
-
-            gradlew() {
-              # On NixOS, the AGP-bundled aapt2 is a prebuilt binary that won't run.
-              # Replace cached aapt2 with the Nix SDK one if the bundled one is broken.
-              local aapt2_path
-              aapt2_path=$(find ~/.gradle/caches -name "aapt2" -path "*/aapt2-*-linux/aapt2" -type f 2>/dev/null | head -1)
-              if [ -n "$aapt2_path" ]; then
-                if ! "$aapt2_path" version >/dev/null 2>&1; then
-                  cp -f "$ANDROID_AAPT2" "$aapt2_path" 2>/dev/null || true
-                fi
-              fi
-              export ANDROID_AAPT2="${androidSdkPath}/build-tools/37.0.0/aapt2"
-              ${pkgs.coreutils}/bin/env sh "$FLAKE_ROOT/gradlew" "$@"
-            }
+            export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4g -Dandroid.aapt2FromMavenOverride=$ANDROID_AAPT2"
 
             # ADB server fix: ensure it talks to the outside emulator
             adb kill-server 2>/dev/null; adb start-server 2>/dev/null || true

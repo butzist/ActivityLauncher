@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class NoadsModule {
+abstract class FeatureServicesModule {
     @Singleton
     @Binds
     abstract fun bindAdManager(
