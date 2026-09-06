@@ -50,7 +50,7 @@ jobs:
           name: debug.apk
           path: app/build/outputs/apk/ossNoads/debug/app-oss-noads-debug.apk
 
-  integration-tests:
+  instrumented-tests:
     needs: unit-tests
     runs-on: ubuntu-latest
     steps:
@@ -62,7 +62,7 @@ jobs:
           java-version: 21
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Run integration tests
+      - name: Run instrumented integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
@@ -75,6 +75,25 @@ jobs:
             mkdir -p screenshots
             adb pull /storage/emulated/0/screenshots/. screenshots/ || true
             exit $res
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/
+
+  upgrade-compatibility-test:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Run release upgrade & shortcut compatibility test
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -86,9 +105,3 @@ jobs:
           disable-animations: true
           script: |
             python3 scripts/test_upgrade_shortcut.py
-      - name: Upload screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: screenshots/

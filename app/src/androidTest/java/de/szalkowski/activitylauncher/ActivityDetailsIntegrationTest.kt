@@ -474,7 +474,7 @@ class ActivityDetailsIntegrationTest {
             onView(withId(R.id.llCreateShortcut)).check(matches(isDisplayed()))
             onView(withId(R.id.llLaunch)).check(matches(not(isDisplayed())))
             onView(withId(R.id.btShareShortcut)).check(matches(isDisplayed()))
-            onView(withId(R.id.btFavorite)).check(matches(isDisplayed()))
+            onView(withId(R.id.btFavorite)).perform(scrollTo()).check(matches(isDisplayed()))
             onView(withId(R.id.tilLaunchPlugin)).check(matches(isDisplayed()))
         } finally {
             runCatching { scenario.close() }
@@ -509,7 +509,7 @@ class ActivityDetailsIntegrationTest {
             onView(withId(R.id.llCreateShortcut)).check(matches(not(isDisplayed())))
             onView(withId(R.id.llLaunch)).check(matches(isDisplayed()))
             onView(withId(R.id.btShareShortcut)).check(matches(isDisplayed()))
-            onView(withId(R.id.btFavorite)).check(matches(isDisplayed()))
+            onView(withId(R.id.btFavorite)).perform(scrollTo()).check(matches(isDisplayed()))
             onView(withId(R.id.tilLaunchPlugin)).check(matches(isDisplayed()))
         } finally {
             runCatching { scenario.close() }

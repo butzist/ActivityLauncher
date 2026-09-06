@@ -205,16 +205,19 @@ def get_current_focus_package():
 
 
 def ensure_app_launched(package_name, activity_name):
-    for attempt in range(5):
+    for attempt in range(8):
         adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
         adb_shell("wm dismiss-keyguard", check=False)
         adb_shell("input swipe 500 1500 500 500", check=False)
         time.sleep(1)
-        focus = get_current_focus_package()
-        if "Application Error" in focus or "android" in focus or "resolver" in focus.lower():
-            click_element(resource_id="android:id/aerr_close", wait=1) or click_element(resource_id="android:id/button1", wait=1)
+
+        xml = dump_ui()
+        if 'package="android"' in xml or "Application Error" in xml:
+            print("System/crash dialog detected, attempting to clear...")
+            click_element(resource_id="android:id/aerr_close", wait=1, retries=1) or click_element(text_contains="Allow", wait=1, retries=1) or click_element(resource_id="android:id/button1", wait=1, retries=1)
             adb_shell("input keyevent KEYCODE_BACK", check=False)
             time.sleep(1)
+
         adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package_name}/{activity_name}")
         time.sleep(2)
         focus = get_current_focus_package()
@@ -301,8 +304,19 @@ def test_upgrade_flow():
                     break
 
     if not clicked_pin:
-        print("Fallback pin dialog tap at (800, 2220)...")
-        adb_shell("input tap 800 2220")
+        print("Fallback pin dialog tap based on screen size...")
+        res = adb_shell("wm size", check=False)
+        width, height = 1080, 1920
+        size_match = re.search(r'(\d+)x(\d+)', res.stdout)
+        if size_match:
+            width, height = map(int, size_match.groups())
+        tap_x = int(width * 0.75)
+        tap_y1 = int(height * 0.62)
+        tap_y2 = int(height * 0.78)
+        print(f"Tapping fallback coordinates ({tap_x}, {tap_y1}) and ({tap_x}, {tap_y2})...")
+        adb_shell(f"input tap {tap_x} {tap_y1}")
+        time.sleep(1)
+        adb_shell(f"input tap {tap_x} {tap_y2}")
         time.sleep(1.5)
 
     print("=== Step 13: Navigating to Home screen ===")

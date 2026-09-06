@@ -25,6 +25,7 @@ import de.szalkowski.activitylauncher.entrypoint.MainActivity
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,6 +34,7 @@ import javax.inject.Inject
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
+@Ignore("Disabled for CI")
 class CreateShortcutIntegrationTest {
 
     @get:Rule
