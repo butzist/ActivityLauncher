@@ -290,14 +290,35 @@ def test_upgrade_flow():
         time.sleep(2)
 
     print("Confirming System Pin Shortcut dialog...")
-    if not (click_element(resource_id="android:id/button1", wait=2, retries=3) or
-            click_element(text_contains="Add", wait=2, retries=3) or
-            click_element(text_contains="ADD", wait=2, retries=3) or
-            click_element(text_contains="Allow", wait=2, retries=3) or
-            click_element(text_contains="OK", wait=2, retries=3)):
-        print("Fallback pin dialog keyevent ENTER...")
-        adb_shell("input keyevent KEYCODE_ENTER")
-        time.sleep(1.5)
+    pinPattern = re.compile(r'(?i)(add automatically|add to home screen|\badd\b|allow|ok)')
+    clicked_pin = False
+    for attempt in range(5):
+        xml = dump_ui()
+        for match in re.finditer(r'<node ([^>]+)>', xml):
+            attr = match.group(1)
+            node_text = ""
+            tm = re.search(r'text="([^"]*)"', attr)
+            if tm: node_text += tm.group(1)
+            dm = re.search(r'content-desc="([^"]*)"', attr)
+            if dm: node_text += " " + dm.group(1)
+
+            if pinPattern.search(node_text):
+                bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
+                if bounds_match:
+                    x1, y1, x2, y2 = map(int, bounds_match.groups())
+                    if y1 > 200:
+                        cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                        print(f"Pin dialog button '{node_text.strip()}' found at ({cx}, {cy}). Clicking...")
+                        adb_shell(f"input tap {cx} {cy}")
+                        clicked_pin = True
+                        time.sleep(2)
+                        break
+        if clicked_pin:
+            break
+        print("Retrying pin dialog search / DPAD navigation...")
+        adb_shell("input keyevent KEYCODE_DPAD_RIGHT", check=False)
+        adb_shell("input keyevent KEYCODE_ENTER", check=False)
+        time.sleep(1)
 
     print("=== Step 13: Navigating to Home screen ===")
     adb_shell("input keyevent KEYCODE_HOME")
