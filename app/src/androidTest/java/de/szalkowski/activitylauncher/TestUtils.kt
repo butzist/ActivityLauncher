@@ -40,8 +40,13 @@ object TestUtils {
             "Close",
             "OK",
             "Accept",
+            "Accept all",
             "Allow",
             "Wait",
+            "No thanks",
+            "I agree",
+            "Got it",
+            "Continue",
         )
 
         val regex = "(?i)" + commonButtons.joinToString("|")
