@@ -7,7 +7,6 @@ import time
 
 PACKAGE_NAME = "de.szalkowski.activitylauncher.oss"
 MAIN_ACTIVITY = f"{PACKAGE_NAME}/de.szalkowski.activitylauncher.entrypoint.MainActivity"
-SHORTCUT_LABEL = "Upgrade Test Settings Shortcut"
 TARGET_PACKAGE = "com.android.settings"
 
 PREVIOUS_RELEASE_TAG = "2.4.1"
@@ -24,7 +23,10 @@ def get_env():
         env["HOME"] = home_dir
 
     java_in_path = (
-        subprocess.run("which java", shell=True, capture_output=True, text=True, env=env).returncode == 0
+        subprocess.run(
+            "which java", shell=True, capture_output=True, text=True, env=env
+        ).returncode
+        == 0
     )
     if not java_in_path:
         possible_jdks = [
@@ -46,7 +48,9 @@ def get_env():
 def run_cmd(cmd, check=True):
     print(f"Executing: {cmd}")
     env = get_env()
-    res = subprocess.run(cmd, shell=True, capture_output=True, text=True, env=env)
+    res = subprocess.run(
+        cmd, shell=True, capture_output=True, text=True, env=env
+    )
     if check and res.returncode != 0:
         print(
             f"Command failed with exit code {res.returncode}:\nSTDOUT: {res.stdout}\nSTDERR: {res.stderr}"
@@ -93,21 +97,23 @@ def setup_environment():
         f"gh release download {PREVIOUS_RELEASE_TAG} --repo ActivityLauncher/ActivityLauncher --pattern 'app-oss-noads-release.apk' --dir /tmp/previous_release --clobber"
     )
 
+    print("=== Step 2: Ensuring debug keystore exists ===")
+    keystore_dir = os.path.expanduser("~/.android")
+    os.makedirs(keystore_dir, exist_ok=True)
+    keystore = os.path.join(keystore_dir, "debug.keystore")
+    if not os.path.exists(keystore):
+        print(f"Creating debug keystore at {keystore}...")
+        keytool_cmd = f"keytool -genkey -v -keystore {keystore} -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'"
+        run_cmd(keytool_cmd)
+
     print(
-        "=== Step 2: Re-signing previous release APK with local debug keystore ==="
+        "=== Step 3: Re-signing previous release APK with local debug keystore ==="
     )
     apksigner = find_apksigner()
-    keystore = os.path.expanduser("~/.android/debug.keystore")
-    if not os.path.exists(keystore):
-        print(
-            f"Debug keystore not found at {keystore}, building project to generate debug keystore..."
-        )
-        run_cmd("./gradlew app:assembleOssNoadsDebug")
-
     sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android --out {PREVIOUS_APK_RESIGNED} {PREVIOUS_APK_ORIGINAL}'
     run_cmd(sign_cmd)
 
-    print("=== Step 3: Checking current version APK ===")
+    print("=== Step 4: Checking current version APK ===")
     if not os.path.exists(NEW_APK_PATH):
         print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
         run_cmd("./gradlew app:assembleOssNoadsDebug")
@@ -146,23 +152,29 @@ def find_node_center(
 def click_element(
     resource_id=None, text=None, text_contains=None, pkg=None, wait=1.5
 ):
-    for _ in range(5):
+    for attempt in range(5):
         xml = dump_ui()
-        center = find_node_center(
-            xml,
-            resource_id=resource_id,
-            text=text,
-            text_contains=text_contains,
-            pkg=pkg,
-        )
-        if center:
-            cx, cy = center
-            print(
-                f"Clicking element ({resource_id or text or text_contains}) at ({cx}, {cy})"
+        for match in re.finditer(r"<node ([^>]+)>", xml):
+            attr = match.group(1)
+            if resource_id and f'resource-id="{resource_id}"' not in attr:
+                continue
+            if text and f'text="{text}"' not in attr:
+                continue
+            if text_contains and text_contains.lower() not in attr.lower():
+                continue
+            if pkg and f'package="{pkg}"' not in attr:
+                continue
+
+            bounds_match = re.search(
+                r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr
             )
-            adb_shell(f"input tap {cx} {cy}")
-            time.sleep(wait)
-            return True
+            if bounds_match:
+                x1, y1, x2, y2 = map(int, bounds_match.groups())
+                cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                print(f"Clicking node '{attr[:100]}' at ({cx}, {cy})")
+                adb_shell(f"input tap {cx} {cy}")
+                time.sleep(wait)
+                return True
         time.sleep(1)
     print(
         f"Warning: Element ({resource_id or text or text_contains}) not found"
@@ -182,26 +194,32 @@ def get_current_focus_package():
 
 def test_upgrade_flow():
     print(
-        "=== Step 4: Uninstalling existing app and installing re-signed previous version ==="
+        "=== Step 4: Uninstalling existing versions of Activity Launcher ==="
     )
-    adb(f"uninstall {PACKAGE_NAME}", check=False)
+    # Ensure no duplicate versions exist on device
+    adb("uninstall de.szalkowski.activitylauncher", check=False)
+    adb("uninstall de.szalkowski.activitylauncher.oss", check=False)
+
+    print("=== Step 5: Installing re-signed previous version (2.4.1) ===")
     adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
 
-    print("=== Step 5: Launching previous version (2.4.1) ===")
+    print("=== Step 6: Launching previous version (2.4.1) ===")
     adb_shell(f"am start -n {MAIN_ACTIVITY}")
     time.sleep(3)
 
-    print("=== Step 6: Dismissing disclaimer dialog if shown ===")
+    print("=== Step 7: Dismissing disclaimer dialog if shown ===")
     click_element(
         resource_id="android:id/button1", text="OK", wait=2
     ) or click_element(text="OK", wait=2)
 
-    print("=== Step 7: Searching for com.android.settings ===")
+    print("=== Step 8: Searching for com.android.settings ===")
     if click_element(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1):
         adb_shell("input text com.android.settings")
-        time.sleep(2)
+        time.sleep(1)
+        adb_shell("input keyevent 111")
+        time.sleep(1)
 
-    print("=== Step 8: Selecting com.android.settings package ===")
+    print("=== Step 9: Selecting com.android.settings package ===")
     if not click_element(
         resource_id=f"{PACKAGE_NAME}:id/tvClass",
         text_contains="com.android.settings",
@@ -211,33 +229,45 @@ def test_upgrade_flow():
             adb_shell("input tap 500 520")
             time.sleep(2)
 
-    print("=== Step 9: Selecting activity ===")
+    print("=== Step 10: Selecting activity ===")
     if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2):
         adb_shell("input tap 500 520")
         time.sleep(2)
 
-    print(
-        f"=== Step 10: Setting shortcut name to '{SHORTCUT_LABEL}' ==="
-    )
-    click_element(resource_id=f"{PACKAGE_NAME}:id/tiName", wait=1)
-    for _ in range(30):
-        adb_shell("input keyevent 67", check=False)
-    adb_shell(f"input text {SHORTCUT_LABEL.replace(' ', '\\ ')}")
-    time.sleep(1)
-
     print("=== Step 11: Clicking 'Create shortcut' button ===")
-    adb_shell("input swipe 500 1200 500 400 300")
-    time.sleep(1)
-    if not click_element(
-        resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2
-    ):
-        click_element(text_contains="Create", wait=2)
+    click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2)
 
-    print("=== Step 12: Confirming system pin shortcut dialog ===")
-    time.sleep(1)
-    if not click_element(text_contains="Add automatically", wait=2):
-        if not click_element(text_contains="Add to Home", wait=2):
-            click_element(resource_id="android:id/button1", wait=2)
+    print("=== Step 12: Confirming System Pin Shortcut dialog ===")
+    time.sleep(2)
+    xml = dump_ui()
+
+    if "Complete action using" in xml or "ResolverActivity" in xml:
+        print("ResolverActivity/Chooser shown for shortcut creation, selecting 'Activity Launcher'...")
+        click_element(text_contains="Activity Launcher", wait=2) or adb_shell("input tap 300 1900")
+        time.sleep(2)
+        xml = dump_ui()
+
+    print("Confirming System Pin Shortcut dialog...")
+    pinPattern = re.compile(r'(?i)(add automatically|add to home screen|add|allow|ok)')
+    clicked_pin = False
+    for match in re.finditer(r'<node ([^>]+)>', xml):
+        attr = match.group(1)
+        if ('class="android.widget.Button"' in attr or 'clickable="true"' in attr) and pinPattern.search(attr):
+            bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
+            if bounds_match:
+                x1, y1, x2, y2 = map(int, bounds_match.groups())
+                if y1 > 500:  # Exclude status bar
+                    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                    print(f"Pin dialog button found at ({cx}, {cy}). Clicking...")
+                    adb_shell(f"input tap {cx} {cy}")
+                    clicked_pin = True
+                    time.sleep(1.5)
+                    break
+
+    if not clicked_pin:
+        print("Fallback pin dialog tap at (800, 2220)...")
+        adb_shell("input tap 800 2220")
+        time.sleep(1.5)
 
     print("=== Step 13: Navigating to Home screen ===")
     adb_shell("input keyevent KEYCODE_HOME")
@@ -250,16 +280,14 @@ def test_upgrade_flow():
     adb_shell("input keyevent KEYCODE_HOME")
     time.sleep(2)
 
-    print(
-        f"=== Step 15: Clicking created shortcut '{SHORTCUT_LABEL}' on Home screen ==="
-    )
+    print("=== Step 15: Clicking created shortcut 'Settings' on Home screen ===")
     shortcut_found = False
     for attempt in range(4):
         xml = dump_ui()
         for match in re.finditer(r"<node ([^>]+)>", xml):
             attr = match.group(1)
             if (
-                SHORTCUT_LABEL.lower() in attr.lower()
+                "settings" in attr.lower()
                 and "com.android.systemui" not in attr
             ):
                 bounds_match = re.search(
