@@ -89,6 +89,22 @@ def find_apksigner():
     return "apksigner"
 
 
+def strip_signatures_and_resign(apk_in, apk_out, keystore):
+    import zipfile
+    print(f"Stripping old signatures from {apk_in}...")
+    temp_apk = apk_out + ".nosig.apk"
+    with zipfile.ZipFile(apk_in, "r") as zin, zipfile.ZipFile(temp_apk, "w") as zout:
+        for item in zin.infolist():
+            if not item.filename.startswith("META-INF/"):
+                zout.writestr(item, zin.read(item.filename))
+
+    apksigner = find_apksigner()
+    sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android --out {apk_out} {temp_apk}'
+    run_cmd(sign_cmd)
+    if os.path.exists(temp_apk):
+        os.remove(temp_apk)
+
+
 def setup_environment():
     print(
         f"=== Step 1: Downloading previous release ({PREVIOUS_RELEASE_TAG}) from GitHub ==="
@@ -107,15 +123,14 @@ def setup_environment():
         run_cmd(keytool_cmd)
 
     print("=== Step 3: Re-signing previous release APK with local debug keystore ===")
-    apksigner = find_apksigner()
-    sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android --out {PREVIOUS_APK_RESIGNED} {PREVIOUS_APK_ORIGINAL}'
-    run_cmd(sign_cmd)
+    strip_signatures_and_resign(PREVIOUS_APK_ORIGINAL, PREVIOUS_APK_RESIGNED, keystore)
     print(f"Previous release re-signed at {PREVIOUS_APK_RESIGNED}")
 
-    print("=== Step 4: Checking current version APK ===")
+    print("=== Step 4: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ===")
+    run_cmd("./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss")
     if not os.path.exists(NEW_APK_PATH):
-        print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
-        run_cmd("./gradlew app:assembleOssNoadsDebug")
+        print(f"Error: Current version APK not found at {NEW_APK_PATH} after build!")
+        sys.exit(1)
     print(f"Current version APK verified at {NEW_APK_PATH}")
 
 
@@ -149,9 +164,9 @@ def find_node_center(
 
 
 def click_element(
-    resource_id=None, text=None, text_contains=None, pkg=None, wait=1.5
+    resource_id=None, text=None, text_contains=None, pkg=None, wait=1.5, retries=5
 ):
-    for attempt in range(5):
+    for attempt in range(retries):
         xml = dump_ui()
         for match in re.finditer(r"<node ([^>]+)>", xml):
             attr = match.group(1)
@@ -176,7 +191,7 @@ def click_element(
                 return True
         time.sleep(1)
     print(
-        f"Warning: Element ({resource_id or text or text_contains}) not found"
+        f"Warning: Element ({resource_id or text or text_contains}) not found in XML: {xml[:300]}"
     )
     return False
 
@@ -203,7 +218,12 @@ def test_upgrade_flow():
     adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
 
     print("=== Step 6: Launching previous version (2.4.1) ===")
-    adb_shell(f"am start -n {MAIN_ACTIVITY}")
+    adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
+    adb_shell("wm dismiss-keyguard", check=False)
+    adb_shell("input swipe 500 1500 500 500", check=False)
+    adb_shell("input keyevent KEYCODE_HOME", check=False)
+    time.sleep(1)
+    adb_shell(f"am start -W -n {MAIN_ACTIVITY}")
     time.sleep(3)
 
     print("=== Step 7: Dismissing disclaimer dialog if shown ===")
