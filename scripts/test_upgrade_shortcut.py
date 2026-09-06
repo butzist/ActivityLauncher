@@ -235,7 +235,10 @@ def test_upgrade_flow():
         time.sleep(2)
 
     print("=== Step 11: Clicking 'Create shortcut' button ===")
-    click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2)
+    if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2):
+        adb_shell("input swipe 500 1800 500 800 300")
+        time.sleep(1.5)
+        click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2)
 
     print("=== Step 12: Confirming System Pin Shortcut dialog ===")
     time.sleep(2)
@@ -321,9 +324,9 @@ def test_upgrade_flow():
             success = True
             break
         if current_pkg == "android":
-            print("ResolverActivity shown, selecting 'Just once' / default option...")
-            if not click_element(text_contains="Just once", wait=2):
-                click_element(resource_id="android:id/button_once", wait=2)
+            print("ResolverActivity shown on shortcut launch, selecting Activity Launcher handler...")
+            click_element(text_contains="Activity Launcher", wait=1.5) or click_element(resource_id="android:id/text1", wait=1.5)
+            click_element(text_contains="Just once", wait=2) or click_element(resource_id="android:id/button_once", wait=2)
             time.sleep(2)
         else:
             time.sleep(1)
