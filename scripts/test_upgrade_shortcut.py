@@ -97,27 +97,23 @@ def setup_environment():
         f"gh release download {PREVIOUS_RELEASE_TAG} --repo ActivityLauncher/ActivityLauncher --pattern 'app-oss-noads-release.apk' --dir /tmp/previous_release --clobber"
     )
 
-    print("=== Step 2: Ensuring debug keystore exists ===")
-    keystore_dir = os.path.expanduser("~/.android")
-    os.makedirs(keystore_dir, exist_ok=True)
-    keystore = os.path.join(keystore_dir, "debug.keystore")
+    print("=== Step 2: Checking current version APK ===")
+    if not os.path.exists(NEW_APK_PATH):
+        print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
+        run_cmd("./gradlew app:assembleOssNoadsDebug")
+    print(f"Current version APK verified at {NEW_APK_PATH}")
+
+    print("=== Step 3: Re-signing previous release APK with local debug keystore ===")
+    keystore = os.path.expanduser("~/.android/debug.keystore")
     if not os.path.exists(keystore):
         print(f"Creating debug keystore at {keystore}...")
         keytool_cmd = f"keytool -genkey -v -keystore {keystore} -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'"
         run_cmd(keytool_cmd)
 
-    print(
-        "=== Step 3: Re-signing previous release APK with local debug keystore ==="
-    )
     apksigner = find_apksigner()
     sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android --out {PREVIOUS_APK_RESIGNED} {PREVIOUS_APK_ORIGINAL}'
     run_cmd(sign_cmd)
-
-    print("=== Step 4: Checking current version APK ===")
-    if not os.path.exists(NEW_APK_PATH):
-        print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
-        run_cmd("./gradlew app:assembleOssNoadsDebug")
-    print(f"Current version APK verified at {NEW_APK_PATH}")
+    print(f"Previous release re-signed at {PREVIOUS_APK_RESIGNED}")
 
 
 def dump_ui():
