@@ -172,8 +172,12 @@ def click_element(
                 continue
             if text and f'text="{text}"' not in attr:
                 continue
-            if text_contains and text_contains.lower() not in attr.lower():
-                continue
+            if text_contains:
+                text_match = re.search(r'text="([^"]*)"', attr)
+                desc_match = re.search(r'content-desc="([^"]*)"', attr)
+                node_text = (text_match.group(1) if text_match else "") + " " + (desc_match.group(1) if desc_match else "")
+                if text_contains.lower() not in node_text.lower():
+                    continue
             if pkg and f'package="{pkg}"' not in attr:
                 continue
 
@@ -282,41 +286,17 @@ def test_upgrade_flow():
 
     if "Complete action using" in xml or "ResolverActivity" in xml:
         print("ResolverActivity/Chooser shown for shortcut creation, selecting 'Activity Launcher'...")
-        click_element(text_contains="Activity Launcher", wait=2) or adb_shell("input tap 300 1900")
+        click_element(text_contains="Activity Launcher", wait=2, retries=3) or adb_shell("input tap 300 1900")
         time.sleep(2)
-        xml = dump_ui()
 
     print("Confirming System Pin Shortcut dialog...")
-    pinPattern = re.compile(r'(?i)(add automatically|add to home screen|add|allow|ok)')
-    clicked_pin = False
-    for match in re.finditer(r'<node ([^>]+)>', xml):
-        attr = match.group(1)
-        if ('class="android.widget.Button"' in attr or 'clickable="true"' in attr) and pinPattern.search(attr):
-            bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
-            if bounds_match:
-                x1, y1, x2, y2 = map(int, bounds_match.groups())
-                if y1 > 500:  # Exclude status bar
-                    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
-                    print(f"Pin dialog button found at ({cx}, {cy}). Clicking...")
-                    adb_shell(f"input tap {cx} {cy}")
-                    clicked_pin = True
-                    time.sleep(1.5)
-                    break
-
-    if not clicked_pin:
-        print("Fallback pin dialog tap based on screen size...")
-        res = adb_shell("wm size", check=False)
-        width, height = 1080, 1920
-        size_match = re.search(r'(\d+)x(\d+)', res.stdout)
-        if size_match:
-            width, height = map(int, size_match.groups())
-        tap_x = int(width * 0.75)
-        tap_y1 = int(height * 0.62)
-        tap_y2 = int(height * 0.78)
-        print(f"Tapping fallback coordinates ({tap_x}, {tap_y1}) and ({tap_x}, {tap_y2})...")
-        adb_shell(f"input tap {tap_x} {tap_y1}")
-        time.sleep(1)
-        adb_shell(f"input tap {tap_x} {tap_y2}")
+    if not (click_element(resource_id="android:id/button1", wait=2, retries=3) or
+            click_element(text_contains="Add", wait=2, retries=3) or
+            click_element(text_contains="ADD", wait=2, retries=3) or
+            click_element(text_contains="Allow", wait=2, retries=3) or
+            click_element(text_contains="OK", wait=2, retries=3)):
+        print("Fallback pin dialog keyevent ENTER...")
+        adb_shell("input keyevent KEYCODE_ENTER")
         time.sleep(1.5)
 
     print("=== Step 13: Navigating to Home screen ===")
