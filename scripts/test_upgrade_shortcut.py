@@ -89,20 +89,12 @@ def find_apksigner():
     return "apksigner"
 
 
-def strip_signatures_and_resign(apk_in, apk_out, keystore):
-    import zipfile
-    print(f"Stripping old signatures from {apk_in}...")
-    temp_apk = apk_out + ".nosig.apk"
-    with zipfile.ZipFile(apk_in, "r") as zin, zipfile.ZipFile(temp_apk, "w") as zout:
-        for item in zin.infolist():
-            if not item.filename.startswith("META-INF/"):
-                zout.writestr(item, zin.read(item.filename))
-
+def strip_signatures_and_resign(apk_path, keystore):
+    print(f"Stripping old signatures from {apk_path}...")
+    run_cmd(f'zip -d {apk_path} "META-INF/*.SF" "META-INF/*.RSA" "META-INF/*.DSA" "META-INF/*.EC" "META-INF/MANIFEST.MF"', check=False)
     apksigner = find_apksigner()
-    sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android --out {apk_out} {temp_apk}'
+    sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android {apk_path}'
     run_cmd(sign_cmd)
-    if os.path.exists(temp_apk):
-        os.remove(temp_apk)
 
 
 def setup_environment():
@@ -123,17 +115,21 @@ def setup_environment():
         run_cmd(keytool_cmd)
 
     print("=== Step 3: Re-signing previous release APK with local debug keystore ===")
-    strip_signatures_and_resign(PREVIOUS_APK_ORIGINAL, PREVIOUS_APK_RESIGNED, keystore)
+    run_cmd(f"cp {PREVIOUS_APK_ORIGINAL} {PREVIOUS_APK_RESIGNED}")
+    strip_signatures_and_resign(PREVIOUS_APK_RESIGNED, keystore)
     print(f"Previous release re-signed at {PREVIOUS_APK_RESIGNED}")
 
     print("=== Step 4: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ===")
-    if os.path.exists(NEW_APK_PATH):
-        os.remove(NEW_APK_PATH)
-    run_cmd("./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss --rerun-tasks --no-build-cache")
+    if not os.path.exists(NEW_APK_PATH):
+        print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
+        run_cmd("./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss")
     if not os.path.exists(NEW_APK_PATH):
         print(f"Error: Current version APK not found at {NEW_APK_PATH} after build!")
         sys.exit(1)
-    print(f"Current version APK verified at {NEW_APK_PATH}")
+
+    print("=== Step 5: Re-signing current version APK with exact same debug keystore ===")
+    strip_signatures_and_resign(NEW_APK_PATH, keystore)
+    print(f"Current version APK verified and re-signed at {NEW_APK_PATH}")
 
 
 def dump_ui():
@@ -208,6 +204,28 @@ def get_current_focus_package():
     return ""
 
 
+def ensure_app_launched(package_name, activity_name):
+    for attempt in range(5):
+        adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
+        adb_shell("wm dismiss-keyguard", check=False)
+        adb_shell("input swipe 500 1500 500 500", check=False)
+        time.sleep(1)
+        focus = get_current_focus_package()
+        if "Application Error" in focus or "android" in focus or "resolver" in focus.lower():
+            click_element(resource_id="android:id/aerr_close", wait=1) or click_element(resource_id="android:id/button1", wait=1)
+            adb_shell("input keyevent KEYCODE_BACK", check=False)
+            time.sleep(1)
+        adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package_name}/{activity_name}")
+        time.sleep(2)
+        focus = get_current_focus_package()
+        if package_name in focus:
+            print(f"App {package_name} is in focus!")
+            return True
+        time.sleep(1)
+    print(f"Warning: Could not focus {package_name}")
+    return False
+
+
 def test_upgrade_flow():
     print(
         "=== Step 4: Uninstalling existing versions of Activity Launcher ==="
@@ -220,13 +238,7 @@ def test_upgrade_flow():
     adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
 
     print("=== Step 6: Launching previous version (2.4.1) ===")
-    adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
-    adb_shell("wm dismiss-keyguard", check=False)
-    adb_shell("input swipe 500 1500 500 500", check=False)
-    adb_shell("input keyevent KEYCODE_HOME", check=False)
-    time.sleep(1)
-    adb_shell(f"am start -W -n {MAIN_ACTIVITY}")
-    time.sleep(3)
+    ensure_app_launched(PACKAGE_NAME, "de.szalkowski.activitylauncher.entrypoint.MainActivity")
 
     print("=== Step 7: Dismissing disclaimer dialog if shown ===")
     click_element(
