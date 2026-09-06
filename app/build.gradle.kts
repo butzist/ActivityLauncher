@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId =
-            providers.environmentVariable("APPID").getOrElse("de.szalkowski.activitylauncher")
+            providers.environmentVariable("APPID").orElse(providers.gradleProperty("APPID")).getOrElse("de.szalkowski.activitylauncher")
         minSdk = 16
         targetSdk = 37
         versionCode = 20500

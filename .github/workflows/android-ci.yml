@@ -71,6 +71,17 @@ jobs:
             mkdir -p screenshots
             adb pull /storage/emulated/0/screenshots/. screenshots/ || true
             exit $res
+      - name: Run release upgrade & shortcut compatibility test
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPID: de.szalkowski.activitylauncher.oss
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          disable-animations: true
+          script: |
+            python3 scripts/test_upgrade_shortcut.py
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
