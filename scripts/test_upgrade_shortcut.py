@@ -290,10 +290,9 @@ def test_upgrade_flow():
         time.sleep(2)
 
     print("Confirming System Pin Shortcut dialog...")
-    pinPattern = re.compile(r'(?i)(add automatically|add to home screen|\badd\b|allow|ok)')
     clicked_pin = False
     for attempt in range(10):
-        time.sleep(1)
+        time.sleep(1.5)
         xml = dump_ui()
         for match in re.finditer(r'<node ([^>]+)>', xml):
             attr = match.group(1)
@@ -303,11 +302,12 @@ def test_upgrade_flow():
             dm = re.search(r'content-desc="([^"]*)"', attr)
             if dm: node_text += " " + dm.group(1)
 
-            if pinPattern.search(node_text) or 'button1' in attr or 'btn_add' in attr:
+            if (re.search(r'(?i)(add|allow|ok|pin)', node_text) or
+                'button1' in attr or 'btn_add' in attr):
                 bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
                 if bounds_match:
                     x1, y1, x2, y2 = map(int, bounds_match.groups())
-                    if y1 > 200:
+                    if y1 > 200 and (x2 - x1) > 20:
                         cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
                         print(f"Pin dialog button '{node_text.strip()}' found at ({cx}, {cy}). Clicking...")
                         adb_shell(f"input tap {cx} {cy}")
@@ -318,10 +318,11 @@ def test_upgrade_flow():
             break
 
     if not clicked_pin:
-        print("Fallback pin dialog tap...")
-        adb_shell("input keyevent KEYCODE_DPAD_RIGHT", check=False)
+        print("Fallback pin dialog navigation...")
+        adb_shell("input keyevent KEYCODE_TAB", check=False)
+        adb_shell("input keyevent KEYCODE_TAB", check=False)
         adb_shell("input keyevent KEYCODE_ENTER", check=False)
-        time.sleep(1)
+        time.sleep(1.5)
 
     print("=== Step 13: Navigating to Home screen ===")
     adb_shell("input keyevent KEYCODE_HOME")
