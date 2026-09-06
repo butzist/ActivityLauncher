@@ -127,7 +127,9 @@ def setup_environment():
     print(f"Previous release re-signed at {PREVIOUS_APK_RESIGNED}")
 
     print("=== Step 4: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ===")
-    run_cmd("./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss")
+    if os.path.exists(NEW_APK_PATH):
+        os.remove(NEW_APK_PATH)
+    run_cmd("./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss --rerun-tasks --no-build-cache")
     if not os.path.exists(NEW_APK_PATH):
         print(f"Error: Current version APK not found at {NEW_APK_PATH} after build!")
         sys.exit(1)
