@@ -69,6 +69,36 @@ def adb_shell(cmd, check=True):
     return adb(f'shell "{cmd}"', check=check)
 
 
+def get_screen_size():
+    res = adb_shell("wm size", check=False)
+    match = re.search(r"(\d+)x(\d+)", res.stdout)
+    if match:
+        return int(match.group(1)), int(match.group(2))
+    return 1080, 1920
+
+
+def swipe_scroll_down():
+    w, h = get_screen_size()
+    cx = w // 2
+    start_y = int(h * 0.75)
+    end_y = int(h * 0.25)
+    print(
+        f"Scrolling down: swiping from ({cx}, {start_y}) to ({cx}, {end_y}) on {w}x{h} screen"
+    )
+    adb_shell(f"input swipe {cx} {start_y} {cx} {end_y} 300")
+
+
+def swipe_page_left():
+    w, h = get_screen_size()
+    cy = h // 2
+    start_x = int(w * 0.8)
+    end_x = int(w * 0.2)
+    print(
+        f"Swiping to next page: from ({start_x}, {cy}) to ({end_x}, {cy}) on {w}x{h} screen"
+    )
+    adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 300")
+
+
 def find_apksigner():
     android_home = (
         os.environ.get("ANDROID_HOME")
@@ -304,7 +334,7 @@ def ensure_app_launched(package_name, activity_name):
     for attempt in range(8):
         adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
         adb_shell("wm dismiss-keyguard", check=False)
-        adb_shell("input swipe 500 1500 500 500", check=False)
+        swipe_scroll_down()
         time.sleep(1)
 
         xml = dump_ui()
@@ -335,6 +365,7 @@ def ensure_app_launched(package_name, activity_name):
 
 
 def test_upgrade_flow():
+    w, h = get_screen_size()
     print(
         "=== Step 4: Uninstalling existing versions of Activity Launcher ==="
     )
@@ -374,13 +405,13 @@ def test_upgrade_flow():
         label="select_package_class",
     ):
         if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2, label="select_package_name"):
-            adb_shell("input tap 500 520")
+            adb_shell(f"input tap {w // 2} {int(h * 0.25)}")
             time.sleep(2)
     save_snapshot("step09_after_package_select")
 
     print("=== Step 10: Selecting activity ===")
     if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2, label="select_activity"):
-        adb_shell("input tap 500 520")
+        adb_shell(f"input tap {w // 2} {int(h * 0.25)}")
         time.sleep(2)
     save_snapshot("step10_after_activity_select")
 
@@ -388,7 +419,7 @@ def test_upgrade_flow():
     save_snapshot("step11_before_create_shortcut")
     if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, label="create_shortcut"):
         print("Swiping down to find Create Shortcut button...")
-        adb_shell("input swipe 500 1800 500 800 300")
+        swipe_scroll_down()
         time.sleep(1.5)
         save_snapshot("step11_after_swipe")
         click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, label="create_shortcut_retry")
@@ -400,7 +431,7 @@ def test_upgrade_flow():
 
     if "Complete action using" in xml or "ResolverActivity" in xml:
         print("ResolverActivity/Chooser shown for shortcut creation, selecting 'Activity Launcher'...")
-        click_element(text_contains="Activity Launcher", wait=2, retries=3, label="resolver_activity_launcher") or adb_shell("input tap 300 1900")
+        click_element(text_contains="Activity Launcher", wait=2, retries=3, label="resolver_activity_launcher") or adb_shell(f"input tap {w // 2} {int(h * 0.8)}")
         time.sleep(2)
         save_snapshot("step12_after_resolver")
 
@@ -479,7 +510,7 @@ def test_upgrade_flow():
         if shortcut_found:
             break
         print(f"Page {attempt+1}: Shortcut not found, swiping...")
-        adb_shell("input swipe 800 1000 200 1000 300")
+        swipe_page_left()
         time.sleep(2)
 
     if not shortcut_found:
