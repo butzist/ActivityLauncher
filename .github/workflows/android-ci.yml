@@ -105,3 +105,9 @@ jobs:
           disable-animations: true
           script: |
             python3 scripts/test_upgrade_shortcut.py
+      - name: Upload upgrade test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upgrade-test-artifacts
+          path: upgrade-test-artifacts/

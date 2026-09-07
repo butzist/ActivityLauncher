@@ -14,6 +14,8 @@ PREVIOUS_APK_ORIGINAL = "/tmp/previous_release/app-oss-noads-release.apk"
 PREVIOUS_APK_RESIGNED = "/tmp/previous_release_debug.apk"
 NEW_APK_PATH = "app/build/outputs/apk/ossNoads/debug/app-oss-noads-debug.apk"
 
+SNAPSHOT_COUNTER = 0
+
 
 def get_env():
     env = os.environ.copy()
@@ -91,7 +93,10 @@ def find_apksigner():
 
 def strip_signatures_and_resign(apk_path, keystore):
     print(f"Stripping old signatures from {apk_path}...")
-    run_cmd(f'zip -d {apk_path} "META-INF/*.SF" "META-INF/*.RSA" "META-INF/*.DSA" "META-INF/*.EC" "META-INF/MANIFEST.MF"', check=False)
+    run_cmd(
+        f'zip -d {apk_path} "META-INF/*.SF" "META-INF/*.RSA" "META-INF/*.DSA" "META-INF/*.EC" "META-INF/MANIFEST.MF"',
+        check=False,
+    )
     apksigner = find_apksigner()
     sign_cmd = f'"{apksigner}" sign --ks {keystore} --ks-pass pass:android --key-pass pass:android {apk_path}'
     run_cmd(sign_cmd)
@@ -119,10 +124,14 @@ def setup_environment():
     strip_signatures_and_resign(PREVIOUS_APK_RESIGNED, keystore)
     print(f"Previous release re-signed at {PREVIOUS_APK_RESIGNED}")
 
-    print("=== Step 4: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ===")
+    print(
+        "=== Step 4: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ==="
+    )
     if not os.path.exists(NEW_APK_PATH):
         print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
-        run_cmd("./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss")
+        run_cmd(
+            "./gradlew app:assembleOssNoadsDebug -PAPPID=de.szalkowski.activitylauncher.oss"
+        )
     if not os.path.exists(NEW_APK_PATH):
         print(f"Error: Current version APK not found at {NEW_APK_PATH} after build!")
         sys.exit(1)
@@ -136,6 +145,76 @@ def dump_ui():
     adb_shell("uiautomator dump /sdcard/window_dump.xml >/dev/null", check=False)
     res = adb_shell("cat /sdcard/window_dump.xml", check=False)
     return res.stdout
+
+
+def log_ui_summary(xml_content, label="", max_nodes=50):
+    nodes = []
+    for match in re.finditer(r"<node ([^>]+)>", xml_content):
+        attr = match.group(1)
+        tm = re.search(r'text="([^"]*)"', attr)
+        dm = re.search(r'content-desc="([^"]*)"', attr)
+        rid = re.search(r'resource-id="([^"]*)"', attr)
+        cls = re.search(r'class="([^"]*)"', attr)
+        pkg = re.search(r'package="([^"]*)"', attr)
+        bm = re.search(r'bounds="([^"]*)"', attr)
+
+        text = tm.group(1) if tm else ""
+        desc = dm.group(1) if dm else ""
+        res_id = rid.group(1) if rid else ""
+        class_name = cls.group(1).split(".")[-1] if cls else ""
+        package = pkg.group(1) if pkg else ""
+        bounds = bm.group(1) if bm else ""
+
+        displayed_text = f"text='{text}'" if text else ""
+        if desc:
+            displayed_text += (
+                f" desc='{desc}'" if displayed_text else f"desc='{desc}'"
+            )
+
+        if text or desc or res_id:
+            short_id = res_id.split("/")[-1] if "/" in res_id else res_id
+            nodes.append(
+                f"  - [{package}] {class_name} ({short_id}) {displayed_text} {bounds}"
+            )
+
+    print(f"--- UI Screen Summary [{label}] ({len(nodes)} labeled nodes) ---")
+    if nodes:
+        for n in nodes[:max_nodes]:
+            print(n)
+        if len(nodes) > max_nodes:
+            print(f"  ... and {len(nodes) - max_nodes} more nodes")
+    else:
+        print("  (No text/resource-id nodes found in XML dump)")
+    print("---------------------------------------------------------")
+
+
+def save_snapshot(label="snapshot"):
+    global SNAPSHOT_COUNTER
+    SNAPSHOT_COUNTER += 1
+    artifacts_dir = "upgrade-test-artifacts"
+    os.makedirs(artifacts_dir, exist_ok=True)
+
+    sanitized_label = re.sub(r"[^a-zA-Z0-9_-]", "_", str(label))[:50]
+    prefix = os.path.join(
+        artifacts_dir, f"{SNAPSHOT_COUNTER:02d}_{sanitized_label}"
+    )
+
+    xml_path = f"{prefix}.xml"
+    png_path = f"{prefix}.png"
+
+    adb_shell("uiautomator dump /sdcard/window_dump.xml >/dev/null", check=False)
+    adb(f"pull /sdcard/window_dump.xml {xml_path}", check=False)
+
+    adb_shell("screencap -p /sdcard/screen.png", check=False)
+    adb(f"pull /sdcard/screen.png {png_path}", check=False)
+
+    if os.path.exists(xml_path):
+        try:
+            with open(xml_path, "r", encoding="utf-8", errors="ignore") as f:
+                xml_content = f.read()
+            log_ui_summary(xml_content, label=sanitized_label)
+        except Exception as e:
+            print(f"Error reading UI dump {xml_path}: {e}")
 
 
 def find_node_center(
@@ -162,7 +241,13 @@ def find_node_center(
 
 
 def click_element(
-    resource_id=None, text=None, text_contains=None, pkg=None, wait=1.5, retries=5
+    resource_id=None,
+    text=None,
+    text_contains=None,
+    pkg=None,
+    wait=1.5,
+    retries=5,
+    label=None,
 ):
     for attempt in range(retries):
         xml = dump_ui()
@@ -175,7 +260,11 @@ def click_element(
             if text_contains:
                 text_match = re.search(r'text="([^"]*)"', attr)
                 desc_match = re.search(r'content-desc="([^"]*)"', attr)
-                node_text = (text_match.group(1) if text_match else "") + " " + (desc_match.group(1) if desc_match else "")
+                node_text = (
+                    (text_match.group(1) if text_match else "")
+                    + " "
+                    + (desc_match.group(1) if desc_match else "")
+                )
                 if text_contains.lower() not in node_text.lower():
                     continue
             if pkg and f'package="{pkg}"' not in attr:
@@ -192,9 +281,12 @@ def click_element(
                 time.sleep(wait)
                 return True
         time.sleep(1)
+
+    target_desc = resource_id or text or text_contains
     print(
-        f"Warning: Element ({resource_id or text or text_contains}) not found in XML: {xml[:300]}"
+        f"Warning: Element ({target_desc}) not found after {retries} retries."
     )
+    save_snapshot(f"missing_{label or target_desc}")
     return False
 
 
@@ -218,11 +310,19 @@ def ensure_app_launched(package_name, activity_name):
         xml = dump_ui()
         if 'package="android"' in xml or "Application Error" in xml:
             print("System/crash dialog detected, attempting to clear...")
-            click_element(resource_id="android:id/aerr_close", wait=1, retries=1) or click_element(text_contains="Allow", wait=1, retries=1) or click_element(resource_id="android:id/button1", wait=1, retries=1)
+            click_element(
+                resource_id="android:id/aerr_close", wait=1, retries=1
+            ) or click_element(
+                text_contains="Allow", wait=1, retries=1
+            ) or click_element(
+                resource_id="android:id/button1", wait=1, retries=1
+            )
             adb_shell("input keyevent KEYCODE_BACK", check=False)
             time.sleep(1)
 
-        adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package_name}/{activity_name}")
+        adb_shell(
+            f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package_name}/{activity_name}"
+        )
         time.sleep(2)
         focus = get_current_focus_package()
         if package_name in focus:
@@ -230,6 +330,7 @@ def ensure_app_launched(package_name, activity_name):
             return True
         time.sleep(1)
     print(f"Warning: Could not focus {package_name}")
+    save_snapshot("cannot_focus_app")
     return False
 
 
@@ -245,49 +346,63 @@ def test_upgrade_flow():
     adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
 
     print("=== Step 6: Launching previous version (2.4.1) ===")
-    ensure_app_launched(PACKAGE_NAME, "de.szalkowski.activitylauncher.entrypoint.MainActivity")
+    ensure_app_launched(
+        PACKAGE_NAME, "de.szalkowski.activitylauncher.entrypoint.MainActivity"
+    )
+    save_snapshot("step06_app_launched")
 
     print("=== Step 7: Dismissing disclaimer dialog if shown ===")
     click_element(
-        resource_id="android:id/button1", text="OK", wait=2
-    ) or click_element(text="OK", wait=2)
+        resource_id="android:id/button1", text="OK", wait=2, label="disclaimer_ok"
+    ) or click_element(text="OK", wait=2, label="disclaimer_ok")
+    save_snapshot("step07_disclaimer_done")
 
     print("=== Step 8: Searching for com.android.settings ===")
-    if click_element(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1):
+    save_snapshot("step08_before_search")
+    if click_element(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1, label="search_input"):
         adb_shell("input text com.android.settings")
         time.sleep(1)
         adb_shell("input keyevent 111")
         time.sleep(1)
+    save_snapshot("step08_after_search")
 
     print("=== Step 9: Selecting com.android.settings package ===")
     if not click_element(
         resource_id=f"{PACKAGE_NAME}:id/tvClass",
         text_contains="com.android.settings",
         wait=2,
+        label="select_package_class",
     ):
-        if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2):
+        if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2, label="select_package_name"):
             adb_shell("input tap 500 520")
             time.sleep(2)
+    save_snapshot("step09_after_package_select")
 
     print("=== Step 10: Selecting activity ===")
-    if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2):
+    if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2, label="select_activity"):
         adb_shell("input tap 500 520")
         time.sleep(2)
+    save_snapshot("step10_after_activity_select")
 
     print("=== Step 11: Clicking 'Create shortcut' button ===")
-    if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2):
+    save_snapshot("step11_before_create_shortcut")
+    if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, label="create_shortcut"):
+        print("Swiping down to find Create Shortcut button...")
         adb_shell("input swipe 500 1800 500 800 300")
         time.sleep(1.5)
-        click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2)
+        save_snapshot("step11_after_swipe")
+        click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, label="create_shortcut_retry")
 
     print("=== Step 12: Confirming System Pin Shortcut dialog ===")
     time.sleep(2)
+    save_snapshot("step12_pin_dialog_check")
     xml = dump_ui()
 
     if "Complete action using" in xml or "ResolverActivity" in xml:
         print("ResolverActivity/Chooser shown for shortcut creation, selecting 'Activity Launcher'...")
-        click_element(text_contains="Activity Launcher", wait=2, retries=3) or adb_shell("input tap 300 1900")
+        click_element(text_contains="Activity Launcher", wait=2, retries=3, label="resolver_activity_launcher") or adb_shell("input tap 300 1900")
         time.sleep(2)
+        save_snapshot("step12_after_resolver")
 
     print("Confirming System Pin Shortcut dialog...")
     clicked_pin = False
@@ -319,14 +434,18 @@ def test_upgrade_flow():
 
     if not clicked_pin:
         print("Fallback pin dialog navigation...")
+        save_snapshot("step12_fallback_pin_navigation")
         adb_shell("input keyevent KEYCODE_TAB", check=False)
         adb_shell("input keyevent KEYCODE_TAB", check=False)
         adb_shell("input keyevent KEYCODE_ENTER", check=False)
         time.sleep(1.5)
 
+    save_snapshot("step12_after_pin")
+
     print("=== Step 13: Navigating to Home screen ===")
     adb_shell("input keyevent KEYCODE_HOME")
     time.sleep(2)
+    save_snapshot("step13_home_screen")
 
     print("=== Step 14: Upgrading in-place to current version ===")
     adb(f"install -r -g {NEW_APK_PATH}")
@@ -334,10 +453,12 @@ def test_upgrade_flow():
 
     adb_shell("input keyevent KEYCODE_HOME")
     time.sleep(2)
+    save_snapshot("step14_upgraded_home_screen")
 
     print("=== Step 15: Clicking created shortcut 'Settings' on Home screen ===")
     shortcut_found = False
     for attempt in range(4):
+        save_snapshot(f"step15_home_page_{attempt+1}")
         xml = dump_ui()
         for match in re.finditer(r"<node ([^>]+)>", xml):
             attr = match.group(1)
@@ -363,11 +484,13 @@ def test_upgrade_flow():
 
     if not shortcut_found:
         print("ERROR: Could not locate shortcut on Home screen!")
+        save_snapshot("step15_error_shortcut_not_found")
         sys.exit(1)
 
     time.sleep(3)
 
     print("=== Step 16: Validating that com.android.settings was launched ===")
+    save_snapshot("step16_before_validation")
     success = False
     for _ in range(5):
         current_pkg = get_current_focus_package()
@@ -377,11 +500,13 @@ def test_upgrade_flow():
             break
         if current_pkg == "android":
             print("ResolverActivity shown on shortcut launch, selecting Activity Launcher handler...")
-            click_element(text_contains="Activity Launcher", wait=1.5) or click_element(resource_id="android:id/text1", wait=1.5)
-            click_element(text_contains="Just once", wait=2) or click_element(resource_id="android:id/button_once", wait=2)
+            click_element(text_contains="Activity Launcher", wait=1.5, label="resolver_activity_launcher_launch") or click_element(resource_id="android:id/text1", wait=1.5, label="resolver_text1")
+            click_element(text_contains="Just once", wait=2, label="resolver_just_once") or click_element(resource_id="android:id/button_once", wait=2, label="resolver_button_once")
             time.sleep(2)
         else:
             time.sleep(1)
+
+    save_snapshot("step16_after_validation")
 
     if success or get_current_focus_package() == TARGET_PACKAGE:
         print("\n==========================================")
@@ -401,5 +526,10 @@ def test_upgrade_flow():
 
 
 if __name__ == "__main__":
-    setup_environment()
-    test_upgrade_flow()
+    try:
+        setup_environment()
+        test_upgrade_flow()
+    except Exception as e:
+        print(f"FATAL ERROR in test execution: {e}")
+        save_snapshot("fatal_error")
+        sys.exit(1)

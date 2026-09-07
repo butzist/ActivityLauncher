@@ -16,3 +16,5 @@ keystore*.jks
 /.artifacts
 /.kotlin
 client_secret.json
+upgrade-test-artifacts/
+__pycache__/
