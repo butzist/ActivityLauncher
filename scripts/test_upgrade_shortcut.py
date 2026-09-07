@@ -20,30 +20,12 @@ SNAPSHOT_COUNTER = 0
 def get_env():
     env = os.environ.copy()
     env["APPID"] = "de.szalkowski.activitylauncher.oss"
-    home_dir = os.path.expanduser("~")
-    if "HOME" not in env:
-        env["HOME"] = home_dir
-
-    java_in_path = (
-        subprocess.run(
-            "which java", shell=True, capture_output=True, text=True, env=env
-        ).returncode
-        == 0
-    )
-    if not java_in_path:
-        possible_jdks = [
-            os.environ.get("JAVA_HOME", ""),
-            os.path.join(home_dir, ".jdks/ms-21.0.12.1"),
-            "/usr/lib/jvm/default-java",
-        ]
-        for jdk in possible_jdks:
-            if not jdk:
-                continue
-            bin_path = os.path.join(jdk, "bin")
-            if os.path.exists(os.path.join(bin_path, "java")):
-                env["PATH"] = f"{bin_path}:{env.get('PATH', '')}"
-                env["JAVA_HOME"] = jdk
-                break
+    env["HOME"] = os.path.expanduser("~")
+    java_home = os.environ.get("JAVA_HOME")
+    if java_home:
+        env["JAVA_HOME"] = java_home
+        bin_path = os.path.join(java_home, "bin")
+        env["PATH"] = f"{bin_path}:{env.get('PATH', '')}"
     return env
 
 
@@ -97,6 +79,32 @@ def swipe_page_left():
         f"Swiping to next page: from ({start_x}, {cy}) to ({end_x}, {cy}) on {w}x{h} screen"
     )
     adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 300")
+
+
+def disable_stylus_and_keyboard_prompts():
+    adb_shell("settings put secure stylus_handwriting_enabled 0", check=False)
+    adb_shell("settings put secure show_stylus_handwriting_pointer 0", check=False)
+    adb_shell("settings put global stylus_handwriting_enabled 0", check=False)
+
+
+def uninstall_all_activitylauncher_packages():
+    res = adb_shell("pm list packages", check=False)
+    for line in res.stdout.splitlines():
+        if "activitylauncher" in line:
+            pkg = line.replace("package:", "").strip()
+            if pkg:
+                print(f"Uninstalling existing package: {pkg}")
+                adb(f"uninstall {pkg}", check=False)
+
+
+def check_installed_packages_and_version():
+    res = adb_shell("pm list packages --show-versioncode", check=False)
+    al_packages = []
+    for line in res.stdout.splitlines():
+        if "activitylauncher" in line:
+            pkg_info = line.replace("package:", "").strip()
+            al_packages.append(pkg_info)
+    return al_packages
 
 
 def find_apksigner():
@@ -247,29 +255,6 @@ def save_snapshot(label="snapshot"):
             print(f"Error reading UI dump {xml_path}: {e}")
 
 
-def find_node_center(
-    dump_xml, resource_id=None, text=None, text_contains=None, pkg=None
-):
-    for match in re.finditer(r"<node ([^>]+)>", dump_xml):
-        node_attr = match.group(1)
-        if resource_id and f'resource-id="{resource_id}"' not in node_attr:
-            continue
-        if text and f'text="{text}"' not in node_attr:
-            continue
-        if text_contains and text_contains.lower() not in node_attr.lower():
-            continue
-        if pkg and f'package="{pkg}"' not in node_attr:
-            continue
-
-        bounds_match = re.search(
-            r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', node_attr
-        )
-        if bounds_match:
-            x1, y1, x2, y2 = map(int, bounds_match.groups())
-            return ((x1 + x2) // 2, (y1 + y2) // 2)
-    return None
-
-
 def click_element(
     resource_id=None,
     text=None,
@@ -320,6 +305,27 @@ def click_element(
     return False
 
 
+def dismiss_system_prompts():
+    disable_stylus_and_keyboard_prompts()
+    xml = dump_ui()
+    if any(
+        k in xml.lower()
+        for k in ["stylus", "got it", "skip", "allow", "permission", "welcome", "keyboard"]
+    ):
+        print("System prompt/overlay detected, dismissing...")
+        click_element(
+            text_contains="Got it", wait=1, retries=1, label="dismiss_got_it"
+        ) or click_element(
+            text_contains="SKIP", wait=1, retries=1, label="dismiss_skip"
+        ) or click_element(
+            text_contains="Allow", wait=1, retries=1, label="dismiss_allow"
+        ) or click_element(
+            resource_id="android:id/button1", wait=1, retries=1, label="dismiss_ok"
+        )
+        adb_shell("input keyevent KEYCODE_BACK", check=False)
+        time.sleep(1)
+
+
 def get_current_focus_package():
     res = adb_shell("dumpsys window | grep mCurrentFocus", check=False)
     out = res.stdout
@@ -331,6 +337,7 @@ def get_current_focus_package():
 
 
 def ensure_app_launched(package_name, activity_name):
+    disable_stylus_and_keyboard_prompts()
     for attempt in range(8):
         adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
         adb_shell("wm dismiss-keyguard", check=False)
@@ -338,8 +345,9 @@ def ensure_app_launched(package_name, activity_name):
         time.sleep(1)
 
         xml = dump_ui()
-        if 'package="android"' in xml or "Application Error" in xml:
+        if 'package="android"' in xml or "Application Error" in xml or "stylus" in xml.lower():
             print("System/crash dialog detected, attempting to clear...")
+            dismiss_system_prompts()
             click_element(
                 resource_id="android:id/aerr_close", wait=1, retries=1
             ) or click_element(
@@ -366,15 +374,20 @@ def ensure_app_launched(package_name, activity_name):
 
 def test_upgrade_flow():
     w, h = get_screen_size()
-    print(
-        "=== Step 4: Uninstalling existing versions of Activity Launcher ==="
-    )
-    # Ensure no duplicate versions exist on device
-    adb("uninstall de.szalkowski.activitylauncher", check=False)
-    adb("uninstall de.szalkowski.activitylauncher.oss", check=False)
+    disable_stylus_and_keyboard_prompts()
+    print("=== Uninstalling ALL existing Activity Launcher packages ===")
+    uninstall_all_activitylauncher_packages()
 
     print("=== Step 5: Installing re-signed previous version (2.4.1) ===")
     adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
+
+    # Check installed packages after v2.4.1 install
+    packages_v1 = check_installed_packages_and_version()
+    print(f"Installed Activity Launcher packages (v2.4.1): {packages_v1}")
+    if not any(PACKAGE_NAME in pkg for pkg in packages_v1) or len(packages_v1) != 1:
+        print(f"ERROR: Expected exactly 1 package ({PACKAGE_NAME}), but found: {packages_v1}")
+        save_snapshot("error_v1_packages_mismatch")
+        sys.exit(1)
 
     print("=== Step 6: Launching previous version (2.4.1) ===")
     ensure_app_launched(
@@ -389,40 +402,61 @@ def test_upgrade_flow():
     save_snapshot("step07_disclaimer_done")
 
     print("=== Step 8: Searching for com.android.settings ===")
+    dismiss_system_prompts()
     save_snapshot("step08_before_search")
-    if click_element(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1, label="search_input"):
-        adb_shell("input text com.android.settings")
+    if click_element(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1.5, label="search_input"):
         time.sleep(1)
-        adb_shell("input keyevent 111")
+        dismiss_system_prompts()
+        print("Typing com.android.settings into search field...")
+        adb_shell("input text com.android.settings")
+        time.sleep(2)
+        adb_shell("input keyevent KEYCODE_ENTER", check=False)
+        time.sleep(1)
+        adb_shell("input keyevent KEYCODE_BACK", check=False)
         time.sleep(1)
     save_snapshot("step08_after_search")
 
     print("=== Step 9: Selecting com.android.settings package ===")
+    time.sleep(2)
     if not click_element(
         resource_id=f"{PACKAGE_NAME}:id/tvClass",
-        text_contains="com.android.settings",
+        text="com.android.settings",
         wait=2,
+        retries=5,
         label="select_package_class",
     ):
-        if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2, label="select_package_name"):
-            adb_shell(f"input tap {w // 2} {int(h * 0.25)}")
-            time.sleep(2)
+        if not click_element(text="com.android.settings", wait=2, retries=5, label="select_package_text"):
+            print("ERROR: Could not find package com.android.settings in list!")
+            save_snapshot("error_package_not_found")
+            sys.exit(1)
     save_snapshot("step09_after_package_select")
 
     print("=== Step 10: Selecting activity ===")
-    if not click_element(resource_id=f"{PACKAGE_NAME}:id/tvName", wait=2, label="select_activity"):
-        adb_shell(f"input tap {w // 2} {int(h * 0.25)}")
-        time.sleep(2)
+    time.sleep(2)
+    if not click_element(
+        resource_id=f"{PACKAGE_NAME}:id/tvName",
+        text="Settings",
+        wait=2,
+        retries=5,
+        label="select_activity_name",
+    ):
+        if not click_element(text="Settings", wait=2, retries=5, label="select_activity_text"):
+            print("ERROR: Could not find Settings activity in list!")
+            save_snapshot("error_activity_not_found")
+            sys.exit(1)
     save_snapshot("step10_after_activity_select")
 
     print("=== Step 11: Clicking 'Create shortcut' button ===")
     save_snapshot("step11_before_create_shortcut")
-    if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, label="create_shortcut"):
+    if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3, label="create_shortcut"):
         print("Swiping down to find Create Shortcut button...")
         swipe_scroll_down()
         time.sleep(1.5)
         save_snapshot("step11_after_swipe")
-        click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, label="create_shortcut_retry")
+        if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3, label="create_shortcut_retry"):
+            print("ERROR: Could not find Create Shortcut button!")
+            save_snapshot("error_btCreateShortcut_not_found")
+            sys.exit(1)
 
     print("=== Step 12: Confirming System Pin Shortcut dialog ===")
     time.sleep(2)
@@ -482,6 +516,18 @@ def test_upgrade_flow():
     adb(f"install -r -g {NEW_APK_PATH}")
     time.sleep(2)
 
+    # Verify that in-place upgrade updated the existing package and didn't install a separate package
+    packages_v2 = check_installed_packages_and_version()
+    print(f"Installed Activity Launcher packages (after in-place upgrade): {packages_v2}")
+    if len(packages_v2) != 1:
+        print(f"ERROR: Multiple or zero Activity Launcher packages found after upgrade! Packages: {packages_v2}")
+        save_snapshot("error_multiple_packages_after_upgrade")
+        sys.exit(1)
+    if PACKAGE_NAME not in packages_v2[0]:
+        print(f"ERROR: Package name changed after upgrade! Expected {PACKAGE_NAME}, got: {packages_v2[0]}")
+        save_snapshot("error_package_name_changed")
+        sys.exit(1)
+
     adb_shell("input keyevent KEYCODE_HOME")
     time.sleep(2)
     save_snapshot("step14_upgraded_home_screen")
@@ -520,7 +566,7 @@ def test_upgrade_flow():
 
     time.sleep(3)
 
-    print("=== Step 16: Validating that com.android.settings was launched ===")
+    print("=== Step 16: Validating that com.android.settings was launched without app selector ===")
     save_snapshot("step16_before_validation")
     success = False
     for _ in range(5):
@@ -530,12 +576,10 @@ def test_upgrade_flow():
             success = True
             break
         if current_pkg == "android":
-            print("ResolverActivity shown on shortcut launch, selecting Activity Launcher handler...")
-            click_element(text_contains="Activity Launcher", wait=1.5, label="resolver_activity_launcher_launch") or click_element(resource_id="android:id/text1", wait=1.5, label="resolver_text1")
-            click_element(text_contains="Just once", wait=2, label="resolver_just_once") or click_element(resource_id="android:id/button_once", wait=2, label="resolver_button_once")
-            time.sleep(2)
-        else:
-            time.sleep(1)
+            print("ERROR: App selector/ResolverActivity shown when clicking shortcut! Expected direct launch.")
+            save_snapshot("error_app_selector_shown")
+            sys.exit(1)
+        time.sleep(1)
 
     save_snapshot("step16_after_validation")
 
@@ -543,7 +587,7 @@ def test_upgrade_flow():
         print("\n==========================================")
         print(" SUCCESS: Upgrade test passed 100%!")
         print(
-            f" Shortcut created in v{PREVIOUS_RELEASE_TAG} worked after update to current version!"
+            f" Shortcut created in v{PREVIOUS_RELEASE_TAG} worked after update to current version without app selector!"
         )
         print("==========================================\n")
     else:

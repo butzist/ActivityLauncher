@@ -30,10 +30,16 @@ android {
             dimension = "distribution"
             minSdk = 16
             multiDexEnabled = true
+            applicationId =
+                providers.environmentVariable(
+                    "APPID",
+                ).orElse(providers.gradleProperty("APPID")).getOrElse("de.szalkowski.activitylauncher.oss")
         }
         create("playStore") {
             dimension = "distribution"
             minSdk = 24
+            applicationId =
+                providers.environmentVariable("APPID").orElse(providers.gradleProperty("APPID")).getOrElse("de.szalkowski.activitylauncher")
         }
         create("noads") {
             dimension = "ads"
