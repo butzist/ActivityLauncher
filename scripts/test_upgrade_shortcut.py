@@ -51,34 +51,84 @@ def adb_shell(cmd, check=True):
     return adb(f'shell "{cmd}"', check=check)
 
 
-def get_screen_size():
-    res = adb_shell("wm size", check=False)
-    match = re.search(r"(\d+)x(\d+)", res.stdout)
-    if match:
-        return int(match.group(1)), int(match.group(2))
-    return 1080, 1920
+class UiDevice:
+    def __init__(self):
+        self.w, self.h = self._get_screen_size()
 
+    def _get_screen_size(self):
+        res = adb_shell("wm size", check=False)
+        match = re.search(r"(\d+)x(\d+)", res.stdout)
+        if match:
+            return int(match.group(1)), int(match.group(2))
+        return 1080, 1920
 
-def swipe_scroll_down():
-    w, h = get_screen_size()
-    cx = w // 2
-    start_y = int(h * 0.75)
-    end_y = int(h * 0.25)
-    print(
-        f"Scrolling down: swiping from ({cx}, {start_y}) to ({cx}, {end_y}) on {w}x{h} screen"
-    )
-    adb_shell(f"input swipe {cx} {start_y} {cx} {end_y} 300")
+    def dump_hierarchy(self):
+        adb_shell("uiautomator dump /sdcard/window_dump.xml >/dev/null", check=False)
+        res = adb_shell("cat /sdcard/window_dump.xml", check=False)
+        return res.stdout
 
+    def screenshot(self, path):
+        adb_shell("screencap -p /sdcard/screen.png", check=False)
+        adb(f"pull /sdcard/screen.png {path}", check=False)
 
-def swipe_page_left():
-    w, h = get_screen_size()
-    cy = h // 2
-    start_x = int(w * 0.8)
-    end_x = int(w * 0.2)
-    print(
-        f"Swiping to next page: from ({start_x}, {cy}) to ({end_x}, {cy}) on {w}x{h} screen"
-    )
-    adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 300")
+    def press(self, key):
+        if key == "home":
+            adb_shell("input keyevent KEYCODE_HOME")
+        elif key == "back":
+            adb_shell("input keyevent KEYCODE_BACK")
+        elif key == "enter":
+            adb_shell("input keyevent KEYCODE_ENTER")
+        elif key == "tab":
+            adb_shell("input keyevent KEYCODE_TAB")
+
+    def scroll_down(self):
+        cx = self.w // 2
+        start_y = int(self.h * 0.75)
+        end_y = int(self.h * 0.25)
+        print(f"Scrolling down: swiping from ({cx}, {start_y}) to ({cx}, {end_y}) on {self.w}x{self.h} screen")
+        adb_shell(f"input swipe {cx} {start_y} {cx} {end_y} 300")
+
+    def swipe_left(self):
+        cy = self.h // 2
+        start_x = int(self.w * 0.8)
+        end_x = int(self.w * 0.2)
+        print(f"Swiping left: from ({start_x}, {cy}) to ({end_x}, {cy}) on {self.w}x{self.h} screen")
+        adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 300")
+
+    def app_start(self, package, activity):
+        adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package}/{activity}")
+
+    def current_package(self):
+        res = adb_shell("dumpsys window | grep mCurrentFocus", check=False)
+        match = re.search(r"(\b[a-zA-Z0-9_.]+\b)/", res.stdout)
+        return match.group(1) if match else ""
+
+    def click(self, resource_id=None, text=None, text_contains=None, wait=1.5, retries=5):
+        for _ in range(retries):
+            xml = self.dump_hierarchy()
+            for match in re.finditer(r"<node ([^>]+)>", xml):
+                attr = match.group(1)
+                if resource_id and f'resource-id="{resource_id}"' not in attr:
+                    continue
+                if text and f'text="{text}"' not in attr:
+                    continue
+                if text_contains:
+                    tm = re.search(r'text="([^"]*)"', attr)
+                    dm = re.search(r'content-desc="([^"]*)"', attr)
+                    node_text = (tm.group(1) if tm else "") + " " + (dm.group(1) if dm else "")
+                    if text_contains.lower() not in node_text.lower():
+                        continue
+
+                bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
+                if bm:
+                    x1, y1, x2, y2 = map(int, bm.groups())
+                    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                    print(f"Clicking '{text or resource_id or text_contains}' at ({cx}, {cy})")
+                    adb_shell(f"input tap {cx} {cy}")
+                    time.sleep(wait)
+                    return True
+            time.sleep(1)
+        return False
 
 
 def disable_stylus_and_keyboard_prompts():
@@ -179,12 +229,6 @@ def setup_environment():
     print(f"Current version APK verified and re-signed at {NEW_APK_PATH}")
 
 
-def dump_ui():
-    adb_shell("uiautomator dump /sdcard/window_dump.xml >/dev/null", check=False)
-    res = adb_shell("cat /sdcard/window_dump.xml", check=False)
-    return res.stdout
-
-
 def log_ui_summary(xml_content, label="", max_nodes=50):
     nodes = []
     for match in re.finditer(r"<node ([^>]+)>", xml_content):
@@ -226,7 +270,7 @@ def log_ui_summary(xml_content, label="", max_nodes=50):
     print("---------------------------------------------------------")
 
 
-def save_snapshot(label="snapshot"):
+def save_snapshot(d, label="snapshot"):
     global SNAPSHOT_COUNTER
     SNAPSHOT_COUNTER += 1
     artifacts_dir = "upgrade-test-artifacts"
@@ -240,143 +284,68 @@ def save_snapshot(label="snapshot"):
     xml_path = f"{prefix}.xml"
     png_path = f"{prefix}.png"
 
-    adb_shell("uiautomator dump /sdcard/window_dump.xml >/dev/null", check=False)
-    adb(f"pull /sdcard/window_dump.xml {xml_path}", check=False)
+    try:
+        xml_content = d.dump_hierarchy()
+        with open(xml_path, "w", encoding="utf-8") as f:
+            f.write(xml_content)
+        log_ui_summary(xml_content, label=sanitized_label)
+    except Exception as e:
+        print(f"Error dumping hierarchy: {e}")
 
-    adb_shell("screencap -p /sdcard/screen.png", check=False)
-    adb(f"pull /sdcard/screen.png {png_path}", check=False)
-
-    if os.path.exists(xml_path):
-        try:
-            with open(xml_path, "r", encoding="utf-8", errors="ignore") as f:
-                xml_content = f.read()
-            log_ui_summary(xml_content, label=sanitized_label)
-        except Exception as e:
-            print(f"Error reading UI dump {xml_path}: {e}")
-
-
-def click_element(
-    resource_id=None,
-    text=None,
-    text_contains=None,
-    pkg=None,
-    wait=1.5,
-    retries=5,
-    label=None,
-):
-    for attempt in range(retries):
-        xml = dump_ui()
-        for match in re.finditer(r"<node ([^>]+)>", xml):
-            attr = match.group(1)
-            if resource_id and f'resource-id="{resource_id}"' not in attr:
-                continue
-            if text and f'text="{text}"' not in attr:
-                continue
-            if text_contains:
-                text_match = re.search(r'text="([^"]*)"', attr)
-                desc_match = re.search(r'content-desc="([^"]*)"', attr)
-                node_text = (
-                    (text_match.group(1) if text_match else "")
-                    + " "
-                    + (desc_match.group(1) if desc_match else "")
-                )
-                if text_contains.lower() not in node_text.lower():
-                    continue
-            if pkg and f'package="{pkg}"' not in attr:
-                continue
-
-            bounds_match = re.search(
-                r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr
-            )
-            if bounds_match:
-                x1, y1, x2, y2 = map(int, bounds_match.groups())
-                cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
-                print(f"Clicking node '{attr[:100]}' at ({cx}, {cy})")
-                adb_shell(f"input tap {cx} {cy}")
-                time.sleep(wait)
-                return True
-        time.sleep(1)
-
-    target_desc = resource_id or text or text_contains
-    print(
-        f"Warning: Element ({target_desc}) not found after {retries} retries."
-    )
-    save_snapshot(f"missing_{label or target_desc}")
-    return False
+    try:
+        d.screenshot(png_path)
+    except Exception as e:
+        print(f"Error taking screenshot: {e}")
 
 
-def dismiss_system_prompts():
+def dismiss_system_prompts(d):
     disable_stylus_and_keyboard_prompts()
-    xml = dump_ui()
+    xml = d.dump_hierarchy()
     if any(
         k in xml.lower()
         for k in ["stylus", "got it", "skip", "allow", "permission", "welcome", "keyboard"]
     ):
         print("System prompt/overlay detected, dismissing...")
-        click_element(
-            text_contains="Got it", wait=1, retries=1, label="dismiss_got_it"
-        ) or click_element(
-            text_contains="SKIP", wait=1, retries=1, label="dismiss_skip"
-        ) or click_element(
-            text_contains="Allow", wait=1, retries=1, label="dismiss_allow"
-        ) or click_element(
-            resource_id="android:id/button1", wait=1, retries=1, label="dismiss_ok"
-        )
-        adb_shell("input keyevent KEYCODE_BACK", check=False)
+        d.click(text_contains="Got it") or \
+        d.click(text_contains="SKIP") or \
+        d.click(text_contains="Allow") or \
+        d.click(resource_id="android:id/button1")
+        d.press("back")
         time.sleep(1)
 
 
-def get_current_focus_package():
-    res = adb_shell("dumpsys window | grep mCurrentFocus", check=False)
-    out = res.stdout
-    print(f"Current focus: {out.strip()}")
-    match = re.search(r"(\b[a-zA-Z0-9_.]+\b)/", out)
-    if match:
-        return match.group(1)
-    return ""
-
-
-def ensure_app_launched(package_name, activity_name):
+def ensure_app_launched(d, package_name, activity_name):
     disable_stylus_and_keyboard_prompts()
-    for attempt in range(8):
+    for _ in range(8):
         adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
         adb_shell("wm dismiss-keyguard", check=False)
-        swipe_scroll_down()
+        d.scroll_down()
         time.sleep(1)
 
-        xml = dump_ui()
+        xml = d.dump_hierarchy()
         if 'package="android"' in xml or "Application Error" in xml or "stylus" in xml.lower():
             print("System/crash dialog detected, attempting to clear...")
-            dismiss_system_prompts()
-            click_element(
-                resource_id="android:id/aerr_close", wait=1, retries=1
-            ) or click_element(
-                text_contains="Allow", wait=1, retries=1
-            ) or click_element(
-                resource_id="android:id/button1", wait=1, retries=1
-            )
+            dismiss_system_prompts(d)
             adb_shell("input keyevent KEYCODE_BACK", check=False)
             time.sleep(1)
 
-        adb_shell(
-            f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package_name}/{activity_name}"
-        )
+        d.app_start(package_name, activity_name)
         time.sleep(2)
-        focus = get_current_focus_package()
+        focus = d.current_package()
         if package_name in focus:
             print(f"App {package_name} is in focus!")
             return True
         time.sleep(1)
     print(f"Warning: Could not focus {package_name}")
-    save_snapshot("cannot_focus_app")
+    save_snapshot(d, "cannot_focus_app")
     return False
 
 
 def test_upgrade_flow():
-    w, h = get_screen_size()
+    d = UiDevice()
     disable_stylus_and_keyboard_prompts()
-    print("=== Uninstalling ALL existing Activity Launcher packages ===")
-    uninstall_all_activitylauncher_packages()
+    print(f"=== Uninstalling existing package {PACKAGE_NAME} ===")
+    adb(f"uninstall {PACKAGE_NAME}", check=False)
 
     print("=== Step 5: Installing re-signed previous version (2.4.1) ===")
     adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
@@ -384,96 +353,81 @@ def test_upgrade_flow():
     # Check installed packages after v2.4.1 install
     packages_v1 = check_installed_packages_and_version()
     print(f"Installed Activity Launcher packages (v2.4.1): {packages_v1}")
-    if not any(PACKAGE_NAME in pkg for pkg in packages_v1) or len(packages_v1) != 1:
+    if len(packages_v1) != 1 or PACKAGE_NAME not in packages_v1[0]:
         print(f"ERROR: Expected exactly 1 package ({PACKAGE_NAME}), but found: {packages_v1}")
-        save_snapshot("error_v1_packages_mismatch")
+        save_snapshot(d, "error_v1_packages_mismatch")
         sys.exit(1)
 
     print("=== Step 6: Launching previous version (2.4.1) ===")
     ensure_app_launched(
-        PACKAGE_NAME, "de.szalkowski.activitylauncher.entrypoint.MainActivity"
+        d, PACKAGE_NAME, "de.szalkowski.activitylauncher.entrypoint.MainActivity"
     )
-    save_snapshot("step06_app_launched")
+    save_snapshot(d, "step06_app_launched")
 
     print("=== Step 7: Dismissing disclaimer dialog if shown ===")
-    click_element(
-        resource_id="android:id/button1", text="OK", wait=2, label="disclaimer_ok"
-    ) or click_element(text="OK", wait=2, label="disclaimer_ok")
-    save_snapshot("step07_disclaimer_done")
+    d.click(resource_id="android:id/button1", text="OK", wait=2) or d.click(text="OK", wait=2)
+    save_snapshot(d, "step07_disclaimer_done")
 
     print("=== Step 8: Searching for com.android.settings ===")
-    dismiss_system_prompts()
-    save_snapshot("step08_before_search")
-    if click_element(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1.5, label="search_input"):
+    dismiss_system_prompts(d)
+    save_snapshot(d, "step08_before_search")
+    if d.click(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1.5):
         time.sleep(1)
-        dismiss_system_prompts()
+        dismiss_system_prompts(d)
         print("Typing com.android.settings into search field...")
         adb_shell("input text com.android.settings")
         time.sleep(2)
-        adb_shell("input keyevent KEYCODE_ENTER", check=False)
+        d.press("enter")
         time.sleep(1)
-        adb_shell("input keyevent KEYCODE_BACK", check=False)
+        d.press("back")
         time.sleep(1)
-    save_snapshot("step08_after_search")
+    save_snapshot(d, "step08_after_search")
 
     print("=== Step 9: Selecting com.android.settings package ===")
     time.sleep(2)
-    if not click_element(
-        resource_id=f"{PACKAGE_NAME}:id/tvClass",
-        text="com.android.settings",
-        wait=2,
-        retries=5,
-        label="select_package_class",
-    ):
-        if not click_element(text="com.android.settings", wait=2, retries=5, label="select_package_text"):
+    if not d.click(resource_id=f"{PACKAGE_NAME}:id/tvClass", text="com.android.settings", wait=2, retries=5):
+        if not d.click(text="com.android.settings", wait=2, retries=5):
             print("ERROR: Could not find package com.android.settings in list!")
-            save_snapshot("error_package_not_found")
+            save_snapshot(d, "error_package_not_found")
             sys.exit(1)
-    save_snapshot("step09_after_package_select")
+    save_snapshot(d, "step09_after_package_select")
 
     print("=== Step 10: Selecting activity ===")
     time.sleep(2)
-    if not click_element(
-        resource_id=f"{PACKAGE_NAME}:id/tvName",
-        text="Settings",
-        wait=2,
-        retries=5,
-        label="select_activity_name",
-    ):
-        if not click_element(text="Settings", wait=2, retries=5, label="select_activity_text"):
+    if not d.click(resource_id=f"{PACKAGE_NAME}:id/tvName", text="Settings", wait=2, retries=5):
+        if not d.click(text="Settings", wait=2, retries=5):
             print("ERROR: Could not find Settings activity in list!")
-            save_snapshot("error_activity_not_found")
+            save_snapshot(d, "error_activity_not_found")
             sys.exit(1)
-    save_snapshot("step10_after_activity_select")
+    save_snapshot(d, "step10_after_activity_select")
 
     print("=== Step 11: Clicking 'Create shortcut' button ===")
-    save_snapshot("step11_before_create_shortcut")
-    if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3, label="create_shortcut"):
-        print("Swiping down to find Create Shortcut button...")
-        swipe_scroll_down()
+    save_snapshot(d, "step11_before_create_shortcut")
+    if not d.click(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3):
+        print("Scrolling down to find Create Shortcut button...")
+        d.scroll_down()
         time.sleep(1.5)
-        save_snapshot("step11_after_swipe")
-        if not click_element(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3, label="create_shortcut_retry"):
+        save_snapshot(d, "step11_after_swipe")
+        if not d.click(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3):
             print("ERROR: Could not find Create Shortcut button!")
-            save_snapshot("error_btCreateShortcut_not_found")
+            save_snapshot(d, "error_btCreateShortcut_not_found")
             sys.exit(1)
 
     print("=== Step 12: Confirming System Pin Shortcut dialog ===")
     time.sleep(2)
-    save_snapshot("step12_pin_dialog_check")
-    xml = dump_ui()
+    save_snapshot(d, "step12_pin_dialog_check")
+    xml = d.dump_hierarchy()
 
     if "Complete action using" in xml or "ResolverActivity" in xml:
-        print("ResolverActivity/Chooser shown for shortcut creation, selecting 'Activity Launcher'...")
-        click_element(text_contains="Activity Launcher", wait=2, retries=3, label="resolver_activity_launcher") or adb_shell(f"input tap {w // 2} {int(h * 0.8)}")
-        time.sleep(2)
-        save_snapshot("step12_after_resolver")
+        print("ERROR: App selector/ResolverActivity shown during shortcut creation!")
+        save_snapshot(d, "error_resolver_activity_in_pin")
+        sys.exit(1)
 
     print("Confirming System Pin Shortcut dialog...")
     clicked_pin = False
     for attempt in range(10):
         time.sleep(1.5)
-        xml = dump_ui()
+        xml = d.dump_hierarchy()
         for match in re.finditer(r'<node ([^>]+)>', xml):
             attr = match.group(1)
             node_text = ""
@@ -499,18 +453,18 @@ def test_upgrade_flow():
 
     if not clicked_pin:
         print("Fallback pin dialog navigation...")
-        save_snapshot("step12_fallback_pin_navigation")
-        adb_shell("input keyevent KEYCODE_TAB", check=False)
-        adb_shell("input keyevent KEYCODE_TAB", check=False)
-        adb_shell("input keyevent KEYCODE_ENTER", check=False)
+        save_snapshot(d, "step12_fallback_pin_navigation")
+        d.press("tab")
+        d.press("tab")
+        d.press("enter")
         time.sleep(1.5)
 
-    save_snapshot("step12_after_pin")
+    save_snapshot(d, "step12_after_pin")
 
     print("=== Step 13: Navigating to Home screen ===")
-    adb_shell("input keyevent KEYCODE_HOME")
+    d.press("home")
     time.sleep(2)
-    save_snapshot("step13_home_screen")
+    save_snapshot(d, "step13_home_screen")
 
     print("=== Step 14: Upgrading in-place to current version ===")
     adb(f"install -r -g {NEW_APK_PATH}")
@@ -521,22 +475,22 @@ def test_upgrade_flow():
     print(f"Installed Activity Launcher packages (after in-place upgrade): {packages_v2}")
     if len(packages_v2) != 1:
         print(f"ERROR: Multiple or zero Activity Launcher packages found after upgrade! Packages: {packages_v2}")
-        save_snapshot("error_multiple_packages_after_upgrade")
+        save_snapshot(d, "error_multiple_packages_after_upgrade")
         sys.exit(1)
     if PACKAGE_NAME not in packages_v2[0]:
         print(f"ERROR: Package name changed after upgrade! Expected {PACKAGE_NAME}, got: {packages_v2[0]}")
-        save_snapshot("error_package_name_changed")
+        save_snapshot(d, "error_package_name_changed")
         sys.exit(1)
 
-    adb_shell("input keyevent KEYCODE_HOME")
+    d.press("home")
     time.sleep(2)
-    save_snapshot("step14_upgraded_home_screen")
+    save_snapshot(d, "step14_upgraded_home_screen")
 
     print("=== Step 15: Clicking created shortcut 'Settings' on Home screen ===")
     shortcut_found = False
     for attempt in range(4):
-        save_snapshot(f"step15_home_page_{attempt+1}")
-        xml = dump_ui()
+        save_snapshot(d, f"step15_home_page_{attempt+1}")
+        xml = d.dump_hierarchy()
         for match in re.finditer(r"<node ([^>]+)>", xml):
             attr = match.group(1)
             if (
@@ -556,42 +510,42 @@ def test_upgrade_flow():
         if shortcut_found:
             break
         print(f"Page {attempt+1}: Shortcut not found, swiping...")
-        swipe_page_left()
+        d.swipe_left()
         time.sleep(2)
 
     if not shortcut_found:
         print("ERROR: Could not locate shortcut on Home screen!")
-        save_snapshot("step15_error_shortcut_not_found")
+        save_snapshot(d, "step15_error_shortcut_not_found")
         sys.exit(1)
 
     time.sleep(3)
 
-    print("=== Step 16: Validating that com.android.settings was launched without app selector ===")
-    save_snapshot("step16_before_validation")
+    print("=== Step 16: Validating that com.android.settings was launched directly ===")
+    save_snapshot(d, "step16_before_validation")
     success = False
     for _ in range(5):
-        current_pkg = get_current_focus_package()
+        current_pkg = d.current_package()
         print(f"Current package: {current_pkg}")
         if current_pkg == TARGET_PACKAGE:
             success = True
             break
         if current_pkg == "android":
             print("ERROR: App selector/ResolverActivity shown when clicking shortcut! Expected direct launch.")
-            save_snapshot("error_app_selector_shown")
+            save_snapshot(d, "error_app_selector_shown")
             sys.exit(1)
         time.sleep(1)
 
-    save_snapshot("step16_after_validation")
+    save_snapshot(d, "step16_after_validation")
 
-    if success or get_current_focus_package() == TARGET_PACKAGE:
+    if success or d.current_package() == TARGET_PACKAGE:
         print("\n==========================================")
         print(" SUCCESS: Upgrade test passed 100%!")
         print(
-            f" Shortcut created in v{PREVIOUS_RELEASE_TAG} worked after update to current version without app selector!"
+            f" Shortcut created in v{PREVIOUS_RELEASE_TAG} worked after update to current version directly without app selector!"
         )
         print("==========================================\n")
     else:
-        current_pkg = get_current_focus_package()
+        current_pkg = d.current_package()
         print("\n==========================================")
         print(
             f" FAILURE: Expected {TARGET_PACKAGE}, but active package is '{current_pkg}'"
@@ -606,5 +560,4 @@ if __name__ == "__main__":
         test_upgrade_flow()
     except Exception as e:
         print(f"FATAL ERROR in test execution: {e}")
-        save_snapshot("fatal_error")
         sys.exit(1)

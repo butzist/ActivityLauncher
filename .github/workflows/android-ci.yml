@@ -104,6 +104,7 @@ jobs:
           arch: x86_64
           disable-animations: true
           script: |
+            python3 -m pip install -r scripts/requirements.txt
             python3 scripts/test_upgrade_shortcut.py
       - name: Upload upgrade test artifacts
         if: always()
