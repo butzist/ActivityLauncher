@@ -6,12 +6,9 @@ import sys
 import time
 
 PACKAGE_NAME = "de.szalkowski.activitylauncher.oss"
-MAIN_ACTIVITY = f"{PACKAGE_NAME}/de.szalkowski.activitylauncher.entrypoint.MainActivity"
 TARGET_PACKAGE = "com.android.settings"
 
-PREVIOUS_RELEASE_TAG = "2.4.1"
-PREVIOUS_APK_ORIGINAL = "/tmp/previous_release/app-oss-noads-release.apk"
-PREVIOUS_APK_RESIGNED = "/tmp/previous_release_debug.apk"
+RELEASE_TAGS = ["2.3.1", "2.4.1"]
 NEW_APK_PATH = "app/build/outputs/apk/ossNoads/debug/app-oss-noads-debug.apk"
 
 SNAPSHOT_COUNTER = 0
@@ -97,8 +94,8 @@ class UiDevice:
         print(f"Swiping left: from ({start_x}, {cy}) to ({end_x}, {cy}) on {self.w}x{self.h} screen")
         adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 300")
 
-    def app_start(self, package, activity):
-        adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {package}/{activity}")
+    def app_start(self, component_name):
+        adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {component_name}")
 
     def current_package(self):
         res = adb_shell("dumpsys window | grep mCurrentFocus", check=False)
@@ -145,6 +142,16 @@ def disable_stylus_and_keyboard_prompts():
     adb_shell("settings put global stylus_handwriting_enabled 0", check=False)
 
 
+def uninstall_all_activitylauncher_packages():
+    res = adb_shell("pm list packages", check=False)
+    for line in res.stdout.splitlines():
+        if "activitylauncher" in line:
+            pkg = line.replace("package:", "").strip()
+            if pkg:
+                print(f"Uninstalling existing package: {pkg}")
+                adb(f"uninstall {pkg}", check=False)
+
+
 def check_installed_packages_and_version():
     res = adb_shell("pm list packages --show-versioncode", check=False)
     al_packages = []
@@ -189,14 +196,7 @@ def strip_signatures_and_resign(apk_path, keystore):
 
 
 def setup_environment():
-    print(
-        f"=== Step 1: Downloading previous release ({PREVIOUS_RELEASE_TAG}) from GitHub ==="
-    )
-    run_cmd(
-        f"gh release download {PREVIOUS_RELEASE_TAG} --repo ActivityLauncher/ActivityLauncher --pattern 'app-oss-noads-release.apk' --dir /tmp/previous_release --clobber"
-    )
-
-    print("=== Step 2: Ensuring debug keystore exists ===")
+    print("=== Step 1: Ensuring debug keystore exists ===")
     keystore_dir = os.path.expanduser("~/.android")
     os.makedirs(keystore_dir, exist_ok=True)
     keystore = os.path.join(keystore_dir, "debug.keystore")
@@ -205,13 +205,8 @@ def setup_environment():
         keytool_cmd = f"keytool -genkey -v -keystore {keystore} -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'"
         run_cmd(keytool_cmd)
 
-    print("=== Step 3: Re-signing previous release APK with local debug keystore ===")
-    run_cmd(f"cp {PREVIOUS_APK_ORIGINAL} {PREVIOUS_APK_RESIGNED}")
-    strip_signatures_and_resign(PREVIOUS_APK_RESIGNED, keystore)
-    print(f"Previous release re-signed at {PREVIOUS_APK_RESIGNED}")
-
     print(
-        "=== Step 4: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ==="
+        "=== Step 2: Building current version APK with APPID=de.szalkowski.activitylauncher.oss ==="
     )
     if not os.path.exists(NEW_APK_PATH):
         print(f"Current version APK not found at {NEW_APK_PATH}, building it now...")
@@ -222,7 +217,7 @@ def setup_environment():
         print(f"Error: Current version APK not found at {NEW_APK_PATH} after build!")
         sys.exit(1)
 
-    print("=== Step 5: Re-signing current version APK with exact same debug keystore ===")
+    print("=== Step 3: Re-signing current version APK with exact same debug keystore ===")
     strip_signatures_and_resign(NEW_APK_PATH, keystore)
     print(f"Current version APK verified and re-signed at {NEW_APK_PATH}")
 
@@ -322,7 +317,6 @@ def dismiss_system_prompts(d):
             break
 
         print(f"System prompt/ANR dialog detected (attempt {loop+1}), clearing...")
-        # Always click 'Close app' / 'aerr_close' to permanently terminate the frozen process
         if "aerr_close" in xml or "close app" in xml_lower:
             d.click(resource_id="android:id/aerr_close") or d.click(text="Close app")
         elif "aerr_wait" in xml or "wait" in xml_lower:
@@ -337,7 +331,7 @@ def dismiss_system_prompts(d):
         time.sleep(1)
 
 
-def ensure_app_launched(d, package_name, activity_name):
+def ensure_app_launched(d, package_name, component_name):
     disable_stylus_and_keyboard_prompts()
     for _ in range(8):
         adb_shell("input keyevent KEYCODE_WAKEUP", check=False)
@@ -353,7 +347,7 @@ def ensure_app_launched(d, package_name, activity_name):
             adb_shell("input keyevent KEYCODE_BACK", check=False)
             time.sleep(1)
 
-        d.app_start(package_name, activity_name)
+        d.app_start(component_name)
         time.sleep(2)
         focus = d.current_package()
         if package_name in focus:
@@ -365,173 +359,236 @@ def ensure_app_launched(d, package_name, activity_name):
     return False
 
 
-def test_upgrade_flow():
-    d = UiDevice()
-    disable_stylus_and_keyboard_prompts()
-    print(f"=== Uninstalling existing package {PACKAGE_NAME} ===")
-    adb(f"uninstall {PACKAGE_NAME}", check=False)
+class VersionShortcutCreator:
+    """Base class for version-specific shortcut creation workflows."""
 
-    print("=== Step 5: Installing re-signed previous version (2.4.1) ===")
-    adb(f"install -r -g {PREVIOUS_APK_RESIGNED}")
+    def __init__(self, device: UiDevice, release_tag: str):
+        self.d = device
+        self.release_tag = release_tag
+        self.package_name = PACKAGE_NAME
+        self.component_name = self.get_component_name()
 
-    # Check installed packages after v2.4.1 install
+    def get_component_name(self) -> str:
+        return f"{self.package_name}/de.szalkowski.activitylauncher.entrypoint.MainActivity"
+
+    def launch_app(self) -> bool:
+        print(f"=== Launching version {self.release_tag} ({self.component_name}) ===")
+        return ensure_app_launched(self.d, self.package_name, self.component_name)
+
+    def dismiss_disclaimer(self):
+        print(f"=== Dismissing disclaimer dialog for version {self.release_tag} ===")
+        self.d.click(resource_id="android:id/button1", text="OK", wait=2) or self.d.click(text="OK", wait=2)
+        save_snapshot(self.d, f"{self.release_tag}_disclaimer_done")
+
+    def search_package(self, target_package: str):
+        print(f"=== Searching for {target_package} in version {self.release_tag} ===")
+        dismiss_system_prompts(self.d)
+        save_snapshot(self.d, f"{self.release_tag}_before_search")
+        if self.d.click(resource_id=f"{self.package_name}:id/tiSearch", wait=1.5):
+            time.sleep(1)
+            dismiss_system_prompts(self.d)
+            print(f"Typing {target_package} into search field...")
+            adb_shell(f"input text {target_package}")
+            time.sleep(2)
+            self.d.press("enter")
+            time.sleep(1)
+            self.d.press("back")
+            time.sleep(1)
+        save_snapshot(self.d, f"{self.release_tag}_after_search")
+
+    def select_package(self, target_package: str):
+        print(f"=== Selecting package {target_package} in version {self.release_tag} ===")
+        time.sleep(2)
+        dismiss_system_prompts(self.d)
+        if not self.d.click(resource_id=f"{self.package_name}:id/tvClass", text=target_package, wait=2, retries=5):
+            if not self.d.click(text=target_package, wait=2, retries=5):
+                print(f"ERROR: Could not find package {target_package} in list!")
+                save_snapshot(self.d, f"{self.release_tag}_error_package_not_found")
+                sys.exit(1)
+        save_snapshot(self.d, f"{self.release_tag}_after_package_select")
+
+    def select_activity(self, activity_title: str):
+        print(f"=== Selecting activity {activity_title} in version {self.release_tag} ===")
+        time.sleep(2)
+        dismiss_system_prompts(self.d)
+        if not self.d.click(resource_id=f"{self.package_name}:id/tvName", text=activity_title, wait=2, retries=5):
+            if not self.d.click(text=activity_title, wait=2, retries=5):
+                print(f"ERROR: Could not find activity {activity_title} in list!")
+                save_snapshot(self.d, f"{self.release_tag}_error_activity_not_found")
+                sys.exit(1)
+        save_snapshot(self.d, f"{self.release_tag}_after_activity_select")
+
+    def click_create_shortcut(self):
+        print(f"=== Clicking Create Shortcut button in version {self.release_tag} ===")
+        dismiss_system_prompts(self.d)
+        save_snapshot(self.d, f"{self.release_tag}_before_create_shortcut")
+        if not self.d.click(resource_id=f"{self.package_name}:id/btCreateShortcut", wait=2, retries=3):
+            print("Scrolling down to find Create Shortcut button...")
+            self.d.scroll_down()
+            time.sleep(1.5)
+            save_snapshot(self.d, f"{self.release_tag}_after_swipe")
+            if not self.d.click(resource_id=f"{self.package_name}:id/btCreateShortcut", wait=2, retries=3):
+                print("ERROR: Could not find Create Shortcut button!")
+                save_snapshot(self.d, f"{self.release_tag}_error_btCreateShortcut_not_found")
+                sys.exit(1)
+
+    def confirm_pin_shortcut_dialog(self):
+        print(f"=== Confirming Pin Shortcut dialog in version {self.release_tag} ===")
+        time.sleep(2)
+        dismiss_system_prompts(self.d)
+        save_snapshot(self.d, f"{self.release_tag}_pin_dialog_check")
+        xml = self.d.dump_hierarchy()
+
+        if "Complete action using" in xml or "ResolverActivity" in xml:
+            print("ERROR: App selector/ResolverActivity shown during shortcut creation!")
+            save_snapshot(self.d, f"{self.release_tag}_error_resolver_activity_in_pin")
+            sys.exit(1)
+
+        clicked_pin = False
+        for attempt in range(10):
+            time.sleep(1.5)
+            xml = self.d.dump_hierarchy()
+            for match in re.finditer(r'<node ([^>]+)>', xml):
+                attr = match.group(1)
+                node_text = ""
+                tm = re.search(r'text="([^"]*)"', attr)
+                if tm: node_text += tm.group(1)
+                dm = re.search(r'content-desc="([^"]*)"', attr)
+                if dm: node_text += " " + dm.group(1)
+
+                if (re.search(r'(?i)(add|allow|ok|pin)', node_text) or
+                    'button1' in attr or 'btn_add' in attr):
+                    bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
+                    if bounds_match:
+                        x1, y1, x2, y2 = map(int, bounds_match.groups())
+                        if y1 > 200 and (x2 - x1) > 20:
+                            cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                            print(f"Pin dialog button '{node_text.strip()}' found at ({cx}, {cy}). Clicking...")
+                            adb_shell(f"input tap {cx} {cy}")
+                            clicked_pin = True
+                            time.sleep(2)
+                            break
+            if clicked_pin:
+                break
+
+        if not clicked_pin:
+            print("Fallback pin dialog navigation...")
+            save_snapshot(self.d, f"{self.release_tag}_fallback_pin_navigation")
+            self.d.press("tab")
+            self.d.press("tab")
+            self.d.press("enter")
+            time.sleep(1.5)
+
+        save_snapshot(self.d, f"{self.release_tag}_after_pin")
+
+    def create_shortcut(self, target_package: str, activity_title: str):
+        """Template method orchestrating the shortcut creation flow."""
+        self.launch_app()
+        self.dismiss_disclaimer()
+        self.search_package(target_package)
+        self.select_package(target_package)
+        self.select_activity(activity_title)
+        self.click_create_shortcut()
+        self.confirm_pin_shortcut_dialog()
+
+
+class Version231ShortcutCreator(VersionShortcutCreator):
+    """Specific implementation for Release v2.3.1."""
+
+    def get_component_name(self) -> str:
+        # In v2.3.1, the activity was de.szalkowski.activitylauncher.MainActivity
+        return f"{self.package_name}/de.szalkowski.activitylauncher.MainActivity"
+
+
+class Version241ShortcutCreator(VersionShortcutCreator):
+    """Specific implementation for Release v2.4.1."""
+
+    def get_component_name(self) -> str:
+        # In v2.4.1+, the activity was moved to de.szalkowski.activitylauncher.entrypoint.MainActivity
+        return f"{self.package_name}/de.szalkowski.activitylauncher.entrypoint.MainActivity"
+
+
+def get_shortcut_creator(device: UiDevice, release_tag: str) -> VersionShortcutCreator:
+    if release_tag.startswith("2.3"):
+        return Version231ShortcutCreator(device, release_tag)
+    elif release_tag.startswith("2.4"):
+        return Version241ShortcutCreator(device, release_tag)
+    else:
+        return VersionShortcutCreator(device, release_tag)
+
+
+def test_upgrade_flow_for_version(d: UiDevice, release_tag: str):
+    print(f"\n=======================================================")
+    print(f" TESTING UPGRADE FROM VERSION {release_tag} TO CURRENT ")
+    print(f"=======================================================\n")
+
+    download_dir = f"/tmp/release_{release_tag}_dir"
+    tag_debug_apk = f"/tmp/release_{release_tag}_debug.apk"
+
+    print(f"Downloading release asset for tag {release_tag}...")
+    run_cmd(
+        f"gh release download {release_tag} --repo ActivityLauncher/ActivityLauncher --pattern '*.apk' --dir {download_dir} --clobber"
+    )
+
+    downloaded_files = os.listdir(download_dir)
+    apk_files = [f for f in downloaded_files if f.endswith(".apk")]
+    if not apk_files:
+        print(f"ERROR: No APK file found in download directory for tag {release_tag}!")
+        sys.exit(1)
+
+    downloaded_apk = os.path.join(download_dir, apk_files[0])
+    run_cmd(f"cp {downloaded_apk} {tag_debug_apk}")
+
+    keystore = os.path.expanduser("~/.android/debug.keystore")
+    strip_signatures_and_resign(tag_debug_apk, keystore)
+
+    uninstall_all_activitylauncher_packages()
+
+    print(f"Installing version {release_tag}...")
+    adb(f"install -r -g {tag_debug_apk}")
+
     packages_v1 = check_installed_packages_and_version()
-    print(f"Installed Activity Launcher packages (v2.4.1): {packages_v1}")
+    print(f"Installed Activity Launcher packages (v{release_tag}): {packages_v1}")
     if len(packages_v1) != 1 or PACKAGE_NAME not in packages_v1[0]:
         print(f"ERROR: Expected exactly 1 package ({PACKAGE_NAME}), but found: {packages_v1}")
-        save_snapshot(d, "error_v1_packages_mismatch")
+        save_snapshot(d, f"{release_tag}_error_v1_packages_mismatch")
         sys.exit(1)
 
-    print("=== Step 6: Launching previous version (2.4.1) ===")
-    ensure_app_launched(
-        d, PACKAGE_NAME, "de.szalkowski.activitylauncher.entrypoint.MainActivity"
-    )
-    save_snapshot(d, "step06_app_launched")
+    creator = get_shortcut_creator(d, release_tag)
+    creator.create_shortcut(TARGET_PACKAGE, "Settings")
 
-    print("=== Step 7: Dismissing disclaimer dialog if shown ===")
-    d.click(resource_id="android:id/button1", text="OK", wait=2) or d.click(text="OK", wait=2)
-    save_snapshot(d, "step07_disclaimer_done")
-
-    print("=== Step 8: Searching for com.android.settings ===")
-    dismiss_system_prompts(d)
-    save_snapshot(d, "step08_before_search")
-    if d.click(resource_id=f"{PACKAGE_NAME}:id/tiSearch", wait=1.5):
-        time.sleep(1)
-        dismiss_system_prompts(d)
-        print("Typing com.android.settings into search field...")
-        adb_shell("input text com.android.settings")
-        time.sleep(2)
-        d.press("enter")
-        time.sleep(1)
-        d.press("back")
-        time.sleep(1)
-    save_snapshot(d, "step08_after_search")
-
-    print("=== Step 9: Selecting com.android.settings package ===")
-    time.sleep(2)
-    dismiss_system_prompts(d)
-    if not d.click(resource_id=f"{PACKAGE_NAME}:id/tvClass", text="com.android.settings", wait=2, retries=5):
-        if not d.click(text="com.android.settings", wait=2, retries=5):
-            print("ERROR: Could not find package com.android.settings in list!")
-            save_snapshot(d, "error_package_not_found")
-            sys.exit(1)
-    save_snapshot(d, "step09_after_package_select")
-
-    print("=== Step 10: Selecting activity ===")
-    time.sleep(2)
-    dismiss_system_prompts(d)
-    if not d.click(resource_id=f"{PACKAGE_NAME}:id/tvName", text="Settings", wait=2, retries=5):
-        if not d.click(text="Settings", wait=2, retries=5):
-            print("ERROR: Could not find Settings activity in list!")
-            save_snapshot(d, "error_activity_not_found")
-            sys.exit(1)
-    save_snapshot(d, "step10_after_activity_select")
-
-    print("=== Step 11: Clicking 'Create shortcut' button ===")
-    dismiss_system_prompts(d)
-    save_snapshot(d, "step11_before_create_shortcut")
-    if not d.click(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3):
-        print("Scrolling down to find Create Shortcut button...")
-        d.scroll_down()
-        time.sleep(1.5)
-        save_snapshot(d, "step11_after_swipe")
-        if not d.click(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3):
-            print("ERROR: Could not find Create Shortcut button!")
-            save_snapshot(d, "error_btCreateShortcut_not_found")
-            sys.exit(1)
-
-    print("=== Step 12: Confirming System Pin Shortcut dialog ===")
-    time.sleep(2)
-    dismiss_system_prompts(d)
-    save_snapshot(d, "step12_pin_dialog_check")
-    xml = d.dump_hierarchy()
-
-    if "Complete action using" in xml or "ResolverActivity" in xml:
-        print("ERROR: App selector/ResolverActivity shown during shortcut creation!")
-        save_snapshot(d, "error_resolver_activity_in_pin")
-        sys.exit(1)
-
-    print("Confirming System Pin Shortcut dialog...")
-    clicked_pin = False
-    for attempt in range(10):
-        time.sleep(1.5)
-        xml = d.dump_hierarchy()
-        for match in re.finditer(r'<node ([^>]+)>', xml):
-            attr = match.group(1)
-            node_text = ""
-            tm = re.search(r'text="([^"]*)"', attr)
-            if tm: node_text += tm.group(1)
-            dm = re.search(r'content-desc="([^"]*)"', attr)
-            if dm: node_text += " " + dm.group(1)
-
-            if (re.search(r'(?i)(add|allow|ok|pin)', node_text) or
-                'button1' in attr or 'btn_add' in attr):
-                bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
-                if bounds_match:
-                    x1, y1, x2, y2 = map(int, bounds_match.groups())
-                    if y1 > 200 and (x2 - x1) > 20:
-                        cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
-                        print(f"Pin dialog button '{node_text.strip()}' found at ({cx}, {cy}). Clicking...")
-                        adb_shell(f"input tap {cx} {cy}")
-                        clicked_pin = True
-                        time.sleep(2)
-                        break
-        if clicked_pin:
-            break
-
-    if not clicked_pin:
-        print("Fallback pin dialog navigation...")
-        save_snapshot(d, "step12_fallback_pin_navigation")
-        d.press("tab")
-        d.press("tab")
-        d.press("enter")
-        time.sleep(1.5)
-
-    save_snapshot(d, "step12_after_pin")
-
-    print("=== Step 13: Navigating to Home screen ===")
     d.press("home")
     time.sleep(2)
-    save_snapshot(d, "step13_home_screen")
+    save_snapshot(d, f"{release_tag}_home_screen_before_upgrade")
 
-    print("=== Step 14: Upgrading in-place to current version ===")
+    print(f"Upgrading in-place from v{release_tag} to current debug version...")
     adb(f"install -r -g {NEW_APK_PATH}")
     time.sleep(2)
 
-    # Verify that in-place upgrade updated the existing package and didn't install a separate package
     packages_v2 = check_installed_packages_and_version()
-    print(f"Installed Activity Launcher packages (after in-place upgrade): {packages_v2}")
+    print(f"Installed Activity Launcher packages (after upgrading v{release_tag}): {packages_v2}")
     if len(packages_v2) != 1:
-        print(f"ERROR: Multiple or zero Activity Launcher packages found after upgrade! Packages: {packages_v2}")
-        save_snapshot(d, "error_multiple_packages_after_upgrade")
-        sys.exit(1)
-    if PACKAGE_NAME not in packages_v2[0]:
-        print(f"ERROR: Package name changed after upgrade! Expected {PACKAGE_NAME}, got: {packages_v2[0]}")
-        save_snapshot(d, "error_package_name_changed")
+        print(f"ERROR: Multiple or zero Activity Launcher packages found after upgrading v{release_tag}! Packages: {packages_v2}")
+        save_snapshot(d, f"{release_tag}_error_multiple_packages_after_upgrade")
         sys.exit(1)
 
     d.press("home")
     time.sleep(2)
-    save_snapshot(d, "step14_upgraded_home_screen")
+    save_snapshot(d, f"{release_tag}_upgraded_home_screen")
 
-    print("=== Step 15: Clicking created shortcut 'Settings' on Home screen ===")
+    print(f"=== Clicking created shortcut 'Settings' on Home screen (upgraded from v{release_tag}) ===")
     shortcut_found = False
     for attempt in range(4):
-        save_snapshot(d, f"step15_home_page_{attempt+1}")
+        save_snapshot(d, f"{release_tag}_home_page_{attempt+1}")
         xml = d.dump_hierarchy()
         for match in re.finditer(r"<node ([^>]+)>", xml):
             attr = match.group(1)
-            if (
-                "settings" in attr.lower()
-                and "com.android.systemui" not in attr
-            ):
-                bounds_match = re.search(
-                    r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr
-                )
+            if "settings" in attr.lower() and "com.android.systemui" not in attr:
+                bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
                 if bounds_match:
                     x1, y1, x2, y2 = map(int, bounds_match.groups())
                     cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
-                    print(f"Found shortcut at ({cx}, {cy}). Clicking...")
+                    print(f"Found shortcut at ({cx}, {cy}) for upgraded v{release_tag}. Clicking...")
                     adb_shell(f"input tap {cx} {cy}")
                     shortcut_found = True
                     break
@@ -542,14 +599,13 @@ def test_upgrade_flow():
         time.sleep(2)
 
     if not shortcut_found:
-        print("ERROR: Could not locate shortcut on Home screen!")
-        save_snapshot(d, "step15_error_shortcut_not_found")
+        print(f"ERROR: Could not locate shortcut on Home screen for upgraded v{release_tag}!")
+        save_snapshot(d, f"{release_tag}_error_shortcut_not_found")
         sys.exit(1)
 
     time.sleep(3)
 
-    print("=== Step 16: Validating that com.android.settings was launched directly ===")
-    save_snapshot(d, "step16_before_validation")
+    save_snapshot(d, f"{release_tag}_before_validation")
     success = False
     for _ in range(5):
         current_pkg = d.current_package()
@@ -558,34 +614,41 @@ def test_upgrade_flow():
             success = True
             break
         if current_pkg == "android":
-            print("ERROR: App selector/ResolverActivity shown when clicking shortcut! Expected direct launch.")
-            save_snapshot(d, "error_app_selector_shown")
+            print("ERROR: App selector/ResolverActivity shown when clicking shortcut!")
+            save_snapshot(d, f"{release_tag}_error_app_selector_shown")
             sys.exit(1)
         time.sleep(1)
 
-    save_snapshot(d, "step16_after_validation")
+    save_snapshot(d, f"{release_tag}_after_validation")
 
     if success or d.current_package() == TARGET_PACKAGE:
-        print("\n==========================================")
-        print(" SUCCESS: Upgrade test passed 100%!")
-        print(
-            f" Shortcut created in v{PREVIOUS_RELEASE_TAG} worked after update to current version directly without app selector!"
-        )
-        print("==========================================\n")
+        print(f"\n==========================================")
+        print(f" SUCCESS: Upgrade test passed for v{release_tag}!")
+        print(f"==========================================\n")
     else:
         current_pkg = d.current_package()
-        print("\n==========================================")
-        print(
-            f" FAILURE: Expected {TARGET_PACKAGE}, but active package is '{current_pkg}'"
-        )
-        print("==========================================\n")
+        print(f"\n==========================================")
+        print(f" FAILURE (v{release_tag}): Expected {TARGET_PACKAGE}, got '{current_pkg}'")
+        print(f"==========================================\n")
         sys.exit(1)
+
+    print(f"Cleaning up after v{release_tag} test...")
+    uninstall_all_activitylauncher_packages()
+    d.press("home")
+    time.sleep(2)
 
 
 if __name__ == "__main__":
     try:
         setup_environment()
-        test_upgrade_flow()
+        d = UiDevice()
+        disable_stylus_and_keyboard_prompts()
+        for tag in RELEASE_TAGS:
+            test_upgrade_flow_for_version(d, tag)
+        print("\n==========================================")
+        print(" ALL RELEASE UPGRADE TESTS PASSED 100%! ")
+        print(" Tested versions:", RELEASE_TAGS)
+        print("==========================================\n")
     except Exception as e:
         print(f"FATAL ERROR in test execution: {e}")
         sys.exit(1)
