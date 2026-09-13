@@ -104,8 +104,14 @@ class UiDevice:
         return match.group(1) if match else ""
 
     def click(self, resource_id=None, text=None, text_contains=None, wait=1.5, retries=5):
-        for _ in range(retries):
+        for attempt in range(retries):
             xml = self.dump_hierarchy()
+            xml_lower = xml.lower()
+            if "isn't responding" in xml_lower or "aerr_" in xml_lower or "stylus" in xml_lower:
+                print("System ANR or overlay detected during click attempt, dismissing...")
+                dismiss_system_prompts(self)
+                xml = self.dump_hierarchy()
+
             for match in re.finditer(r"<node ([^>]+)>", xml):
                 attr = match.group(1)
                 if resource_id and f'resource-id="{resource_id}"' not in attr:
@@ -135,16 +141,6 @@ def disable_stylus_and_keyboard_prompts():
     adb_shell("settings put secure stylus_handwriting_enabled 0", check=False)
     adb_shell("settings put secure show_stylus_handwriting_pointer 0", check=False)
     adb_shell("settings put global stylus_handwriting_enabled 0", check=False)
-
-
-def uninstall_all_activitylauncher_packages():
-    res = adb_shell("pm list packages", check=False)
-    for line in res.stdout.splitlines():
-        if "activitylauncher" in line:
-            pkg = line.replace("package:", "").strip()
-            if pkg:
-                print(f"Uninstalling existing package: {pkg}")
-                adb(f"uninstall {pkg}", check=False)
 
 
 def check_installed_packages_and_version():
@@ -301,11 +297,31 @@ def save_snapshot(d, label="snapshot"):
 def dismiss_system_prompts(d):
     disable_stylus_and_keyboard_prompts()
     xml = d.dump_hierarchy()
+    xml_lower = xml.lower()
     if any(
-        k in xml.lower()
-        for k in ["stylus", "got it", "skip", "allow", "permission", "welcome", "keyboard"]
+        k in xml_lower
+        for k in [
+            "stylus",
+            "got it",
+            "skip",
+            "allow",
+            "permission",
+            "welcome",
+            "keyboard",
+            "isn't responding",
+            "is not responding",
+            "close app",
+            "aerr_close",
+            "aerr_wait",
+            "wait",
+        ]
     ):
-        print("System prompt/overlay detected, dismissing...")
+        print("System prompt/ANR dialog detected, dismissing...")
+        if "aerr_wait" in xml or "wait" in xml_lower:
+            d.click(resource_id="android:id/aerr_wait") or d.click(text="Wait")
+        elif "aerr_close" in xml or "close app" in xml_lower:
+            d.click(resource_id="android:id/aerr_close") or d.click(text="Close app")
+
         d.click(text_contains="Got it") or \
         d.click(text_contains="SKIP") or \
         d.click(text_contains="Allow") or \
@@ -323,8 +339,9 @@ def ensure_app_launched(d, package_name, activity_name):
         time.sleep(1)
 
         xml = d.dump_hierarchy()
-        if 'package="android"' in xml or "Application Error" in xml or "stylus" in xml.lower():
-            print("System/crash dialog detected, attempting to clear...")
+        xml_lower = xml.lower()
+        if 'package="android"' in xml or "application error" in xml_lower or "isn't responding" in xml_lower or "stylus" in xml_lower:
+            print("System/ANR/crash dialog detected, attempting to clear...")
             dismiss_system_prompts(d)
             adb_shell("input keyevent KEYCODE_BACK", check=False)
             time.sleep(1)
