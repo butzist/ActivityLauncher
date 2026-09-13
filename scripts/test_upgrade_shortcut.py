@@ -88,18 +88,25 @@ class UiDevice:
         adb_shell(f"input swipe {cx} {start_y} {cx} {end_y} 300")
 
     def swipe_left(self):
-        cy = self.h // 2
+        cy = int(self.h * 0.6)
         start_x = int(self.w * 0.85)
         end_x = int(self.w * 0.15)
         print(f"Swiping left: from ({start_x}, {cy}) to ({end_x}, {cy}) on {self.w}x{self.h} screen")
         adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 500")
 
     def swipe_right(self):
-        cy = self.h // 2
+        cy = int(self.h * 0.6)
         start_x = int(self.w * 0.15)
         end_x = int(self.w * 0.85)
         print(f"Swiping right: from ({start_x}, {cy}) to ({end_x}, {cy}) on {self.w}x{self.h} screen")
         adb_shell(f"input swipe {start_x} {cy} {end_x} {cy} 500")
+
+    def open_app_drawer(self):
+        cx = self.w // 2
+        start_y = int(self.h * 0.85)
+        end_y = int(self.h * 0.2)
+        print(f"Opening App Drawer: swiping up from ({cx}, {start_y}) to ({cx}, {end_y})")
+        adb_shell(f"input swipe {cx} {start_y} {cx} {end_y} 300")
 
     def app_start(self, component_name):
         adb_shell(f"am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n {component_name}")
@@ -524,6 +531,70 @@ def get_shortcut_creator(device: UiDevice, release_tag: str) -> VersionShortcutC
         return VersionShortcutCreator(device, release_tag)
 
 
+def find_and_click_shortcut_on_home(d: UiDevice, release_tag: str) -> bool:
+    print(f"=== Searching for 'Settings' shortcut on Home screen for upgraded v{release_tag} ===")
+
+    # Reset to home screen page 1
+    d.press("home")
+    time.sleep(1)
+    d.swipe_right()
+    d.swipe_right()
+    time.sleep(1)
+
+    for page in range(5):
+        save_snapshot(d, f"{release_tag}_home_page_{page+1}")
+        xml = d.dump_hierarchy()
+        for match in re.finditer(r"<node ([^>]+)>", xml):
+            attr = match.group(1)
+            if "com.android.systemui" in attr:
+                continue
+
+            tm = re.search(r'text="([^"]*)"', attr)
+            dm = re.search(r'content-desc="([^"]*)"', attr)
+            node_text = (tm.group(1) if tm else "") + " " + (dm.group(1) if dm else "")
+
+            if "settings" in node_text.lower():
+                bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
+                if bounds_match:
+                    x1, y1, x2, y2 = map(int, bounds_match.groups())
+                    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                    print(f"Found workspace shortcut '{node_text.strip()}' at ({cx}, {cy}) for upgraded v{release_tag}. Clicking...")
+                    adb_shell(f"input tap {cx} {cy}")
+                    return True
+
+        print(f"Page {page+1}: Shortcut 'Settings' not found on workspace, swiping left...")
+        d.swipe_left()
+        time.sleep(2)
+
+    # Fallback: Check App Drawer / All Apps
+    print("Shortcut not found on workspace pages. Trying App Drawer...")
+    d.press("home")
+    time.sleep(1)
+    d.open_app_drawer()
+    time.sleep(2)
+    save_snapshot(d, f"{release_tag}_app_drawer")
+    xml = d.dump_hierarchy()
+    for match in re.finditer(r"<node ([^>]+)>", xml):
+        attr = match.group(1)
+        if "com.android.systemui" in attr:
+            continue
+
+        tm = re.search(r'text="([^"]*)"', attr)
+        dm = re.search(r'content-desc="([^"]*)"', attr)
+        node_text = (tm.group(1) if tm else "") + " " + (dm.group(1) if dm else "")
+
+        if "settings" in node_text.lower():
+            bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
+            if bounds_match:
+                x1, y1, x2, y2 = map(int, bounds_match.groups())
+                cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                print(f"Found shortcut '{node_text.strip()}' in App Drawer at ({cx}, {cy}) for upgraded v{release_tag}. Clicking...")
+                adb_shell(f"input tap {cx} {cy}")
+                return True
+
+    return False
+
+
 def test_upgrade_flow_for_version(d: UiDevice, release_tag: str):
     print(f"\n=======================================================")
     print(f" TESTING UPGRADE FROM VERSION {release_tag} TO CURRENT ")
@@ -581,42 +652,10 @@ def test_upgrade_flow_for_version(d: UiDevice, release_tag: str):
 
     d.press("home")
     time.sleep(1)
-    d.swipe_right()
-    d.swipe_right()
-    time.sleep(1)
-    save_snapshot(d, f"{release_tag}_upgraded_home_screen")
 
-    print(f"=== Clicking created shortcut 'Settings' on Home screen (upgraded from v{release_tag}) ===")
-    shortcut_found = False
-    for page in range(5):
-        save_snapshot(d, f"{release_tag}_home_page_{page+1}")
-        xml = d.dump_hierarchy()
-        for match in re.finditer(r"<node ([^>]+)>", xml):
-            attr = match.group(1)
-            if "com.android.systemui" in attr:
-                continue
-
-            tm = re.search(r'text="([^"]*)"', attr)
-            dm = re.search(r'content-desc="([^"]*)"', attr)
-            node_text = (tm.group(1) if tm else "") + " " + (dm.group(1) if dm else "")
-
-            if "settings" in node_text.lower():
-                bounds_match = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', attr)
-                if bounds_match:
-                    x1, y1, x2, y2 = map(int, bounds_match.groups())
-                    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
-                    print(f"Found shortcut '{node_text.strip()}' at ({cx}, {cy}) for upgraded v{release_tag}. Clicking...")
-                    adb_shell(f"input tap {cx} {cy}")
-                    shortcut_found = True
-                    break
-        if shortcut_found:
-            break
-        print(f"Page {page+1}: Shortcut 'Settings' not found, swiping left...")
-        d.swipe_left()
-        time.sleep(2)
-
+    shortcut_found = find_and_click_shortcut_on_home(d, release_tag)
     if not shortcut_found:
-        print(f"ERROR: Could not locate shortcut on Home screen for upgraded v{release_tag}!")
+        print(f"ERROR: Could not locate shortcut on Home screen or App Drawer for upgraded v{release_tag}!")
         save_snapshot(d, f"{release_tag}_error_shortcut_not_found")
         sys.exit(1)
 
