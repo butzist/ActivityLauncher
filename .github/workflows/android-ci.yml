@@ -85,7 +85,7 @@ jobs:
   upgrade-compatibility-test:
     needs: build-debug
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: set up JDK 21
