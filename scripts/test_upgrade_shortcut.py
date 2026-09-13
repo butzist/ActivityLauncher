@@ -80,6 +80,8 @@ class UiDevice:
             adb_shell("input keyevent KEYCODE_ENTER")
         elif key == "tab":
             adb_shell("input keyevent KEYCODE_TAB")
+        elif key == "escape":
+            adb_shell("input keyevent KEYCODE_ESCAPE")
 
     def scroll_down(self):
         cx = self.w // 2
@@ -296,37 +298,42 @@ def save_snapshot(d, label="snapshot"):
 
 def dismiss_system_prompts(d):
     disable_stylus_and_keyboard_prompts()
-    xml = d.dump_hierarchy()
-    xml_lower = xml.lower()
-    if any(
-        k in xml_lower
-        for k in [
-            "stylus",
-            "got it",
-            "skip",
-            "allow",
-            "permission",
-            "welcome",
-            "keyboard",
-            "isn't responding",
-            "is not responding",
-            "close app",
-            "aerr_close",
-            "aerr_wait",
-            "wait",
-        ]
-    ):
-        print("System prompt/ANR dialog detected, dismissing...")
-        if "aerr_wait" in xml or "wait" in xml_lower:
-            d.click(resource_id="android:id/aerr_wait") or d.click(text="Wait")
-        elif "aerr_close" in xml or "close app" in xml_lower:
+    for loop in range(3):
+        xml = d.dump_hierarchy()
+        xml_lower = xml.lower()
+        if not any(
+            k in xml_lower
+            for k in [
+                "stylus",
+                "got it",
+                "skip",
+                "allow",
+                "permission",
+                "welcome",
+                "keyboard",
+                "isn't responding",
+                "is not responding",
+                "close app",
+                "aerr_close",
+                "aerr_wait",
+                "wait",
+            ]
+        ):
+            break
+
+        print(f"System prompt/ANR dialog detected (attempt {loop+1}), clearing...")
+        # Always click 'Close app' / 'aerr_close' to permanently terminate the frozen process
+        if "aerr_close" in xml or "close app" in xml_lower:
             d.click(resource_id="android:id/aerr_close") or d.click(text="Close app")
+        elif "aerr_wait" in xml or "wait" in xml_lower:
+            d.click(resource_id="android:id/aerr_close") or d.click(text="Close app") or d.click(resource_id="android:id/aerr_wait")
 
         d.click(text_contains="Got it") or \
         d.click(text_contains="SKIP") or \
         d.click(text_contains="Allow") or \
         d.click(resource_id="android:id/button1")
-        d.press("back")
+
+        adb_shell("input keyevent KEYCODE_ESCAPE", check=False)
         time.sleep(1)
 
 
@@ -402,6 +409,7 @@ def test_upgrade_flow():
 
     print("=== Step 9: Selecting com.android.settings package ===")
     time.sleep(2)
+    dismiss_system_prompts(d)
     if not d.click(resource_id=f"{PACKAGE_NAME}:id/tvClass", text="com.android.settings", wait=2, retries=5):
         if not d.click(text="com.android.settings", wait=2, retries=5):
             print("ERROR: Could not find package com.android.settings in list!")
@@ -411,6 +419,7 @@ def test_upgrade_flow():
 
     print("=== Step 10: Selecting activity ===")
     time.sleep(2)
+    dismiss_system_prompts(d)
     if not d.click(resource_id=f"{PACKAGE_NAME}:id/tvName", text="Settings", wait=2, retries=5):
         if not d.click(text="Settings", wait=2, retries=5):
             print("ERROR: Could not find Settings activity in list!")
@@ -419,6 +428,7 @@ def test_upgrade_flow():
     save_snapshot(d, "step10_after_activity_select")
 
     print("=== Step 11: Clicking 'Create shortcut' button ===")
+    dismiss_system_prompts(d)
     save_snapshot(d, "step11_before_create_shortcut")
     if not d.click(resource_id=f"{PACKAGE_NAME}:id/btCreateShortcut", wait=2, retries=3):
         print("Scrolling down to find Create Shortcut button...")
@@ -432,6 +442,7 @@ def test_upgrade_flow():
 
     print("=== Step 12: Confirming System Pin Shortcut dialog ===")
     time.sleep(2)
+    dismiss_system_prompts(d)
     save_snapshot(d, "step12_pin_dialog_check")
     xml = d.dump_hierarchy()
 
