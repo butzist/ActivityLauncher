@@ -83,9 +83,9 @@ jobs:
           path: screenshots/
 
   upgrade-compatibility-test:
-    needs: unit-tests
+    needs: build-debug
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - name: set up JDK 21
@@ -93,8 +93,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - name: Download debug APK
+        uses: actions/download-artifact@v4
+        with:
+          name: debug.apk
+          path: app/build/outputs/apk/ossNoads/debug/
       - name: Run release upgrade & shortcut compatibility test
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
